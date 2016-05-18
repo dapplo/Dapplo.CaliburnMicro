@@ -34,6 +34,14 @@ namespace Dapplo.CaliburnMicro
 	/// </summary>
 	public static class NotifyPropertyChangedExtensions
 	{
+		/// <summary>
+		/// Bind PropertyChanged events from a source property, e.g. via ILanguage to a destination property, e.g. DisplayName
+		/// </summary>
+		/// <typeparam name="T1"></typeparam>
+		/// <param name="notifier">INotifyPropertyChanged</param>
+		/// <param name="notifierProperty">Nameof the source property</param>
+		/// <param name="notifies">Action with PropertyChangedEventArgs</param>
+		/// <param name="notifiesProperty">Nameof the target property</param>
 		public static void BindChanges<T1>(this T1 notifier, string notifierProperty, Action<PropertyChangedEventArgs> notifies, string notifiesProperty)
 			where T1 : INotifyPropertyChanged
 		{

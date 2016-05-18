@@ -30,9 +30,13 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
 	/// <summary>
 	///     Make your ViewModel extend this, instead of Screen, so you can get to the ITrayIcon
+	///     This is a bit of a hack, and needs to be revised
 	/// </summary>
 	public class TrayIconScreen : Screen
 	{
+		/// <summary>
+		/// This retrieves the ITrayIcon from the view
+		/// </summary>
 		public ITrayIcon TrayIcon
 		{
 			get
