@@ -3,14 +3,14 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:cal="http://www.caliburnproject.org"
 			xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf"
-			IconSource="/Resources/icon.ico" ToolTipText="Demo"
+			IconSource="/Resources/icon.ico" ToolTipText="Demo" Visibility="Hidden"
 			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
 	<ni:TrayIcon.ContextMenu>
-		<ContextMenu>
-			<MenuItem Header="Update" cal:Message.Attach="Update" />
-			<MenuItem Header="Configure..." cal:Message.Attach="Configure" />
+		<ContextMenu >
+			<MenuItem Header="{Binding ContextMenuTranslations.Update}" cal:Message.Attach="Update" />
+			<MenuItem Header="{Binding ContextMenuTranslations.Configure}" cal:Message.Attach="Configure" />
 			<Separator />
-			<MenuItem Header="Exit" cal:Message.Attach="Exit" />
+			<MenuItem Header="{Binding ContextMenuTranslations.Exit}" cal:Message.Attach="Exit" />
 		</ContextMenu>
 	</ni:TrayIcon.ContextMenu>
 </ni:TrayIcon>

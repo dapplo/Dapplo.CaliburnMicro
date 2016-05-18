@@ -23,6 +23,7 @@
 
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
+using System.Windows;
 
 #endregion
 

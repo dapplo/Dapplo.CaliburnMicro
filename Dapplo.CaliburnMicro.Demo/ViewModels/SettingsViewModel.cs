@@ -97,6 +97,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			// TODO: Sort them for a tree view, somehow...
 			Items.AddRange(SettingsControls);
 
+			// TODO: This should be done differently... maybe detect the export and leave the visibility to the ViewModel
 			// Create the TrayIcon
 			WindowsManager.ShowPopup(TrayIconVm);
 			TrayIconVm.TrayIcon.Show();

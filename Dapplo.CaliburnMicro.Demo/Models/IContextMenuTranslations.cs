@@ -21,46 +21,18 @@
 
 #region using
 
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.NotifyIconWpf;
-using Dapplo.LogFacade;
-using Dapplo.CaliburnMicro.Demo.Models;
+using System.ComponentModel;
+using Dapplo.Config.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.Models
 {
-	[Export]
-	public class TrayIconViewModel : TrayIconScreen
+	[Language("ContextMenu")]
+	public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
 	{
-		private static readonly LogSource Log = new LogSource();
-
-		[Import]
-		public IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-		public bool CanShowSomething()
-		{
-			return true;
-		}
-
-		public void Configure()
-		{
-			Log.Debug().WriteLine("Configure");
-		}
-
-		public void Exit()
-		{
-			Log.Debug().WriteLine("Exit");
-		}
-
-		public void ShowSomething()
-		{
-			Log.Debug().WriteLine("ShowSomething");
-		}
-
-		public void Update()
-		{
-			Log.Debug().WriteLine("Update");
-		}
+		string Update { get; }
+		string Configure { get; }
+		string Exit { get; }
 	}
 }

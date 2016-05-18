@@ -116,6 +116,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ISettingsControl.cs" />
+    <Compile Include="Models\IContextMenuTranslations.cs" />
     <Compile Include="Models\ICoreTranslations.cs" />
     <Compile Include="Models\ICredentialsTranslations.cs" />
     <Compile Include="Models\IDemoConfiguration.cs" />
