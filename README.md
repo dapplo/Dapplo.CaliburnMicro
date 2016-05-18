@@ -6,13 +6,11 @@ WORK IN PROGRESS
 - Documentation can be found [here](http://www.dapplo.net/blocks/Dapplo.CaliburnMicro) (soon)
 - Current build status: [![Build status](https://ci.appveyor.com/api/projects/status/fuaq8ppel23aqqva?svg=true)](https://ci.appveyor.com/project/dapplo/dapplo-caliburnmicro)
 - Coverage Status: [![Coverage Status](https://coveralls.io/repos/github/dapplo/Dapplo.CaliburnMicro/badge.svg?branch=master)](https://coveralls.io/github/dapplo/Dapplo.CaliburnMicro?branch=master)
-- NuGet package: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro)
-- NuGet package: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps)
-- NuGet package: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.Caliburn.NotifyIconWpf)
+- NuGet package Dapplo.CaliburnMicro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro)
+- NuGet package Dapplo.CaliburnMicro.MahApps: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps)
+- NuGet package Dapplo.CaliburnMicro.NotifyIconWpf: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf)
 
-A Caliburn Bootstrapper which takes care of initializing your IShell ViewModel.
-
-- For MahApps a MetroWindowManager is available in Dapplo.CaliburnMicro.MahApps
-- For a system tray icon, Dapplo.Caliburn.NotifyIconWpf will supply you with code which simplies the usage of Hardcodet.NotifyIcon.Wpf
-
-
+Packages:
+- Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
+- Dapplo.CaliburnMicro.MahApps, contains a MetroWindowManager MahApps
+- Dapplo.CaliburnMicro.NotifyIconWpf, adds functionality to display a system tray icon ViewModel first, via Hardcodet.NotifyIcon.Wpf
