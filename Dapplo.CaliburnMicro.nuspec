@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <licenseUrl>http://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
+        <projectUrl>http://www.dapplo.net/blocks/Dapplo.CaliburnMicro</projectUrl>
+        <iconUrl>http://www.dapplo.net/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This will help you to get started with bootstrapping Caliburn.Micro</description>
+		<summary>This will help you to get started with bootstrapping Caliburn.Micro</summary>
+        <language>en-us</language>
+		<copyright>$author$</copyright>
+		<tags>Caliburn Bootstrap</tags>
+		<dependencies>
+			<group targetFramework="net452">
+				<dependency id="Dapplo.LogFacade" version="0.2.44" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="Dapplo.CaliburnMicro\bin\release\$id$.pdb" target="lib\net452" />
+		<file src="Dapplo.CaliburnMicro\bin\release\$id$.xml" target="lib\net452" />
+		<file src="Dapplo.CaliburnMicro\bin\release\$id$.dll" target="lib\net452" />
+	</files>
+</package>

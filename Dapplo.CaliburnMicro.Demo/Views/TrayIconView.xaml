@@ -1,0 +1,16 @@
+﻿<ni:TrayIcon x:Class="Dapplo.CaliburnMicro.Demo.Views.TrayIconView"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:cal="http://www.caliburnproject.org"
+			xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf"
+			IconSource="/Resources/icon.ico" ToolTipText="Demo"
+			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
+	<ni:TrayIcon.ContextMenu>
+		<ContextMenu>
+			<MenuItem Header="Update" cal:Message.Attach="Update" />
+			<MenuItem Header="Configure..." cal:Message.Attach="Configure" />
+			<Separator />
+			<MenuItem Header="Exit" cal:Message.Attach="Exit" />
+		</ContextMenu>
+	</ni:TrayIcon.ContextMenu>
+</ni:TrayIcon>

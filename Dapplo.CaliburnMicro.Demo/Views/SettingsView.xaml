@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.Views.SettingsView"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:cal="http://www.caliburnproject.org"
+			Width="Auto" Height="400">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="40" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<TreeView x:Name="Items"
+				cal:Message.Attach="[Event SelectedItemChanged] = [Action ActivateChildView($this.SelectedItem)]" Grid.Column="0">
+			<TreeView.ItemTemplate>
+				<DataTemplate>
+					<Label Content="{Binding DisplayName}" />
+				</DataTemplate>
+			</TreeView.ItemTemplate>
+		</TreeView>
+		<ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0" />
+	</Grid>
+</UserControl>

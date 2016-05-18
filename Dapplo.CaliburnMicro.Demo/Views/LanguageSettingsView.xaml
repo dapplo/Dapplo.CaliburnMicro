@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.Views.LanguageSettingsView"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<StackPanel>
+		<DockPanel LastChildFill="True">
+			<Label x:Name="CoreTranslations_Language" Width="100" />
+			<ComboBox x:Name="AvailableLanguages" SelectedValuePath="Key" DisplayMemberPath="Value"
+					SelectedValue="{Binding DemoConfiguration.Language}" />
+		</DockPanel>
+		<Button x:Name="ChangeLanguage" Content="Change language" />
+	</StackPanel>
+</UserControl>

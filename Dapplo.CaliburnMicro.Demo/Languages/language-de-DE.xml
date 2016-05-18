@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<language>
+	<resources prefix="core">
+		<resource name="ok">Ok</resource>
+		<resource name="cancel">Abbrechen</resource>
+		<resource name="language">Sprache</resource>
+		<resource name="settings">Einstellungen</resource>
+	</resources>
+	<resources prefix="credentials">
+		<resource name="username">Benutzername</resource>
+		<resource name="password">Paswort</resource>
+		<resource name="login">Anmelden</resource>
+	</resources>
+</language>

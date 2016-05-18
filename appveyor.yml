@@ -1,0 +1,62 @@
+version: 0.1.{build}
+skip_tags: true
+configuration: Release
+platform: AnyCPU
+clone_depth: 2
+branches:
+  only:
+  - master
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+install:
+  - choco install gitlink -y
+before_build:
+  - nuget restore
+  - ps: if(-not $env:APPVEYOR_PULL_REQUEST_NUMBER) { $env:is_not_pr = "true"; }
+before_package:
+  - ps: Remove-Item packages\OpenCover* -include ("*.pdb", "*.sln", "*.csproj") -recurse
+  - GitLink .\
+  - nuget pack -Verbosity detailed "%APPVEYOR_PROJECT_NAME%.nuspec" -MSBuildVersion 14.0 -Properties id=%APPVEYOR_PROJECT_NAME%;version=%APPVEYOR_BUILD_VERSION%;author=Dapplo
+after_test: 
+    - ps: .\CreateCoverage.ps1
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: L60mbCAOvZODwY3jnXtDc+d7fMJhlWhqOaYry0+YAZxsM139e32GZ9mrXiBQboy9
+build:
+  project: Dapplo.CaliburnMicro.sln
+  publish_nuget: true
+  publish_nuget_symbols: false
+  verbosity: minimal
+artifacts:
+- path: '*.nupkg'
+  name: NuGet package
+notifications:
+- provider: Email
+  to:
+  - robin@dapplo.net
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false
+deploy:
+- provider: GitHub
+  release: Dapplo.CaliburnMicro-v$(appveyor_build_version)
+  auth_token:
+    secure: eBQPtXg53XgcvdcVY3wQAw6kkwNh+QhcsTDwzyQLLh6IOPyiePEaEhJR0D2YBjAj
+  artifact: /.*\.nupkg/
+  draft: false
+  on:
+    branch: master
+    is_not_pr: true
+    appveyor_repo_commit_message_extended: /\[release\]/
+- provider: NuGet
+  skip_symbols: true
+  api_key:
+    secure: xkDQ385+smLqdzhESsXBJvnUjK4FZ4Djjrqi9tFR29dwESIvPYOrQAqgri5Nf/fA
+  on:
+    branch: master
+    is_not_pr: true
+    appveyor_repo_commit_message_extended: /\[release\]/

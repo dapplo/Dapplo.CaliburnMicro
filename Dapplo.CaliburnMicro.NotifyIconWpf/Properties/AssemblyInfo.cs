@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Dapplo.CaliburnMicro")]
-[assembly: AssemblyDescription("A Caliburn.Micro Bootstrapper library")]
+[assembly: AssemblyTitle("Dapplo.CaliburnMicro.NotifyIconWpf")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dapplo")]
-[assembly: AssemblyProduct("Dapplo.CaliburnMicro")]
+[assembly: AssemblyProduct("Dapplo.CaliburnMicro.NotifyIconWpf")]
 [assembly: AssemblyCopyright("Copyright © Dapplo 2016")]
 [assembly: AssemblyTrademark("Dapplo")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("971d2ce0-140c-40c1-bff7-34ff74fc0b04")]
+[assembly: Guid("33ff7672-bb0d-4b91-8fe2-51dfb4b25c98")]
 
 // Version information for an assembly consists of the following four values:
 //
