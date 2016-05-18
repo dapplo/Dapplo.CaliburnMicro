@@ -45,15 +45,10 @@ namespace Dapplo.CaliburnMicro.Demo
 		private async void App_OnStartup(object sender, StartupEventArgs e)
 		{
 			LogSettings.Logger = new DebugLogger { Level = LogLevel.Verbose };
+			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro*.dll");
 #if DEBUG
-			_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro\bin\Debug", "Dapplo.CaliburnMicro.dll");
-			_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.MahApps\bin\Debug", "Dapplo.CaliburnMicro.MahApps.dll");
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
 			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #else
-			_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro\bin\Release", "Dapplo.CaliburnMicro.dll");
-			_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.MahApps\bin\Release", "Dapplo.CaliburnMicro.MahApps.dll");
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
 			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Release", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #endif
 			await _bootstrapper.RunAsync();

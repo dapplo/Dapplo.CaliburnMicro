@@ -148,6 +148,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.MahApps\Dapplo.CaliburnMicro.MahApps.csproj">
+      <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
+      <Name>Dapplo.CaliburnMicro.MahApps</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj">
       <Project>{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}</Project>
       <Name>Dapplo.CaliburnMicro.NotifyIconWpf</Name>
