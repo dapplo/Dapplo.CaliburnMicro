@@ -4,24 +4,24 @@
         <id>$id$</id>
         <version>$version$</version>
         <authors>$author$</authors>
-        <licenseUrl>http://www.gnu.org/licenses/lgpl-3.0.en.html</licenseUrl>
+        <licenseUrl>http://www.gnu.org/licenses/lgpl-3.0.html</licenseUrl>
         <projectUrl>http://www.dapplo.net/blocks/Dapplo.CaliburnMicro</projectUrl>
         <iconUrl>http://www.dapplo.net/favicon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>This will help you to get started with bootstrapping Caliburn.Micro</description>
-		<summary>This will help you to get started with bootstrapping Caliburn.Micro</summary>
+        <description>Dapplo.CaliburnMicro.MahApps adds a IWindowManager to Dapplo.CaliburnMicro</description>
+		<summary>Dapplo.CaliburnMicro.MahApps adds a IWindowManager to Dapplo.CaliburnMicro</summary>
         <language>en-us</language>
 		<copyright>$author$</copyright>
-		<tags>Caliburn Bootstrap</tags>
+		<tags>Dapplo Caliburn.Micro MahApps</tags>
 		<dependencies>
 			<group targetFramework="net452">
-				<dependency id="Dapplo.LogFacade" version="0.2.44" />
+				<dependency id="Dapplo.CaliburnMicro" version="$version$" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Dapplo.CaliburnMicro\bin\release\$id$.pdb" target="lib\net452" />
-		<file src="Dapplo.CaliburnMicro\bin\release\$id$.xml" target="lib\net452" />
-		<file src="Dapplo.CaliburnMicro\bin\release\$id$.dll" target="lib\net452" />
+		<file src="bin\release\$id$.pdb" target="lib\net452" />
+		<file src="bin\release\$id$.xml" target="lib\net452" />
+		<file src="bin\release\$id$.dll" target="lib\net452" />
 	</files>
 </package>

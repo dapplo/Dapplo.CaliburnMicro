@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <licenseUrl>http://www.gnu.org/licenses/lgpl-3.0.html</licenseUrl>
+        <projectUrl>http://www.dapplo.net/blocks/Dapplo.CaliburnMicro</projectUrl>
+        <iconUrl>http://www.dapplo.net/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Dapplo.CaliburnMicro is a Caliburn bootstrapper (and more) to quickly start with a WPF MVVM Application</description>
+		<summary>Dapplo.CaliburnMicro is a Caliburn bootstrapper (and more) to quickly start with a WPF MVVM Application</summary>
+        <language>en-us</language>
+		<copyright>$author$</copyright>
+		<tags>Dapplo Caliburn.Micro MVVM</tags>
+		<frameworkAssemblies>
+			<frameworkAssembly assemblyName="PresentationCore" targetFramework="net452" />
+			<frameworkAssembly assemblyName="PresentationFramework" targetFramework="net452" />
+			<frameworkAssembly assemblyName="System.Xaml" targetFramework="net452" />
+			<frameworkAssembly assemblyName="WindowsBase" targetFramework="net452" />
+		</frameworkAssemblies>
+	</metadata>
+	<files>
+		<file src="bin\release\$id$.pdb" target="lib\net452" />
+		<file src="bin\release\$id$.xml" target="lib\net452" />
+		<file src="bin\release\$id$.dll" target="lib\net452" />
+	</files>
+</package>

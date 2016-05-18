@@ -18,14 +18,7 @@ before_build:
   - nuget restore
   - ps: if(-not $env:APPVEYOR_PULL_REQUEST_NUMBER) { $env:is_not_pr = "true"; }
 before_package:
-  - ps: Remove-Item packages\OpenCover* -include ("*.pdb", "*.sln", "*.csproj") -recurse
   - GitLink .\
-  - nuget pack -Verbosity detailed "%APPVEYOR_PROJECT_NAME%.nuspec" -MSBuildVersion 14.0 -Properties id=%APPVEYOR_PROJECT_NAME%;version=%APPVEYOR_BUILD_VERSION%;author=Dapplo
-after_test: 
-    - ps: .\CreateCoverage.ps1
-environment:
-  COVERALLS_REPO_TOKEN:
-    secure: L60mbCAOvZODwY3jnXtDc+d7fMJhlWhqOaYry0+YAZxsM139e32GZ9mrXiBQboy9
 build:
   project: Dapplo.CaliburnMicro.sln
   publish_nuget: true
