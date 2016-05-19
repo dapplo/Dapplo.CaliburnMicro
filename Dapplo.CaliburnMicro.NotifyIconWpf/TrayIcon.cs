@@ -67,5 +67,45 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			ViewModelBinder.Bind(rootModel, view, null);
 			ShowCustomBalloon(view, animation, timeout.HasValue ? (int)timeout.Value.TotalMilliseconds : (int?)null);
 		}
+
+		/// <summary>
+		///     Show a balloon with title, message and the default info icon
+		/// </summary>
+		/// <param name="title">Title for the standard balloon</param>
+		/// <param name="message">Message for the standard balloon</param>
+		public void ShowInfoBalloonTip(string title, string message)
+		{
+			ShowBalloonTip(title, message, BalloonIcon.Info);
+		}
+
+		/// <summary>
+		///     Show a balloon with title, message and the default error icon
+		/// </summary>
+		/// <param name="title">Title for the standard balloon</param>
+		/// <param name="message">Message for the standard balloon</param>
+		public void ShowErrorBalloonTip(string title, string message)
+		{
+			ShowBalloonTip(title, message, BalloonIcon.Error);
+		}
+
+		/// <summary>
+		///     Show a balloon with title, message and the default warning icon
+		/// </summary>
+		/// <param name="title">Title for the standard balloon</param>
+		/// <param name="message">Message for the standard balloon</param>
+		public void ShowWarningBalloonTip(string title, string message)
+		{
+			ShowBalloonTip(title, message, BalloonIcon.Warning);
+		}
+
+		/// <summary>
+		///     Show a balloon with title, message and no icon
+		/// </summary>
+		/// <param name="title">Title for the standard balloon</param>
+		/// <param name="message">Message for the standard balloon</param>
+		public void ShowBalloonTip(string title, string message)
+		{
+			ShowBalloonTip(title, message, BalloonIcon.None);
+		}
 	}
 }

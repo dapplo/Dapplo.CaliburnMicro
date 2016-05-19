@@ -26,10 +26,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Models;
-using Dapplo.CaliburnMicro;
 using Dapplo.Config.Language;
 using Dapplo.Utils;
-using Hardcodet.Wpf.TaskbarNotification;
 using Caliburn.Micro;
 
 #endregion
@@ -65,9 +63,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		private IEnumerable<ISettingsControl> SettingsControls { get; set; }
 
 		[Import]
-		private TrayIconViewModel TrayIconVm { get; set; }
-
-		[Import]
 		private IWindowManager WindowsManager { get; set; }
 
 		public void OnImportsSatisfied()
@@ -96,12 +91,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			// Add all the imported settings controls
 			// TODO: Sort them for a tree view, somehow...
 			Items.AddRange(SettingsControls);
-
-			// TODO: This should be done differently... maybe detect the export and leave the visibility to the ViewModel
-			// Create the TrayIcon
-			WindowsManager.ShowPopup(TrayIconVm);
-			TrayIconVm.TrayIcon.Show();
-			TrayIconVm.TrayIcon.ShowBalloonTip("Hello", "This is a message", BalloonIcon.Warning);
 
 			UiContext.RunOn(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang)).Wait();
 		}

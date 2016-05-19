@@ -25,15 +25,20 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.LogFacade;
 using Dapplo.CaliburnMicro.Demo.Models;
+using Caliburn.Micro;
+using System.Windows;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.ViewModels
 {
-	[Export]
-	public class TrayIconViewModel : TrayIconScreen
+	[Export(typeof(ITrayIconViewModel))]
+	public class TrayIconViewModel : Screen, ITrayIconViewModel
 	{
 		private static readonly LogSource Log = new LogSource();
+
+		[Import]
+		public ITrayIconManager TrayIconManager { get; set; }
 
 		[Import]
 		public IContextMenuTranslations ContextMenuTranslations { get; set; }
@@ -51,16 +56,27 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void Exit()
 		{
 			Log.Debug().WriteLine("Exit");
+			Application.Current.Shutdown();
 		}
 
 		public void ShowSomething()
 		{
 			Log.Debug().WriteLine("ShowSomething");
+			// Lookup my tray icon
+			var trayIcon = TrayIconManager.GetTrayIconFor(this);
+			trayIcon.ShowInfoBalloonTip("Clicked", "You clicked the icon");
 		}
 
 		public void Update()
 		{
 			Log.Debug().WriteLine("Update");
+		}
+
+		protected override void OnActivate()
+		{
+			base.OnActivate();
+			var trayIcon = TrayIconManager.GetTrayIconFor(this);
+			trayIcon.Show();
 		}
 	}
 }

@@ -23,7 +23,6 @@
 
 using System;
 using System.Windows.Controls.Primitives;
-using Hardcodet.Wpf.TaskbarNotification;
 
 #endregion
 
@@ -50,12 +49,33 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		void Show();
 
 		/// <summary>
-		///     Show a balloon with title, message and an icon
+		///     Show a balloon with title, message and an Info-icon
 		/// </summary>
 		/// <param name="title"></param>
 		/// <param name="message"></param>
-		/// <param name="balloonIcon">BalloonIcon</param>
-		void ShowBalloonTip(string title, string message, BalloonIcon balloonIcon = BalloonIcon.Info);
+		void ShowInfoBalloonTip(string title, string message);
+
+		/// <summary>
+		///     Show a balloon with title, message and an Error-icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowErrorBalloonTip(string title, string message);
+
+		/// <summary>
+		///     Show a balloon with title, message and an Warning-icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowWarningBalloonTip(string title, string message);
+
+
+		/// <summary>
+		///     Show a balloon with title, message without icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowBalloonTip(string title, string message);
 
 		/// <summary>
 		///     Show a custom balloon (ViewModel first), using the specified animation.

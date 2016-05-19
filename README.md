@@ -10,7 +10,40 @@ WORK IN PROGRESS
 - NuGet package Dapplo.CaliburnMicro.MahApps: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps)
 - NuGet package Dapplo.CaliburnMicro.NotifyIconWpf: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf)
 
-Packages:
+Available Packages:
 - Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
 - Dapplo.CaliburnMicro.MahApps, contains a MetroWindowManager MahApps
 - Dapplo.CaliburnMicro.NotifyIconWpf, adds functionality to display a system tray icon ViewModel first, via Hardcodet.NotifyIcon.Wpf
+
+# Quick-start documentation
+
+A demo-project is supplied, see: Dapplo.CaliburnMicro.Demo
+
+## Dapplo.CaliburnMicro
+
+Caliburn.Micro Bootstrapper with Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
+This bases on Dapplo.Addons.Bootstrapper, to use it you will need to instanciate the bootstrapper.
+
+Usage:
+- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.dll");
+
+## Dapplo.CaliburnMicro.NotifyIconWpf
+
+This is based on a Hardcodet.Wpf.TaskbarNotification dependency, and supplies code to a have ViewModel first approach for a System-Tray icon
+
+Usage:
+- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
+- Annotate your ViewModel class with the ExportAttribute, give it the typeof(ITrayIconViewModel) parameter. This make sure it's found and instanciated, you can set the initial visibility (as expected) in the view.
+- Make your ViewModel extend the ITrayIconViewModel, this forces you to implement the IViewAware from Caliburn.Micro but this can be done by extending e.g. Screen or ViewAware.
+- Create a View with a TrayIcon, you don't NEED code behind, e.g. <ni:TrayIcon xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf" />
+- TrayIcon extends TaskbarIcon (from Hardcodet.Wpf.TaskbarNotification) and only adds an interface and a minimal implementation. This allows you to use it exactly like the documentation of Hardcodet.Wpf.TaskbarNotification describes. Also due to the way things are wired, all Caliburn.Micro logic works as designed (even cal:Message.Attach="[Event TrayLeftMouseDown] = [Action xxxx]")
+
+
+## Dapplo.CaliburnMicro.MahApps
+
+This is based on a MahApps.Metro dependency, and supplies a IWindowManager implementation which makes things look like "metro" apps.
+
+Usage:
+- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.MahApps.dll");
+
+Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/

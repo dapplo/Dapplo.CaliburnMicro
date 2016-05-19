@@ -25,6 +25,7 @@ using System.Windows;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.LogFacade;
 using Dapplo.LogFacade.Loggers;
+using Dapplo.Utils;
 
 #endregion
 
@@ -42,16 +43,28 @@ namespace Dapplo.CaliburnMicro.Demo
 			InitializeComponent();
 		}
 
-		private async void App_OnStartup(object sender, StartupEventArgs e)
+		private async void App_OnStartup(object sender, StartupEventArgs startupEventArgs)
 		{
 			LogSettings.Logger = new DebugLogger { Level = LogLevel.Verbose };
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro*.dll");
+			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.dll");
+			// Comment this if no TrayIcons should be used
+			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
+			// Comment this to use the default window manager
+			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.MahApps.dll");
 #if DEBUG
 			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #else
 			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Release", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #endif
+			// UiContext.Initialize() should actually be called in the ApplicationBootstrapper if possible...
+			UiContext.Initialize();
 			await _bootstrapper.RunAsync();
+
+			// Current.Exit should actually be caught in the ApplicationBootstrapper if possible...
+			Current.Exit += async (s, e) =>
+			{
+				await _bootstrapper.ShutdownAsync();
+			};
 		}
 	}
 }

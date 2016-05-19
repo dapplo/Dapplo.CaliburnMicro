@@ -34,7 +34,12 @@ using System.Collections.Generic;
 namespace Dapplo.CaliburnMicro.MahApps
 {
 	/// <summary>
-	///     This comes from https://github.com/ziyasal/Caliburn.Metro/blob/master/Caliburn.Metro.Core/MetroWindowManager.cs
+	///     This (slightly modified) comes from <a href="https://github.com/ziyasal/Caliburn.Metro/blob/master/Caliburn.Metro.Core/MetroWindowManager.cs">here</a>
+	///     and providers a Caliburn.Micro IWindowManager implementation. The Dapplo.CaliburnMicro.CaliburnMicroBootstrapper will
+	///     take care of taking this (if available) and the MetroWindowManager will take care of instanciating a MetroWindow.
+	///     
+	/// Note: Currently there is no support for the DialogCoordinator yet..
+	/// For more information see <a href="https://gist.github.com/ButchersBoy/4a7272f3ac104c5b1a54">here</a> and <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
 	/// </summary>
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager
@@ -132,7 +137,6 @@ namespace Dapplo.CaliburnMicro.MahApps
 			{
 				window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			}
-
 			return window;
 		}
 

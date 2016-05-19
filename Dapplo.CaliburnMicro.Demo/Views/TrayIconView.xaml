@@ -3,7 +3,7 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:cal="http://www.caliburnproject.org"
 			xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf"
-			IconSource="/Resources/icon.ico" ToolTipText="Demo" Visibility="Hidden"
+			IconSource="/Resources/icon.ico" ToolTipText="Demo"
 			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
 	<ni:TrayIcon.ContextMenu>
 		<ContextMenu >

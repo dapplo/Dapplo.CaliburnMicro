@@ -39,7 +39,7 @@ namespace Dapplo.CaliburnMicro
 	/// <summary>
 	///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF) and uses this.
 	/// </summary>
-	[StartupAction(StartupOrder = 100)]
+	[StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper)]
 	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction
 	{
 		[Import]
@@ -50,6 +50,9 @@ namespace Dapplo.CaliburnMicro
 
 		[Import]
 		private IServiceRepository ServiceRepository { get; set; }
+
+		[Import]
+		private IShell Shell { get; set; }
 
 		/// <summary>
 		///     Initialize the Caliburn bootstrapper from the Dapplo startup

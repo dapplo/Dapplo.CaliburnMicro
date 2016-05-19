@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroBootstrapper.cs" />
+    <Compile Include="CaliburnStartOrder.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="NotifyPropertyChangedExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

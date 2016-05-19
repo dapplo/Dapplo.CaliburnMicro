@@ -4,37 +4,31 @@
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
 // 
-//  This file is part of Dapplo.CaliburnMicro.Demo
+//  This file is part of Dapplo.CaliburnMicro
 // 
-//  Dapplo.CaliburnMicro.Demo is free software: you can redistribute it and/or modify
+//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
 // 
-//  Dapplo.CaliburnMicro.Demo is distributed in the hope that it will be useful,
+//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro.Demo. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using Caliburn.Micro;
 
-using System.Windows.Controls;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Demo.Views
+namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
 	/// <summary>
-	///     Interaction logic for LanguageSettingsView.xaml
+	/// Marker interface which ViewModels for a TrayIcon must implement and export as.
+	/// This extends IViewAware, as this is needed to make it possible to find the ITrayIcon for a ViewModel.
+	/// Implementing this is easy, extend your ViewModel from ViewAware or Screen or another class in Caliburn.Micro.
 	/// </summary>
-	public partial class LanguageSettingsView : UserControl
+	public interface ITrayIconViewModel : IViewAware
 	{
-		public LanguageSettingsView()
-		{
-			InitializeComponent();
-		}
 	}
 }
