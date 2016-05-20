@@ -27,15 +27,19 @@ using Dapplo.LogFacade;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Caliburn.Micro;
 using System.Windows;
+using System;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.ViewModels
 {
 	[Export(typeof(ITrayIconViewModel))]
-	public class TrayIconViewModel : Screen, ITrayIconViewModel
+	public class TrayIconViewModel : Screen, ITrayIconViewModel, IHandle<string>
 	{
 		private static readonly LogSource Log = new LogSource();
+
+		[Import]
+		private IEventAggregator EventAggregator { get; set; }
 
 		[Import]
 		public ITrayIconManager TrayIconManager { get; set; }
@@ -77,6 +81,13 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			base.OnActivate();
 			var trayIcon = TrayIconManager.GetTrayIconFor(this);
 			trayIcon.Show();
+			EventAggregator.Subscribe(this);
+		}
+
+		public void Handle(string message)
+		{
+			var trayIcon = TrayIconManager.GetTrayIconFor(this);
+			trayIcon.ShowBalloonTip("Event", message);
 		}
 	}
 }

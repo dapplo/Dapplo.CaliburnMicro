@@ -51,9 +51,6 @@ namespace Dapplo.CaliburnMicro
 		[Import]
 		private IServiceRepository ServiceRepository { get; set; }
 
-		[Import]
-		private IShell Shell { get; set; }
-
 		/// <summary>
 		///     Initialize the Caliburn bootstrapper from the Dapplo startup
 		/// </summary>
@@ -64,21 +61,8 @@ namespace Dapplo.CaliburnMicro
 
 			Initialize();
 
-			// Test if there is a IWindowManager available, if not use the default
-			var windowManagers = ServiceLocator.GetExports<IWindowManager>();
-			if (!windowManagers.Any())
-			{
-				ServiceExporter.Export<IWindowManager>(new WindowManager());
-			}
-
-			// Test if there is a IEventAggregator available, if not use the default
-			var eventAggregator = ServiceLocator.GetExports<IEventAggregator>();
-			if (!eventAggregator.Any())
-			{
-				ServiceExporter.Export<IEventAggregator>(new EventAggregator());
-			}
-
 			OnStartup(this, null);
+			
 			return Task.FromResult(true);
 		}
 
@@ -100,7 +84,19 @@ namespace Dapplo.CaliburnMicro
 			{
 				ServiceRepository.Add(assembly);
 			}
-			ServiceExporter.Export<IEventAggregator>(new EventAggregator());
+			// Test if there is a IWindowManager available, if not use the default
+			var windowManagers = ServiceLocator.GetExports<IWindowManager>();
+			if (!windowManagers.Any())
+			{
+				ServiceExporter.Export<IWindowManager>(new WindowManager());
+			}
+
+			// Test if there is a IEventAggregator available, if not use the default
+			var eventAggregators = ServiceLocator.GetExports<IEventAggregator>();
+			if (!eventAggregators.Any())
+			{
+				ServiceExporter.Export<IEventAggregator>(new EventAggregator());
+			}
 		}
 
 		/// <summary>

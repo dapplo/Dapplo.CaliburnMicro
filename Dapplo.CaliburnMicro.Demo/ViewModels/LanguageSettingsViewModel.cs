@@ -50,6 +50,9 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[Import]
 		public IDemoConfiguration DemoConfiguration { get; set; }
 
+		[Import]
+		private IEventAggregator EventAggregator { get; set; }
+
 		public void OnImportsSatisfied()
 		{
 			CoreTranslations.BindChanges(nameof(CoreTranslations.Language), OnPropertyChanged, nameof(DisplayName));
@@ -69,6 +72,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		public async Task ChangeLanguage()
 		{
+			EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
 			await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language);
 		}
 	}
