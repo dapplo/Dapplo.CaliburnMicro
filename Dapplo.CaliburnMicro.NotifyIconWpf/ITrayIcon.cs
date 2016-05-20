@@ -17,7 +17,7 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 #region using
 
@@ -48,27 +48,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// </summary>
 		void Show();
 
-		/// <summary>
-		///     Show a balloon with title, message and an Info-icon
-		/// </summary>
-		/// <param name="title"></param>
-		/// <param name="message"></param>
-		void ShowInfoBalloonTip(string title, string message);
-
-		/// <summary>
-		///     Show a balloon with title, message and an Error-icon
-		/// </summary>
-		/// <param name="title"></param>
-		/// <param name="message"></param>
-		void ShowErrorBalloonTip(string title, string message);
-
-		/// <summary>
-		///     Show a balloon with title, message and an Warning-icon
-		/// </summary>
-		/// <param name="title"></param>
-		/// <param name="message"></param>
-		void ShowWarningBalloonTip(string title, string message);
-
 
 		/// <summary>
 		///     Show a balloon with title, message without icon
@@ -85,5 +64,26 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <param name="animation">PopupAnimation</param>
 		/// <param name="timeout">TimeSpan</param>
 		void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Slide, TimeSpan? timeout = null);
+
+		/// <summary>
+		///     Show a balloon with title, message and an Error-icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowErrorBalloonTip(string title, string message);
+
+		/// <summary>
+		///     Show a balloon with title, message and an Info-icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowInfoBalloonTip(string title, string message);
+
+		/// <summary>
+		///     Show a balloon with title, message and an Warning-icon
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="message"></param>
+		void ShowWarningBalloonTip(string title, string message);
 	}
 }

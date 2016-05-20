@@ -17,7 +17,7 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 #region using
 
@@ -37,9 +37,10 @@ using Dapplo.Addons;
 namespace Dapplo.CaliburnMicro
 {
 	/// <summary>
-	///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF) and uses this.
+	///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
+	///     and uses this.
 	/// </summary>
-	[StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper)]
+	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper)]
 	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction
 	{
 		[Import]
@@ -62,12 +63,12 @@ namespace Dapplo.CaliburnMicro
 			Initialize();
 
 			OnStartup(this, null);
-			
+
 			return Task.FromResult(true);
 		}
 
 		/// <summary>
-		/// Fill imports of the supplied instance
+		///     Fill imports of the supplied instance
 		/// </summary>
 		/// <param name="instance">some object to fill</param>
 		protected override void BuildUp(object instance)
@@ -76,7 +77,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Configure the Dapplo.Addon.Bootstrapper with the AssemblySource.Instance values
+		///     Configure the Dapplo.Addon.Bootstrapper with the AssemblySource.Instance values
 		/// </summary>
 		protected override void Configure()
 		{
@@ -109,7 +110,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Locate an instance of a service, used in Caliburn.
+		///     Locate an instance of a service, used in Caliburn.
 		/// </summary>
 		/// <param name="serviceType"></param>
 		/// <param name="key"></param>

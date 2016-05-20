@@ -17,29 +17,31 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 #region using
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
-using System.Collections.Generic;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.MahApps
 {
 	/// <summary>
-	///     This (slightly modified) comes from <a href="https://github.com/ziyasal/Caliburn.Metro/blob/master/Caliburn.Metro.Core/MetroWindowManager.cs">here</a>
-	///     and providers a Caliburn.Micro IWindowManager implementation. The Dapplo.CaliburnMicro.CaliburnMicroBootstrapper will
+	///     This (slightly modified) comes from
+	///     <a href="https://github.com/ziyasal/Caliburn.Metro/blob/master/Caliburn.Metro.Core/MetroWindowManager.cs">here</a>
+	///     and providers a Caliburn.Micro IWindowManager implementation. The Dapplo.CaliburnMicro.CaliburnMicroBootstrapper
+	///     will
 	///     take care of taking this (if available) and the MetroWindowManager will take care of instanciating a MetroWindow.
-	///     
-	/// Note: Currently there is no support for the DialogCoordinator yet..
-	/// For more information see <a href="https://gist.github.com/ButchersBoy/4a7272f3ac104c5b1a54">here</a> and <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
+	///     Note: Currently there is no support for the DialogCoordinator yet..
+	///     For more information see <a href="https://gist.github.com/ButchersBoy/4a7272f3ac104c5b1a54">here</a> and
+	///     <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
 	/// </summary>
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager
@@ -47,17 +49,7 @@ namespace Dapplo.CaliburnMicro.MahApps
 		private readonly IList<ResourceDictionary> _resourceDictionaries = LoadResources();
 
 		/// <summary>
-		/// Add a single ResourceDictionary so it will be used by this MetroWindowManager
-		/// An example would be for the Icons.xaml (which is in MahApps.Metro.Resources)
-		/// </summary>
-		/// <param name="resourceDictionary"></param>
-		public void AddResourceDictionary(ResourceDictionary resourceDictionary)
-		{
-			_resourceDictionaries.Add(resourceDictionary);
-		}
-
-		/// <summary>
-		/// Set the ResourceDictionary for the newly generated window
+		///     Set the ResourceDictionary for the newly generated window
 		/// </summary>
 		/// <param name="window"></param>
 		private void AddMetroResources(MetroWindow window)
@@ -69,7 +61,17 @@ namespace Dapplo.CaliburnMicro.MahApps
 		}
 
 		/// <summary>
-		/// Implement this to make specific configuration changes to your window.
+		///     Add a single ResourceDictionary so it will be used by this MetroWindowManager
+		///     An example would be for the Icons.xaml (which is in MahApps.Metro.Resources)
+		/// </summary>
+		/// <param name="resourceDictionary"></param>
+		public void AddResourceDictionary(ResourceDictionary resourceDictionary)
+		{
+			_resourceDictionaries.Add(resourceDictionary);
+		}
+
+		/// <summary>
+		///     Implement this to make specific configuration changes to your window.
 		/// </summary>
 		/// <param name="window"></param>
 		public virtual void ConfigureWindow(MetroWindow window)
@@ -77,7 +79,7 @@ namespace Dapplo.CaliburnMicro.MahApps
 		}
 
 		/// <summary>
-		/// Create a MetroWindow
+		///     Create a MetroWindow
 		/// </summary>
 		/// <param name="view"></param>
 		/// <param name="windowIsView"></param>
@@ -141,16 +143,16 @@ namespace Dapplo.CaliburnMicro.MahApps
 		}
 
 		/// <summary>
-		/// Load the resources, like styles etc, to make the available to the MetroWindow
+		///     Load the resources, like styles etc, to make the available to the MetroWindow
 		/// </summary>
 		/// <returns></returns>
-		private static IList<ResourceDictionary>LoadResources()
+		private static IList<ResourceDictionary> LoadResources()
 		{
-			string[] styles = { "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue" };
+			string[] styles = {"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue"};
 			return (
 				from style in styles
-				select new ResourceDictionary { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute) }
-			).ToList();
+				select new ResourceDictionary {Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute)}
+				).ToList();
 		}
 	}
 }

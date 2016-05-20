@@ -17,17 +17,17 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
 	/// <summary>
-	/// This can be used to locate the ITrayIcon for a ViewModel
+	///     This can be used to locate the ITrayIcon for a ViewModel
 	/// </summary>
 	public interface ITrayIconManager
 	{
 		/// <summary>
-		/// Get the ITrayIcon belonging to the specified ITrayIconViewModel instance
+		///     Get the ITrayIcon belonging to the specified ITrayIconViewModel instance
 		/// </summary>
 		/// <param name="trayIconViewModel">ViewModel instance to get the ITrayIcon for</param>
 		/// <returns>ITrayIcon</returns>

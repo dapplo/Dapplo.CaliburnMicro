@@ -17,13 +17,13 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 namespace Dapplo.CaliburnMicro
 {
 	/// <summary>
-	/// Implement (and export with) this interface on your ViewModel to make sure your "shell" is started.
-	/// There can be only one!
+	///     Implement (and export with) this interface on your ViewModel to make sure your "shell" is started.
+	///     There can be only one!
 	/// </summary>
 	public interface IShell
 	{

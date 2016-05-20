@@ -17,16 +17,20 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#region using
 
 using Caliburn.Micro;
+
+#endregion
 
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
 	/// <summary>
-	/// Marker interface which ViewModels for a TrayIcon must implement and export as.
-	/// This extends IViewAware, as this is needed to make it possible to find the ITrayIcon for a ViewModel.
-	/// Implementing this is easy, extend your ViewModel from ViewAware or Screen or another class in Caliburn.Micro.
+	///     Marker interface which ViewModels for a TrayIcon must implement and export as.
+	///     This extends IViewAware, as this is needed to make it possible to find the ITrayIcon for a ViewModel.
+	///     Implementing this is easy, extend your ViewModel from ViewAware or Screen or another class in Caliburn.Micro.
 	/// </summary>
 	public interface ITrayIconViewModel : IViewAware
 	{

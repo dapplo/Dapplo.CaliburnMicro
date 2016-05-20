@@ -6,7 +6,7 @@
 			IconSource="/Resources/icon.ico" ToolTipText="Demo"
 			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
 	<ni:TrayIcon.ContextMenu>
-		<ContextMenu >
+		<ContextMenu>
 			<MenuItem Header="{Binding ContextMenuTranslations.Update}" cal:Message.Attach="Update" />
 			<MenuItem Header="{Binding ContextMenuTranslations.Configure}" cal:Message.Attach="Configure" />
 			<Separator />

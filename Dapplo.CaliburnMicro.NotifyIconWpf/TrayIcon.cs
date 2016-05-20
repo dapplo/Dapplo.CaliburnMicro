@@ -17,7 +17,7 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 #region using
 
@@ -32,7 +32,7 @@ using Hardcodet.Wpf.TaskbarNotification;
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
 	/// <summary>
-	/// This is the TrayIcon, which makes the TaskbarIcon usable from Caliburn
+	///     This is the TrayIcon, which makes the TaskbarIcon usable from Caliburn
 	/// </summary>
 	public class TrayIcon : TaskbarIcon, ITrayIcon
 	{
@@ -65,7 +65,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 
 			var view = ViewLocator.LocateForModel(rootModel, null, null);
 			ViewModelBinder.Bind(rootModel, view, null);
-			ShowCustomBalloon(view, animation, timeout.HasValue ? (int)timeout.Value.TotalMilliseconds : (int?)null);
+			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int?) null);
 		}
 
 		/// <summary>

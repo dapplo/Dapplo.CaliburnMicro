@@ -17,7 +17,7 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 #region using
 
@@ -37,7 +37,7 @@ namespace Dapplo.CaliburnMicro
 		private readonly LogSource _log;
 
 		/// <summary>
-		/// The constructor is called from the LogManager.GetLog function with the type to log for
+		///     The constructor is called from the LogManager.GetLog function with the type to log for
 		/// </summary>
 		/// <param name="type"></param>
 		public CaliburnLogger(Type type)
@@ -46,7 +46,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Log an error
+		///     Log an error
 		/// </summary>
 		/// <param name="exception"></param>
 		public void Error(Exception exception)
@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Log information
+		///     Log information
 		/// </summary>
 		/// <param name="format"></param>
 		/// <param name="args"></param>
@@ -65,7 +65,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Log warning
+		///     Log warning
 		/// </summary>
 		/// <param name="format"></param>
 		/// <param name="args"></param>

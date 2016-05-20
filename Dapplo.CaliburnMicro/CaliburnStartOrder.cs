@@ -17,22 +17,22 @@
 //  GNU Lesser General Public License for more details.
 // 
 //  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 namespace Dapplo.CaliburnMicro
 {
-
 	/// <summary>
-	/// Helps to structure the order of starting Dappo StartupActions
+	///     Helps to structure the order of starting Dappo StartupActions
 	/// </summary>
 	public enum CaliburnStartOrder
 	{
 		/// <summary>
-		/// This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
+		///     This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
 		/// </summary>
 		Bootstrapper = 100,
+
 		/// <summary>
-		/// This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+		///     This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
 		/// </summary>
 		TrayIcons = 200
 	}
