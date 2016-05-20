@@ -71,6 +71,13 @@ namespace Dapplo.CaliburnMicro
 				ServiceExporter.Export<IWindowManager>(new WindowManager());
 			}
 
+			// Test if there is a IEventAggregator available, if not use the default
+			var eventAggregator = ServiceLocator.GetExports<IEventAggregator>();
+			if (!eventAggregator.Any())
+			{
+				ServiceExporter.Export<IEventAggregator>(new EventAggregator());
+			}
+
 			OnStartup(this, null);
 			return Task.FromResult(true);
 		}
