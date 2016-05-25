@@ -23,6 +23,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -39,15 +40,15 @@ namespace Dapplo.CaliburnMicro
 		/// </summary>
 		/// <typeparam name="T1"></typeparam>
 		/// <param name="notifier">INotifyPropertyChanged</param>
-		/// <param name="notifierProperty">Nameof the source property</param>
+		/// <param name="notifierPropertyPattern">Nameof the source property or a regular expression which needs to match</param>
 		/// <param name="notifies">Action with PropertyChangedEventArgs</param>
 		/// <param name="notifiesProperty">Nameof the target property</param>
-		public static void BindChanges<T1>(this T1 notifier, string notifierProperty, Action<PropertyChangedEventArgs> notifies, string notifiesProperty)
+		public static void BindNotifyPropertyChanged<T1>(this T1 notifier, string notifierPropertyPattern, Action<PropertyChangedEventArgs> notifies, string notifiesProperty)
 			where T1 : INotifyPropertyChanged
 		{
 			notifier.PropertyChanged += (sender, args) =>
 			{
-				if (args.PropertyName == notifierProperty)
+				if (Regex.IsMatch(args.PropertyName, notifierPropertyPattern))
 				{
 					notifies(new PropertyChangedEventArgs(notifiesProperty));
 				}

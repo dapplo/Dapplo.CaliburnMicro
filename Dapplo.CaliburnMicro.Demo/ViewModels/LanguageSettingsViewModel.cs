@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		public void OnImportsSatisfied()
 		{
-			CoreTranslations.BindChanges(nameof(CoreTranslations.Language), OnPropertyChanged, nameof(DisplayName));
+			CoreTranslations.BindNotifyPropertyChanged(nameof(CoreTranslations.Language), OnPropertyChanged, nameof(DisplayName));
 		}
 
 		/// <summary>

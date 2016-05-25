@@ -128,6 +128,12 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="e">StartupEventArgs, as it's called internally this is actually null</param>
 		protected override void OnStartup(object sender, StartupEventArgs e)
 		{
+			// Throw exception when no IShell export is found
+			var shells = ServiceLocator.GetExports<IShell>();
+			if (!shells.Any())
+			{
+				throw new ApplicationException("No IShell export found, make sure you exported your ViewModel with [Export(typeof(IShell))]");
+			}
 			// Display the IShell viewmodel
 			DisplayRootViewFor<IShell>();
 		}
