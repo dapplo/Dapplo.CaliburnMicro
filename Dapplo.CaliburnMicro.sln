@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro", "Dap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.NotifyIconWpf", "Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj", "{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.MahApps\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo", "Dapplo.CaliburnMicro.Demo\Dapplo.CaliburnMicro.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
 EndProject
