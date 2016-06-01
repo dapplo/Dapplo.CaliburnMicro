@@ -28,6 +28,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
+using Dapplo.LogFacade;
 using Dapplo.Utils;
 
 #endregion
@@ -41,11 +42,16 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 	[Export(typeof(IShell))]
 	public class SettingsViewModel : Conductor<ISettingsControl>.Collection.OneActive, IShell, IPartImportsSatisfiedNotification
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		[Import]
 		private ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
 		private IDemoConfiguration DemoConfiguration { get; set; }
+
+		[Import]
+		private IEventAggregator EventAggregator { get; set; }
 
 		/// <summary>
 		///     Make the DisplayName be translatable
@@ -65,6 +71,9 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[Import]
 		private IWindowManager WindowsManager { get; set; }
 
+		[Import]
+		private CredentialsViewModel CredentialsVm { get; set; }
+
 		public void OnImportsSatisfied()
 		{
 			CoreTranslations.BindNotifyPropertyChanged(nameof(CoreTranslations.Settings), OnPropertyChanged, nameof(DisplayName));
@@ -78,6 +87,12 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void ActivateChildView(ISettingsControl view)
 		{
 			ActivateItem(view);
+		}
+
+		public void ShowLogin()
+		{
+			var result = WindowsManager.ShowDialog(CredentialsVm);
+			Log.Info().WriteLine($"Girl you know it's {result}");
 		}
 
 		/// <summary>

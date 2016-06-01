@@ -22,7 +22,6 @@
 #region using
 
 using System.ComponentModel.Composition;
-using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Models;
 
@@ -34,7 +33,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 	///     A view model for credentials (username / password)
 	/// </summary>
 	[Export]
-	public class CredentialsViewModel : PropertyChangedBase
+	public class CredentialsViewModel : Screen
 	{
 		private string _password;
 		private string _username;
@@ -46,6 +45,12 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		[Import]
 		public ICredentialsTranslations CredentialsTranslations { get; set; }
+
+		[Import]
+		public ICoreTranslations CoreTranslations { get; set; }
+
+		[Import]
+		public DummyViewModel DummyVm { get; set; }
 
 		/// <summary>
 		///     Password for a login
@@ -77,7 +82,12 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		public void Login()
 		{
-			MessageBox.Show($"Hello {Username}!");
+			TryClose(true);
+		}
+
+		public void Cancel()
+		{
+			TryClose(false);
 		}
 	}
 }

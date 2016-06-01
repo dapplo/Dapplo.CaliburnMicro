@@ -121,12 +121,10 @@
     <Compile Include="Models\ICredentialsTranslations.cs" />
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
+    <Compile Include="ViewModels\DummyViewModel.cs" />
     <Compile Include="ViewModels\LanguageSettingsViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
-    <Compile Include="Views\CredentialsView.xaml.cs">
-      <DependentUpon>CredentialsView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -165,6 +163,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CredentialsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DummyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

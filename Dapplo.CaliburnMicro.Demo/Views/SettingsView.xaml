@@ -1,8 +1,15 @@
-﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.Views.SettingsView"
+﻿<mahapps:MetroWindow x:Class="Dapplo.CaliburnMicro.Demo.Views.SettingsView"
 			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:cal="http://www.caliburnproject.org"
+			xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
 			Width="Auto" Height="400">
+	<mahapps:MetroWindow.RightWindowCommands>
+		<mahapps:WindowCommands>
+			<Button x:Name="ShowLogin" Content="Login"></Button>
+		</mahapps:WindowCommands>
+	</mahapps:MetroWindow.RightWindowCommands>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -20,6 +27,6 @@
 				</DataTemplate>
 			</TreeView.ItemTemplate>
 		</TreeView>
-		<ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0" />
+		<ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0"/>
 	</Grid>
-</UserControl>
+</mahapps:MetroWindow>
