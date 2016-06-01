@@ -7,12 +7,12 @@ WORK IN PROGRESS
 - Current build status: [![Build status](https://ci.appveyor.com/api/projects/status/fuaq8ppel23aqqva?svg=true)](https://ci.appveyor.com/project/dapplo/dapplo-caliburnmicro)
 - Coverage Status: [![Coverage Status](https://coveralls.io/repos/github/dapplo/Dapplo.CaliburnMicro/badge.svg?branch=master)](https://coveralls.io/github/dapplo/Dapplo.CaliburnMicro?branch=master)
 - NuGet package Dapplo.CaliburnMicro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro)
-- NuGet package Dapplo.CaliburnMicro.MahApps: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.MahApps)
+- NuGet package Dapplo.CaliburnMicro.Metro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro)
 - NuGet package Dapplo.CaliburnMicro.NotifyIconWpf: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf)
 
 Available Packages:
 - Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
-- Dapplo.CaliburnMicro.MahApps, contains a MetroWindowManager MahApps
+- Dapplo.CaliburnMicro.Metro, contains a MetroWindowManager to make it work with MahApps
 - Dapplo.CaliburnMicro.NotifyIconWpf, adds functionality to display a system tray icon ViewModel first, via Hardcodet.NotifyIcon.Wpf
 
 # Quick-start documentation
@@ -39,11 +39,11 @@ Usage:
 - TrayIcon extends TaskbarIcon (from Hardcodet.Wpf.TaskbarNotification) and only adds an interface and a minimal implementation. This allows you to use it exactly like the documentation of Hardcodet.Wpf.TaskbarNotification describes. Also due to the way things are wired, all Caliburn.Micro logic works as designed (even cal:Message.Attach="[Event TrayLeftMouseDown] = [Action xxxx]")
 
 
-## Dapplo.CaliburnMicro.MahApps
+## Dapplo.CaliburnMicro.Metro
 
 This is based on a MahApps.Metro dependency, and supplies a IWindowManager implementation which makes things look like "metro" apps.
 
 Usage:
-- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.MahApps.dll");
+- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 
 Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/

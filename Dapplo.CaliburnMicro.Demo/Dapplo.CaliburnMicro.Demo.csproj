@@ -137,7 +137,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.MahApps\Dapplo.CaliburnMicro.Metro.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
       <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
       <Name>Dapplo.CaliburnMicro.Metro</Name>
     </ProjectReference>
