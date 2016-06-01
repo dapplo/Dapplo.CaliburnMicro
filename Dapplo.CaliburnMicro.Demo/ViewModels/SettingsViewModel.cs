@@ -89,7 +89,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			ActivateItem(view);
 		}
 
-		public void ShowLogin()
+		public void Login()
 		{
 			var result = WindowsManager.ShowDialog(CredentialsVm);
 			Log.Info().WriteLine($"Girl you know it's {result}");

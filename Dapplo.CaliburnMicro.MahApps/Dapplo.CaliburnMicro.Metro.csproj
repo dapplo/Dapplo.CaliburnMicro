@@ -7,8 +7,8 @@
     <ProjectGuid>{E6597C99-3721-42F3-87B6-219B9DFD9879}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dapplo.CaliburnMicro.MahApps</RootNamespace>
-    <AssemblyName>Dapplo.CaliburnMicro.MahApps</AssemblyName>
+    <RootNamespace>Dapplo.CaliburnMicro.Metro</RootNamespace>
+    <AssemblyName>Dapplo.CaliburnMicro.Metro</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Dapplo.CaliburnMicro.MahApps.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Dapplo.CaliburnMicro.Metro.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.MahApps.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.Metro.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>

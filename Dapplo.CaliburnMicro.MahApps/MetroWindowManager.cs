@@ -31,7 +31,7 @@ using MahApps.Metro.Controls;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.MahApps
+namespace Dapplo.CaliburnMicro.Metro
 {
 	/// <summary>
 	///     This (slightly modified) comes from

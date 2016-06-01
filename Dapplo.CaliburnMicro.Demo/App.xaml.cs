@@ -50,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo
 			// Comment this if no TrayIcons should be used
 			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
 			// Comment this to use the default window manager
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.MahApps.dll");
+			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 #if DEBUG
 			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #else

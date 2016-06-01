@@ -6,7 +6,7 @@
 			Width="Auto" Height="400">
 	<mahapps:MetroWindow.RightWindowCommands>
 		<mahapps:WindowCommands>
-			<Button x:Name="ShowLogin" Content="Login"></Button>
+			<Button x:Name="Login" Content="Login" cal:Message.Attach="[Event Click] = [Action Login()]"></Button>
 		</mahapps:WindowCommands>
 	</mahapps:MetroWindow.RightWindowCommands>
 

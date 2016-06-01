@@ -30,11 +30,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Dapplo.CaliburnMicro.MahApps")]
+[assembly: AssemblyTitle("Dapplo.CaliburnMicro.Metro")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dapplo")]
-[assembly: AssemblyProduct("Dapplo.CaliburnMicro.MahApps")]
+[assembly: AssemblyProduct("Dapplo.CaliburnMicro.Metro")]
 [assembly: AssemblyCopyright("Copyright © Dapplo 2016")]
 [assembly: AssemblyTrademark("Dapplo")]
 [assembly: AssemblyCulture("")]
