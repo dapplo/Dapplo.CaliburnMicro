@@ -21,7 +21,10 @@
 
 #region using
 
+using System;
+using System.Diagnostics;
 using System.Windows;
+using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.LogFacade;
 using Dapplo.LogFacade.Loggers;
@@ -32,20 +35,39 @@ using Dapplo.Utils;
 namespace Dapplo.CaliburnMicro.Demo
 {
 	/// <summary>
-	///     Interaction logic for App.xaml
+	/// This takes care or starting the Application
 	/// </summary>
-	public partial class App
+	public class Startup : Application
 	{
-		private readonly ApplicationBootstrapper _bootstrapper = new ApplicationBootstrapper("Demo", "1234456789");
+		private readonly ApplicationBootstrapper _bootstrapper = new ApplicationBootstrapper("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5");
 
-		public App()
+		/// <summary>
+		/// Start the application
+		/// </summary>
+		[STAThread, DebuggerNonUserCode]
+		public static void Main()
 		{
-			InitializeComponent();
+#if DEBUG
+			// Initialize a debug logger for Dapplo packages
+			LogSettings.Logger = new DebugLogger { Level = LogLevel.Verbose };
+#endif
+			var application = new Startup
+			{
+				ShutdownMode = ShutdownMode.OnLastWindowClose
+			};
+			application.Run();
 		}
 
-		private async void App_OnStartup(object sender, StartupEventArgs startupEventArgs)
+		/// <summary>
+		/// Make sure we startup everything after WPF instanciated
+		/// </summary>
+		/// <param name="startupEventArgs">StartupEventArgs</param>
+		protected override async void OnStartup(StartupEventArgs startupEventArgs)
 		{
-			LogSettings.Logger = new DebugLogger {Level = LogLevel.Verbose};
+			base.OnStartup(startupEventArgs);
+
+			UiContext.Initialize();
+
 			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.dll");
 			// Comment this if no TrayIcons should be used
 			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
@@ -56,12 +78,13 @@ namespace Dapplo.CaliburnMicro.Demo
 #else
 	//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Release", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #endif
-			// UiContext.Initialize() should actually be called in the ApplicationBootstrapper if possible...
-			UiContext.Initialize();
-			await _bootstrapper.RunAsync();
+			_bootstrapper.Add(GetType().Assembly);
 
-			// Current.Exit should actually be caught in the ApplicationBootstrapper if possible...
-			Current.Exit += async (s, e) => { await _bootstrapper.ShutdownAsync(); };
+			// TODO: Remove "hack" for the shutdown/exit
+			await _bootstrapper.InitializeAsync();
+			_bootstrapper.Export<IBootstrapper>(_bootstrapper);
+
+			await _bootstrapper.RunAsync();
 		}
 	}
 }
