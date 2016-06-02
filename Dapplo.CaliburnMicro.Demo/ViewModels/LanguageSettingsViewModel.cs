@@ -29,6 +29,8 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
+using Dapplo.CaliburnMicro.Demo.Languages;
+using System.Windows;
 
 #endregion
 
@@ -70,7 +72,8 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public async Task ChangeLanguage()
 		{
 			EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-			await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language);
+			await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
 		}
+
 	}
 }

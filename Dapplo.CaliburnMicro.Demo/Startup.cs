@@ -21,14 +21,12 @@
 
 #region using
 
+using Dapplo.Addons.Bootstrapper;
+using Dapplo.LogFacade;
+using Dapplo.Utils;
 using System;
 using System.Diagnostics;
 using System.Windows;
-using Dapplo.Addons;
-using Dapplo.Addons.Bootstrapper;
-using Dapplo.LogFacade;
-using Dapplo.LogFacade.Loggers;
-using Dapplo.Utils;
 
 #endregion
 
@@ -39,6 +37,8 @@ namespace Dapplo.CaliburnMicro.Demo
 	/// </summary>
 	public class Startup : Application
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		private readonly ApplicationBootstrapper _bootstrapper = new ApplicationBootstrapper("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5");
 
 		/// <summary>
@@ -80,11 +80,18 @@ namespace Dapplo.CaliburnMicro.Demo
 #endif
 			_bootstrapper.Add(GetType().Assembly);
 
-			// TODO: Remove "hack" for the shutdown/exit
-			await _bootstrapper.InitializeAsync();
-			_bootstrapper.Export<IBootstrapper>(_bootstrapper);
+			await _bootstrapper.RunAsync().ConfigureAwait(false);
+		}
 
-			await _bootstrapper.RunAsync();
+		/// <summary>
+		/// Make sure the bootstrapper is stopped,
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnExit(ExitEventArgs e)
+		{
+			Log.Info().WriteLine("Stopping the Bootstrapper, if the application hangs here is a problem with a ShutdownAsync!!");
+			_bootstrapper.StopAsync().Wait();
+			base.OnExit(e);
 		}
 	}
 }

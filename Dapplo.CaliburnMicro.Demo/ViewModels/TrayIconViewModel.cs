@@ -27,6 +27,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.LogFacade;
+using Dapplo.CaliburnMicro.Demo.Languages;
 
 #endregion
 
@@ -81,7 +82,8 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			Log.Debug().WriteLine("ShowSomething");
 			// Lookup my tray icon
 			var trayIcon = TrayIconManager.GetTrayIconFor(this);
-			trayIcon.ShowInfoBalloonTip("Clicked", "You clicked the icon");
+
+			trayIcon.ShowBalloonTip<NotificationExampleViewModel>();
 		}
 
 		public void Update()

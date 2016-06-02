@@ -26,13 +26,14 @@ using Dapplo.Config.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Models
+namespace Dapplo.CaliburnMicro.Demo.Languages
 {
-	[Language("ContextMenu")]
-	public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
+	[Language("Credentials")]
+	public interface ICredentialsTranslations : ILanguage, INotifyPropertyChanged
 	{
-		string Configure { get; }
-		string Exit { get; }
-		string Update { get; }
+		string Login { get; }
+
+		string Password { get; }
+		string Username { get; }
 	}
 }

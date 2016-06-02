@@ -54,12 +54,12 @@
       <HintPath>..\packages\Caliburn.Micro.3.0.1\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.3.40.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.3.40\lib\net452\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.3.41.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.3.41\lib\net452\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.3.40.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.3.40\lib\net452\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.3.41.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.3.41\lib\net452\Dapplo.Addons.Bootstrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Config, Version=0.3.32.0, Culture=neutral, processorArchitecture=MSIL">
@@ -108,14 +108,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISettingsControl.cs" />
-    <Compile Include="Models\IContextMenuTranslations.cs" />
-    <Compile Include="Models\ICoreTranslations.cs" />
-    <Compile Include="Models\ICredentialsTranslations.cs" />
+    <Compile Include="Languages\IContextMenuTranslations.cs" />
+    <Compile Include="Languages\ICoreTranslations.cs" />
+    <Compile Include="Languages\ICredentialsTranslations.cs" />
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />
     <Compile Include="ViewModels\LanguageSettingsViewModel.cs" />
+    <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
   </ItemGroup>
@@ -164,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LanguageSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotificationExampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -59,13 +59,15 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <typeparam name="T">Type for the ViewModel to show</typeparam>
 		/// <param name="animation">PopupAnimation</param>
 		/// <param name="timeout">TimeSpan</param>
-		public void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Slide, TimeSpan? timeout = default(TimeSpan?))
+		public void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?))
 		{
 			var rootModel = IoC.Get<T>();
 
 			var view = ViewLocator.LocateForModel(rootModel, null, null);
 			ViewModelBinder.Bind(rootModel, view, null);
-			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int?) null);
+
+			var p = GetPopupTrayPosition();
+			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int)TimeSpan.FromSeconds(4).TotalMilliseconds);
 		}
 
 		/// <summary>

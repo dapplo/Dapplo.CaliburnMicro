@@ -24,6 +24,7 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.CaliburnMicro.Demo.Languages;
 
 #endregion
 

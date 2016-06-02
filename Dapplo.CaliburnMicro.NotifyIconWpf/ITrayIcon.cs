@@ -63,7 +63,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <typeparam name="T">Type for the ViewModel to show</typeparam>
 		/// <param name="animation">PopupAnimation</param>
 		/// <param name="timeout">TimeSpan</param>
-		void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Slide, TimeSpan? timeout = null);
+		void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = null);
 
 		/// <summary>
 		///     Show a balloon with title, message and an Error-icon

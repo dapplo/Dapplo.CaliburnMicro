@@ -63,7 +63,8 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <returns></returns>
 		public Task ShutdownAsync(CancellationToken token = default(CancellationToken))
 		{
-			return UiContext.RunOn(() =>
+			// TODO: Check if there is some way to do this async await without blocking.
+			Execute.OnUIThread(() =>
 			{
 				var trayIcons = _trayIcons.Values.Select(x =>
 				{
@@ -75,7 +76,8 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 				{
 					trayIcon.Hide();
 				}
-			}, token);
+			});
+			return Task.FromResult(true);
 		}
 
 		/// <summary>
@@ -83,9 +85,9 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// </summary>
 		/// <param name="token">CancellationToken</param>
 		/// <returns>Task</returns>
-		public Task StartAsync(CancellationToken token = default(CancellationToken))
+		public async Task StartAsync(CancellationToken token = default(CancellationToken))
 		{
-			return UiContext.RunOn(() =>
+			await UiContext.RunOn(() =>
 			{
 				foreach (var trayIconViewModel in TrayIconViewModels)
 				{
@@ -99,7 +101,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 					};
 					WindowsManager.ShowPopup(trayIconViewModel);
 				}
-			}, token);
+			}, token).ConfigureAwait(false);
 		}
 
 		/// <summary>
