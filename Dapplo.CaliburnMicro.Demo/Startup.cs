@@ -21,12 +21,10 @@
 
 #region using
 
-using Dapplo.Addons.Bootstrapper;
-using Dapplo.LogFacade;
-using Dapplo.Utils;
 using System;
 using System.Diagnostics;
 using System.Windows;
+using Dapplo.LogFacade;
 using Dapplo.LogFacade.Loggers;
 
 #endregion
@@ -34,65 +32,37 @@ using Dapplo.LogFacade.Loggers;
 namespace Dapplo.CaliburnMicro.Demo
 {
 	/// <summary>
-	/// This takes care or starting the Application
+	///     This takes care or starting the Application
 	/// </summary>
-	public class Startup : Application
+	public class Startup
 	{
-		private static readonly LogSource Log = new LogSource();
-
-		private readonly ApplicationBootstrapper _bootstrapper = new ApplicationBootstrapper("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5");
-
 		/// <summary>
-		/// Start the application
+		///     Start the application
 		/// </summary>
 		[STAThread, DebuggerNonUserCode]
 		public static void Main()
 		{
 #if DEBUG
 			// Initialize a debug logger for Dapplo packages
-			LogSettings.Logger = new DebugLogger { Level = LogLevel.Verbose };
+			LogSettings.Logger = new DebugLogger {Level = LogLevel.Verbose};
 #endif
-			var application = new Startup
+			var application = new Dapplication("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
 			{
 				ShutdownMode = ShutdownMode.OnLastWindowClose
 			};
-			application.Run();
-		}
-
-		/// <summary>
-		/// Make sure we startup everything after WPF instanciated
-		/// </summary>
-		/// <param name="startupEventArgs">StartupEventArgs</param>
-		protected override async void OnStartup(StartupEventArgs startupEventArgs)
-		{
-			base.OnStartup(startupEventArgs);
-
-			UiContext.Initialize();
-
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.dll");
+			application.Add(@".", "Dapplo.CaliburnMicro.dll");
 			// Comment this if no TrayIcons should be used
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
+			application.Add(@".", "Dapplo.CaliburnMicro.NotifyIconWpf.dll");
 			// Comment this to use the default window manager
-			_bootstrapper.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
+			application.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 #if DEBUG
-			//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
+			//application.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #else
 	//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Release", "Dapplo.CaliburnMicro.DemoAddon.dll");
 #endif
-			_bootstrapper.Add(GetType().Assembly);
+			application.Add(typeof(Startup).Assembly);
 
-			await _bootstrapper.RunAsync().ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Make sure the bootstrapper is stopped,
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnExit(ExitEventArgs e)
-		{
-			Log.Info().WriteLine("Stopping the Bootstrapper, if the application hangs here is a problem with a ShutdownAsync!!");
-			_bootstrapper.StopAsync().Wait();
-			base.OnExit(e);
+			application.Run();
 		}
 	}
 }

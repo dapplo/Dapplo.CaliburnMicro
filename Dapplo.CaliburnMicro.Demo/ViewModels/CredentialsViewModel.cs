@@ -23,7 +23,6 @@
 
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Demo.Languages;
 
 #endregion
@@ -45,10 +44,10 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public bool CanLogin => !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
 
 		[Import]
-		public ICredentialsTranslations CredentialsTranslations { get; set; }
+		public ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
-		public ICoreTranslations CoreTranslations { get; set; }
+		public ICredentialsTranslations CredentialsTranslations { get; set; }
 
 		[Import]
 		public DummyViewModel DummyVm { get; set; }
@@ -81,14 +80,14 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			}
 		}
 
-		public void Login()
-		{
-			TryClose(true);
-		}
-
 		public void Cancel()
 		{
 			TryClose(false);
+		}
+
+		public void Login()
+		{
+			TryClose(true);
 		}
 	}
 }

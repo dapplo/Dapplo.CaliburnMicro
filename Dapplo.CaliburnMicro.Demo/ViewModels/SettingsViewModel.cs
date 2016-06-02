@@ -21,6 +21,9 @@
 
 #region using
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -28,9 +31,6 @@ using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
 using Dapplo.LogFacade;
 using Dapplo.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
 
 #endregion
 
@@ -49,10 +49,10 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		private ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
-		private IDemoConfiguration DemoConfiguration { get; set; }
+		private CredentialsViewModel CredentialsVm { get; set; }
 
 		[Import]
-		private IEventAggregator EventAggregator { get; set; }
+		private IDemoConfiguration DemoConfiguration { get; set; }
 
 		/// <summary>
 		///     Make the DisplayName be translatable
@@ -63,6 +63,9 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			set { throw new NotImplementedException(); }
 		}
 
+		[Import]
+		private IEventAggregator EventAggregator { get; set; }
+
 		/// <summary>
 		///     Get all settings controls, these are the items that are displayed.
 		/// </summary>
@@ -71,9 +74,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		[Import]
 		private IWindowManager WindowsManager { get; set; }
-
-		[Import]
-		private CredentialsViewModel CredentialsVm { get; set; }
 
 		public void OnImportsSatisfied()
 		{

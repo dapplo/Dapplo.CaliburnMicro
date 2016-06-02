@@ -19,14 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Caliburn.Micro;
+#region using
+
 using System.ComponentModel.Composition;
+using Caliburn.Micro;
+
+#endregion
 
 namespace Dapplo.CaliburnMicro.Demo.ViewModels
 {
 	/// <summary>
-	/// This is the ViewModel for the Notification popup, it's currently important to specify a special PartCreationPolicy to prevent exceptions.
-	/// Every time a popup is created a new instance is needed. Later I might add an attibute coverting this.
+	///     This is the ViewModel for the Notification popup, it's currently important to specify a special PartCreationPolicy
+	///     to prevent exceptions.
+	///     Every time a popup is created a new instance is needed. Later I might add an attibute coverting this.
 	/// </summary>
 	[Export]
 	[PartCreationPolicy(CreationPolicy.NonShared)]

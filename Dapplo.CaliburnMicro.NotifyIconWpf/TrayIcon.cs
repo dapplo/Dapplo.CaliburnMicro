@@ -67,7 +67,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			ViewModelBinder.Bind(rootModel, view, null);
 
 			var p = GetPopupTrayPosition();
-			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int)TimeSpan.FromSeconds(4).TotalMilliseconds);
+			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int) TimeSpan.FromSeconds(4).TotalMilliseconds);
 		}
 
 		/// <summary>
