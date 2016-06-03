@@ -3,10 +3,12 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:cal="http://www.caliburnproject.org"
 					xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+					Icon="/Resources/Icon.ico"
 					Width="Auto" Height="400">
 	<mahapps:MetroWindow.RightWindowCommands>
 		<mahapps:WindowCommands>
 			<Button x:Name="Login" Content="Login" cal:Message.Attach="[Event Click] = [Action Login()]" />
+			<Button x:Name="Dialog" Content="Dialog" cal:Message.Attach="[Event Click] = [Action Dialog()]" />
 		</mahapps:WindowCommands>
 	</mahapps:MetroWindow.RightWindowCommands>
 

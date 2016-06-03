@@ -21,9 +21,6 @@
 
 #region using
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -31,6 +28,11 @@ using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
 using Dapplo.LogFacade;
 using Dapplo.Utils;
+using MahApps.Metro.Controls.Dialogs;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -55,14 +57,8 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		private IDemoConfiguration DemoConfiguration { get; set; }
 
 		/// <summary>
-		///     Make the DisplayName be translatable
+		/// Used to send events
 		/// </summary>
-		public override string DisplayName
-		{
-			get { return CoreTranslations.Settings; }
-			set { throw new NotImplementedException(); }
-		}
-
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
 
@@ -72,12 +68,33 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[ImportMany]
 		private IEnumerable<ISettingsControl> SettingsControls { get; set; }
 
+		/// <summary>
+		/// Used to show a "normal" dialog
+		/// </summary>
 		[Import]
 		private IWindowManager WindowsManager { get; set; }
 
+		/// <summary>
+		/// Used to make it possible to show a MahApps dialog
+		/// </summary>
+		[Import]
+		private IDialogCoordinator Dialogcoordinator { get; set; }
+
+		/// <summary>
+		/// This makes a updating CoreTranslations.Settings send a change for DisplayName
+		/// </summary>
 		public void OnImportsSatisfied()
 		{
 			CoreTranslations.BindNotifyPropertyChanged(nameof(CoreTranslations.Settings), OnPropertyChanged, nameof(DisplayName));
+		}
+
+		/// <summary>
+		///     Make the DisplayName be translateble
+		/// </summary>
+		public override string DisplayName
+		{
+			get { return CoreTranslations.Settings; }
+			set { throw new NotImplementedException(); }
 		}
 
 		/// <summary>
@@ -90,10 +107,22 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			ActivateItem(view);
 		}
 
+		/// <summary>
+		/// Show the credentials for the login
+		/// </summary>
 		public void Login()
 		{
 			var result = WindowsManager.ShowDialog(CredentialsVm);
 			Log.Info().WriteLine($"Girl you know it's {result}");
+		}
+
+		/// <summary>
+		/// Show a MahApps dialog from the MVVM
+		/// </summary>
+		/// <returns></returns>
+		public async Task Dialog()
+		{
+			await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
 		}
 
 		/// <summary>

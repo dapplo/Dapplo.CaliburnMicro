@@ -31,6 +31,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
+using Dapplo.Utils;
 
 #endregion
 
@@ -41,7 +42,8 @@ namespace Dapplo.CaliburnMicro
 	///     and uses this.
 	/// </summary>
 	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper)]
-	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction
+	[ShutdownAction(ShutdownOrder = (int)CaliburnStartOrder.Bootstrapper)]
+	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction, IShutdownAction
 	{
 		[Import]
 		private IServiceExporter ServiceExporter { get; set; }
@@ -56,15 +58,28 @@ namespace Dapplo.CaliburnMicro
 		///     Initialize the Caliburn bootstrapper from the Dapplo startup
 		/// </summary>
 		/// <param name="token">CancellationToken</param>
-		public Task StartAsync(CancellationToken token = default(CancellationToken))
+		public async Task StartAsync(CancellationToken token = default(CancellationToken))
 		{
 			LogManager.GetLog = type => new CaliburnLogger(type);
+			await UiContext.RunOn(() =>
+			{
+				Initialize();
 
-			Initialize();
+				OnStartup(this, null);
+			});
+		}
 
-			OnStartup(this, null);
-
-			return Task.FromResult(true);
+		/// <summary>
+		/// Shutdown Caliburn
+		/// </summary>
+		/// <param name="token">CancellationToken</param>
+		/// <returns>Task</returns>
+		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
+		{
+			await UiContext.RunOn(() =>
+			{
+				OnExit(this, new EventArgs());
+			});
 		}
 
 		/// <summary>

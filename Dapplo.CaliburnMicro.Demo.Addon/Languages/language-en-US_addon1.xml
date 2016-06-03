@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<language>
+	<resources prefix="Addon1">
+		<resource name="addon">Addon</resource>
+	</resources>
+</language>

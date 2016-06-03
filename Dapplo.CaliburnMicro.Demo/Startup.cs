@@ -56,9 +56,9 @@ namespace Dapplo.CaliburnMicro.Demo
 			// Comment this to use the default window manager
 			application.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 #if DEBUG
-			//application.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Debug", "Dapplo.CaliburnMicro.DemoAddon.dll");
+			application.Add(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Debug", "Dapplo.CaliburnMicro.Demo.Addon.dll");
 #else
-	//_bootstrapper.Add(@"..\..\..\Dapplo.CaliburnMicro.DemoAddon\bin\Release", "Dapplo.CaliburnMicro.DemoAddon.dll");
+			application.Add(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Release", "Dapplo.CaliburnMicro.Demo.Addon.dll");
 #endif
 			application.Add(typeof(Startup).Assembly);
 

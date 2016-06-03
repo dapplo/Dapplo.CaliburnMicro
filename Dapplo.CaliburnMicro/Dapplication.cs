@@ -27,6 +27,8 @@ using System.Windows;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.LogFacade;
 using Dapplo.Utils;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 #endregion
 
@@ -54,6 +56,15 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
 		public Dapplication(string applicationName, string mutexId = null, bool global = false)
 		{
+			// Hook unhandled exceptions in the Dispatcher
+			DispatcherUnhandledException += HandleDispatcherException;
+
+			// Hook unhandled exceptions in the AppDomain
+			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainException;
+
+			// Hook unhandled exceptions in tasks
+			TaskScheduler.UnobservedTaskException += HandleTaskException;
+
 			_bootstrapper = new ApplicationBootstrapper(applicationName, mutexId, global);
 		}
 
@@ -66,6 +77,11 @@ namespace Dapplo.CaliburnMicro
 		///     This is called when the application is alreay running
 		/// </summary>
 		public Action OnAlreadyRunning { get; set; }
+
+		/// <summary>
+		///     This is called when the application is alreay running
+		/// </summary>
+		public Action<Exception> OnUnhandledException { get; set; }
 
 		/// <summary>
 		///     Add the assemblies (with parts) found in the specified directory
@@ -87,13 +103,13 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		///     Make sure the bootstrapper is stopped,
+		///     Make sure the Dapplication is stopped, the bootstrapper is shutdown.
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnExit(ExitEventArgs e)
 		{
-			Log.Info().WriteLine("Stopping the Bootstrapper, if the application hangs here is a problem with a ShutdownAsync!!");
-			_bootstrapper.StopAsync().Wait();
+			Log.Info().WriteLine("Stopping the Dapplication.");
+			Dispatcher.Invoke(async () => await _bootstrapper.StopAsync());
 			base.OnExit(e);
 		}
 
@@ -103,13 +119,6 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="startupEventArgs">StartupEventArgs</param>
 		protected override async void OnStartup(StartupEventArgs startupEventArgs)
 		{
-			// Hook unhandled exceptions
-			DispatcherUnhandledException += (sender, eventArgs) =>
-			{
-				eventArgs.Handled = true;
-				OnUnhandledException(eventArgs.Exception);
-			};
-
 			// Enable UI access for different Dapplo packages, especially the UiContext.RunOn
 			// This only works here, not before the Application is started
 			UiContext.Initialize();
@@ -123,13 +132,110 @@ namespace Dapplo.CaliburnMicro
 			await _bootstrapper.RunAsync().ConfigureAwait(false);
 		}
 
+		#region Error handling
 		/// <summary>
-		///     Override to handle exceptions.
+		/// This is called when exceptions occure inside a dispatched call
 		/// </summary>
-		/// <param name="exception">Exception</param>
-		protected virtual void OnUnhandledException(Exception exception)
+		public Action<Exception> OnUnhandledDispatcherException { get; set; }
+
+		/// <summary>
+		/// This is called when Exceptions are not handled inside the applications dispatcher
+		/// It will call the OnUnhandledException action, which can be used to display a message.
+		/// Only when an action is assigned, and not throw an exception, the application will not be terminated.
+		/// </summary>
+		/// <param name="sender">Sender of this event</param>
+		/// <param name="eventArgs">DispatcherUnhandledExceptionEventArgs</param>
+		protected virtual void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs eventArgs)
 		{
-			Log.Error().WriteLine(exception);
+			Log.Error().WriteLine(eventArgs.Exception, "Exception in Dispatcher");
+			if (OnUnhandledDispatcherException != null)
+			{
+				// Make sure this doesn't cause any additional exceptions
+				try
+				{
+					OnUnhandledDispatcherException?.Invoke(eventArgs.Exception);
+					// Signal that the exception was handled, to prevent the application from crashing.
+					eventArgs.Handled = true;
+				}
+				catch (Exception callerException)
+				{
+					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
+				}
+			}
 		}
+
+		/// <summary>
+		/// This is called when exceptions occure inside the AppDomain (everywhere)
+		/// Exception is the reason, the boolean specifies if your application will be terminated.
+		/// </summary>
+		public Action<Exception, bool> OnUnhandledAppDomainException { get; set; }
+
+		/// <summary>
+		/// This is called when Exceptions are not handled inside the (current) AppDomain
+		/// It will call the OnUnhandledAppDomainException action, which can be used to display a message.
+		/// Implementing an action can NOT prevent termination of your application!
+		/// It may, or may not, be terminated
+		/// </summary>
+		/// <param name="sender">Sender of this event</param>
+		/// <param name="eventArgs">UnhandledExceptionEventArgs</param>
+		protected virtual void HandleAppDomainException(object sender, UnhandledExceptionEventArgs eventArgs)
+		{
+			if (eventArgs.IsTerminating)
+			{
+				Log.Error().WriteLine("An exception the the current AppDomain will terminate your application.");
+			}
+			var exception = eventArgs.ExceptionObject as Exception;
+			Log.Error().WriteLine(exception, "Exception in AppDomain");
+			if (OnUnhandledAppDomainException != null)
+			{
+				// Make sure this doesn't cause any additional exceptions
+				try
+				{
+					OnUnhandledAppDomainException?.Invoke(exception, eventArgs.IsTerminating);
+				}
+				catch (Exception callerException)
+				{
+					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
+				}
+			}
+		}
+
+		/// <summary>
+		/// Specifies if an UnhandledTaskException is logged and 
+		/// </summary>
+		public bool ObserveUnhandledTaskException { get; set; } = true;
+
+		/// <summary>
+		/// This is called when exceptions occure inside Tasks (everywhere)
+		/// </summary>
+		public Action<Exception> OnUnhandledTaskException { get; set; }
+
+		/// <summary>
+		/// This is called when Exceptions are not handled inside Tasks
+		/// It will call the OnUnhandledTaskException action, which can be used to display a message or do something else.
+		/// In .NET before 4.5 this would terminate your application, since 4.5 it does not.
+		/// Unless you change the configuration, see <a href="https://msdn.microsoft.com/en-us/library/system.threading.tasks.taskscheduler.unobservedtaskexception.aspx">here</a>
+		/// </summary>
+		/// <param name="sender">Sender of this event</param>
+		/// <param name="eventArgs">UnobservedTaskExceptionEventArgs</param>
+		protected virtual void HandleTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
+		{
+			Log.Error().WriteLine(eventArgs.Exception, "Exception in Task");
+			if (OnUnhandledTaskException != null)
+			{
+				// Make sure this doesn't cause any additional exceptions
+				try
+				{
+					OnUnhandledTaskException?.Invoke(eventArgs.Exception);
+					// Specify that the task exception is observed, this is no longer needed but anyway...
+					eventArgs.SetObserved();
+				}
+				catch (Exception callerException)
+				{
+					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invokation");
+				}
+			}
+		}
+		#endregion
 	}
 }

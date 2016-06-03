@@ -28,6 +28,8 @@ using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
+using System.Windows.Media;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -47,6 +49,17 @@ namespace Dapplo.CaliburnMicro.Metro
 	public class MetroWindowManager : WindowManager
 	{
 		private readonly IList<ResourceDictionary> _resourceDictionaries = LoadResources();
+
+		/// <summary>
+		/// Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
+		/// </summary>
+		[Export]
+		public IDialogCoordinator MahAppsDialogCoordinator {
+			get
+			{
+				return DialogCoordinator.Instance;
+			}
+		}
 
 		/// <summary>
 		///     Set the ResourceDictionary for the newly generated window
@@ -71,13 +84,15 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		///     Implement this to make specific configuration changes to your window.
+		///  Implement this to make specific configuration changes to your window.
 		/// </summary>
-		/// <param name="window"></param>
-		public virtual void ConfigureWindow(MetroWindow window)
-		{
-		}
+		public Action<MetroWindow> OnConfigureWindow { get; set; }
 
+		/// <summary>
+		///  Implement this to make specific configuration changes to your owned (dialog) window.
+		/// </summary>
+		public Action<MetroWindow> OnConfigureOwnedWindow { get; set; }
+		
 		/// <summary>
 		///     Create a MetroWindow
 		/// </summary>
@@ -95,11 +110,12 @@ namespace Dapplo.CaliburnMicro.Metro
 			{
 				result = new MetroWindow
 				{
-					Content = view
+					Content = view,
+					SizeToContent = SizeToContent.WidthAndHeight
 				};
 			}
 
-			AddMetroResources(result);
+			 AddMetroResources(result);
 			return result;
 		}
 
@@ -127,17 +143,22 @@ namespace Dapplo.CaliburnMicro.Metro
 				window = CreateCustomWindow(view, false);
 			}
 
-			ConfigureWindow(window);
+			// Allow dialogs
+			window.SetValue(DialogParticipation.RegisterProperty, model);
 			window.SetValue(View.IsGeneratedProperty, true);
 			inferOwnerOf = InferOwnerOf(window);
 			if (inferOwnerOf != null)
 			{
+				// "Dialog", center it on top of the owner
 				window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 				window.Owner = inferOwnerOf;
+				OnConfigureOwnedWindow?.Invoke(window);
 			}
 			else
 			{
+				// Free window, without owner
 				window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				OnConfigureWindow?.Invoke(window);
 			}
 			return window;
 		}
