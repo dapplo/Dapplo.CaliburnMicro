@@ -44,7 +44,7 @@ namespace Dapplo.CaliburnMicro.Demo
 		{
 #if DEBUG
 			// Initialize a debug logger for Dapplo packages
-			LogSettings.Logger = new DebugLogger {Level = LogLevel.Verbose};
+			LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 #endif
 			var application = new Dapplication("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
 			{
