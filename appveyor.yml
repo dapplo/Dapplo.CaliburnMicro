@@ -39,7 +39,6 @@ deploy:
   release: Dapplo.CaliburnMicro-v$(appveyor_build_version)
   auth_token:
     secure: eBQPtXg53XgcvdcVY3wQAw6kkwNh+QhcsTDwzyQLLh6IOPyiePEaEhJR0D2YBjAj
-  artifact: /.*\.nupkg/
   draft: false
   on:
     branch: master

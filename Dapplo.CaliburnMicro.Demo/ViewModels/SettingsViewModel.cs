@@ -26,7 +26,7 @@ using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
-using Dapplo.LogFacade;
+using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls.Dialogs;
 using System;

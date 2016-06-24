@@ -24,8 +24,8 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
-using Dapplo.LogFacade;
-using Dapplo.LogFacade.Loggers;
+using Dapplo.Log.Facade;
+using Dapplo.Log.Facade.Loggers;
 
 #endregion
 
@@ -44,11 +44,11 @@ namespace Dapplo.CaliburnMicro.Demo
 		{
 #if DEBUG
 			// Initialize a debug logger for Dapplo packages
-			LogSettings.Logger = new DebugLogger {Level = LogLevel.Verbose};
+			LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 #endif
 			var application = new Dapplication("Dapplo.CaliburnMicro.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
 			{
-				ShutdownMode = ShutdownMode.OnLastWindowClose
+				ShutdownMode = ShutdownMode.OnExplicitShutdown,
 			};
 			application.Add(@".", "Dapplo.CaliburnMicro.dll");
 			// Comment this if no TrayIcons should be used

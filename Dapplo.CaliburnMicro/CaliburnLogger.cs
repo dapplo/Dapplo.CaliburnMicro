@@ -23,7 +23,7 @@
 
 using System;
 using Caliburn.Micro;
-using Dapplo.LogFacade;
+using Dapplo.Log.Facade;
 
 #endregion
 

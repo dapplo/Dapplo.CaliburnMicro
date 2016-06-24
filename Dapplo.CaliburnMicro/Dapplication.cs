@@ -25,7 +25,7 @@ using System;
 using System.Reflection;
 using System.Windows;
 using Dapplo.Addons.Bootstrapper;
-using Dapplo.LogFacade;
+using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using System.Threading.Tasks;
 using System.Windows.Threading;
