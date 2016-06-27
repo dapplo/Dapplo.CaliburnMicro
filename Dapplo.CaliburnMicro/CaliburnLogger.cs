@@ -61,7 +61,8 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="args"></param>
 		public void Info(string format, params object[] args)
 		{
-			_log.Info().WriteLine(format, args);
+			// Pre-format the message, otherwise we get problems with dependency objects etc
+			_log.Info().WriteLine(LogSettings.DefaultMessageFormatter(format, args));
 		}
 
 		/// <summary>
@@ -71,7 +72,8 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="args"></param>
 		public void Warn(string format, params object[] args)
 		{
-			_log.Warn().WriteLine(format, args);
+			// Pre-format the message, otherwise we get problems with dependency objects etc
+			_log.Warn().WriteLine(LogSettings.DefaultMessageFormatter(format, args));
 		}
 	}
 }
