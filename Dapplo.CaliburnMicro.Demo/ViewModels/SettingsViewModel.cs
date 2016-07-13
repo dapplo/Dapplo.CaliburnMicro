@@ -33,6 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using System.Windows;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -81,23 +83,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		private IDialogCoordinator Dialogcoordinator { get; set; }
 
 		/// <summary>
-		/// This makes a updating CoreTranslations.Settings send a change for DisplayName
-		/// </summary>
-		public void OnImportsSatisfied()
-		{
-			CoreTranslations.BindNotifyPropertyChanged(nameof(CoreTranslations.Settings), OnPropertyChanged, nameof(DisplayName));
-		}
-
-		/// <summary>
-		///     Make the DisplayName be translateble
-		/// </summary>
-		public override string DisplayName
-		{
-			get { return CoreTranslations.Settings; }
-			set { throw new NotImplementedException(); }
-		}
-
-		/// <summary>
 		///     This is called when an item from the itemssource is selected
 		///     And will make sure that the selected item is made visible.
 		/// </summary>
@@ -125,19 +110,25 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
 		}
 
-		/// <summary>
-		///     As soon as it's activated, the items that are imported are add to the Observable Items collection.
-		/// </summary>
 		protected override void OnActivate()
 		{
 			base.OnActivate();
-			var lang = DemoConfiguration.Language;
-
 			// Add all the imported settings controls
 			// TODO: Sort them for a tree view, somehow...
 			Items.AddRange(SettingsControls);
+		}
 
-			UiContext.RunOn(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang)).Wait();
+		public void OnImportsSatisfied()
+		{
+			// automatically update the DisplayName
+			CoreTranslations.OnPropertyChanged(pcEvent =>
+			{
+				DisplayName = CoreTranslations.Settings;
+			}, nameof(ICoreTranslations.Settings));
+
+			// Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
+			var lang = DemoConfiguration.Language;
+			Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
 		}
 	}
 }

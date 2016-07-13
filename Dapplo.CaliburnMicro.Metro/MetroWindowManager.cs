@@ -160,6 +160,8 @@ namespace Dapplo.CaliburnMicro.Metro
 				window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				OnConfigureWindow?.Invoke(window);
 			}
+			// Just in case, make sure it's activated
+			window.Activate();
 			return window;
 		}
 

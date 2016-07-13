@@ -59,9 +59,9 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <summary>
 		///     Hide all trayicons to prevent them hanging useless in the system tray
 		/// </summary>
-		/// <param name="token"></param>
-		/// <returns></returns>
-		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
+		/// <param name="cancellationToken">CancellationToken</param>
+		/// <returns>Task</returns>
+		public async Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			await UiContext.RunOn(() =>
 			{
@@ -75,15 +75,15 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 				{
 					trayIcon.Hide();
 				}
-			}, token).ConfigureAwait(false);
+			}, cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>
 		///     Find all trayicons and initialize them.
 		/// </summary>
-		/// <param name="token">CancellationToken</param>
+		/// <param name="cancellationToken">CancellationToken</param>
 		/// <returns>Task</returns>
-		public async Task StartAsync(CancellationToken token = default(CancellationToken))
+		public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			await UiContext.RunOn(() =>
 			{
@@ -99,7 +99,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 					};
 					WindowsManager.ShowPopup(trayIconViewModel);
 				}
-			}, token).ConfigureAwait(false);
+			}, cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>

@@ -46,6 +46,12 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[Import]
 		public ITrayIconManager TrayIconManager { get; set; }
 
+		[Import]
+		public IWindowManager WindowManager { get; set; }
+
+		[Import]
+		public IShell Shell { get; set; }
+
 		public void Handle(string message)
 		{
 			var trayIcon = TrayIconManager.GetTrayIconFor(this);
@@ -60,6 +66,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void Configure()
 		{
 			Log.Debug().WriteLine("Configure");
+			WindowManager.ShowWindow(Shell);
 		}
 
 		public void Exit()

@@ -21,15 +21,15 @@
 
 #region using
 
+using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using System;
-using System.ComponentModel.Composition;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 {
 	[Export(typeof(ISettingsControl))]
 	public class AddonSettingsViewModel : Screen, ISettingsControl, IPartImportsSatisfiedNotification
@@ -40,21 +40,13 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
 
-		/// <summary>
-		///     Implement the IHaveDisplayName
-		/// </summary>
-		public override string DisplayName
-		{
-			get {
-				return AddonTranslations.Addon;
-			}
-			set { throw new NotImplementedException($"Set {nameof(DisplayName)}"); }
-		}
-
 		public void OnImportsSatisfied()
 		{
-			AddonTranslations.BindNotifyPropertyChanged(nameof(AddonTranslations.Addon), OnPropertyChanged, nameof(DisplayName));
-			//throw new ApplicationException("Hilfe!");
+			// automatically update the DisplayName
+			AddonTranslations.OnPropertyChanged(e =>
+			{
+				DisplayName = AddonTranslations.Addon;
+			}, nameof(IAddonTranslations.Addon));
 		}
 
 		public void DoSomething()

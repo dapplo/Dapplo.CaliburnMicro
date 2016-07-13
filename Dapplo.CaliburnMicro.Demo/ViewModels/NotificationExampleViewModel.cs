@@ -30,8 +30,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 {
 	/// <summary>
 	///     This is the ViewModel for the Notification popup, it's currently important to specify a special PartCreationPolicy
-	///     to prevent exceptions.
-	///     Every time a popup is created a new instance is needed. Later I might add an attibute coverting this.
+	///     to prevent exceptions as every time a popup is created a new instance is needed. Later I might add an attibute covering this.
 	/// </summary>
 	[Export]
 	[PartCreationPolicy(CreationPolicy.NonShared)]

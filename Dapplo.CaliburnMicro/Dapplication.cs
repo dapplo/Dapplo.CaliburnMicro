@@ -109,7 +109,7 @@ namespace Dapplo.CaliburnMicro
 		protected override void OnExit(ExitEventArgs e)
 		{
 			Log.Info().WriteLine("Stopping the Dapplication.");
-			Dispatcher.Invoke(async () => await _bootstrapper.StopAsync());
+			Dispatcher.Invoke(async () => await _bootstrapper.StopAsync().ConfigureAwait(false));
 			base.OnExit(e);
 		}
 

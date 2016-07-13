@@ -26,10 +26,10 @@ using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -40,10 +40,25 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 	{
 		public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
 
+		public void OnImportsSatisfied()
+		{
+			// automatically update the DisplayName
+			CoreTranslations.OnPropertyChanged(pcEvent =>
+			{
+				DisplayName = CoreTranslations.Language;
+			}, nameof(ICoreTranslations.Language));
+
+			// automatically update the CanChangeLanguage state when a different language is selected
+			DemoConfiguration.OnPropertyChanged(pcEvent =>
+			{
+				NotifyOfPropertyChange(nameof(CanChangeLanguage));
+			}, nameof(IDemoConfiguration.Language));
+		}
+
 		/// <summary>
 		///     Can the login button be pressed?
 		/// </summary>
-		public bool CanChangeLanguage => !string.IsNullOrWhiteSpace(DemoConfiguration.Language);
+		public bool CanChangeLanguage => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
 
 		[Import]
 		public ICoreTranslations CoreTranslations { get; set; }
@@ -53,21 +68,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
-
-		public void OnImportsSatisfied()
-		{
-			CoreTranslations.BindNotifyPropertyChanged(nameof(CoreTranslations.Language), OnPropertyChanged, nameof(DisplayName));
-			//throw new ApplicationException("Hilfe!");
-		}
-
-		/// <summary>
-		///     Implement the IHaveDisplayName
-		/// </summary>
-		public override string DisplayName
-		{
-			get { return CoreTranslations.Language; }
-			set { throw new NotImplementedException($"Set {nameof(DisplayName)}"); }
-		}
 
 		public async Task ChangeLanguage()
 		{

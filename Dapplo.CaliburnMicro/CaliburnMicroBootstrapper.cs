@@ -63,10 +63,17 @@ namespace Dapplo.CaliburnMicro
 			LogManager.GetLog = type => new CaliburnLogger(type);
 			await UiContext.RunOn(() =>
 			{
-				Initialize();
+				try
+				{
+					Initialize();
 
-				OnStartup(this, null);
-			});
+					OnStartup(this, null);
+				}
+				catch (Exception ex)
+				{
+					throw new StartupException(ex.Message, ex);
+				}
+			}, token).ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -79,7 +86,7 @@ namespace Dapplo.CaliburnMicro
 			await UiContext.RunOn(() =>
 			{
 				OnExit(this, new EventArgs());
-			});
+			}, token).ConfigureAwait(false);
 		}
 
 		/// <summary>
