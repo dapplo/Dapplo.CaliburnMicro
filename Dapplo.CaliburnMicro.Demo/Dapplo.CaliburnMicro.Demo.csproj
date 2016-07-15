@@ -107,10 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISettingsControl.cs" />
+    <Compile Include="Languages\IWizardTranslations.cs" />
     <Compile Include="Languages\IContextMenuTranslations.cs" />
     <Compile Include="Languages\ICoreTranslations.cs" />
     <Compile Include="Languages\ICredentialsTranslations.cs" />
     <Compile Include="Models\IDemoConfiguration.cs" />
+    <Compile Include="Models\IWizardModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />
@@ -118,6 +120,9 @@
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
+    <Compile Include="ViewModels\WizardStep2ViewModel.cs" />
+    <Compile Include="ViewModels\WizardStep1ViewModel.cs" />
+    <Compile Include="ViewModels\WizardExampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -176,6 +181,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TrayIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WizardExampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WizardStep1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WizardStep2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -50,6 +50,10 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public IWindowManager WindowManager { get; set; }
 
 		[Import]
+		private WizardExampleViewModel WizardExample { get; set; }
+
+
+		[Import]
 		public IShell Shell { get; set; }
 
 		public void Handle(string message)
@@ -95,6 +99,8 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void Update()
 		{
 			Log.Debug().WriteLine("Update");
+
+			WindowManager.ShowWindow(WizardExample);
 		}
 	}
 }

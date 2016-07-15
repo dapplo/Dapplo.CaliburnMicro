@@ -90,6 +90,10 @@
     <Compile Include="Dapplication.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wizard\IWizard.cs" />
+    <Compile Include="Wizard\IWizardAware.cs" />
+    <Compile Include="Wizard\IWizardScreen.cs" />
+    <Compile Include="Wizard\Wizard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

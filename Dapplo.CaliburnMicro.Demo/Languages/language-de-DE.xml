@@ -17,4 +17,9 @@
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>
 	</resources>
+	<resources prefix="wizard">
+		<resource name="title">Mein Wizard</resource>
+		<resource name="title_step1">Schritt 1</resource>
+		<resource name="title_step2">Schritt 2</resource>
+	</resources>
 </language>
