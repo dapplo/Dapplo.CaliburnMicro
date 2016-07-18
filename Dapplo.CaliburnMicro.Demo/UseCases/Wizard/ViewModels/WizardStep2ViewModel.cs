@@ -36,15 +36,13 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public class WizardStep2ViewModel : WizardScreen
+	public sealed class WizardStep2ViewModel : WizardScreen
 	{
 		private IDisposable _displayNameUpdater;
 
 		public WizardStep2ViewModel()
 		{
-			// ReSharper disable once VirtualMemberCallInConstructor
 			Order = 2;
-			// ReSharper disable once VirtualMemberCallInConstructor
 			IsEnabled = false;
 		}
 

@@ -27,7 +27,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
@@ -37,7 +36,7 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public class WizardStep4ViewModel : WizardScreen
+	public sealed class WizardStep4ViewModel : WizardScreen
 	{
 		private IDisposable _displayNameUpdater;
 
@@ -46,7 +45,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public WizardStep4ViewModel()
 		{
-			// ReSharper disable once VirtualMemberCallInConstructor
 			Order = 4;
 		}
 
