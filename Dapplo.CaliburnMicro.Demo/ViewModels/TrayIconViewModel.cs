@@ -25,6 +25,8 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
+using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.Log.Facade;
 
@@ -54,7 +56,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 
 		[Import]
-		public IShell Shell { get; set; }
+		public SettingsViewModel SettingsViewModel { get; set; }
 
 		public void Handle(string message)
 		{
@@ -70,7 +72,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void Configure()
 		{
 			Log.Debug().WriteLine("Configure");
-			WindowManager.ShowWindow(Shell);
+			WindowManager.ShowWindow(SettingsViewModel);
 		}
 
 		public void Exit()
@@ -96,9 +98,9 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			trayIcon.ShowBalloonTip<NotificationExampleViewModel>();
 		}
 
-		public void Update()
+		public void Wizard()
 		{
-			Log.Debug().WriteLine("Update");
+			Log.Debug().WriteLine("Wizard");
 
 			WindowManager.ShowWindow(WizardExample);
 		}

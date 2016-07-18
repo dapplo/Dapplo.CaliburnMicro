@@ -1,25 +1,29 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016 Dapplo
-// 
-//  For more information see: http://dapplo.net/
-//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-//  This file is part of Dapplo.CaliburnMicro
-// 
-//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-// 
-//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Lesser General Public License for more details.
-// 
-//  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+﻿#region Dapplo 2016 - GNU Lesser General Public License
 
-#region using
+// Dapplo - building blocks for .NET applications
+// Copyright (C) 2016 Dapplo
+// 
+// For more information see: http://dapplo.net/
+// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+// This file is part of Dapplo.CaliburnMicro
+// 
+// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have a copy of the GNU Lesser General Public License
+// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#endregion
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -31,6 +35,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
+using Dapplo.Log.Facade;
 using Dapplo.Utils;
 
 #endregion
@@ -42,9 +47,11 @@ namespace Dapplo.CaliburnMicro
 	///     and uses this.
 	/// </summary>
 	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper)]
-	[ShutdownAction(ShutdownOrder = (int)CaliburnStartOrder.Bootstrapper)]
+	[ShutdownAction(ShutdownOrder = (int) CaliburnStartOrder.Bootstrapper)]
 	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction, IShutdownAction
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		[Import]
 		private IServiceExporter ServiceExporter { get; set; }
 
@@ -53,6 +60,16 @@ namespace Dapplo.CaliburnMicro
 
 		[Import]
 		private IServiceRepository ServiceRepository { get; set; }
+
+		/// <summary>
+		///     Shutdown Caliburn
+		/// </summary>
+		/// <param name="token">CancellationToken</param>
+		/// <returns>Task</returns>
+		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
+		{
+			await UiContext.RunOn(() => { OnExit(this, new EventArgs()); }, token).ConfigureAwait(false);
+		}
 
 		/// <summary>
 		///     Initialize the Caliburn bootstrapper from the Dapplo startup
@@ -73,19 +90,6 @@ namespace Dapplo.CaliburnMicro
 				{
 					throw new StartupException(ex.Message, ex);
 				}
-			}, token).ConfigureAwait(false);
-		}
-
-		/// <summary>
-		/// Shutdown Caliburn
-		/// </summary>
-		/// <param name="token">CancellationToken</param>
-		/// <returns>Task</returns>
-		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
-		{
-			await UiContext.RunOn(() =>
-			{
-				OnExit(this, new EventArgs());
 			}, token).ConfigureAwait(false);
 		}
 
@@ -152,12 +156,15 @@ namespace Dapplo.CaliburnMicro
 		{
 			// Throw exception when no IShell export is found
 			var shells = ServiceLocator.GetExports<IShell>();
-			if (!shells.Any())
+			if (shells.Any())
 			{
-				throw new ApplicationException("No IShell export found, make sure you exported your ViewModel with [Export(typeof(IShell))]");
+				// Display the IShell viewmodel
+				DisplayRootViewFor<IShell>();
 			}
-			// Display the IShell viewmodel
-			DisplayRootViewFor<IShell>();
+			else
+			{
+				Log.Info().WriteLine("No IShell export found, if you want to have an initial window make sure you exported your ViewModel with [Export(typeof(IShell))]");
+			}
 		}
 
 		/// <summary>

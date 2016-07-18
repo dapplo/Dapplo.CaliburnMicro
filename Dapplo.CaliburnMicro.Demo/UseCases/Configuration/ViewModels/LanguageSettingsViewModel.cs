@@ -21,19 +21,19 @@
 
 #region using
 
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using Dapplo.Utils.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
 	[Export(typeof(ISettingsControl))]
 	public class LanguageSettingsViewModel : Screen, ISettingsControl, IPartImportsSatisfiedNotification

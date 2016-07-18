@@ -21,31 +21,29 @@
 
 #region using
 
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Interfaces;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
-using Dapplo.Utils;
-using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Threading.Tasks;
-using System.Windows;
 using Dapplo.Utils.Extensions;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
 	/// <summary>
 	///     The settings view model is, well... for the settings :)
 	///     It is a conductor where one item is active.
 	/// </summary>
-	[Export(typeof(IShell))]
-	public class SettingsViewModel : Conductor<ISettingsControl>.Collection.OneActive, IShell, IPartImportsSatisfiedNotification
+	[Export]
+	public class SettingsViewModel : Conductor<ISettingsControl>.Collection.OneActive, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 

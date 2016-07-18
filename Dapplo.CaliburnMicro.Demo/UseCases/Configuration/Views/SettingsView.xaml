@@ -1,4 +1,4 @@
-﻿<mahapps:MetroWindow x:Class="Dapplo.CaliburnMicro.Demo.Views.SettingsView"
+﻿<mahapps:MetroWindow x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Configuration.Views.SettingsView"
 					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:cal="http://www.caliburnproject.org"

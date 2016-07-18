@@ -78,8 +78,8 @@
       <HintPath>..\packages\Dapplo.Log.Loggers.0.5.4\lib\net45\Dapplo.Log.Loggers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Utils, Version=0.1.66.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.0.1.66\lib\net45\Dapplo.Utils.dll</HintPath>
+    <Reference Include="Dapplo.Utils, Version=0.1.67.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Utils.0.1.67\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -92,6 +92,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -107,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISettingsControl.cs" />
+    <Compile Include="Languages\IValidationErrors.cs" />
     <Compile Include="Languages\IWizardTranslations.cs" />
     <Compile Include="Languages\IContextMenuTranslations.cs" />
     <Compile Include="Languages\ICoreTranslations.cs" />
@@ -116,13 +118,15 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />
-    <Compile Include="ViewModels\LanguageSettingsViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\LanguageSettingsViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
-    <Compile Include="ViewModels\WizardStep2ViewModel.cs" />
-    <Compile Include="ViewModels\WizardStep1ViewModel.cs" />
-    <Compile Include="ViewModels\WizardExampleViewModel.cs" />
+    <Compile Include="UseCases\Wizard\ViewModels\WizardStep4ViewModel.cs" />
+    <Compile Include="UseCases\Wizard\ViewModels\WizardStep3ViewModel.cs" />
+    <Compile Include="UseCases\Wizard\ViewModels\WizardStep2ViewModel.cs" />
+    <Compile Include="UseCases\Wizard\ViewModels\WizardStep1ViewModel.cs" />
+    <Compile Include="UseCases\Wizard\ViewModels\WizardExampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -168,7 +172,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LanguageSettingsView.xaml">
+    <Page Include="UseCases\Configuration\Views\LanguageSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="UseCases\Configuration\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,15 +188,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WizardExampleView.xaml">
+    <Page Include="UseCases\Wizard\Views\WizardExampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WizardStep1View.xaml">
+    <Page Include="UseCases\Wizard\Views\WizardStep1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WizardStep2View.xaml">
+    <Page Include="UseCases\Wizard\Views\WizardStep4View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UseCases\Wizard\Views\WizardStep3View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UseCases\Wizard\Views\WizardStep2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

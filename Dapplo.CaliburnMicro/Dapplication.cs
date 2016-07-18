@@ -1,34 +1,38 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016 Dapplo
-// 
-//  For more information see: http://dapplo.net/
-//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-//  This file is part of Dapplo.CaliburnMicro
-// 
-//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-// 
-//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Lesser General Public License for more details.
-// 
-//  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+﻿#region Dapplo 2016 - GNU Lesser General Public License
 
-#region using
+// Dapplo - building blocks for .NET applications
+// Copyright (C) 2016 Dapplo
+// 
+// For more information see: http://dapplo.net/
+// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+// This file is part of Dapplo.CaliburnMicro
+// 
+// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have a copy of the GNU Lesser General Public License
+// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#endregion
+
+#region Usings
 
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 
 #endregion
 
@@ -133,15 +137,16 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		#region Error handling
+
 		/// <summary>
-		/// This is called when exceptions occure inside a dispatched call
+		///     This is called when exceptions occure inside a dispatched call
 		/// </summary>
 		public Action<Exception> OnUnhandledDispatcherException { get; set; }
 
 		/// <summary>
-		/// This is called when Exceptions are not handled inside the applications dispatcher
-		/// It will call the OnUnhandledException action, which can be used to display a message.
-		/// Only when an action is assigned, and not throw an exception, the application will not be terminated.
+		///     This is called when Exceptions are not handled inside the applications dispatcher
+		///     It will call the OnUnhandledException action, which can be used to display a message.
+		///     Only when an action is assigned, and not throw an exception, the application will not be terminated.
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">DispatcherUnhandledExceptionEventArgs</param>
@@ -165,16 +170,16 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// This is called when exceptions occure inside the AppDomain (everywhere)
-		/// Exception is the reason, the boolean specifies if your application will be terminated.
+		///     This is called when exceptions occure inside the AppDomain (everywhere)
+		///     Exception is the reason, the boolean specifies if your application will be terminated.
 		/// </summary>
 		public Action<Exception, bool> OnUnhandledAppDomainException { get; set; }
 
 		/// <summary>
-		/// This is called when Exceptions are not handled inside the (current) AppDomain
-		/// It will call the OnUnhandledAppDomainException action, which can be used to display a message.
-		/// Implementing an action can NOT prevent termination of your application!
-		/// It may, or may not, be terminated
+		///     This is called when Exceptions are not handled inside the (current) AppDomain
+		///     It will call the OnUnhandledAppDomainException action, which can be used to display a message.
+		///     Implementing an action can NOT prevent termination of your application!
+		///     It may, or may not, be terminated
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">UnhandledExceptionEventArgs</param>
@@ -201,20 +206,24 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Specifies if an UnhandledTaskException is logged and 
+		///     Specifies if an UnhandledTaskException is logged and
 		/// </summary>
 		public bool ObserveUnhandledTaskException { get; set; } = true;
 
 		/// <summary>
-		/// This is called when exceptions occure inside Tasks (everywhere)
+		///     This is called when exceptions occure inside Tasks (everywhere)
 		/// </summary>
 		public Action<Exception> OnUnhandledTaskException { get; set; }
 
 		/// <summary>
-		/// This is called when Exceptions are not handled inside Tasks
-		/// It will call the OnUnhandledTaskException action, which can be used to display a message or do something else.
-		/// In .NET before 4.5 this would terminate your application, since 4.5 it does not.
-		/// Unless you change the configuration, see <a href="https://msdn.microsoft.com/en-us/library/system.threading.tasks.taskscheduler.unobservedtaskexception.aspx">here</a>
+		///     This is called when Exceptions are not handled inside Tasks
+		///     It will call the OnUnhandledTaskException action, which can be used to display a message or do something else.
+		///     In .NET before 4.5 this would terminate your application, since 4.5 it does not.
+		///     Unless you change the configuration, see
+		///     <a
+		///         href="https://msdn.microsoft.com/en-us/library/system.threading.tasks.taskscheduler.unobservedtaskexception.aspx">
+		///         here
+		///     </a>
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">UnobservedTaskExceptionEventArgs</param>
@@ -236,6 +245,7 @@ namespace Dapplo.CaliburnMicro
 				}
 			}
 		}
+
 		#endregion
 	}
 }

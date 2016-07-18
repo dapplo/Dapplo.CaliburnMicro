@@ -28,11 +28,9 @@ using Dapplo.Config.Language;
 
 namespace Dapplo.CaliburnMicro.Demo.Languages
 {
-	[Language("ContextMenu")]
-	public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
+	[Language("ValidationErrors")]
+	public interface IValidationErrors : ILanguage, INotifyPropertyChanged
 	{
-		string Configure { get; }
-		string Exit { get; }
-		string Wizard { get; }
+		string Name { get; }
 	}
 }

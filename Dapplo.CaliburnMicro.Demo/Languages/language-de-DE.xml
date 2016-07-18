@@ -6,6 +6,7 @@
 		<resource name="cancel">Abbrechen</resource>
 		<resource name="language">Sprache</resource>
 		<resource name="settings">Einstellungen</resource>
+		<resource name="change_language">Sprache ändern</resource>
 	</resources>
 	<resources prefix="credentials">
 		<resource name="username">Benutzername</resource>
@@ -13,13 +14,19 @@
 		<resource name="login">Anmelden</resource>
 	</resources>
 	<resources prefix="contextmenu">
-		<resource name="update">Aktualisieren</resource>
+		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>
 	</resources>
 	<resources prefix="wizard">
+		<resource name="next">Weiter</resource>
+		<resource name="previous">Zurück</resource>
+		<resource name="cancel">Abbrechen</resource>
+		<resource name="finish">Ok</resource>
 		<resource name="title">Mein Wizard</resource>
 		<resource name="title_step1">Schritt 1</resource>
 		<resource name="title_step2">Schritt 2</resource>
+		<resource name="title_step3">Schritt 3</resource>
+		<resource name="title_step4">Schritt 4</resource>
 	</resources>
 </language>

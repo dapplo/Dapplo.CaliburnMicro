@@ -7,7 +7,7 @@
 			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
 	<ni:TrayIcon.ContextMenu>
 		<ContextMenu>
-			<MenuItem Header="{Binding ContextMenuTranslations.Update}" cal:Message.Attach="Update" />
+			<MenuItem Header="{Binding ContextMenuTranslations.Wizard}" cal:Message.Attach="Wizard" />
 			<MenuItem Header="{Binding ContextMenuTranslations.Configure}" cal:Message.Attach="Configure" />
 			<Separator />
 			<MenuItem Header="{Binding ContextMenuTranslations.Exit}" cal:Message.Attach="Exit" />

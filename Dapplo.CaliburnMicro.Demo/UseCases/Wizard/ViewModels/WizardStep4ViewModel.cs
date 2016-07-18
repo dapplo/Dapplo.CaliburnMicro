@@ -23,13 +23,39 @@
 
 #endregion
 
-namespace Dapplo.CaliburnMicro
+#region Usings
+
+using System;
+using System.ComponentModel.Composition;
+using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Wizard;
+using Dapplo.Utils.Extensions;
+
+#endregion
+
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
-	/// <summary>
-	///     Implement (and export with) this interface on your main ViewModel, if available this will be started automatically.
-	///     P.S. There can be only one!
-	/// </summary>
-	public interface IShell
+	[Export(typeof(IWizardScreen))]
+	public class WizardStep4ViewModel : Screen, IWizardScreen
 	{
+		private IDisposable _displayNameUpdater;
+
+		[Import]
+		private IWizardTranslations WizardTranslations { get; set; }
+
+		public void Initialize(IWizard parent)
+		{
+			_displayNameUpdater = WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.TitleStep4);
+		}
+
+		public void Terminate()
+		{
+			_displayNameUpdater?.Dispose();
+		}
+
+		public bool IsEnabled => true;
+
+		public bool IsVisible => true;
 	}
 }

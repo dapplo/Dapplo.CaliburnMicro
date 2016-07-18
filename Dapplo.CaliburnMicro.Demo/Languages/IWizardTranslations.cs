@@ -31,8 +31,14 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 	[Language("Wizard")]
 	public interface IWizardTranslations : ILanguage, INotifyPropertyChanged
 	{
+		string Next { get; }
+		string Previous { get; }
+		string Finish { get; }
+		string Cancel { get; }
 		string Title { get; }
 		string TitleStep1 { get; }
 		string TitleStep2 { get; }
+		string TitleStep3 { get; }
+		string TitleStep4 { get; }
 	}
 }
