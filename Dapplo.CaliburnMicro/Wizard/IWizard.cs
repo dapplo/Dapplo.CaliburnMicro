@@ -40,12 +40,12 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <summary>
 		///     The TWizardScreen items of the wizard
 		/// </summary>
-		IEnumerable<IWizardScreen> WizardScreens { get; }
+		IEnumerable<IWizardScreen> WizardScreens { get; set; }
 
 		/// <summary>
 		///     Returns the current wizard screen
 		/// </summary>
-		IWizardScreen CurrentWizardScreen { get; }
+		IWizardScreen CurrentWizardScreen { get; set; }
 
 		/// <summary>
 		/// Initialize will o.a. initialize the wizard screens

@@ -37,25 +37,27 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public class WizardStep4ViewModel : Screen, IWizardScreen
+	public class WizardStep4ViewModel : WizardScreen
 	{
 		private IDisposable _displayNameUpdater;
 
 		[Import]
 		private IWizardTranslations WizardTranslations { get; set; }
 
-		public void Initialize(IWizard parent)
+		public WizardStep4ViewModel()
+		{
+			// ReSharper disable once VirtualMemberCallInConstructor
+			Order = 4;
+		}
+
+		public override void Initialize(IWizard parent)
 		{
 			_displayNameUpdater = WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.TitleStep4);
 		}
 
-		public void Terminate()
+		public override void Terminate()
 		{
 			_displayNameUpdater?.Dispose();
 		}
-
-		public bool IsEnabled => true;
-
-		public bool IsVisible => true;
 	}
 }

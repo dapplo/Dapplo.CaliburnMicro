@@ -40,36 +40,20 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	public class WizardExampleViewModel : Wizard<IWizardScreen>, IPartImportsSatisfiedNotification
 	{
 		[ImportMany]
-		private IEnumerable<IWizardScreen> WizardElements { get; set; }
+		private IEnumerable<IWizardScreen> WizardItems { get; set; }
 
 		[Import]
 		public IWizardTranslations WizardTranslations { get; set; }
 
-		public override bool CanFinish
-		{
-			get { return WizardElements.Last() == CurrentWizardScreen; }
-		}
+		public override bool CanFinish => WizardScreens.Last() == CurrentWizardScreen;
 
-		public override bool CanCancel
-		{
-			get { return WizardElements.Last() != CurrentWizardScreen; }
-		}
+		public override bool CanCancel => WizardScreens.Last() != CurrentWizardScreen;
 
 		public void OnImportsSatisfied()
 		{
 			WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.Title);
-		}
-
-
-		/// <summary>
-		///     OnActivate is overriden to add the items to the list.
-		/// </summary>
-		protected override void OnActivate()
-		{
-			// Make sure the order is step1, step2 by ordering on the name
-			Items.AddRange(WizardElements.OrderBy(x => x.GetType().Name));
-
-			base.OnActivate();
+			// Set the WizardScreens by ordering them
+			WizardScreens = WizardItems.OrderBy(x => x.Order);
 		}
 	}
 }

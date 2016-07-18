@@ -32,41 +32,66 @@ using Caliburn.Micro;
 namespace Dapplo.CaliburnMicro.Wizard
 {
 	/// <summary>
-	///     Every Step in a wizard should implement this
-	///     Some of the wizard functionality is covered in standard Caliburn interfaces, which are supplied by the interfaces
-	///     which IScreen extends:
-	///     IHaveDisplayName: Covers the name and title of the Wizard screen
-	///     INotifyPropertyChanged: Makes it possible that changes to e.g. the name are directly represented in the view
-	///     IActivate, IDeactivate: to know if the wizard screen is activated or deactivated
-	///     IGuardClose.CanClose: Prevents leaving the wizard screen
-	///     A default implementation is to extend Screen
+	///     A very simple implementation of IWizardScreen
 	/// </summary>
-	public interface IWizardScreen : IScreen
+	public abstract class WizardScreen : Screen, IWizardScreen
 	{
-		/// <summary>
-		/// The order in which the screens are shown
-		/// </summary>
-		int Order { get; }
+		private bool _isEnabled = true;
+		private bool _isVisible = true;
+		private int _order = 1;
 
 		/// <summary>
-		/// Do some general initialization, if needed
-		/// This is called, no matter if the IWizardScreen is shown.
+		///     The order in which the screens are shown
 		/// </summary>
-		void Initialize(IWizard parent);
+		public virtual int Order
+		{
+			get { return _order; }
+			protected set
+			{
+				_order = value;
+				NotifyOfPropertyChange(nameof(Order));
+			}
+		}
 
 		/// <summary>
-		/// Cleanup the wizard screen
+		///     Do some general initialization, if needed
+		///     This is called, no matter if the IWizardScreen is shown.
 		/// </summary>
-		void Terminate();
+		public virtual void Initialize(IWizard parent)
+		{
+		}
+
+		/// <summary>
+		///     Cleanup the wizard screen
+		/// </summary>
+		public virtual void Terminate()
+		{
+		}
 
 		/// <summary>
 		///     Returns if the wizard screen can be selected
 		/// </summary>
-		bool IsEnabled { get; }
+		public virtual bool IsEnabled
+		{
+			get { return _isEnabled; }
+			protected set
+			{
+				_isEnabled = value;
+				NotifyOfPropertyChange(nameof(IsEnabled));
+			}
+		}
 
 		/// <summary>
 		///     Returns if the wizard screen is visible
 		/// </summary>
-		bool IsVisible { get; }
+		public virtual bool IsVisible
+		{
+			get { return _isVisible; }
+			protected set
+			{
+				_isVisible = value;
+				NotifyOfPropertyChange(nameof(IsVisible));
+			}
+		}
 	}
 }

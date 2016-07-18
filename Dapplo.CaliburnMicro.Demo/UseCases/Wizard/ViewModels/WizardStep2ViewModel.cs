@@ -27,7 +27,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
@@ -37,25 +36,29 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public class WizardStep2ViewModel : Screen, IWizardScreen
+	public class WizardStep2ViewModel : WizardScreen
 	{
 		private IDisposable _displayNameUpdater;
+
+		public WizardStep2ViewModel()
+		{
+			// ReSharper disable once VirtualMemberCallInConstructor
+			Order = 2;
+			// ReSharper disable once VirtualMemberCallInConstructor
+			IsEnabled = false;
+		}
 
 		[Import]
 		private IWizardTranslations WizardTranslations { get; set; }
 
-		public void Initialize(IWizard parent)
+		public override void Initialize(IWizard parent)
 		{
 			_displayNameUpdater = WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.TitleStep2);
 		}
 
-		public void Terminate()
+		public override void Terminate()
 		{
 			_displayNameUpdater?.Dispose();
 		}
-
-		public bool IsEnabled => false;
-
-		public bool IsVisible => true;
 	}
 }

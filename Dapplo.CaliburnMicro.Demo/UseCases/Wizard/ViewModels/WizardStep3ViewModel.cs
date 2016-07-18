@@ -28,7 +28,6 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
@@ -38,7 +37,7 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public class WizardStep3ViewModel : Screen, IWizardScreen
+	public class WizardStep3ViewModel : WizardScreen
 	{
 		private IDisposable _displayNameUpdater;
 		private readonly IDisposable[] _watchParent = { null };
@@ -46,8 +45,13 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		[Import]
 		private IWizardTranslations WizardTranslations { get; set; }
 
+		public WizardStep3ViewModel()
+		{
+			// ReSharper disable once VirtualMemberCallInConstructor
+			Order = 3;
+		}
 
-		public void Initialize(IWizard parent)
+		public override void Initialize(IWizard parent)
 		{
 			// do some magic, if the current wizard screen is the last, make this visible again
 			_watchParent[0] = parent.OnPropertyChanged(pcEvent =>
@@ -60,7 +64,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 				if (parent.CurrentWizardScreen == parent.WizardScreens.Last())
 				{
 					IsVisible = true;
-					NotifyOfPropertyChange(nameof(IsVisible));
 				}
 			}, nameof(IWizard<IWizardScreen>.CurrentWizardScreen));
 
@@ -68,14 +71,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			IsVisible = false;
 		}
 
-		public void Terminate()
+		public override void Terminate()
 		{
 			_displayNameUpdater?.Dispose();
 			_watchParent[0].Dispose();
 		}
-
-		public bool IsEnabled => true;
-
-		public bool IsVisible { get; set; }
 	}
 }

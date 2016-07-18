@@ -35,7 +35,7 @@ using Dapplo.Log.Facade;
 namespace Dapplo.CaliburnMicro.Wizard
 {
 	/// <summary>
-	///     This implements a wizard Caliburn-Micro style
+	///     This implements a Caliburn-Micro wizard
 	/// </summary>
 	public abstract class Wizard<TWizardScreen> : Conductor<TWizardScreen>.Collection.OneActive, IWizard<TWizardScreen> where TWizardScreen : class, IWizardScreen
 	{
@@ -43,24 +43,25 @@ namespace Dapplo.CaliburnMicro.Wizard
 		private static readonly LogSource Log = new LogSource();
 
 		/// <summary>
-		/// This is called when the wizard needs to initialize stuff
+		/// This is called when the wizard needs to initialize stuff, it will call Initialize on every screen
 		/// </summary>
 		public virtual void Initialize()
 		{
 			Log.Verbose().WriteLine("Initializing wizard");
-			foreach (var wizardScreen in WizardScreens)
+
+			foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
 			{
 				wizardScreen.Initialize(this);
 			}
 		}
 
 		/// <summary>
-		/// This is called when the wizard needs to cleanup things
+		/// This is called when the wizard needs to cleanup things, it will call Terminate on every screen
 		/// </summary>
 		public virtual void Terminate()
 		{
 			Log.Verbose().WriteLine("Terminating wizard");
-			foreach (var wizardScreen in WizardScreens)
+			foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
 			{
 				wizardScreen.Terminate();
 			}
@@ -81,7 +82,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <summary>Called when activating.</summary>
 		protected override void OnActivate()
 		{
+			// Order the items by ordering on Order
+			Items.AddRange(WizardScreens.OrderBy(x => x.Order));
+
 			Initialize();
+
 			base.OnActivate();
 		}
 
@@ -102,24 +107,45 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <summary>
 		///     The TWizardScreen items of the wizard
 		/// </summary>
-		public IEnumerable<TWizardScreen> WizardScreens => Items;
+		public virtual IEnumerable<TWizardScreen> WizardScreens { get; set; }
 
 		/// <summary>
-		///     The TWizardScreen items of the wizard
+		///     This implements IWizard.WizardScreens via WizardScreens
 		/// </summary>
-		IEnumerable<IWizardScreen> IWizard.WizardScreens => Items;
+		IEnumerable<IWizardScreen> IWizard.WizardScreens
+		{
+			get
+			{
+				return WizardScreens;
+			}
+			set
+			{
+				WizardScreens = value as IEnumerable<TWizardScreen>;
+			}
+		}
 
 		/// <summary>
-		///     This is returns ActiveItem which is typed.
-		///     IHaveActiveItem from Caliburn.Micro, which could be used instead, doesn't have a type.
+		///     This return or sets the current wizard screen
 		/// </summary>
-		public TWizardScreen CurrentWizardScreen => ActiveItem;
+		public virtual TWizardScreen CurrentWizardScreen
+		{
+			get { return ActiveItem; }
+			set { ActivateItem(value); }
+		}
 
 		/// <summary>
-		///     This is returns ActiveItem which is typed.
-		///     IHaveActiveItem from Caliburn.Micro, which could be used instead, doesn't have a type.
+		///     This implements IWizard.CurrentWizardScreen via CurrentWizardScreen
 		/// </summary>
-		IWizardScreen IWizard.CurrentWizardScreen => ActiveItem;
+		IWizardScreen IWizard.CurrentWizardScreen {
+			get
+			{
+				return CurrentWizardScreen;
+			}
+			set
+			{
+				CurrentWizardScreen = value as TWizardScreen;
+			}
+		}
 
 		/// <summary>
 		///     Changes the ActiveItem of the conductor to the next IWizardScreen
@@ -129,10 +155,10 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
 			// Take the first available.
-			var nextWizardScreen = WizardScreens.SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
+			var nextWizardScreen = WizardScreens.OrderBy(x => x.Order).SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
 			if (nextWizardScreen != null)
 			{
-				ActivateItem(nextWizardScreen);
+				CurrentWizardScreen = nextWizardScreen;
 				return true;
 			}
 			return false;
@@ -149,7 +175,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 				// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
 				// Return if there is anything left 
 				return
-					WizardScreens.SkipWhile(w => CurrentWizardScreen != null && w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).Any();
+					WizardScreens.OrderBy(x => x.Order).SkipWhile(w => CurrentWizardScreen != null && w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).Any();
 			}
 		}
 
@@ -161,11 +187,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			// Take until 
 			var previousWizardScreen = CurrentWizardScreen != null
-				? WizardScreens.TakeWhile(w => w != CurrentWizardScreen).LastOrDefault(w => w.IsEnabled && w.IsVisible)
+				? WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).LastOrDefault(w => w.IsEnabled && w.IsVisible)
 				: null;
 			if (previousWizardScreen != null)
 			{
-				ActivateItem(previousWizardScreen);
+				CurrentWizardScreen = previousWizardScreen;
 				return true;
 			}
 			return false;
@@ -177,7 +203,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <returns></returns>
 		public virtual bool CanPrevious
 		{
-			get { return CurrentWizardScreen != null && WizardScreens.TakeWhile(w => w != CurrentWizardScreen).Any(w => w.IsEnabled && w.IsVisible); }
+			get { return CurrentWizardScreen != null && WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).Any(w => w.IsEnabled && w.IsVisible); }
 		}
 
 		/// <summary>
@@ -199,7 +225,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 			get
 			{
 				var result = true;
-				foreach (var wizardScreen in WizardScreens)
+				foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
 				{
 					wizardScreen.CanClose(canClose => result &= canClose);
 				}

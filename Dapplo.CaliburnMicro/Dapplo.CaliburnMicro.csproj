@@ -93,6 +93,7 @@
     <Compile Include="Wizard\IWizard.cs" />
     <Compile Include="Wizard\IWizardScreen.cs" />
     <Compile Include="Wizard\Wizard.cs" />
+    <Compile Include="Wizard\WizardScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
