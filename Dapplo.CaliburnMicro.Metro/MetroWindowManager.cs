@@ -24,12 +24,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
+using Dapplo.Log.Facade;
 
 #endregion
 
@@ -48,7 +51,30 @@ namespace Dapplo.CaliburnMicro.Metro
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager
 	{
-		private readonly IList<ResourceDictionary> _resourceDictionaries = LoadResources();
+		private static readonly LogSource Log = new LogSource();
+		private static readonly string[] Styles = { "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue" };
+		private static readonly Uri IconsResourceUri = new Uri(@"Resources\Icons.xaml", UriKind.Relative);
+
+		/// <summary>
+		/// Add all the resources to the Application
+		/// </summary>
+		public MetroWindowManager()
+		{
+			foreach (var style in Styles)
+			{
+				AddMahappsStyle(style);
+			}
+			// Also add MahApps Icons.xaml, from MahApps.Metro.Resources, IF the file can be found
+			// TODO: Can this be simplified to work without an exception?
+			try
+			{
+				AddResourceDictionary(IconsResourceUri);
+			}
+			catch (Exception ex)
+			{
+				Log.Info().WriteLine("MahApps.Metro.Resources is not installed, MahApps icons are not available: {0}", ex.Message);
+			}
+		}
 
 		/// <summary>
 		/// Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
@@ -62,25 +88,44 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		///     Set the ResourceDictionary for the newly generated window
+		///     Add a ResourceDictionary for the specified MahApps style
+		///     The Uri to the source is created by CreateMahappStyleUri
 		/// </summary>
-		/// <param name="window"></param>
-		private void AddMetroResources(MetroWindow window)
+		/// <param name="style">Style name, this is actually what is added behind pack://application:,,,/MahApps.Metro;component/Styles/ (and .xaml is added)</param>
+		public void AddMahappsStyle(string style)
 		{
-			foreach (var dictionary in _resourceDictionaries)
-			{
-				window.Resources.MergedDictionaries.Add(dictionary);
-			}
+			AddResourceDictionary(CreateMahappStyleUri(style));
 		}
 
 		/// <summary>
-		///     Add a single ResourceDictionary so it will be used by this MetroWindowManager
-		///     An example would be for the Icons.xaml (which is in MahApps.Metro.Resources)
+		///     Add a single ResourceDictionary for the supplied source
+		///     An example would be /Resources/Icons.xaml (which is in MahApps.Metro.Resources)
 		/// </summary>
-		/// <param name="resourceDictionary"></param>
-		public void AddResourceDictionary(ResourceDictionary resourceDictionary)
+		/// <param name="source">Uri, e.g. /Resources/Icons.xaml or </param>
+		public void AddResourceDictionary(Uri source)
 		{
-			_resourceDictionaries.Add(resourceDictionary);
+			var resourceDictionary = new ResourceDictionary
+			{
+				Source = source,
+			};
+			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+		}
+
+		/// <summary>
+		///     Remove all ResourceDictionaries for the specified MahApps style
+		///     The Uri to the source is created by CreateMahappStyleUri
+		/// </summary>
+		/// <param name="style">string</param>
+		public void RemoveMahappsStyle(string style)
+		{
+			var mahappsStyleUri = CreateMahappStyleUri(style);
+			foreach (var resourceDirectory in Application.Current.Resources.MergedDictionaries.ToList())
+			{
+				if (resourceDirectory.Source == mahappsStyleUri)
+				{
+					Application.Current.Resources.MergedDictionaries.Remove(resourceDirectory);
+				}
+			}
 		}
 
 		/// <summary>
@@ -115,7 +160,6 @@ namespace Dapplo.CaliburnMicro.Metro
 				};
 			}
 
-			 AddMetroResources(result);
 			return result;
 		}
 
@@ -166,16 +210,13 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		///     Load the resources, like styles etc, to make the available to the MetroWindow
+		/// Create a MapApps Uri for the supplied style
 		/// </summary>
+		/// <param name="style">e.g. Fonts or Controls</param>
 		/// <returns></returns>
-		private static IList<ResourceDictionary> LoadResources()
+		public static Uri CreateMahappStyleUri(string style)
 		{
-			string[] styles = {"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue"};
-			return (
-				from style in styles
-				select new ResourceDictionary {Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute)}
-				).ToList();
+			return new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
 		}
 	}
 }
