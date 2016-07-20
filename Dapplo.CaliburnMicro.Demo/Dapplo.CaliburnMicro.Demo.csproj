@@ -107,7 +107,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ISettingsControl.cs" />
+    <Compile Include="Languages\IConfigTranslations.cs" />
     <Compile Include="Languages\IValidationErrors.cs" />
     <Compile Include="Languages\IWizardTranslations.cs" />
     <Compile Include="Languages\IContextMenuTranslations.cs" />
@@ -116,11 +116,14 @@
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Models\IWizardModel.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UseCases\Configuration\ConfigIds.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />
-    <Compile Include="UseCases\Configuration\ViewModels\LanguageSettingsViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
-    <Compile Include="UseCases\Configuration\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\ConfigViewModel.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep4ViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep3ViewModel.cs" />
@@ -181,7 +184,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UseCases\Configuration\Views\LanguageSettingsView.xaml">
+    <Page Include="UseCases\Configuration\Views\LanguageConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,7 +192,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UseCases\Configuration\Views\SettingsView.xaml">
+    <Page Include="UseCases\Configuration\Views\ConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

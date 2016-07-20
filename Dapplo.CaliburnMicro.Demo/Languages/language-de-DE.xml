@@ -8,6 +8,10 @@
 		<resource name="settings">Einstellungen</resource>
 		<resource name="change_language">Sprache ändern</resource>
 	</resources>
+	<resources prefix="config">
+		<resource name="ui">Benutzeroberfläche</resource>
+		<resource name="addons">Erweiterungen</resource>
+	</resources>
 	<resources prefix="credentials">
 		<resource name="username">Benutzername</resource>
 		<resource name="password">Paswort</resource>

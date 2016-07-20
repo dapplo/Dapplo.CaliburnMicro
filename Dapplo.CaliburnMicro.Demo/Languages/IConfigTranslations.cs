@@ -26,15 +26,12 @@ using Dapplo.Config.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Addon.Languages
+namespace Dapplo.CaliburnMicro.Demo.Languages
 {
-	[Language("Addon1")]
-	public interface IAddonTranslations : ILanguage, INotifyPropertyChanged
+	[Language("Config")]
+	public interface IConfigTranslations : ILanguage, INotifyPropertyChanged
 	{
-		[DefaultValue("Blub")]
-		string Addon { get; }
-
-		[DefaultValue("Can't touch me")]
-		string NotSelectableAddon { get; }
+		string Ui { get; }
+		string Addons { get; }
 	}
 }

@@ -21,13 +21,36 @@
 
 #region using
 
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.Config.Language;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Interfaces
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
-	public interface ISettingsControl : IHaveDisplayName
+	[Export(typeof(IConfigScreen))]
+	public sealed class UiConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
 	{
+		[Import]
+		public IConfigTranslations ConfigTranslations { get; set; }
+
+		public void OnImportsSatisfied()
+		{
+			// automatically update the DisplayName
+			ConfigTranslations.OnPropertyChanged(pcEvent =>
+			{
+				DisplayName = ConfigTranslations.Ui;
+			}, nameof(IConfigTranslations.Ui));
+			CanActivate = false;
+		}
+
+		public override int Id { get; } = (int) ConfigIds.Ui;
 	}
 }

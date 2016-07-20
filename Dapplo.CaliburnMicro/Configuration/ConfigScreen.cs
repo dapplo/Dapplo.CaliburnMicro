@@ -25,52 +25,78 @@
 
 #region Usings
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Misc;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Wizard
+namespace Dapplo.CaliburnMicro.Configuration
 {
 	/// <summary>
-	///     A very simple implementation of IWizardScreen
+	///     A basic implementation of IConfigScreen
 	/// </summary>
-	public abstract class WizardScreen : Screen, IWizardScreen
+	public abstract class ConfigScreen : Screen, IConfigScreen
 	{
 		private bool _isEnabled = true;
+		private bool _canActivate = true;
 		private bool _isVisible = true;
-		private int _order = 1;
+
+		#region ITreeNode
+		/// <summary>
+		/// Used to showing this inside a tree
+		/// </summary>
+		public virtual ITreeNode<IConfigScreen> ParentNode { get; set; }
 
 		/// <summary>
-		///     The order in which the screens are shown
+		/// Used to showing this inside a tree
 		/// </summary>
-		public virtual int Order
-		{
-			get { return _order; }
-			protected set
-			{
-				_order = value;
-				NotifyOfPropertyChange(nameof(Order));
-			}
-		}
+		public virtual ICollection<ITreeNode<IConfigScreen>> ChildNodes { get; set; } = new ObservableCollection<ITreeNode<IConfigScreen>>();
+		#endregion
+
+		/// <summary>
+		///     The parent under which the IConfigScreen is shown, 0 is root
+		/// </summary>
+		public virtual int ParentId { get; }
+		
+		/// <summary>
+		/// The Id of this config screen, is also used to order children of a parent
+		/// </summary>
+		public abstract int Id { get; }
 
 		/// <summary>
 		///     Do some general initialization, if needed
-		///     This is called when the IWizard is initializing, no matter if the IWizardScreen is shown.
+		///     This is called when the config UI is initializing
 		/// </summary>
-		public virtual void Initialize(IWizard parent)
+		public virtual void Initialize(IConfig config)
 		{
 		}
 
 		/// <summary>
-		///     Cleanup the wizard screen
-		///     This is called when the IWizard terminates, no matter if the IWizardScreen was shown.
+		///     Terminate the config screen.
+		///     This is called when the parent config UI terminates, no matter if this config screen was shown
 		/// </summary>
 		public virtual void Terminate()
 		{
 		}
 
 		/// <summary>
-		///     Returns if the wizard screen can be selected
+		///     Returns if the config screen can be activated
+		/// </summary>
+		public virtual bool CanActivate
+		{
+			get { return _canActivate; }
+			protected set
+			{
+				_canActivate = value;
+				NotifyOfPropertyChange(nameof(CanActivate));
+			}
+		}
+
+		/// <summary>
+		///     Returns if the config screen can be selected
 		/// </summary>
 		public virtual bool IsEnabled
 		{
@@ -83,7 +109,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
-		///     Returns if the wizard screen is visible
+		///     Returns if the config screen is visible
 		/// </summary>
 		public virtual bool IsVisible
 		{

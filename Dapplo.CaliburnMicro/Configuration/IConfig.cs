@@ -30,88 +30,72 @@ using System.ComponentModel;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Wizard
+namespace Dapplo.CaliburnMicro.Configuration
 {
 	/// <summary>
-	/// Base interface for the IWizard
+	///     Base interface for the IConfiguration
 	/// </summary>
-	public interface IWizard : INotifyPropertyChanged
+	public interface IConfig : INotifyPropertyChanged
 	{
 		/// <summary>
-		///     The TWizardScreen items of the wizard
+		///     The config screens for the config UI
 		/// </summary>
-		IEnumerable<IWizardScreen> WizardScreens { get; set; }
+		IEnumerable<IConfigScreen> ConfigScreens { get; set; }
 
 		/// <summary>
-		///     Returns the current wizard screen
+		///     Returns the current config screen
 		/// </summary>
-		IWizardScreen CurrentWizardScreen { get; set; }
+		IConfigScreen CurrentConfigScreen { get; set; }
 
 		/// <summary>
-		/// Initialize will o.a. initialize the wizard screens
+		///     The config screens for the config UI in the tree
 		/// </summary>
-		void Initialize();
+		ICollection<IConfigScreen> TreeItems { get; }
 
 		/// <summary>
-		/// Cleanup the wizard.
-		/// </summary>
-		void Terminate();
-
-		/// <summary>
-		///     Can the wizard go to the next wizard screen, where IsEnabled/IsVisible are true, in the list. (e.g. false if we are
-		///     at the last)
-		/// </summary>
-		bool CanNext { get; }
-
-		/// <summary>
-		///     Can the wizard go to the previous IsEnabled/IsVisible wizard screen? (e.g. false if we are at the first)
-		/// </summary>
-		bool CanPrevious { get; }
-
-		/// <summary>
-		///     Can the current wizard "flow" be cancelled?
+		///     Can the current config be cancelled?
 		/// </summary>
 		bool CanCancel { get; }
 
 		/// <summary>
-		///     Test if the wizard can be finished
+		///     Test if the config can be OKed
 		/// </summary>
-		bool CanFinish { get; }
+		bool CanOk { get; }
 
 		/// <summary>
-		///     Go to the next wizard screen, where IsEnabled/IsVisible are true, in the list.
+		///     Initialize will o.a. initialize and sort (tree) the config screens
 		/// </summary>
-		bool Next();
+		void Initialize();
 
 		/// <summary>
-		///     Go to the previous wizard screen, where IsEnabled/IsVisible are true, in the list.
+		///     Terminate the config.
 		/// </summary>
-		bool Previous();
+		void Terminate();
 
 		/// <summary>
-		///     Cancel the wizard
+		///     Cancel the config
 		/// </summary>
 		void Cancel();
 
 		/// <summary>
-		///     Finish the wizard
+		///     Ok the config
 		/// </summary>
-		void Finish();
+		void Ok();
 	}
 
 	/// <summary>
-	///     This is the generic interface for a wizard implementation
+	///     This is the generic interface for a config implementation
 	/// </summary>
-	public interface IWizard<out TWizardScreen> : IWizard
+	public interface IConfig<out TConfigScreen> : IConfig
 	{
 		/// <summary>
-		///     The TWizardScreen items of the wizard
+		///     The IConfigScreen items of the config
 		/// </summary>
-		new IEnumerable<TWizardScreen> WizardScreens { get; }
+		new IEnumerable<TConfigScreen> ConfigScreens { get; }
 
 		/// <summary>
-		///     Returns the current wizard screen
+		///     Returns the current config screen
 		/// </summary>
-		new TWizardScreen CurrentWizardScreen { get; }
+		new TConfigScreen CurrentConfigScreen { get; }
 	}
 }

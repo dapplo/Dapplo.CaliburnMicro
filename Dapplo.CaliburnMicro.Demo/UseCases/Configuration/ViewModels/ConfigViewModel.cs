@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Demo.Interfaces;
+using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
@@ -43,12 +43,15 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	///     It is a conductor where one item is active.
 	/// </summary>
 	[Export]
-	public class SettingsViewModel : Conductor<ISettingsControl>.Collection.OneActive, IPartImportsSatisfiedNotification
+	public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 
 		[Import]
-		private ICoreTranslations CoreTranslations { get; set; }
+		public ICoreTranslations CoreTranslations { get; set; }
+
+		[Import]
+		public IConfigTranslations ConfigTranslations { get; set; }
 
 		[Import]
 		private CredentialsViewModel CredentialsVm { get; set; }
@@ -66,7 +69,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		///     Get all settings controls, these are the items that are displayed.
 		/// </summary>
 		[ImportMany]
-		private IEnumerable<ISettingsControl> SettingsControls { get; set; }
+		public override IEnumerable<IConfigScreen> ConfigScreens { get; set; }
 
 		/// <summary>
 		/// Used to show a "normal" dialog
@@ -85,7 +88,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		///     And will make sure that the selected item is made visible.
 		/// </summary>
 		/// <param name="view"></param>
-		public void ActivateChildView(ISettingsControl view)
+		public void ActivateChildView(IConfigScreen view)
 		{
 			ActivateItem(view);
 		}
@@ -106,14 +109,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public async Task Dialog()
 		{
 			await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
-		}
-
-		protected override void OnActivate()
-		{
-			base.OnActivate();
-			// Add all the imported settings controls
-			// TODO: Sort them for a tree view, somehow...
-			Items.AddRange(SettingsControls);
 		}
 
 		public void OnImportsSatisfied()

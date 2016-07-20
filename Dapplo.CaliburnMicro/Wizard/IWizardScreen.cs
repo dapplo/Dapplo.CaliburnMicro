@@ -32,7 +32,7 @@ using Caliburn.Micro;
 namespace Dapplo.CaliburnMicro.Wizard
 {
 	/// <summary>
-	///     Every Step in a wizard should implement this
+	///     Every screen in a wizard should implement this
 	///     Some of the wizard functionality is covered in standard Caliburn interfaces, which are supplied by the interfaces
 	///     which IScreen extends:
 	///     IHaveDisplayName: Covers the name and title of the Wizard screen
@@ -44,28 +44,29 @@ namespace Dapplo.CaliburnMicro.Wizard
 	public interface IWizardScreen : IScreen
 	{
 		/// <summary>
-		/// The order in which the screens are shown
+		/// The order in which the IWizardScreen ist shown
 		/// </summary>
 		int Order { get; }
 
 		/// <summary>
 		/// Do some general initialization, if needed
-		/// This is called, no matter if the IWizardScreen is shown.
+		/// This is called when the parent wizard is initialized
 		/// </summary>
 		void Initialize(IWizard parent);
 
 		/// <summary>
-		/// Cleanup the wizard screen
+		/// Terminate the wizard screen.
+		/// This is called when the parent wizard is terminated
 		/// </summary>
 		void Terminate();
 
 		/// <summary>
-		///     Returns if the wizard screen can be selected
+		///     Returns if the wizard screen can be selected (visible but not usable)
 		/// </summary>
 		bool IsEnabled { get; }
 
 		/// <summary>
-		///     Returns if the wizard screen is visible
+		///     Returns if the wizard screen is visible (not visible and not usable)
 		/// </summary>
 		bool IsVisible { get; }
 	}

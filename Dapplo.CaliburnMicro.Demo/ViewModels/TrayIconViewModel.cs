@@ -56,7 +56,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 
 		[Import]
-		public SettingsViewModel SettingsViewModel { get; set; }
+		public ConfigViewModel ConfigViewModel { get; set; }
 
 		public void Handle(string message)
 		{
@@ -72,7 +72,13 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public void Configure()
 		{
 			Log.Debug().WriteLine("Configure");
-			WindowManager.ShowWindow(SettingsViewModel);
+			// TODO: Closing the ConfigViewModel also closes other windows, check / fix
+			if (WindowManager.ShowDialog(ConfigViewModel) == false)
+			{
+				// Lookup my tray icon
+				var trayIcon = TrayIconManager.GetTrayIconFor(this);
+				trayIcon.ShowBalloonTip("Cancelled", "You cancelled the configuration");
+			}
 		}
 
 		public void Exit()

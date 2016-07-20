@@ -34,29 +34,22 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 {
 	[Export(typeof(IConfigScreen))]
-	public sealed class AddonSettingsViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+	public sealed class NotSelectableConfigViewModel : ConfigScreen, IPartImportsSatisfiedNotification
 	{
 		[Import]
 		public IAddonTranslations AddonTranslations { get; set; }
 
-		[Import]
-		private IEventAggregator EventAggregator { get; set; }
-
 		public void OnImportsSatisfied()
 		{
+			IsEnabled = false;
 			// automatically update the DisplayName
 			AddonTranslations.OnPropertyChanged(e =>
 			{
-				DisplayName = AddonTranslations.Addon;
-			}, nameof(IAddonTranslations.Addon));
-		}
-
-		public void DoSomething()
-		{
-			EventAggregator.PublishOnUIThread("Addon button clicked");
+				DisplayName = AddonTranslations.NotSelectableAddon;
+			}, nameof(IAddonTranslations.NotSelectableAddon));
 		}
 
 		public override int ParentId { get; } = (int)ConfigIds.Addons;
-		public override int Id { get; } = (int) (ConfigIds.Addons + 1);
+		public override int Id { get; } = (int)(ConfigIds.Addons + 2);
 	}
 }

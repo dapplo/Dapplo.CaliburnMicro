@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
@@ -110,7 +111,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		public virtual IEnumerable<TWizardScreen> WizardScreens { get; set; }
 
 		/// <summary>
-		///     This implements IWizard.WizardScreens via WizardScreens
+		///     This implements IWizard.WizardScreens via ConfigScreens
 		/// </summary>
 		IEnumerable<IWizardScreen> IWizard.WizardScreens
 		{
@@ -134,7 +135,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
-		///     This implements IWizard.CurrentWizardScreen via CurrentWizardScreen
+		///     This implements IWizard.CurrentWizardScreen via CurrentConfigScreen
 		/// </summary>
 		IWizardScreen IWizard.CurrentWizardScreen {
 			get
@@ -225,10 +226,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 			get
 			{
 				var result = true;
-				foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
-				{
-					wizardScreen.CanClose(canClose => result &= canClose);
-				}
+				CanClose(b => result = b);
 				return result;
 			}
 		}
@@ -247,6 +245,28 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <summary>
 		///     check every IWizardScreen if it can close
 		/// </summary>
-		public virtual bool CanFinish => CanCancel;
+		public virtual bool CanFinish
+		{
+			get
+			{
+				var result = true;
+				CanClose(b => result = b);
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// Called to check whether or not this instance can close.
+		/// </summary>
+		/// <param name="callback">The implementor calls this action with the result of the close check.</param>
+		public override void CanClose(Action<bool> callback)
+		{
+			var result = true;
+			foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
+			{
+				wizardScreen.CanClose(canClose => result &= canClose);
+			}
+			callback(result);
+		}
 	}
 }

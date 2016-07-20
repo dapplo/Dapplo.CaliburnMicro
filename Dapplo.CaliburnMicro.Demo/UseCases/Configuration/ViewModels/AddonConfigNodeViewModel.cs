@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Demo.Interfaces;
+using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
@@ -35,44 +35,22 @@ using Dapplo.Utils.Extensions;
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
-	[Export(typeof(ISettingsControl))]
-	public class LanguageSettingsViewModel : Screen, ISettingsControl, IPartImportsSatisfiedNotification
+	[Export(typeof(IConfigScreen))]
+	public sealed class AddonConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
 	{
-		public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
+		[Import]
+		public IConfigTranslations ConfigTranslations { get; set; }
 
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			CoreTranslations.OnPropertyChanged(pcEvent =>
+			ConfigTranslations.OnPropertyChanged(pcEvent =>
 			{
-				DisplayName = CoreTranslations.Language;
-			}, nameof(ICoreTranslations.Language));
-
-			// automatically update the CanChangeLanguage state when a different language is selected
-			DemoConfiguration.OnPropertyChanged(pcEvent =>
-			{
-				NotifyOfPropertyChange(nameof(CanChangeLanguage));
-			}, nameof(IDemoConfiguration.Language));
+				DisplayName = ConfigTranslations.Addons;
+			}, nameof(IConfigTranslations.Addons));
+			CanActivate = false;
 		}
 
-		/// <summary>
-		///     Can the login button be pressed?
-		/// </summary>
-		public bool CanChangeLanguage => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
-
-		[Import]
-		public ICoreTranslations CoreTranslations { get; set; }
-
-		[Import]
-		public IDemoConfiguration DemoConfiguration { get; set; }
-
-		[Import]
-		private IEventAggregator EventAggregator { get; set; }
-
-		public async Task ChangeLanguage()
-		{
-			EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-			await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
-		}
+		public override int Id { get; } = (int) ConfigIds.Addons;
 	}
 }

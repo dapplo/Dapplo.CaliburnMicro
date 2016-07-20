@@ -22,15 +22,11 @@
 #region using
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
-using System.Windows.Media;
 using MahApps.Metro.Controls.Dialogs;
 using Dapplo.Log.Facade;
 
@@ -80,12 +76,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		/// Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
 		/// </summary>
 		[Export]
-		public IDialogCoordinator MahAppsDialogCoordinator {
-			get
-			{
-				return DialogCoordinator.Instance;
-			}
-		}
+		public IDialogCoordinator MahAppsDialogCoordinator => DialogCoordinator.Instance;
 
 		/// <summary>
 		///     Add a ResourceDictionary for the specified MahApps style
