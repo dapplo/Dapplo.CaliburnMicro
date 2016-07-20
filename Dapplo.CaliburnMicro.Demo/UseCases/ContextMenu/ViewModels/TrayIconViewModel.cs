@@ -21,23 +21,33 @@
 
 #region using
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Demo.ViewModels;
+using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.Log.Facade;
+using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 {
 	[Export(typeof(ITrayIconViewModel))]
-	public class TrayIconViewModel : Screen, ITrayIconViewModel, IHandle<string>
+	public class TrayIconViewModel : Screen, ITrayIconViewModel, IHandle<string>, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
+
+		[ImportMany]
+		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
+
+		public ObservableCollection<IMenuItem> Items { get; } = new ObservableCollection<IMenuItem>();
 
 		[Import]
 		public IContextMenuTranslations ContextMenuTranslations { get; set; }
@@ -50,10 +60,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 
 		[Import]
 		public IWindowManager WindowManager { get; set; }
-
-		[Import]
-		private WizardExampleViewModel WizardExample { get; set; }
-
 
 		[Import]
 		public ConfigViewModel ConfigViewModel { get; set; }
@@ -104,11 +110,12 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 			trayIcon.ShowBalloonTip<NotificationExampleViewModel>();
 		}
 
-		public void Wizard()
+		public void OnImportsSatisfied()
 		{
-			Log.Debug().WriteLine("Wizard");
-
-			WindowManager.ShowWindow(WizardExample);
+			foreach (var contextMenuItem in ContextMenuItems.CreateTree())
+			{
+				Items.Add(contextMenuItem);
+			}
 		}
 	}
 }

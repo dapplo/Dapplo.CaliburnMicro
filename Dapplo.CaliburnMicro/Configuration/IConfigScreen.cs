@@ -26,7 +26,7 @@
 #region Usings
 
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Misc;
+using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
@@ -44,17 +44,6 @@ namespace Dapplo.CaliburnMicro.Configuration
 	/// </summary>
 	public interface IConfigScreen : IScreen, ITreeNode<IConfigScreen>
 	{
-		/// <summary>
-		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
-		///     if the value is 0, or the parent can't be found, this item is placed into the root
-		/// </summary>
-		int ParentId { get; }
-
-		/// <summary>
-		/// The unique Id of this config screen, is also used to order children of a parent.
-		/// </summary>
-		int Id { get; }
-
 		/// <summary>
 		///     Returns if the config screen can be activated (when clicking on it)
 		/// </summary>

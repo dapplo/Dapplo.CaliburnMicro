@@ -25,11 +25,10 @@
 
 #region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Misc;
+using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
@@ -54,17 +53,18 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// Used to showing this inside a tree
 		/// </summary>
 		public virtual ICollection<ITreeNode<IConfigScreen>> ChildNodes { get; set; } = new ObservableCollection<ITreeNode<IConfigScreen>>();
-		#endregion
 
 		/// <summary>
 		///     The parent under which the IConfigScreen is shown, 0 is root
 		/// </summary>
 		public virtual int ParentId { get; }
-		
+
 		/// <summary>
 		/// The Id of this config screen, is also used to order children of a parent
 		/// </summary>
 		public abstract int Id { get; }
+		#endregion
+
 
 		/// <summary>
 		///     Do some general initialization, if needed

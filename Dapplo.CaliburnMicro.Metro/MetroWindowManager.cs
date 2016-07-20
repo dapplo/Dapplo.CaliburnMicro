@@ -28,7 +28,6 @@ using System.Windows;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Dapplo.Log.Facade;
 
 #endregion
 
@@ -47,9 +46,7 @@ namespace Dapplo.CaliburnMicro.Metro
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager
 	{
-		private static readonly LogSource Log = new LogSource();
-		private static readonly string[] Styles = { "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue" };
-		private static readonly Uri IconsResourceUri = new Uri(@"Resources\Icons.xaml", UriKind.Relative);
+		private static readonly string[] Styles = { "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue", "Accents/BaseLight" };
 
 		/// <summary>
 		/// Add all the resources to the Application
@@ -59,16 +56,6 @@ namespace Dapplo.CaliburnMicro.Metro
 			foreach (var style in Styles)
 			{
 				AddMahappsStyle(style);
-			}
-			// Also add MahApps Icons.xaml, from MahApps.Metro.Resources, IF the file can be found
-			// TODO: Can this be simplified to work without an exception?
-			try
-			{
-				AddResourceDictionary(IconsResourceUri);
-			}
-			catch (Exception ex)
-			{
-				Log.Info().WriteLine("MahApps.Metro.Resources is not installed, MahApps icons are not available: {0}", ex.Message);
 			}
 		}
 

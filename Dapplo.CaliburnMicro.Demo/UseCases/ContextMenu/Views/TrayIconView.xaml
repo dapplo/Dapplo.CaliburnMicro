@@ -1,0 +1,25 @@
+﻿<ni:TrayIcon x:Class="Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.Views.TrayIconView"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:cal="http://www.caliburnproject.org"
+			xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf"
+			xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+			IconSource="/Resources/icon.ico" ToolTipText="Demo"
+			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
+	<ni:TrayIcon.Resources>
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+		<Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+			<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+			<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }"/>
+			<Setter Property="Icon" Value="{Binding Icon}"/>
+			<Setter Property="Header" Value="{Binding DisplayName}" />
+		</Style>
+	</ni:TrayIcon.Resources>
+	<ni:TrayIcon.ContextMenu>
+		<ContextMenu x:Name="Items" ItemContainerStyle="{StaticResource MenuStyle}">
+			<ContextMenu.ItemTemplate>
+				<HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}" />
+			</ContextMenu.ItemTemplate>
+		</ContextMenu>
+	</ni:TrayIcon.ContextMenu>
+</ni:TrayIcon>

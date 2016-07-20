@@ -31,6 +31,7 @@ using System.Linq;
 using Caliburn.Micro;
 using Dapplo.Log.Facade;
 using System.Collections.ObjectModel;
+using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
@@ -40,7 +41,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 	///     This implements a Caliburn-Micro Config UI
 	/// </summary>
 	public abstract class Config<TConfigScreen> : Conductor<TConfigScreen>.Collection.OneActive, IConfig<TConfigScreen>
-		where TConfigScreen : class, IConfigScreen
+		where TConfigScreen : class, IConfigScreen, ITreeNode<TConfigScreen>
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		private static readonly LogSource Log = new LogSource();
@@ -185,28 +186,12 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>Called when activating.</summary>
 		protected override void OnActivate()
 		{
+			Items.AddRange(ConfigScreens);
+			
 			// Build a tree for the ConfigScreens
-			foreach (var configScreen in ConfigScreens)
+			foreach (var configScreen in ConfigScreens.CreateTree())
 			{
-				Items.Add(configScreen);
-				if (configScreen.ParentId == 0)
-				{
-					TreeItems.Add(configScreen);
-				}
-				else
-				{
-					var parentScreen = ConfigScreens.FirstOrDefault(x => x.Id == configScreen.ParentId);
-					// Check if a parent was found, if not log a warning and place it in the root
-					if (parentScreen == null)
-					{
-						Log.Warn().WriteLine("ParentId {0} for config screen {1} not found, adding it to the root", configScreen.ParentId, configScreen.Id);
-						TreeItems.Add(configScreen);
-					}
-					else
-					{
-						parentScreen.ChildNodes.Add(configScreen);
-					}
-				}
+				TreeItems.Add(configScreen);
 			}
 
 			Initialize();

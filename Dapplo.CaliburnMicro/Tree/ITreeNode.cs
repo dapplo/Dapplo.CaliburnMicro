@@ -29,7 +29,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Misc
+namespace Dapplo.CaliburnMicro.Tree
 {
 	/// <summary>
 	///     Interface for tree nodes
@@ -43,8 +43,19 @@ namespace Dapplo.CaliburnMicro.Misc
 		ITreeNode<TTreeItem> ParentNode { get; set; }
 
 		/// <summary>
-		///     The children for this ITreeNode
+		///     The children for this ITreeNode, the collections MUST be initialized!!
 		/// </summary>
 		ICollection<ITreeNode<TTreeItem>> ChildNodes { get; set; }
+
+		/// <summary>
+		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
+		///     if the value is 0, or the parent can't be found, this item is placed into the root
+		/// </summary>
+		int ParentId { get; }
+
+		/// <summary>
+		/// The unique Id of this config screen, is also used to order children of a parent.
+		/// </summary>
+		int Id { get; }
 	}
 }
