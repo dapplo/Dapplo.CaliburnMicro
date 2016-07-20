@@ -8,18 +8,18 @@
 			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
 	<ni:TrayIcon.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-		<Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-			<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
-			<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }"/>
-			<Setter Property="Icon" Value="{Binding Icon}"/>
-			<Setter Property="Header" Value="{Binding DisplayName}" />
-		</Style>
 	</ni:TrayIcon.Resources>
 	<ni:TrayIcon.ContextMenu>
-		<ContextMenu x:Name="Items" ItemContainerStyle="{StaticResource MenuStyle}">
-			<ContextMenu.ItemTemplate>
-				<HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}" />
-			</ContextMenu.ItemTemplate>
+		<ContextMenu ItemsSource="{Binding Items}">
+			<ContextMenu.Resources>
+				<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+					<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }"/>
+					<Setter Property="Icon" Value="{Binding Icon}"/>
+					<Setter Property="Header" Value="{Binding DisplayName}" />
+					<Setter Property="ItemsSource" Value="{Binding ChildNodes}"/>
+				</Style>
+			</ContextMenu.Resources>
 		</ContextMenu>
 	</ni:TrayIcon.ContextMenu>
 </ni:TrayIcon>
