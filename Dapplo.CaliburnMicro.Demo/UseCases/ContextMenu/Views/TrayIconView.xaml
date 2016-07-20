@@ -18,6 +18,7 @@
 					<Setter Property="Icon" Value="{Binding Icon}"/>
 					<Setter Property="Header" Value="{Binding DisplayName}" />
 					<Setter Property="ItemsSource" Value="{Binding ChildNodes}"/>
+					<Setter Property="cal:Message.Attach" Value="Click"/>
 				</Style>
 			</ContextMenu.Resources>
 		</ContextMenu>
