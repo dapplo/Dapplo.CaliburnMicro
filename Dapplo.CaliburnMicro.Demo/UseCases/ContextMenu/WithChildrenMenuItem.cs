@@ -30,6 +30,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
@@ -42,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry which shows children to the context menu
 	/// </summary>
 	[Export(typeof(IMenuItem))]
-	public class WithChildrenMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class WithChildrenMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -57,17 +58,15 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public void OnImportsSatisfied()
 		{
-			using (new NoSynchronizationContextScope())
+			UiContext.RunOn(() =>
 			{
-				UiContext.RunOn(() =>
+				Icon = new PackIconMaterial
 				{
-					DisplayName = ContextMenuTranslations.WithChildren;
-					Icon = new PackIconMaterial
-					{
-						Kind = PackIconMaterialKind.HumanChild
-					};
-				}).Wait();
-			}
+					Kind = PackIconMaterialKind.HumanChild
+				};
+				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.WithChildren);
+			});
+
 			ChildNodes.Add(new MenuItem
 			{
 				Id = "1",

@@ -30,6 +30,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Config.Language;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
 
@@ -41,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry for the wizard to the context menu
 	/// </summary>
 	[Export(typeof(IMenuItem))]
-	public class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		[Import]
 		public IWindowManager WindowManager { get; set; }
@@ -54,17 +55,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public void OnImportsSatisfied()
 		{
-			using (new NoSynchronizationContextScope())
+			UiContext.RunOn(() =>
 			{
-				UiContext.RunOn(() =>
+				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Wizard);
+				Icon = new PackIconFontAwesome
 				{
-					DisplayName = ContextMenuTranslations.Wizard;
-					Icon = new PackIconFontAwesome
-					{
-						Kind = PackIconFontAwesomeKind.Magic
-					};
-				}).Wait();
-			}
+					Kind = PackIconFontAwesomeKind.Magic
+				};
+			});
 		}
 
 		/// <summary>

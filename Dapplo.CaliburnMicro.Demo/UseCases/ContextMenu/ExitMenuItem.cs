@@ -28,6 +28,7 @@
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Config.Language;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
 
@@ -39,26 +40,22 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry for the exit to the context menu
 	/// </summary>
 	[Export(typeof(IMenuItem))]
-	public class ExitMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class ExitMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
 		public void OnImportsSatisfied()
 		{
-			using (new NoSynchronizationContextScope())
-			{
-				UiContext.RunOn(() =>
-				{
-					DisplayName = ContextMenuTranslations.Exit;
-					Icon = new PackIconMaterial
-					{
-						Kind = PackIconMaterialKind.ExitToApp
-					};
-				}).Wait();
-			}
-			// Make sure it's last
 			Id = "Z_Exit";
+			UiContext.RunOn(() =>
+			{
+				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Exit);
+				Icon = new PackIconMaterial
+				{
+					Kind = PackIconMaterialKind.ExitToApp
+				};
+			});
 		}
 
 		public override void Click(IMenuItem clickedItem)

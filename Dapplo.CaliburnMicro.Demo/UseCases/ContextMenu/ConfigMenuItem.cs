@@ -33,6 +33,7 @@ using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
+using Dapplo.Config.Language;
 
 #endregion
 
@@ -42,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry for the configuration to the context menu
 	/// </summary>
 	[Export(typeof(IMenuItem))]
-	public class ConfigMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class ConfigMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -57,17 +58,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public void OnImportsSatisfied()
 		{
-			using (new NoSynchronizationContextScope())
+			UiContext.RunOn(() =>
 			{
-				UiContext.RunOn(() =>
+				Icon = new PackIconModern
 				{
-					DisplayName = ContextMenuTranslations.Configure;
-					Icon = new PackIconModern
-					{
-						Kind = PackIconModernKind.Settings
-					};
-				}).Wait();
-			}
+					Kind = PackIconModernKind.Settings
+				};
+				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Configure);
+			});
 		}
 
 		public override void Click(IMenuItem clickedItem)

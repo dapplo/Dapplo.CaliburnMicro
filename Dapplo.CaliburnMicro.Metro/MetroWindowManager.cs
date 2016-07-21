@@ -29,6 +29,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -148,6 +149,8 @@ namespace Dapplo.CaliburnMicro.Metro
 					SizeToContent = SizeToContent.WidthAndHeight
 				};
 			}
+			result?.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
+			result?.SetValue(Control.BorderThicknessProperty, new Thickness(1));
 
 			return result;
 		}
