@@ -1,25 +1,29 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016 Dapplo
-// 
-//  For more information see: http://dapplo.net/
-//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-//  This file is part of Dapplo.CaliburnMicro
-// 
-//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-// 
-//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Lesser General Public License for more details.
-// 
-//  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+﻿#region Dapplo 2016 - GNU Lesser General Public License
 
-#region using
+// Dapplo - building blocks for .NET applications
+// Copyright (C) 2016 Dapplo
+// 
+// For more information see: http://dapplo.net/
+// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+// This file is part of Dapplo.CaliburnMicro
+// 
+// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have a copy of the GNU Lesser General Public License
+// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#endregion
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -31,6 +35,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Dapplo.Addons;
+using Dapplo.Log.Facade;
+using Dapplo.Utils;
 
 #endregion
 
@@ -44,10 +50,13 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 	[Export(typeof(ITrayIconManager))]
 	public class TrayIconManager : IStartupAction, IShutdownAction, ITrayIconManager
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		/// <summary>
 		///     Cache for the created tray icons
 		/// </summary>
-		private readonly IDictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>> _trayIcons = new Dictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>>();
+		private readonly IDictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>> _trayIcons =
+			new Dictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>>();
 
 		[ImportMany]
 		private IEnumerable<ITrayIconViewModel> TrayIconViewModels { get; set; }
@@ -60,21 +69,23 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// </summary>
 		/// <param name="cancellationToken">CancellationToken</param>
 		/// <returns>Task</returns>
-		public async Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
+		public Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			await Execute.OnUIThreadAsync(() =>
+			Log.Debug().WriteLine("Hiding all created tray-icons");
+			return UiContext.RunOn(() =>
 			{
 				var trayIcons = _trayIcons.Values.Select(x =>
 				{
 					ITrayIcon trayIcon;
 					x.TryGetTarget(out trayIcon);
 					return trayIcon;
-				}).Where(x => x != null);
+				}).Where(x => x != null).ToList();
+				Log.Debug().WriteLine("Hiding {0} tray-icons", trayIcons.Count());
 				foreach (var trayIcon in trayIcons)
 				{
 					trayIcon.Hide();
 				}
-			}).ConfigureAwait(false);
+			}, cancellationToken);
 		}
 
 		/// <summary>
@@ -84,7 +95,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <returns>Task</returns>
 		public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			await Execute.OnUIThreadAsync(() =>
+			await UiContext.RunOn(() =>
 			{
 				foreach (var trayIconViewModel in TrayIconViewModels)
 				{
@@ -98,7 +109,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 					};
 					WindowsManager.ShowPopup(trayIconViewModel);
 				}
-			}).ConfigureAwait(false);
+			}, cancellationToken).ConfigureAwait(false);
 		}
 
 		/// <summary>

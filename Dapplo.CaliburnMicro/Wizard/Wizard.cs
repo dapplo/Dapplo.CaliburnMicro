@@ -38,13 +38,14 @@ namespace Dapplo.CaliburnMicro.Wizard
 	/// <summary>
 	///     This implements a Caliburn-Micro wizard
 	/// </summary>
-	public abstract class Wizard<TWizardScreen> : Conductor<TWizardScreen>.Collection.OneActive, IWizard<TWizardScreen> where TWizardScreen : class, IWizardScreen
+	public abstract class Wizard<TWizardScreen> : Conductor<TWizardScreen>.Collection.OneActive, IWizard<TWizardScreen>
+		where TWizardScreen : class, IWizardScreen
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		private static readonly LogSource Log = new LogSource();
 
 		/// <summary>
-		/// This is called when the wizard needs to initialize stuff, it will call Initialize on every screen
+		///     This is called when the wizard needs to initialize stuff, it will call Initialize on every screen
 		/// </summary>
 		public virtual void Initialize()
 		{
@@ -57,7 +58,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
-		/// This is called when the wizard needs to cleanup things, it will call Terminate on every screen
+		///     This is called when the wizard needs to cleanup things, it will call Terminate on every screen
 		/// </summary>
 		public virtual void Terminate()
 		{
@@ -66,43 +67,6 @@ namespace Dapplo.CaliburnMicro.Wizard
 			{
 				wizardScreen.Terminate();
 			}
-		}
-
-		/// <summary>
-		/// Tries to close this instance by asking its Parent to initiate shutdown or by asking its corresponding view to close.
-		/// Also provides an opportunity to pass a dialog result to it's corresponding view.
-		/// </summary>
-		/// <param name="dialogResult">The dialog result.</param>
-		public override void TryClose(bool? dialogResult = null)
-		{
-			// Terminate needs to be called before TryClose, otherwise our items are gone.
-			Terminate();
-			base.TryClose(dialogResult);
-		}
-
-		/// <summary>Called when activating.</summary>
-		protected override void OnActivate()
-		{
-			// Order the items by ordering on Order
-			Items.AddRange(WizardScreens.OrderBy(x => x.Order));
-
-			Initialize();
-
-			base.OnActivate();
-		}
-
-		/// <summary>
-		///     Activates the specified item, and sends notify property changed events.
-		/// </summary>
-		/// <param name="item">The TWizardScreen to activate.</param>
-		public override void ActivateItem(TWizardScreen item)
-		{
-			base.ActivateItem(item);
-			NotifyOfPropertyChange(nameof(CurrentWizardScreen));
-			NotifyOfPropertyChange(nameof(CanNext));
-			NotifyOfPropertyChange(nameof(CanPrevious));
-			NotifyOfPropertyChange(nameof(CanCancel));
-			NotifyOfPropertyChange(nameof(CanFinish));
 		}
 
 		/// <summary>
@@ -115,14 +79,8 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// </summary>
 		IEnumerable<IWizardScreen> IWizard.WizardScreens
 		{
-			get
-			{
-				return WizardScreens;
-			}
-			set
-			{
-				WizardScreens = value as IEnumerable<TWizardScreen>;
-			}
+			get { return WizardScreens; }
+			set { WizardScreens = value as IEnumerable<TWizardScreen>; }
 		}
 
 		/// <summary>
@@ -137,15 +95,10 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <summary>
 		///     This implements IWizard.CurrentWizardScreen via CurrentConfigScreen
 		/// </summary>
-		IWizardScreen IWizard.CurrentWizardScreen {
-			get
-			{
-				return CurrentWizardScreen;
-			}
-			set
-			{
-				CurrentWizardScreen = value as TWizardScreen;
-			}
+		IWizardScreen IWizard.CurrentWizardScreen
+		{
+			get { return CurrentWizardScreen; }
+			set { CurrentWizardScreen = value as TWizardScreen; }
 		}
 
 		/// <summary>
@@ -156,7 +109,8 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
 			// Take the first available.
-			var nextWizardScreen = WizardScreens.OrderBy(x => x.Order).SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
+			var nextWizardScreen =
+				WizardScreens.OrderBy(x => x.Order).SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
 			if (nextWizardScreen != null)
 			{
 				CurrentWizardScreen = nextWizardScreen;
@@ -176,7 +130,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 				// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
 				// Return if there is anything left 
 				return
-					WizardScreens.OrderBy(x => x.Order).SkipWhile(w => CurrentWizardScreen != null && w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).Any();
+					WizardScreens.OrderBy(x => x.Order)
+						.SkipWhile(w => CurrentWizardScreen != null && w != CurrentWizardScreen)
+						.Skip(1)
+						.SkipWhile(w => !w.IsEnabled || !w.IsVisible)
+						.Any();
 			}
 		}
 
@@ -204,7 +162,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <returns></returns>
 		public virtual bool CanPrevious
 		{
-			get { return CurrentWizardScreen != null && WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).Any(w => w.IsEnabled && w.IsVisible); }
+			get
+			{
+				return CurrentWizardScreen != null &&
+						WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).Any(w => w.IsEnabled && w.IsVisible);
+			}
 		}
 
 		/// <summary>
@@ -256,7 +218,45 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
-		/// Called to check whether or not this instance can close.
+		///     Tries to close this instance by asking its Parent to initiate shutdown or by asking its corresponding view to
+		///     close.
+		///     Also provides an opportunity to pass a dialog result to it's corresponding view.
+		/// </summary>
+		/// <param name="dialogResult">The dialog result.</param>
+		public override void TryClose(bool? dialogResult = null)
+		{
+			// Terminate needs to be called before TryClose, otherwise our items are gone.
+			Terminate();
+			base.TryClose(dialogResult);
+		}
+
+		/// <summary>Called when activating.</summary>
+		protected override void OnActivate()
+		{
+			// Order the items by ordering on Order
+			Items.AddRange(WizardScreens.OrderBy(x => x.Order));
+
+			Initialize();
+
+			base.OnActivate();
+		}
+
+		/// <summary>
+		///     Activates the specified item, and sends notify property changed events.
+		/// </summary>
+		/// <param name="item">The TWizardScreen to activate.</param>
+		public override void ActivateItem(TWizardScreen item)
+		{
+			base.ActivateItem(item);
+			NotifyOfPropertyChange(nameof(CurrentWizardScreen));
+			NotifyOfPropertyChange(nameof(CanNext));
+			NotifyOfPropertyChange(nameof(CanPrevious));
+			NotifyOfPropertyChange(nameof(CanCancel));
+			NotifyOfPropertyChange(nameof(CanFinish));
+		}
+
+		/// <summary>
+		///     Called to check whether or not this instance can close.
 		/// </summary>
 		/// <param name="callback">The implementor calls this action with the result of the close check.</param>
 		public override void CanClose(Action<bool> callback)

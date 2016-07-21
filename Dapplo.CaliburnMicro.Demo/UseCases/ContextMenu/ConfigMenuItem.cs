@@ -28,70 +28,56 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
+using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Log.Facade;
+using Dapplo.Utils;
+using MahApps.Metro.Controls;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	///     A view model for credentials (username / password)
+	/// This will add an extry for the configuration to the context menu
 	/// </summary>
-	[Export]
-	public class CredentialsViewModel : Screen
+	[Export(typeof(IMenuItem))]
+	public class ConfigMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
-		private string _password;
-		private string _username;
-
-		/// <summary>
-		///     Can the login button be pressed?
-		/// </summary>
-		public bool CanLogin => !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
+		private static readonly LogSource Log = new LogSource();
 
 		[Import]
-		public ICoreTranslations CoreTranslations { get; set; }
+		public IWindowManager WindowManager { get; set; }
 
 		[Import]
-		public ICredentialsTranslations CredentialsTranslations { get; set; }
+		public ConfigViewModel ConfigViewModel { get; set; }
 
 		[Import]
-		public DummyViewModel DummyVm { get; set; }
+		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		/// <summary>
-		///     Password for a login
-		/// </summary>
-		public string Password
+		public void OnImportsSatisfied()
 		{
-			get { return _password; }
-			set
+			using (new NoSynchronizationContextScope())
 			{
-				_password = value;
-				NotifyOfPropertyChange(() => Password);
-				NotifyOfPropertyChange(() => CanLogin);
+				UiContext.RunOn(() =>
+				{
+					DisplayName = ContextMenuTranslations.Configure;
+					Icon = new PackIconModern
+					{
+						Kind = PackIconModernKind.Settings
+					};
+				}).Wait();
 			}
 		}
 
-		/// <summary>
-		///     Username for a login
-		/// </summary>
-		public string Username
+		public override void Click(IMenuItem clickedItem)
 		{
-			get { return _username; }
-			set
+			Log.Debug().WriteLine("Configure");
+			// TODO: Closing the ConfigViewModel also closes other windows, check / fix
+			if (WindowManager.ShowDialog(ConfigViewModel) == false)
 			{
-				_username = value;
-				NotifyOfPropertyChange(() => Username);
-				NotifyOfPropertyChange(() => CanLogin);
+				Log.Warn().WriteLine("You cancelled the configuration");
 			}
-		}
-
-		public void Cancel()
-		{
-			TryClose(false);
-		}
-
-		public void Login()
-		{
-			TryClose(true);
 		}
 	}
 }

@@ -25,23 +25,31 @@
 
 #region Usings
 
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Dapplo.CaliburnMicro.Demo.Languages;
+using System;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Models
+namespace Dapplo.CaliburnMicro.Menu
 {
 	/// <summary>
-	///     This is the model which is used by the wizard steps
+	///     Extend or provide this to have a separator
 	/// </summary>
-	public interface IWizardModel : INotifyPropertyChanged
+	public class SeparatorMenuItem : MenuItem
 	{
-		[RegularExpression("[A-Z][a-z ]*", ErrorMessage = "Name ", ErrorMessageResourceName = nameof(IValidationErrors.Name),
-			ErrorMessageResourceType = typeof(IValidationErrors))]
-		string Name { get; set; }
+		/// <summary>
+		/// Default constructor
+		/// </summary>
+		public SeparatorMenuItem()
+		{
+			IsSeparator = true;
+		}
 
-		string Age { get; set; }
+		/// <summary>
+		///     Is called when the IMenuItem it clicked, but doesn't make sense for a separator
+		/// </summary>
+		public override void Click(IMenuItem clickedItem)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

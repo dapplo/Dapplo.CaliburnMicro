@@ -38,12 +38,26 @@ namespace Dapplo.CaliburnMicro.Menu
 	/// <summary>
 	///     Extend this to make your IMenuItem
 	/// </summary>
-	public abstract class MenuItem : PropertyChangedBase, IMenuItem
+	public class MenuItem : PropertyChangedBase, IMenuItem
 	{
 		private string _displayName;
 		private Control _icon;
+		private string _id;
 		private bool _isEnabled = true;
 		private bool _isVisible = true;
+
+		/// <summary>
+		/// Default constructor take the name of the type for the Id
+		/// </summary>
+		public MenuItem()
+		{
+			_id = GetType().Name;
+		}
+
+		/// <summary>
+		///     This make it NOT shown as a separator
+		/// </summary>
+		public bool IsSeparator { get; set; } = false;
 
 		/// <summary>
 		///     Returns if the IMenuItem is enabled
@@ -89,10 +103,7 @@ namespace Dapplo.CaliburnMicro.Menu
 		/// </summary>
 		public virtual string DisplayName
 		{
-			get
-			{
-				return _displayName ?? GetType().Name;
-			}
+			get { return _displayName ?? GetType().Name; }
 			set
 			{
 				_displayName = value;
@@ -101,9 +112,17 @@ namespace Dapplo.CaliburnMicro.Menu
 		}
 
 		/// <summary>
-		///     Is called when the IMenuItem it clicked
+		///     Is called when the IMenuItem is clicked
 		/// </summary>
-		public abstract void Click();
+		public virtual void Click(IMenuItem clickedItem)
+		{
+			ClickAction?.Invoke(clickedItem);
+		}
+
+		/// <summary>
+		/// This action is called when Click is invoked
+		/// </summary>
+		public System.Action<IMenuItem> ClickAction { get; set; }
 
 		#region ITreeNode
 
@@ -118,14 +137,19 @@ namespace Dapplo.CaliburnMicro.Menu
 		public virtual ICollection<ITreeNode<IMenuItem>> ChildNodes { get; set; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
 		/// <summary>
-		///     The parent under which the IConfigScreen is shown, 0 is root
+		///     The parent under which the IMenuItem is shown, null is root
 		/// </summary>
-		public virtual int ParentId { get; } = 0;
+		public virtual string ParentId { get; set; } = null;
 
 		/// <summary>
-		///     The Id of this config screen, is also used to order children of a parent
+		///     The Id of this IMenuItem, is also used to order children of a parent
+		///     Default the Id is the name of the Type
 		/// </summary>
-		public abstract int Id { get; }
+		public virtual string Id
+		{
+			get { return _id; }
+			set { _id = value; }
+		}
 
 		#endregion
 	}
