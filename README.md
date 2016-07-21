@@ -24,8 +24,14 @@ A demo-project is supplied, see: Dapplo.CaliburnMicro.Demo
 Caliburn.Micro Bootstrapper with Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
 This bases on Dapplo.Addons.Bootstrapper, to use it you will need to instanciate the bootstrapper.
 
+There is functionality available to support your with building:
+- Context menus (with tree support)
+- Wizard
+- a structured configuration, with a tree where you can hang your "config screens"
+
 Usage:
 - Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.dll");
+
 
 ## Dapplo.CaliburnMicro.NotifyIconWpf
 
