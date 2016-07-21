@@ -119,6 +119,9 @@
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
+    <Compile Include="UseCases\ContextMenu\ExitMenuItem.cs" />
+    <Compile Include="UseCases\ContextMenu\ConfigMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\WizardMenuItem.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />

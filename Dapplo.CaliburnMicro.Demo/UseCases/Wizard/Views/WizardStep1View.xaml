@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Wizard.Views.WizardStep1View"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="200">
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="200">
 	<StackPanel>
-		<Label Content="This is step 1"></Label>
+		<Label Content="This is step 1" />
 	</StackPanel>
 </UserControl>

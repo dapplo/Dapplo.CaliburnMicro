@@ -60,6 +60,7 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
 		public Dapplication(string applicationName, string mutexId = null, bool global = false)
 		{
+			Current = this;
 			// Hook unhandled exceptions in the Dispatcher
 			DispatcherUnhandledException += HandleDispatcherException;
 
@@ -71,6 +72,11 @@ namespace Dapplo.CaliburnMicro
 
 			_bootstrapper = new ApplicationBootstrapper(applicationName, mutexId, global);
 		}
+
+		/// <summary>
+		///     Access the current Dapplication
+		/// </summary>
+		public new static Dapplication Current { get; private set; }
 
 		/// <summary>
 		///     Allows access to the Dapplo.Addons.ApplicationBootstrapper
@@ -107,13 +113,37 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
+		///     Helper method to stop the bootstrapper, if needed
+		/// </summary>
+		private async Task StopBootstrapperAsync()
+		{
+			if (_bootstrapper.IsInitialized)
+			{
+				await _bootstrapper.StopAsync().ConfigureAwait(false);
+			}
+		}
+
+		/// <summary>
+		///     Provide our own shutdown to solve some dispatcher issues
+		/// </summary>
+		public new async void Shutdown(int exitCode = 0)
+		{
+			Log.Info().WriteLine("Stopping the Dapplication.");
+			await StopBootstrapperAsync();
+			Log.Info().WriteLine("Calling the real shutdown.");
+			base.Shutdown(exitCode);
+		}
+
+		/// <summary>
 		///     Make sure the Dapplication is stopped, the bootstrapper is shutdown.
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnExit(ExitEventArgs e)
 		{
-			Log.Info().WriteLine("Stopping the Dapplication.");
-			Dispatcher.Invoke(async () => await _bootstrapper.StopAsync().ConfigureAwait(false));
+			using (new NoSynchronizationContextScope())
+			{
+				StopBootstrapperAsync().Wait();
+			}
 			base.OnExit(e);
 		}
 

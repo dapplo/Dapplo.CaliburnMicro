@@ -28,8 +28,9 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
 
@@ -38,16 +39,18 @@ using MahApps.Metro.Controls;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	/// This will add an extry for the wizard to the context menu
+	/// This will add an extry which shows children to the context menu
 	/// </summary>
 	[Export(typeof(IMenuItem))]
-	public class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public class WithChildrenMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		[Import]
 		public IWindowManager WindowManager { get; set; }
 
 		[Import]
-		private WizardExampleViewModel WizardExample { get; set; }
+		public ConfigViewModel ConfigViewModel { get; set; }
 
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
@@ -58,21 +61,35 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			{
 				UiContext.RunOn(() =>
 				{
-					DisplayName = ContextMenuTranslations.Wizard;
-					Icon = new PackIconFontAwesome
+					DisplayName = ContextMenuTranslations.WithChildren;
+					Icon = new PackIconMaterial
 					{
-						Kind = PackIconFontAwesomeKind.Magic
+						Kind = PackIconMaterialKind.HumanChild
 					};
 				}).Wait();
 			}
+			ChildNodes.Add(new MenuItem
+			{
+				Id = "1",
+				DisplayName = "One"
+			});
+			ChildNodes.Add(new MenuItem
+			{
+				Id = "2",
+				DisplayName = "Two"
+			});
+			ChildNodes.Add(new SeparatorMenuItem());
+			ChildNodes.Add(new MenuItem
+			{
+				Id = "3",
+				DisplayName = "Three",
+				ClickAction = item => Log.Debug().WriteLine("Three was clicked: {0}", item.Id)
+			});
 		}
 
-		/// <summary>
-		///     Is called when the IMenuItem is clicked
-		/// </summary>
 		public override void Click(IMenuItem clickedItem)
 		{
-			WindowManager.ShowDialog(WizardExample);
+			Log.Debug().WriteLine("child {0} clicked", clickedItem.Id);
 		}
 	}
 }

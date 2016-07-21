@@ -68,7 +68,9 @@ namespace Dapplo.CaliburnMicro
 		/// <returns>Task</returns>
 		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
 		{
+			Log.Debug().WriteLine("Starting shutdown");
 			await UiContext.RunOn(() => { OnExit(this, new EventArgs()); }, token).ConfigureAwait(false);
+			Log.Debug().WriteLine("finished shutdown");
 		}
 
 		/// <summary>
@@ -78,6 +80,7 @@ namespace Dapplo.CaliburnMicro
 		public async Task StartAsync(CancellationToken token = default(CancellationToken))
 		{
 			LogManager.GetLog = type => new CaliburnLogger(type);
+
 			await UiContext.RunOn(() =>
 			{
 				try
@@ -154,6 +157,16 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="e">StartupEventArgs, as it's called internally this is actually null</param>
 		protected override void OnStartup(object sender, StartupEventArgs e)
 		{
+
+			// TODO: Documentation
+			// This make it possible to pass the data-context of the originally clicked object in the Message.Attach event bubbling.
+			// E.G. the parent Menu-Item Click will get the Child MenuItem that was actually clicked.
+			MessageBinder.SpecialValues.Add("$originalDataContext", context => {
+				var routedEventArgs = context.EventArgs as RoutedEventArgs;
+				var frameworkElement = routedEventArgs?.OriginalSource as FrameworkElement;
+				return frameworkElement?.DataContext;
+			});
+
 			// Throw exception when no IShell export is found
 			var shells = ServiceLocator.GetExports<IShell>();
 			if (shells.Any())

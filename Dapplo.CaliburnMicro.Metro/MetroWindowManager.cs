@@ -1,25 +1,29 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016 Dapplo
-// 
-//  For more information see: http://dapplo.net/
-//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-//  This file is part of Dapplo.CaliburnMicro
-// 
-//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-// 
-//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Lesser General Public License for more details.
-// 
-//  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+﻿#region Dapplo 2016 - GNU Lesser General Public License
 
-#region using
+// Dapplo - building blocks for .NET applications
+// Copyright (C) 2016 Dapplo
+// 
+// For more information see: http://dapplo.net/
+// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+// This file is part of Dapplo.CaliburnMicro
+// 
+// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have a copy of the GNU Lesser General Public License
+// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#endregion
+
+#region Usings
 
 using System;
 using System.ComponentModel.Composition;
@@ -46,10 +50,14 @@ namespace Dapplo.CaliburnMicro.Metro
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager
 	{
-		private static readonly string[] Styles = { "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue", "Accents/BaseLight" };
+		private static readonly string[] Styles =
+		{
+			"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue",
+			"Accents/BaseLight"
+		};
 
 		/// <summary>
-		/// Add all the resources to the Application
+		///     Add all the resources to the Application
 		/// </summary>
 		public MetroWindowManager()
 		{
@@ -60,16 +68,29 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		/// Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
+		///     Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
 		/// </summary>
 		[Export]
 		public IDialogCoordinator MahAppsDialogCoordinator => DialogCoordinator.Instance;
 
 		/// <summary>
+		///     Implement this to make specific configuration changes to your window.
+		/// </summary>
+		public Action<MetroWindow> OnConfigureWindow { get; set; }
+
+		/// <summary>
+		///     Implement this to make specific configuration changes to your owned (dialog) window.
+		/// </summary>
+		public Action<MetroWindow> OnConfigureOwnedWindow { get; set; }
+
+		/// <summary>
 		///     Add a ResourceDictionary for the specified MahApps style
 		///     The Uri to the source is created by CreateMahappStyleUri
 		/// </summary>
-		/// <param name="style">Style name, this is actually what is added behind pack://application:,,,/MahApps.Metro;component/Styles/ (and .xaml is added)</param>
+		/// <param name="style">
+		///     Style name, this is actually what is added behind
+		///     pack://application:,,,/MahApps.Metro;component/Styles/ (and .xaml is added)
+		/// </param>
 		public void AddMahappsStyle(string style)
 		{
 			AddResourceDictionary(CreateMahappStyleUri(style));
@@ -84,7 +105,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		{
 			var resourceDictionary = new ResourceDictionary
 			{
-				Source = source,
+				Source = source
 			};
 			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 		}
@@ -106,16 +127,6 @@ namespace Dapplo.CaliburnMicro.Metro
 			}
 		}
 
-		/// <summary>
-		///  Implement this to make specific configuration changes to your window.
-		/// </summary>
-		public Action<MetroWindow> OnConfigureWindow { get; set; }
-
-		/// <summary>
-		///  Implement this to make specific configuration changes to your owned (dialog) window.
-		/// </summary>
-		public Action<MetroWindow> OnConfigureOwnedWindow { get; set; }
-		
 		/// <summary>
 		///     Create a MetroWindow
 		/// </summary>
@@ -188,7 +199,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		/// Create a MapApps Uri for the supplied style
+		///     Create a MapApps Uri for the supplied style
 		/// </summary>
 		/// <param name="style">e.g. Fonts or Controls</param>
 		/// <returns></returns>

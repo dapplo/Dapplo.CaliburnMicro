@@ -44,21 +44,9 @@ namespace Dapplo.CaliburnMicro.Wizard
 	public interface IWizardScreen : IScreen
 	{
 		/// <summary>
-		/// The order in which the IWizardScreen ist shown
+		///     The order in which the IWizardScreen ist shown
 		/// </summary>
 		int Order { get; }
-
-		/// <summary>
-		/// Do some general initialization, if needed
-		/// This is called when the parent wizard is initialized
-		/// </summary>
-		void Initialize(IWizard parent);
-
-		/// <summary>
-		/// Terminate the wizard screen.
-		/// This is called when the parent wizard is terminated
-		/// </summary>
-		void Terminate();
 
 		/// <summary>
 		///     Returns if the wizard screen can be selected (visible but not usable)
@@ -69,5 +57,17 @@ namespace Dapplo.CaliburnMicro.Wizard
 		///     Returns if the wizard screen is visible (not visible and not usable)
 		/// </summary>
 		bool IsVisible { get; }
+
+		/// <summary>
+		///     Do some general initialization, if needed
+		///     This is called when the parent wizard is initialized
+		/// </summary>
+		void Initialize(IWizard parent);
+
+		/// <summary>
+		///     Terminate the wizard screen.
+		///     This is called when the parent wizard is terminated
+		/// </summary>
+		void Terminate();
 	}
 }

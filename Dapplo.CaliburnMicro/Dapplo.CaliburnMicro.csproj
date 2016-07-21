@@ -93,6 +93,7 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Menu\IMenuItem.cs" />
     <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Menu\SeparatorMenuItem.cs" />
     <Compile Include="Tree\ITreeNode.cs" />
     <Compile Include="Dapplication.cs" />
     <Compile Include="IShell.cs" />

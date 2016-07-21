@@ -49,13 +49,13 @@ namespace Dapplo.CaliburnMicro.Tree
 
 		/// <summary>
 		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
-		///     if the value is 0, or the parent can't be found, this item is placed into the root
+		///     if the value is null, or the parent can't be found, this item is placed into the root
 		/// </summary>
-		int ParentId { get; }
+		string ParentId { get; }
 
 		/// <summary>
-		/// The unique Id of this config screen, is also used to order children of a parent.
+		///     The unique Id of this config screen, is also used to order children of a parent.
 		/// </summary>
-		int Id { get; }
+		string Id { get; }
 	}
 }

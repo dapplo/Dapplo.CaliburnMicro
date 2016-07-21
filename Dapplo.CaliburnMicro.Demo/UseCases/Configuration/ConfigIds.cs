@@ -33,16 +33,16 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration
 		/// <summary>
 		///     The root ID
 		/// </summary>
-		Root = 0,
+		Root,
 
 		/// <summary>
 		///     UI related config screens should have this as parent
 		/// </summary>
-		Ui = 100,
+		Ui,
 
 		/// <summary>
 		///     Config screens from addons should have this as parent
 		/// </summary>
-		Addons = 200
+		Addons
 	}
 }

@@ -24,11 +24,12 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<TreeView x:Name="TreeItems" cal:Message.Attach="[Event SelectedItemChanged] = [Action ActivateChildView($this.SelectedItem)]" Grid.Column="0">
+		<TreeView x:Name="TreeItems"
+				cal:Message.Attach="[Event SelectedItemChanged] = [Action ActivateChildView($this.SelectedItem)]" Grid.Column="0">
 			<TreeView.ItemContainerStyle>
 				<Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-					<Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
-					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }"/>
+					<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
 				</Style>
 			</TreeView.ItemContainerStyle>
 			<TreeView.ItemTemplate>

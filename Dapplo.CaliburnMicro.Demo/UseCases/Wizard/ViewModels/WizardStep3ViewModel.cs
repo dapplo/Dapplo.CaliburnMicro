@@ -39,16 +39,16 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	[Export(typeof(IWizardScreen))]
 	public sealed class WizardStep3ViewModel : WizardScreen
 	{
+		private readonly IDisposable[] _watchParent = {null};
 		private IDisposable _displayNameUpdater;
-		private readonly IDisposable[] _watchParent = { null };
-
-		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
 
 		public WizardStep3ViewModel()
 		{
 			Order = 3;
 		}
+
+		[Import]
+		private IWizardTranslations WizardTranslations { get; set; }
 
 		public override void Initialize(IWizard parent)
 		{

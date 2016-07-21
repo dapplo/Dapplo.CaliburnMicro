@@ -39,32 +39,18 @@ namespace Dapplo.CaliburnMicro.Configuration
 	/// </summary>
 	public abstract class ConfigScreen : Screen, IConfigScreen
 	{
-		private bool _isEnabled = true;
 		private bool _canActivate = true;
+		private bool _isEnabled = true;
 		private bool _isVisible = true;
-
-		#region ITreeNode
-		/// <summary>
-		/// Used to showing this inside a tree
-		/// </summary>
-		public virtual ITreeNode<IConfigScreen> ParentNode { get; set; }
+		private string _id;
 
 		/// <summary>
-		/// Used to showing this inside a tree
+		/// Default constructor take the name of the type for the Id
 		/// </summary>
-		public virtual ICollection<ITreeNode<IConfigScreen>> ChildNodes { get; set; } = new ObservableCollection<ITreeNode<IConfigScreen>>();
-
-		/// <summary>
-		///     The parent under which the IConfigScreen is shown, 0 is root
-		/// </summary>
-		public virtual int ParentId { get; }
-
-		/// <summary>
-		/// The Id of this config screen, is also used to order children of a parent
-		/// </summary>
-		public abstract int Id { get; }
-		#endregion
-
+		public ConfigScreen()
+		{
+			_id = GetType().Name;
+		}
 
 		/// <summary>
 		///     Do some general initialization, if needed
@@ -75,7 +61,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Terminate the config screen.
+		///     Terminate the IConfigScreen.
 		///     This is called when the parent config UI terminates, no matter if this config screen was shown
 		/// </summary>
 		public virtual void Terminate()
@@ -83,7 +69,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Returns if the config screen can be activated
+		///     Returns if the IConfigScreen can be activated
 		/// </summary>
 		public virtual bool CanActivate
 		{
@@ -96,7 +82,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Returns if the config screen can be selected
+		///     Returns if the IConfigScreen can be selected
 		/// </summary>
 		public virtual bool IsEnabled
 		{
@@ -109,7 +95,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Returns if the config screen is visible
+		///     Returns if the IConfigScreen is visible
 		/// </summary>
 		public virtual bool IsVisible
 		{
@@ -120,5 +106,34 @@ namespace Dapplo.CaliburnMicro.Configuration
 				NotifyOfPropertyChange(nameof(IsVisible));
 			}
 		}
+
+		#region ITreeNode
+
+		/// <summary>
+		///     Used to showing this IConfigScreen inside a tree
+		/// </summary>
+		public virtual ITreeNode<IConfigScreen> ParentNode { get; set; }
+
+		/// <summary>
+		///     Used to showing this IConfigScreen inside a tree
+		/// </summary>
+		public virtual ICollection<ITreeNode<IConfigScreen>> ChildNodes { get; set; } = new ObservableCollection<ITreeNode<IConfigScreen>>();
+
+		/// <summary>
+		///     The parent under which the IConfigScreen is shown, null is root
+		/// </summary>
+		public virtual string ParentId { get; } = null;
+
+		/// <summary>
+		///     The Id of this IConfigScreen, is also used to order children of a parent.
+		///     By default the name of the type is used
+		/// </summary>
+		public virtual string Id
+		{
+			get { return _id; }
+			set { _id = value; }
+		}
+
+		#endregion
 	}
 }

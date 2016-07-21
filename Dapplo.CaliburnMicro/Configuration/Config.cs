@@ -27,11 +27,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Caliburn.Micro;
-using Dapplo.Log.Facade;
 using System.Collections.ObjectModel;
+using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
+using Dapplo.Log.Facade;
 
 #endregion
 
@@ -157,7 +156,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		/// Called to check whether or not this instance can close.
+		///     Called to check whether or not this instance can close.
 		/// </summary>
 		/// <param name="callback">The implementor calls this action with the result of the close check.</param>
 		public override void CanClose(Action<bool> callback)
@@ -187,7 +186,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		protected override void OnActivate()
 		{
 			Items.AddRange(ConfigScreens);
-			
+
 			// Build a tree for the ConfigScreens
 			foreach (var configScreen in ConfigScreens.CreateTree())
 			{

@@ -25,23 +25,45 @@
 
 #region Usings
 
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Menu;
+using Dapplo.Utils;
+using MahApps.Metro.Controls;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Models
+namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	///     This is the model which is used by the wizard steps
+	/// This will add an extry for the exit to the context menu
 	/// </summary>
-	public interface IWizardModel : INotifyPropertyChanged
+	[Export(typeof(IMenuItem))]
+	public class ExitMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
-		[RegularExpression("[A-Z][a-z ]*", ErrorMessage = "Name ", ErrorMessageResourceName = nameof(IValidationErrors.Name),
-			ErrorMessageResourceType = typeof(IValidationErrors))]
-		string Name { get; set; }
+		[Import]
+		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		string Age { get; set; }
+		public void OnImportsSatisfied()
+		{
+			using (new NoSynchronizationContextScope())
+			{
+				UiContext.RunOn(() =>
+				{
+					DisplayName = ContextMenuTranslations.Exit;
+					Icon = new PackIconMaterial
+					{
+						Kind = PackIconMaterialKind.ExitToApp
+					};
+				}).Wait();
+			}
+			// Make sure it's last
+			Id = "Z_Exit";
+		}
+
+		public override void Click(IMenuItem clickedItem)
+		{
+			Dapplication.Current.Shutdown();
+		}
 	}
 }

@@ -45,17 +45,17 @@ namespace Dapplo.CaliburnMicro.Configuration
 	public interface IConfigScreen : IScreen, ITreeNode<IConfigScreen>
 	{
 		/// <summary>
-		///     Returns if the config screen can be activated (when clicking on it)
+		///     Returns if the IConfigScreen can be activated (when clicking on it)
 		/// </summary>
 		bool CanActivate { get; }
 
 		/// <summary>
-		///     Returns if the config screen can be selected (visible but not usable)
+		///     Returns if the IConfigScreen can be selected (visible but not usable)
 		/// </summary>
 		bool IsEnabled { get; }
 
 		/// <summary>
-		///     Returns if the config screen is visible (not visible and not usable)
+		///     Returns if the IConfigScreen is visible (not visible and not usable)
 		/// </summary>
 		bool IsVisible { get; }
 

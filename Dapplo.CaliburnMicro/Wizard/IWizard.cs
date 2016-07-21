@@ -33,7 +33,7 @@ using System.ComponentModel;
 namespace Dapplo.CaliburnMicro.Wizard
 {
 	/// <summary>
-	/// Base interface for the IWizard
+	///     Base interface for the IWizard
 	/// </summary>
 	public interface IWizard : INotifyPropertyChanged
 	{
@@ -46,16 +46,6 @@ namespace Dapplo.CaliburnMicro.Wizard
 		///     Returns the current wizard screen
 		/// </summary>
 		IWizardScreen CurrentWizardScreen { get; set; }
-
-		/// <summary>
-		/// Initialize will o.a. initialize the wizard screens
-		/// </summary>
-		void Initialize();
-
-		/// <summary>
-		/// Cleanup the wizard.
-		/// </summary>
-		void Terminate();
 
 		/// <summary>
 		///     Can the wizard go to the next wizard screen, where IsEnabled/IsVisible are true, in the list. (e.g. false if we are
@@ -77,6 +67,16 @@ namespace Dapplo.CaliburnMicro.Wizard
 		///     Test if the wizard can be finished
 		/// </summary>
 		bool CanFinish { get; }
+
+		/// <summary>
+		///     Initialize will o.a. initialize the wizard screens
+		/// </summary>
+		void Initialize();
+
+		/// <summary>
+		///     Cleanup the wizard.
+		/// </summary>
+		void Terminate();
 
 		/// <summary>
 		///     Go to the next wizard screen, where IsEnabled/IsVisible are true, in the list.

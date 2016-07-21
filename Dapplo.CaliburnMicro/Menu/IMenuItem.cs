@@ -57,6 +57,6 @@ namespace Dapplo.CaliburnMicro.Menu
 		/// <summary>
 		///     Is called when the IMenuItem it clicked
 		/// </summary>
-		void Click();
+		void Click(IMenuItem clickedItem);
 	}
 }

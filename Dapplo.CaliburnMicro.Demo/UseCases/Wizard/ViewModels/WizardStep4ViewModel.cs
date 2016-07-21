@@ -40,13 +40,13 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	{
 		private IDisposable _displayNameUpdater;
 
-		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
-
 		public WizardStep4ViewModel()
 		{
 			Order = 4;
 		}
+
+		[Import]
+		private IWizardTranslations WizardTranslations { get; set; }
 
 		public override void Initialize(IWizard parent)
 		{
