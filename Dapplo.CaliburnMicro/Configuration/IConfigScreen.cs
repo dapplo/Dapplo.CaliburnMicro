@@ -60,6 +60,12 @@ namespace Dapplo.CaliburnMicro.Configuration
 		bool IsVisible { get; }
 
 		/// <summary>
+		/// Tests if the IConfigScreen contains the supplied text
+		/// </summary>
+		/// <param name="text">the text to search for</param>
+		bool Contains(string text);
+
+		/// <summary>
 		///     Do some general initialization, if needed
 		///     This is called when the config UI is initialized
 		/// </summary>
@@ -70,5 +76,15 @@ namespace Dapplo.CaliburnMicro.Configuration
 		///     This is called when the parent config UI is terminated
 		/// </summary>
 		void Terminate();
+
+		/// <summary>
+		/// This is called when the configuration should be "persisted"
+		/// </summary>
+		void Commit();
+
+		/// <summary>
+		/// This is called when the configuration should be "rolled back"
+		/// </summary>
+		void Rollback();
 	}
 }

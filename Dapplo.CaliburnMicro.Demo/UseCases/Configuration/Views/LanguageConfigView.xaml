@@ -7,6 +7,5 @@
 			<ComboBox x:Name="AvailableLanguages" SelectedValuePath="Key" DisplayMemberPath="Value"
 					SelectedValue="{Binding DemoConfiguration.Language}" />
 		</DockPanel>
-		<Button x:Name="ChangeLanguage" Content="{Binding CoreTranslations.ChangeLanguage}" />
 	</StackPanel>
 </UserControl>

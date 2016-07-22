@@ -24,20 +24,23 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<TreeView x:Name="TreeItems"
-				cal:Message.Attach="[Event SelectedItemChanged] = [Action ActivateChildView($this.SelectedItem)]" Grid.Column="0">
-			<TreeView.ItemContainerStyle>
-				<Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-					<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
-				</Style>
-			</TreeView.ItemContainerStyle>
-			<TreeView.ItemTemplate>
-				<HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
-					<Label Content="{Binding DisplayName}" />
-				</HierarchicalDataTemplate>
-			</TreeView.ItemTemplate>
-		</TreeView>
+		<StackPanel Grid.Column="0">
+			<TextBox x:Name="Filter" mahapps:TextBoxHelper.ClearTextButton="True" mahapps:TextBoxHelper.Watermark="{Binding ConfigTranslations.Filter}"/>
+			<TreeView x:Name="TreeItems"
+				cal:Message.Attach="[Event SelectedItemChanged] = [Action ActivateChildView($this.SelectedItem)]" >
+				<TreeView.ItemContainerStyle>
+					<Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+						<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+						<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
+					</Style>
+				</TreeView.ItemContainerStyle>
+				<TreeView.ItemTemplate>
+					<HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
+						<Label Content="{Binding DisplayName}" />
+					</HierarchicalDataTemplate>
+				</TreeView.ItemTemplate>
+			</TreeView>
+		</StackPanel>
 		<ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0" />
 		<UniformGrid Grid.Column="1" Grid.Row="1">
 			<Button x:Name="Cancel" Content="{Binding CoreTranslations.Cancel}" />

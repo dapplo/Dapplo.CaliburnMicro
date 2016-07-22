@@ -6,11 +6,13 @@
 		<resource name="cancel">Cancel</resource>
 		<resource name="language">Language</resource>
 		<resource name="settings">Settings</resource>
-		<resource name="change_language">Change language</resource>
 	</resources>
 	<resources prefix="config">
+		<resource name="apply">Apply</resource>
+		<resource name="restore_defaults">Defaults</resource>
 		<resource name="ui">User interface</resource>
 		<resource name="addons">Addons</resource>
+		<resource name="filter">type filter text</resource>
 	</resources>
 	<resources prefix="credentials">
 		<resource name="username">Username</resource>

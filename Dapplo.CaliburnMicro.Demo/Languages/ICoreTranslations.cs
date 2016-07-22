@@ -39,6 +39,5 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 		string Language { get; }
 		string Ok { get; }
 		string Settings { get; }
-		string ChangeLanguage { get; }
 	}
 }

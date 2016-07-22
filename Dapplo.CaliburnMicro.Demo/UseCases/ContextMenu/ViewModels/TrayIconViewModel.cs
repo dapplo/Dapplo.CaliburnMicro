@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 		[ImportMany]
 		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
 
-		public ObservableCollection<IMenuItem> Items { get; } = new ObservableCollection<IMenuItem>();
+		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
 		[Import]
 		public IContextMenuTranslations ContextMenuTranslations { get; set; }

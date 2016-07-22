@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
+using Dapplo.InterfaceImpl.Extensions;
 using Dapplo.Log.Facade;
 
 #endregion
@@ -44,6 +45,28 @@ namespace Dapplo.CaliburnMicro.Configuration
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		private static readonly LogSource Log = new LogSource();
+		private string _filter;
+		private readonly ISet<ITransactionalProperties> _transactionalPropertyRegistrations = new HashSet<ITransactionalProperties>();
+
+		/// <summary>
+		///     Set a filter to apply to every IConfigScreen
+		/// </summary>
+		public virtual string Filter
+		{
+			get { return _filter; }
+			set
+			{
+				_filter = value;
+				NotifyOfPropertyChange(_filter);
+
+				TreeItems.Clear();
+				// Rebuild a tree for the ConfigScreens
+				foreach (var configScreen in ConfigScreens.CreateTree(screen => screen.Contains(_filter)))
+				{
+					TreeItems.Add(configScreen);
+				}
+			}
+		}
 
 		/// <summary>
 		///     This is called when the config needs to initialize stuff, it will call Initialize on every screen
@@ -55,6 +78,11 @@ namespace Dapplo.CaliburnMicro.Configuration
 			foreach (var configScreen in ConfigScreens)
 			{
 				configScreen.Initialize(this);
+			}
+			// call StartTransaction on every registered ITransactionalProperties
+			foreach (var transactionalProperties in _transactionalPropertyRegistrations)
+			{
+				transactionalProperties.StartTransaction();
 			}
 		}
 
@@ -68,6 +96,13 @@ namespace Dapplo.CaliburnMicro.Configuration
 			{
 				configScreen.Terminate();
 			}
+			// call RollbackTransaction on every registered ITransactionalProperties
+			// this doesn't do anything if a after a CommitTransaction so is safe to do when terminating
+			foreach (var transactionalProperties in _transactionalPropertyRegistrations)
+			{
+				transactionalProperties.RollbackTransaction();
+			}
+			_transactionalPropertyRegistrations.Clear();
 		}
 
 		/// <summary>
@@ -87,7 +122,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     This implements IConfig.TreeItems via ConfigScreens
 		/// </summary>
-		public virtual ICollection<IConfigScreen> TreeItems { get; } = new ObservableCollection<IConfigScreen>();
+		public virtual ICollection<ITreeNode<TConfigScreen>> TreeItems { get; } = new ObservableCollection<ITreeNode<TConfigScreen>>();
 
 		/// <summary>
 		///     This return or sets the current config screen
@@ -108,15 +143,27 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     This will call TryClose with false if all IConfigScreen items are okay with closing
+		///     If CanCancel is true, this will call Rollback on all IConfigScreens and TryClose afterwards
 		/// </summary>
 		public virtual void Cancel()
 		{
 			if (CanCancel)
 			{
+				// Tell all IConfigScreen to Rollback
+				foreach (var configScreen in ConfigScreens)
+				{
+					configScreen.Rollback();
+				}
+
 				TryClose(false);
 			}
 		}
+
+		/// <summary>
+		/// Implement IConfig.TreeItems via the generic version
+		/// </summary>
+		// ReSharper disable once SuspiciousTypeConversion.Global
+		ICollection<ITreeNode<IConfigScreen>> IConfig.TreeItems => TreeItems as ICollection<ITreeNode<IConfigScreen>>;
 
 		/// <summary>
 		///     check every IConfigScreen if it can close
@@ -132,14 +179,33 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     This will call TryClose with true if all IConfigScreen items are okay with closing
+		///     If CanOk is true, this will call Commit on all IConfigScreens and TryClose afterwards
 		/// </summary>
 		public virtual void Ok()
 		{
 			if (CanOk)
 			{
+				// Tell all IConfigScreen to commit
+				foreach (var configScreen in ConfigScreens)
+				{
+					configScreen.Commit();
+				}
+				// call CommitTransaction on every registered ITransactionalProperties
+				foreach (var transactionalProperties in _transactionalPropertyRegistrations)
+				{
+					transactionalProperties.CommitTransaction();
+				}
 				TryClose(true);
 			}
+		}
+
+		/// <summary>
+		/// Register an instanceof ITransactionalProperties to be included in the transaction (rollback or commit will be called for you)
+		/// </summary>
+		/// <param name="transactionalProperties"></param>
+		public void Register(ITransactionalProperties transactionalProperties)
+		{
+			_transactionalPropertyRegistrations.Add(transactionalProperties);
 		}
 
 		/// <summary>
@@ -170,30 +236,32 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Tries to close this instance by asking its Parent to initiate shutdown or by asking its corresponding view to
-		///     close.
-		///     Also provides an opportunity to pass a dialog result to it's corresponding view.
+		///     Called when deactivating, this will terminate the configuration
+		///     Makes sure the items are cleared again, otherwise we have everything double
 		/// </summary>
-		/// <param name="dialogResult">The dialog result.</param>
-		public override void TryClose(bool? dialogResult = null)
+		/// <param name="close">Inidicates whether this instance will be closed.</param>
+		protected override void OnDeactivate(bool close)
 		{
-			// Terminate needs to be called before TryClose, otherwise our items are gone.
 			Terminate();
-			base.TryClose(dialogResult);
+			base.OnDeactivate(close);
+			Items.Clear();
+			TreeItems.Clear();
 		}
 
-		/// <summary>Called when activating.</summary>
+		/// <summary>
+		///     Called when activating, will build a tree of the config screens
+		/// </summary>
 		protected override void OnActivate()
 		{
 			Items.AddRange(ConfigScreens);
+
+			Initialize();
 
 			// Build a tree for the ConfigScreens
 			foreach (var configScreen in ConfigScreens.CreateTree())
 			{
 				TreeItems.Add(configScreen);
 			}
-
-			Initialize();
 
 			base.OnActivate();
 		}
@@ -204,7 +272,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <param name="configScreen">The TConfigScreen to activate.</param>
 		public override void ActivateItem(TConfigScreen configScreen)
 		{
-			if (configScreen.CanActivate)
+			if (configScreen == null || configScreen.CanActivate)
 			{
 				base.ActivateItem(configScreen);
 				NotifyOfPropertyChange(nameof(CurrentConfigScreen));

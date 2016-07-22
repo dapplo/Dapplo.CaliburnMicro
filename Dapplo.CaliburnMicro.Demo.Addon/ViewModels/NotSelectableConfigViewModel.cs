@@ -41,8 +41,10 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		[Import]
 		public IAddonTranslations AddonTranslations { get; set; }
 
-		public override string ParentId { get; } = nameof(ConfigIds.Addons);
-
+		public NotSelectableConfigViewModel()
+		{
+			ParentId = nameof(ConfigIds.Addons);
+		}
 		public void OnImportsSatisfied()
 		{
 			IsEnabled = false;

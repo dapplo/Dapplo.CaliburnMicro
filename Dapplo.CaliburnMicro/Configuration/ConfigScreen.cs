@@ -27,6 +27,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
 
@@ -37,7 +38,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 	/// <summary>
 	///     A basic implementation of IConfigScreen
 	/// </summary>
-	public abstract class ConfigScreen : Screen, IConfigScreen
+	public class ConfigScreen : Screen, IConfigScreen
 	{
 		private bool _canActivate = true;
 		private bool _isEnabled = true;
@@ -53,6 +54,15 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
+		/// Tests if the IConfigScreen contains the supplied text
+		/// </summary>
+		/// <param name="text">the text to search for</param>
+		public virtual bool Contains(string text)
+		{
+			return string.IsNullOrEmpty(text) || CultureInfo.CurrentUICulture.CompareInfo.IndexOf(DisplayName, text, CompareOptions.IgnoreCase) >= 0;
+		}
+
+		/// <summary>
 		///     Do some general initialization, if needed
 		///     This is called when the config UI is initializing
 		/// </summary>
@@ -61,10 +71,24 @@ namespace Dapplo.CaliburnMicro.Configuration
 		}
 
 		/// <summary>
-		///     Terminate the IConfigScreen.
-		///     This is called when the parent config UI terminates, no matter if this config screen was shown
+		///     Terminate is called (must!) for every IConfigScreen when the parent IConfig Terminate is called.
+		///     No matter if this config screen was every shown and what reason there is to leave the configuration screen.
 		/// </summary>
 		public virtual void Terminate()
+		{
+		}
+
+		/// <summary>
+		/// This is called when the configuration should be "persisted"
+		/// </summary>
+		public virtual void Commit()
+		{
+		}
+
+		/// <summary>
+		/// This is called when the configuration should be "rolled back"
+		/// </summary>
+		public virtual void Rollback()
 		{
 		}
 
@@ -122,7 +146,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     The parent under which the IConfigScreen is shown, null is root
 		/// </summary>
-		public virtual string ParentId { get; } = null;
+		public virtual string ParentId { get; set; }
 
 		/// <summary>
 		///     The Id of this IConfigScreen, is also used to order children of a parent.

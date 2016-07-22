@@ -6,11 +6,13 @@
 		<resource name="cancel">Abbrechen</resource>
 		<resource name="language">Sprache</resource>
 		<resource name="settings">Einstellungen</resource>
-		<resource name="change_language">Sprache ändern</resource>
 	</resources>
 	<resources prefix="config">
+		<resource name="apply">Anwenden</resource>
+		<resource name="restore_defaults">Standardeinstellungen</resource>
 		<resource name="ui">Benutzeroberfläche</resource>
 		<resource name="addons">Erweiterungen</resource>
+		<resource name="filter">Typ Filtertext</resource>
 	</resources>
 	<resources prefix="credentials">
 		<resource name="username">Benutzername</resource>

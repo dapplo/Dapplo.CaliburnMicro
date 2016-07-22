@@ -45,8 +45,10 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
 
-		public override string ParentId { get; } = nameof(ConfigIds.Addons);
-
+		public AddonSettingsViewModel()
+		{
+			ParentId = nameof(ConfigIds.Addons);
+		}
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName

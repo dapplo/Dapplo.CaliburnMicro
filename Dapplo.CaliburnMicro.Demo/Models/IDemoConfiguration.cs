@@ -35,7 +35,7 @@ using Dapplo.InterfaceImpl.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.Models
 {
 	[IniSection("Demo")]
-	public interface IDemoConfiguration : IIniSection, INotifyPropertyChanged, IDefaultValue
+	public interface IDemoConfiguration : IIniSection, INotifyPropertyChanged, IDefaultValue, ITransactionalProperties
 	{
 		IList<string> Items { get; set; }
 

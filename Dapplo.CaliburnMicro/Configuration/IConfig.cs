@@ -27,6 +27,8 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using Dapplo.CaliburnMicro.Tree;
+using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
 
@@ -37,6 +39,11 @@ namespace Dapplo.CaliburnMicro.Configuration
 	/// </summary>
 	public interface IConfig : INotifyPropertyChanged
 	{
+		/// <summary>
+		///     The property for the filter text
+		/// </summary>
+		string Filter { get; set; }
+
 		/// <summary>
 		///     The config screens for the config UI
 		/// </summary>
@@ -50,7 +57,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     The config screens for the config UI in the tree
 		/// </summary>
-		ICollection<IConfigScreen> TreeItems { get; }
+		ICollection<ITreeNode<IConfigScreen>> TreeItems { get; }
 
 		/// <summary>
 		///     Can the current config be cancelled?
@@ -73,20 +80,26 @@ namespace Dapplo.CaliburnMicro.Configuration
 		void Terminate();
 
 		/// <summary>
-		///     Cancel the config
+		///     If CanCancel is true, this will call Rollback on all IConfigScreens and TryClose afterwards
 		/// </summary>
 		void Cancel();
 
 		/// <summary>
-		///     Ok the config
+		///     If CanOk is true, this will call Commit on all IConfigScreens and TryClose afterwards
 		/// </summary>
 		void Ok();
+
+		/// <summary>
+		/// Register an instanceof ITransactionalProperties to be included in the transaction (rollback or commit will be called for you)
+		/// </summary>
+		/// <param name="transactionalProperties"></param>
+		void Register(ITransactionalProperties transactionalProperties);
 	}
 
 	/// <summary>
 	///     This is the generic interface for a config implementation
 	/// </summary>
-	public interface IConfig<out TConfigScreen> : IConfig
+	public interface IConfig<TConfigScreen> : IConfig
 	{
 		/// <summary>
 		///     The IConfigScreen items of the config
@@ -97,5 +110,10 @@ namespace Dapplo.CaliburnMicro.Configuration
 		///     Returns the current config screen
 		/// </summary>
 		new TConfigScreen CurrentConfigScreen { get; }
+
+		/// <summary>
+		///     The config screens for the config UI in the tree
+		/// </summary>
+		new ICollection<ITreeNode<TConfigScreen>> TreeItems { get; }
 	}
 }

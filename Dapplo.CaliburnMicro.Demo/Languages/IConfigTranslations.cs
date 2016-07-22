@@ -37,5 +37,8 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 	{
 		string Ui { get; }
 		string Addons { get; }
+		string Filter { get; }
+		string RestoreDefaults { get; }
+		string Apply { get; }
 	}
 }

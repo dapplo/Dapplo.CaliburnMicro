@@ -27,21 +27,23 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.Config.Language;
 using Dapplo.Utils.Extensions;
+using Dapplo.Utils;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
 	[Export(typeof(IConfigScreen))]
-	public sealed class LanguageConfigViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+	public sealed class LanguageConfigViewModel : ConfigScreen
 	{
+		private readonly Disposables _disposables = new Disposables();
+
 		public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
 
 		/// <summary>
@@ -59,21 +61,45 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
 
-		public override string ParentId { get; } = nameof(ConfigIds.Ui);
-
-		public void OnImportsSatisfied()
+		public override void Initialize(IConfig config)
 		{
+			// Place this under the Ui parent
+			ParentId = nameof(ConfigIds.Ui);
+
+			// Make sure Commit/Rollback is called on the IDemoConfiguration
+			config.Register(DemoConfiguration);
+
 			// automatically update the DisplayName
-			CoreTranslations.OnPropertyChanged(pcEvent => { DisplayName = CoreTranslations.Language; }, nameof(ICoreTranslations.Language));
+			_disposables.Add(CoreTranslations.OnPropertyChanged(pcEvent =>
+			{
+				DisplayName = CoreTranslations.Language;
+			}, nameof(ICoreTranslations.Language)));
 
 			// automatically update the CanChangeLanguage state when a different language is selected
-			DemoConfiguration.OnPropertyChanged(pcEvent => { NotifyOfPropertyChange(nameof(CanChangeLanguage)); }, nameof(IDemoConfiguration.Language));
+			_disposables.Add(DemoConfiguration.OnPropertyChanged(pcEvent =>
+			{
+				NotifyOfPropertyChange(nameof(CanChangeLanguage));
+			}, nameof(IDemoConfiguration.Language)));
+
+			base.Initialize(config);
 		}
 
-		public async Task ChangeLanguage()
+		protected override void OnDeactivate(bool close)
 		{
+			_disposables.Dispose();
+			base.OnDeactivate(close);
+		}
+
+		public override void Commit()
+		{
+			// Manually commit
+			DemoConfiguration.CommitTransaction();
 			EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-			await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
+			UiContext.RunOn(async () =>
+			{
+				await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
+			});
+			base.Commit();
 		}
 	}
 }
