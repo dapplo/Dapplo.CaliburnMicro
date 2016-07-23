@@ -26,9 +26,7 @@
 #region Usings
 
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
 using Dapplo.Utils;
@@ -36,41 +34,34 @@ using MahApps.Metro.Controls;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 {
 	/// <summary>
-	/// This will add an extry for the wizard to the context menu
+	/// This will add the File item to menu
 	/// </summary>
-	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	[Export("menu", typeof(IMenuItem))]
+	public sealed class SaveAsMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		[Import]
-		public IWindowManager WindowManager { get; set; }
-
-		[Import]
-		private WizardExampleViewModel WizardExample { get; set; }
-
-		[Import]
-		private IContextMenuTranslations ContextMenuTranslations { get; set; }
+		private IMenuTranslations MenuTranslations { get; set; }
 
 		public void OnImportsSatisfied()
 		{
+			Id = "A_SaveAs";
+			ParentId = "1_File";
 			UiContext.RunOn(() =>
 			{
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Wizard);
-				Icon = new PackIconFontAwesome
+				MenuTranslations.OnLanguageChanged(lang => DisplayName = MenuTranslations.SaveAs);
+				Icon = new PackIconEntypo
 				{
-					Kind = PackIconFontAwesomeKind.Magic
+					Kind = PackIconEntypoKind.Save
 				};
 			});
 		}
 
-		/// <summary>
-		///     Is called when the IMenuItem is clicked
-		/// </summary>
 		public override void Click(IMenuItem clickedItem)
 		{
-			WindowManager.ShowDialog(WizardExample);
+			
 		}
 	}
 }

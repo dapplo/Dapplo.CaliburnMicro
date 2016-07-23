@@ -46,7 +46,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 	{
 		private static readonly LogSource Log = new LogSource();
 
-		[ImportMany]
+		[ImportMany("contextmenu", typeof(IMenuItem))]
 		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
 
 		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();

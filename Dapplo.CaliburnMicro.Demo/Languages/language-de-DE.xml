@@ -20,9 +20,15 @@
 		<resource name="login">Anmelden</resource>
 	</resources>
 	<resources prefix="contextmenu">
+		<resource name="withchildren">Kinder</resource>
+		<resource name="somewindow">Ein Window</resource>
 		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>
+	</resources>
+	<resources prefix="menu">
+		<resource name="file">Bestand</resource>
+		<resource name="save_as">Speichern unter</resource>
 	</resources>
 	<resources prefix="wizard">
 		<resource name="next">Weiter</resource>

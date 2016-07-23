@@ -42,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// <summary>
 	/// This will add an extry which shows children to the context menu
 	/// </summary>
-	[Export(typeof(IMenuItem))]
+	[Export("contextmenu", typeof(IMenuItem))]
 	public sealed class WithChildrenMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();

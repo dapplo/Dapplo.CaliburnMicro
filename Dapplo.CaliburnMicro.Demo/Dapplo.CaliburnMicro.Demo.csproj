@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Languages\IConfigTranslations.cs" />
+    <Compile Include="Languages\IMenuTranslations.cs" />
     <Compile Include="Languages\IValidationErrors.cs" />
     <Compile Include="Languages\IWizardTranslations.cs" />
     <Compile Include="Languages\IContextMenuTranslations.cs" />
@@ -119,10 +120,13 @@
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\ContextMenu\SomeWindowMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ExitMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ConfigMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\WizardMenuItem.cs" />
+    <Compile Include="UseCases\Menu\SaveAsMenuItem.cs" />
+    <Compile Include="UseCases\Menu\ViewModels\WindowWithMenuViewModel.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\DummyViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
@@ -171,6 +175,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UseCases\Menu\Views\WindowWithMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CredentialsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

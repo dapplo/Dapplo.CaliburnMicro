@@ -42,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// <summary>
 	/// This will add an extry for the configuration to the context menu
 	/// </summary>
-	[Export(typeof(IMenuItem))]
+	[Export("contextmenu", typeof(IMenuItem))]
 	public sealed class ConfigMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();

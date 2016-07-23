@@ -28,27 +28,31 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
+using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Config.Language;
+using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	/// This will add an extry for the wizard to the context menu
+	/// This will add an extry for the SomeWindow to the context menu
 	/// </summary>
 	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class SomeWindowMenuItem : MenuItem, IPartImportsSatisfiedNotification
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		[Import]
 		public IWindowManager WindowManager { get; set; }
 
 		[Import]
-		private WizardExampleViewModel WizardExample { get; set; }
+		public WindowWithMenuViewModel WindowWithMenuViewModel { get; set; }
 
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
@@ -57,20 +61,18 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			UiContext.RunOn(() =>
 			{
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Wizard);
-				Icon = new PackIconFontAwesome
+				Icon = new PackIconModern
 				{
-					Kind = PackIconFontAwesomeKind.Magic
+					Kind = PackIconModernKind.List
 				};
+				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.SomeWindow);
 			});
 		}
 
-		/// <summary>
-		///     Is called when the IMenuItem is clicked
-		/// </summary>
 		public override void Click(IMenuItem clickedItem)
 		{
-			WindowManager.ShowDialog(WizardExample);
+			Log.Debug().WriteLine("SomeWindow");
+			WindowManager.ShowWindow(WindowWithMenuViewModel);
 		}
 	}
 }

@@ -35,10 +35,10 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 	[Language("ContextMenu")]
 	public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
 	{
+		string SomeWindow { get; }
 		string Configure { get; }
 		string Exit { get; }
 		string Wizard { get; }
-		[DefaultValue("With children")]
 		string WithChildren { get; }
 	}
 }
