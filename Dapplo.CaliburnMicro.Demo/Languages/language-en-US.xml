@@ -21,13 +21,18 @@
 	</resources>
 	<resources prefix="contextmenu">
 		<resource name="withchildren">Children</resource>
+		<resource name="one">One</resource>
+		<resource name="two">Two</resource>
+		<resource name="three">Three</resource>
 		<resource name="somewindow">Just a Window</resource>
 		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Configure</resource>
 		<resource name="exit">Exit</resource>
 	</resources>
 	<resources prefix="menu">
-		<resource name="file">Bestand</resource>
+		<resource name="about">About</resource>
+		<resource name="edit">Edit</resource>
+		<resource name="file">File</resource>
 		<resource name="save_as">Save As</resource>
 	</resources>
 	<resources prefix="wizard">

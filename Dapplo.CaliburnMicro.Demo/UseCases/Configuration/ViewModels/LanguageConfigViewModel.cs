@@ -31,6 +31,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
 using Dapplo.Utils.Extensions;
 using Dapplo.Utils;
@@ -70,10 +71,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(CoreTranslations.OnPropertyChanged(pcEvent =>
-			{
-				DisplayName = CoreTranslations.Language;
-			}, nameof(ICoreTranslations.Language)));
+			_disposables.Add(this.BindDisplayName(CoreTranslations, nameof(ICoreTranslations.Language)));
 
 			// automatically update the CanChangeLanguage state when a different language is selected
 			_disposables.Add(DemoConfiguration.OnPropertyChanged(pcEvent =>

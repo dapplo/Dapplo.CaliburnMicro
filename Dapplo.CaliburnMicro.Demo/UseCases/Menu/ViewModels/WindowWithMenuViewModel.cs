@@ -26,57 +26,96 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
+using Dapplo.Utils;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 {
 	[Export]
-	public class WindowWithMenuViewModel : Screen, IPartImportsSatisfiedNotification
+	public class WindowWithMenuViewModel : Screen
 	{
+		private readonly Disposables _disposables = new Disposables();
+
 		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
+		[Import]
+		private IMenuTranslations MenuTranslations { get; set; }
+
+		[Import]
+		private IContextMenuTranslations ContextMenuTranslations { get; set; }
+		
 		[ImportMany("menu", typeof(IMenuItem))]
 		private IEnumerable<IMenuItem> MenuItems { get; set; }
 
-		public void OnImportsSatisfied()
+		protected override void OnActivate()
 		{
 			var items = MenuItems.ToList();
+			var menuTranslationsObservable = MenuTranslations.ToObservable();
+			_disposables.Add(menuTranslationsObservable);
+
+			var contextMenuTranslationObservable = ContextMenuTranslations.ToObservable();
+			_disposables.Add(contextMenuTranslationObservable);
+
+			var menuItem = new MenuItem
+			{
+				Id = "1_File"
+			};
+			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.File));
+			items.Add(menuItem);
+
+			menuItem = new MenuItem
+			{
+				Id = "2_Edit"
+			};
+			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit));
+			items.Add(menuItem);
+
+			menuItem = new MenuItem
+			{
+				Id = "3_About"
+			};
+			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About));
+			items.Add(menuItem);
 
 			items.Add(new MenuItem
 			{
-				Id = "1_File",
-				DisplayName= "File"
-			});
-			items.Add(new MenuItem
-			{
-				Id = "2_Edit",
-				DisplayName = "Edit"
-			});
-			items.Add(new MenuItem
-			{
-				Id = "3_About",
-				DisplayName = "About"
+				IsSeparator = true,
+				Id = "Y_Separator",
+				ParentId = "1_File"
 			});
 
-			items.Add(new SeparatorMenuItem
-			{
-				Id = "Y_Separator", ParentId = "1_File"
-			});
-			items.Add(new MenuItem
+			menuItem = new MenuItem
 			{
 				Id = "Z_Edit",
 				ParentId = "1_File",
-				DisplayName = "Exit",
-				ClickAction = (menuItem) => Dapplication.Current.Shutdown()
-			});
+				ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
+			};
+			menuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit));
+			items.Add(menuItem);
 
-			foreach (var menuItem in items.CreateTree())
+			foreach (var item in items.CreateTree())
 			{
-				Items.Add(menuItem);
+				Items.Add(item);
 			}
+
+			base.OnActivate();
+		}
+
+		/// <summary>
+		/// Called when deactivating.
+		/// Removes all event subscriptions
+		/// </summary>
+		/// <param name="close">Inidicates whether this instance will be closed.</param>
+		protected override void OnDeactivate(bool close)
+		{
+			_disposables.Dispose();
+			base.OnDeactivate(close);
 		}
 	}
 }

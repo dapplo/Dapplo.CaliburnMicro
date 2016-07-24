@@ -33,9 +33,9 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
-using Dapplo.Utils.Extensions;
 using MahApps.Metro.Controls.Dialogs;
 
 #endregion
@@ -90,7 +90,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			CoreTranslations.OnPropertyChanged(pcEvent => { DisplayName = CoreTranslations.Settings; }, nameof(ICoreTranslations.Settings));
+			this.BindDisplayName(CoreTranslations, nameof(CoreTranslations.Settings));
 
 			// Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
 			var lang = DemoConfiguration.Language;

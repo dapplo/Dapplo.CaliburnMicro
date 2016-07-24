@@ -29,6 +29,7 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -49,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		{
 			IsEnabled = false;
 			// automatically update the DisplayName
-			AddonTranslations.OnPropertyChanged(e => { DisplayName = AddonTranslations.NotSelectableAddon; }, nameof(IAddonTranslations.NotSelectableAddon));
+			this.BindDisplayName(AddonTranslations, nameof(IAddonTranslations.NotSelectableAddon));
 		}
 	}
 }

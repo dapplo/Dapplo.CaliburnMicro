@@ -30,6 +30,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -52,7 +53,7 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			AddonTranslations.OnPropertyChanged(e => { DisplayName = AddonTranslations.Addon; }, nameof(IAddonTranslations.Addon));
+			this.BindDisplayName(AddonTranslations, nameof(IAddonTranslations.Addon));
 		}
 
 		public void DoSomething()

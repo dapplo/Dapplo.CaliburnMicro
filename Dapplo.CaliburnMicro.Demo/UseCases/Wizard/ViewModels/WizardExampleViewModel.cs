@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
 
@@ -51,7 +52,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public void OnImportsSatisfied()
 		{
-			WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.Title);
+			// automatically update the DisplayName
+			this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.Title));
 			// Set the WizardScreens by ordering them
 			WizardScreens = WizardItems.OrderBy(x => x.Order);
 		}

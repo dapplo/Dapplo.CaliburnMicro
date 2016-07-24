@@ -29,6 +29,7 @@ using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
@@ -64,26 +65,32 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				{
 					Kind = PackIconMaterialKind.HumanChild
 				};
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.WithChildren);
+				// automatically update the DisplayName
+				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.WithChildren));
 			});
 
-			ChildNodes.Add(new MenuItem
+			var menuItem = new MenuItem
 			{
-				Id = "1",
-				DisplayName = "One"
-			});
-			ChildNodes.Add(new MenuItem
+				Id = "1"
+			};
+			var observable = menuItem.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.One));
+			ChildNodes.Add(menuItem);
+
+			ChildNodes.Add(new MenuItem { IsSeparator = true });
+
+			menuItem = new MenuItem
 			{
-				Id = "2",
-				DisplayName = "Two"
-			});
-			ChildNodes.Add(new SeparatorMenuItem());
-			ChildNodes.Add(new MenuItem
+				Id = "2"
+			};
+			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Two));
+			ChildNodes.Add(menuItem);
+
+			menuItem = new MenuItem
 			{
-				Id = "3",
-				DisplayName = "Three",
-				ClickAction = item => Log.Debug().WriteLine("Three was clicked: {0}", item.Id)
-			});
+				Id = "3"
+			};
+			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Three));
+			ChildNodes.Add(menuItem);
 		}
 
 		public override void Click(IMenuItem clickedItem)

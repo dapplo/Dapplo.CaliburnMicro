@@ -72,8 +72,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 		public void OnImportsSatisfied()
 		{
 			var items = ContextMenuItems.ToList();
-			items.Add(new SeparatorMenuItem
+			items.Add(new MenuItem
 			{
+				IsSeparator = true,
 				Id = "Y_Separator"
 			});
 			foreach (var contextMenuItem in items.CreateTree())

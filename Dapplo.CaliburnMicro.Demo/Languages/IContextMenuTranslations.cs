@@ -40,5 +40,9 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 		string Exit { get; }
 		string Wizard { get; }
 		string WithChildren { get; }
+
+		string One { get; }
+		string Two { get; }
+		string Three { get; }
 	}
 }

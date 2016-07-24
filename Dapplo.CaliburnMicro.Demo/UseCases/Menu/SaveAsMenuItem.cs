@@ -27,6 +27,7 @@
 
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
 using Dapplo.Utils;
@@ -51,7 +52,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 			ParentId = "1_File";
 			UiContext.RunOn(() =>
 			{
-				MenuTranslations.OnLanguageChanged(lang => DisplayName = MenuTranslations.SaveAs);
+				// automatically update the DisplayName
+				this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
 				Icon = new PackIconEntypo
 				{
 					Kind = PackIconEntypoKind.Save

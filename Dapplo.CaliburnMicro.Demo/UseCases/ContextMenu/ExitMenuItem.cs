@@ -27,6 +27,7 @@
 
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
 using Dapplo.Utils;
@@ -50,7 +51,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			Id = "Z_Exit";
 			UiContext.RunOn(() =>
 			{
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Exit);
+				// automatically update the DisplayName
+				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Exit));
 				Icon = new PackIconMaterial
 				{
 					Kind = PackIconMaterialKind.ExitToApp

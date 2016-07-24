@@ -29,6 +29,7 @@ using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
 using Dapplo.Utils;
@@ -57,7 +58,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			UiContext.RunOn(() =>
 			{
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.Wizard);
+				// automatically update the DisplayName
+				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));
 				Icon = new PackIconFontAwesome
 				{
 					Kind = PackIconFontAwesomeKind.Magic

@@ -35,6 +35,8 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 	[Language("Menu")]
 	public interface IMenuTranslations : ILanguage, INotifyPropertyChanged
 	{
+		string About { get; }
+		string Edit { get; }
 		string File { get; }
 		string SaveAs { get; }
 	}

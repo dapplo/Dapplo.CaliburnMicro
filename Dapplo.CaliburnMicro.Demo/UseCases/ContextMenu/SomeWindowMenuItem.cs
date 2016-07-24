@@ -28,13 +28,12 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
-using Dapplo.Config.Language;
 
 #endregion
 
@@ -65,7 +64,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				{
 					Kind = PackIconModernKind.List
 				};
-				ContextMenuTranslations.OnLanguageChanged(lang => DisplayName = ContextMenuTranslations.SomeWindow);
+				// automatically update the DisplayName
+				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.SomeWindow));
 			});
 		}
 

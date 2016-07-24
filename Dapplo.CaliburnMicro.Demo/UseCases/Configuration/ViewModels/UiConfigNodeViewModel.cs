@@ -28,6 +28,7 @@
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -43,7 +44,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			ConfigTranslations.OnPropertyChanged(pcEvent => { DisplayName = ConfigTranslations.Ui; }, nameof(IConfigTranslations.Ui));
+			this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Ui));
+
+			// automatically update the DisplayName
 			CanActivate = false;
 			Id = nameof(ConfigIds.Ui);
 		}

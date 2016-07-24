@@ -29,6 +29,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
 
@@ -66,7 +67,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 				}
 			}, nameof(IWizard<IWizardScreen>.CurrentWizardScreen));
 
-			_displayNameUpdater = WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.TitleStep3);
+			// automatically update the DisplayName
+			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep3));
 			IsVisible = false;
 		}
 

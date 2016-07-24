@@ -28,6 +28,7 @@
 using System;
 using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.Utils.Extensions;
 
@@ -50,7 +51,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public override void Initialize(IWizard parent)
 		{
-			_displayNameUpdater = WizardTranslations.OnPropertyChanged(propertyName => DisplayName = WizardTranslations.TitleStep4);
+			// automatically update the DisplayName
+			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep4));
 		}
 
 		public override void Terminate()
