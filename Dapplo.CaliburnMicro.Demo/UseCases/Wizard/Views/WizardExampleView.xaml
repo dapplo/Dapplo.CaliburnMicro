@@ -24,17 +24,17 @@
 			</TabControl.ItemContainerStyle>
 		</TabControl>
 		<StackPanel Grid.Row="1" Orientation="Horizontal">
-			<Button x:Name="Previous" ToolTip="{Binding WizardTranslations.Previous}">
-				<mah:PackIconModern Kind="NavigatePrevious" Height="24" Width="24" />
+			<Button x:Name="Previous" ToolTip="{Binding WizardTranslations.Previous}" Content="{Binding WizardTranslations.Previous}">
+				<!--<mah:PackIconModern Kind="NavigatePrevious" Height="24" Width="24" />-->
 			</Button>
-			<Button x:Name="Next" ToolTip="{Binding WizardTranslations.Next}">
-				<mah:PackIconModern Kind="NavigateNext" Height="24" Width="24" />
+			<Button x:Name="Next" ToolTip="{Binding WizardTranslations.Next}" Content="{Binding WizardTranslations.Next}">
+				<!--<mah:PackIconModern Kind="NavigateNext" Height="24" Width="24" />-->
 			</Button>
-			<Button x:Name="Cancel" ToolTip="{Binding WizardTranslations.Cancel}">
-				<mah:PackIconModern Kind="Cancel" Height="24" Width="24" />
+			<Button x:Name="Cancel" ToolTip="{Binding WizardTranslations.Cancel}" Content="{Binding WizardTranslations.Cancel}">
+				<!--<mah:PackIconModern Kind="Cancel" Height="24" Width="24" />-->
 			</Button>
-			<Button x:Name="Finish" ToolTip="{Binding WizardTranslations.Finish}">
-				<mah:PackIconModern Kind="CameraFlash" Height="24" Width="24" />
+			<Button x:Name="Finish" ToolTip="{Binding WizardTranslations.Finish}" Content="{Binding WizardTranslations.Finish}">
+				<!--<mah:PackIconModern Kind="CameraFlash" Height="24" Width="24" />-->
 			</Button>
 		</StackPanel>
 	</Grid>

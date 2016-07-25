@@ -54,10 +54,11 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
-				Icon = new PackIconEntypo
-				{
-					Kind = PackIconEntypoKind.Save
-				};
+				// TODO: Enable with 1.3
+				//Icon = new PackIconEntypo
+				//{
+				//	Kind = PackIconEntypoKind.Save
+				//};
 			});
 		}
 

@@ -62,6 +62,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			var contextMenuTranslationObservable = ContextMenuTranslations.ToObservable();
 			_disposables.Add(contextMenuTranslationObservable);
 
+			this.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.SomeWindow));
 			var menuItem = new MenuItem
 			{
 				Id = "1_File"

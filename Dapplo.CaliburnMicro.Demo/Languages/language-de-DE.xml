@@ -24,7 +24,7 @@
 		<resource name="one">Eins</resource>
 		<resource name="two">Zwei</resource>
 		<resource name="three">Drei</resource>
-		<resource name="somewindow">Ein Window</resource>
+		<resource name="somewindow">Nur ein Window</resource>
 		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>
