@@ -60,11 +60,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));
-				// TODO: Enable with 1.3
-				//Icon = new PackIconFontAwesome
-				//{
-				//	Kind = PackIconFontAwesomeKind.Magic
-				//};
+				Icon = new PackIconFontAwesome
+				{
+					Kind = PackIconFontAwesomeKind.Magic
+				};
 			});
 		}
 

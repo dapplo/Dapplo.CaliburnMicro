@@ -61,11 +61,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			UiContext.RunOn(() =>
 			{
-				// TODO: Enable with 1.3
-				//Icon = new PackIconModern
-				//{
-				//	Kind = PackIconModernKind.Settings
-				//};
+				Icon = new PackIconModern
+				{
+					Kind = PackIconModernKind.Settings
+				};
 				// automatically update the DisplayName
 				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Configure));
 			});
