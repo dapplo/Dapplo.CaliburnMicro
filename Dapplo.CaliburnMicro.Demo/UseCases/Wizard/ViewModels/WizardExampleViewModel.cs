@@ -32,7 +32,6 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.CaliburnMicro.Wizard.ViewModels;
-using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -41,6 +40,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	[Export]
 	public class WizardExampleViewModel : Wizard<IWizardScreen>, IPartImportsSatisfiedNotification
 	{
+		private bool _isStep2Enabled = false;
+
 		[ImportMany]
 		private IEnumerable<IWizardScreen> WizardItems { get; set; }
 
@@ -53,6 +54,16 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public override bool CanCancel => WizardScreens.Last() != CurrentWizardScreen;
 
+		public bool IsStep2Enabled
+		{
+			get { return _isStep2Enabled; }
+			set
+			{
+				_isStep2Enabled = value;
+				NotifyOfPropertyChange(nameof(IsStep2Enabled));
+			}
+		}
+
 		public void OnImportsSatisfied()
 		{
 			WizardProgress = new WizardProgressViewModel(this);
@@ -60,6 +71,12 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.Title));
 			// Set the WizardScreens by ordering them
 			WizardScreens = WizardItems.OrderBy(x => x.Order);
+		}
+
+		protected override void OnActivate()
+		{
+			base.OnActivate();
+			CurrentWizardScreen = WizardScreens.FirstOrDefault();
 		}
 	}
 }

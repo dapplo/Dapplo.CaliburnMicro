@@ -30,14 +30,13 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
-using Dapplo.Utils.Extensions;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public sealed class WizardStep1ViewModel : WizardScreen
+	public sealed class WizardStep1ViewModel : WizardScreen<WizardExampleViewModel>
 	{
 		private IDisposable _displayNameUpdater;
 
@@ -47,7 +46,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		}
 
 		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
+		public IWizardTranslations WizardTranslations { get; set; }
 
 		public override void Initialize()
 		{

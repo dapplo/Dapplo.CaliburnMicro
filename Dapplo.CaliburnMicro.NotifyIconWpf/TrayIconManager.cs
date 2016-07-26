@@ -33,7 +33,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Threading;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log.Facade;

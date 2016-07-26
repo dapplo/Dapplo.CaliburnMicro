@@ -27,20 +27,17 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
-using Dapplo.Utils.Extensions;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public sealed class WizardStep3ViewModel : WizardScreen
+	public sealed class WizardStep3ViewModel : WizardScreen<WizardExampleViewModel>
 	{
-		private readonly IDisposable[] _watchParent = {null};
 		private IDisposable _displayNameUpdater;
 
 		public WizardStep3ViewModel()
@@ -53,29 +50,13 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public override void Initialize()
 		{
-			// do some magic, if the current wizard screen is the last, make this visible again
-			_watchParent[0] = ParentWizard.OnPropertyChanged(pcEvent =>
-			{
-				if (ParentWizard.WizardScreens == null || !ParentWizard.WizardScreens.Any())
-				{
-					_watchParent[0].Dispose();
-					return;
-				}
-				if (ParentWizard.CurrentWizardScreen == ParentWizard.WizardScreens.Last())
-				{
-					IsVisible = true;
-				}
-			}, nameof(IWizard<IWizardScreen>.CurrentWizardScreen));
-
 			// automatically update the DisplayName
 			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep3));
-			IsVisible = false;
 		}
 
 		public override void Terminate()
 		{
 			_displayNameUpdater?.Dispose();
-			_watchParent[0].Dispose();
 		}
 	}
 }

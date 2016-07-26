@@ -37,7 +37,7 @@ using Dapplo.Utils.Extensions;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
 	[Export(typeof(IWizardScreen))]
-	public sealed class WizardStep2ViewModel : WizardScreen
+	public sealed class WizardStep2ViewModel : WizardScreen<WizardExampleViewModel>
 	{
 		private IDisposable _displayNameUpdater;
 
@@ -54,6 +54,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		{
 			// automatically update the DisplayName
 			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep2));
+			ParentWizard.OnPropertyChanged(s => IsEnabled = ParentWizard.IsStep2Enabled, nameof(WizardExampleViewModel.IsStep2Enabled));
 		}
 
 		public override void Terminate()

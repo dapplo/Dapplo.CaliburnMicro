@@ -34,11 +34,12 @@ namespace Dapplo.CaliburnMicro.Wizard
 	/// <summary>
 	///     A very simple implementation of IWizardScreen
 	/// </summary>
-	public abstract class WizardScreen : Screen, IWizardScreen
+	public abstract class WizardScreen<TWizard>: Screen, IWizardScreen<TWizard> where TWizard : class, IWizard
 	{
 		private bool _isEnabled = true;
 		private bool _isVisible = true;
 		private int _order = 1;
+		private TWizard _parent;
 
 		/// <summary>
 		///     The order in which the screens are shown
@@ -53,15 +54,33 @@ namespace Dapplo.CaliburnMicro.Wizard
 			}
 		}
 
-		public void Click()
+		/// <summary>
+		/// The parent wizard where this IWizardScreen is used
+		/// </summary>
+		public TWizard ParentWizard
 		{
-			ParentWizard.CurrentWizardScreen = this;
+			get { return _parent; }
+			set
+			{
+				_parent = value;
+				NotifyOfPropertyChange(nameof(ParentWizard));
+			}
 		}
+
 
 		/// <summary>
 		/// The parent wizard where this IWizardScreen is used
 		/// </summary>
-		public IWizard ParentWizard { get; set; }
+		IWizard IWizardScreen.ParentWizard {
+			get
+			{
+				return ParentWizard;
+			}
+			set
+			{
+				ParentWizard = value as TWizard;
+			}
+		}
 
 		/// <summary>
 		///     Do some general initialization, if needed

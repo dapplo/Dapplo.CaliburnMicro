@@ -31,7 +31,6 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Utils.Extensions;
 
 #endregion
 

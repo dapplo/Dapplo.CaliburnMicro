@@ -23,12 +23,11 @@
 
 #endregion
 
-using System.Windows.Controls;
-
 namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 {
 	/// <summary>
-	/// A ViewModel to display the progress of a wizard
+	/// A ViewModel to display the progress of a wizard.
+	/// This is based upon the stackoverflow question <a href="http://stackoverflow.com/questions/7691386/implementing-a-wizard-progress-control-in-wpf">here</a>
 	/// </summary>
 	public class WizardProgressViewModel
 	{

@@ -31,7 +31,6 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
