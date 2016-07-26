@@ -53,7 +53,8 @@ namespace Dapplo.CaliburnMicro.Wizard
 
 			foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
 			{
-				wizardScreen.Initialize(this);
+				wizardScreen.ParentWizard = this;
+				wizardScreen.Initialize();
 			}
 		}
 
@@ -69,6 +70,40 @@ namespace Dapplo.CaliburnMicro.Wizard
 			}
 		}
 
+		/// <summary>
+		/// The current progress, from 0 when no screen is active until 100 when the last screen is active
+		/// </summary>
+		public int Progress
+		{
+			get
+			{
+				// Is there already a screen selected?
+				if (CurrentWizardScreen == null)
+				{
+					return 0;
+				}
+
+				int availableScreens = WizardScreens.Count(x => x.IsVisible);
+				int index = WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).Count(x=> x.IsVisible)+1;
+				return (int) (100*((double) index / availableScreens));
+			}
+		}
+
+		/// <summary>
+		/// Test if we are at the last screen
+		/// </summary>
+		public bool IsLast
+		{
+			get { return WizardScreens.OrderBy(x => x.Order).LastOrDefault(x => x.IsEnabled && x.IsVisible) == CurrentWizardScreen; }
+		}
+
+		/// <summary>
+		/// Test if we are at the first screen
+		/// </summary>
+		public bool IsFirst
+		{
+			get { return WizardScreens.OrderBy(x => x.Order).First() == CurrentWizardScreen; }
+		}
 		/// <summary>
 		///     The TWizardScreen items of the wizard
 		/// </summary>
@@ -249,10 +284,13 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			base.ActivateItem(item);
 			NotifyOfPropertyChange(nameof(CurrentWizardScreen));
+			NotifyOfPropertyChange(nameof(Progress));
 			NotifyOfPropertyChange(nameof(CanNext));
 			NotifyOfPropertyChange(nameof(CanPrevious));
 			NotifyOfPropertyChange(nameof(CanCancel));
 			NotifyOfPropertyChange(nameof(CanFinish));
+			NotifyOfPropertyChange(nameof(IsFirst));
+			NotifyOfPropertyChange(nameof(IsLast));
 		}
 
 		/// <summary>

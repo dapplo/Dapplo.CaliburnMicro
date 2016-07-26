@@ -23,42 +23,27 @@
 
 #endregion
 
-#region Usings
+using System.Windows.Controls;
 
-using System;
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Wizard;
-using Dapplo.Utils.Extensions;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
+namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 {
-	[Export(typeof(IWizardScreen))]
-	public sealed class WizardStep2ViewModel : WizardScreen
+	/// <summary>
+	/// A ViewModel to display the progress of a wizard
+	/// </summary>
+	public class WizardProgressViewModel
 	{
-		private IDisposable _displayNameUpdater;
+		/// <summary>
+		/// The IWizard
+		/// </summary>
+		public IWizard Wizard { get; set; }
 
-		public WizardStep2ViewModel()
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wizard"></param>
+		public WizardProgressViewModel(IWizard wizard)
 		{
-			Order = 2;
-			IsEnabled = false;
-		}
-
-		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
-
-		public override void Initialize()
-		{
-			// automatically update the DisplayName
-			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep2));
-		}
-
-		public override void Terminate()
-		{
-			_displayNameUpdater?.Dispose();
+			Wizard = wizard;
 		}
 	}
 }

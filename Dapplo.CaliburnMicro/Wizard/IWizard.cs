@@ -38,6 +38,21 @@ namespace Dapplo.CaliburnMicro.Wizard
 	public interface IWizard : INotifyPropertyChanged
 	{
 		/// <summary>
+		/// The current progress
+		/// </summary>
+		int Progress { get; }
+
+		/// <summary>
+		/// Test if we are at the last screen
+		/// </summary>
+		bool IsLast { get; }
+
+		/// <summary>
+		/// Test if we are at the first screen
+		/// </summary>
+		bool IsFirst { get; }
+
+		/// <summary>
 		///     The TWizardScreen items of the wizard
 		/// </summary>
 		IEnumerable<IWizardScreen> WizardScreens { get; set; }

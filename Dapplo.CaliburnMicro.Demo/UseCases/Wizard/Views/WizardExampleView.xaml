@@ -9,13 +9,15 @@
 	</mah:MetroWindow.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="50" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<TabControl x:Name="Items" Grid.Row="0">
+		<ContentControl x:Name="WizardProgress" Grid.Row="0"/>
+		<TabControl x:Name="Items" Grid.Row="1">
 			<TabControl.ItemContainerStyle>
 				<Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
 					<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
@@ -23,7 +25,7 @@
 				</Style>
 			</TabControl.ItemContainerStyle>
 		</TabControl>
-		<StackPanel Grid.Row="1" Orientation="Horizontal">
+		<StackPanel Orientation="Horizontal" Grid.Row="2">
 			<Button x:Name="Previous" ToolTip="{Binding WizardTranslations.Previous}">
 				<mah:PackIconModern Kind="NavigatePrevious" Height="24" Width="24" />
 			</Button>

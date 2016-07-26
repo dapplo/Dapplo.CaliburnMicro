@@ -51,17 +51,17 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		[Import]
 		private IWizardTranslations WizardTranslations { get; set; }
 
-		public override void Initialize(IWizard parent)
+		public override void Initialize()
 		{
 			// do some magic, if the current wizard screen is the last, make this visible again
-			_watchParent[0] = parent.OnPropertyChanged(pcEvent =>
+			_watchParent[0] = ParentWizard.OnPropertyChanged(pcEvent =>
 			{
-				if (parent.WizardScreens == null || !parent.WizardScreens.Any())
+				if (ParentWizard.WizardScreens == null || !ParentWizard.WizardScreens.Any())
 				{
 					_watchParent[0].Dispose();
 					return;
 				}
-				if (parent.CurrentWizardScreen == parent.WizardScreens.Last())
+				if (ParentWizard.CurrentWizardScreen == ParentWizard.WizardScreens.Last())
 				{
 					IsVisible = true;
 				}

@@ -29,9 +29,9 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Config.Language;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
+using System.Windows;
 
 #endregion
 
@@ -62,7 +62,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public override void Click(IMenuItem clickedItem)
 		{
-			Dapplication.Current.Shutdown();
+			Application.Current.Shutdown();
 		}
 	}
 }

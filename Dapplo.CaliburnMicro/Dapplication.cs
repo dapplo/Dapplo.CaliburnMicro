@@ -71,6 +71,9 @@ namespace Dapplo.CaliburnMicro
 			TaskScheduler.UnobservedTaskException += HandleTaskException;
 
 			_bootstrapper = new ApplicationBootstrapper(applicationName, mutexId, global);
+
+			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown
+			Dispatcher.CurrentDispatcher.ShutdownStarted += async (s,e) => await StopBootstrapperAsync().ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -121,30 +124,6 @@ namespace Dapplo.CaliburnMicro
 			{
 				await _bootstrapper.StopAsync().ConfigureAwait(false);
 			}
-		}
-
-		/// <summary>
-		///     Provide our own shutdown to solve some dispatcher issues
-		/// </summary>
-		public new async void Shutdown(int exitCode = 0)
-		{
-			Log.Info().WriteLine("Stopping the Dapplication.");
-			await StopBootstrapperAsync();
-			Log.Info().WriteLine("Calling the real shutdown.");
-			base.Shutdown(exitCode);
-		}
-
-		/// <summary>
-		///     Make sure the Dapplication is stopped, the bootstrapper is shutdown.
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnExit(ExitEventArgs e)
-		{
-			using (new NoSynchronizationContextScope())
-			{
-				StopBootstrapperAsync().Wait();
-			}
-			base.OnExit(e);
 		}
 
 		/// <summary>

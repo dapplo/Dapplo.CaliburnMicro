@@ -53,11 +53,21 @@ namespace Dapplo.CaliburnMicro.Wizard
 			}
 		}
 
+		public void Click()
+		{
+			ParentWizard.CurrentWizardScreen = this;
+		}
+
+		/// <summary>
+		/// The parent wizard where this IWizardScreen is used
+		/// </summary>
+		public IWizard ParentWizard { get; set; }
+
 		/// <summary>
 		///     Do some general initialization, if needed
 		///     This is called when the IWizard is initializing, no matter if the IWizardScreen is shown.
 		/// </summary>
-		public virtual void Initialize(IWizard parent)
+		public virtual void Initialize()
 		{
 		}
 

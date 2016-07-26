@@ -33,6 +33,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log.Facade;
@@ -69,23 +70,32 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// </summary>
 		/// <param name="cancellationToken">CancellationToken</param>
 		/// <returns>Task</returns>
-		public Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
+		public async Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			Log.Debug().WriteLine("Hiding all created tray-icons");
-			return UiContext.RunOn(() =>
+			var trayIcons = _trayIcons.Values.Select(x =>
 			{
-				var trayIcons = _trayIcons.Values.Select(x =>
+				ITrayIcon trayIcon;
+				x.TryGetTarget(out trayIcon);
+				return trayIcon;
+			}).Where(x => x != null).ToList();
+
+			if (trayIcons.Any())
+			{
+				Log.Debug().WriteLine("Hiding all created tray-icons");
+
+				await UiContext.RunOn(() =>
 				{
-					ITrayIcon trayIcon;
-					x.TryGetTarget(out trayIcon);
-					return trayIcon;
-				}).Where(x => x != null).ToList();
-				Log.Debug().WriteLine("Hiding {0} tray-icons", trayIcons.Count());
-				foreach (var trayIcon in trayIcons)
-				{
-					trayIcon.Hide();
-				}
-			}, cancellationToken);
+					Log.Debug().WriteLine("Hiding {0} tray-icons", trayIcons.Count());
+					foreach (var trayIcon in trayIcons)
+					{
+						trayIcon.Hide();
+					}
+				}, cancellationToken).ConfigureAwait(false);
+			}
+			else
+			{
+				Log.Debug().WriteLine("No tray-icons to hide");
+			}
 		}
 
 		/// <summary>

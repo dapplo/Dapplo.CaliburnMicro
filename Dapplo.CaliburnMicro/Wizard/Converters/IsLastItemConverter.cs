@@ -26,39 +26,34 @@
 #region Usings
 
 using System;
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Wizard;
-using Dapplo.Utils.Extensions;
+using System.Globalization;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
+namespace Dapplo.CaliburnMicro.Wizard.Converters
 {
-	[Export(typeof(IWizardScreen))]
-	public sealed class WizardStep2ViewModel : WizardScreen
+	/// <summary>
+	///     This converter is specially written for the WizardProgress
+	/// </summary>
+	public class IsLastItemConverter : IValueConverter
 	{
-		private IDisposable _displayNameUpdater;
-
-		public WizardStep2ViewModel()
+		object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			Order = 2;
-			IsEnabled = false;
+			var contentPresenter = value as ContentPresenter;
+			var itemsControl = ItemsControl.ItemsControlFromItemContainer(contentPresenter);
+			var index = 0;
+			if (contentPresenter != null)
+			{
+				index = itemsControl.ItemContainerGenerator.IndexFromContainer(contentPresenter);
+			}
+			return index == itemsControl.Items.Count - 1;
 		}
 
-		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
-
-		public override void Initialize()
+		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			// automatically update the DisplayName
-			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep2));
-		}
-
-		public override void Terminate()
-		{
-			_displayNameUpdater?.Dispose();
+			throw new NotSupportedException();
 		}
 	}
 }

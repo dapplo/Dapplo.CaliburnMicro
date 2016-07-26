@@ -49,6 +49,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 		int Order { get; }
 
 		/// <summary>
+		/// The parent wizard where this IWizardScreen is used
+		/// </summary>
+		IWizard ParentWizard { get; set; }
+
+		/// <summary>
 		///     Returns if the wizard screen can be selected (visible but not usable)
 		/// </summary>
 		bool IsEnabled { get; }
@@ -60,9 +65,10 @@ namespace Dapplo.CaliburnMicro.Wizard
 
 		/// <summary>
 		///     Do some general initialization, if needed
-		///     This is called when the parent wizard is initialized
+		///     This is called when the parent wizard is initializing.
+		/// ParentWizard will be set before this is called
 		/// </summary>
-		void Initialize(IWizard parent);
+		void Initialize();
 
 		/// <summary>
 		///     Terminate the wizard screen.

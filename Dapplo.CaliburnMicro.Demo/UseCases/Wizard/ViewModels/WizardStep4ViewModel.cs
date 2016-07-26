@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		[Import]
 		private IWizardTranslations WizardTranslations { get; set; }
 
-		public override void Initialize(IWizard parent)
+		public override void Initialize()
 		{
 			// automatically update the DisplayName
 			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep4));

@@ -31,6 +31,7 @@ using System.Linq;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
+using Dapplo.CaliburnMicro.Wizard.ViewModels;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -46,12 +47,15 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		[Import]
 		public IWizardTranslations WizardTranslations { get; set; }
 
+		public WizardProgressViewModel WizardProgress { get; set; }
+
 		public override bool CanFinish => WizardScreens.Last() == CurrentWizardScreen;
 
 		public override bool CanCancel => WizardScreens.Last() != CurrentWizardScreen;
 
 		public void OnImportsSatisfied()
 		{
+			WizardProgress = new WizardProgressViewModel(this);
 			// automatically update the DisplayName
 			this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.Title));
 			// Set the WizardScreens by ordering them
