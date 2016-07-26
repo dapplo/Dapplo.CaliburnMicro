@@ -49,7 +49,7 @@
 										</Style>
 										<Style TargetType="Path" x:Key="InnerPath" BasedOn="{StaticResource OuterPath}">
 											<Setter Property="Data" Value="M0.0,0.0 L0.0,0.45 L1.0,0.45 L1.0,0.55 L0.0,0.55 L0.0,1.0"/>
-											<Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=Foreground}"/>
+											<Setter Property="Fill" Value="{StaticResource HighlightBrush}"/>
 										</Style>
 									</DataTemplate.Resources>
 									<Grid SnapsToDevicePixels="True">
@@ -65,7 +65,7 @@
 											<Path Name="leftPath" Style="{StaticResource OuterPath}"/>
 											<Path Grid.Column="1" Name="rightPath" Style="{StaticResource OuterPath}"/>
 											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="20" Width="20" Fill="{StaticResource WizardBarBrush}"/>
-											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14" Width="14" Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=Foreground}">
+											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14" Width="14" Fill="{StaticResource HighlightBrush}">
 												<Ellipse.Visibility>
 													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
 														<Binding RelativeSource="{RelativeSource TemplatedParent}"/>
@@ -120,7 +120,7 @@
 														<Setter Property="FontWeight" Value="Bold"/>
 													</DataTrigger>
 													<DataTrigger Binding="{Binding IsEnabled}" Value="False">
-														<Setter Property="Foreground" Value="Gray"/>
+														<Setter Property="Foreground" Value="{StaticResource AccentColorBrush4}"/>
 														<Setter Property="FontStyle" Value="Italic"/>
 													</DataTrigger>
 												</Style.Triggers>

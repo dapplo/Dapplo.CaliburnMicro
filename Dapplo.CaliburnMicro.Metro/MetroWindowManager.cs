@@ -31,6 +31,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
+using MahApps.Metro;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -49,24 +50,18 @@ namespace Dapplo.CaliburnMicro.Metro
 	///     <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
 	/// </summary>
 	[Export(typeof(IWindowManager))]
-	public class MetroWindowManager : WindowManager
+	public class MetroWindowManager : WindowManager, IPartImportsSatisfiedNotification
 	{
 		private static readonly string[] Styles =
 		{
-			"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl", "Accents/Blue",
-			"Accents/BaseLight"
+			"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl"
 		};
 
-		/// <summary>
-		///     Add all the resources to the Application
-		/// </summary>
-		public MetroWindowManager()
-		{
-			foreach (var style in Styles)
-			{
-				AddMahappsStyle(style);
-			}
-		}
+		[Import(AllowDefault = true)]
+		private ThemeAccents ThemeAccent { get; set; }
+
+		[Import(AllowDefault = true)]
+		private Themes Theme { get; set; }
 
 		/// <summary>
 		///     Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
@@ -209,6 +204,28 @@ namespace Dapplo.CaliburnMicro.Metro
 		public static Uri CreateMahappStyleUri(string style)
 		{
 			return new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
+		}
+
+		/// <summary>
+		/// Called when a part's imports have been satisfied and it is safe to use.
+		/// </summary>
+		public void OnImportsSatisfied()
+		{
+			foreach (var style in Styles)
+			{
+				AddMahappsStyle(style);
+			}
+			if (ThemeAccent == ThemeAccents.Default)
+			{
+				ThemeAccent = ThemeAccents.Blue;
+			}
+			if (Theme == Themes.Default)
+			{
+				Theme = Themes.BaseLight;
+			}
+
+			AddMahappsStyle($"Accents/{ThemeAccent}");
+			AddMahappsStyle($"Accents/{Theme}");
 		}
 	}
 }

@@ -128,7 +128,6 @@
     <Compile Include="UseCases\Menu\SaveAsMenuItem.cs" />
     <Compile Include="UseCases\Menu\ViewModels\WindowWithMenuViewModel.cs" />
     <Compile Include="ViewModels\CredentialsViewModel.cs" />
-    <Compile Include="ViewModels\DummyViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\ConfigViewModel.cs" />
@@ -180,10 +179,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CredentialsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DummyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

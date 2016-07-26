@@ -26,8 +26,10 @@
 #region Usings
 
 using System;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows;
+using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Log.Facade;
 using Dapplo.Log.Loggers;
 
@@ -38,8 +40,17 @@ namespace Dapplo.CaliburnMicro.Demo
 	/// <summary>
 	///     This takes care or starting the Application
 	/// </summary>
+	[Export]
 	public class Startup
 	{
+		/// <summary>
+		/// Example to show how to change the theme, change the following 2 values
+		/// </summary>
+		[Export]
+		public Themes Theme { get; } = Themes.BaseLight;
+		[Export]
+		public ThemeAccents ThemeAccent { get; } = ThemeAccents.Orange;
+
 		/// <summary>
 		///     Start the application
 		/// </summary>

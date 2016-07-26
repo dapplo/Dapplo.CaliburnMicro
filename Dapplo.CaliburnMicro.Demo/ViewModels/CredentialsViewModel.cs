@@ -53,9 +53,6 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		[Import]
 		public ICredentialsTranslations CredentialsTranslations { get; set; }
 
-		[Import]
-		public DummyViewModel DummyVm { get; set; }
-
 		/// <summary>
 		///     Password for a login
 		/// </summary>
