@@ -23,26 +23,77 @@
 
 #endregion
 
+using System.Windows.Media;
+using Caliburn.Micro;
+using System.Windows;
+
 namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 {
 	/// <summary>
 	/// A ViewModel to display the progress of a wizard.
 	/// This is based upon the stackoverflow question <a href="http://stackoverflow.com/questions/7691386/implementing-a-wizard-progress-control-in-wpf">here</a>
 	/// </summary>
-	public class WizardProgressViewModel
+	public class WizardProgressViewModel : PropertyChangedBase
 	{
+		private const string MapAppsHighlightBrush = "HighlightBrush";
+		private const string MapAppsAccentColorBrush4 = "AccentColorBrush4";
+		private Brush _progressColorBrush = SystemColors.ControlTextBrush;
+
+		private Brush _disabledColorBrush = Brushes.Gray;
+
+		/// <summary>
+		/// Brush for the progress line and dots
+		/// </summary>
+		public Brush ProgressColorBrush
+		{
+			get
+			{
+				return _progressColorBrush;
+			}
+			set
+			{
+				NotifyOfPropertyChange(nameof(ProgressColorBrush));
+				_progressColorBrush = value;
+			}
+		}
+
+		/// <summary>
+		/// Brush for the disabled wizard text
+		/// </summary>
+		public Brush DisabledColorBrush
+		{
+			get
+			{
+				return _disabledColorBrush;
+			}
+			set
+			{
+				NotifyOfPropertyChange(nameof(DisabledColorBrush));
+				_disabledColorBrush = value;
+			}
+		}
+
 		/// <summary>
 		/// The IWizard
 		/// </summary>
 		public IWizard Wizard { get; set; }
 
 		/// <summary>
-		/// 
+		/// Constructor which takes an IWizard, as it's required
 		/// </summary>
 		/// <param name="wizard"></param>
 		public WizardProgressViewModel(IWizard wizard)
 		{
 			Wizard = wizard;
+			// Retrieve the values from MapApps, if they can be found
+			if (Application.Current.Resources.Contains(MapAppsHighlightBrush))
+			{
+				_progressColorBrush = Application.Current.Resources[MapAppsHighlightBrush] as SolidColorBrush;
+			}
+			if (Application.Current.Resources.Contains(MapAppsAccentColorBrush4))
+			{
+				_disabledColorBrush = Application.Current.Resources[MapAppsAccentColorBrush4] as SolidColorBrush;
+			}
 		}
 	}
 }
