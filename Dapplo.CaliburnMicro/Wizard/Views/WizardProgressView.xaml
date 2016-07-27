@@ -15,7 +15,7 @@
 		<converters:IsProgressedConverter x:Key="IsProgressedConverter"/>
 		<converters:IsLastItemConverter x:Key="IsLastItemConverter"/>
 	</UserControl.Resources>
-	<ItemsControl x:Name="Wizard_WizardScreens">
+	<ItemsControl x:Name="WizardScreensView">
 		<ItemsControl.Template>
 			<ControlTemplate TargetType="{x:Type ItemsControl}">
 				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">

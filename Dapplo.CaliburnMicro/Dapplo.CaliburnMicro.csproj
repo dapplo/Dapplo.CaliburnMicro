@@ -87,6 +87,7 @@
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroBootstrapper.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
+    <Compile Include="Collections\TrulyObservableCollection.cs" />
     <Compile Include="Configuration\ConfigScreen.cs" />
     <Compile Include="Configuration\IConfigScreen.cs" />
     <Compile Include="Configuration\IConfig.cs" />

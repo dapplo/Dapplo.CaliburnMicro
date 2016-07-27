@@ -25,54 +25,38 @@
 
 #region Usings
 
+using System;
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Log.Facade;
-using Dapplo.Utils;
-using MahApps.Metro.IconPacks;
+using Dapplo.CaliburnMicro.Wizard;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
+namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 {
-	/// <summary>
-	/// This will add an extry for the SomeWindow to the context menu
-	/// </summary>
-	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class SomeWindowMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	[Export(typeof(IWizardScreen))]
+	public sealed class WizardStep5ViewModel : WizardScreen<WizardExampleViewModel>
 	{
-		private static readonly LogSource Log = new LogSource();
+		private IDisposable _displayNameUpdater;
 
-		[Import]
-		public IWindowManager WindowManager { get; set; }
-
-		[Import]
-		public WindowWithMenuViewModel WindowWithMenuViewModel { get; set; }
-
-		[Import]
-		private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-		public void OnImportsSatisfied()
+		public WizardStep5ViewModel()
 		{
-			UiContext.RunOn(() =>
-			{
-				Icon = new PackIconMaterial
-				{
-					Kind = PackIconMaterialKind.ViewList
-				};
-				// automatically update the DisplayName
-				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.SomeWindow));
-			});
+			Order = 5;
 		}
 
-		public override void Click(IMenuItem clickedItem)
+		[Import]
+		private IWizardTranslations WizardTranslations { get; set; }
+
+		public override void Initialize()
 		{
-			Log.Debug().WriteLine("SomeWindow");
-			WindowManager.ShowWindow(WindowWithMenuViewModel);
+			// automatically update the DisplayName
+			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep5));
+		}
+
+		public override void Terminate()
+		{
+			_displayNameUpdater?.Dispose();
 		}
 	}
 }

@@ -31,6 +31,7 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Utils;
 using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 
 #endregion
 
@@ -53,9 +54,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
-				Icon = new PackIconEntypo
+				Icon = new PackIconMaterial
 				{
-					Kind = PackIconEntypoKind.Save
+					Kind = PackIconMaterialKind.ContentSave
 				};
 			});
 		}

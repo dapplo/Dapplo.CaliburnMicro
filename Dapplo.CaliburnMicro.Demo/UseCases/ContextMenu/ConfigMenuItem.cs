@@ -33,7 +33,7 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
-using MahApps.Metro.Controls;
+using MahApps.Metro.IconPacks;
 
 #endregion
 
@@ -60,9 +60,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			UiContext.RunOn(() =>
 			{
-				Icon = new PackIconModern
+				Icon = new PackIconMaterial
 				{
-					Kind = PackIconModernKind.Settings
+					Kind = PackIconMaterialKind.Settings
 				};
 				// automatically update the DisplayName
 				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Configure));

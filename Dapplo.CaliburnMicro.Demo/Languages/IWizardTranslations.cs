@@ -44,5 +44,6 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 		string TitleStep2 { get; }
 		string TitleStep3 { get; }
 		string TitleStep4 { get; }
+		string TitleStep5 { get; }
 	}
 }

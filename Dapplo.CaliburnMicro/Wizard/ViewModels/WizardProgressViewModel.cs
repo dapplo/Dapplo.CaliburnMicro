@@ -23,9 +23,12 @@
 
 #endregion
 
+using System;
 using System.Windows.Media;
 using Caliburn.Micro;
 using System.Windows;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 {
@@ -74,6 +77,11 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 		}
 
 		/// <summary>
+		/// A sorted view on the WizardScreens
+		/// </summary>
+		public ICollectionView WizardScreensView { get; set; }
+
+		/// <summary>
 		/// The IWizard
 		/// </summary>
 		public IWizard Wizard { get; set; }
@@ -85,6 +93,10 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 		public WizardProgressViewModel(IWizard wizard)
 		{
 			Wizard = wizard;
+			if (Wizard.WizardScreens == null)
+			{
+				throw new ArgumentNullException(nameof(wizard.WizardScreens));
+			}
 			// Retrieve the values from MapApps, if they can be found
 			if (Application.Current.Resources.Contains(MapAppsHighlightBrush))
 			{
@@ -94,6 +106,17 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 			{
 				_disabledColorBrush = Application.Current.Resources[MapAppsAccentColorBrush4] as SolidColorBrush;
 			}
+
+			// Make sure the view is created via the dispatcher
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				WizardScreensView = CollectionViewSource.GetDefaultView(wizard.WizardScreens);
+				WizardScreensView.Filter = o =>
+				{
+					IWizardScreen wizardScreen = o as IWizardScreen;
+					return wizardScreen?.IsVisible == true;
+				};
+			});
 		}
 	}
 }

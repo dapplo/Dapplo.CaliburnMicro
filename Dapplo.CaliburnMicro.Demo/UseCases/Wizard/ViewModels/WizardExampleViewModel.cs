@@ -26,12 +26,14 @@
 #region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.CaliburnMicro.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Collections;
 
 #endregion
 
@@ -66,11 +68,11 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 
 		public void OnImportsSatisfied()
 		{
-			WizardProgress = new WizardProgressViewModel(this);
 			// automatically update the DisplayName
 			this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.Title));
-			// Set the WizardScreens by ordering them
-			WizardScreens = WizardItems.OrderBy(x => x.Order);
+			// Set the WizardScreens as TrulyObservableCollection (needed for the WizardProgressViewModel) and by ordering them
+			WizardScreens = new TrulyObservableCollection<IWizardScreen>(WizardItems.OrderBy(x => x.Order));
+			WizardProgress = new WizardProgressViewModel(this);
 		}
 
 		protected override void OnActivate()

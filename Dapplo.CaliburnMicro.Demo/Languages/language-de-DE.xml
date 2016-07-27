@@ -45,5 +45,6 @@
 		<resource name="title_step2">Schritt 2</resource>
 		<resource name="title_step3">Schritt 3</resource>
 		<resource name="title_step4">Schritt 4</resource>
+		<resource name="title_step5">Schritt 5</resource>
 	</resources>
 </language>

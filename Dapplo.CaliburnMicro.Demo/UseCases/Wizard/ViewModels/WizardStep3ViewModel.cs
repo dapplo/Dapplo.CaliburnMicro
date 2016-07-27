@@ -52,6 +52,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		{
 			// automatically update the DisplayName
 			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep3));
+			IsVisible = false;
 		}
 
 		public override void Terminate()

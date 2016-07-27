@@ -30,8 +30,8 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Utils;
-using MahApps.Metro.Controls;
 using System.Windows;
+using MahApps.Metro.IconPacks;
 
 #endregion
 
