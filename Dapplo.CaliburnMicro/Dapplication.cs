@@ -30,6 +30,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
@@ -84,7 +85,10 @@ namespace Dapplo.CaliburnMicro
 		/// <summary>
 		///     Allows access to the Dapplo.Addons.ApplicationBootstrapper
 		/// </summary>
-		public ApplicationBootstrapper Bootstrapper { get; set; }
+		public IBootstrapper Bootstrapper
+		{
+			get { return _bootstrapper; }
+		}
 
 		/// <summary>
 		///     This is called when the application is alreay running
