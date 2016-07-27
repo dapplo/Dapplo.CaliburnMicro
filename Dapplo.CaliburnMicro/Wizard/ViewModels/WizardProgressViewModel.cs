@@ -28,6 +28,7 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using System.Windows;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Data;
 
 namespace Dapplo.CaliburnMicro.Wizard.ViewModels
@@ -87,10 +88,66 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 		public IWizard Wizard { get; set; }
 
 		/// <summary>
+		/// Design-Mode contructor
+		/// </summary>
+		public WizardProgressViewModel()
+		{
+			if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+			{
+				throw new InvalidOperationException("Should only be used in design mode.");
+			}
+			//in Design mode
+			var wizard = new Wizard<IWizardScreen>
+			{
+				DisplayName = "Test",
+			};
+			wizard.WizardScreens = new[]
+			{
+				new WizardScreen<IWizard>
+				{
+					DisplayName = "Step 1",
+					ParentWizard = Wizard
+				},
+				new WizardScreen<IWizard>
+				{
+					DisplayName = "Step 2",
+					ParentWizard = Wizard
+				},
+				new WizardScreen<IWizard>
+				{
+					DisplayName = "Step 3",
+					ParentWizard = Wizard
+				},
+				new WizardScreen<IWizard>
+				{
+					DisplayName = "Step 4",
+					ParentWizard = Wizard
+				},
+				new WizardScreen<IWizard>
+				{
+					DisplayName = "Step 5",
+					ParentWizard = Wizard
+				}
+			};
+			Initialize(wizard);
+			Wizard.Initialize();
+			Wizard.CurrentWizardScreen = Wizard.WizardScreens.Skip(2).First();
+		}
+
+		/// <summary>
 		/// Constructor which takes an IWizard, as it's required
 		/// </summary>
 		/// <param name="wizard"></param>
 		public WizardProgressViewModel(IWizard wizard)
+		{
+			Initialize(wizard);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wizard"></param>
+		private void Initialize(IWizard wizard)
 		{
 			Wizard = wizard;
 			if (Wizard.WizardScreens == null)

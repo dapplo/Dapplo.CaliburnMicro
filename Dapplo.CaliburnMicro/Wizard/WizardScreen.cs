@@ -34,7 +34,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 	/// <summary>
 	///     A very simple implementation of IWizardScreen
 	/// </summary>
-	public abstract class WizardScreen<TWizard>: Screen, IWizardScreen<TWizard> where TWizard : class, IWizard
+	public class WizardScreen<TWizard>: Screen, IWizardScreen<TWizard> where TWizard : class, IWizard
 	{
 		private bool _isEnabled = true;
 		private bool _isVisible = true;

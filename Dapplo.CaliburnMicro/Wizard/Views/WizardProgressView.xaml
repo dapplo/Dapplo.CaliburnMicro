@@ -4,8 +4,9 @@
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Wizard.Converters"
-			mc:Ignorable="d" 
-			d:DesignHeight="300" d:DesignWidth="300">
+			xmlns:viewModels="clr-namespace:Dapplo.CaliburnMicro.Wizard.ViewModels"
+			mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WizardProgressViewModel,IsDesignTimeCreatable=True}"
+			d:DesignHeight="200" d:DesignWidth="500">
 	<UserControl.Resources>
 		<LinearGradientBrush x:Key="WizardBarBrush" StartPoint="0.5,0.0" EndPoint="0.5,1.0">
 			<GradientStop Color="#FFE4E4E4" Offset="0.25"/>
@@ -15,7 +16,7 @@
 		<converters:IsProgressedConverter x:Key="IsProgressedConverter"/>
 		<converters:IsLastItemConverter x:Key="IsLastItemConverter"/>
 	</UserControl.Resources>
-	<ItemsControl x:Name="WizardScreensView">
+	<ItemsControl x:Name="WizardScreensView" ItemsSource="{Binding WizardScreensView}">
 		<ItemsControl.Template>
 			<ControlTemplate TargetType="{x:Type ItemsControl}">
 				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
@@ -75,7 +76,7 @@
 												<Ellipse.Visibility>
 													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
 														<Binding RelativeSource="{RelativeSource TemplatedParent}"/>
-														<Binding  Path="ParentWizard.Progress"/>
+														<Binding Path="ParentWizard.Progress"/>
 													</MultiBinding>
 												</Ellipse.Visibility>
 											</Ellipse>

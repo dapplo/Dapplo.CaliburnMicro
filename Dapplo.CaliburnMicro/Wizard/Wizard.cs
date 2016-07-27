@@ -38,7 +38,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 	/// <summary>
 	///     This implements a Caliburn-Micro wizard
 	/// </summary>
-	public abstract class Wizard<TWizardScreen> : Conductor<TWizardScreen>.Collection.OneActive, IWizard<TWizardScreen>
+	public class Wizard<TWizardScreen> : Conductor<TWizardScreen>.Collection.OneActive, IWizard<TWizardScreen>
 		where TWizardScreen : class, IWizardScreen
 	{
 		// ReSharper disable once StaticMemberInGenericType
