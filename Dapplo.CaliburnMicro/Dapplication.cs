@@ -85,10 +85,7 @@ namespace Dapplo.CaliburnMicro
 		/// <summary>
 		///     Allows access to the Dapplo.Addons.ApplicationBootstrapper
 		/// </summary>
-		public IBootstrapper Bootstrapper
-		{
-			get { return _bootstrapper; }
-		}
+		public IBootstrapper Bootstrapper => _bootstrapper;
 
 		/// <summary>
 		///     This is called when the application is alreay running
@@ -219,7 +216,7 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		///     Specifies if an UnhandledTaskException is logged and
+		///     Specifies if an UnhandledTaskException is logged and processed
 		/// </summary>
 		public bool ObserveUnhandledTaskException { get; set; } = true;
 
@@ -243,7 +240,7 @@ namespace Dapplo.CaliburnMicro
 		protected virtual void HandleTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
 		{
 			Log.Error().WriteLine(eventArgs.Exception, "Exception in Task");
-			if (OnUnhandledTaskException != null)
+			if (ObserveUnhandledTaskException && OnUnhandledTaskException != null)
 			{
 				// Make sure this doesn't cause any additional exceptions
 				try
