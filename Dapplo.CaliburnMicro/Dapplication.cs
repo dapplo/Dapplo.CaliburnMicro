@@ -34,6 +34,7 @@ using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
+using Dapplo.Utils.Resolving;
 
 #endregion
 
@@ -98,13 +99,21 @@ namespace Dapplo.CaliburnMicro
 		public Action<Exception> OnUnhandledException { get; set; }
 
 		/// <summary>
-		///     Add the assemblies (with parts) found in the specified directory
+		/// Add the specified directory to have the bootstrapper look
 		/// </summary>
-		/// <param name="directory">Directory to scan</param>
-		/// <param name="pattern">Pattern to use for the scan, default is "*.dll"</param>
-		public void Add(string directory, string pattern = "*.dll")
+		/// <param name="directory">string with the directory</param>
+		public void AddScanDirectory(string directory)
 		{
-			_bootstrapper.Add(directory, pattern);
+			AssemblyResolver.AddDirectory(directory);
+		}
+
+		/// <summary>
+		/// Add the assembly with the specified name
+		/// </summary>
+		/// <param name="assemblyName">string with the assembly name</param>
+		public void Add(string assemblyName)
+		{
+			_bootstrapper.Add(assemblyName);
 		}
 
 		/// <summary>

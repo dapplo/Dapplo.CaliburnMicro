@@ -43,6 +43,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	public class WizardExampleViewModel : Wizard<IWizardScreen>, IPartImportsSatisfiedNotification
 	{
 		private bool _isStep2Enabled = false;
+		private bool _isStep3Visible = false;
 
 		[ImportMany]
 		private IEnumerable<IWizardScreen> WizardItems { get; set; }
@@ -63,6 +64,15 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			{
 				_isStep2Enabled = value;
 				NotifyOfPropertyChange(nameof(IsStep2Enabled));
+			}
+		}
+		public bool IsStep3Visible
+		{
+			get { return _isStep3Visible; }
+			set
+			{
+				_isStep3Visible = value;
+				NotifyOfPropertyChange(nameof(IsStep3Visible));
 			}
 		}
 

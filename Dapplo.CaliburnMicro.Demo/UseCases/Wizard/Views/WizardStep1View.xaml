@@ -7,5 +7,6 @@
 	<StackPanel>
 		<Label Content="This is step 1"/>
 		<CheckBox x:Name="ParentWizard_IsStep2Enabled" Content="{Binding WizardTranslations.TitleStep2}"/>
+		<CheckBox x:Name="ParentWizard_IsStep3Visible" Content="{Binding WizardTranslations.TitleStep3}"/>
 	</StackPanel>
 </UserControl>
