@@ -65,18 +65,19 @@ namespace Dapplo.CaliburnMicro.Demo
 			{
 				ShutdownMode = ShutdownMode.OnExplicitShutdown
 			};
-			application.Add("Dapplo.CaliburnMicro");
-			// Comment this if no TrayIcons should be used
-			application.Add("Dapplo.CaliburnMicro.NotifyIconWpf");
-			// Comment this to use the default window manager
-			application.Add("Dapplo.CaliburnMicro.Metro");
+
+			// Add the directory where scanning takes place
 #if DEBUG
 			application.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Debug");
 #else
 			application.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Release");
 #endif
-			application.Add("Dapplo.CaliburnMicro.Demo.Addon");
-			//			application.Add(typeof(Startup).Assembly);
+
+			// Load the assemblies Dapplo.CaliburnMicro, Dapplo.CaliburnMicro.NotifyIconWpf, Dapplo.CaliburnMicro.Metro
+			application.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
+
+			// Load the demo addon
+			application.FindAndLoadAssembly("Dapplo.CaliburnMicro.Demo.Addon");
 
 			application.Run();
 		}

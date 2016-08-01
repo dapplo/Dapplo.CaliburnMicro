@@ -108,12 +108,22 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		/// Add the assembly with the specified name
+		/// Load the assembly with the specified name
 		/// </summary>
 		/// <param name="assemblyName">string with the assembly name</param>
-		public void Add(string assemblyName)
+		public void FindAndLoadAssembly(string assemblyName)
 		{
-			_bootstrapper.Add(assemblyName);
+			_bootstrapper.FindAndLoadAssembly(assemblyName);
+		}
+
+		/// <summary>
+		/// Load the assemblies matching the pattern
+		/// </summary>
+		/// <param name="pattern">string with the pattern</param>
+		/// <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
+		public void FindAndLoadAssemblies(string pattern, bool loadEmbedded = true)
+		{
+			_bootstrapper.FindAndLoadAssemblies(pattern, loadEmbedded);
 		}
 
 		/// <summary>
