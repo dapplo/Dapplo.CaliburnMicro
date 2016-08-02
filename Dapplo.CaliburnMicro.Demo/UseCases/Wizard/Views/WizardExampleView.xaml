@@ -5,9 +5,6 @@
 				xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 				Icon="/Resources/icon.ico"
 				Width="400" Height="400">
-	<mah:MetroWindow.Resources>
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-	</mah:MetroWindow.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="60" />

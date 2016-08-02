@@ -32,7 +32,6 @@ using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Utils;
-using MahApps.Metro.Controls;
 using MahApps.Metro.IconPacks;
 
 #endregion

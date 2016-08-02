@@ -37,6 +37,7 @@ using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
+using Dapplo.Utils.Resolving;
 
 #endregion
 
@@ -186,7 +187,7 @@ namespace Dapplo.CaliburnMicro
 		/// <returns></returns>
 		protected override IEnumerable<Assembly> SelectAssemblies()
 		{
-			return ServiceRepository.KnownAssemblies;
+			return AssemblyResolver.AssemblyCache;
 		}
 	}
 }

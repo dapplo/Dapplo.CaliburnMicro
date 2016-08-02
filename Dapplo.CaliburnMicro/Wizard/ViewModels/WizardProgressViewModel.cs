@@ -100,33 +100,33 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 			var wizard = new Wizard<IWizardScreen>
 			{
 				DisplayName = "Test",
-			};
-			wizard.WizardScreens = new[]
-			{
-				new WizardScreen<IWizard>
+				WizardScreens = new[]
 				{
-					DisplayName = "Step 1",
-					ParentWizard = Wizard
-				},
-				new WizardScreen<IWizard>
-				{
-					DisplayName = "Step 2",
-					ParentWizard = Wizard
-				},
-				new WizardScreen<IWizard>
-				{
-					DisplayName = "Step 3",
-					ParentWizard = Wizard
-				},
-				new WizardScreen<IWizard>
-				{
-					DisplayName = "Step 4",
-					ParentWizard = Wizard
-				},
-				new WizardScreen<IWizard>
-				{
-					DisplayName = "Step 5",
-					ParentWizard = Wizard
+					new WizardScreen<IWizard>
+					{
+						DisplayName = "Step 1",
+						ParentWizard = Wizard
+					},
+					new WizardScreen<IWizard>
+					{
+						DisplayName = "Step 2",
+						ParentWizard = Wizard
+					},
+					new WizardScreen<IWizard>
+					{
+						DisplayName = "Step 3",
+						ParentWizard = Wizard
+					},
+					new WizardScreen<IWizard>
+					{
+						DisplayName = "Step 4",
+						ParentWizard = Wizard
+					},
+					new WizardScreen<IWizard>
+					{
+						DisplayName = "Step 5",
+						ParentWizard = Wizard
+					}
 				}
 			};
 			Initialize(wizard);

@@ -26,7 +26,6 @@
 #region Usings
 
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -34,7 +33,6 @@ using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.Log.Facade;
 using Dapplo.Utils;
-using Dapplo.Utils.Resolving;
 
 #endregion
 
@@ -60,8 +58,17 @@ namespace Dapplo.CaliburnMicro
 		///     bootstapper will not  be able to "bootstrap".
 		/// </param>
 		/// <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
-		public Dapplication(string applicationName, string mutexId = null, bool global = false)
+		public Dapplication(string applicationName, string mutexId = null, bool global = false) : this(new ApplicationBootstrapper(applicationName, mutexId, global))
 		{
+		}
+
+		/// <summary>
+		///     Create the Dapplication for the ApplicationBootstrapper
+		/// </summary>
+		/// <param name="applicationBootstrapper">a configured ApplicationBootstrapper</param>
+		public Dapplication(ApplicationBootstrapper applicationBootstrapper)
+		{
+			_bootstrapper = applicationBootstrapper;
 			Current = this;
 			// Hook unhandled exceptions in the Dispatcher
 			DispatcherUnhandledException += HandleDispatcherException;
@@ -72,10 +79,9 @@ namespace Dapplo.CaliburnMicro
 			// Hook unhandled exceptions in tasks
 			TaskScheduler.UnobservedTaskException += HandleTaskException;
 
-			_bootstrapper = new ApplicationBootstrapper(applicationName, mutexId, global);
 
 			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown
-			Dispatcher.CurrentDispatcher.ShutdownStarted += async (s,e) => await StopBootstrapperAsync().ConfigureAwait(false);
+			Dispatcher.CurrentDispatcher.ShutdownStarted += async (s, e) => await StopBootstrapperAsync().ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -97,43 +103,6 @@ namespace Dapplo.CaliburnMicro
 		///     This is called when the application is alreay running
 		/// </summary>
 		public Action<Exception> OnUnhandledException { get; set; }
-
-		/// <summary>
-		/// Add the specified directory to have the bootstrapper look
-		/// </summary>
-		/// <param name="directory">string with the directory</param>
-		public void AddScanDirectory(string directory)
-		{
-			AssemblyResolver.AddDirectory(directory);
-		}
-
-		/// <summary>
-		/// Load the assembly with the specified name
-		/// </summary>
-		/// <param name="assemblyName">string with the assembly name</param>
-		public void FindAndLoadAssembly(string assemblyName)
-		{
-			_bootstrapper.FindAndLoadAssembly(assemblyName);
-		}
-
-		/// <summary>
-		/// Load the assemblies matching the pattern
-		/// </summary>
-		/// <param name="pattern">string with the pattern</param>
-		/// <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
-		public void FindAndLoadAssemblies(string pattern, bool loadEmbedded = true)
-		{
-			_bootstrapper.FindAndLoadAssemblies(pattern, loadEmbedded);
-		}
-
-		/// <summary>
-		///     Add an assembly to the bootstrapper
-		/// </summary>
-		/// <param name="assembly">Assembly to add</param>
-		public void Add(Assembly assembly)
-		{
-			_bootstrapper.Add(assembly);
-		}
 
 		/// <summary>
 		///     Helper method to stop the bootstrapper, if needed
