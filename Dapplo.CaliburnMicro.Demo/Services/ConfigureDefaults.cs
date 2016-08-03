@@ -25,28 +25,32 @@
 
 #region Usings
 
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.Threading;
+using System.Threading.Tasks;
+using Caliburn.Micro;
+using Dapplo.Addons;
+using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.Config.Ini;
-using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Models
+namespace Dapplo.CaliburnMicro.Demo.Services
 {
-	[IniSection("Demo")]
-	public interface IDemoConfiguration : IIniSection, INotifyPropertyChanged, IDefaultValue, ITransactionalProperties
+	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper + 1)]
+	public class ConfigureDefaults : IStartupAction
 	{
-		IList<string> Items { get; set; }
+		[Import(typeof(IWindowManager))]
+		private MetroWindowManager MetroWindowManager { get; set; }
 
-		[DefaultValue("en-US")]
-		string Language { get; set; }
+		[Import]
+		public IDemoConfiguration DemoConfiguration { get; set; }
 
-		[DefaultValue(Themes.BaseLight)]
-		Themes Theme { get; set; }
-
-		[DefaultValue(ThemeAccents.Orange)]
-		ThemeAccents ThemeAccent { get; set; }
+		public Task StartAsync(CancellationToken token = new CancellationToken())
+		{
+			MetroWindowManager.ChangeTheme(DemoConfiguration.Theme);
+			MetroWindowManager.ChangeThemeAccent(DemoConfiguration.ThemeAccent);
+			return Task.FromResult(true);
+		}
 	}
 }

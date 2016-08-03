@@ -24,7 +24,6 @@
 using System;
 using System.ComponentModel;
 using Caliburn.Micro;
-using Dapplo.Log.Facade;
 using Dapplo.Utils.Events;
 using Dapplo.Utils.Extensions;
 
@@ -37,8 +36,6 @@ namespace Dapplo.CaliburnMicro.Extensions
 	/// </summary>
 	public static class HaveDisplayNameExtensions
 	{
-		private static readonly LogSource Log = new LogSource();
-
 		/// <summary>
 		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
 		/// </summary>

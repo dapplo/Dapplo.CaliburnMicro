@@ -56,11 +56,15 @@ namespace Dapplo.CaliburnMicro.Metro
 			"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl"
 		};
 
-		[Import(AllowDefault = true)]
-		private ThemeAccents ThemeAccent { get; set; }
+		/// <summary>
+		/// The current theme accent
+		/// </summary>
+		public ThemeAccents ThemeAccent { get; private set; }
 
-		[Import(AllowDefault = true)]
-		private Themes Theme { get; set; }
+		/// <summary>
+		/// The current theme
+		/// </summary>
+		public Themes Theme { get; private set; }
 
 		/// <summary>
 		///     Export the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
@@ -98,11 +102,14 @@ namespace Dapplo.CaliburnMicro.Metro
 		/// <param name="source">Uri, e.g. /Resources/Icons.xaml or </param>
 		public void AddResourceDictionary(Uri source)
 		{
-			var resourceDictionary = new ResourceDictionary
+			if (Application.Current.Resources.MergedDictionaries.All(x => x.Source != source))
 			{
-				Source = source
-			};
-			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+				var resourceDictionary = new ResourceDictionary
+				{
+					Source = source
+				};
+				Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+			}
 		}
 
 		/// <summary>
@@ -206,6 +213,28 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
+		/// Change the current theme
+		/// </summary>
+		/// <param name="theme"></param>
+		public void ChangeTheme(Themes theme)
+		{
+			RemoveMahappsStyle($"Accents/{Theme}");
+			Theme = theme;
+			AddMahappsStyle($"Accents/{Theme}");
+		}
+
+		/// <summary>
+		/// Change the current theme accent
+		/// </summary>
+		/// <param name="themeAccent">ThemeAccents</param>
+		public void ChangeThemeAccent(ThemeAccents themeAccent)
+		{
+			RemoveMahappsStyle($"Accents/{ThemeAccent}");
+			ThemeAccent = themeAccent;
+			AddMahappsStyle($"Accents/{ThemeAccent}");
+		}
+
+		/// <summary>
 		/// Called when a part's imports have been satisfied and it is safe to use.
 		/// </summary>
 		public void OnImportsSatisfied()
@@ -214,6 +243,10 @@ namespace Dapplo.CaliburnMicro.Metro
 			{
 				AddMahappsStyle(style);
 			}
+			// Just in case, remove them before adding
+			RemoveMahappsStyle($"Accents/{Theme}");
+			RemoveMahappsStyle($"Accents/{ThemeAccent}");
+
 			if (ThemeAccent == ThemeAccents.Default)
 			{
 				ThemeAccent = ThemeAccents.Blue;

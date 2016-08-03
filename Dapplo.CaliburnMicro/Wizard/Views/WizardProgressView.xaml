@@ -5,6 +5,7 @@
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Wizard.Converters"
 			xmlns:viewModels="clr-namespace:Dapplo.CaliburnMicro.Wizard.ViewModels"
+			xmlns:cal="http://www.caliburnproject.org"
 			mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WizardProgressViewModel,IsDesignTimeCreatable=True}"
 			d:DesignHeight="200" d:DesignWidth="500">
 	<UserControl.Resources>
@@ -70,9 +71,9 @@
 											<!-- The path part which is right from the dots -->
 											<Path Grid.Column="1" Name="rightPath" Style="{StaticResource OuterPath}"/>
 											<!-- Outside of the dots -->
-											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="20" Width="20" Fill="{StaticResource WizardBarBrush}"/>
+											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="20" Width="20" Fill="{StaticResource WizardBarBrush}" cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]"/>
 											<!-- Inside of the dots -->
-											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14" Width="14" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ProgressColorBrush}">
+											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14" Width="14" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ProgressColorBrush}" cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
 												<Ellipse.Visibility>
 													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
 														<Binding RelativeSource="{RelativeSource TemplatedParent}"/>
@@ -123,7 +124,7 @@
 							</ItemsControl.ItemsPanel>
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" Margin="0,5,0,0" >
+									<TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" Margin="0,5,0,0" cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
 										<TextBlock.Style>
 											<Style TargetType="TextBlock">
 												<Style.Triggers>

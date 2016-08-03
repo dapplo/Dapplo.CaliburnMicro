@@ -5,6 +5,7 @@
 		<resource name="ok">Ok</resource>
 		<resource name="cancel">Abbrechen</resource>
 		<resource name="language">Sprache</resource>
+		<resource name="theme">Theme</resource>
 		<resource name="settings">Einstellungen</resource>
 	</resources>
 	<resources prefix="config">

@@ -18,7 +18,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="50" />
+			<RowDefinition Height="30" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="200" />
@@ -42,7 +42,7 @@
 			</TreeView>
 		</StackPanel>
 		<ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0" />
-		<UniformGrid Grid.Column="1" Grid.Row="1">
+		<UniformGrid Grid.Column="1" Grid.Row="1" Rows="1" Columns="2">
 			<Button x:Name="Cancel" Content="{Binding CoreTranslations.Cancel}" />
 			<Button x:Name="Ok" Content="{Binding CoreTranslations.Ok}" />
 		</UniformGrid>

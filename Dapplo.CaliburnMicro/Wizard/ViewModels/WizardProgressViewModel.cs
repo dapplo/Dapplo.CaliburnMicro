@@ -37,13 +37,13 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 	/// A ViewModel to display the progress of a wizard.
 	/// This is based upon the stackoverflow question <a href="http://stackoverflow.com/questions/7691386/implementing-a-wizard-progress-control-in-wpf">here</a>
 	/// </summary>
-	public class WizardProgressViewModel : PropertyChangedBase
+	public class WizardProgressViewModel : Screen
 	{
 		private const string MapAppsHighlightBrush = "HighlightBrush";
 		private const string MapAppsAccentColorBrush4 = "AccentColorBrush4";
-		private Brush _progressColorBrush = SystemColors.ControlTextBrush;
+		private Brush _progressColorBrush;
 
-		private Brush _disabledColorBrush = Brushes.Gray;
+		private Brush _disabledColorBrush;
 
 		/// <summary>
 		/// Brush for the progress line and dots
@@ -88,7 +88,19 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 		public IWizard Wizard { get; set; }
 
 		/// <summary>
-		/// Design-Mode contructor
+		/// Makes the clicked item active, if this is allowed
+		/// </summary>
+		/// <param name="wizardScreen"></param>
+		public void JumpTo(IWizardScreen wizardScreen)
+		{
+			if (wizardScreen.IsEnabled && wizardScreen.IsVisible && !wizardScreen.IsActive)
+			{
+				Wizard.CurrentWizardScreen = wizardScreen;
+			}
+		}
+
+		/// <summary>
+		/// Design-Mode contructor, will create a design time IWizard
 		/// </summary>
 		public WizardProgressViewModel()
 		{
@@ -96,7 +108,7 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 			{
 				throw new InvalidOperationException("Should only be used in design mode.");
 			}
-			//in Design mode
+			// Only for Design mode
 			var wizard = new Wizard<IWizardScreen>
 			{
 				DisplayName = "Test",
@@ -137,31 +149,32 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
 		/// <summary>
 		/// Constructor which takes an IWizard, as it's required
 		/// </summary>
-		/// <param name="wizard"></param>
+		/// <param name="wizard">IWizard</param>
 		public WizardProgressViewModel(IWizard wizard)
 		{
 			Initialize(wizard);
 		}
 
+		/// <summary>Called when a view is attached.</summary>
+		/// <param name="view">The view.</param>
+		/// <param name="context">The context in which the view appears.</param>
+		protected override void OnViewAttached(object view, object context)
+		{
+			// Retrieve the values from MapApps, if they can be found
+			ProgressColorBrush = Application.Current.TryFindResource(MapAppsHighlightBrush) as SolidColorBrush ?? SystemColors.ControlTextBrush;
+			DisabledColorBrush = Application.Current.TryFindResource(MapAppsAccentColorBrush4) as SolidColorBrush ?? Brushes.Gray;
+		}
+
 		/// <summary>
-		/// 
+		/// Initialize this with the information in the IWizard
 		/// </summary>
-		/// <param name="wizard"></param>
+		/// <param name="wizard">IWizard</param>
 		private void Initialize(IWizard wizard)
 		{
 			Wizard = wizard;
 			if (Wizard.WizardScreens == null)
 			{
 				throw new ArgumentNullException(nameof(wizard.WizardScreens));
-			}
-			// Retrieve the values from MapApps, if they can be found
-			if (Application.Current.Resources.Contains(MapAppsHighlightBrush))
-			{
-				_progressColorBrush = Application.Current.Resources[MapAppsHighlightBrush] as SolidColorBrush;
-			}
-			if (Application.Current.Resources.Contains(MapAppsAccentColorBrush4))
-			{
-				_disabledColorBrush = Application.Current.Resources[MapAppsAccentColorBrush4] as SolidColorBrush;
 			}
 
 			// Make sure the view is created via the dispatcher
