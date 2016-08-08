@@ -1,18 +1,17 @@
-﻿<ni:TrayIcon x:Class="Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.Views.TrayIconView"
+﻿<notifyIconWpf:TrayIcon x:Class="Dapplo.CaliburnMicro.NotifyIconWpf.Views.TrayIconView"
 			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:cal="http://www.caliburnproject.org"
-			xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf"
-			IconSource="/Resources/icon.ico" ToolTipText="Demo"
-			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action ShowSomething()]">
-	<ni:TrayIcon.Resources>
+			xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
+			cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]">
+	<notifyIconWpf:TrayIcon.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
 		<ControlTemplate x:Key="MenuSeparatorTemplate">
 			<Separator />
 		</ControlTemplate>
-	</ni:TrayIcon.Resources>
-	<ni:TrayIcon.ContextMenu>
-		<ContextMenu ItemsSource="{Binding Items}">
+	</notifyIconWpf:TrayIcon.Resources>
+	<notifyIconWpf:TrayIcon.ContextMenu>
+		<ContextMenu ItemsSource="{Binding TrayMenuItems}">
 			<ContextMenu.Resources>
 				<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
 					<Setter Property="Tag" Value="{Binding}"/>
@@ -31,5 +30,5 @@
 				</Style>
 			</ContextMenu.Resources>
 		</ContextMenu>
-	</ni:TrayIcon.ContextMenu>
-</ni:TrayIcon>
+	</notifyIconWpf:TrayIcon.ContextMenu>
+</notifyIconWpf:TrayIcon>

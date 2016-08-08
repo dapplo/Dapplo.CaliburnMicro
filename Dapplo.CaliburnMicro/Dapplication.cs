@@ -79,7 +79,6 @@ namespace Dapplo.CaliburnMicro
 			// Hook unhandled exceptions in tasks
 			TaskScheduler.UnobservedTaskException += HandleTaskException;
 
-
 			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown
 			Dispatcher.CurrentDispatcher.ShutdownStarted += async (s, e) => await StopBootstrapperAsync().ConfigureAwait(false);
 		}

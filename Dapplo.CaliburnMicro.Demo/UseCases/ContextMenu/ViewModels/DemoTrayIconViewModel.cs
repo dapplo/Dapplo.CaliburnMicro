@@ -26,39 +26,31 @@
 #region Usings
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Media;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
-using Dapplo.CaliburnMicro.Tree;
+using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using Dapplo.Log.Facade;
+using MahApps.Metro.IconPacks;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 {
 	[Export(typeof(ITrayIconViewModel))]
-	public class TrayIconViewModel : Screen, ITrayIconViewModel, IHandle<string>, IPartImportsSatisfiedNotification
+	public class DemoTrayIconViewModel : TrayIconViewModel, IHandle<string>, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 
 		[ImportMany("contextmenu", typeof(IMenuItem))]
 		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
 
-		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
-
-		[Import]
-		public IContextMenuTranslations ContextMenuTranslations { get; set; }
-
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
-
-		[Import]
-		public ITrayIconManager TrayIconManager { get; set; }
 
 		[Import]
 		public IWindowManager WindowManager { get; set; }
@@ -77,32 +69,28 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 				IsSeparator = true,
 				Id = "Y_Separator"
 			});
-			foreach (var contextMenuItem in items.CreateTree())
-			{
-				Items.Add(contextMenuItem);
-			}
-		}
+			ConfigureMenuItems(items);
 
-		public bool CanShowSomething()
-		{
-			return true;
 		}
 
 		protected override void OnActivate()
 		{
 			base.OnActivate();
-			var trayIcon = TrayIconManager.GetTrayIconFor(this);
-			trayIcon.Show();
+
+			SetIcon(new PackIconMaterial
+			{
+				Kind = PackIconMaterialKind.Deskphone,
+				Background = Brushes.White,
+				Foreground = Brushes.Orange,
+			});
+			Show();
 			EventAggregator.Subscribe(this);
 		}
 
-		public void ShowSomething()
+		public override void Click() 
 		{
 			Log.Debug().WriteLine("ShowSomething");
-			// Lookup my tray icon
-			var trayIcon = TrayIconManager.GetTrayIconFor(this);
-
-			trayIcon.ShowBalloonTip<NotificationExampleViewModel>();
+			TrayIcon.ShowBalloonTip<NotificationExampleViewModel>();
 		}
 	}
 }

@@ -57,12 +57,12 @@ namespace Dapplo.CaliburnMicro.Metro
 		};
 
 		/// <summary>
-		/// The current theme accent
+		///     The current theme accent
 		/// </summary>
 		public ThemeAccents ThemeAccent { get; private set; }
 
 		/// <summary>
-		/// The current theme
+		///     The current theme
 		/// </summary>
 		public Themes Theme { get; private set; }
 
@@ -81,6 +81,32 @@ namespace Dapplo.CaliburnMicro.Metro
 		///     Implement this to make specific configuration changes to your owned (dialog) window.
 		/// </summary>
 		public Action<MetroWindow> OnConfigureOwnedWindow { get; set; }
+
+		/// <summary>
+		///     Called when a part's imports have been satisfied and it is safe to use.
+		/// </summary>
+		public void OnImportsSatisfied()
+		{
+			foreach (var style in Styles)
+			{
+				AddMahappsStyle(style);
+			}
+			// Just in case, remove them before adding
+			RemoveMahappsStyle($"Accents/{Theme}");
+			RemoveMahappsStyle($"Accents/{ThemeAccent}");
+
+			if (ThemeAccent == ThemeAccents.Default)
+			{
+				ThemeAccent = ThemeAccents.Blue;
+			}
+			if (Theme == Themes.Default)
+			{
+				Theme = Themes.BaseLight;
+			}
+
+			AddMahappsStyle($"Accents/{ThemeAccent}");
+			AddMahappsStyle($"Accents/{Theme}");
+		}
 
 		/// <summary>
 		///     Add a ResourceDictionary for the specified MahApps style
@@ -213,7 +239,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		/// Change the current theme
+		///     Change the current theme
 		/// </summary>
 		/// <param name="theme"></param>
 		public void ChangeTheme(Themes theme)
@@ -224,7 +250,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		}
 
 		/// <summary>
-		/// Change the current theme accent
+		///     Change the current theme accent
 		/// </summary>
 		/// <param name="themeAccent">ThemeAccents</param>
 		public void ChangeThemeAccent(ThemeAccents themeAccent)
@@ -232,32 +258,6 @@ namespace Dapplo.CaliburnMicro.Metro
 			RemoveMahappsStyle($"Accents/{ThemeAccent}");
 			ThemeAccent = themeAccent;
 			AddMahappsStyle($"Accents/{ThemeAccent}");
-		}
-
-		/// <summary>
-		/// Called when a part's imports have been satisfied and it is safe to use.
-		/// </summary>
-		public void OnImportsSatisfied()
-		{
-			foreach (var style in Styles)
-			{
-				AddMahappsStyle(style);
-			}
-			// Just in case, remove them before adding
-			RemoveMahappsStyle($"Accents/{Theme}");
-			RemoveMahappsStyle($"Accents/{ThemeAccent}");
-
-			if (ThemeAccent == ThemeAccents.Default)
-			{
-				ThemeAccent = ThemeAccents.Blue;
-			}
-			if (Theme == Themes.Default)
-			{
-				Theme = Themes.BaseLight;
-			}
-
-			AddMahappsStyle($"Accents/{ThemeAccent}");
-			AddMahappsStyle($"Accents/{Theme}");
 		}
 	}
 }

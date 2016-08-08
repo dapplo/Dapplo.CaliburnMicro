@@ -52,7 +52,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// </summary>
 		void Show();
 
-
 		/// <summary>
 		///     Show a balloon with title, message without icon
 		/// </summary>

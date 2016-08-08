@@ -107,6 +107,36 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
+		/// Add logic to find the base viewtype if the default locator can't find a view.
+		/// </summary>
+		private void ConfigureViewLocator()
+		{
+			var defaultLocator = ViewLocator.LocateTypeForModelType;
+			ViewLocator.LocateTypeForModelType = (modelType, displayLocation, context) =>
+			{
+				var viewType = defaultLocator(modelType, displayLocation, context);
+				bool initialViewFound = viewType != null;
+
+				if (!initialViewFound)
+				{
+					Log.Verbose().WriteLine("No view for {0}, looking into base types.", modelType);
+					var currentModelType = modelType;
+					while (viewType == null && currentModelType != null && currentModelType != typeof(object))
+					{
+						currentModelType = currentModelType.BaseType;
+						viewType = defaultLocator(currentModelType, displayLocation, context);
+					}
+					if (viewType != null)
+					{
+						Log.Verbose().WriteLine("Found view for {0} in base type {1}, the view is {2}", modelType, currentModelType, viewType);
+					}
+				}
+
+				return viewType;
+			};
+		}
+
+		/// <summary>
 		///     Configure the Dapplo.Addon.Bootstrapper with the AssemblySource.Instance values
 		/// </summary>
 		protected override void Configure()
@@ -115,6 +145,9 @@ namespace Dapplo.CaliburnMicro
 			{
 				ServiceRepository.Add(assembly);
 			}
+
+			ConfigureViewLocator();
+
 			// Test if there is a IWindowManager available, if not use the default
 			var windowManagers = ServiceLocator.GetExports<IWindowManager>();
 			if (!windowManagers.Any())

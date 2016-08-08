@@ -45,7 +45,7 @@ namespace Dapplo.CaliburnMicro.Demo
 		/// <summary>
 		///     Start the application
 		/// </summary>
-		[STAThread, DebuggerNonUserCode]
+		[STAThread]
 		public static void Main()
 		{
 #if DEBUG

@@ -54,8 +54,8 @@
       <HintPath>..\packages\Caliburn.Micro.3.0.1\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.3.77.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.3.77\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.3.78.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.3.78\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Config, Version=0.3.49.0, Culture=neutral, processorArchitecture=MSIL">
@@ -74,8 +74,8 @@
       <HintPath>..\packages\Dapplo.Log.Loggers.0.5.4\lib\net45\Dapplo.Log.Loggers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Utils, Version=0.1.107.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.0.1.107\lib\net45\Dapplo.Utils.dll</HintPath>
+    <Reference Include="Dapplo.Utils, Version=0.1.111.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Utils.0.1.111\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -134,7 +134,7 @@
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\ConfigViewModel.cs" />
-    <Compile Include="UseCases\ContextMenu\ViewModels\TrayIconViewModel.cs" />
+    <Compile Include="UseCases\ContextMenu\ViewModels\DemoTrayIconViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep4ViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep3ViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep2ViewModel.cs" />
@@ -202,10 +202,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UseCases\Configuration\Views\ConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UseCases\ContextMenu\Views\TrayIconView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
