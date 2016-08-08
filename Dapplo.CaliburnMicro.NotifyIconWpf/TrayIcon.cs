@@ -28,6 +28,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Hardcodet.Wpf.TaskbarNotification;
 
@@ -70,8 +71,20 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			var view = ViewLocator.LocateForModel(rootModel, null, null);
 			ViewModelBinder.Bind(rootModel, view, null);
 
-			var p = GetPopupTrayPosition();
+			// TODO: This is a workaround for the popup to be at the wrong location
+			var customPopupPosition = CustomPopupPosition;
+			var frameworkElement = view as FrameworkElement;
+			if (frameworkElement != null)
+			{
+				CustomPopupPosition = () =>
+				{
+					var point = GetPopupTrayPosition();
+					point.Y -= (int)frameworkElement.Height;
+					return point;
+				};
+			}
 			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int) TimeSpan.FromSeconds(4).TotalMilliseconds);
+			CustomPopupPosition = customPopupPosition;
 		}
 
 		/// <summary>
