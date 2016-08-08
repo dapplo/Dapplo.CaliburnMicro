@@ -90,8 +90,11 @@ namespace Dapplo.CaliburnMicro.Menu
 		/// </summary>
 		public virtual Control Icon
 		{
-			get { return _icon; }
-			protected set
+			get
+			{
+				return _icon;
+			}
+			set
 			{
 				_icon = value;
 				NotifyOfPropertyChange(nameof(Icon));

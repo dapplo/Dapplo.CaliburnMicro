@@ -52,7 +52,7 @@ namespace Dapplo.CaliburnMicro.Menu
 		/// <summary>
 		///     The icon for the IMenuItem
 		/// </summary>
-		Control Icon { get; }
+		Control Icon { get; set; }
 
 		/// <summary>
 		///     Is called when the IMenuItem it clicked

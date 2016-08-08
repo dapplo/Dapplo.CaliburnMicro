@@ -27,7 +27,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Windows;
 using Dapplo.Log.Facade;
 using Dapplo.Log.Loggers;
@@ -39,7 +38,6 @@ namespace Dapplo.CaliburnMicro.Demo
 	/// <summary>
 	///     This takes care or starting the Application
 	/// </summary>
-	[Export]
 	public class Startup
 	{
 		/// <summary>
