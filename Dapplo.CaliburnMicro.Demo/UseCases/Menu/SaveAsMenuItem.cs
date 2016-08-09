@@ -40,24 +40,21 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 	/// This will add the File item to menu
 	/// </summary>
 	[Export("menu", typeof(IMenuItem))]
-	public sealed class SaveAsMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class SaveAsMenuItem : MenuItem
 	{
 		[Import]
 		private IMenuTranslations MenuTranslations { get; set; }
 
-		public void OnImportsSatisfied()
+		public override void Initialize()
 		{
 			Id = "A_SaveAs";
 			ParentId = "1_File";
-			Execute.OnUIThread(() =>
+			// automatically update the DisplayName
+			this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
+			Icon = new PackIconMaterial
 			{
-				// automatically update the DisplayName
-				this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
-				Icon = new PackIconMaterial
-				{
-					Kind = PackIconMaterialKind.ContentSave
-				};
-			});
+				Kind = PackIconMaterialKind.ContentSave
+			};
 		}
 
 		public override void Click(IMenuItem clickedItem)

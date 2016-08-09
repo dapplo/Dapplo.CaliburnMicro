@@ -41,7 +41,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry for the wizard to the context menu
 	/// </summary>
 	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WizardMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class WizardMenuItem : MenuItem
 	{
 		[Import]
 		public IWindowManager WindowManager { get; set; }
@@ -52,17 +52,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		public void OnImportsSatisfied()
+		public override void Initialize()
 		{
-			Execute.OnUIThread(() =>
+			// automatically update the DisplayName
+			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));
+			Icon = new PackIconMaterial
 			{
-				// automatically update the DisplayName
-				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));
-				Icon = new PackIconMaterial
-				{
-					Kind = PackIconMaterialKind.Alarm
-				};
-			});
+				Kind = PackIconMaterialKind.Alarm
+			};
 		}
 
 		/// <summary>

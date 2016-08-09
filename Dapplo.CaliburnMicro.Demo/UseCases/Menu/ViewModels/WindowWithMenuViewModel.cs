@@ -42,6 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 	{
 		private readonly Disposables _disposables = new Disposables();
 
+		// ReSharper disable once CollectionNeverQueried.Global
 		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
 		[Import]
@@ -63,26 +64,26 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			_disposables.Add(contextMenuTranslationObservable);
 
 			this.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.SomeWindow));
-			var menuItem = new MenuItem
+			var fileMenuItem = new MenuItem
 			{
 				Id = "1_File"
 			};
-			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.File));
-			items.Add(menuItem);
+			fileMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.File));
+			items.Add(fileMenuItem);
 
-			menuItem = new MenuItem
+			var editMenuItem = new MenuItem
 			{
 				Id = "2_Edit"
 			};
-			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit));
-			items.Add(menuItem);
+			editMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit));
+			items.Add(editMenuItem);
 
-			menuItem = new MenuItem
+			var aboutMenuItem = new MenuItem
 			{
 				Id = "3_About"
 			};
-			menuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About));
-			items.Add(menuItem);
+			aboutMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About));
+			items.Add(aboutMenuItem);
 
 			items.Add(new MenuItem
 			{
@@ -91,15 +92,21 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 				ParentId = "1_File"
 			});
 
-			menuItem = new MenuItem
+			var exitMenuItem = new MenuItem
 			{
-				Id = "Z_Edit",
+				Id = "Z_Exit",
 				ParentId = "1_File",
 				ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
 			};
-			menuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit));
-			items.Add(menuItem);
+			exitMenuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit));
+			items.Add(exitMenuItem);
 
+			// Make sure all items are initialized
+			foreach (var menuItem in items)
+			{
+				menuItem.Initialize();
+			}
+			// Add the root elements to the Items
 			foreach (var item in items.CreateTree())
 			{
 				Items.Add(item);

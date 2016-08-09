@@ -42,7 +42,7 @@ using MahApps.Metro.IconPacks;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 {
 	[Export(typeof(ITrayIconViewModel))]
-	public class DemoTrayIconViewModel : TrayIconViewModel, IHandle<string>, IPartImportsSatisfiedNotification
+	public class DemoTrayIconViewModel : TrayIconViewModel, IHandle<string>
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -61,8 +61,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			trayIcon.ShowBalloonTip("Event", message);
 		}
 
-		public void OnImportsSatisfied()
+		protected override void OnActivate()
 		{
+			base.OnActivate();
+
 			var items = ContextMenuItems.ToList();
 			items.Add(new MenuItem
 			{
@@ -70,12 +72,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 				Id = "Y_Separator"
 			});
 			ConfigureMenuItems(items);
-
-		}
-
-		protected override void OnActivate()
-		{
-			base.OnActivate();
 
 			SetIcon(new PackIconMaterial
 			{

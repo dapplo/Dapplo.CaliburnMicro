@@ -51,11 +51,17 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		/// Call to set the TrayMenuItems
+		/// Call to set the TrayMenuItems, call this from the UI thread!
 		/// </summary>
 		/// <param name="menuItems">IEnumerable with IMenuItem</param>
 		protected void ConfigureMenuItems(IEnumerable<IMenuItem> menuItems)
 		{
+			// Make sure all items are initialized
+			foreach (var menuItem in menuItems)
+			{
+				menuItem.Initialize();
+			}
+
 			foreach (var contextMenuItem in menuItems.CreateTree())
 			{
 				TrayMenuItems.Add(contextMenuItem);

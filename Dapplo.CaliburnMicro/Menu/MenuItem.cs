@@ -55,6 +55,14 @@ namespace Dapplo.CaliburnMicro.Menu
 		}
 
 		/// <summary>
+		/// The initialize is called from the UI Thread before the menu-item is added to a context menu.
+		/// This allows for any UI initialization, like icons etc, to be made
+		/// </summary>
+		public virtual void Initialize()
+		{
+		}
+
+		/// <summary>
 		///     This make it NOT shown as a separator
 		/// </summary>
 		public bool IsSeparator { get; set; } = false;

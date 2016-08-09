@@ -42,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry which shows children to the context menu
 	/// </summary>
 	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WithChildrenMenuItem : MenuItem, IPartImportsSatisfiedNotification
+	public sealed class WithChildrenMenuItem : MenuItem
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -55,17 +55,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		public void OnImportsSatisfied()
+		public override void Initialize()
 		{
-			Execute.OnUIThread(() =>
+			Icon = new PackIconMaterial
 			{
-				Icon = new PackIconMaterial
-				{
-					Kind = PackIconMaterialKind.HumanChild
-				};
-				// automatically update the DisplayName
-				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.WithChildren));
-			});
+				Kind = PackIconMaterialKind.HumanChild
+			};
+			// automatically update the DisplayName
+			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.WithChildren));
 
 			var menuItem = new MenuItem
 			{
