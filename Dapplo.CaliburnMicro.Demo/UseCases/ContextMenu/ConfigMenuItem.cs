@@ -32,7 +32,6 @@ using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log.Facade;
-using Dapplo.Utils;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -58,7 +57,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public void OnImportsSatisfied()
 		{
-			UiContext.RunOn(() =>
+			Execute.OnUIThread(() =>
 			{
 				Icon = new PackIconMaterial
 				{

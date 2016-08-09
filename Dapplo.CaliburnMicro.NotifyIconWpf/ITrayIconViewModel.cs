@@ -28,7 +28,6 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;

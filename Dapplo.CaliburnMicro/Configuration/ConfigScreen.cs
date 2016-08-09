@@ -48,7 +48,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		/// Default constructor take the name of the type for the Id
 		/// </summary>
-		public ConfigScreen()
+		protected ConfigScreen()
 		{
 			_id = GetType().Name;
 		}

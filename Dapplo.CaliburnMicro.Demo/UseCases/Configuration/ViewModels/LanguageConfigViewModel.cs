@@ -93,10 +93,11 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			// Manually commit
 			DemoConfiguration.CommitTransaction();
 			EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-			UiContext.RunOn(async () =>
+			Execute.OnUIThread(async () =>
 			{
 				await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
 			});
+
 			base.Commit();
 		}
 	}

@@ -31,7 +31,6 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Utils;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -55,7 +54,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public void OnImportsSatisfied()
 		{
-			UiContext.RunOn(() =>
+			Execute.OnUIThread(() =>
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));

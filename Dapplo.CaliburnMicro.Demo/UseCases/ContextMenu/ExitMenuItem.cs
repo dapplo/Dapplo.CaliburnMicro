@@ -29,8 +29,8 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Utils;
 using System.Windows;
+using Caliburn.Micro;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public void OnImportsSatisfied()
 		{
 			Id = "Z_Exit";
-			UiContext.RunOn(() =>
+			Execute.OnUIThread(() =>
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Exit));

@@ -79,9 +79,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 
 			SetIcon(new PackIconMaterial
 			{
-				Kind = PackIconMaterialKind.Deskphone,
+				Kind = PackIconMaterialKind.Apps,
 				Background = Brushes.White,
-				Foreground = Brushes.Orange,
+				Foreground = Brushes.Black,
 			});
 			Show();
 			EventAggregator.Subscribe(this);

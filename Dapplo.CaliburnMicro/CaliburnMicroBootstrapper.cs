@@ -36,7 +36,6 @@ using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log.Facade;
-using Dapplo.Utils;
 using Dapplo.Utils.Resolving;
 
 #endregion
@@ -47,9 +46,9 @@ namespace Dapplo.CaliburnMicro
 	///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
 	///     and uses this.
 	/// </summary>
-	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper)]
 	[ShutdownAction(ShutdownOrder = (int) CaliburnStartOrder.Bootstrapper)]
-	public class CaliburnMicroBootstrapper : BootstrapperBase, IStartupAction, IShutdownAction
+	[Export]
+	public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdownAction
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -70,31 +69,11 @@ namespace Dapplo.CaliburnMicro
 		public async Task ShutdownAsync(CancellationToken token = default(CancellationToken))
 		{
 			Log.Debug().WriteLine("Starting shutdown");
-			await UiContext.RunOn(() => { OnExit(this, new EventArgs()); }, token).ConfigureAwait(false);
-			Log.Debug().WriteLine("finished shutdown");
-		}
-
-		/// <summary>
-		///     Initialize the Caliburn bootstrapper from the Dapplo startup
-		/// </summary>
-		/// <param name="token">CancellationToken</param>
-		public async Task StartAsync(CancellationToken token = default(CancellationToken))
-		{
-			LogManager.GetLog = type => new CaliburnLogger(type);
-
-			await UiContext.RunOn(() =>
+			await Execute.OnUIThreadAsync(() =>
 			{
-				try
-				{
-					Initialize();
-
-					OnStartup(this, null);
-				}
-				catch (Exception ex)
-				{
-					throw new StartupException(ex.Message, ex);
-				}
-			}, token).ConfigureAwait(false);
+				OnExit(this, new EventArgs());
+			}).ConfigureAwait(false);
+			Log.Debug().WriteLine("finished shutdown");
 		}
 
 		/// <summary>
@@ -141,6 +120,8 @@ namespace Dapplo.CaliburnMicro
 		/// </summary>
 		protected override void Configure()
 		{
+			LogManager.GetLog = type => new CaliburnLogger(type);
+
 			foreach (var assembly in AssemblySource.Instance)
 			{
 				ServiceRepository.Add(assembly);
@@ -161,6 +142,15 @@ namespace Dapplo.CaliburnMicro
 			{
 				ServiceExporter.Export<IEventAggregator>(new EventAggregator());
 			}
+
+			// TODO: Documentation
+			// This make it possible to pass the data-context of the originally clicked object in the Message.Attach event bubbling.
+			// E.G. the parent Menu-Item Click will get the Child MenuItem that was actually clicked.
+			MessageBinder.SpecialValues.Add("$originalDataContext", context => {
+				var routedEventArgs = context.EventArgs as RoutedEventArgs;
+				var frameworkElement = routedEventArgs?.OriginalSource as FrameworkElement;
+				return frameworkElement?.DataContext;
+			});
 		}
 
 		/// <summary>
@@ -191,15 +181,8 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="e">StartupEventArgs, as it's called internally this is actually null</param>
 		protected override void OnStartup(object sender, StartupEventArgs e)
 		{
-
-			// TODO: Documentation
-			// This make it possible to pass the data-context of the originally clicked object in the Message.Attach event bubbling.
-			// E.G. the parent Menu-Item Click will get the Child MenuItem that was actually clicked.
-			MessageBinder.SpecialValues.Add("$originalDataContext", context => {
-				var routedEventArgs = context.EventArgs as RoutedEventArgs;
-				var frameworkElement = routedEventArgs?.OriginalSource as FrameworkElement;
-				return frameworkElement?.DataContext;
-			});
+			// Call the base, this actually currently does nothing but who knows what is added later.
+			base.OnStartup(sender, e);
 
 			// Throw exception when no IShell export is found
 			var shells = ServiceLocator.GetExports<IShell>();

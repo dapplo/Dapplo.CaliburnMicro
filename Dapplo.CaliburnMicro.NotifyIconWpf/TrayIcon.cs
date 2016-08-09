@@ -28,7 +28,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Hardcodet.Wpf.TaskbarNotification;
 
@@ -83,8 +82,11 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 					return point;
 				};
 			}
+			// Show the balloon
 			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int) TimeSpan.FromSeconds(4).TotalMilliseconds);
 			CustomPopupPosition = customPopupPosition;
+			// End of workaround
+
 		}
 
 		/// <summary>

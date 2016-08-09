@@ -26,7 +26,6 @@
 #region Usings
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using Dapplo.Log.Facade;
 using Dapplo.Log.Loggers;
@@ -38,7 +37,7 @@ namespace Dapplo.CaliburnMicro.Demo
 	/// <summary>
 	///     This takes care or starting the Application
 	/// </summary>
-	public class Startup
+	public static class Startup
 	{
 		/// <summary>
 		///     Start the application

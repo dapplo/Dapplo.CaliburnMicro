@@ -26,7 +26,6 @@
 #region Usings
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -36,7 +35,6 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.Config.Language;
 using Dapplo.Utils.Extensions;
 using Dapplo.Utils;
 

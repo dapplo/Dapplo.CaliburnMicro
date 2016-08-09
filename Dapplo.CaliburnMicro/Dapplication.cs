@@ -95,6 +95,10 @@ namespace Dapplo.CaliburnMicro
 
 		/// <summary>
 		///     This is called when the application is alreay running
+		///     Facts:
+		///     1: it will be run on the UI thread and 
+		///     2: Caliburn.Micro is actually fully configured
+		///     3: Dapplo Startup is NOT made, so you have no access to ILanguage etc (yet?)
 		/// </summary>
 		public Action OnAlreadyRunning { get; set; }
 
@@ -121,16 +125,25 @@ namespace Dapplo.CaliburnMicro
 		protected override async void OnStartup(StartupEventArgs startupEventArgs)
 		{
 			// Enable UI access for different Dapplo packages, especially the UiContext.RunOn
-			// This only works here, not before the Application is started
+			// This only works here, not before the Application is started and not later
 			UiContext.Initialize();
+
+			// The following is a solution to make sure Caliburn.Micro is correctly initialized on the right thread, so Execute.OnUIThread works
+			await _bootstrapper.InitializeAsync();
+			var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>();
+			caliburnBootstrapper.Value.Initialize();
 
 			if (!_bootstrapper.IsMutexLocked)
 			{
 				OnAlreadyRunning?.Invoke();
 				return;
 			}
+
+			// Start Dapplo, do not use configure-await false here, so the OnStartup doesn't have any issues
+			await _bootstrapper.RunAsync();
+
+			// This also triggers the Caliburn.Micro.BootstrapperBase.OnStartup
 			base.OnStartup(startupEventArgs);
-			await _bootstrapper.RunAsync().ConfigureAwait(false);
 		}
 
 		#region Error handling

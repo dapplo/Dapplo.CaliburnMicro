@@ -36,7 +36,6 @@ using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log.Facade;
-using Dapplo.Utils;
 
 #endregion
 
@@ -82,14 +81,14 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			{
 				Log.Debug().WriteLine("Hiding all created tray-icons");
 
-				await UiContext.RunOn(() =>
+				await Execute.OnUIThreadAsync(() =>
 				{
-					Log.Debug().WriteLine("Hiding {0} tray-icons", trayIcons.Count());
+					Log.Debug().WriteLine("Hiding {0} tray-icons", trayIcons.Count);
 					foreach (var trayIcon in trayIcons)
 					{
 						trayIcon.Hide();
 					}
-				}, cancellationToken).ConfigureAwait(false);
+				});
 			}
 			else
 			{
@@ -104,7 +103,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		/// <returns>Task</returns>
 		public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			await UiContext.RunOn(() =>
+			await Execute.OnUIThreadAsync(() =>
 			{
 				foreach (var trayIconViewModel in TrayIconViewModels)
 				{
@@ -118,7 +117,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 					};
 					WindowsManager.ShowPopup(trayIconViewModel);
 				}
-			}, cancellationToken).ConfigureAwait(false);
+			});
 		}
 
 		/// <summary>

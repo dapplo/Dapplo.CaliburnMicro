@@ -26,10 +26,10 @@
 #region Usings
 
 using System.ComponentModel.Composition;
+using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Utils;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 		{
 			Id = "A_SaveAs";
 			ParentId = "1_File";
-			UiContext.RunOn(() =>
+			Execute.OnUIThread(() =>
 			{
 				// automatically update the DisplayName
 				this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
