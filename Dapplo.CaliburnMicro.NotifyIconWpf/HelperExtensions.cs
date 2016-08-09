@@ -21,49 +21,49 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		private static extern bool DestroyIcon(IntPtr handle);
 
 		/// <summary>
-		/// Render the control to an Icon
+		/// Render the frameworkElement to an Icon
 		/// </summary>
-		/// <param name="control"></param>
+		/// <param name="frameworkElement">FrameworkElement</param>
 		/// <param name="size">Size, using the bound as size by default</param>
 		/// <param name="dpiX">Horizontal DPI settings</param>
 		/// <param name="dpiY">Vertical DPI settings</param>
 		/// <returns>Icon</returns>
-		public static Icon ToIcon(this Control control, Size? size = null, double dpiX = 96.0, double dpiY = 96.0)
+		public static Icon ToIcon(this FrameworkElement frameworkElement, Size? size = null, double dpiX = 96.0, double dpiY = 96.0)
 		{
-			if (control == null)
+			if (frameworkElement == null)
 			{
-				throw new ArgumentNullException(nameof(control));
+				throw new ArgumentNullException(nameof(frameworkElement));
 			}
-			var bitmapSource = control.ToBitmapSource(size, dpiX, dpiY);
+			var bitmapSource = frameworkElement.ToBitmapSource(size, dpiX, dpiY);
 			return bitmapSource.ToIcon();
 		}
 
 		/// <summary>
-		/// Render the control to a BitmapSource
+		/// Render the frameworkElement to a BitmapSource
 		/// </summary>
-		/// <param name="control"></param>
+		/// <param name="frameworkElement">FrameworkElement</param>
 		/// <param name="size">Size, using the bound as size by default</param>
 		/// <param name="dpiX">Horizontal DPI settings</param>
 		/// <param name="dpiY">Vertical DPI settings</param>
 		/// <returns>BitmapSource</returns>
-		public static BitmapSource ToBitmapSource(this Control control, Size? size = null, double dpiX = 96.0, double dpiY = 96.0)
+		public static BitmapSource ToBitmapSource(this FrameworkElement frameworkElement, Size? size = null, double dpiX = 96.0, double dpiY = 96.0)
 		{
-			if (control == null)
+			if (frameworkElement == null)
 			{
-				throw new ArgumentNullException(nameof(control));
+				throw new ArgumentNullException(nameof(frameworkElement));
 			}
 			// Make sure we have a size
 			if (!size.HasValue)
 			{
-				var bounds = VisualTreeHelper.GetDescendantBounds(control);
+				var bounds = VisualTreeHelper.GetDescendantBounds(frameworkElement);
 				size = bounds != Rect.Empty ? bounds.Size : new Size(16,16);
 			}
 
-			// Create a viewbox to render the control in the correct size
+			// Create a viewbox to render the frameworkElement in the correct size
 			var viewbox = new Viewbox
 			{
-				//control to render
-				Child = control
+				//frameworkElement to render
+				Child = frameworkElement
 			};
 			viewbox.Measure(size.Value);
 			viewbox.Arrange(new Rect(new Point(), size.Value));

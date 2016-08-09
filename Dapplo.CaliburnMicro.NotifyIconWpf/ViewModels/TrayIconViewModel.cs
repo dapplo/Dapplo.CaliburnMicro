@@ -2,7 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Drawing;
-using System.Windows.Controls;
+using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
@@ -56,13 +57,14 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		/// <param name="menuItems">IEnumerable with IMenuItem</param>
 		protected void ConfigureMenuItems(IEnumerable<IMenuItem> menuItems)
 		{
+			var items = menuItems.ToList();
 			// Make sure all items are initialized
-			foreach (var menuItem in menuItems)
+			foreach (var menuItem in items)
 			{
 				menuItem.Initialize();
 			}
 
-			foreach (var contextMenuItem in menuItems.CreateTree())
+			foreach (var contextMenuItem in items.CreateTree())
 			{
 				TrayMenuItems.Add(contextMenuItem);
 			}
@@ -91,9 +93,9 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		/// <summary>
 		/// Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
 		/// </summary>
-		public void SetIcon(Control control)
+		public void SetIcon(FrameworkElement frameworkElement)
 		{
-			Icon = control.ToIcon();
+			Icon = frameworkElement.ToIcon();
 		}
 
 		/// <summary>
