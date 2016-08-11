@@ -30,7 +30,7 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using System.Windows;
-using Caliburn.Micro;
+using System.Windows.Media;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -51,10 +51,12 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			Id = "Z_Exit";
 			// automatically update the DisplayName
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Exit));
+
 			Icon = new PackIconMaterial
 			{
-				Kind = PackIconMaterialKind.ExitToApp
+				Kind = PackIconMaterialKind.Close
 			};
+			this.ApplyIconForegroundColor(Brushes.DarkRed);
 		}
 
 		public override void Click(IMenuItem clickedItem)

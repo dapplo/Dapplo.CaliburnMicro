@@ -28,6 +28,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
@@ -36,6 +37,7 @@ using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using Dapplo.Log.Facade;
 using MahApps.Metro.IconPacks;
+using Dapplo.CaliburnMicro.Extensions;
 
 #endregion
 
@@ -73,6 +75,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			});
 			ConfigureMenuItems(items);
 
+			// Make sure the margin is set, do this AFTER the icon are set
+			items.ApplyIconMargin(new Thickness(2, 2, 2, 2));
 			SetIcon(new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.Apps,

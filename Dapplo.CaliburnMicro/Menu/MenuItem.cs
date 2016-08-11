@@ -27,6 +27,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
@@ -63,9 +64,9 @@ namespace Dapplo.CaliburnMicro.Menu
 		}
 
 		/// <summary>
-		///     This make it NOT shown as a separator
+		///     This property defines if the item is a separator or not
 		/// </summary>
-		public bool IsSeparator { get; set; } = false;
+		public bool IsSeparator { get; set; }
 
 		/// <summary>
 		///     Returns if the IMenuItem is enabled

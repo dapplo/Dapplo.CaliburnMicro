@@ -5,7 +5,6 @@
 		<resource name="ok">Ok</resource>
 		<resource name="cancel">Cancel</resource>
 		<resource name="language">Language</resource>
-		<resource name="theme">Theme</resource>
 		<resource name="settings">Settings</resource>
 	</resources>
 	<resources prefix="config">
@@ -14,6 +13,8 @@
 		<resource name="ui">User interface</resource>
 		<resource name="addons">Addons</resource>
 		<resource name="filter">type filter text</resource>
+		<resource name="hotkey">Hotkeys</resource>
+		<resource name="theme">Theme</resource>
 	</resources>
 	<resources prefix="credentials">
 		<resource name="username">Username</resource>

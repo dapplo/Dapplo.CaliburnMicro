@@ -120,6 +120,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\Configuration\ViewModels\HotkeyConfigViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\ThemeConfigViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\SomeWindowMenuItem.cs" />
@@ -177,6 +178,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DemoResourceDirectory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UseCases\Configuration\Views\HotkeyConfigView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UseCases\Configuration\Views\ThemeConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -43,19 +43,9 @@ using Dapplo.Utils;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 {
 	[Export(typeof(IConfigScreen))]
-	public sealed class ThemeConfigViewModel : ConfigScreen
+	public sealed class HotkeyConfigViewModel : ConfigScreen
 	{
 		private readonly Disposables _disposables = new Disposables();
-
-		/// <summary>
-		/// The avaible themes
-		/// </summary>
-		public ObservableCollection<Tuple<Themes, string>> AvailableThemes { get; set; } = new ObservableCollection<Tuple<Themes, string>>();
-
-		/// <summary>
-		/// The avaible theme accents
-		/// </summary>
-		public ObservableCollection<Tuple<ThemeAccents, string>> AvailableThemeAccents { get; set; } = new ObservableCollection<Tuple<ThemeAccents, string>>();
 
 		[Import]
 		public IConfigTranslations ConfigTranslations { get; set; }
@@ -68,20 +58,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 
 		public override void Initialize(IConfig config)
 		{
-			AvailableThemeAccents.Clear();
-			foreach (var themeAccent in Enum.GetValues(typeof(ThemeAccents)).Cast<ThemeAccents>())
-			{
-				var translation = themeAccent.EnumValueOf();
-				AvailableThemeAccents.Add(new Tuple<ThemeAccents, string>(themeAccent, translation));
-			}
-
-			AvailableThemes.Clear();
-			foreach (var theme in Enum.GetValues(typeof(Themes)).Cast<Themes>())
-			{
-				var translation = theme.EnumValueOf();
-				AvailableThemes.Add(new Tuple<Themes, string>(theme, translation));
-			}
-
 			// Place this under the Ui parent
 			ParentId = nameof(ConfigIds.Ui);
 
@@ -89,7 +65,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Theme)));
+			_disposables.Add(this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Hotkey)));
 
 			base.Initialize(config);
 		}

@@ -78,7 +78,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 				CustomPopupPosition = () =>
 				{
 					var point = GetPopupTrayPosition();
-					point.Y -= (int)frameworkElement.Height;
+					point.Y -= (int) frameworkElement.Height;
 					return point;
 				};
 			}
@@ -86,7 +86,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int) TimeSpan.FromSeconds(4).TotalMilliseconds);
 			CustomPopupPosition = customPopupPosition;
 			// End of workaround
-
 		}
 
 		/// <summary>

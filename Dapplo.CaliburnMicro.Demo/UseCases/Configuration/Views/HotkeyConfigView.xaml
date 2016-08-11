@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Configuration.Views.HotkeyConfigView"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+	<StackPanel>
+		<DockPanel>
+			<Label x:Name="ConfigTranslations_Hotkey" Width="50" />
+			<controls:HotKeyBox AreModifierKeysRequired="True" HotKey="{Binding DemoConfiguration.HotKey}"></controls:HotKeyBox>
+		</DockPanel>
+	</StackPanel>
+</UserControl>

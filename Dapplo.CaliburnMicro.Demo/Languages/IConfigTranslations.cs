@@ -40,5 +40,7 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 		string Filter { get; }
 		string RestoreDefaults { get; }
 		string Apply { get; }
+		string Theme { get; }
+		string Hotkey { get; }
 	}
 }

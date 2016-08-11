@@ -1,4 +1,31 @@
-﻿using System.Collections.Generic;
+﻿#region Dapplo 2016 - GNU Lesser General Public License
+
+// Dapplo - building blocks for .NET applications
+// Copyright (C) 2016 Dapplo
+// 
+// For more information see: http://dapplo.net/
+// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+// This file is part of Dapplo.CaliburnMicro
+// 
+// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have a copy of the GNU Lesser General Public License
+// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#endregion
+
+#region Usings
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Drawing;
@@ -10,33 +37,35 @@ using Dapplo.CaliburnMicro.Tree;
 using Dapplo.Log.Facade;
 using Hardcodet.Wpf.TaskbarNotification;
 
+#endregion
+
 namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 {
 	/// <summary>
-	/// A default implementation for the ITrayIconViewModel
+	///     A default implementation for the ITrayIconViewModel
 	/// </summary>
 	public class TrayIconViewModel : Screen, ITrayIconViewModel
 	{
 		private static readonly LogSource Log = new LogSource();
 
 		/// <summary>
-		/// The ITrayIconManager, which makes it possible to show and hide the icon
+		///     The ITrayIconManager, which makes it possible to show and hide the icon
 		/// </summary>
 		[Import]
 		protected ITrayIconManager TrayIconManager { get; set; }
 
 		/// <summary>
-		/// The ITrayIcon for the ViewModel
+		///     The ITrayIcon for the ViewModel
 		/// </summary>
 		public ITrayIcon TrayIcon => TrayIconManager.GetTrayIconFor(this);
 
 		/// <summary>
-		/// These are the Context MenuItems for the system tray
+		///     These are the Context MenuItems for the system tray
 		/// </summary>
 		public ObservableCollection<ITreeNode<IMenuItem>> TrayMenuItems { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
 		/// <summary>
-		/// Show the icon for this ViewModel
+		///     Show the icon for this ViewModel
 		/// </summary>
 		public virtual void Show()
 		{
@@ -44,7 +73,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		/// Hide the icon for this ViewModel
+		///     Hide the icon for this ViewModel
 		/// </summary>
 		public virtual void Hide()
 		{
@@ -52,26 +81,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		/// Call to set the TrayMenuItems, call this from the UI thread!
-		/// </summary>
-		/// <param name="menuItems">IEnumerable with IMenuItem</param>
-		protected void ConfigureMenuItems(IEnumerable<IMenuItem> menuItems)
-		{
-			var items = menuItems.ToList();
-			// Make sure all items are initialized
-			foreach (var menuItem in items)
-			{
-				menuItem.Initialize();
-			}
-
-			foreach (var contextMenuItem in items.CreateTree())
-			{
-				TrayMenuItems.Add(contextMenuItem);
-			}
-		}
-
-		/// <summary>
-		/// Set the Icon to the underlying TrayIcon.Icon
+		///     Set the Icon to the underlying TrayIcon.Icon
 		/// </summary>
 		public Icon Icon
 		{
@@ -91,7 +101,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		/// Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
+		///     Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
 		/// </summary>
 		public void SetIcon(FrameworkElement frameworkElement)
 		{
@@ -99,12 +109,31 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		/// This is called when someone makes a a left-click on the icon
+		///     This is called when someone makes a a left-click on the icon
 		/// </summary>
 		public virtual void Click()
 		{
 			// No implementation, unless overridden
 			Log.Verbose().WriteLine("Left-click");
+		}
+
+		/// <summary>
+		///     Call to set the TrayMenuItems, call this from the UI thread!
+		/// </summary>
+		/// <param name="menuItems">IEnumerable with IMenuItem</param>
+		protected void ConfigureMenuItems(IEnumerable<IMenuItem> menuItems)
+		{
+			var items = menuItems.ToList();
+			// Make sure all items are initialized
+			foreach (var menuItem in items)
+			{
+				menuItem.Initialize();
+			}
+
+			foreach (var contextMenuItem in items.CreateTree())
+			{
+				TrayMenuItems.Add(contextMenuItem);
+			}
 		}
 	}
 }

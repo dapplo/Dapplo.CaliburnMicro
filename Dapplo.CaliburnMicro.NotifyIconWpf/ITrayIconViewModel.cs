@@ -28,7 +28,6 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
@@ -45,37 +44,37 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 	public interface ITrayIconViewModel : IViewAware
 	{
 		/// <summary>
-		/// These are the Context MenuItems for the system tray
+		///     These are the Context MenuItems for the system tray
 		/// </summary>
 		ObservableCollection<ITreeNode<IMenuItem>> TrayMenuItems { get; }
 
 		/// <summary>
-		/// The ITrayIcon for the ViewModel
+		///     The ITrayIcon for the ViewModel
 		/// </summary>
 		ITrayIcon TrayIcon { get; }
 
 		/// <summary>
-		/// Gives access to the "underlying" TrayIcon.Icon
+		///     Gives access to the "underlying" TrayIcon.Icon
 		/// </summary>
 		Icon Icon { get; set; }
 
 		/// <summary>
-		/// Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
+		///     Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
 		/// </summary>
 		void SetIcon(FrameworkElement frameworkElement);
 
 		/// <summary>
-		/// Show the icon for this ViewModel
+		///     Show the icon for this ViewModel
 		/// </summary>
 		void Show();
 
 		/// <summary>
-		/// Hide the icon for this ViewModel
+		///     Hide the icon for this ViewModel
 		/// </summary>
 		void Hide();
 
 		/// <summary>
-		/// This is called when someone makes a a left-click on the icon
+		///     This is called when someone makes a a left-click on the icon
 		/// </summary>
 		void Click();
 	}

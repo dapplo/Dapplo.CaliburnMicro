@@ -3,7 +3,7 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<StackPanel>
 		<DockPanel>
-			<Label x:Name="CoreTranslations_Theme" Width="50" />
+			<Label x:Name="ConfigTranslations_Theme" Width="50" />
 			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding DemoConfiguration.Theme}"/>
 			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding DemoConfiguration.ThemeAccent}"/>
 		</DockPanel>

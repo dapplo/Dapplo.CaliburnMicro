@@ -93,6 +93,7 @@
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
+    <Compile Include="Extensions\MenuItemExtensions.cs" />
     <Compile Include="Menu\IMenuItem.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Tree\ITreeNode.cs" />

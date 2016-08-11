@@ -58,7 +58,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Wizard));
 			Icon = new PackIconMaterial
 			{
-				Kind = PackIconMaterialKind.Alarm
+				Kind = PackIconMaterialKind.AutoFix
 			};
 		}
 

@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,6 +49,9 @@ namespace Dapplo.CaliburnMicro.Demo.Services
 
 		public Task StartAsync(CancellationToken token = new CancellationToken())
 		{
+			var demoUri = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
+			MetroWindowManager.AddResourceDictionary(demoUri);
+
 			MetroWindowManager.ChangeTheme(DemoConfiguration.Theme);
 			MetroWindowManager.ChangeThemeAccent(DemoConfiguration.ThemeAccent);
 			return Task.FromResult(true);
