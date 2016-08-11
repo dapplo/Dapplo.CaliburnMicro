@@ -101,7 +101,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		}
 
 		/// <summary>
-		///     Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing
+		///     Set the Icon to the underlying TrayIcon.Icon, use this to prevent using System.Drawing and always have the correct scaling
 		/// </summary>
 		public void SetIcon(FrameworkElement frameworkElement)
 		{

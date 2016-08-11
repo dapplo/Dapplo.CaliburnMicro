@@ -83,7 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrayIcon.cs" />
     <Compile Include="TrayIconManager.cs" />
-    <Compile Include="HelperExtensions.cs" />
+    <Compile Include="IconExtensions.cs" />
     <Compile Include="ViewModels\TrayIconViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
