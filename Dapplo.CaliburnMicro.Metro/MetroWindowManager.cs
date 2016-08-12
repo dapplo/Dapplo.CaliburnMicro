@@ -31,8 +31,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
+using Dapplo.Log.Facade;
+using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Dapplo.CaliburnMicro;
+using Dapplo.CaliburnMicro.Extensions;
 
 #endregion
 
@@ -51,6 +55,7 @@ namespace Dapplo.CaliburnMicro.Metro
 	[Export(typeof(IWindowManager))]
 	public class MetroWindowManager : WindowManager, IPartImportsSatisfiedNotification
 	{
+		private static readonly LogSource Log = new LogSource();
 		private static readonly string[] Styles =
 		{
 			"Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl"
@@ -118,7 +123,13 @@ namespace Dapplo.CaliburnMicro.Metro
 		/// </param>
 		public void AddMahappsStyle(string style)
 		{
-			AddResourceDictionary(CreateMahappStyleUri(style));
+			var packUri = CreateMahappStyleUri(style);
+			// TODO: Fix Dapplo.Utils resource checking
+			if (!packUri.EmbeddedResourceExists())
+			{
+				Log.Warn().WriteLine("Style {0} might not be available as {1}.", style, packUri);
+			}
+			AddResourceDictionary(packUri);
 		}
 
 		/// <summary>
@@ -222,6 +233,11 @@ namespace Dapplo.CaliburnMicro.Metro
 				// Free window, without owner
 				window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				OnConfigureWindow?.Invoke(window);
+			}
+			var haveIcon = model as IHaveIcon;
+			if (haveIcon != null && window.Icon == null)
+			{
+				window.Icon = haveIcon.Icon.ToBitmapSource(new Size(256,256));
 			}
 			// Just in case, make sure it's activated
 			window.Activate();

@@ -25,32 +25,25 @@
 
 #region Usings
 
-using System.Collections.Generic;
+using Caliburn.Micro;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Tree
+namespace Dapplo.CaliburnMicro
 {
 	/// <summary>
-	///     Interface for tree nodes
+	///     This interface is implemented by elements that can be displayed
 	/// </summary>
-	/// <typeparam name="TTreeItem"></typeparam>
-	public interface ITreeNode<TTreeItem> : IHaveId
+	public interface IAmDisplayable : IHaveDisplayName
 	{
 		/// <summary>
-		///     The parent for this ITreeNode
+		///     Returns if the element can be selected (visible but not usable)
 		/// </summary>
-		ITreeNode<TTreeItem> ParentNode { get; set; }
+		bool IsEnabled { get; }
 
 		/// <summary>
-		///     The children for this ITreeNode, the collections MUST be initialized!!
+		///     Returns if the element is visible (not visible and not usable)
 		/// </summary>
-		ICollection<ITreeNode<TTreeItem>> ChildNodes { get; set; }
-
-		/// <summary>
-		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
-		///     if the value is null, or the parent can't be found, this item is placed into the root
-		/// </summary>
-		string ParentId { get; }
+		bool IsVisible { get; }
 	}
 }

@@ -36,7 +36,7 @@ using Dapplo.CaliburnMicro.Tree;
 namespace Dapplo.CaliburnMicro.Configuration
 {
 	/// <summary>
-	///     A basic implementation of IConfigScreen
+	///     A basic implementation of IConfigScreen, this is a screen which is visible in an IConfig
 	/// </summary>
 	public class ConfigScreen : Screen, IConfigScreen
 	{
@@ -48,7 +48,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		/// Default constructor take the name of the type for the Id
 		/// </summary>
-		protected ConfigScreen()
+		public ConfigScreen()
 		{
 			_id = GetType().Name;
 		}
@@ -105,6 +105,8 @@ namespace Dapplo.CaliburnMicro.Configuration
 			}
 		}
 
+		#region IAmDisplayable
+
 		/// <summary>
 		///     Returns if the IConfigScreen can be selected
 		/// </summary>
@@ -131,6 +133,21 @@ namespace Dapplo.CaliburnMicro.Configuration
 			}
 		}
 
+		#endregion
+
+		#region IHaveID
+
+		/// <summary>
+		///     The Id of this IConfigScreen, is also used to order children of a parent.
+		///     By default the name of the type is used
+		/// </summary>
+		public virtual string Id
+		{
+			get { return _id; }
+			set { _id = value; }
+		}
+		#endregion
+
 		#region ITreeNode
 
 		/// <summary>
@@ -148,15 +165,6 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// </summary>
 		public virtual string ParentId { get; set; }
 
-		/// <summary>
-		///     The Id of this IConfigScreen, is also used to order children of a parent.
-		///     By default the name of the type is used
-		/// </summary>
-		public virtual string Id
-		{
-			get { return _id; }
-			set { _id = value; }
-		}
 
 		#endregion
 	}

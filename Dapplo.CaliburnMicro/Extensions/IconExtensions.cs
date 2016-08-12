@@ -40,7 +40,7 @@ using Size = System.Windows.Size;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.NotifyIconWpf
+namespace Dapplo.CaliburnMicro.Extensions
 {
 	/// <summary>
 	///     Extension method to support Icon conversion

@@ -50,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public IWindowManager WindowManager { get; set; }
 
 		[Import]
-		public ConfigViewModel ConfigViewModel { get; set; }
+		public ConfigViewModel DemoConfigViewModel { get; set; }
 
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
@@ -68,8 +68,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public override void Click(IMenuItem clickedItem)
 		{
 			Log.Debug().WriteLine("Configure");
-			// TODO: Closing the ConfigViewModel also closes other windows, check / fix
-			if (WindowManager.ShowDialog(ConfigViewModel) == false)
+			// TODO: Closing the DemoConfigViewModel also closes other windows, check / fix
+			if (WindowManager.ShowDialog(DemoConfigViewModel) == false)
 			{
 				Log.Warn().WriteLine("You cancelled the configuration");
 			}

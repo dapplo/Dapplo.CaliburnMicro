@@ -38,7 +38,7 @@ using Dapplo.Log.Facade;
 namespace Dapplo.CaliburnMicro.Configuration
 {
 	/// <summary>
-	///     This implements a Caliburn-Micro Config UI
+	///     This implements a Caliburn-Micro Config UI, for showing IConfigScreen based configuration items
 	/// </summary>
 	public abstract class Config<TConfigScreen> : Conductor<TConfigScreen>.Collection.OneActive, IConfig<TConfigScreen>
 		where TConfigScreen : class, IConfigScreen, ITreeNode<TConfigScreen>
@@ -203,7 +203,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// Register an instanceof ITransactionalProperties to be included in the transaction (rollback or commit will be called for you)
 		/// </summary>
 		/// <param name="transactionalProperties"></param>
-		public void Register(ITransactionalProperties transactionalProperties)
+		public virtual void Register(ITransactionalProperties transactionalProperties)
 		{
 			_transactionalPropertyRegistrations.Add(transactionalProperties);
 		}
@@ -279,6 +279,16 @@ namespace Dapplo.CaliburnMicro.Configuration
 				NotifyOfPropertyChange(nameof(CanCancel));
 				NotifyOfPropertyChange(nameof(CanOk));
 			}
+		}
+
+		/// <summary>
+		///     This is called when an item from the itemssource is selected
+		///     And will make sure that the selected item is made visible.
+		/// </summary>
+		/// <param name="configScreen">TConfigScreen to activate</param>
+		public virtual void ActivateChildView(TConfigScreen configScreen)
+		{
+			ActivateItem(configScreen);
 		}
 	}
 }

@@ -54,7 +54,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			=> !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
 
 		[Import]
-		public ICoreTranslations CoreTranslations { get; set; }
+		public Languages.ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
 		public IDemoConfiguration DemoConfiguration { get; set; }
@@ -71,7 +71,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(this.BindDisplayName(CoreTranslations, nameof(ICoreTranslations.Language)));
+			_disposables.Add(this.BindDisplayName(CoreTranslations, nameof(Languages.ICoreTranslations.Language)));
 
 			// automatically update the CanChangeLanguage state when a different language is selected
 			_disposables.Add(DemoConfiguration.OnPropertyChanged(pcEvent =>

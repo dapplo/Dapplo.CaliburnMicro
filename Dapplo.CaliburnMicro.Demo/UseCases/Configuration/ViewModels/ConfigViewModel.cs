@@ -28,6 +28,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -37,6 +39,7 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
 using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.IconPacks;
 
 #endregion
 
@@ -47,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	///     It is a conductor where one item is active.
 	/// </summary>
 	[Export]
-	public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
+	public class ConfigViewModel : Config<IConfigScreen>, IHaveIcon, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -87,24 +90,23 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		[Import]
 		private IDialogCoordinator Dialogcoordinator { get; set; }
 
+		/// <summary>
+		/// Set the default config icon for the view
+		/// </summary>
+		public Control Icon => new PackIconMaterial
+		{
+			Kind = PackIconMaterialKind.Settings,
+			Margin = new Thickness(10)
+		};
+
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			this.BindDisplayName(CoreTranslations, nameof(CoreTranslations.Settings));
+			this.BindDisplayName(CoreTranslations, nameof(ICoreTranslations.Settings));
 
 			// Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
 			var lang = DemoConfiguration.Language;
 			Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
-		}
-
-		/// <summary>
-		///     This is called when an item from the itemssource is selected
-		///     And will make sure that the selected item is made visible.
-		/// </summary>
-		/// <param name="view"></param>
-		public void ActivateChildView(IConfigScreen view)
-		{
-			ActivateItem(view);
 		}
 
 		/// <summary>

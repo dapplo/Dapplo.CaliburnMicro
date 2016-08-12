@@ -69,6 +69,20 @@ namespace Dapplo.CaliburnMicro.Menu
 		public bool IsSeparator { get; set; }
 
 		/// <summary>
+		///     Is called when the IMenuItem is clicked
+		/// </summary>
+		public virtual void Click(IMenuItem clickedItem)
+		{
+			ClickAction?.Invoke(clickedItem);
+		}
+
+		/// <summary>
+		/// This action is called when Click is invoked
+		/// </summary>
+		public System.Action<IMenuItem> ClickAction { get; set; }
+
+		#region IAmDisplayable
+		/// <summary>
 		///     Returns if the IMenuItem is enabled
 		/// </summary>
 		public virtual bool IsEnabled
@@ -94,6 +108,10 @@ namespace Dapplo.CaliburnMicro.Menu
 			}
 		}
 
+		#endregion
+
+		#region IHaveIcon
+
 		/// <summary>
 		///     Returns the icon of the IMenuItem
 		/// </summary>
@@ -109,6 +127,9 @@ namespace Dapplo.CaliburnMicro.Menu
 				NotifyOfPropertyChange(nameof(Icon));
 			}
 		}
+		#endregion
+
+		#region IHaveDisplayName
 
 		/// <summary>
 		///     Returns the DisplayName of the IMenuItem
@@ -122,19 +143,22 @@ namespace Dapplo.CaliburnMicro.Menu
 				NotifyOfPropertyChange(nameof(DisplayName));
 			}
 		}
+		#endregion
+
+		#region IHaveId
 
 		/// <summary>
-		///     Is called when the IMenuItem is clicked
+		///     The Id of this IMenuItem, is also used to order children of a parent
+		///     Default the Id is the name of the Type
 		/// </summary>
-		public virtual void Click(IMenuItem clickedItem)
+		public virtual string Id
 		{
-			ClickAction?.Invoke(clickedItem);
+			get { return _id; }
+			set { _id = value; }
 		}
 
-		/// <summary>
-		/// This action is called when Click is invoked
-		/// </summary>
-		public System.Action<IMenuItem> ClickAction { get; set; }
+		#endregion
+
 
 		#region ITreeNode
 
@@ -152,16 +176,6 @@ namespace Dapplo.CaliburnMicro.Menu
 		///     The parent under which the IMenuItem is shown, null is root
 		/// </summary>
 		public virtual string ParentId { get; set; } = null;
-
-		/// <summary>
-		///     The Id of this IMenuItem, is also used to order children of a parent
-		///     Default the Id is the name of the Type
-		/// </summary>
-		public virtual string Id
-		{
-			get { return _id; }
-			set { _id = value; }
-		}
 
 		#endregion
 	}

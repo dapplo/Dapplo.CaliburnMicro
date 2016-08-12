@@ -32,6 +32,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
 using Dapplo.Log.Facade;

@@ -25,32 +25,22 @@
 
 #region Usings
 
-using System.Collections.Generic;
+using System.ComponentModel;
+using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Tree
+namespace Dapplo.CaliburnMicro.Translations
 {
 	/// <summary>
-	///     Interface for tree nodes
+	///     These are the translations used on the ConfigViewModel
 	/// </summary>
-	/// <typeparam name="TTreeItem"></typeparam>
-	public interface ITreeNode<TTreeItem> : IHaveId
+	public interface IConfigTranslations : IDefaultValue
 	{
 		/// <summary>
-		///     The parent for this ITreeNode
+		///     Used for the label / watermark test where the filter can be specified
 		/// </summary>
-		ITreeNode<TTreeItem> ParentNode { get; set; }
-
-		/// <summary>
-		///     The children for this ITreeNode, the collections MUST be initialized!!
-		/// </summary>
-		ICollection<ITreeNode<TTreeItem>> ChildNodes { get; set; }
-
-		/// <summary>
-		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
-		///     if the value is null, or the parent can't be found, this item is placed into the root
-		/// </summary>
-		string ParentId { get; }
+		[DefaultValue("Filter")]
+		string Filter { get; }
 	}
 }

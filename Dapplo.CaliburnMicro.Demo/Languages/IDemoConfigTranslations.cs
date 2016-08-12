@@ -25,32 +25,23 @@
 
 #region Usings
 
-using System.Collections.Generic;
+using System.ComponentModel;
+using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.CaliburnMicro.Translations;
+using Dapplo.Config.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Tree
+namespace Dapplo.CaliburnMicro.Demo.Languages
 {
-	/// <summary>
-	///     Interface for tree nodes
-	/// </summary>
-	/// <typeparam name="TTreeItem"></typeparam>
-	public interface ITreeNode<TTreeItem> : IHaveId
+	[Language("Config")]
+	public interface IConfigTranslations : Translations.IConfigTranslations, ILanguage, INotifyPropertyChanged
 	{
-		/// <summary>
-		///     The parent for this ITreeNode
-		/// </summary>
-		ITreeNode<TTreeItem> ParentNode { get; set; }
-
-		/// <summary>
-		///     The children for this ITreeNode, the collections MUST be initialized!!
-		/// </summary>
-		ICollection<ITreeNode<TTreeItem>> ChildNodes { get; set; }
-
-		/// <summary>
-		///     This defines the Location in the tree, by specifying the Id of the parent, where the config screen is shown.
-		///     if the value is null, or the parent can't be found, this item is placed into the root
-		/// </summary>
-		string ParentId { get; }
+		string Ui { get; }
+		string Addons { get; }
+		string RestoreDefaults { get; }
+		string Apply { get; }
+		string Theme { get; }
+		string Hotkey { get; }
 	}
 }

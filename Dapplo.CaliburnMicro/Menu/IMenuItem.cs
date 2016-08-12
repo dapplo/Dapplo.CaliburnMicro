@@ -38,28 +38,13 @@ namespace Dapplo.CaliburnMicro.Menu
 	/// <summary>
 	///     This defines an IMenuItem
 	/// </summary>
-	public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IHaveDisplayName
+	public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon
 	{
 		/// <summary>
 		/// The initialize is called from the UI Thread before the menu-item is added to a context menu.
 		/// This allows for any initialization, like icons etc, to be made
 		/// </summary>
 		void Initialize();
-
-		/// <summary>
-		///     Returns if the IMenuItem can be selected (visible but not usable)
-		/// </summary>
-		bool IsEnabled { get; }
-
-		/// <summary>
-		///     Returns if the IMenuItem is visible (not visible and not usable)
-		/// </summary>
-		bool IsVisible { get; }
-
-		/// <summary>
-		///     The icon for the IMenuItem
-		/// </summary>
-		Control Icon { get; set; }
 
 		/// <summary>
 		///     Is called when the IMenuItem it clicked

@@ -33,6 +33,7 @@ using Dapplo.CaliburnMicro.Tree;
 namespace Dapplo.CaliburnMicro.Configuration
 {
 	/// <summary>
+	/// Implement this for elements that are visible in an IConfig
 	///     Every element in the config UI should implement this
 	///     Some of the configuration functionality is covered in standard Caliburn.Micro interfaces
 	///     which are supplied by the interfaces which IScreen extends:
@@ -41,23 +42,16 @@ namespace Dapplo.CaliburnMicro.Configuration
 	///     IActivate, IDeactivate: to know if the config screen is activated or deactivated
 	///     IGuardClose.CanClose: Prevents leaving the config screen
 	///     A default implementation is just to extend Screen from Caliburn.Micro
+	/// 
+	///     Additionally some Dapplo.CaliburnMicro Interfaces are used:
+	///     IAmDisplayable: Covers the visiblity and enabled (extends IHaveDisplayName)
 	/// </summary>
-	public interface IConfigScreen : IScreen, ITreeNode<IConfigScreen>
+	public interface IConfigScreen : IScreen, ITreeNode<IConfigScreen>, IAmDisplayable
 	{
 		/// <summary>
 		///     Returns if the IConfigScreen can be activated (when clicking on it)
 		/// </summary>
 		bool CanActivate { get; }
-
-		/// <summary>
-		///     Returns if the IConfigScreen can be selected (visible but not usable)
-		/// </summary>
-		bool IsEnabled { get; }
-
-		/// <summary>
-		///     Returns if the IConfigScreen is visible (not visible and not usable)
-		/// </summary>
-		bool IsVisible { get; }
 
 		/// <summary>
 		/// Tests if the IConfigScreen contains the supplied text

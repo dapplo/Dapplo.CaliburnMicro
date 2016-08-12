@@ -50,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public IWindowManager WindowManager { get; set; }
 
 		[Import]
-		public ConfigViewModel ConfigViewModel { get; set; }
+		public ConfigViewModel DemoConfigViewModel { get; set; }
 
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }

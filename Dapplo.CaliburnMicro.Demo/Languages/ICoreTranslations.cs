@@ -33,11 +33,9 @@ using Dapplo.Config.Language;
 namespace Dapplo.CaliburnMicro.Demo.Languages
 {
 	[Language("Core")]
-	public interface ICoreTranslations : ILanguage, INotifyPropertyChanged
+	public interface ICoreTranslations : Translations.ICoreTranslations, ILanguage, INotifyPropertyChanged
 	{
-		string Cancel { get; }
 		string Language { get; }
-		string Ok { get; }
 		string Settings { get; }
 	}
 }

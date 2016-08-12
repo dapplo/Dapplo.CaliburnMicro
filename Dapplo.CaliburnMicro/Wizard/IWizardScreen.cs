@@ -41,7 +41,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 	///     IGuardClose.CanClose: Prevents leaving the wizard screen
 	///     A default implementation is to extend Screen
 	/// </summary>
-	public interface IWizardScreen : IScreen
+	public interface IWizardScreen : IScreen, IAmDisplayable
 	{
 		/// <summary>
 		/// The parent wizard where this IWizardScreen is used
@@ -52,16 +52,6 @@ namespace Dapplo.CaliburnMicro.Wizard
 		///     The order in which the IWizardScreen ist shown
 		/// </summary>
 		int Order { get; }
-
-		/// <summary>
-		///     Returns if the wizard screen can be selected (visible but not usable)
-		/// </summary>
-		bool IsEnabled { get; }
-
-		/// <summary>
-		///     Returns if the wizard screen is visible (not visible and not usable)
-		/// </summary>
-		bool IsVisible { get; }
 
 		/// <summary>
 		///     Do some general initialization, if needed

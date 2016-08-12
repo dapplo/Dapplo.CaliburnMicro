@@ -26,21 +26,27 @@
 #region Usings
 
 using System.ComponentModel;
-using Dapplo.Config.Language;
+using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Languages
+namespace Dapplo.CaliburnMicro.Translations
 {
-	[Language("Config")]
-	public interface IConfigTranslations : ILanguage, INotifyPropertyChanged
+	/// <summary>
+	///     These are translations used throughout the project
+	/// </summary>
+	public interface ICoreTranslations : IDefaultValue
 	{
-		string Ui { get; }
-		string Addons { get; }
-		string Filter { get; }
-		string RestoreDefaults { get; }
-		string Apply { get; }
-		string Theme { get; }
-		string Hotkey { get; }
+		/// <summary>
+		///     Used everywhere where ok is used
+		/// </summary>
+		[DefaultValue("Ok")]
+		string Ok { get; }
+
+		/// <summary>
+		///     Used everywhere where cancel is used
+		/// </summary>
+		[DefaultValue("Cancel")]
+		string Cancel { get; }
 	}
 }
