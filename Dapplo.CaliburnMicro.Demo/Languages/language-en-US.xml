@@ -22,6 +22,7 @@
 		<resource name="login">Login</resource>
 	</resources>
 	<resources prefix="contextmenu">
+		<resource name="title">Demo application</resource>
 		<resource name="withchildren">Children</resource>
 		<resource name="one">One</resource>
 		<resource name="two">Two</resource>

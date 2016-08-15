@@ -26,9 +26,6 @@
 #region Usings
 
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
 
 #endregion

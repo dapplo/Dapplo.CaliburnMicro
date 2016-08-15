@@ -48,7 +48,7 @@ namespace Dapplo.CaliburnMicro.Demo.ViewModels
 		public bool CanLogin => !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
 
 		[Import]
-		public Languages.ICoreTranslations CoreTranslations { get; set; }
+		public ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
 		public ICredentialsTranslations CredentialsTranslations { get; set; }

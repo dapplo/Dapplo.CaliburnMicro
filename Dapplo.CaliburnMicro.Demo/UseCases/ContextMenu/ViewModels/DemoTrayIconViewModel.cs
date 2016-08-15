@@ -31,6 +31,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
@@ -43,6 +44,9 @@ using Dapplo.CaliburnMicro.Extensions;
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 {
+	/// <summary>
+	/// Implementation of the system-tray icon
+	/// </summary>
 	[Export(typeof(ITrayIconViewModel))]
 	public class DemoTrayIconViewModel : TrayIconViewModel, IHandle<string>
 	{
@@ -57,6 +61,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 		[Import]
 		public IWindowManager WindowManager { get; set; }
 
+		[Import]
+		private IContextMenuTranslations ContextMenuTranslations { get; set; }
+
 		public void Handle(string message)
 		{
 			var trayIcon = TrayIconManager.GetTrayIconFor(this);
@@ -66,6 +73,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 		protected override void OnActivate()
 		{
 			base.OnActivate();
+
+			// Set the title of the icon (the ToolTipText) to our IContextMenuTranslations.Title
+			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Title));
 
 			var items = ContextMenuItems.ToList();
 			items.Add(new MenuItem

@@ -27,7 +27,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;

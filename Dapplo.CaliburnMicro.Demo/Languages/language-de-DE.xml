@@ -22,6 +22,7 @@
 		<resource name="login">Anmelden</resource>
 	</resources>
 	<resources prefix="contextmenu">
+		<resource name="title">Demo Anwendung</resource>
 		<resource name="withchildren">Kinder</resource>
 		<resource name="one">Eins</resource>
 		<resource name="two">Zwei</resource>

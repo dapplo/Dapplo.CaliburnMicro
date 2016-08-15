@@ -66,6 +66,16 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 		public ObservableCollection<ITreeNode<IMenuItem>> TrayMenuItems { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
 		/// <summary>
+		/// Set some sensible defaults
+		/// </summary>
+		protected override void OnActivate()
+		{
+			base.OnActivate();
+			// Make sure the default DisplayName (class name) is not used on the ToolTipText
+			DisplayName = "";
+		}
+
+		/// <summary>
 		///     Show the icon for this ViewModel
 		/// </summary>
 		public virtual void Show()

@@ -35,7 +35,6 @@ using Dapplo.Log.Facade;
 using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Extensions;
 
 #endregion

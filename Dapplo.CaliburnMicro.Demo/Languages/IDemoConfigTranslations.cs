@@ -26,8 +26,6 @@
 #region Usings
 
 using System.ComponentModel;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Translations;
 using Dapplo.Config.Language;
 
 #endregion
