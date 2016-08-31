@@ -184,7 +184,7 @@ namespace Dapplo.CaliburnMicro
 			// Call the base, this actually currently does nothing but who knows what is added later.
 			base.OnStartup(sender, e);
 
-			// Throw exception when no IShell export is found
+			// Warn when no IShell export is found
 			var shells = ServiceLocator.GetExports<IShell>();
 			if (shells.Any())
 			{
