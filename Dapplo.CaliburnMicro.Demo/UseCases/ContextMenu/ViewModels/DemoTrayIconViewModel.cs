@@ -80,7 +80,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			var items = ContextMenuItems.ToList();
 			items.Add(new MenuItem
 			{
-				IsSeparator = true,
+				Style = MenuItemStyles.Separator,
 				Id = "Y_Separator"
 			});
 			ConfigureMenuItems(items);

@@ -87,7 +87,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 
 			items.Add(new MenuItem
 			{
-				IsSeparator = true,
+				Style = MenuItemStyles.Separator,
 				Id = "Y_Separator",
 				ParentId = "1_File"
 			});

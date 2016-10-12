@@ -10,6 +10,7 @@
 						xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						xmlns:cal="http://www.caliburnproject.org"
 						xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
+						xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro"
 						cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]"
 						ToolTipText="{Binding DisplayName}"
 						Visibility="Collapsed">
@@ -39,8 +40,14 @@
 					<Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
 					<Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
 					<Style.Triggers>
-						<DataTrigger Binding="{Binding IsSeparator}" Value="True">
+						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
 							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Title}">
+							<Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+							<Setter Property="FontWeight" Value="Bold" />
+							<Setter Property="IsEnabled" Value="False"/>
+							<Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}"/>
 						</DataTrigger>
 					</Style.Triggers>
 				</Style>

@@ -43,6 +43,8 @@ namespace Dapplo.CaliburnMicro.Menu
 		private string _displayName;
 		private Control _icon;
 		private string _id;
+		private MenuItemStyles _style = MenuItemStyles.Default;
+
 		private bool _isEnabled = true;
 		private bool _isVisible = true;
 
@@ -63,9 +65,19 @@ namespace Dapplo.CaliburnMicro.Menu
 		}
 
 		/// <summary>
-		///     This property defines if the item is a separator or not
+		///     This property defines the style the item uses.
 		/// </summary>
-		public bool IsSeparator { get; set; }
+		public MenuItemStyles Style {
+			get
+			{
+				return _style;
+			}
+			set
+			{
+				_style = value;
+				NotifyOfPropertyChange(nameof(Style));
+			}
+		}
 
 		/// <summary>
 		///     Is called when the IMenuItem is clicked

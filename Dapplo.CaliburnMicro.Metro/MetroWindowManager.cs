@@ -52,7 +52,7 @@ namespace Dapplo.CaliburnMicro.Metro
 	///     <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
 	/// </summary>
 	[Export(typeof(IWindowManager))]
-	public class MetroWindowManager : WindowManager, IPartImportsSatisfiedNotification
+	public sealed class MetroWindowManager : WindowManager, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
 		private static readonly string[] Styles =
@@ -171,7 +171,7 @@ namespace Dapplo.CaliburnMicro.Metro
 		/// <param name="view"></param>
 		/// <param name="windowIsView"></param>
 		/// <returns></returns>
-		public virtual MetroWindow CreateCustomWindow(object view, bool windowIsView)
+		public MetroWindow CreateCustomWindow(object view, bool windowIsView)
 		{
 			MetroWindow result;
 			if (windowIsView)

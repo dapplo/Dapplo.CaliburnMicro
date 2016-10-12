@@ -26,12 +26,10 @@
 #region Usings
 
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Log.Facade;
+using System.Windows.Media;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -39,58 +37,26 @@ using MahApps.Metro.IconPacks;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	/// This will add an extry which shows children to the context menu
+	/// This will add an extry for the exit to the context menu
 	/// </summary>
 	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WithChildrenMenuItem : MenuItem
+	public sealed class TitleMenuItem : MenuItem
 	{
-		private static readonly LogSource Log = new LogSource();
-
-		[Import]
-		public IWindowManager WindowManager { get; set; }
-
-		[Import]
-		public ConfigViewModel DemoConfigViewModel { get; set; }
-
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
+		
 		public override void Initialize()
 		{
+			Id = "A_Title";
+			// automatically update the DisplayName
+			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Title));
+			Style = MenuItemStyles.Title;
+
 			Icon = new PackIconMaterial
 			{
-				Kind = PackIconMaterialKind.HumanChild
+				Kind = PackIconMaterialKind.Exclamation
 			};
-			// automatically update the DisplayName
-			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.WithChildren));
-
-			var menuItem = new MenuItem
-			{
-				Id = "1"
-			};
-			var observable = menuItem.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.One));
-			ChildNodes.Add(menuItem);
-
-			ChildNodes.Add(new MenuItem { Style = MenuItemStyles.Separator });
-
-			menuItem = new MenuItem
-			{
-				Id = "2"
-			};
-			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Two));
-			ChildNodes.Add(menuItem);
-
-			menuItem = new MenuItem
-			{
-				Id = "3"
-			};
-			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Three));
-			ChildNodes.Add(menuItem);
-		}
-
-		public override void Click(IMenuItem clickedItem)
-		{
-			Log.Debug().WriteLine("child {0} clicked", clickedItem.Id);
+			this.ApplyIconForegroundColor(Brushes.DarkRed);
 		}
 	}
 }
