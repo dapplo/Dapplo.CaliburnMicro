@@ -99,6 +99,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			Margin = new Thickness(10)
 		};
 
+
+
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName

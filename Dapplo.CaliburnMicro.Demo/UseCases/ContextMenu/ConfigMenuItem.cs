@@ -59,7 +59,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			Icon = new PackIconMaterial
 			{
-				Kind = PackIconMaterialKind.Settings
+				Kind = PackIconMaterialKind.Settings,
+				Spin = true,
+				SpinDuration = 3
 			};
 			// automatically update the DisplayName
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Configure));
