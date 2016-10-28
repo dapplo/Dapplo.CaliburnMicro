@@ -8,11 +8,11 @@
         <projectUrl>http://www.dapplo.net/blocks/Dapplo.CaliburnMicro</projectUrl>
         <iconUrl>http://www.dapplo.net/favicon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro</description>
+        <description>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro, a CaliburnMicro MEF Bootstrapper</description>
 		<summary>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro</summary>
         <language>en-us</language>
 		<copyright>$author$</copyright>
-		<tags>Dapplo Caliburn.Micro Hardcodet.NotifyIcon.Wpf</tags>
+		<tags>Dapplo MEF Caliburn.Micro Hardcodet.NotifyIcon.Wpf</tags>
 		<dependencies>
 			<group targetFramework="net45">
 				<dependency id="Dapplo.CaliburnMicro" version="$version$" />
