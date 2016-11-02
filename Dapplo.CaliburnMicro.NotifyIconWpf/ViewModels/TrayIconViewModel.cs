@@ -28,16 +28,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
 using Dapplo.Log.Facade;
-using Hardcodet.Wpf.TaskbarNotification;
 
 #endregion
 

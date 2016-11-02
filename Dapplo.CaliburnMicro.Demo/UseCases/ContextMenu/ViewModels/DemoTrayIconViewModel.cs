@@ -40,7 +40,6 @@ using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using Dapplo.Log.Facade;
 using MahApps.Metro.IconPacks;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Utils.Extensions;
 
 #endregion
 

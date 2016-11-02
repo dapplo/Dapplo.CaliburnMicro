@@ -26,7 +26,6 @@
 #region Usings
 
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
