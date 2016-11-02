@@ -124,7 +124,7 @@
     <Compile Include="UseCases\Configuration\ViewModels\ThemeConfigViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
-    <Compile Include="UseCases\ContextMenu\SomeWindowMenuItem.cs" />
+    <Compile Include="UseCases\ContextMenu\SomeWindowMenuItemProvider.cs" />
     <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ExitMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ConfigMenuItem.cs" />

@@ -40,6 +40,7 @@ using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using Dapplo.Log.Facade;
 using MahApps.Metro.IconPacks;
 using Dapplo.CaliburnMicro.Extensions;
+using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -55,6 +56,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 
 		[ImportMany("contextmenu", typeof(IMenuItem))]
 		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
+
+
+		[ImportMany("contextmenu", typeof(IMenuItemProvider))]
+		private IEnumerable<IMenuItemProvider> ContextMenuItemProviders { get; set; }
 
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
@@ -79,6 +84,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Title));
 
 			var items = ContextMenuItems.ToList();
+			items.AddRange(ContextMenuItemProviders.SelectMany(itemProvider => itemProvider.ProvideMenuItems()));
 			items.Add(new MenuItem
 			{
 				Style = MenuItemStyles.Separator,

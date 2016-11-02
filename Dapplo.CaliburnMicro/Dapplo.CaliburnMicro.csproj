@@ -98,6 +98,7 @@
     <Compile Include="Configuration\IConfigScreen.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Menu\IMenuItemProvider.cs" />
     <Compile Include="Menu\MenuItemStyles.cs" />
     <Compile Include="Translations\IConfigTranslations.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
