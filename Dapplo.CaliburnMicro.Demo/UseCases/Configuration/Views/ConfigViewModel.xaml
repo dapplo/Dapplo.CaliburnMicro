@@ -3,7 +3,12 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:cal="http://www.caliburnproject.org"
 					xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+					xmlns:behaviors="clr-namespace:Dapplo.CaliburnMicro.Behaviors;assembly=Dapplo.CaliburnMicro"
+					xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 					Width="500" Height="400">
+	<behaviors:IconBehavior.Icon>
+		<iconPacks:PackIconMaterial Kind="Settings" Margin="10"/>
+	</behaviors:IconBehavior.Icon>
 	<mahapps:MetroWindow.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
 	</mahapps:MetroWindow.Resources>

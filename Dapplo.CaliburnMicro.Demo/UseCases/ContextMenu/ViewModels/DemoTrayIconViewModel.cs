@@ -83,7 +83,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			// Set the title of the icon (the ToolTipText) to our IContextMenuTranslations.Title
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Title));
 
-			var items = ContextMenuItems.ToList();
+			var items = new List<IMenuItem>();
+			items.AddRange(ContextMenuItems);
+			// Use IMenuItemProvider, if any
 			items.AddRange(ContextMenuItemProviders.SelectMany(itemProvider => itemProvider.ProvideMenuItems()));
 			items.Add(new MenuItem
 			{
@@ -95,7 +97,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			// Make sure the margin is set, do this AFTER the icon are set
 			items.ApplyIconMargin(new Thickness(2, 2, 2, 2));
 
-			WpfIconBehaviors.SetIcon(TrayIcon as FrameworkElement, new PackIconMaterial
+			IconBehavior.SetIcon(TrayIcon as FrameworkElement, new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.Apps,
 				Background = Brushes.White,

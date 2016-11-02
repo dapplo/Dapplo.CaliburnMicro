@@ -34,9 +34,9 @@ namespace Dapplo.CaliburnMicro.Behaviors
 {
 
 	/// <summary>
-	/// This class contains logic to assist in setting an Icon of e.g. Window or e.g. TaskbarIcon from a FrameworkElement
+	/// This class contains a behavior to assist in setting an Icon of a e.g. Window or TaskbarIcon with a FrameworkElement
 	/// </summary>
-	public static class WpfIconBehaviors
+	public static class IconBehavior
 	{
 		private static readonly LogSource Log = new LogSource();
 		/// <summary>
@@ -46,7 +46,28 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <param name="frameworkElement"></param>
 		public static void SetIcon(DependencyObject dependencyObject, FrameworkElement frameworkElement)
 		{
-			dependencyObject.SetValue(WpfIconProperty, frameworkElement);
+			// Just set the framework element if it's null or loaded
+			if (frameworkElement == null || frameworkElement.IsLoaded)
+			{
+				dependencyObject.SetValue(WpfIconProperty, frameworkElement);
+				return;
+			}
+
+			var targetFrameworkElement = dependencyObject as FrameworkElement;
+			if (targetFrameworkElement == null)
+			{
+				// Use the Loaded event of the supplied frameworkElement instead of the target
+				targetFrameworkElement = frameworkElement;
+				// We can't register the Loaded event on the target, 
+				Log.Warn().WriteLine("Using a not loaded FrameworkElement on a target which doesn't support the Loaded event.");
+			}
+			var handlers = new RoutedEventHandler[1];
+			handlers[0] = (sender, args) =>
+			{
+				dependencyObject.SetValue(WpfIconProperty, frameworkElement);
+				targetFrameworkElement.Loaded -= handlers[0];
+			};
+			targetFrameworkElement.Loaded += handlers[0];
 		}
 
 		/// <summary>
@@ -63,7 +84,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <summary>
 		/// Use to set an Icon with a FrameworkElement
 		/// </summary>
-		public static readonly DependencyProperty WpfIconProperty = DependencyProperty.RegisterAttached("WpfIconProperty", typeof(FrameworkElement), typeof(WpfIconBehaviors), new PropertyMetadata(null, PropertyChangedCallback));
+		public static readonly DependencyProperty WpfIconProperty = DependencyProperty.RegisterAttached("WpfIconProperty", typeof(FrameworkElement), typeof(IconBehavior), new PropertyMetadata(null, PropertyChangedCallback));
 
 		private static void SetIconInternally(DependencyObject dependencyObject, FrameworkElement icon)
 		{

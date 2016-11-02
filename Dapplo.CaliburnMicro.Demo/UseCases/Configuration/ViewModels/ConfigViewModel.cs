@@ -28,8 +28,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -39,7 +37,6 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
 using Dapplo.Log.Facade;
 using MahApps.Metro.Controls.Dialogs;
-using MahApps.Metro.IconPacks;
 
 #endregion
 
@@ -50,10 +47,9 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	///     It is a conductor where one item is active.
 	/// </summary>
 	[Export]
-	public class ConfigViewModel : Config<IConfigScreen>, IHaveIcon, IPartImportsSatisfiedNotification
+	public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
-		private Control _icon;
 
 		[Import]
 		public ICoreTranslations CoreTranslations { get; set; }
@@ -90,16 +86,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		/// </summary>
 		[Import]
 		private IDialogCoordinator Dialogcoordinator { get; set; }
-
-		/// <summary>
-		/// Set the default config icon for the view
-		/// </summary>
-		public Control Icon => _icon ?? (_icon = new PackIconMaterial
-								{
-									Kind = PackIconMaterialKind.Settings,
-									Margin = new Thickness(10),
-									Spin = true
-								});
 
 		public void OnImportsSatisfied()
 		{
