@@ -53,6 +53,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	public class ConfigViewModel : Config<IConfigScreen>, IHaveIcon, IPartImportsSatisfiedNotification
 	{
 		private static readonly LogSource Log = new LogSource();
+		private Control _icon;
 
 		[Import]
 		public ICoreTranslations CoreTranslations { get; set; }
@@ -93,13 +94,12 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		/// <summary>
 		/// Set the default config icon for the view
 		/// </summary>
-		public Control Icon => new PackIconMaterial
-		{
-			Kind = PackIconMaterialKind.Settings,
-			Margin = new Thickness(10)
-		};
-
-
+		public Control Icon => _icon ?? (_icon = new PackIconMaterial
+								{
+									Kind = PackIconMaterialKind.Settings,
+									Margin = new Thickness(10),
+									Spin = true
+								});
 
 		public void OnImportsSatisfied()
 		{

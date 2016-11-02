@@ -31,11 +31,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.Log.Facade;
 using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Dapplo.CaliburnMicro.Extensions;
 
 #endregion
 
@@ -236,7 +236,7 @@ namespace Dapplo.CaliburnMicro.Metro
 			var haveIcon = model as IHaveIcon;
 			if (haveIcon != null && window.Icon == null)
 			{
-				window.Icon = haveIcon.Icon.ToBitmapSource(new Size(256,256));
+				WpfIconBehaviors.SetIcon(window, haveIcon.Icon);
 			}
 			// Just in case, make sure it's activated
 			window.Activate();

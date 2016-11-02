@@ -31,6 +31,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
@@ -87,7 +88,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 
 			// Make sure the margin is set, do this AFTER the icon are set
 			items.ApplyIconMargin(new Thickness(2, 2, 2, 2));
-			SetIcon(new PackIconMaterial
+
+			WpfIconBehaviors.SetIcon(TrayIcon as FrameworkElement, new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.Apps,
 				Background = Brushes.White,
