@@ -87,6 +87,9 @@ namespace Dapplo.CaliburnMicro.Menu
 			ClickAction?.Invoke(clickedItem);
 		}
 
+		/// <inheritdoc />
+		public string HotKeyHint { get; set; }
+
 		/// <summary>
 		/// This action is called when Click is invoked
 		/// </summary>
@@ -186,7 +189,7 @@ namespace Dapplo.CaliburnMicro.Menu
 		/// <summary>
 		///     The parent under which the IMenuItem is shown, null is root
 		/// </summary>
-		public virtual string ParentId { get; set; } = null;
+		public virtual string ParentId { get; set; }
 
 		#endregion
 	}

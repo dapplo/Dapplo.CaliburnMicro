@@ -63,6 +63,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				Spin = true,
 				SpinDuration = 3
 			};
+			HotKeyHint = "Alt+C";
 			// automatically update the DisplayName
 			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Configure));
 		}

@@ -47,5 +47,11 @@ namespace Dapplo.CaliburnMicro.Menu
 		///     Is called when the IMenuItem it clicked
 		/// </summary>
 		void Click(IMenuItem clickedItem);
+
+		/// <summary>
+		/// A string which describes which hotkey the menu entry would respond to.
+		/// This does NOT implement the hotkey binding, it's only a hint
+		/// </summary>
+		string HotKeyHint { get; set; }
 	}
 }

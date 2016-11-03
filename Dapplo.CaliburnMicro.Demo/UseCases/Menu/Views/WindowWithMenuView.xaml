@@ -24,6 +24,7 @@
 					<Setter Property="Icon" Value="{Binding Icon}" />
 					<Setter Property="Header" Value="{Binding DisplayName}" />
 					<Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
+					<Setter Property="InputGestureText" Value="{Binding HotKeyHint}"/>
 					<Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
 					<Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
 					<Style.Triggers>
