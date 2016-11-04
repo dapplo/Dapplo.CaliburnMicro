@@ -37,7 +37,7 @@ using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 using Dapplo.CaliburnMicro.Extensions;
 

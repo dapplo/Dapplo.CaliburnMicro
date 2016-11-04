@@ -35,7 +35,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Dapplo.Addons;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 
 #endregion
 

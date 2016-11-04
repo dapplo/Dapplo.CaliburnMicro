@@ -23,9 +23,10 @@
 
 using System;
 using System.ComponentModel;
+using System.Reactive.Linq;
 using Caliburn.Micro;
-using Dapplo.Utils.Events;
-using Dapplo.Utils.Extensions;
+using System.Reactive;
+using System.Reactive.Disposables;
 
 #endregion
 
@@ -42,11 +43,26 @@ namespace Dapplo.CaliburnMicro.Extensions
 		/// <param name="haveDisplayName">IHaveDisplayName</param>
 		/// <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
 		/// <param name="propertyName">string with the name of a property</param>
-		/// <returns>IEventObservable for the PropertyChanged event, dispose this to stop it</returns>
-		public static IEventObservable<PropertyChangedEventArgs> BindDisplayName(this IHaveDisplayName haveDisplayName, INotifyPropertyChanged notifyPropertyChanged, string propertyName)
+		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
+		/// <returns>IDisposable</returns>
+		public static IDisposable BindDisplayName(this IHaveDisplayName haveDisplayName, INotifyPropertyChanged notifyPropertyChanged, string propertyName, CompositeDisposable disposables = null)
 		{
-			var propertyChangedObservable = notifyPropertyChanged.ToObservable();
-			haveDisplayName.BindDisplayName(propertyChangedObservable, propertyName);
+			var propertyChangedObservable = notifyPropertyChanged.OnPropertyChangedPattern();
+			return haveDisplayName.BindDisplayName(propertyChangedObservable, propertyName, disposables);
+		}
+
+		/// <summary>
+		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
+		/// </summary>
+		/// <param name="haveDisplayName">IHaveDisplayName</param>
+		/// <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
+		/// <param name="propertyName">string with the name of a property</param>
+		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
+		/// <returns>IEventObservable for the PropertyChanged event, dispose this to stop it</returns>
+		public static IObservable<EventPattern<PropertyChangedEventArgs>> MultiBindDisplayName(this IHaveDisplayName haveDisplayName, INotifyPropertyChanged notifyPropertyChanged, string propertyName, CompositeDisposable disposables = null)
+		{
+			var propertyChangedObservable = notifyPropertyChanged.OnPropertyChangedPattern();
+			haveDisplayName.BindDisplayName(propertyChangedObservable, propertyName, disposables);
 			return propertyChangedObservable;
 		}
 
@@ -54,18 +70,17 @@ namespace Dapplo.CaliburnMicro.Extensions
 		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
 		/// </summary>
 		/// <param name="haveDisplayName">IHaveDisplayName</param>
-		/// <param name="eventObservable">IEventObservable for PropertyChangedEventArgs</param>
+		/// <param name="observable">IObservable for EventPattern of PropertyChangedEventArgs</param>
 		/// <param name="propertyName">string with the name of a property</param>
+		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
 		/// <returns>IDisposable for the event registration, dispose this to stop it</returns>
-		public static IDisposable BindDisplayName(this IHaveDisplayName haveDisplayName, IEventObservable<PropertyChangedEventArgs> eventObservable, string propertyName)
+		public static IDisposable BindDisplayName(this IHaveDisplayName haveDisplayName, IObservable<EventPattern<PropertyChangedEventArgs>> observable, string propertyName, CompositeDisposable disposables = null)
 		{
-			var propertyInfo = eventObservable.Source.GetType().GetProperty(propertyName);
+			var binding = observable.Where(args => args.EventArgs.PropertyName == propertyName)
+					.Subscribe(pattern => haveDisplayName.DisplayName = pattern.Sender.GetType().GetProperty(pattern.EventArgs.PropertyName).GetValue(pattern.Sender) as string);
+			disposables?.Add(binding);
 
-			haveDisplayName.DisplayName = propertyInfo.GetValue(eventObservable.Source) as string;
-			return eventObservable.OnPropertyChanged(s =>
-			{
-				haveDisplayName.DisplayName = propertyInfo.GetValue(eventObservable.Source) as string;
-			}, propertyName);
+			return binding;
 		}
 	}
 }

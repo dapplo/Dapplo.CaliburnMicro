@@ -35,7 +35,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using Dapplo.Utils.Resolving;
 
 #endregion

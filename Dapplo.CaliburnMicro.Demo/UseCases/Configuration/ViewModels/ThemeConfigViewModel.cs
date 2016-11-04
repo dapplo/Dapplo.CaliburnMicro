@@ -29,6 +29,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reactive.Disposables;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -45,7 +46,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	[Export(typeof(IConfigScreen))]
 	public sealed class ThemeConfigViewModel : ConfigScreen
 	{
-		private readonly Disposables _disposables = new Disposables();
+		/// <summary>
+		/// Here all disposables are registered, so we can clean the up
+		/// </summary>
+		private CompositeDisposable _disposables;
 
 		/// <summary>
 		/// The avaible themes
@@ -68,6 +72,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 
 		public override void Initialize(IConfig config)
 		{
+			// Prepare disposables
+			_disposables?.Dispose();
+			_disposables = new CompositeDisposable();
+
 			AvailableThemeAccents.Clear();
 			foreach (var themeAccent in Enum.GetValues(typeof(ThemeAccents)).Cast<ThemeAccents>())
 			{

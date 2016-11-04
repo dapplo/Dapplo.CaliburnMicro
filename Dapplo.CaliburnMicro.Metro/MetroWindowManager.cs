@@ -32,7 +32,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;

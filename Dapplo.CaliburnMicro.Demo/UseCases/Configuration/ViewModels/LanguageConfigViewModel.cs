@@ -25,15 +25,15 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Reactive.Disposables;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
-using Dapplo.Utils.Extensions;
-using Dapplo.Utils;
 
 #endregion
 
@@ -42,7 +42,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	[Export(typeof(IConfigScreen))]
 	public sealed class LanguageConfigViewModel : ConfigScreen
 	{
-		private readonly Disposables _disposables = new Disposables();
+		/// <summary>
+		/// Here all disposables are registered, so we can clean the up
+		/// </summary>
+		private CompositeDisposable _disposables;
 
 		public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
 
@@ -63,6 +66,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 
 		public override void Initialize(IConfig config)
 		{
+			// Prepare disposables
+			_disposables?.Dispose();
+			_disposables = new CompositeDisposable();
+
 			// Place this under the Ui parent
 			ParentId = nameof(ConfigIds.Ui);
 
@@ -70,13 +77,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(this.BindDisplayName(CoreTranslations, nameof(Languages.ICoreTranslations.Language)));
+			this.BindDisplayName(CoreTranslations, nameof(Languages.ICoreTranslations.Language), _disposables);
 
 			// automatically update the CanChangeLanguage state when a different language is selected
-			_disposables.Add(DemoConfiguration.OnPropertyChanged(pcEvent =>
-			{
-				NotifyOfPropertyChange(nameof(CanChangeLanguage));
-			}, nameof(IDemoConfiguration.Language)));
+			_disposables.Add(DemoConfiguration.OnPropertyChanged(nameof(IDemoConfiguration.Language)).Subscribe(pcEvent => NotifyOfPropertyChange(nameof(CanChangeLanguage))));
 
 			base.Initialize(config);
 		}

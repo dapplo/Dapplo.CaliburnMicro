@@ -35,7 +35,7 @@ using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using MahApps.Metro.Controls.Dialogs;
 
 #endregion

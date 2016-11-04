@@ -31,7 +31,7 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -68,7 +68,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			{
 				Id = "1"
 			};
-			var observable = menuItem.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.One));
+			var observable = menuItem.MultiBindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.One));
 			ChildNodes.Add(menuItem);
 
 			ChildNodes.Add(new MenuItem { Style = MenuItemStyles.Separator });

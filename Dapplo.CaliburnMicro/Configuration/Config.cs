@@ -31,7 +31,7 @@ using System.Collections.ObjectModel;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
 using Dapplo.InterfaceImpl.Extensions;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 
 #endregion
 

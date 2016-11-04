@@ -34,7 +34,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 
 #endregion
 

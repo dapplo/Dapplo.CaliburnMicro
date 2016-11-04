@@ -31,7 +31,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using Dapplo.Utils;
 
 #endregion

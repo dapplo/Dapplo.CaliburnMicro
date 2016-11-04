@@ -27,7 +27,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using Size = System.Windows.Size;
 
 namespace Dapplo.CaliburnMicro.Behaviors

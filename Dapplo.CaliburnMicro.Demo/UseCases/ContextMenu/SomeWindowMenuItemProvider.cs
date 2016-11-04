@@ -32,7 +32,7 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.Log.Facade;
+using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 
 #endregion

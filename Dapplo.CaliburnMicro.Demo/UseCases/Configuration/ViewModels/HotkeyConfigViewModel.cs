@@ -26,6 +26,7 @@
 #region Usings
 
 using System.ComponentModel.Composition;
+using System.Reactive.Disposables;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -41,7 +42,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	[Export(typeof(IConfigScreen))]
 	public sealed class HotkeyConfigViewModel : ConfigScreen
 	{
-		private readonly Disposables _disposables = new Disposables();
+		/// <summary>
+		/// Here all disposables are registered, so we can clean the up
+		/// </summary>
+		private CompositeDisposable _disposables;
 
 		[Import]
 		public IConfigTranslations ConfigTranslations { get; set; }
@@ -54,6 +58,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 
 		public override void Initialize(IConfig config)
 		{
+			// Prepare disposables
+			_disposables?.Dispose();
+			_disposables = new CompositeDisposable();
+
 			// Place this under the Ui parent
 			ParentId = nameof(ConfigIds.Ui);
 
@@ -61,7 +69,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Hotkey)));
+			this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Hotkey), _disposables);
 
 			base.Initialize(config);
 		}

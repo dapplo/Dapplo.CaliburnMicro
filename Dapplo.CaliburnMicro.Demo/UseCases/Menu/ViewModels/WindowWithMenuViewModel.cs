@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reactive.Disposables;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
@@ -40,7 +41,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 	[Export]
 	public class WindowWithMenuViewModel : Screen
 	{
-		private readonly Disposables _disposables = new Disposables();
+		/// <summary>
+		/// Here all disposables are registered, so we can clean the up
+		/// </summary>
+		private CompositeDisposable _disposables;
 
 		// ReSharper disable once CollectionNeverQueried.Global
 		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
@@ -56,33 +60,32 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 
 		protected override void OnActivate()
 		{
+			// Prepare disposables
+			_disposables?.Dispose();
+			_disposables = new CompositeDisposable();
+
 			var items = MenuItems.ToList();
-			var menuTranslationsObservable = MenuTranslations.ToObservable();
-			_disposables.Add(menuTranslationsObservable);
 
-			var contextMenuTranslationObservable = ContextMenuTranslations.ToObservable();
-			_disposables.Add(contextMenuTranslationObservable);
-
-			this.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.SomeWindow));
+			var contextMenuTranslationObservable = this.MultiBindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.SomeWindow), _disposables);
 			var fileMenuItem = new MenuItem
 			{
 				Id = "1_File"
 			};
-			fileMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.File));
+			var menuTranslationsObservable = fileMenuItem.MultiBindDisplayName(MenuTranslations, nameof(IMenuTranslations.File), _disposables);
 			items.Add(fileMenuItem);
 
 			var editMenuItem = new MenuItem
 			{
 				Id = "2_Edit"
 			};
-			editMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit));
+			editMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit), _disposables);
 			items.Add(editMenuItem);
 
 			var aboutMenuItem = new MenuItem
 			{
 				Id = "3_About"
 			};
-			aboutMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About));
+			aboutMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About), _disposables);
 			items.Add(aboutMenuItem);
 
 			items.Add(new MenuItem
@@ -98,7 +101,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 				ParentId = "1_File",
 				ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
 			};
-			exitMenuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit));
+			exitMenuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit), _disposables);
 			items.Add(exitMenuItem);
 
 			// Make sure all items are initialized
