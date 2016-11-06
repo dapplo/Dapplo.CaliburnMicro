@@ -65,7 +65,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			};
 			HotKeyHint = "Alt+C";
 			// automatically update the DisplayName
-			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.Configure));
+			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Configure));
 		}
 
 		public override void Click(IMenuItem clickedItem)

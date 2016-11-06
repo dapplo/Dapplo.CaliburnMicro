@@ -33,54 +33,104 @@ using System.Reactive.Disposables;
 namespace Dapplo.CaliburnMicro.Extensions
 {
 	/// <summary>
+	/// Binding describing all information needed for binding names
+	/// </summary>
+	public class NameBinding : IDisposable
+	{
+		/// <summary>
+		/// Create the name binding object
+		/// </summary>
+		/// <param name="observable"></param>
+		/// <param name="notifyPropertyChanged"></param>
+		public NameBinding(IObservable<EventPattern<PropertyChangedEventArgs>> observable, INotifyPropertyChanged notifyPropertyChanged)
+		{
+			Observable = observable;
+			NotifyPropertyChanged = notifyPropertyChanged;
+			Disposables = new CompositeDisposable();
+		}
+		/// <summary>
+		/// Observable as event provider for the name binding
+		/// </summary>
+		public IObservable<EventPattern<PropertyChangedEventArgs>> Observable { get; }
+
+		/// <summary>
+		/// The source of the events
+		/// </summary>
+		public INotifyPropertyChanged NotifyPropertyChanged { get; }
+
+		/// <summary>
+		/// All bindings are stored here
+		/// </summary>
+		public CompositeDisposable Disposables { get; }
+
+		/// <summary>
+		/// Dispose the underlying bindings which are stored in a CompositeDisposable
+		/// </summary>
+		public void Dispose()
+		{
+			Disposables?.Dispose();
+		}
+	}
+
+	/// <summary>
 	/// Extensions for IHaveDisplayName
 	/// </summary>
 	public static class HaveDisplayNameExtensions
 	{
 		/// <summary>
-		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
+		/// Copy the value specified by the property name from the source to the haveDisplayName
 		/// </summary>
 		/// <param name="haveDisplayName">IHaveDisplayName</param>
-		/// <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
-		/// <param name="propertyName">string with the name of a property</param>
-		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
-		/// <returns>IDisposable</returns>
-		public static IDisposable BindDisplayName(this IHaveDisplayName haveDisplayName, INotifyPropertyChanged notifyPropertyChanged, string propertyName, CompositeDisposable disposables = null)
+		/// <param name="eventPattern"></param>
+		private static void CopyValue(this IHaveDisplayName haveDisplayName, EventPattern<PropertyChangedEventArgs> eventPattern)
 		{
-			var propertyChangedObservable = notifyPropertyChanged.OnPropertyChangedPattern();
-			return haveDisplayName.BindDisplayName(propertyChangedObservable, propertyName, disposables);
+			var source = eventPattern.Sender;
+			var propertyName = eventPattern.EventArgs.PropertyName;
+			var value = source.GetType().GetProperty(propertyName).GetValue(source) as string;
+			haveDisplayName.DisplayName = value;
 		}
 
 		/// <summary>
-		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
+		/// Create a binding between the INotifyPropertyChanged and optional IHaveDisplayName objects.
 		/// </summary>
-		/// <param name="haveDisplayName">IHaveDisplayName</param>
 		/// <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
-		/// <param name="propertyName">string with the name of a property</param>
-		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
-		/// <returns>IEventObservable for the PropertyChanged event, dispose this to stop it</returns>
-		public static IObservable<EventPattern<PropertyChangedEventArgs>> MultiBindDisplayName(this IHaveDisplayName haveDisplayName, INotifyPropertyChanged notifyPropertyChanged, string propertyName, CompositeDisposable disposables = null)
+		/// <param name="haveDisplayName">optional IHaveDisplayName for the first binding</param>
+		/// <param name="propertyName">optional property name for the first binding</param>
+		/// <returns>NameBinding</returns>
+		public static NameBinding CreateBinding(this INotifyPropertyChanged notifyPropertyChanged, IHaveDisplayName haveDisplayName = null, string propertyName = null)
 		{
 			var propertyChangedObservable = notifyPropertyChanged.OnPropertyChangedPattern();
-			haveDisplayName.BindDisplayName(propertyChangedObservable, propertyName, disposables);
-			return propertyChangedObservable;
+			var nameBinding =  new NameBinding(propertyChangedObservable, notifyPropertyChanged);
+			if (haveDisplayName != null)
+			{
+				nameBinding.AddDisplayNameBinding(haveDisplayName, propertyName);
+			}
+			return nameBinding;
 		}
 
 		/// <summary>
-		/// Bind the property of a INotifyPropertyChanged implementing class to the DisplayName
+		/// Add a displayname binding to the NameBinding
 		/// </summary>
+		/// <param name="nameBinding">NameBinding to bind to</param>
 		/// <param name="haveDisplayName">IHaveDisplayName</param>
-		/// <param name="observable">IObservable for EventPattern of PropertyChangedEventArgs</param>
-		/// <param name="propertyName">string with the name of a property</param>
-		/// <param name="disposables">optional CompositeDisposable to add the binding to</param>
-		/// <returns>IDisposable for the event registration, dispose this to stop it</returns>
-		public static IDisposable BindDisplayName(this IHaveDisplayName haveDisplayName, IObservable<EventPattern<PropertyChangedEventArgs>> observable, string propertyName, CompositeDisposable disposables = null)
+		/// <param name="propertyName">Name of the property in the original INotifyPropertyChanged object</param>
+		/// <returns>binding</returns>
+		public static NameBinding AddDisplayNameBinding(this NameBinding nameBinding, IHaveDisplayName haveDisplayName, string propertyName)
 		{
-			var binding = observable.Where(args => args.EventArgs.PropertyName == propertyName)
-					.Subscribe(pattern => haveDisplayName.DisplayName = pattern.Sender.GetType().GetProperty(pattern.EventArgs.PropertyName).GetValue(pattern.Sender) as string);
-			disposables?.Add(binding);
-
-			return binding;
+			if (haveDisplayName == null)
+			{
+				throw new ArgumentNullException(nameof(haveDisplayName));
+			}
+			if (propertyName == null)
+			{
+				throw new ArgumentNullException(nameof(propertyName));
+			}
+			var disposable = nameBinding.Observable.Where(args => args.EventArgs.PropertyName == propertyName).Subscribe(haveDisplayName.CopyValue);
+			// Update the display name right away
+			haveDisplayName.DisplayName = nameBinding.NotifyPropertyChanged.GetType().GetProperty(propertyName).GetValue(nameBinding.NotifyPropertyChanged) as string;
+			// If the disposables is passed, add the disposable
+			nameBinding.Disposables?.Add(disposable);
+			return nameBinding;
 		}
 	}
 }

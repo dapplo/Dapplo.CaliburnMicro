@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu
 			Id = "A_SaveAs";
 			ParentId = "1_File";
 			// automatically update the DisplayName
-			this.BindDisplayName(MenuTranslations, nameof(IMenuTranslations.SaveAs));
+			MenuTranslations.CreateBinding(this, nameof(IMenuTranslations.SaveAs));
 			Icon = new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.ContentSave

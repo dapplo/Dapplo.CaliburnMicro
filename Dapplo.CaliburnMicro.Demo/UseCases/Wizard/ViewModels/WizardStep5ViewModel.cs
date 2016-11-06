@@ -51,7 +51,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		public override void Initialize()
 		{
 			// automatically update the DisplayName
-			_displayNameUpdater = this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.TitleStep5));
+			_displayNameUpdater = WizardTranslations.CreateBinding(this, nameof(IWizardTranslations.TitleStep5));
 		}
 
 		public override void Terminate()

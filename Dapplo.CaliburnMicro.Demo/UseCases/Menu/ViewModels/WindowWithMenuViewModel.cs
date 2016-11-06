@@ -31,8 +31,6 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
-using Dapplo.Utils;
-using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -64,28 +62,36 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			_disposables?.Dispose();
 			_disposables = new CompositeDisposable();
 
-			var items = MenuItems.ToList();
+			// Remove all items, so we can build them
+			Items.Clear();
 
-			var contextMenuTranslationObservable = this.MultiBindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.SomeWindow), _disposables);
+			var contextMenuNameBinding = ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.SomeWindow));
+
+			// Make sure the contextMenuNameBinding is disposed when this is no longer active
+			_disposables.Add(contextMenuNameBinding);
+			
+			var items = MenuItems.ToList();
 			var fileMenuItem = new MenuItem
 			{
 				Id = "1_File"
 			};
-			var menuTranslationsObservable = fileMenuItem.MultiBindDisplayName(MenuTranslations, nameof(IMenuTranslations.File), _disposables);
+			var menuNameBinding = MenuTranslations.CreateBinding(fileMenuItem, nameof(IMenuTranslations.File));
+			// Make sure the menuNameBinding is disposed when this is no longer active
+			_disposables.Add(menuNameBinding);
 			items.Add(fileMenuItem);
 
 			var editMenuItem = new MenuItem
 			{
 				Id = "2_Edit"
 			};
-			editMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.Edit), _disposables);
+			menuNameBinding.AddDisplayNameBinding(editMenuItem, nameof(IMenuTranslations.Edit));
 			items.Add(editMenuItem);
 
 			var aboutMenuItem = new MenuItem
 			{
 				Id = "3_About"
 			};
-			aboutMenuItem.BindDisplayName(menuTranslationsObservable, nameof(IMenuTranslations.About), _disposables);
+			menuNameBinding.AddDisplayNameBinding(aboutMenuItem, nameof(IMenuTranslations.About));
 			items.Add(aboutMenuItem);
 
 			items.Add(new MenuItem
@@ -101,7 +107,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 				ParentId = "1_File",
 				ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
 			};
-			exitMenuItem.BindDisplayName(contextMenuTranslationObservable, nameof(IContextMenuTranslations.Exit), _disposables);
+			contextMenuNameBinding.AddDisplayNameBinding(exitMenuItem, nameof(IContextMenuTranslations.Exit));
 			items.Add(exitMenuItem);
 
 			// Make sure all items are initialized

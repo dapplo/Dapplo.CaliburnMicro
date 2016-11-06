@@ -62,14 +62,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				Kind = PackIconMaterialKind.HumanChild
 			};
 			// automatically update the DisplayName
-			this.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.WithChildren));
-
+			var binding = ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.WithChildren));
 			var menuItem = new MenuItem
 			{
 				Id = "1"
 			};
-			var observable = menuItem.MultiBindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.One));
 			ChildNodes.Add(menuItem);
+
+			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.One));
 
 			ChildNodes.Add(new MenuItem { Style = MenuItemStyles.Separator });
 
@@ -77,14 +77,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			{
 				Id = "2"
 			};
-			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Two));
+			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Two));
 			ChildNodes.Add(menuItem);
 
 			menuItem = new MenuItem
 			{
 				Id = "3"
 			};
-			menuItem.BindDisplayName(observable, nameof(IContextMenuTranslations.Three));
+			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Three));
 			ChildNodes.Add(menuItem);
 		}
 

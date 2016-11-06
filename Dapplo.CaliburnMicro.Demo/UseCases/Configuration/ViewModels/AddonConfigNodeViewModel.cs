@@ -46,7 +46,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			this.BindDisplayName(ConfigTranslations, nameof(ConfigTranslations.Addons));
+			ConfigTranslations.CreateBinding(this, nameof(ConfigTranslations.Addons));
 			CanActivate = false;
 			Id = nameof(ConfigIds.Addons);
 		}

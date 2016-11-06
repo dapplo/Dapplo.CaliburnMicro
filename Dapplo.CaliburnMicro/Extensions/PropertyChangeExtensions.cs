@@ -14,6 +14,7 @@ namespace Dapplo.CaliburnMicro.Extensions
 	public static class PropertyChangeExtensions
 	{
 		private static readonly LogSource Log = new LogSource();
+
 		/// <summary>
 		/// Create an observable for the INotifyPropertyChanged
 		/// </summary>

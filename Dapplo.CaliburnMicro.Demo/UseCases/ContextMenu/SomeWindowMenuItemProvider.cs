@@ -72,7 +72,8 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 						WindowManager.ShowWindow(WindowWithMenuViewModel);
 					}
 				};
-				_menuItem.BindDisplayName(ContextMenuTranslations, nameof(IContextMenuTranslations.SomeWindow));
+				// Binding without disposing
+				ContextMenuTranslations.CreateBinding(_menuItem, nameof(IContextMenuTranslations.SomeWindow));
 			}
 			yield return _menuItem;
 		}

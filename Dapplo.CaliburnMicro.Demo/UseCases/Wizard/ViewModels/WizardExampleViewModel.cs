@@ -78,7 +78,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			this.BindDisplayName(WizardTranslations, nameof(IWizardTranslations.Title));
+			WizardTranslations.CreateBinding(this, nameof(IWizardTranslations.Title));
 			// Set the WizardScreens as TrulyObservableCollection (needed for the WizardProgressViewModel) and by ordering them
 			WizardScreens = new TrulyObservableCollection<IWizardScreen>(WizardItems.OrderBy(x => x.Order));
 			WizardProgress = new WizardProgressViewModel(this);

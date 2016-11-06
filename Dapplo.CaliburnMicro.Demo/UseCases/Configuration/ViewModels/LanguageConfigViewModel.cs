@@ -77,7 +77,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			this.BindDisplayName(CoreTranslations, nameof(Languages.ICoreTranslations.Language), _disposables);
+			_disposables.Add(CoreTranslations.CreateBinding(this, nameof(Languages.ICoreTranslations.Language)));
 
 			// automatically update the CanChangeLanguage state when a different language is selected
 			_disposables.Add(DemoConfiguration.OnPropertyChanged(nameof(IDemoConfiguration.Language)).Subscribe(pcEvent => NotifyOfPropertyChange(nameof(CanChangeLanguage))));

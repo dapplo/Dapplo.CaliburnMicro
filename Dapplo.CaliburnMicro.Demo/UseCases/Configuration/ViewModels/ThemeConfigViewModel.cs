@@ -37,7 +37,6 @@ using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Utils.Extensions;
-using Dapplo.Utils;
 
 #endregion
 
@@ -97,7 +96,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			config.Register(DemoConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(this.BindDisplayName(ConfigTranslations, nameof(IConfigTranslations.Theme)));
+			_disposables.Add(ConfigTranslations.CreateBinding(this, nameof(IConfigTranslations.Theme)));
 
 			base.Initialize(config);
 		}
