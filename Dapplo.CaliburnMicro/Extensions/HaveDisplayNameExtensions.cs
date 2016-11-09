@@ -60,7 +60,7 @@ namespace Dapplo.CaliburnMicro.Extensions
 
 		/// <summary>
 		/// All bindings are stored here
-		/// </summary>
+		/// </summary>tran
 		public CompositeDisposable Disposables { get; }
 
 		/// <summary>

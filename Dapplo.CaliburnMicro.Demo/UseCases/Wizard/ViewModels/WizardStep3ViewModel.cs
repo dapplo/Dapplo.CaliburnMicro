@@ -30,7 +30,7 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
-using Dapplo.Utils.Extensions;
+
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
@@ -53,8 +53,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			// automatically update the DisplayName
 			_displayNameUpdater = WizardTranslations.CreateBinding(this, nameof(IWizardTranslations.TitleStep3));
 			IsVisible = false;
-			ParentWizard.OnPropertyChanged(s => IsVisible = ParentWizard.IsStep3Visible, nameof(WizardExampleViewModel.IsStep3Visible));
-
+			ParentWizard.OnPropertyChanged(nameof(WizardExampleViewModel.IsStep3Visible)).Subscribe(s => IsVisible = ParentWizard.IsStep3Visible);
 		}
 
 		public override void Terminate()
