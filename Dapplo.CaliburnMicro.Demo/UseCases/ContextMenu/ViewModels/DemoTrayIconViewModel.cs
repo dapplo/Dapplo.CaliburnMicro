@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -54,11 +55,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 		private static readonly LogSource Log = new LogSource();
 
 		[ImportMany("contextmenu", typeof(IMenuItem))]
-		private IEnumerable<IMenuItem> ContextMenuItems { get; set; }
-
-
-		[ImportMany("contextmenu", typeof(IMenuItemProvider))]
-		private IEnumerable<IMenuItemProvider> ContextMenuItemProviders { get; set; }
+		private IEnumerable<Lazy<IMenuItem>> ContextMenuItems { get; set; }
 
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
@@ -83,9 +80,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Title));
 
 			var items = new List<IMenuItem>();
-			items.AddRange(ContextMenuItems);
-			// Use IMenuItemProvider, if any
-			items.AddRange(ContextMenuItemProviders.SelectMany(itemProvider => itemProvider.ProvideMenuItems()));
+
+			// Lazy values
+			items.AddRange(ContextMenuItems.Select(lazy => lazy.Value));
+
 			items.Add(new MenuItem
 			{
 				Style = MenuItemStyles.Separator,

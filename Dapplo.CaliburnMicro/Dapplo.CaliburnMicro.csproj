@@ -111,7 +111,6 @@
     <Compile Include="Extensions\IniSectionExtensions.cs" />
     <Compile Include="Extensions\LanguageChangedExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
-    <Compile Include="Menu\IMenuItemProvider.cs" />
     <Compile Include="Menu\MenuItemStyles.cs" />
     <Compile Include="Translations\IConfigTranslations.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />

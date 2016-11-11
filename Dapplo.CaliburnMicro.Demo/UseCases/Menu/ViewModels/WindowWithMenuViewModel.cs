@@ -21,6 +21,7 @@
 
 #region using
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
@@ -54,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 		
 		[ImportMany("menu", typeof(IMenuItem))]
-		private IEnumerable<IMenuItem> MenuItems { get; set; }
+		private IEnumerable<Lazy<IMenuItem>> MenuItems { get; set; }
 
 		protected override void OnActivate()
 		{
@@ -70,7 +71,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			// Make sure the contextMenuNameBinding is disposed when this is no longer active
 			_disposables.Add(contextMenuNameBinding);
 			
-			var items = MenuItems.ToList();
+			var items = MenuItems.Select(x => x.Value).ToList();
 			var fileMenuItem = new MenuItem
 			{
 				Id = "1_File"

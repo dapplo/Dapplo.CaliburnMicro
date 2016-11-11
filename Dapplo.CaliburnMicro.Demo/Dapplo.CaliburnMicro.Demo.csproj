@@ -70,10 +70,6 @@
       <HintPath>..\packages\Dapplo.Log.1.0.22\lib\net45\Dapplo.Log.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Log.Facade, Version=0.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Log.Facade.0.5.4\lib\net45\Dapplo.Log.Facade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Dapplo.Log.Loggers, Version=1.0.22.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.Loggers.1.0.22\lib\net45\Dapplo.Log.Loggers.dll</HintPath>
       <Private>True</Private>
@@ -151,7 +147,7 @@
     <Compile Include="UseCases\Configuration\ViewModels\ThemeConfigViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
-    <Compile Include="UseCases\ContextMenu\SomeWindowMenuItemProvider.cs" />
+    <Compile Include="UseCases\ContextMenu\SomeWindowMenuItems.cs" />
     <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ExitMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\ConfigMenuItem.cs" />

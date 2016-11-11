@@ -25,7 +25,7 @@
 
 #region Usings
 
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -40,13 +40,12 @@ using MahApps.Metro.IconPacks;
 namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 {
 	/// <summary>
-	/// This will add an extry for the SomeWindow to the context menu, implemented via the IMenuItemProvider
+	/// This provides the IMenuItem to open the WindowWithMenuViewModel
 	/// </summary>
-	[Export("contextmenu", typeof(IMenuItemProvider))]
-	public sealed class SomeWindowMenuItemProvider : IMenuItemProvider
+	public sealed class SomeWindowMenuItems
 	{
 		private static readonly LogSource Log = new LogSource();
-		private MenuItem _menuItem;
+
 		[Import]
 		public IWindowManager WindowManager { get; set; }
 
@@ -56,26 +55,30 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		public IEnumerable<IMenuItem> ProvideMenuItems()
+		/// <summary>
+		/// This will add an extry for the SomeWindow to the context menu.
+		/// As it's imported via "Lazy" the item will only be called on the UI thread!
+		/// </summary>
+		[Export("contextmenu", typeof(IMenuItem))]
+		public IMenuItem SomeWindowMenuItem
 		{
-			if (_menuItem == null)
-			{
-				_menuItem = new MenuItem
+			get {
+				var menuItem = new MenuItem
 				{
 					Icon = new PackIconMaterial
 					{
 						Kind = PackIconMaterialKind.ViewList
 					},
-					ClickAction = (clickedItem) =>
+					ClickAction = clickedItem =>
 					{
 						Log.Debug().WriteLine("SomeWindow");
 						WindowManager.ShowWindow(WindowWithMenuViewModel);
 					}
 				};
 				// Binding without disposing
-				ContextMenuTranslations.CreateBinding(_menuItem, nameof(IContextMenuTranslations.SomeWindow));
+				ContextMenuTranslations.CreateBinding(menuItem, nameof(IContextMenuTranslations.SomeWindow));
+				return menuItem;
 			}
-			yield return _menuItem;
 		}
 	}
 }
