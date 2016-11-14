@@ -31,6 +31,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
 using Dapplo.Utils;
 
@@ -79,8 +80,8 @@ namespace Dapplo.CaliburnMicro
 			// Hook unhandled exceptions in tasks
 			TaskScheduler.UnobservedTaskException += HandleTaskException;
 
-			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown
-			Dispatcher.CurrentDispatcher.ShutdownStarted += async (s, e) => await StopBootstrapperAsync().ConfigureAwait(false);
+			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown, this uses a little hack to make sure there is no block
+			Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) => StopBootstrapperAsync().WaitWithNestedMessageLoop();
 		}
 
 		/// <summary>
