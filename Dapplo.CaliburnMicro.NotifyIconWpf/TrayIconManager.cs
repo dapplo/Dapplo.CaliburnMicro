@@ -58,7 +58,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 			new Dictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>>();
 
 		[ImportMany]
-		private IEnumerable<ITrayIconViewModel> TrayIconViewModels { get; set; }
+		private IEnumerable<Lazy<ITrayIconViewModel>> TrayIconViewModels { get; set; }
 
 		[Import]
 		private IWindowManager WindowsManager { get; set; }
@@ -105,7 +105,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 		{
 			await Execute.OnUIThreadAsync(() =>
 			{
-				foreach (var trayIconViewModel in TrayIconViewModels)
+				foreach (var trayIconViewModel in TrayIconViewModels.Select(x=> x.Value))
 				{
 					// Get the view, to store it as ITrayIcon
 					trayIconViewModel.ViewAttached += (sender, e) =>

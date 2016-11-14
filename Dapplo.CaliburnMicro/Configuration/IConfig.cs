@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Dapplo.CaliburnMicro.Tree;
@@ -47,7 +48,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     The config screens for the config UI
 		/// </summary>
-		IEnumerable<IConfigScreen> ConfigScreens { get; set; }
+		IEnumerable<Lazy<IConfigScreen>> ConfigScreens { get; set; }
 
 		/// <summary>
 		///     Returns the current config screen
@@ -104,7 +105,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     The IConfigScreen items of the config
 		/// </summary>
-		new IEnumerable<TConfigScreen> ConfigScreens { get; }
+		new IEnumerable<Lazy<TConfigScreen>> ConfigScreens { get; }
 
 		/// <summary>
 		///     Returns the current config screen

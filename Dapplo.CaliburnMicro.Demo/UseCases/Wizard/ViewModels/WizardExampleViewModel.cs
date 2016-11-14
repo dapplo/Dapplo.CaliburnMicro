@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -41,11 +42,11 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	[Export]
 	public class WizardExampleViewModel : Wizard<IWizardScreen>, IPartImportsSatisfiedNotification
 	{
-		private bool _isStep2Enabled = false;
-		private bool _isStep3Visible = false;
+		private bool _isStep2Enabled;
+		private bool _isStep3Visible;
 
 		[ImportMany]
-		private IEnumerable<IWizardScreen> WizardItems { get; set; }
+		private IEnumerable<Lazy<IWizardScreen>> WizardItems { get; set; }
 
 		[Import]
 		public IWizardTranslations WizardTranslations { get; set; }
@@ -80,7 +81,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			// automatically update the DisplayName
 			WizardTranslations.CreateBinding(this, nameof(IWizardTranslations.Title));
 			// Set the WizardScreens as TrulyObservableCollection (needed for the WizardProgressViewModel) and by ordering them
-			WizardScreens = new TrulyObservableCollection<IWizardScreen>(WizardItems.OrderBy(x => x.Order));
+			WizardScreens = new TrulyObservableCollection<IWizardScreen>(WizardItems.Select(x => x.Value).OrderBy(x => x.Order));
 			WizardProgress = new WizardProgressViewModel(this);
 		}
 

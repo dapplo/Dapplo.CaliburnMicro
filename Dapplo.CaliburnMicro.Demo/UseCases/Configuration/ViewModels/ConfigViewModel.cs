@@ -25,6 +25,7 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		///     Get all settings controls, these are the items that are displayed.
 		/// </summary>
 		[ImportMany]
-		public override IEnumerable<IConfigScreen> ConfigScreens { get; set; }
+		public override IEnumerable<Lazy<IConfigScreen>> ConfigScreens { get; set; }
 
 		/// <summary>
 		///     Used to show a "normal" dialog

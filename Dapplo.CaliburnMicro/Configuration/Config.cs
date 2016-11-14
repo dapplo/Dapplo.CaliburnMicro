@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Tree;
 using Dapplo.InterfaceImpl.Extensions;
@@ -61,7 +62,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 
 				TreeItems.Clear();
 				// Rebuild a tree for the ConfigScreens
-				foreach (var configScreen in ConfigScreens.CreateTree(screen => screen.Contains(_filter)))
+				foreach (var configScreen in ConfigScreens.Select(c => c.Value).CreateTree(screen => screen.Contains(_filter)))
 				{
 					TreeItems.Add(configScreen);
 				}
@@ -75,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		{
 			Log.Verbose().WriteLine("Initializing config");
 
-			foreach (var configScreen in ConfigScreens)
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value))
 			{
 				configScreen.Initialize(this);
 			}
@@ -92,7 +93,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		public virtual void Terminate()
 		{
 			Log.Verbose().WriteLine("Terminating config");
-			foreach (var configScreen in ConfigScreens)
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value))
 			{
 				configScreen.Terminate();
 			}
@@ -108,15 +109,15 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <summary>
 		///     The TConfigScreen items of the config
 		/// </summary>
-		public virtual IEnumerable<TConfigScreen> ConfigScreens { get; set; }
+		public virtual IEnumerable<Lazy<TConfigScreen>> ConfigScreens { get; set; }
 
 		/// <summary>
 		///     This implements IConfig.ConfigScreens via ConfigScreens
 		/// </summary>
-		IEnumerable<IConfigScreen> IConfig.ConfigScreens
+		IEnumerable<Lazy<IConfigScreen>> IConfig.ConfigScreens
 		{
-			get { return ConfigScreens; }
-			set { ConfigScreens = value as ICollection<TConfigScreen>; }
+			get { return ConfigScreens.Cast<Lazy<IConfigScreen>>(); }
+			set { ConfigScreens = value as ICollection<Lazy<TConfigScreen>>; }
 		}
 
 		/// <summary>
@@ -150,7 +151,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 			if (CanCancel)
 			{
 				// Tell all IConfigScreen to Rollback
-				foreach (var configScreen in ConfigScreens)
+				foreach (var configScreen in ConfigScreens.Select(c => c.Value))
 				{
 					configScreen.Rollback();
 				}
@@ -186,7 +187,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 			if (CanOk)
 			{
 				// Tell all IConfigScreen to commit
-				foreach (var configScreen in ConfigScreens)
+				foreach (var configScreen in ConfigScreens.Select(c => c.Value))
 				{
 					configScreen.Commit();
 				}
@@ -228,7 +229,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		public override void CanClose(Action<bool> callback)
 		{
 			var result = true;
-			foreach (var configScreen in ConfigScreens)
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value))
 			{
 				configScreen.CanClose(canClose => result &= canClose);
 			}
@@ -253,12 +254,12 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// </summary>
 		protected override void OnActivate()
 		{
-			Items.AddRange(ConfigScreens);
+			Items.AddRange(ConfigScreens.Select(c => c.Value));
 
 			Initialize();
 
 			// Build a tree for the ConfigScreens
-			foreach (var configScreen in ConfigScreens.CreateTree())
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value).CreateTree())
 			{
 				TreeItems.Add(configScreen);
 			}
