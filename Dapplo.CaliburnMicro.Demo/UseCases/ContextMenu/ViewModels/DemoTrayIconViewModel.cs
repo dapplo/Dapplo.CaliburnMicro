@@ -94,12 +94,12 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			// Make sure the margin is set, do this AFTER the icon are set
 			items.ApplyIconMargin(new Thickness(2, 2, 2, 2));
 
-			IconBehavior.SetIcon(TrayIcon as FrameworkElement, new PackIconMaterial
+			Icon = new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.Apps,
 				Background = Brushes.White,
 				Foreground = Brushes.Black,
-			});
+			};
 			Show();
 			EventAggregator.Subscribe(this);
 		}

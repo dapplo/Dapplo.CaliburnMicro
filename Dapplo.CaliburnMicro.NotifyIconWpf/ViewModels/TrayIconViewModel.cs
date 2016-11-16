@@ -97,7 +97,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 			set
 			{
 				var taskbarIcon = TrayIcon as FrameworkElement;
-				IconBehavior.SetIcon(taskbarIcon, value);
+				taskbarIcon?.SetCurrentValue(FrameworkElementIcon.ValueProperty, value);
 			}
 		}
 

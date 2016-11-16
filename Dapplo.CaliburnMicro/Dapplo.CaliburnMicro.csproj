@@ -103,11 +103,9 @@
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="Behaviors\EnumCheck.cs" />
-    <Compile Include="Behaviors\EnumGroup.cs" />
-    <Compile Include="Behaviors\EnumSelector.cs" />
     <Compile Include="Behaviors\EnumVisibility.cs" />
     <Compile Include="Behaviors\IBehavior.cs" />
-    <Compile Include="Behaviors\IconBehavior.cs" />
+    <Compile Include="Behaviors\FrameworkElementIcon.cs" />
     <Compile Include="Behaviors\NullVisibility.cs" />
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroBootstrapper.cs" />

@@ -236,8 +236,8 @@ namespace Dapplo.CaliburnMicro.Metro
 			var haveIcon = model as IHaveIcon;
 			if (haveIcon != null && window.Icon == null)
 			{
-				// Now ussu the attached behavior to set the icon
-				IconBehavior.SetIcon(window, haveIcon.Icon);
+				// Now use the attached behavior to set the icon
+				window.SetCurrentValue(FrameworkElementIcon.ValueProperty, haveIcon.Icon);
 			}
 			// Just in case, make sure it's activated
 			window.Activate();

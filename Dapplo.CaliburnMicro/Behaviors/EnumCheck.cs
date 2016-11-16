@@ -27,7 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 #endregion
@@ -35,27 +34,16 @@ using System.Linq;
 namespace Dapplo.CaliburnMicro.Behaviors
 {
 	/// <summary>
+	/// This handles the 
 	/// This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
 	/// </summary>
 	public class EnumCheck
 	{
-		private readonly List<object> _parsedTargetValues = new List<object>();
-
-		public EnumCheck()
-		{
-			ParsedTargetValues = _parsedTargetValues.AsReadOnly();
-		}
+		private readonly IList<object> _parsedTargetValues = new List<object>();
 
 		public object Value { get; private set; }
 
 		public string TargetValue { get; private set; }
-
-		public ReadOnlyCollection<object> ParsedTargetValues { get; }
-
-		public object ParsedTargetValue
-		{
-			get { return ParsedTargetValues.FirstOrDefault(); }
-		}
 
 		public bool IsMatch { get; private set; }
 
@@ -86,15 +74,19 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		{
 			_parsedTargetValues.Clear();
 
-			if ((Value != null) && Value is Enum && !string.IsNullOrEmpty(TargetValue))
+			if (!(Value is Enum) || string.IsNullOrEmpty(TargetValue))
 			{
-				var parsedValues =
-					from targetValue in TargetValue.Split(',')
-					let trimmedTargetValue = targetValue.Trim()
-					where trimmedTargetValue.Length > 0
-					select Enum.Parse(Value.GetType(), trimmedTargetValue, false);
+				return;
+			}
+			var parsedValues =
+				from targetValue in TargetValue.Split(',')
+				let trimmedTargetValue = targetValue.Trim()
+				where trimmedTargetValue.Length > 0
+				select Enum.Parse(Value.GetType(), trimmedTargetValue, false);
 
-				_parsedTargetValues.AddRange(parsedValues);
+			foreach (var parsedValue in parsedValues)
+			{
+				_parsedTargetValues.Add(parsedValue);
 			}
 		}
 

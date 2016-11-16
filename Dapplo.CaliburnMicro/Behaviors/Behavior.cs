@@ -41,7 +41,11 @@ namespace Dapplo.CaliburnMicro.Behaviors
 	{
 		private readonly WeakReference _hostReference;
 
-		protected Behavior(DependencyObject host)
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="host">DependencyObject</param>
+		protected Behavior(THost host)
 		{
 			Contract.Requires(host is THost, "Host is not the expected type");
 
@@ -53,35 +57,57 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			return (THost) _hostReference.Target;
 		}
 
+		/// <summary>
+		/// Returns if the Behavior is applicable for the specified DependencyObject
+		/// </summary>
+		/// <param name="host">THost which extends DependencyObject</param>
+		/// <returns>bool</returns>
 		protected virtual bool IsApplicable(THost host)
 		{
 			return true;
 		}
 
+		/// <summary>
+		/// Attach this Behavior to the specified DependencyObject
+		/// </summary>
+		/// <param name="host">THost which extends DependencyObject</param>
 		protected virtual void Attach(THost host)
 		{
 		}
 
+		/// <summary>
+		/// Remove this Behavior from the specified DependencyObject
+		/// </summary>
+		/// <param name="host">THost which extends DependencyObject</param>
 		protected virtual void Detach(THost host)
 		{
 		}
 
+		/// <summary>
+		/// Let the behavior update it's "stuffT for the specified host
+		/// </summary>
+		/// <param name="host">THost which extends DependencyObject</param>
 		protected abstract void Update(THost host);
 
-		protected void TryUpdate(Action<THost> update)
+		/// <summary>
+		/// Let the behavior update it's "stuffT for the specified host
+		/// </summary>
+		/// <param name="updateAction">Action of THost (which extends DependencyObject)</param>
+		protected void TryUpdate(Action<THost> updateAction)
 		{
-			Contract.Requires(update != null);
+			Contract.Requires(updateAction != null);
 
 			var host = GetHost();
 
 			if (host != null)
 			{
-				update(host);
+				updateAction(host);
 			}
 		}
 
 		#region IBehavior
 
+		/// <inheritdoc />
 		public bool IsApplicable()
 		{
 			var host = GetHost();
@@ -89,6 +115,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			return (host != null) && IsApplicable(host);
 		}
 
+		/// <inheritdoc />
 		public void Attach()
 		{
 			var host = GetHost();
@@ -99,6 +126,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			}
 		}
 
+		/// <inheritdoc />
 		public void Detach()
 		{
 			var host = GetHost();
@@ -109,6 +137,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			}
 		}
 
+		/// <inheritdoc />
 		public void Update()
 		{
 			var host = GetHost();

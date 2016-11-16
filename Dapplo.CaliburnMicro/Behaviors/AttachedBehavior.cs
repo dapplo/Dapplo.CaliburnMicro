@@ -48,6 +48,11 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			_behaviorFactory = behaviorFactory;
 		}
 
+		/// <summary>
+		/// Register a behavior to a DependencyObject
+		/// </summary>
+		/// <param name="behaviorFactory">Func with DependencyObject and IBehavior</param>
+		/// <returns>AttachedBehavior</returns>
 		public static AttachedBehavior Register(Func<DependencyObject, IBehavior> behaviorFactory)
 		{
 			Contract.Requires(behaviorFactory != null);
@@ -65,6 +70,10 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			return "_" + Guid.NewGuid().ToString("N");
 		}
 
+		/// <summary>
+		/// Update (or create) the Behavior for the DependencyObject
+		/// </summary>
+		/// <param name="host"></param>
 		public void Update(DependencyObject host)
 		{
 			Contract.Requires(host != null);

@@ -26,57 +26,48 @@
 #region Usings
 
 using System.Diagnostics.Contracts;
+using System.Drawing;
+using System.IO;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Dapplo.Log;
+using Size = System.Windows.Size;
+using Dapplo.CaliburnMicro.Extensions;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Behaviors
 {
 	/// <summary>
-	/// Change the visibility of a UIElement depending on an enum value
-	/// This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+	///     This class contains a behavior to assist in setting an Icon of a e.g. Window or TaskbarIcon via a FrameworkElement
 	/// </summary>
-	public static class EnumVisibility
+	public static class FrameworkElementIcon
 	{
+		private static readonly LogSource Log = new LogSource();
+
 		/// <summary>
-		/// The value to check
+		/// The icon to set
 		/// </summary>
 		public static readonly DependencyProperty ValueProperty = DependencyProperty.RegisterAttached(
 			"Value",
-			typeof(object),
-			typeof(EnumVisibility),
+			typeof(FrameworkElement),
+			typeof(FrameworkElementIcon),
 			new PropertyMetadata(OnArgumentsChanged));
 
 		/// <summary>
-		/// Possible value(s) which the target should have to match
+		/// What is the target property which should used for the icon
 		/// </summary>
 		public static readonly DependencyProperty TargetValueProperty = DependencyProperty.RegisterAttached(
 			"TargetValue",
 			typeof(string),
-			typeof(EnumVisibility),
-			new PropertyMetadata(OnArgumentsChanged));
+			typeof(FrameworkElementIcon),
+			new PropertyMetadata("Icon", OnArgumentsChanged));
 
 		/// <summary>
-		/// Visibility to use when the value matches
-		/// Default is Visibility.Visible
+		/// Use the IconBehavior
 		/// </summary>
-		public static readonly DependencyProperty WhenMatchedProperty = DependencyProperty.RegisterAttached(
-			"WhenMatched",
-			typeof(Visibility),
-			typeof(EnumVisibility),
-			new FrameworkPropertyMetadata(Visibility.Visible, OnArgumentsChanged));
-
-		/// <summary>
-		/// Visibility to use when the value doesn't match
-		/// Default is Visibility.Collapsed
-		/// </summary>
-		public static readonly DependencyProperty WhenNotMatchedProperty = DependencyProperty.RegisterAttached(
-			"WhenNotMatched",
-			typeof(Visibility),
-			typeof(EnumVisibility),
-			new FrameworkPropertyMetadata(Visibility.Collapsed, OnArgumentsChanged));
-
-		private static readonly AttachedBehavior Behavior = AttachedBehavior.Register(host => new EnumVisibilityBehavior((UIElement)host));
+		private static AttachedBehavior Behavior { get; } = AttachedBehavior.Register(host => new IconBehavior((FrameworkElement)host));
 
 		/// <summary>
 		/// When the arguments change, the Behavior.Update is called
@@ -93,10 +84,10 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <returns>object which represents the value of the in ValueProperty specified DependencyProperty</returns>
-		public static object GetValue(UIElement uiElement)
+		public static FrameworkElement GetValue(UIElement uiElement)
 		{
 			Contract.Requires(uiElement != null);
-			return uiElement.GetValue(ValueProperty);
+			return (FrameworkElement)uiElement.GetValue(ValueProperty);
 		}
 
 		/// <summary>
@@ -104,7 +95,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <param name="value">Value to assign to the in ValueProperty specified DependencyProperty</param>
-		public static void SetValue(UIElement uiElement, object value)
+		public static void SetValue(UIElement uiElement, FrameworkElement value)
 		{
 			Contract.Requires(uiElement != null);
 			uiElement.SetValue(ValueProperty, value);
@@ -114,11 +105,11 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// Returns the value from the UIElement of the DependencyProperty specified in TargetValueProperty.
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
-		/// <returns>object which represents the value of the in TargetValueProperty specified DependencyProperty</returns>
+		/// <returns>string which represents the name of the target property</returns>
 		public static string GetTargetValue(UIElement uiElement)
 		{
 			Contract.Requires(uiElement != null);
-			return (string) uiElement.GetValue(TargetValueProperty);
+			return (string)uiElement.GetValue(TargetValueProperty);
 		}
 
 		/// <summary>
@@ -133,66 +124,69 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		}
 
 		/// <summary>
-		/// Returns the value which is used when the enum value matches
-		/// </summary>
-		/// <param name="uiElement">UIElement</param>
-		/// <returns>Visibility</returns>
-		public static Visibility GetWhenMatched(UIElement uiElement)
-		{
-			Contract.Requires(uiElement != null);
-			return (Visibility) uiElement.GetValue(WhenMatchedProperty);
-		}
-
-		/// <summary>
-		/// Sets the value which is used when the enum value matches
-		/// </summary>
-		/// <param name="uiElement">UIElement</param>
-		/// <param name="visibility">Visibility to use when matched</param>
-		public static void SetWhenMatched(UIElement uiElement, Visibility visibility)
-		{
-			Contract.Requires(uiElement != null);
-			uiElement.SetValue(WhenMatchedProperty, visibility);
-		}
-
-		/// <summary>
-		/// Returns the value which is used when the enum value doesn't match
-		/// </summary>
-		/// <param name="uiElement">UIElement</param>
-		/// <returns>Visibility</returns>
-		public static Visibility GetWhenNotMatched(UIElement uiElement)
-		{
-			Contract.Requires(uiElement != null);
-			return (Visibility) uiElement.GetValue(WhenNotMatchedProperty);
-		}
-
-		/// <summary>
-		/// Sets the value which is used when the enum value doesn't match
-		/// </summary>
-		/// <param name="uiElement">UIElement</param>
-		/// <param name="visibility">Visibility to use when matched</param>
-		public static void SetWhenNotMatched(UIElement uiElement, Visibility visibility)
-		{
-			Contract.Requires(uiElement != null);
-			uiElement.SetValue(WhenNotMatchedProperty, visibility);
-		}
-
-
-		/// <summary>
 		/// Implementation of the actual behavior logic of the EnumVisibilityBehavior
 		/// </summary>
-		private sealed class EnumVisibilityBehavior : Behavior<UIElement>
+		private sealed class IconBehavior : Behavior<FrameworkElement>
 		{
-			private readonly EnumCheck _enumCheck = new EnumCheck();
-
-			internal EnumVisibilityBehavior(UIElement host) : base(host)
+			internal IconBehavior(FrameworkElement host) : base(host)
 			{
 			}
 
-			protected override void Update(UIElement host)
+			protected override void Update(FrameworkElement host)
 			{
-				_enumCheck.Update(GetValue(host), GetTargetValue(host));
+				var icon = GetValue(host);
+				if (icon == null)
+				{
+					return;
+				}
+				if (!host.IsLoaded)
+				{
+					// If the host is not loaded, wait until it is.
+					FrameworkElement target = host.IsLoaded ? icon : host;
+					var handlers = new RoutedEventHandler[1];
+					handlers[0] = (sender, args) =>
+					{
+						Update(host);
+						target.Loaded -= handlers[0];
+					};
+					target.Loaded += handlers[0];
+					return;
+				}
 
-				host.Visibility = _enumCheck.IsMatch ? GetWhenMatched(host) : GetWhenNotMatched(host);
+				var iconProperty = GetTargetValue(host);
+				var propertyInfo = host.GetType().GetProperty(iconProperty);
+				if (propertyInfo == null)
+				{
+					return;
+				}
+				if (propertyInfo.PropertyType == typeof(ImageSource))
+				{
+					// Icon is of type ImageSource
+					var image = propertyInfo.GetValue(host) as ImageSource;
+					// Default size for the icon
+					var size = new Size(256, 256);
+					if (image != null)
+					{
+						size = new Size(image.Width, image.Height);
+					}
+					var iconIcon = icon.ToBitmapSource(size);
+					using (var fileStream = new FileStream(@"C:\LocalData\icon.png", FileMode.Create))
+					{
+						BitmapEncoder encoder = new PngBitmapEncoder();
+						encoder.Frames.Add(BitmapFrame.Create(iconIcon));
+						encoder.Save(fileStream);
+					}
+					propertyInfo.SetValue(host, iconIcon);
+				}
+				else if (propertyInfo.PropertyType == typeof(Icon))
+				{
+					// Icon is of type System.Drawing.Icon
+					propertyInfo.SetValue(host, icon.ToIcon());
+				}
+				else
+				{
+					Log.Error().WriteLine("Unknown type for Icon property: {0}", propertyInfo.PropertyType);
+				}
 			}
 		}
 	}
