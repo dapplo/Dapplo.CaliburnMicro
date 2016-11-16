@@ -23,6 +23,8 @@
 
 #endregion
 
+#region Usings
+
 using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
@@ -30,24 +32,32 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
 using Size = System.Windows.Size;
 
+#endregion
+
 namespace Dapplo.CaliburnMicro.Behaviors
 {
-
 	/// <summary>
-	/// This class contains a behavior to assist in setting an Icon of a e.g. Window or TaskbarIcon with a FrameworkElement
+	///     This class contains a behavior to assist in setting an Icon of a e.g. Window or TaskbarIcon with a FrameworkElement
 	/// </summary>
 	public static class IconBehavior
 	{
 		private static readonly LogSource Log = new LogSource();
+
 		/// <summary>
-		/// Sets the specified frameworkElement as value for the target icon
+		///     Use to set an Icon with a FrameworkElement
+		/// </summary>
+		public static readonly DependencyProperty WpfIconProperty = DependencyProperty.RegisterAttached("WpfIconProperty", typeof(FrameworkElement), typeof(IconBehavior),
+			new PropertyMetadata(null, PropertyChangedCallback));
+
+		/// <summary>
+		///     Sets the specified frameworkElement as value for the target icon
 		/// </summary>
 		/// <param name="dependencyObject"></param>
 		/// <param name="frameworkElement"></param>
 		public static void SetIcon(DependencyObject dependencyObject, FrameworkElement frameworkElement)
 		{
 			// Just set the framework element if it's null or loaded
-			if (frameworkElement == null || frameworkElement.IsLoaded)
+			if ((frameworkElement == null) || frameworkElement.IsLoaded)
 			{
 				dependencyObject.SetValue(WpfIconProperty, frameworkElement);
 				return;
@@ -71,20 +81,14 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		}
 
 		/// <summary>
-		/// Update the icon from the dependencyObject's value
+		///     Update the icon from the dependencyObject's value
 		/// </summary>
 		/// <param name="dependencyObject">DependencyObject</param>
 		public static void RefreshIcon(DependencyObject dependencyObject)
 		{
-
 			var frameworkElement = dependencyObject.GetValue(WpfIconProperty) as FrameworkElement;
 			SetIconInternally(dependencyObject, frameworkElement);
 		}
-
-		/// <summary>
-		/// Use to set an Icon with a FrameworkElement
-		/// </summary>
-		public static readonly DependencyProperty WpfIconProperty = DependencyProperty.RegisterAttached("WpfIconProperty", typeof(FrameworkElement), typeof(IconBehavior), new PropertyMetadata(null, PropertyChangedCallback));
 
 		private static void SetIconInternally(DependencyObject dependencyObject, FrameworkElement icon)
 		{
@@ -124,7 +128,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		}
 
 		/// <summary>
-		/// Handle the fact that the property changed, now really apply the value
+		///     Handle the fact that the property changed, now really apply the value
 		/// </summary>
 		/// <param name="dependencyObject">DependencyObject which is the target</param>
 		/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs which describes the value</param>

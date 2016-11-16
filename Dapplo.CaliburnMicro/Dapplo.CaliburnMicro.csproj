@@ -99,7 +99,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\AttachedBehavior.cs" />
+    <Compile Include="Behaviors\Behavior.cs" />
+    <Compile Include="Behaviors\BooleanVisibility.cs" />
+    <Compile Include="Behaviors\EnumCheck.cs" />
+    <Compile Include="Behaviors\EnumGroup.cs" />
+    <Compile Include="Behaviors\EnumSelector.cs" />
+    <Compile Include="Behaviors\EnumVisibility.cs" />
+    <Compile Include="Behaviors\IBehavior.cs" />
     <Compile Include="Behaviors\IconBehavior.cs" />
+    <Compile Include="Behaviors\NullVisibility.cs" />
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroBootstrapper.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
@@ -113,6 +122,8 @@
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Menu\MenuItemStyles.cs" />
+    <Compile Include="Security\AuthenticationProvider.cs" />
+    <Compile Include="Security\IAuthenticationProvider.cs" />
     <Compile Include="Translations\IConfigTranslations.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
     <Compile Include="Extensions\HaveIconExtensions.cs" />

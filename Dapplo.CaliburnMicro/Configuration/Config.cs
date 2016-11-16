@@ -117,7 +117,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 		IEnumerable<Lazy<IConfigScreen>> IConfig.ConfigScreens
 		{
 			get { return ConfigScreens.Cast<Lazy<IConfigScreen>>(); }
-			set { ConfigScreens = value as ICollection<Lazy<TConfigScreen>>; }
+			set { ConfigScreens = value as IEnumerable<Lazy<TConfigScreen>>; }
 		}
 
 		/// <summary>
