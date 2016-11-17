@@ -23,12 +23,14 @@
 
 #endregion
 
+using System.ComponentModel;
+
 namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
 	///     Interface which all authentication providers must implement
 	/// </summary>
-	public interface IAuthenticationProvider
+	public interface IAuthenticationProvider : INotifyPropertyChanged
 	{
 		/// <summary>
 		///     Returns if the current user has a certain permission

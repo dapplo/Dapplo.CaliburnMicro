@@ -32,7 +32,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Menu;

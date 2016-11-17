@@ -73,8 +73,9 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <summary>
 		/// Update (or create) the Behavior for the DependencyObject
 		/// </summary>
-		/// <param name="host"></param>
-		public void Update(DependencyObject host)
+		/// <param name="host">DependencyObject</param>
+		/// <param name="propertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+		public void Update(DependencyObject host, DependencyPropertyChangedEventArgs propertyChangedEventArgs)
 		{
 			Contract.Requires(host != null);
 
@@ -82,33 +83,32 @@ namespace Dapplo.CaliburnMicro.Behaviors
 
 			if (behavior == null)
 			{
-				TryCreateBehavior(host);
+				TryCreateBehavior(host, propertyChangedEventArgs);
 			}
 			else
 			{
-				UpdateBehavior(host, behavior);
+				UpdateBehavior(host, behavior, propertyChangedEventArgs);
 			}
 		}
 
-		private void TryCreateBehavior(DependencyObject host)
+		private void TryCreateBehavior(DependencyObject host, DependencyPropertyChangedEventArgs propertyChangedEventArgs)
 		{
 			var behavior = _behaviorFactory(host);
 
-			if (behavior.IsApplicable())
+			if (!behavior.IsApplicable())
 			{
-				behavior.Attach();
-
-				host.SetValue(_property, behavior);
-
-				behavior.Update();
+				return;
 			}
+			behavior.Attach();
+			host.SetValue(_property, behavior);
+			behavior.Update(propertyChangedEventArgs);
 		}
 
-		private void UpdateBehavior(DependencyObject host, IBehavior behavior)
+		private void UpdateBehavior(DependencyObject host, IBehavior behavior, DependencyPropertyChangedEventArgs propertyChangedEventArgs)
 		{
 			if (behavior.IsApplicable())
 			{
-				behavior.Update();
+				behavior.Update(propertyChangedEventArgs);
 			}
 			else
 			{

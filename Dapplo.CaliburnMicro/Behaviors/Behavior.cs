@@ -44,12 +44,12 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="host">DependencyObject</param>
-		protected Behavior(THost host)
+		/// <param name="uiElement">DependencyObject</param>
+		protected Behavior(THost uiElement)
 		{
-			Contract.Requires(host is THost, "Host is not the expected type");
+			Contract.Requires(uiElement is THost, "Host is not the expected type");
 
-			_hostReference = new WeakReference(host);
+			_hostReference = new WeakReference(uiElement);
 		}
 
 		private THost GetHost()
@@ -86,8 +86,9 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <summary>
 		/// Let the behavior update it's "stuffT for the specified host
 		/// </summary>
-		/// <param name="host">THost which extends DependencyObject</param>
-		protected abstract void Update(THost host);
+		/// <param name="uiElement">THost which extends DependencyObject</param>
+		/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+		protected abstract void Update(THost uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs);
 
 		/// <summary>
 		/// Let the behavior update it's "stuffT for the specified host
@@ -138,13 +139,13 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		}
 
 		/// <inheritdoc />
-		public void Update()
+		public void Update(DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 		{
 			var host = GetHost();
 
 			if (host != null)
 			{
-				Update(host);
+				Update(host, dependencyPropertyChangedEventArgs);
 			}
 		}
 

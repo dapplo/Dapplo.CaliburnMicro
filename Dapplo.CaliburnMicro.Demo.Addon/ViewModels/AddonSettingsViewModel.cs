@@ -27,10 +27,12 @@
 
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
+using Dapplo.CaliburnMicro.Security;
 
 #endregion
 
@@ -45,6 +47,10 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		[Import]
 		private IEventAggregator EventAggregator { get; set; }
 
+
+		[Import]
+		private IAuthenticationProvider AuthenticationProvider { get; set; }
+
 		public AddonSettingsViewModel()
 		{
 			ParentId = nameof(ConfigIds.Addons);
@@ -58,6 +64,19 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		public void DoSomething()
 		{
 			EventAggregator.PublishOnUIThread("Addon button clicked");
+		}
+
+		public void AddAdmin()
+		{
+			var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;
+			authenticationProvider?.AddPermission("Admin");
+
+		}
+		public void RemoveAdmin()
+		{
+			var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;
+			authenticationProvider?.RemovePermission("Admin");
+
 		}
 	}
 }

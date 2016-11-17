@@ -23,6 +23,8 @@
 
 #endregion
 
+using System.Windows;
+
 namespace Dapplo.CaliburnMicro.Behaviors
 {
 	/// <summary>
@@ -50,6 +52,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <summary>
 		/// Update the behavior
 		/// </summary>
-		void Update();
+		/// <param name="dependencyPropertyChangedEventArgs">optional DependencyPropertyChangedEventArgs</param>
+		void Update(DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs);
 	}
 }

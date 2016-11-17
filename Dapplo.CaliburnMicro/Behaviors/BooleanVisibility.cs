@@ -69,9 +69,9 @@ namespace Dapplo.CaliburnMicro.Behaviors
 
 		private static readonly AttachedBehavior Behavior = AttachedBehavior.Register(host => new BooleanVisibilityBehavior((UIElement)host));
 
-		private static void OnVisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void OnVisibilityChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			Behavior.Update(d);
+			Behavior.Update(dependencyObject, dependencyPropertyChangedEventArgs);
 		}
 
 		/// <summary>
@@ -151,15 +151,15 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		private sealed class BooleanVisibilityBehavior : Behavior<UIElement>
 		{
-			internal BooleanVisibilityBehavior(UIElement host) : base(host)
+			internal BooleanVisibilityBehavior(UIElement uiElement) : base(uiElement)
 			{
 				// Does not propagate external changes in visibility to binding source - that will be
 				// covered in a future post
 			}
 
-			protected override void Update(UIElement host)
+			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				host.Visibility = GetValue(host) ? GetWhenTrue(host) : GetWhenFalse(host);
+				uiElement.Visibility = GetValue(uiElement) ? GetWhenTrue(uiElement) : GetWhenFalse(uiElement);
 			}
 		}
 	}

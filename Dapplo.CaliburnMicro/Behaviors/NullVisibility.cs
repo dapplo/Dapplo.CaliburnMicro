@@ -68,9 +68,9 @@ namespace Dapplo.CaliburnMicro.Behaviors
 
 		private static readonly AttachedBehavior Behavior = AttachedBehavior.Register(host => new NullVisibilityBehavior((UIElement)host));
 
-		private static void OnArgumentsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void OnArgumentsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			Behavior.Update(d);
+			Behavior.Update(dependencyObject, dependencyPropertyChangedEventArgs);
 		}
 
 		/// <summary>
@@ -138,15 +138,15 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		private sealed class NullVisibilityBehavior : Behavior<UIElement>
 		{
-			internal NullVisibilityBehavior(UIElement host) : base(host)
+			internal NullVisibilityBehavior(UIElement uiElement) : base(uiElement)
 			{
 			}
 
-			protected override void Update(UIElement host)
+			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				host.Visibility = GetValue(host) == null
-					? GetWhenNull(host)
-					: GetWhenNotNull(host);
+				uiElement.Visibility = GetValue(uiElement) == null
+					? GetWhenNull(uiElement)
+					: GetWhenNotNull(uiElement);
 			}
 		}
 	}

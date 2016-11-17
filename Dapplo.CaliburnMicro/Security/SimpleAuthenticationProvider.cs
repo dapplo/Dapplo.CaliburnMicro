@@ -25,7 +25,11 @@
 
 #region Usings
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Caliburn.Micro;
 
 #endregion
 
@@ -34,17 +38,53 @@ namespace Dapplo.CaliburnMicro.Security
 	/// <summary>
 	///     A simple implementation of the IAuthenticationProvider, can be used as a base for your own implementation
 	/// </summary>
-	public class SimpleAuthenticationProvider : IAuthenticationProvider
+	public class SimpleAuthenticationProvider : PropertyChangedBase, IAuthenticationProvider
 	{
+		private readonly IList<string> _permissions = new List<string>();
+
 		/// <summary>
 		///     List of available permissions
 		/// </summary>
-		protected IList<string> Permissions { get; set; }
+		public IEnumerable<string> Permissions => new ReadOnlyCollection<string>( _permissions);
+
+		/// <summary>
+		/// Add a permission and inform via INotifyPropertyChanged events of changes
+		/// </summary>
+		/// <param name="permission">string</param>
+		public void AddPermission(string permission)
+		{
+			if (string.IsNullOrWhiteSpace(permission))
+			{
+				throw new ArgumentNullException(nameof(permission));
+			}
+			var newPermission = permission.Trim().ToLowerInvariant();
+			_permissions.Add(newPermission);
+			NotifyOfPropertyChange(nameof(HasPermission));
+		}
+
+		/// <summary>
+		/// Remove a permission and inform via INotifyPropertyChanged events of changes
+		/// </summary>
+		/// <param name="permission">string</param>
+		public void RemovePermission(string permission)
+		{
+			if (string.IsNullOrWhiteSpace(permission))
+			{
+				throw new ArgumentNullException(nameof(permission));
+			}
+			var removingPermission = permission.Trim().ToLowerInvariant();
+			_permissions.Remove(removingPermission);
+			NotifyOfPropertyChange(nameof(HasPermission));
+		}
 
 		/// <inheritdoc />
 		public bool HasPermission(string permission)
 		{
-			return Permissions.Contains(permission);
+			if (string.IsNullOrWhiteSpace(permission))
+			{
+				return true;
+			}
+			return Permissions.Contains(permission.Trim().ToLowerInvariant());
 		}
 	}
 }

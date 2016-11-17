@@ -25,12 +25,14 @@
 
 #region Usings
 
+using System;
 using System.Windows;
-using Dapplo.CaliburnMicro.Behaviors;
+using Dapplo.CaliburnMicro.Extensions;
+using Dapplo.CaliburnMicro.Security;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Security
+namespace Dapplo.CaliburnMicro.Behaviors.Security
 {
 	/// <summary>
 	///     Change the visibility of a UiElement depending on rights
@@ -66,7 +68,7 @@ namespace Dapplo.CaliburnMicro.Security
 			typeof(AuthenticationVisibility),
 			new PropertyMetadata(Visibility.Visible, OnArgumentsChanged));
 
-		private static readonly AttachedBehavior Behavior = AttachedBehavior.Register(host => new AuthenticationVisibilityBehavior((UIElement) host));
+		private static readonly AttachedBehavior Behavior = AttachedBehavior.Register(uiElement => new AuthenticationVisibilityBehavior((UIElement) uiElement));
 
 		/// <summary>
 		///     This handles the fact that a dependency property has changed on a DependencyObject.
@@ -76,7 +78,7 @@ namespace Dapplo.CaliburnMicro.Security
 		/// <param name="dependencyPropertyChangedEventArgs">dependencyPropertyChangedEventArgs</param>
 		private static void OnArgumentsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			Behavior.Update(dependencyObject);
+			Behavior.Update(dependencyObject, dependencyPropertyChangedEventArgs);
 		}
 
 		/// <summary>
@@ -144,8 +146,12 @@ namespace Dapplo.CaliburnMicro.Security
 		/// </summary>
 		private sealed class AuthenticationVisibilityBehavior : Behavior<UIElement>
 		{
-			internal AuthenticationVisibilityBehavior(UIElement host) : base(host)
+			private Lazy<IAuthenticationProvider> _authenticationProvider;
+			private IDisposable _authenticationProviderSubscription;
+
+			internal AuthenticationVisibilityBehavior(UIElement uiElement) : base(uiElement)
 			{
+				
 			}
 
 			/// <summary>
@@ -160,17 +166,37 @@ namespace Dapplo.CaliburnMicro.Security
 				{
 					return true;
 				}
-				var authenticationProvider = Dapplication.Current.Bootstrapper.GetExport<IAuthenticationProvider>();
-				return authenticationProvider?.Value.HasPermission(permission) ?? false;
+				return _authenticationProvider?.Value.HasPermission(permission) ?? false;
 			}
 
-			protected override void Update(UIElement host)
+			protected override void Detach(UIElement host)
 			{
-				var permission = GetPermission(host);
+				base.Detach(host);
+				_authenticationProviderSubscription?.Dispose();
 
-				host.Visibility = HasPermission(permission)
-					? GetWhenPermission(host)
-					: GetWhenPermissionMissing(host);
+			}
+
+			protected override void Attach(UIElement host)
+			{
+				base.Attach(host);
+				_authenticationProvider = Dapplication.Current?.Bootstrapper?.GetExport<IAuthenticationProvider>();
+
+				// Call update when the _authenticationProvider changes it's values
+				_authenticationProviderSubscription = _authenticationProvider?.Value?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermission)).Subscribe(x => Update(host, null));
+			}
+
+			/// <summary>
+			/// Update the Visibility of the UIElement
+			/// </summary>
+			/// <param name="uiElement">UIElement</param>
+			/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
+			{
+				var permission = GetPermission(uiElement);
+
+				uiElement.Visibility = HasPermission(permission)
+					? GetWhenPermission(uiElement)
+					: GetWhenPermissionMissing(uiElement);
 			}
 		}
 	}

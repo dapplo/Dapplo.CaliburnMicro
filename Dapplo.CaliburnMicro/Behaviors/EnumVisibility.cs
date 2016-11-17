@@ -85,7 +85,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
 		private static void OnArgumentsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			Behavior.Update(dependencyObject);
+			Behavior.Update(dependencyObject, dependencyPropertyChangedEventArgs);
 		}
 
 		/// <summary>
@@ -182,17 +182,17 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		private sealed class EnumVisibilityBehavior : Behavior<UIElement>
 		{
-			private readonly EnumCheck _enumCheck = new EnumCheck();
+			private readonly ValueChecker<object> _enumCheck = new ValueChecker<object>();
 
-			internal EnumVisibilityBehavior(UIElement host) : base(host)
+			internal EnumVisibilityBehavior(UIElement uiElement) : base(uiElement)
 			{
 			}
 
-			protected override void Update(UIElement host)
+			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				_enumCheck.Update(GetValue(host), GetTargetValue(host));
+				_enumCheck.Update(GetValue(uiElement), GetTargetValue(uiElement));
 
-				host.Visibility = _enumCheck.IsMatch ? GetWhenMatched(host) : GetWhenNotMatched(host);
+				uiElement.Visibility = _enumCheck.IsMatch ? GetWhenMatched(uiElement) : GetWhenNotMatched(uiElement);
 			}
 		}
 	}

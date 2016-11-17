@@ -76,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
 		private static void OnArgumentsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
 		{
-			Behavior.Update(dependencyObject);
+			Behavior.Update(dependencyObject, dependencyPropertyChangedEventArgs);
 		}
 
 		/// <summary>
@@ -128,33 +128,33 @@ namespace Dapplo.CaliburnMicro.Behaviors
 		/// </summary>
 		private sealed class IconBehavior : Behavior<FrameworkElement>
 		{
-			internal IconBehavior(FrameworkElement host) : base(host)
+			internal IconBehavior(FrameworkElement uiElement) : base(uiElement)
 			{
 			}
 
-			protected override void Update(FrameworkElement host)
+			protected override void Update(FrameworkElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				var icon = GetValue(host);
+				var icon = GetValue(uiElement);
 				if (icon == null)
 				{
 					return;
 				}
-				if (!host.IsLoaded)
+				if (!uiElement.IsLoaded)
 				{
 					// If the host is not loaded, wait until it is.
-					FrameworkElement target = host.IsLoaded ? icon : host;
+					FrameworkElement target = uiElement.IsLoaded ? icon : uiElement;
 					var handlers = new RoutedEventHandler[1];
 					handlers[0] = (sender, args) =>
 					{
-						Update(host);
+						Update(uiElement, dependencyPropertyChangedEventArgs);
 						target.Loaded -= handlers[0];
 					};
 					target.Loaded += handlers[0];
 					return;
 				}
 
-				var iconProperty = GetTargetValue(host);
-				var propertyInfo = host.GetType().GetProperty(iconProperty);
+				var iconProperty = GetTargetValue(uiElement);
+				var propertyInfo = uiElement.GetType().GetProperty(iconProperty);
 				if (propertyInfo == null)
 				{
 					return;
@@ -162,7 +162,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
 				if (propertyInfo.PropertyType == typeof(ImageSource))
 				{
 					// Icon is of type ImageSource
-					var image = propertyInfo.GetValue(host) as ImageSource;
+					var image = propertyInfo.GetValue(uiElement) as ImageSource;
 					// Default size for the icon
 					var size = new Size(256, 256);
 					if (image != null)
@@ -176,12 +176,12 @@ namespace Dapplo.CaliburnMicro.Behaviors
 						encoder.Frames.Add(BitmapFrame.Create(iconIcon));
 						encoder.Save(fileStream);
 					}
-					propertyInfo.SetValue(host, iconIcon);
+					propertyInfo.SetValue(uiElement, iconIcon);
 				}
 				else if (propertyInfo.PropertyType == typeof(Icon))
 				{
 					// Icon is of type System.Drawing.Icon
-					propertyInfo.SetValue(host, icon.ToIcon());
+					propertyInfo.SetValue(uiElement, icon.ToIcon());
 				}
 				else
 				{

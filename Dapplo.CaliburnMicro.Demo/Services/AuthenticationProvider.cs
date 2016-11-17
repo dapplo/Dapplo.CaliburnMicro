@@ -25,8 +25,8 @@
 
 #region Usings
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Security;
 
 #endregion
@@ -42,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.Services
 	{
 		public AuthenticationProvider()
 		{
-			Permissions = new List<string> {"Developer"};
+			AddPermission("Admin");
 		}
 	}
 }
