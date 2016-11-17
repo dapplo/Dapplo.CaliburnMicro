@@ -23,18 +23,28 @@
 
 #endregion
 
+#region Usings
+
+using System.Collections.Generic;
+
+#endregion
+
 namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
-	///     Interface which all authentication providers must implement
+	///     A simple implementation of the IAuthenticationProvider, can be used as a base for your own implementation
 	/// </summary>
-	public interface IAuthenticationProvider
+	public class SimpleAuthenticationProvider : IAuthenticationProvider
 	{
 		/// <summary>
-		///     Returns if the current user has a certain permission
+		///     List of available permissions
 		/// </summary>
-		/// <param name="permission">string with the name of the permission</param>
-		/// <returns>true if the current user has the specified permission</returns>
-		bool HasPermission(string permission);
+		protected IList<string> Permissions { get; set; }
+
+		/// <inheritdoc />
+		public bool HasPermission(string permission)
+		{
+			return Permissions.Contains(permission);
+		}
 	}
 }

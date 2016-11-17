@@ -139,6 +139,7 @@
     <Compile Include="Languages\ICredentialsTranslations.cs" />
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Models\IWizardModel.cs" />
+    <Compile Include="Services\AuthenticationProvider.cs" />
     <Compile Include="Services\ConfigureDefaults.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />

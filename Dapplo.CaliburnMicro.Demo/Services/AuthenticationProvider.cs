@@ -26,25 +26,23 @@
 #region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using Dapplo.CaliburnMicro.Security;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Security
+namespace Dapplo.CaliburnMicro.Demo.Services
 {
 	/// <summary>
-	///     A simple implementation of the IAuthenticationProvider
+	///     This exports a IAuthenticationProvider, which is used to show or hide elements in the UI depending on the available
+	///     rights
 	/// </summary>
-	public class SimpleAuthenticationProvider : IAuthenticationProvider
+	[Export(typeof(IAuthenticationProvider))]
+	public class AuthenticationProvider : SimpleAuthenticationProvider
 	{
-		/// <summary>
-		///     List of available permissions
-		/// </summary>
-		public IList<string> Permissions { get; set; } = new List<string>();
-
-		/// <inheritdoc />
-		public bool HasPermission(string permission)
+		public AuthenticationProvider()
 		{
-			return Permissions.Contains(permission);
+			Permissions = new List<string> {"Developer"};
 		}
 	}
 }
