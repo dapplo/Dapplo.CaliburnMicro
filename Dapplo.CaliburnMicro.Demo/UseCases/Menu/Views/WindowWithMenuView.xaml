@@ -6,7 +6,7 @@
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:cal="http://www.caliburnproject.org"
 			 xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro"
-			 xmlns:cmSec="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
+			 xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
 	<controls:MetroWindow.Resources>
@@ -32,15 +32,15 @@
 						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
 							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationTargetProperties.Visibility}">
-							<Setter Property="cmSec:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
-							<Setter Property="cmSec:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
-							<Setter Property="cmSec:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+						<DataTrigger Binding="{Binding Path=(security:INeedAuthentication.AuthenticationTargetProperty)}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+							<Setter Property="security:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
+							<Setter Property="security:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
+							<Setter Property="security:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationTargetProperties.IsEnabled}">
-							<Setter Property="cmSec:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
-							<Setter Property="cmSec:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
-							<Setter Property="cmSec:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+						<DataTrigger Binding="{Binding Path=(security:INeedAuthentication.AuthenticationTargetProperty)}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+							<Setter Property="security:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
+							<Setter Property="security:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
+							<Setter Property="security:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
 					</Style.Triggers>
 				</Style>

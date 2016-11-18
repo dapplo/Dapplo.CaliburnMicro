@@ -28,8 +28,7 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 	/// <summary>
 	/// Base interface which an authenticated thing needs to implement
 	/// </summary>
-	/// <typeparam name="TWhen"></typeparam>
-	public interface INeedAuthentication<out TWhen>
+	public interface INeedAuthentication
 	{
 		/// <summary>
 		///     This defines the property which is managed by authentication
@@ -40,7 +39,14 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		///     Permission(s) for which the item is managed
 		/// </summary>
 		string Permission { get; }
+	}
 
+	/// <summary>
+	/// Base interface which an authenticated thing needs to implement
+	/// </summary>
+	/// <typeparam name="TWhen"></typeparam>
+	public interface INeedAuthentication<out TWhen> : INeedAuthentication
+	{
 		/// <summary>
 		///     What should be used when the permission is available
 		/// </summary>
