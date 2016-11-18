@@ -23,8 +23,6 @@
 
 #endregion
 
-using System.ComponentModel;
-
 namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>

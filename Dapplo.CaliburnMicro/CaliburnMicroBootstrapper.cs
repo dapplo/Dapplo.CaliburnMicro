@@ -35,6 +35,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
+using Dapplo.CaliburnMicro.Security;
 using Dapplo.Log;
 using Dapplo.Utils.Resolving;
 
@@ -184,7 +185,7 @@ namespace Dapplo.CaliburnMicro
 			// Call the base, this actually currently does nothing but who knows what is added later.
 			base.OnStartup(sender, e);
 
-			// Warn when no IShell export is found
+			// Inform when no IShell export is found
 			var shells = ServiceLocator.GetExports<IShell>();
 			if (shells.Any())
 			{
@@ -194,6 +195,15 @@ namespace Dapplo.CaliburnMicro
 			else
 			{
 				Log.Info().WriteLine("No IShell export found, if you want to have an initial window make sure you exported your ViewModel with [Export(typeof(IShell))]");
+			}
+
+			// Warn when no IAuthenticationProvider export is found
+			var authenticationProvider = ServiceLocator.GetExports<IAuthenticationProvider>().FirstOrDefault();
+			if (authenticationProvider != null)
+			{
+				Log.Info().WriteLine("IAuthenticationProvider to provide UI permissions: {0}", authenticationProvider.Value.GetType());
+			} else {
+				Log.Warn().WriteLine("No IAuthenticationProvider export found, UI permissions will not work.");
 			}
 		}
 
