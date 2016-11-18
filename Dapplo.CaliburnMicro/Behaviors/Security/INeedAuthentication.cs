@@ -23,25 +23,32 @@
 
 #endregion
 
-#region Usings
-
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Security;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Demo.Services
+namespace Dapplo.CaliburnMicro.Behaviors.Security
 {
 	/// <summary>
-	///     This exports a IAuthenticationProvider, which is used to show or hide elements in the UI depending on the available
-	///     rights
+	/// Base interface which an authenticated thing needs to implement
 	/// </summary>
-	[Export(typeof(IAuthenticationProvider))]
-	public class AuthenticationProvider : SimpleAuthenticationProvider
+	/// <typeparam name="TWhen"></typeparam>
+	public interface INeedAuthentication<out TWhen>
 	{
-		public AuthenticationProvider()
-		{
-			AddPermission("Admin");
-		}
+		/// <summary>
+		///     This defines the property which is managed by authentication
+		/// </summary>
+		AuthenticationProperties AuthenticationProperty { get; }
+
+		/// <summary>
+		///     Permission(s) for which the item is managed
+		/// </summary>
+		string Permission { get; }
+
+		/// <summary>
+		///     What should be used when the permission is available
+		/// </summary>
+		TWhen WhenPermission { get; }
+
+		/// <summary>
+		///     What should be used when the permission is not available
+		/// </summary>
+		TWhen WhenPermissionMissing { get; }
 	}
 }

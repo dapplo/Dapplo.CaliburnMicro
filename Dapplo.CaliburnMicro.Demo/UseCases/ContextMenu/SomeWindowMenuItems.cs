@@ -26,7 +26,9 @@
 #region Usings
 
 using System.ComponentModel.Composition;
+using System.Windows;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
@@ -62,8 +64,12 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public IMenuItem SomeWindowMenuItem
 		{
 			get {
-				var menuItem = new MenuItem
+				var menuItem = new AuthenticatedMenuItem<Visibility>
 				{
+					Permission = "Admin",
+					AuthenticationProperty = AuthenticationProperties.Visibility,
+					WhenPermission = Visibility.Visible,
+					WhenPermissionMissing = Visibility.Collapsed,
 					Icon = new PackIconMaterial
 					{
 						Kind = PackIconMaterialKind.ViewList

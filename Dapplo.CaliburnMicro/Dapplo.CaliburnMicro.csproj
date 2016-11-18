@@ -102,6 +102,8 @@
     <Compile Include="Behaviors\AttachedBehavior.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
+    <Compile Include="Behaviors\Security\INeedAuthentication.cs" />
+    <Compile Include="Behaviors\Security\AuthenticationProperties.cs" />
     <Compile Include="Behaviors\ValueChecker.cs" />
     <Compile Include="Behaviors\EnumVisibility.cs" />
     <Compile Include="Behaviors\IBehavior.cs" />
@@ -119,13 +121,13 @@
     <Compile Include="Extensions\LanguageChangedExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Menu\AuthenticatedMenuItem.cs" />
     <Compile Include="Menu\MenuItemStyles.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Behaviors\Security\AuthenticationEnabled.cs" />
     <Compile Include="Behaviors\Security\AuthenticationVisibility.cs" />
     <Compile Include="Security\SimpleAuthenticationProvider.cs" />
     <Compile Include="Security\IAuthenticationProvider.cs" />
-    <Compile Include="Behaviors\Security\UiEnabledPermissionsAttribute.cs" />
     <Compile Include="Translations\IConfigTranslations.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
     <Compile Include="Extensions\HaveIconExtensions.cs" />

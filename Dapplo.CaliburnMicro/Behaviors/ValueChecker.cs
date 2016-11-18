@@ -67,23 +67,24 @@ namespace Dapplo.CaliburnMicro.Behaviors
 			var valueChanged = stringValue != Value;
 			var targetValueChanged = targetValue != TargetValue;
 
-			if (valueChanged || targetValueChanged)
+			if (!valueChanged && !targetValueChanged)
 			{
-				if (valueChanged)
-				{
-					Value = stringValue;
-				}
-
-				if (targetValueChanged)
-				{
-					TargetValue = targetValue;
-				}
-
-				ParseTargetValues();
-
-				// Update the IsMatch
-				IsMatch = (Value == null) || Value.Equals("") ? string.IsNullOrEmpty(TargetValue) : _parsedTargetValues.Contains(stringValue);
+				return;
 			}
+			if (valueChanged)
+			{
+				Value = stringValue;
+			}
+
+			if (targetValueChanged)
+			{
+				TargetValue = targetValue;
+			}
+
+			ParseTargetValues();
+
+			// Update the IsMatch
+			IsMatch = (Value == null) || Value.Equals("") ? string.IsNullOrEmpty(TargetValue) : _parsedTargetValues.Contains(stringValue);
 		}
 
 		/// <summary>

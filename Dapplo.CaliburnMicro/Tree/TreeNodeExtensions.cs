@@ -88,16 +88,17 @@ namespace Dapplo.CaliburnMicro.Tree
 					{
 						continue;
 					}
-					if (!predicate(treeNodeItem))
+					if (predicate(treeNodeItem))
 					{
-						// should not be shown, removed it from it's parent or the root
-						treeNodeItem.ParentNode?.ChildNodes.Remove(treeNodeItem);
-						if (treeNodeItem.ParentNode?.ChildNodes != null && !treeNodeItem.ParentNode.ChildNodes.Any())
-						{
-							rootItems.Remove(treeNodeItem.ParentNode);
-						}
-						rootItems.Remove(treeNodeItem);
+						continue;
 					}
+					// should not be shown, removed it from it's parent or the root
+					treeNodeItem.ParentNode?.ChildNodes.Remove(treeNodeItem);
+					if (treeNodeItem.ParentNode?.ChildNodes != null && !treeNodeItem.ParentNode.ChildNodes.Any())
+					{
+						rootItems.Remove(treeNodeItem.ParentNode);
+					}
+					rootItems.Remove(treeNodeItem);
 				}
 			}
 			return rootItems;

@@ -164,19 +164,20 @@ namespace Dapplo.CaliburnMicro
 		protected virtual void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs eventArgs)
 		{
 			Log.Error().WriteLine(eventArgs.Exception, "Exception in Dispatcher");
-			if (OnUnhandledDispatcherException != null)
+			if (OnUnhandledDispatcherException == null)
 			{
-				// Make sure this doesn't cause any additional exceptions
-				try
-				{
-					OnUnhandledDispatcherException?.Invoke(eventArgs.Exception);
-					// Signal that the exception was handled, to prevent the application from crashing.
-					eventArgs.Handled = true;
-				}
-				catch (Exception callerException)
-				{
-					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
-				}
+				return;
+			}
+			// Make sure this doesn't cause any additional exceptions
+			try
+			{
+				OnUnhandledDispatcherException?.Invoke(eventArgs.Exception);
+				// Signal that the exception was handled, to prevent the application from crashing.
+				eventArgs.Handled = true;
+			}
+			catch (Exception callerException)
+			{
+				Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
 			}
 		}
 
@@ -202,17 +203,18 @@ namespace Dapplo.CaliburnMicro
 			}
 			var exception = eventArgs.ExceptionObject as Exception;
 			Log.Error().WriteLine(exception, "Exception in AppDomain");
-			if (OnUnhandledAppDomainException != null)
+			if (OnUnhandledAppDomainException == null)
 			{
-				// Make sure this doesn't cause any additional exceptions
-				try
-				{
-					OnUnhandledAppDomainException?.Invoke(exception, eventArgs.IsTerminating);
-				}
-				catch (Exception callerException)
-				{
-					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
-				}
+				return;
+			}
+			// Make sure this doesn't cause any additional exceptions
+			try
+			{
+				OnUnhandledAppDomainException?.Invoke(exception, eventArgs.IsTerminating);
+			}
+			catch (Exception callerException)
+			{
+				Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
 			}
 		}
 
@@ -241,19 +243,20 @@ namespace Dapplo.CaliburnMicro
 		protected virtual void HandleTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
 		{
 			Log.Error().WriteLine(eventArgs.Exception, "Exception in Task");
-			if (ObserveUnhandledTaskException && OnUnhandledTaskException != null)
+			if (!ObserveUnhandledTaskException || OnUnhandledTaskException == null)
 			{
-				// Make sure this doesn't cause any additional exceptions
-				try
-				{
-					OnUnhandledTaskException?.Invoke(eventArgs.Exception);
-					// Specify that the task exception is observed, this is no longer needed but anyway...
-					eventArgs.SetObserved();
-				}
-				catch (Exception callerException)
-				{
-					Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invokation");
-				}
+				return;
+			}
+			// Make sure this doesn't cause any additional exceptions
+			try
+			{
+				OnUnhandledTaskException?.Invoke(eventArgs.Exception);
+				// Specify that the task exception is observed, this is no longer needed but anyway...
+				eventArgs.SetObserved();
+			}
+			catch (Exception callerException)
+			{
+				Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invokation");
 			}
 		}
 

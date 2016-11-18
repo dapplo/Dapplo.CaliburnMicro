@@ -70,12 +70,13 @@ namespace Dapplo.CaliburnMicro.Collections
 					((INotifyPropertyChanged) item).PropertyChanged += ItemPropertyChanged;
 				}
 			}
-			if (e.OldItems != null)
+			if (e.OldItems == null)
 			{
-				foreach (var item in e.OldItems)
-				{
-					((INotifyPropertyChanged) item).PropertyChanged -= ItemPropertyChanged;
-				}
+				return;
+			}
+			foreach (var item in e.OldItems)
+			{
+				((INotifyPropertyChanged) item).PropertyChanged -= ItemPropertyChanged;
 			}
 		}
 

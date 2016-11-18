@@ -138,14 +138,15 @@ namespace Dapplo.CaliburnMicro.Metro
 		/// <param name="source">Uri, e.g. /Resources/Icons.xaml or </param>
 		public void AddResourceDictionary(Uri source)
 		{
-			if (Application.Current.Resources.MergedDictionaries.All(x => x.Source != source))
+			if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source == source))
 			{
-				var resourceDictionary = new ResourceDictionary
-				{
-					Source = source
-				};
-				Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+				return;
 			}
+			var resourceDictionary = new ResourceDictionary
+			{
+				Source = source
+			};
+			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 		}
 
 		/// <summary>

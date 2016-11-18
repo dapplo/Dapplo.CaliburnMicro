@@ -27,7 +27,6 @@
 
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;

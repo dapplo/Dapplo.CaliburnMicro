@@ -148,16 +148,17 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// </summary>
 		public virtual void Cancel()
 		{
-			if (CanCancel)
+			if (!CanCancel)
 			{
-				// Tell all IConfigScreen to Rollback
-				foreach (var configScreen in ConfigScreens.Select(c => c.Value))
-				{
-					configScreen.Rollback();
-				}
-
-				TryClose(false);
+				return;
 			}
+			// Tell all IConfigScreen to Rollback
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value))
+			{
+				configScreen.Rollback();
+			}
+
+			TryClose(false);
 		}
 
 		/// <summary>
@@ -184,20 +185,21 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// </summary>
 		public virtual void Ok()
 		{
-			if (CanOk)
+			if (!CanOk)
 			{
-				// Tell all IConfigScreen to commit
-				foreach (var configScreen in ConfigScreens.Select(c => c.Value))
-				{
-					configScreen.Commit();
-				}
-				// call CommitTransaction on every registered ITransactionalProperties
-				foreach (var transactionalProperties in _transactionalPropertyRegistrations)
-				{
-					transactionalProperties.CommitTransaction();
-				}
-				TryClose(true);
+				return;
 			}
+			// Tell all IConfigScreen to commit
+			foreach (var configScreen in ConfigScreens.Select(c => c.Value))
+			{
+				configScreen.Commit();
+			}
+			// call CommitTransaction on every registered ITransactionalProperties
+			foreach (var transactionalProperties in _transactionalPropertyRegistrations)
+			{
+				transactionalProperties.CommitTransaction();
+			}
+			TryClose(true);
 		}
 
 		/// <summary>
@@ -273,13 +275,14 @@ namespace Dapplo.CaliburnMicro.Configuration
 		/// <param name="configScreen">The TConfigScreen to activate.</param>
 		public override void ActivateItem(TConfigScreen configScreen)
 		{
-			if (configScreen == null || configScreen.CanActivate)
+			if (configScreen != null && !configScreen.CanActivate)
 			{
-				base.ActivateItem(configScreen);
-				NotifyOfPropertyChange(nameof(CurrentConfigScreen));
-				NotifyOfPropertyChange(nameof(CanCancel));
-				NotifyOfPropertyChange(nameof(CanOk));
+				return;
 			}
+			base.ActivateItem(configScreen);
+			NotifyOfPropertyChange(nameof(CurrentConfigScreen));
+			NotifyOfPropertyChange(nameof(CanCancel));
+			NotifyOfPropertyChange(nameof(CanOk));
 		}
 
 		/// <summary>

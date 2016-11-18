@@ -146,12 +146,12 @@ namespace Dapplo.CaliburnMicro.Wizard
 			// Take the first available.
 			var nextWizardScreen =
 				WizardScreens.OrderBy(x => x.Order).SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
-			if (nextWizardScreen != null)
+			if (nextWizardScreen == null)
 			{
-				CurrentWizardScreen = nextWizardScreen;
-				return true;
+				return false;
 			}
-			return false;
+			CurrentWizardScreen = nextWizardScreen;
+			return true;
 		}
 
 		/// <summary>
@@ -183,12 +183,12 @@ namespace Dapplo.CaliburnMicro.Wizard
 			var previousWizardScreen = CurrentWizardScreen != null
 				? WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).LastOrDefault(w => w.IsEnabled && w.IsVisible)
 				: null;
-			if (previousWizardScreen != null)
+			if (previousWizardScreen == null)
 			{
-				CurrentWizardScreen = previousWizardScreen;
-				return true;
+				return false;
 			}
-			return false;
+			CurrentWizardScreen = previousWizardScreen;
+			return true;
 		}
 
 		/// <summary>

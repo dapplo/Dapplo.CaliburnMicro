@@ -26,7 +26,6 @@
 #region Usings
 
 using System.ComponentModel.Composition;
-using System.Security.Permissions;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Demo.Languages;
@@ -43,8 +42,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 	/// This will add an extry for the wizard to the context menu
 	/// </summary>
 	[Export("contextmenu", typeof(IMenuItem))]
-	[UiEnabledPermissions(Permissions = "Admin")]
-	public sealed class WizardMenuItem : MenuItem
+	public sealed class WizardMenuItem : AuthenticatedMenuItem<bool>
 	{
 		[Import]
 		public IWindowManager WindowManager { get; set; }
@@ -54,6 +52,14 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		[Import]
 		private IContextMenuTranslations ContextMenuTranslations { get; set; }
+
+		public WizardMenuItem()
+		{
+			Permission = "Admin";
+			AuthenticationProperty = AuthenticationProperties.IsEnabled;
+			WhenPermission = true;
+			WhenPermissionMissing = false;
+		}
 
 		public override void Initialize()
 		{

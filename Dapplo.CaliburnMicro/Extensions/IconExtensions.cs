@@ -138,7 +138,7 @@ namespace Dapplo.CaliburnMicro.Extensions
 			const int iconDirSize = 6;
 			const int iconDirEntrySize = 16;
 
-			var offset = iconDirSize + (imageSizes.Count * iconDirEntrySize);
+			var offset = iconDirSize + imageSizes.Count * iconDirEntrySize;
 			for (int i = 0; i < imageSizes.Count; i++)
 			{
 				var imageSize = imageSizes[i];
@@ -248,12 +248,13 @@ namespace Dapplo.CaliburnMicro.Extensions
 			}
 
 			var contentControl = parent as ContentControl;
-			if (contentControl != null)
+			if (contentControl == null)
 			{
-				if (Equals(contentControl.Content, child))
-				{
-					contentControl.Content = null;
-				}
+				return;
+			}
+			if (Equals(contentControl.Content, child))
+			{
+				contentControl.Content = null;
 			}
 		}
 	}

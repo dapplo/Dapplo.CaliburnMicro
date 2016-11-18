@@ -32,7 +32,6 @@ using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Tree;
 using Dapplo.Log;
@@ -126,7 +125,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
 
 			foreach (var contextMenuItem in items.CreateTree())
 			{
-				//UiEnabledPermissionsAttribute.ApplyBehaviorWhenAttribute(contextMenuItem);
 				TrayMenuItems.Add(contextMenuItem);
 			}
 		}
