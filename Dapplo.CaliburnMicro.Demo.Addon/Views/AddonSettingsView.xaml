@@ -3,13 +3,13 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			xmlns:security1="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
+			xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
 			mc:Ignorable="d"
 			d:DesignHeight="300" d:DesignWidth="300">
 	<StackPanel>
 		<Button x:Name="DoSomething" Content="Do something!" />
-		<Button x:Name="AddAdmin" Content="Add admin permission" security1:AuthenticationEnabled.Permission="Admin" security1:AuthenticationEnabled.WhenPermissionMissing="true" security1:AuthenticationEnabled.WhenPermission="false"/>
-		<Button x:Name="RemoveAdmin" Content="Remove admin permission" security1:AuthenticationEnabled.Permission="Admin" />
-		<Label Content="You have the 'Admin' permission" security1:AuthenticationVisibility.Permission="Admin" />
+		<Button x:Name="AddAdmin" Content="Add admin permission" security:AuthenticationEnabled.Permission="Admin" security:AuthenticationEnabled.WhenPermissionMissing="true" security:AuthenticationEnabled.WhenPermission="false"/>
+		<Button x:Name="RemoveAdmin" Content="Remove admin permission" security:AuthenticationEnabled.Permission="Admin" />
+		<Label Content="You have the 'Admin' permission" security:AuthenticationVisibility.Permission="Admin" />
 	</StackPanel>
 </UserControl>

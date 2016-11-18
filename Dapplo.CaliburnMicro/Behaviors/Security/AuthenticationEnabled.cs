@@ -26,6 +26,7 @@
 #region Usings
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
@@ -181,8 +182,9 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 				base.Attach(host);
 				_authenticationProvider = Dapplication.Current?.Bootstrapper?.GetExport<IAuthenticationProvider>();
 
-				// Call update when the _authenticationProvider changes it's values
-				_authenticationProviderSubscription = _authenticationProvider?.Value?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermission)).Subscribe(x => Update(host, null));
+				// if INotifyPropertyChanged is implemented: Call update when the _authenticationProvider changes it's values, 
+				var notifyPropertyChangedAuthenticationProvider = _authenticationProvider?.Value as INotifyPropertyChanged;
+				_authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermission)).Subscribe(x => Update(host, null));
 			}
 
 			/// <summary>

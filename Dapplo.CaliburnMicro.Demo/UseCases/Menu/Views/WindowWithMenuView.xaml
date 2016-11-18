@@ -32,12 +32,12 @@
 						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
 							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationProperties.Visibility}">
+						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationTargetProperties.Visibility}">
 							<Setter Property="cmSec:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
 							<Setter Property="cmSec:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="cmSec:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationProperties.IsEnabled}">
+						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static cmSec:AuthenticationTargetProperties.IsEnabled}">
 							<Setter Property="cmSec:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
 							<Setter Property="cmSec:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="cmSec:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />

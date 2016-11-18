@@ -3,7 +3,7 @@
 	/// <summary>
 	/// This defines the property which is managed by authentication
 	/// </summary>
-	public enum AuthenticationProperties
+	public enum AuthenticationTargetProperties
 	{
 
 		/// <summary>

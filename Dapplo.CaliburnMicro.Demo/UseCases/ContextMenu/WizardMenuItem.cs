@@ -56,7 +56,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public WizardMenuItem()
 		{
 			Permission = "Admin";
-			AuthenticationProperty = AuthenticationProperties.IsEnabled;
+			AuthenticationTargetProperty = AuthenticationTargetProperties.IsEnabled;
 			WhenPermission = true;
 			WhenPermissionMissing = false;
 		}

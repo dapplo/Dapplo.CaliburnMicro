@@ -34,7 +34,7 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// <summary>
 		///     This defines the property which is managed by authentication
 		/// </summary>
-		AuthenticationProperties AuthenticationProperty { get; }
+		AuthenticationTargetProperties AuthenticationTargetProperty { get; }
 
 		/// <summary>
 		///     Permission(s) for which the item is managed

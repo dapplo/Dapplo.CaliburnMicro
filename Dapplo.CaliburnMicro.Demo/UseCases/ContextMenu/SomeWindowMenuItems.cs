@@ -67,7 +67,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				var menuItem = new AuthenticatedMenuItem<Visibility>
 				{
 					Permission = "Admin",
-					AuthenticationProperty = AuthenticationProperties.Visibility,
+					AuthenticationTargetProperty = AuthenticationTargetProperties.Visibility,
 					WhenPermission = Visibility.Visible,
 					WhenPermissionMissing = Visibility.Collapsed,
 					Icon = new PackIconMaterial

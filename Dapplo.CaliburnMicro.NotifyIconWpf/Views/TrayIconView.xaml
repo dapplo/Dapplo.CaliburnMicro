@@ -51,12 +51,12 @@
 							<Setter Property="IsEnabled" Value="False"/>
 							<Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}"/>
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static security:AuthenticationProperties.Visibility}">
+						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
 							<Setter Property="security:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
 							<Setter Property="security:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="security:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static security:AuthenticationProperties.IsEnabled}">
+						<DataTrigger Binding="{Binding AuthenticationProperty}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
 							<Setter Property="security:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
 							<Setter Property="security:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="security:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />

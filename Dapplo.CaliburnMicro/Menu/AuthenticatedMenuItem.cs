@@ -39,16 +39,16 @@ namespace Dapplo.CaliburnMicro.Menu
 		private TWhen _whenPermissionMissing;
 		private TWhen _whenPermission;
 		private string _permission;
-		private AuthenticationProperties _authenticationProperty = AuthenticationProperties.None;
+		private AuthenticationTargetProperties _authenticationTargetProperty = AuthenticationTargetProperties.None;
 
 		/// <inheritdoc />
-		public AuthenticationProperties AuthenticationProperty
+		public AuthenticationTargetProperties AuthenticationTargetProperty
 		{
-			get { return _authenticationProperty; }
+			get { return _authenticationTargetProperty; }
 			set
 			{
-				_authenticationProperty = value;
-				NotifyOfPropertyChange(nameof(AuthenticationProperties));
+				_authenticationTargetProperty = value;
+				NotifyOfPropertyChange(nameof(AuthenticationTargetProperties));
 			}
 		}
 

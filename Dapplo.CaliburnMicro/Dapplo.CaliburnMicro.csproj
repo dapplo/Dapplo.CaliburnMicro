@@ -103,7 +103,7 @@
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="Behaviors\Security\INeedAuthentication.cs" />
-    <Compile Include="Behaviors\Security\AuthenticationProperties.cs" />
+    <Compile Include="Behaviors\Security\AuthenticationTargetProperties.cs" />
     <Compile Include="Behaviors\ValueChecker.cs" />
     <Compile Include="Behaviors\EnumVisibility.cs" />
     <Compile Include="Behaviors\IBehavior.cs" />
