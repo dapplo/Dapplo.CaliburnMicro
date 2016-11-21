@@ -27,6 +27,8 @@ This bases on Dapplo.Addons.Bootstrapper, to use it you will need to instanciate
 There is functionality available to support your with building:
 - Context menus (with tree support)
 - Wizard
+- Simplified binding of properties
+- Some build in behaviors, like Visibility, IsEnabled and authentication behaviors which hide/disable elements depending on a value.
 - a structured configuration, with a tree where you can hang your "config screens"
 
 Usage:
