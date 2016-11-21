@@ -26,6 +26,7 @@
 #region Usings
 
 using System.ComponentModel;
+using Dapplo.Config.Language;
 using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
@@ -35,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Translations
 	/// <summary>
 	///     These are translations used throughout the project
 	/// </summary>
-	public interface ICoreTranslations : IDefaultValue
+	public interface ICoreTranslations : IDefaultValue, ILanguagePart
 	{
 		/// <summary>
 		///     Used everywhere where ok is used
