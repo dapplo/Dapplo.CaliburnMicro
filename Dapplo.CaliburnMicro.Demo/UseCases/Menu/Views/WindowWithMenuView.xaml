@@ -7,9 +7,11 @@
 			 xmlns:cal="http://www.caliburnproject.org"
 			 xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro"
 			 xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
+			 xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
 	<controls:MetroWindow.Resources>
+		<converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
 		<ControlTemplate x:Key="MenuSeparatorTemplate">
 			<Separator />
@@ -32,12 +34,12 @@
 						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
 							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding Path=(security:INeedAuthentication.AuthenticationTargetProperty)}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
 							<Setter Property="security:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
 							<Setter Property="security:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="security:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding Path=(security:INeedAuthentication.AuthenticationTargetProperty)}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
 							<Setter Property="security:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
 							<Setter Property="security:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
 							<Setter Property="security:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />

@@ -117,6 +117,7 @@
     <Compile Include="Configuration\IConfigScreen.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Converters\AuthenticationTargetPropertyConverter.cs" />
     <Compile Include="Extensions\IniSectionExtensions.cs" />
     <Compile Include="Extensions\LanguageChangedExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
