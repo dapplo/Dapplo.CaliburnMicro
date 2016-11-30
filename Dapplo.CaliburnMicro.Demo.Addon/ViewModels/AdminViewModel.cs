@@ -26,56 +26,39 @@
 #region Usings
 
 using System.ComponentModel.Composition;
-using Caliburn.Micro;
+using System.Windows;
 using Dapplo.CaliburnMicro.Behaviors.Security;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
+using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.CaliburnMicro.Demo.Addon.Languages;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
-using MahApps.Metro.IconPacks;
+using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
+namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 {
-	/// <summary>
-	/// This will add an extry for the wizard to the context menu
-	/// </summary>
-	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WizardMenuItem : AuthenticatedMenuItem<bool>
+	[Export(typeof(IConfigScreen))]
+	public sealed class AdminViewModel : AuthenticatedConfigScreen<Visibility>, IPartImportsSatisfiedNotification
 	{
 		[Import]
-		public IWindowManager WindowManager { get; set; }
+		public IAddonTranslations AddonTranslations { get; set; }
 
 		[Import]
-		private WizardExampleViewModel WizardExample { get; set; }
+		private IAuthenticationProvider AuthenticationProvider { get; set; }
 
-		[Import]
-		private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-		public WizardMenuItem()
+		public AdminViewModel()
 		{
+			ParentId = nameof(ConfigIds.Addons);
 			Permission = "Admin";
-			this.EnabledOnPermission();
+			this.VisibleOnPermission();
 		}
 
-		public override void Initialize()
+		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Wizard));
-			Icon = new PackIconMaterial
-			{
-				Kind = PackIconMaterialKind.AutoFix
-			};
-		}
-
-		/// <summary>
-		///     Is called when the IMenuItem is clicked
-		/// </summary>
-		public override void Click(IMenuItem clickedItem)
-		{
-			WindowManager.ShowDialog(WizardExample);
+			AddonTranslations.CreateBinding(this, nameof(IAddonTranslations.Admin));
 		}
 	}
 }

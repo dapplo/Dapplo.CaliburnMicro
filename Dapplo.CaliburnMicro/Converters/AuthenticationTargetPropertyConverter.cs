@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 using Dapplo.CaliburnMicro.Behaviors.Security;
+using Dapplo.CaliburnMicro.Security;
 
 namespace Dapplo.CaliburnMicro.Converters
 {

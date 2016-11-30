@@ -42,7 +42,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 	///     This implements a Caliburn-Micro Config UI, for showing IConfigScreen based configuration items
 	/// </summary>
 	public abstract class Config<TConfigScreen> : Conductor<TConfigScreen>.Collection.OneActive, IConfig<TConfigScreen>
-		where TConfigScreen : class, IConfigScreen, ITreeNode<TConfigScreen>
+		where TConfigScreen : class, IConfigScreen, ITreeScreenNode<TConfigScreen>
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		private static readonly LogSource Log = new LogSource();

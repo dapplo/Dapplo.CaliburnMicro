@@ -40,5 +40,8 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.Languages
 
 		[DefaultValue("Can't touch me")]
 		string NotSelectableAddon { get; }
+
+		[DefaultValue("Admin")]
+		string Admin { get; }
 	}
 }

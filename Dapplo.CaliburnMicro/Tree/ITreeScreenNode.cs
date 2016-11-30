@@ -23,38 +23,18 @@
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Behaviors.Security
+#region Usings
+
+using Caliburn.Micro;
+
+#endregion
+
+namespace Dapplo.CaliburnMicro.Tree
 {
 	/// <summary>
-	/// Base interface which an authenticated thing needs to implement
+	/// A TreeScreen node
 	/// </summary>
-	public interface INeedAuthentication
+	public interface ITreeScreenNode<TTreeScreen> : ITreeScreen, ITreeNode<TTreeScreen>
 	{
-		/// <summary>
-		///     This defines the property which is managed by authentication
-		/// </summary>
-		AuthenticationTargetProperties AuthenticationTargetProperty { get; }
-
-		/// <summary>
-		///     Permission(s) for which the item is managed
-		/// </summary>
-		string Permission { get; }
-	}
-
-	/// <summary>
-	/// Base interface which an authenticated thing needs to implement
-	/// </summary>
-	/// <typeparam name="TWhen"></typeparam>
-	public interface INeedAuthentication<out TWhen> : INeedAuthentication
-	{
-		/// <summary>
-		///     What should be used when the permission is available
-		/// </summary>
-		TWhen WhenPermission { get; }
-
-		/// <summary>
-		///     What should be used when the permission is not available
-		/// </summary>
-		TWhen WhenPermissionMissing { get; }
 	}
 }

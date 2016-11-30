@@ -102,8 +102,10 @@
     <Compile Include="Behaviors\AttachedBehavior.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
-    <Compile Include="Behaviors\Security\INeedAuthentication.cs" />
-    <Compile Include="Behaviors\Security\AuthenticationTargetProperties.cs" />
+    <Compile Include="Security\IChangeableNeedAuthentication.cs" />
+    <Compile Include="Security\INeedAuthentication.cs" />
+    <Compile Include="Security\AuthenticationTargetProperties.cs" />
+    <Compile Include="Security\NeedAuthenticationExtensions.cs" />
     <Compile Include="Behaviors\ValueChecker.cs" />
     <Compile Include="Behaviors\EnumVisibility.cs" />
     <Compile Include="Behaviors\IBehavior.cs" />
@@ -113,8 +115,13 @@
     <Compile Include="CaliburnMicroBootstrapper.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
     <Compile Include="Collections\TrulyObservableCollection.cs" />
+    <Compile Include="Security\AuthenticatedConfigScreen.cs" />
     <Compile Include="Configuration\ConfigScreen.cs" />
     <Compile Include="Configuration\IConfigScreen.cs" />
+    <Compile Include="Tree\AuthenticatedTreeScreen.cs" />
+    <Compile Include="Tree\ITreeScreenNode.cs" />
+    <Compile Include="Tree\TreeScreen.cs" />
+    <Compile Include="Tree\ITreeScreen.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Converters\AuthenticationTargetPropertyConverter.cs" />
@@ -122,7 +129,7 @@
     <Compile Include="Extensions\LanguageChangedExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
-    <Compile Include="Menu\AuthenticatedMenuItem.cs" />
+    <Compile Include="Security\AuthenticatedMenuItem.cs" />
     <Compile Include="Menu\MenuItemStyles.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Behaviors\Security\AuthenticationEnabled.cs" />

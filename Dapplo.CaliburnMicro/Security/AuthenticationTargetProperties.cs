@@ -1,4 +1,4 @@
-﻿namespace Dapplo.CaliburnMicro.Behaviors.Security
+﻿namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
 	/// This defines the property which is managed by authentication

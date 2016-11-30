@@ -23,32 +23,38 @@
 
 #endregion
 
-#region Usings
-
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Tree;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
+namespace Dapplo.CaliburnMicro.Security
 {
-	[Export(typeof(IConfigScreen))]
-	public sealed class UiConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+	/// <summary>
+	/// Base interface which an authenticated thing needs to implement
+	/// </summary>
+	public interface INeedAuthentication
 	{
-		[Import]
-		public IConfigTranslations ConfigTranslations { get; set; }
+		/// <summary>
+		///     This defines the property which is managed by authentication
+		/// </summary>
+		AuthenticationTargetProperties AuthenticationTargetProperty { get; }
 
-		public void OnImportsSatisfied()
-		{
-			// automatically update the DisplayName
-			ConfigTranslations.CreateBinding(this, nameof(IConfigTranslations.Ui));
+		/// <summary>
+		///     Permission(s) for which the item is managed
+		/// </summary>
+		string Permission { get; }
+	}
 
-			// automatically update the DisplayName
-			CanActivate = false;
-			Id = nameof(ConfigIds.Ui);
-		}
+	/// <summary>
+	/// Base interface which an authenticated thing needs to implement
+	/// </summary>
+	/// <typeparam name="TWhen"></typeparam>
+	public interface INeedAuthentication<out TWhen> : INeedAuthentication
+	{
+		/// <summary>
+		///     What should be used when the permission is available
+		/// </summary>
+		TWhen WhenPermission { get; }
+
+		/// <summary>
+		///     What should be used when the permission is not available
+		/// </summary>
+		TWhen WhenPermissionMissing { get; }
 	}
 }

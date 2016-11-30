@@ -36,6 +36,7 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
+using Dapplo.CaliburnMicro.Tree;
 using Dapplo.Utils.Extensions;
 
 #endregion

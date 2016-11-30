@@ -23,33 +23,38 @@
 
 #endregion
 
-#region Usings
-
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Tree;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
+namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
-	/// This is just a placeholder, doesn't have a view
+	/// Base interface which an authenticated thing needs to implement
 	/// </summary>
-	[Export(typeof(IConfigScreen))]
-	public sealed class AddonConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+	public interface IChangeableNeedAuthentication : INeedAuthentication
 	{
-		[Import]
-		public IConfigTranslations ConfigTranslations { get; set; }
+		/// <summary>
+		///     This defines the property which is managed by authentication
+		/// </summary>
+		new AuthenticationTargetProperties AuthenticationTargetProperty { get; set; }
 
-		public void OnImportsSatisfied()
-		{
-			// automatically update the DisplayName
-			ConfigTranslations.CreateBinding(this, nameof(ConfigTranslations.Addons));
-			CanActivate = false;
-			Id = nameof(ConfigIds.Addons);
-		}
+		/// <summary>
+		///     Permission(s) for which the item is managed
+		/// </summary>
+		new string Permission { get; set; }
+	}
+
+	/// <summary>
+	/// Base interface which an authenticated thing needs to implement
+	/// </summary>
+	/// <typeparam name="TWhen"></typeparam>
+	public interface IChangeableNeedAuthentication<TWhen> : INeedAuthentication<TWhen>, IChangeableNeedAuthentication
+	{
+		/// <summary>
+		///     What should be used when the permission is available
+		/// </summary>
+		new TWhen WhenPermission { get; set; }
+
+		/// <summary>
+		///     What should be used when the permission is not available
+		/// </summary>
+		new TWhen WhenPermissionMissing { get; set; }
 	}
 }

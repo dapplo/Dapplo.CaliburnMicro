@@ -1,4 +1,4 @@
-#region Dapplo 2016 - GNU Lesser General Public License
+﻿#region Dapplo 2016 - GNU Lesser General Public License
 
 // Dapplo - building blocks for .NET applications
 // Copyright (C) 2016 Dapplo
@@ -26,15 +26,16 @@
 #region Usings
 
 using Dapplo.CaliburnMicro.Behaviors.Security;
+using Dapplo.CaliburnMicro.Security;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Menu
+namespace Dapplo.CaliburnMicro.Tree
 {
 	/// <summary>
-	///     Extend this to make your IMenuItem authentication aware, e.g. controling the IsEnabled / Visibility
+	///     An extension of the TreeScreen which adds authentication
 	/// </summary>
-	public class AuthenticatedMenuItem<TWhen> : MenuItem, INeedAuthentication<TWhen>
+	public abstract class AuthenticatedTreeScreen<TTreeScreen, TWhen> : TreeScreen<TTreeScreen>, INeedAuthentication<TWhen>
 	{
 		private TWhen _whenPermissionMissing;
 		private TWhen _whenPermission;

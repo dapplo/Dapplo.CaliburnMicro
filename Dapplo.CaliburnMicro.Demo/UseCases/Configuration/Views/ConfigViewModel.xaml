@@ -5,12 +5,16 @@
 					xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
 					xmlns:behaviors="clr-namespace:Dapplo.CaliburnMicro.Behaviors;assembly=Dapplo.CaliburnMicro"
 					xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+					xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
+					xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
+					xmlns:security1="clr-namespace:Dapplo.CaliburnMicro.Security;assembly=Dapplo.CaliburnMicro"
 					Width="500" Height="400">
 	<behaviors:FrameworkElementIcon.Value>
 		<iconPacks:PackIconMaterial Kind="Settings" Margin="10" Visibility="Visible"/>
 	</behaviors:FrameworkElementIcon.Value>
 	<mahapps:MetroWindow.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+		<converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
 	</mahapps:MetroWindow.Resources>
 	<mahapps:MetroWindow.RightWindowCommands>
 		<mahapps:WindowCommands>
@@ -35,7 +39,19 @@
 				<TreeView.ItemContainerStyle>
 					<Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
 						<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-						<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
+						<Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource BooleanToVisibility} }" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security1:AuthenticationTargetProperties.Visibility}">
+								<Setter Property="security:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
+								<Setter Property="security:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
+								<Setter Property="security:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+							</DataTrigger>
+							<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security1:AuthenticationTargetProperties.IsEnabled}">
+								<Setter Property="security:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
+								<Setter Property="security:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
+								<Setter Property="security:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+							</DataTrigger>
+						</Style.Triggers>
 					</Style>
 				</TreeView.ItemContainerStyle>
 				<TreeView.ItemTemplate>

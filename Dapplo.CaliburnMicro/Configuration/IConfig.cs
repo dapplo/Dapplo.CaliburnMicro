@@ -103,7 +103,7 @@ namespace Dapplo.CaliburnMicro.Configuration
 	public interface IConfig<TConfigScreen> : IConfig
 	{
 		/// <summary>
-		///     The IConfigScreen items of the config
+		///     The IConfigScreens items of the config
 		/// </summary>
 		new IEnumerable<Lazy<TConfigScreen>> ConfigScreens { get; }
 
