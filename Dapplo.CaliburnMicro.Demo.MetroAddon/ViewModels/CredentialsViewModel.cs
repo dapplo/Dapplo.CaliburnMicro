@@ -31,7 +31,7 @@ using Dapplo.CaliburnMicro.Demo.Languages;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.MetroAddon.ViewModels
 {
 	/// <summary>
 	///     A view model for credentials (username / password)

@@ -90,7 +90,7 @@
   <ItemGroup>
     <Compile Include="Languages\IAddonTranslations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\AdminConfigViewModel.cs" />
     <Compile Include="ViewModels\NotSelectableConfigViewModel.cs" />
     <Compile Include="ViewModels\AddonSettingsViewModel.cs" />
   </ItemGroup>
@@ -121,7 +121,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AdminView.xaml">
+    <Page Include="Views\AdminConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

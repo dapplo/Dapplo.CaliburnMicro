@@ -14,6 +14,8 @@
 		<resource name="addons">Erweiterungen</resource>
 		<resource name="filter">Typ Filtertext</resource>
 		<resource name="hotkey">Abkürzungstasten</resource>
+	</resources>
+	<resources prefix="ui">
 		<resource name="theme">Theme</resource>
 	</resources>
 	<resources prefix="credentials">

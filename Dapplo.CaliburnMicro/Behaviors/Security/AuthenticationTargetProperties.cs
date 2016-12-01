@@ -23,21 +23,26 @@
 
 #endregion
 
-using System.Collections.Generic;
-
-namespace Dapplo.CaliburnMicro.Security
+namespace Dapplo.CaliburnMicro.Behaviors.Security
 {
 	/// <summary>
-	///     Interface which all authentication providers must implement
+	///     This defines the property which is managed by authentication
 	/// </summary>
-	public interface IAuthenticationProvider
+	public enum AuthenticationTargetProperties
 	{
 		/// <summary>
-		///     Returns if the current user has a certain permission
+		///     No influence
 		/// </summary>
-		/// <param name="neededPermissions">string with the name of the permission</param>
-		/// <param name="permissionOperation">PermissionOperations, default Or</param>
-		/// <returns>true if the current user has the specified permission</returns>
-		bool HasPermissions(IEnumerable<string> neededPermissions, PermissionOperations permissionOperation = PermissionOperations.Or);
+		None,
+
+		/// <summary>
+		///     Changes the IsEnabled
+		/// </summary>
+		IsEnabled,
+
+		/// <summary>
+		///     Changes the visibility
+		/// </summary>
+		Visibility
 	}
 }

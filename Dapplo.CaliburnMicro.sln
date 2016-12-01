@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo.Addon", "Dapplo.CaliburnMicro.Demo.Addon\Dapplo.CaliburnMicro.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo.MetroAddon", "Dapplo.CaliburnMicro.Demo.MetroAddon\Dapplo.CaliburnMicro.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

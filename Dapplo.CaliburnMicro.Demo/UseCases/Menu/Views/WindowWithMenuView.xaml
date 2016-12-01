@@ -1,23 +1,21 @@
-﻿<controls:MetroWindow x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Menu.Views.WindowWithMenuView"
+﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Menu.Views.WindowWithMenuView"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:cal="http://www.caliburnproject.org"
 			 xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro"
 			 xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
 			 xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
-			 xmlns:security1="clr-namespace:Dapplo.CaliburnMicro.Security;assembly=Dapplo.CaliburnMicro"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
-	<controls:MetroWindow.Resources>
+	<UserControl.Resources>
 		<converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
 		<ControlTemplate x:Key="MenuSeparatorTemplate">
 			<Separator />
 		</ControlTemplate>
-	</controls:MetroWindow.Resources>
+	</UserControl.Resources>
 	<DockPanel>
 		<Menu ItemsSource="{Binding Items}">
 			<Menu.Resources>
@@ -35,20 +33,20 @@
 						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
 							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security1:AuthenticationTargetProperties.Visibility}">
-							<Setter Property="security:AuthenticationVisibility.Permission" Value="{Binding Permission}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermission" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+							<Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permission}" />
+							<Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
+							<Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security1:AuthenticationTargetProperties.IsEnabled}">
-							<Setter Property="security:AuthenticationEnabled.Permission" Value="{Binding Permission}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermission" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermissionMissing" Value="{Binding WhenPermissionMissing}" />
+						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+							<Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permission}" />
+							<Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
+							<Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
 						</DataTrigger>
 					</Style.Triggers>
 				</Style>
 			</Menu.Resources>
 		</Menu>
 	</DockPanel>
-</controls:MetroWindow>
+</UserControl>
 

@@ -23,21 +23,22 @@
 
 #endregion
 
-using System.Collections.Generic;
-
 namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
-	///     Interface which all authentication providers must implement
+	///     Describes the operation which is used when checking permissions.
 	/// </summary>
-	public interface IAuthenticationProvider
+	public enum PermissionOperations
 	{
 		/// <summary>
-		///     Returns if the current user has a certain permission
+		///     Defines that the permission protected item needs one of the specified permissions.
+		///     This should be the default
 		/// </summary>
-		/// <param name="neededPermissions">string with the name of the permission</param>
-		/// <param name="permissionOperation">PermissionOperations, default Or</param>
-		/// <returns>true if the current user has the specified permission</returns>
-		bool HasPermissions(IEnumerable<string> neededPermissions, PermissionOperations permissionOperation = PermissionOperations.Or);
+		Or,
+
+		/// <summary>
+		///     Defines that the permission protected item needs all of the specified permissions.
+		/// </summary>
+		And
 	}
 }

@@ -39,7 +39,5 @@ namespace Dapplo.CaliburnMicro.Demo.Languages
 		string Addons { get; }
 		string RestoreDefaults { get; }
 		string Apply { get; }
-		string Theme { get; }
-		string Hotkey { get; }
 	}
 }

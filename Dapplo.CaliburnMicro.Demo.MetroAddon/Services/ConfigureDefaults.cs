@@ -31,12 +31,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.CaliburnMicro.Demo.MetroAddon.Configurations;
 using Dapplo.CaliburnMicro.Metro;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Services
+namespace Dapplo.CaliburnMicro.Demo.MetroAddon.Services
 {
 	[StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper + 1)]
 	public class ConfigureDefaults : IStartupAction
@@ -45,15 +45,17 @@ namespace Dapplo.CaliburnMicro.Demo.Services
 		private MetroWindowManager MetroWindowManager { get; set; }
 
 		[Import]
-		public IDemoConfiguration DemoConfiguration { get; set; }
+		public IUiConfiguration UiConfiguration { get; set; }
 
 		public Task StartAsync(CancellationToken token = new CancellationToken())
 		{
+			// Override the ConfigView with a much nicer looking version
+			ViewLocator.NameTransformer.AddRule(@"^Dapplo\.CaliburnMicro\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Dapplo.CaliburnMicro.Demo.MetroAddon.Views.ConfigView");
 			var demoUri = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
 			MetroWindowManager.AddResourceDictionary(demoUri);
 
-			MetroWindowManager.ChangeTheme(DemoConfiguration.Theme);
-			MetroWindowManager.ChangeThemeAccent(DemoConfiguration.ThemeAccent);
+			MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
+			MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
 			return Task.FromResult(true);
 		}
 	}

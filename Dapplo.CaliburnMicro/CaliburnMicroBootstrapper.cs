@@ -213,7 +213,10 @@ namespace Dapplo.CaliburnMicro
 		/// <returns></returns>
 		protected override IEnumerable<Assembly> SelectAssemblies()
 		{
-			return AssemblyResolver.AssemblyCache;
+			foreach (var assembly in AssemblyResolver.AssemblyCache)
+			{
+				yield return assembly;
+			}
 		}
 	}
 }

@@ -8,8 +8,8 @@
 			d:DesignHeight="300" d:DesignWidth="300">
 	<StackPanel>
 		<Button x:Name="DoSomething" Content="Do something!" />
-		<Button x:Name="AddAdmin" Content="Add admin permission" security:AuthenticationEnabled.Permission="Admin" security:AuthenticationEnabled.WhenPermissionMissing="true" security:AuthenticationEnabled.WhenPermission="false"/>
-		<Button x:Name="RemoveAdmin" Content="Remove admin permission" security:AuthenticationEnabled.Permission="Admin" />
-		<Label Content="You have the 'Admin' permission" security:AuthenticationVisibility.Permission="Admin" />
+		<Button x:Name="AddAdmin" Content="Add admin permission" security:AuthenticationEnabled.PermissionsAsString="Admin" security:AuthenticationEnabled.WhenPermissionsMissing="true" security:AuthenticationEnabled.WhenPermissions="false"/>
+		<Button x:Name="RemoveAdmin" Content="Remove admin permission" security:AuthenticationEnabled.PermissionsAsString="Admin" />
+		<Label Content="You have the 'Admin' permission" security:AuthenticationVisibility.PermissionsAsString="Admin" />
 	</StackPanel>
 </UserControl>

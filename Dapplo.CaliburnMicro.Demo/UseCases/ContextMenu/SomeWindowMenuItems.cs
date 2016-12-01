@@ -28,7 +28,6 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
@@ -67,7 +66,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 			get {
 				var menuItem = new AuthenticatedMenuItem<Visibility>
 				{
-					Permission = "Admin",
 					Icon = new PackIconMaterial
 					{
 						Kind = PackIconMaterialKind.ViewList
@@ -78,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 						WindowManager.ShowWindow(WindowWithMenuViewModel);
 					}
 				};
-				menuItem.VisibleOnPermission();
+				menuItem.VisibleOnPermissions("Admin");
 				// Binding without disposing
 				ContextMenuTranslations.CreateBinding(menuItem, nameof(IContextMenuTranslations.SomeWindow));
 				return menuItem;

@@ -14,6 +14,8 @@
 		<resource name="addons">Addons</resource>
 		<resource name="filter">type filter text</resource>
 		<resource name="hotkey">Hotkeys</resource>
+	</resources>
+	<resources prefix="ui">
 		<resource name="theme">Theme</resource>
 	</resources>
 	<resources prefix="credentials">

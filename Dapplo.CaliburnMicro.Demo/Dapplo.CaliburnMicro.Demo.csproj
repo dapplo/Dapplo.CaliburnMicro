@@ -82,10 +82,6 @@
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\MahApps.Metro.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.1.6.0\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
       <Private>True</Private>
@@ -115,10 +111,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -140,12 +132,9 @@
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Models\IWizardModel.cs" />
     <Compile Include="Services\AuthenticationProvider.cs" />
-    <Compile Include="Services\ConfigureDefaults.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
-    <Compile Include="UseCases\Configuration\ViewModels\HotkeyConfigViewModel.cs" />
-    <Compile Include="UseCases\Configuration\ViewModels\ThemeConfigViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\SomeWindowMenuItems.cs" />
@@ -156,7 +145,6 @@
     <Compile Include="UseCases\Menu\SaveAsMenuItem.cs" />
     <Compile Include="UseCases\Menu\ViewModels\WindowWithMenuViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep5ViewModel.cs" />
-    <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\ConfigViewModel.cs" />
@@ -178,10 +166,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
-      <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
-      <Name>Dapplo.CaliburnMicro.Metro</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj">
       <Project>{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}</Project>
       <Name>Dapplo.CaliburnMicro.NotifyIconWpf</Name>
@@ -207,14 +191,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UseCases\Configuration\Views\HotkeyConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UseCases\Configuration\Views\ThemeConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UseCases\Menu\Views\WindowWithMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,10 +198,6 @@
     <Page Include="UseCases\Wizard\Views\WizardStep5View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CredentialsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UseCases\Configuration\Views\LanguageConfigView.xaml">
       <SubType>Designer</SubType>
@@ -235,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UseCases\Configuration\Views\ConfigViewModel.xaml">
+    <Page Include="UseCases\Configuration\Views\ConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

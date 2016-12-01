@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Dapplo.CaliburnMicro.Tree;
+﻿using Dapplo.CaliburnMicro.Tree;
 
 namespace Dapplo.CaliburnMicro.Configuration
 {

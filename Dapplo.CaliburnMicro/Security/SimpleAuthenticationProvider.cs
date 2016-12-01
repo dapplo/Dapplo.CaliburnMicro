@@ -59,7 +59,7 @@ namespace Dapplo.CaliburnMicro.Security
 			}
 			var newPermission = permission.Trim().ToLowerInvariant();
 			_permissions.Add(newPermission);
-			NotifyOfPropertyChange(nameof(HasPermission));
+			NotifyOfPropertyChange(nameof(HasPermissions));
 		}
 
 		/// <summary>
@@ -74,17 +74,26 @@ namespace Dapplo.CaliburnMicro.Security
 			}
 			var removingPermission = permission.Trim().ToLowerInvariant();
 			_permissions.Remove(removingPermission);
-			NotifyOfPropertyChange(nameof(HasPermission));
+			NotifyOfPropertyChange(nameof(HasPermissions));
 		}
 
 		/// <inheritdoc />
-		public bool HasPermission(string permission)
+		public bool HasPermissions(IEnumerable<string> neededPermissions, PermissionOperations permissionOperation = PermissionOperations.Or)
 		{
-			if (string.IsNullOrWhiteSpace(permission))
+			// Argument check
+			if (neededPermissions == null)
 			{
-				return true;
+				throw new ArgumentNullException(nameof(neededPermissions));
 			}
-			return Permissions.Contains(permission.Trim().ToLowerInvariant());
+
+			// Create a clean list of permissions needed
+			var permissionsToCompare = neededPermissions.Where(s => !string.IsNullOrWhiteSpace(s)).Select(permission => permission.Trim().ToLowerInvariant()).ToList();
+
+			if (permissionOperation == PermissionOperations.Or)
+			{
+				return permissionsToCompare.Any(permission => _permissions.Contains(permission));
+			}
+			return permissionsToCompare.All(permission => _permissions.Contains(permission));
 		}
 	}
 }

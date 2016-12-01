@@ -26,6 +26,7 @@
 #region Usings
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Dapplo.CaliburnMicro.Extensions;
@@ -43,28 +44,37 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// <summary>
 		///     The permission(s) to check against
 		/// </summary>
-		public static readonly DependencyProperty PermissionProperty = DependencyProperty.RegisterAttached(
-			"Permission",
-			typeof(string),
+		public static readonly DependencyProperty PermissionsProperty = DependencyProperty.RegisterAttached(
+			"Permissions",
+			typeof(IEnumerable<string>),
 			typeof(AuthenticationEnabled),
 			new PropertyMetadata(OnArgumentsChanged));
+
+		/// <summary>
+		///     The operation used when the permissions are checked
+		/// </summary>
+		public static readonly DependencyProperty PermissionsOperationProperty = DependencyProperty.RegisterAttached(
+			"PermissionsOperation",
+			typeof(PermissionOperations),
+			typeof(AuthenticationEnabled),
+			new PropertyMetadata(PermissionOperations.Or, OnArgumentsChanged));
 
 		/// <summary>
 		///     IsEnabled value to use when the current user doesn't have the permission
 		///     Default is false
 		/// </summary>
-		public static readonly DependencyProperty WhenPermissionMissingProperty = DependencyProperty.RegisterAttached(
-			"WhenPermissionMissing",
+		public static readonly DependencyProperty WhenPermissionsMissingProperty = DependencyProperty.RegisterAttached(
+			"WhenPermissionsMissing",
 			typeof(bool),
 			typeof(AuthenticationEnabled),
 			new PropertyMetadata(false, OnArgumentsChanged));
 
 		/// <summary>
-		///     IsEnabled value  to use when the permission is available
+		///     IsEnabled value to use when the permissions are available
 		///     Default is true
 		/// </summary>
-		public static readonly DependencyProperty WhenPermissionProperty = DependencyProperty.RegisterAttached(
-			"WhenPermission",
+		public static readonly DependencyProperty WhenPermissionsProperty = DependencyProperty.RegisterAttached(
+			"WhenPermissions",
 			typeof(bool),
 			typeof(AuthenticationEnabled),
 			new PropertyMetadata(true, OnArgumentsChanged));
@@ -83,23 +93,52 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		}
 
 		/// <summary>
-		///     Returns the permission from the UIElement of the DependencyProperty specified in PermissionProperty.
+		///     Returns the permissions from the UIElement of the DependencyProperty specified in PermissionsProperty.
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
-		/// <returns>string which represents the permission of the in PermissionProperty specified DependencyProperty</returns>
-		public static string GetPermission(UIElement uiElement)
+		/// <returns>string which represents the permissions of the in PermissionsProperty specified DependencyProperty</returns>
+		public static IEnumerable<string> GetPermissions(UIElement uiElement)
 		{
-			return (string) uiElement.GetValue(PermissionProperty);
+			return (IEnumerable<string>) uiElement.GetValue(PermissionsProperty);
 		}
 
 		/// <summary>
-		///     Sets the permission of the UIElement to the DependencyProperty specified in PermissionProperty.
+		///     Sets the permissions of the UIElement to the DependencyProperty specified in PermissionsProperty.
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
-		/// <param name="value">Permission to assign to the in PermissionProperty specified DependencyProperty</param>
-		public static void SetPermission(UIElement uiElement, string value)
+		/// <param name="permissions">Permissions to assign to the in PermissionsProperty specified DependencyProperty</param>
+		public static void SetPermissions(UIElement uiElement, IEnumerable<string> permissions)
 		{
-			uiElement.SetValue(PermissionProperty, value);
+			uiElement.SetValue(PermissionsProperty, permissions);
+		}
+
+		/// <summary>
+		///     Sets the permission of the UIElement to the DependencyProperty specified in PermissionsProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		/// <param name="permissions">Permissions as string to assign to the in PermissionsProperty specified DependencyProperty</param>
+		public static void SetPermissionsAsString(UIElement uiElement, string permissions)
+		{
+			uiElement.SetValue(PermissionsProperty, permissions.ToPermissions());
+		}
+
+		/// <summary>
+		///     Gets the permissions Operation of the UIElement to the DependencyProperty specified in PermissionsOperationProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		public static PermissionOperations GetPermissionsOperations(UIElement uiElement)
+		{
+			return (PermissionOperations)uiElement.GetValue(PermissionsOperationProperty);
+		}
+
+		/// <summary>
+		///     Sets the permissions Operation of the UIElement to the DependencyProperty specified in PermissionsOperationProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		/// <param name="permissionOperations">PermissionOperations</param>
+		public static void SetPermissionsOperations(UIElement uiElement, PermissionOperations permissionOperations)
+		{
+			uiElement.SetValue(PermissionsOperationProperty, permissionOperations);
 		}
 
 		/// <summary>
@@ -107,9 +146,9 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <returns>bool</returns>
-		public static bool GetWhenPermissionMissing(UIElement uiElement)
+		public static bool GetWhenPermissionsMissing(UIElement uiElement)
 		{
-			return (bool) uiElement.GetValue(WhenPermissionMissingProperty);
+			return (bool) uiElement.GetValue(WhenPermissionsMissingProperty);
 		}
 
 		/// <summary>
@@ -117,9 +156,9 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <param name="isEnabled">bool to use when matched</param>
-		public static void SetWhenPermissionMissing(UIElement uiElement, bool isEnabled)
+		public static void SetWhenPermissionsMissing(UIElement uiElement, bool isEnabled)
 		{
-			uiElement.SetValue(WhenPermissionMissingProperty, isEnabled);
+			uiElement.SetValue(WhenPermissionsMissingProperty, isEnabled);
 		}
 
 		/// <summary>
@@ -127,9 +166,9 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <returns>bool</returns>
-		public static bool GetWhenPermission(UIElement uiElement)
+		public static bool GetWhenPermissions(UIElement uiElement)
 		{
-			return (bool) uiElement.GetValue(WhenPermissionProperty);
+			return (bool) uiElement.GetValue(WhenPermissionsProperty);
 		}
 
 		/// <summary>
@@ -137,9 +176,9 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <param name="isEnabled">bool to use when matched</param>
-		public static void SetWhenPermission(UIElement uiElement, bool isEnabled)
+		public static void SetWhenPermissions(UIElement uiElement, bool isEnabled)
 		{
-			uiElement.SetValue(WhenPermissionProperty, isEnabled);
+			uiElement.SetValue(WhenPermissionsProperty, isEnabled);
 		}
 
 		/// <summary>
@@ -156,18 +195,19 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 			}
 
 			/// <summary>
-			///     check if the supplied permission is available
+			///     check if the supplied permissions are available
 			/// </summary>
-			/// <param name="permission"></param>
-			/// <returns>true if the permission is available</returns>
-			private bool HasPermission(string permission)
+			/// <param name="neededPermissions"></param>
+			/// <param name="permissionOperation">PermissionOperations</param>
+			/// <returns>true if the permissions are available</returns>
+			private bool HasPermissions(IEnumerable<string> neededPermissions, PermissionOperations permissionOperation = PermissionOperations.Or)
 			{
 				// Null permission is aways there
-				if (permission == null)
+				if (neededPermissions == null)
 				{
 					return true;
 				}
-				return _authenticationProvider?.Value.HasPermission(permission) ?? false;
+				return _authenticationProvider?.Value.HasPermissions(neededPermissions, permissionOperation) ?? false;
 			}
 
 			protected override void Detach(UIElement host)
@@ -184,7 +224,7 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 
 				// if INotifyPropertyChanged is implemented: Call update when the _authenticationProvider changes it's values, 
 				var notifyPropertyChangedAuthenticationProvider = _authenticationProvider?.Value as INotifyPropertyChanged;
-				_authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermission)).Subscribe(x => Update(host, null));
+				_authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermissions)).Subscribe(x => Update(host, null));
 			}
 
 			/// <summary>
@@ -194,11 +234,17 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 			/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
 			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				var permission = GetPermission(uiElement);
+				var permissions = GetPermissions(uiElement);
+				var permissionsOperation = GetPermissionsOperations(uiElement);
 
-				uiElement.IsEnabled = HasPermission(permission)
-					? GetWhenPermission(uiElement)
-					: GetWhenPermissionMissing(uiElement);
+				//var neededPermissions = permissions.Split(',')
+				//	.Where(permission => permission != null)
+				//	.Select(permission => permission.Trim().ToLowerInvariant())
+				//	.Where(permission => !string.IsNullOrEmpty(permission));
+
+				uiElement.IsEnabled = HasPermissions(permissions, permissionsOperation)
+					? GetWhenPermissions(uiElement)
+					: GetWhenPermissionsMissing(uiElement);
 			}
 		}
 	}

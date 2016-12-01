@@ -33,11 +33,9 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
-using Dapplo.CaliburnMicro.Demo.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Config.Language;
 using Dapplo.Log;
-using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -50,16 +48,11 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 	[Export]
 	public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
 	{
-		private static readonly LogSource Log = new LogSource();
-
 		[Import]
 		public ICoreTranslations CoreTranslations { get; set; }
 
 		[Import]
 		public IConfigTranslations ConfigTranslations { get; set; }
-
-		[Import]
-		private CredentialsViewModel CredentialsVm { get; set; }
 
 		[Import]
 		private IDemoConfiguration DemoConfiguration { get; set; }
@@ -76,18 +69,6 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		[ImportMany]
 		public override IEnumerable<Lazy<IConfigScreen>> ConfigScreens { get; set; }
 
-		/// <summary>
-		///     Used to show a "normal" dialog
-		/// </summary>
-		[Import]
-		private IWindowManager WindowsManager { get; set; }
-
-		/// <summary>
-		///     Used to make it possible to show a MahApps dialog
-		/// </summary>
-		[Import]
-		private IDialogCoordinator Dialogcoordinator { get; set; }
-
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
@@ -98,22 +79,5 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
 		}
 
-		/// <summary>
-		///     Show the credentials for the login
-		/// </summary>
-		public void Login()
-		{
-			var result = WindowsManager.ShowDialog(CredentialsVm);
-			Log.Info().WriteLine($"Girl you know it's {result}");
-		}
-
-		/// <summary>
-		///     Show a MahApps dialog from the MVVM
-		/// </summary>
-		/// <returns></returns>
-		public async Task Dialog()
-		{
-			await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
-		}
 	}
 }

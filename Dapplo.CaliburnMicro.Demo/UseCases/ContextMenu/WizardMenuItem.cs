@@ -27,7 +27,6 @@
 
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
@@ -56,8 +55,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 
 		public WizardMenuItem()
 		{
-			Permission = "Admin";
-			this.EnabledOnPermission();
+			this.EnabledOnPermissions("Admin");
 		}
 
 		public override void Initialize()

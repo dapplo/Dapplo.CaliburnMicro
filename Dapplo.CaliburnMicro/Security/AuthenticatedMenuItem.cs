@@ -25,6 +25,8 @@
 
 #region Usings
 
+using System.Collections.Generic;
+using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Menu;
 
 #endregion
@@ -38,8 +40,9 @@ namespace Dapplo.CaliburnMicro.Security
 	{
 		private TWhen _whenPermissionMissing;
 		private TWhen _whenPermission;
-		private string _permission;
+		private IEnumerable<string> _permissions;
 		private AuthenticationTargetProperties _authenticationTargetProperty = AuthenticationTargetProperties.None;
+		private PermissionOperations _permissionOperation = PermissionOperations.Or;
 
 		/// <inheritdoc />
 		public AuthenticationTargetProperties AuthenticationTargetProperty
@@ -48,21 +51,32 @@ namespace Dapplo.CaliburnMicro.Security
 			set
 			{
 				_authenticationTargetProperty = value;
-				NotifyOfPropertyChange(nameof(AuthenticationTargetProperties));
+				NotifyOfPropertyChange(nameof(AuthenticationTargetProperty));
 			}
 		}
 
 		/// <inheritdoc />
-		public string Permission
+		public PermissionOperations PermissionOperation
+		{
+			get { return _permissionOperation; }
+			set
+			{
+				_permissionOperation = value;
+				NotifyOfPropertyChange(nameof(PermissionOperation));
+			}
+		}
+
+		/// <inheritdoc />
+		public IEnumerable<string> Permissions
 		{
 			get
 			{
-				return _permission;
+				return _permissions;
 			}
 			set
 			{
-				_permission = value;
-				NotifyOfPropertyChange(nameof(Permission));
+				_permissions = value;
+				NotifyOfPropertyChange(nameof(Permissions));
 			}
 		}
 

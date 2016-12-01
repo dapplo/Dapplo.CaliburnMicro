@@ -23,6 +23,9 @@
 
 #endregion
 
+using System.Collections.Generic;
+using Dapplo.CaliburnMicro.Behaviors.Security;
+
 namespace Dapplo.CaliburnMicro.Security
 {
 	/// <summary>
@@ -36,9 +39,14 @@ namespace Dapplo.CaliburnMicro.Security
 		AuthenticationTargetProperties AuthenticationTargetProperty { get; }
 
 		/// <summary>
+		/// Describes the operation which is used when checking permissions.
+		/// </summary>
+		PermissionOperations PermissionOperation { get; }
+
+		/// <summary>
 		///     Permission(s) for which the item is managed
 		/// </summary>
-		string Permission { get; }
+		IEnumerable<string> Permissions { get; }
 	}
 
 	/// <summary>

@@ -30,22 +30,25 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.Models;
+using Dapplo.CaliburnMicro.Demo.MetroAddon.Configurations;
+using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.CaliburnMicro.Tree;
+using Dapplo.Log;
 using Dapplo.Utils.Extensions;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
+namespace Dapplo.CaliburnMicro.Demo.MetroAddon.ViewModels
 {
 	[Export(typeof(IConfigScreen))]
 	public sealed class ThemeConfigViewModel : ConfigScreen
 	{
+		private static readonly LogSource Log = new LogSource();
 		/// <summary>
 		/// Here all disposables are registered, so we can clean the up
 		/// </summary>
@@ -62,13 +65,28 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public ObservableCollection<Tuple<ThemeAccents, string>> AvailableThemeAccents { get; set; } = new ObservableCollection<Tuple<ThemeAccents, string>>();
 
 		[Import]
-		public IConfigTranslations ConfigTranslations { get; set; }
+		public IUiTranslations UiTranslations { get; set; }
 
 		[Import]
-		public IDemoConfiguration DemoConfiguration { get; set; }
+		public IUiConfiguration UiConfiguration { get; set; }
 
 		[Import(typeof(IWindowManager))]
 		private MetroWindowManager MetroWindowManager { get; set; }
+
+		[Import]
+		private CredentialsViewModel CredentialsVm { get; set; }
+
+		/// <summary>
+		///     Used to show a "normal" dialog
+		/// </summary>
+		[Import]
+		private IWindowManager WindowsManager { get; set; }
+
+		/// <summary>
+		///     Used to make it possible to show a MahApps dialog
+		/// </summary>
+		[Import]
+		private IDialogCoordinator Dialogcoordinator { get; set; }
 
 		public override void Initialize(IConfig config)
 		{
@@ -94,10 +112,10 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 			ParentId = nameof(ConfigIds.Ui);
 
 			// Make sure Commit/Rollback is called on the IDemoConfiguration
-			config.Register(DemoConfiguration);
+			config.Register(UiConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(ConfigTranslations.CreateBinding(this, nameof(IConfigTranslations.Theme)));
+			_disposables.Add(UiTranslations.CreateBinding(this, nameof(IUiTranslations.Theme)));
 
 			base.Initialize(config);
 		}
@@ -111,10 +129,29 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public override void Commit()
 		{
 			// Manually commit
-			DemoConfiguration.CommitTransaction();
-			MetroWindowManager.ChangeTheme(DemoConfiguration.Theme);
-			MetroWindowManager.ChangeThemeAccent(DemoConfiguration.ThemeAccent);
+			UiConfiguration.CommitTransaction();
+			MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
+			MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
 			base.Commit();
+		}
+
+
+		/// <summary>
+		///     Show a MahApps dialog from the MVVM
+		/// </summary>
+		/// <returns></returns>
+		public async Task Dialog()
+		{
+			await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
+		}
+
+		/// <summary>
+		///     Show the credentials for the login
+		/// </summary>
+		public void Login()
+		{
+			var result = WindowsManager.ShowDialog(CredentialsVm);
+			Log.Info().WriteLine($"Girl you know it's {result}");
 		}
 	}
 }

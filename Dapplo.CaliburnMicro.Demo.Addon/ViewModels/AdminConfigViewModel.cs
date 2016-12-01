@@ -27,20 +27,18 @@
 
 using System.ComponentModel.Composition;
 using System.Windows;
-using Dapplo.CaliburnMicro.Behaviors.Security;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Addon.Languages;
 using Dapplo.CaliburnMicro.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
-using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 {
 	[Export(typeof(IConfigScreen))]
-	public sealed class AdminViewModel : AuthenticatedConfigScreen<Visibility>, IPartImportsSatisfiedNotification
+	public sealed class AdminConfigViewModel : AuthenticatedConfigScreen<Visibility>, IPartImportsSatisfiedNotification
 	{
 		[Import]
 		public IAddonTranslations AddonTranslations { get; set; }
@@ -48,11 +46,10 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		[Import]
 		private IAuthenticationProvider AuthenticationProvider { get; set; }
 
-		public AdminViewModel()
+		public AdminConfigViewModel()
 		{
 			ParentId = nameof(ConfigIds.Addons);
-			Permission = "Admin";
-			this.VisibleOnPermission();
+			this.VisibleOnPermissions("Admin");
 		}
 
 		public void OnImportsSatisfied()

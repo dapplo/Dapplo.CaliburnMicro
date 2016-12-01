@@ -30,6 +30,7 @@ using System.ComponentModel;
 using System.Windows;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
+using System.Collections.Generic;
 
 #endregion
 
@@ -43,18 +44,27 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		/// <summary>
 		///     The permission to check against
 		/// </summary>
-		public static readonly DependencyProperty PermissionProperty = DependencyProperty.RegisterAttached(
-			"Permission",
-			typeof(string),
+		public static readonly DependencyProperty PermissionsProperty = DependencyProperty.RegisterAttached(
+			"Permissions",
+			typeof(IEnumerable<string>),
 			typeof(AuthenticationVisibility),
 			new PropertyMetadata(OnArgumentsChanged));
+
+		/// <summary>
+		///     The operation used when the permissions are checked
+		/// </summary>
+		public static readonly DependencyProperty PermissionsOperationProperty = DependencyProperty.RegisterAttached(
+			"PermissionsOperation",
+			typeof(PermissionOperations),
+			typeof(AuthenticationVisibility),
+			new PropertyMetadata(PermissionOperations.Or, OnArgumentsChanged));
 
 		/// <summary>
 		///     Visibility to use when the current user doesn't have the permission
 		///     Default is Visibility.Collapsed
 		/// </summary>
-		public static readonly DependencyProperty WhenPermissionMissingProperty = DependencyProperty.RegisterAttached(
-			"WhenPermissionMissing",
+		public static readonly DependencyProperty WhenPermissionsMissingProperty = DependencyProperty.RegisterAttached(
+			"WhenPermissionsMissing",
 			typeof(Visibility),
 			typeof(AuthenticationVisibility),
 			new PropertyMetadata(Visibility.Collapsed, OnArgumentsChanged));
@@ -63,8 +73,8 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		///     Visibility to use when the permission is available
 		///     Default is Visibility.Visible
 		/// </summary>
-		public static readonly DependencyProperty WhenPermissionProperty = DependencyProperty.RegisterAttached(
-			"WhenPermission",
+		public static readonly DependencyProperty WhenPermissionsProperty = DependencyProperty.RegisterAttached(
+			"WhenPermissions",
 			typeof(Visibility),
 			typeof(AuthenticationVisibility),
 			new PropertyMetadata(Visibility.Visible, OnArgumentsChanged));
@@ -83,63 +93,92 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 		}
 
 		/// <summary>
-		///     Returns the permission from the UIElement of the DependencyProperty specified in PermissionProperty.
+		///     Returns the permission from the UIElement of the DependencyProperty specified in PermissionsProperty.
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
-		/// <returns>string which represents the permission of the in PermissionProperty specified DependencyProperty</returns>
-		public static string GetPermission(UIElement uiElement)
+		/// <returns>IEnumerable with strings which represents the permission of the in PermissionsProperty specified DependencyProperty</returns>
+		public static IEnumerable<string> GetPermissions(UIElement uiElement)
 		{
-			return (string) uiElement.GetValue(PermissionProperty);
+			return (IEnumerable<string>) uiElement.GetValue(PermissionsProperty);
 		}
 
 		/// <summary>
-		///     Sets the permission of the UIElement to the DependencyProperty specified in PermissionProperty.
+		///     Sets the permission of the UIElement to the DependencyProperty specified in PermissionsProperty.
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
-		/// <param name="value">Permission to assign to the in PermissionProperty specified DependencyProperty</param>
-		public static void SetPermission(UIElement uiElement, string value)
+		/// <param name="permissions">Permissions to assign to the in PermissionsProperty specified DependencyProperty</param>
+		public static void SetPermissions(UIElement uiElement, IEnumerable<string> permissions)
 		{
-			uiElement.SetValue(PermissionProperty, value);
+			uiElement.SetValue(PermissionsProperty, permissions);
 		}
 
 		/// <summary>
-		///     Returns the visibility which is used when the user doesn't have the specified permission
+		///     Sets the permission of the UIElement to the DependencyProperty specified in PermissionsProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		/// <param name="permissions">Permissions as string to assign to the in PermissionsProperty specified DependencyProperty</param>
+		public static void SetPermissionsAsString(UIElement uiElement, string permissions)
+		{
+			uiElement.SetValue(PermissionsProperty, permissions.ToPermissions());
+		}
+
+		/// <summary>
+		///     Gets the permissions Operation of the UIElement to the DependencyProperty specified in PermissionsOperationProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		public static PermissionOperations GetPermissionsOperations(UIElement uiElement)
+		{
+			return (PermissionOperations)uiElement.GetValue(PermissionsOperationProperty);
+		}
+
+		/// <summary>
+		///     Sets the permissions Operation of the UIElement to the DependencyProperty specified in PermissionsOperationProperty.
+		/// </summary>
+		/// <param name="uiElement">UIElement</param>
+		/// <param name="permissionOperations">PermissionOperations</param>
+		public static void SetPermissionsOperations(UIElement uiElement, PermissionOperations permissionOperations)
+		{
+			uiElement.SetValue(PermissionsOperationProperty, permissionOperations);
+		}
+
+		/// <summary>
+		///     Returns the visibility which is used when the user doesn't have the specified permissions
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <returns>Visibility</returns>
-		public static Visibility GetWhenPermissionMissing(UIElement uiElement)
+		public static Visibility GetWhenPermissionsMissing(UIElement uiElement)
 		{
-			return (Visibility) uiElement.GetValue(WhenPermissionMissingProperty);
+			return (Visibility) uiElement.GetValue(WhenPermissionsMissingProperty);
 		}
 
 		/// <summary>
-		///     Sets the visibility which is used when the user doesn't have the specified permission
+		///     Sets the visibility which is used when the user doesn't have the specified permissions
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <param name="visibility">Visibility to use when matched</param>
-		public static void SetWhenPermissionMissing(UIElement uiElement, Visibility visibility)
+		public static void SetWhenPermissionsMissing(UIElement uiElement, Visibility visibility)
 		{
-			uiElement.SetValue(WhenPermissionMissingProperty, visibility);
+			uiElement.SetValue(WhenPermissionsMissingProperty, visibility);
 		}
 
 		/// <summary>
-		///     Returns the visibility which is used when the user has the specified permission
+		///     Returns the visibility which is used when the user has the specified permissions
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <returns>Visibility</returns>
-		public static Visibility GetWhenPermission(UIElement uiElement)
+		public static Visibility GetWhenPermissions(UIElement uiElement)
 		{
-			return (Visibility) uiElement.GetValue(WhenPermissionProperty);
+			return (Visibility) uiElement.GetValue(WhenPermissionsProperty);
 		}
 
 		/// <summary>
-		///     Sets the visibility which is used when the user has the specified permission
+		///     Sets the visibility which is used when the user has the specified permissions
 		/// </summary>
 		/// <param name="uiElement">UIElement</param>
 		/// <param name="visibility">Visibility to use when matched</param>
-		public static void SetWhenPermission(UIElement uiElement, Visibility visibility)
+		public static void SetWhenPermissions(UIElement uiElement, Visibility visibility)
 		{
-			uiElement.SetValue(WhenPermissionProperty, visibility);
+			uiElement.SetValue(WhenPermissionsProperty, visibility);
 		}
 
 		/// <summary>
@@ -158,16 +197,17 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 			/// <summary>
 			///     check if the supplied permission is available
 			/// </summary>
-			/// <param name="permission"></param>
+			/// <param name="neededPermissions"></param>
+			/// <param name="permissionOperation">PermissionOperations</param>
 			/// <returns>true if the permission is available</returns>
-			private bool HasPermission(string permission)
+			private bool HasPermissions(IEnumerable<string> neededPermissions, PermissionOperations permissionOperation = PermissionOperations.Or)
 			{
 				// Null permission is aways there
-				if (permission == null)
+				if (neededPermissions == null)
 				{
 					return true;
 				}
-				return _authenticationProvider?.Value.HasPermission(permission) ?? false;
+				return _authenticationProvider?.Value.HasPermissions(neededPermissions, permissionOperation) ?? false;
 			}
 
 			protected override void Detach(UIElement host)
@@ -184,7 +224,7 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 
 				// if INotifyPropertyChanged is implemented: Call update when the _authenticationProvider changes it's values, 
 				var notifyPropertyChangedAuthenticationProvider = _authenticationProvider?.Value as INotifyPropertyChanged;
-				_authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermission)).Subscribe(x => Update(host, null));
+				_authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermissions)).Subscribe(x => Update(host, null));
 			}
 
 			/// <summary>
@@ -194,11 +234,17 @@ namespace Dapplo.CaliburnMicro.Behaviors.Security
 			/// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
 			protected override void Update(UIElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
 			{
-				var permission = GetPermission(uiElement);
+				var permissions = GetPermissions(uiElement);
+				var permissionsOperation = GetPermissionsOperations(uiElement);
 
-				uiElement.Visibility = HasPermission(permission)
-					? GetWhenPermission(uiElement)
-					: GetWhenPermissionMissing(uiElement);
+				//var neededPermissions = permissions.Split(',')
+				//	.Where(permission => permission != null)
+				//	.Select(permission => permission.Trim().ToLowerInvariant())
+				//	.Where(permission => !string.IsNullOrEmpty(permission));
+
+				uiElement.Visibility = HasPermissions(permissions, permissionsOperation)
+					? GetWhenPermissions(uiElement)
+					: GetWhenPermissionsMissing(uiElement);
 			}
 		}
 	}

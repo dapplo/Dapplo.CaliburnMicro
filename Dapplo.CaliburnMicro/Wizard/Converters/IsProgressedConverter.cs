@@ -44,13 +44,12 @@ namespace Dapplo.CaliburnMicro.Wizard.Converters
 	{
 		object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
 		{
-			if ((values[0] is ContentPresenter &&
-				values[1] is int) == false)
+			if ((values[0] is ContentPresenter && values[1] is int) == false)
 			{
 				return Visibility.Collapsed;
 			}
 			var checkNextItem = Convert.ToBoolean(parameter.ToString());
-			var contentPresenter = values[0] as ContentPresenter;
+			var contentPresenter = (ContentPresenter) values[0];
 			var progress = (int) values[1];
 			var itemsControl = ItemsControl.ItemsControlFromItemContainer(contentPresenter);
 

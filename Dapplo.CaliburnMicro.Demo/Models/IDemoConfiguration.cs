@@ -27,10 +27,8 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.InterfaceImpl.Extensions;
-using MahApps.Metro.Controls;
 
 #endregion
 
@@ -43,13 +41,5 @@ namespace Dapplo.CaliburnMicro.Demo.Models
 
 		[DefaultValue("en-US")]
 		string Language { get; set; }
-
-		[DefaultValue(Themes.BaseLight)]
-		Themes Theme { get; set; }
-
-		[DefaultValue(ThemeAccents.Orange)]
-		ThemeAccents ThemeAccent { get; set; }
-
-		HotKey HotKey { get; set; }
 	}
 }

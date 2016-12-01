@@ -25,7 +25,7 @@
 
 #region Usings
 
-using Caliburn.Micro;
+
 
 #endregion
 

@@ -13,12 +13,8 @@ namespace Dapplo.CaliburnMicro.Converters
 		/// <inheritdoc />
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			if (value != null)
-			{
-				var needAuthentication = value as INeedAuthentication;
-				return needAuthentication?.AuthenticationTargetProperty ?? AuthenticationTargetProperties.None;
-			}
-			return AuthenticationTargetProperties.None;
+			var needAuthentication = value as INeedAuthentication;
+			return needAuthentication?.AuthenticationTargetProperty ?? AuthenticationTargetProperties.None;
 		}
 
 		/// <inheritdoc />

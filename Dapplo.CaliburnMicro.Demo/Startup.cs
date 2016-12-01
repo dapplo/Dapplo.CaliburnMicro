@@ -57,15 +57,20 @@ namespace Dapplo.CaliburnMicro.Demo
 			// Add the directory where scanning takes place
 #if DEBUG
 			application.Bootstrapper.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Debug");
+			application.Bootstrapper.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.MetroAddon\bin\Debug");
 #else
 			application.Bootstrapper.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.Addon\bin\Release");
+			application.Bootstrapper.AddScanDirectory(@"..\..\..\Dapplo.CaliburnMicro.Demo.MetroAddon\bin\Release");
 #endif
 
 			// Load the assemblies Dapplo.CaliburnMicro, Dapplo.CaliburnMicro.NotifyIconWpf, Dapplo.CaliburnMicro.Metro
-			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
+			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro");
+			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.Metro");
+			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.NotifyIconWpf");
 
-			// Load the demo addon
+			// Load the demo addons
 			application.Bootstrapper.FindAndLoadAssembly("Dapplo.CaliburnMicro.Demo.Addon");
+			application.Bootstrapper.FindAndLoadAssembly("Dapplo.CaliburnMicro.Demo.MetroAddon");
 
 			application.Run();
 		}

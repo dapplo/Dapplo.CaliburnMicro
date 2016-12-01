@@ -131,8 +131,9 @@ namespace Dapplo.CaliburnMicro
 
 			// The following is a solution to make sure Caliburn.Micro is correctly initialized on the right thread, so Execute.OnUIThread works
 			await _bootstrapper.InitializeAsync();
-			var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>();
-			caliburnBootstrapper.Value.Initialize();
+			var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>().Value;
+
+			caliburnBootstrapper.Initialize();
 
 			if (!_bootstrapper.IsMutexLocked)
 			{
