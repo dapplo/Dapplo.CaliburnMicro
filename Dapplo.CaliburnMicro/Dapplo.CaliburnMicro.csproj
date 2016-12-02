@@ -68,13 +68,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.1.0.128\lib\net45\Dapplo.Utils.dll</HintPath>
+      <HintPath>..\packages\Dapplo.Utils.1.0.129\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
@@ -90,6 +92,8 @@
       <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -114,7 +118,6 @@
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroBootstrapper.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
-    <Compile Include="Collections\TrulyObservableCollection.cs" />
     <Compile Include="Security\AuthenticatedConfigScreen.cs" />
     <Compile Include="Configuration\ConfigScreen.cs" />
     <Compile Include="Configuration\IConfigScreen.cs" />
