@@ -111,7 +111,7 @@ namespace Dapplo.CaliburnMicro.Demo.MetroAddon.ViewModels
 			// Place this under the Ui parent
 			ParentId = nameof(ConfigIds.Ui);
 
-			// Make sure Commit/Rollback is called on the IDemoConfiguration
+			// Make sure Commit/Rollback is called on the UiConfiguration
 			config.Register(UiConfiguration);
 
 			// automatically update the DisplayName

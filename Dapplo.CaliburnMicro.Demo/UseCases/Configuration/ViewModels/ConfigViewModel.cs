@@ -34,7 +34,7 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Config.Language;
+using Dapplo.Language;
 using Dapplo.Log;
 
 #endregion

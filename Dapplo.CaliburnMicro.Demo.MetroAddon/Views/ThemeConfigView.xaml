@@ -4,8 +4,8 @@
 	<StackPanel>
 		<DockPanel>
 			<Label x:Name="UiTranslations_Theme" Width="50" />
-			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding DemoConfiguration.Theme}"/>
-			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding DemoConfiguration.ThemeAccent}"/>
+			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding UiConfiguration.Theme}"/>
+			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding UiConfiguration.ThemeAccent}"/>
 		</DockPanel>
 	</StackPanel>
 </UserControl>

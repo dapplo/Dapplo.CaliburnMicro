@@ -25,7 +25,7 @@
 
 using System;
 using System.Reactive.Linq;
-using Dapplo.Config.Ini;
+using Dapplo.Ini;
 
 namespace Dapplo.CaliburnMicro.Extensions
 {

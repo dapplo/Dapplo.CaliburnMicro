@@ -31,7 +31,10 @@ using System.Windows;
 using System.Windows.Threading;
 using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
+using Dapplo.Addons.Bootstrapper.ExportProviders;
 using Dapplo.CaliburnMicro.Extensions;
+using Dapplo.Ini;
+using Dapplo.Language;
 using Dapplo.Log;
 using Dapplo.Utils;
 
@@ -52,6 +55,7 @@ namespace Dapplo.CaliburnMicro
 		/// <summary>
 		///     Create the Dapplication for the specified application name
 		///     The mutex is created and locked in the contructor, and some of your application logic might depend on this.
+		///     Additionally the current or a matching IniConfig and LanguageLoader are added to help resoving confiration and language imports.
 		/// </summary>
 		/// <param name="applicationName">Name of your application</param>
 		/// <param name="mutexId">
@@ -61,6 +65,7 @@ namespace Dapplo.CaliburnMicro
 		/// <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
 		public Dapplication(string applicationName, string mutexId = null, bool global = false) : this(new ApplicationBootstrapper(applicationName, mutexId, global))
 		{
+
 		}
 
 		/// <summary>
@@ -83,6 +88,11 @@ namespace Dapplo.CaliburnMicro
 			// Make the bootstrapper stop when the CurrentDispatcher is going to shutdown, this uses a little hack to make sure there is no block
 			Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) => StopBootstrapperAsync().WaitWithNestedMessageLoop();
 		}
+
+		/// <summary>
+		/// Automatically configure a IniConfig and LanguageLoader
+		/// </summary>
+		public bool AutoConfigure { get; set; } = true;
 
 		/// <summary>
 		///     Access the current Dapplication
@@ -128,6 +138,26 @@ namespace Dapplo.CaliburnMicro
 			// Enable UI access for different Dapplo packages, especially the UiContext.RunOn
 			// This only works here, not before the Application is started and not later
 			UiContext.Initialize();
+
+			if (AutoConfigure)
+			{
+				var iniConfig = IniConfig.Current;
+				if (iniConfig == null)
+				{
+					iniConfig = new IniConfig(_bootstrapper.ApplicationName, _bootstrapper.ApplicationName);
+					await iniConfig.LoadIfNeededAsync();
+				}
+				_bootstrapper.ExportProviders.Add(new ServiceProviderExportProvider(iniConfig, _bootstrapper));
+
+				var languageLoader = LanguageLoader.Current;
+				if (languageLoader == null)
+				{
+					languageLoader = LanguageLoader.Current ?? new LanguageLoader(_bootstrapper.ApplicationName);
+					await languageLoader.LoadIfNeededAsync();
+
+				}
+				_bootstrapper.ExportProviders.Add(new ServiceProviderExportProvider(languageLoader, _bootstrapper));
+			}
 
 			// The following is a solution to make sure Caliburn.Micro is correctly initialized on the right thread, so Execute.OnUIThread works
 			await _bootstrapper.InitializeAsync();

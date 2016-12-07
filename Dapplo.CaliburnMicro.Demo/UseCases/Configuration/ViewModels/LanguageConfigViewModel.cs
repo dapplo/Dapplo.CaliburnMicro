@@ -33,7 +33,7 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Demo.Models;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Config.Language;
+using Dapplo.Language;
 
 #endregion
 

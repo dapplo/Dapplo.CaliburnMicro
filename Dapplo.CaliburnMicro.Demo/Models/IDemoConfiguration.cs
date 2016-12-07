@@ -27,7 +27,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using Dapplo.Config.Ini;
+using Dapplo.Ini;
 using Dapplo.InterfaceImpl.Extensions;
 
 #endregion

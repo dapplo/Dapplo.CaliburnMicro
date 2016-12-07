@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Dapplo.Config.Language;
+using Dapplo.Language;
 
 namespace Dapplo.CaliburnMicro.Demo.MetroAddon.Configurations
 {
