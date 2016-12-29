@@ -43,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			ConfigTranslations.CreateBinding(this, nameof(IConfigTranslations.Ui));
+			ConfigTranslations.CreateDisplayNameBinding(this, nameof(IConfigTranslations.Ui));
 
 			// automatically update the DisplayName
 			CanActivate = false;

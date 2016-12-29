@@ -115,7 +115,7 @@ namespace Dapplo.CaliburnMicro.Demo.MetroAddon.ViewModels
 			config.Register(UiConfiguration);
 
 			// automatically update the DisplayName
-			_disposables.Add(UiTranslations.CreateBinding(this, nameof(IUiTranslations.Theme)));
+			_disposables.Add(UiTranslations.CreateDisplayNameBinding(this, nameof(IUiTranslations.Theme)));
 
 			base.Initialize(config);
 		}

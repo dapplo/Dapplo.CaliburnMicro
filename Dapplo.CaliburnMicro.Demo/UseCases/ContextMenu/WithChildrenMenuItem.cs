@@ -62,7 +62,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				Kind = PackIconMaterialKind.HumanChild
 			};
 			// automatically update the DisplayName
-			var binding = ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.WithChildren));
+			var binding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.WithChildren));
 			var menuItem = new MenuItem
 			{
 				Id = "1"

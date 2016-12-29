@@ -72,7 +72,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			CoreTranslations.CreateBinding(this, nameof(ICoreTranslations.Settings));
+			CoreTranslations.CreateDisplayNameBinding(this, nameof(ICoreTranslations.Settings));
 
 			// Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
 			var lang = DemoConfiguration.Language;

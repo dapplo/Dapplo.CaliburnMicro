@@ -61,7 +61,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		public override void Initialize()
 		{
 			// automatically update the DisplayName
-			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Wizard));
+			ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Wizard));
 			Icon = new PackIconMaterial
 			{
 				Kind = PackIconMaterialKind.AutoFix

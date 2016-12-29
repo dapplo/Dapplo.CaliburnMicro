@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		{
 			IsEnabled = false;
 			// automatically update the DisplayName
-			AddonTranslations.CreateBinding(this, nameof(IAddonTranslations.NotSelectableAddon));
+			AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.NotSelectableAddon));
 		}
 	}
 }

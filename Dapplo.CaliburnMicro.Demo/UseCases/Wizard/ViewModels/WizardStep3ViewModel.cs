@@ -51,7 +51,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		public override void Initialize()
 		{
 			// automatically update the DisplayName
-			_displayNameUpdater = WizardTranslations.CreateBinding(this, nameof(IWizardTranslations.TitleStep3));
+			_displayNameUpdater = WizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.TitleStep3));
 			IsVisible = false;
 			ParentWizard.OnPropertyChanged(nameof(WizardExampleViewModel.IsStep3Visible)).Subscribe(s => IsVisible = ParentWizard.IsStep3Visible);
 		}

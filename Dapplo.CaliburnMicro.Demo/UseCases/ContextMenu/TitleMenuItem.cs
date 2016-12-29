@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			Id = "A_Title";
 			// automatically update the DisplayName
-			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Title));
+			ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
 			Style = MenuItemStyles.Title;
 
 			Icon = new PackIconMaterial

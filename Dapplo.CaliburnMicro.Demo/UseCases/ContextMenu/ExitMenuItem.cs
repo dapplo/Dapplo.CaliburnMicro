@@ -50,7 +50,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 		{
 			Id = "Z_Exit";
 			// automatically update the DisplayName
-			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Exit));
+			ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Exit));
 
 			Icon = new PackIconMaterial
 			{

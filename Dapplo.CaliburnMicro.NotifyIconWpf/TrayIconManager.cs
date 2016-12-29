@@ -47,7 +47,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
 	[StartupAction(StartupOrder = (int) CaliburnStartOrder.TrayIcons)]
 	[ShutdownAction]
 	[Export(typeof(ITrayIconManager))]
-	public class TrayIconManager : IStartupAction, IShutdownAction, ITrayIconManager
+	public class TrayIconManager : IAsyncStartupAction, IAsyncShutdownAction, ITrayIconManager
 	{
 		private static readonly LogSource Log = new LogSource();
 

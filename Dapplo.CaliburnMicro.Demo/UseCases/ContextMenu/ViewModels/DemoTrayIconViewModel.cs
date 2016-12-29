@@ -76,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu.ViewModels
 			base.OnActivate();
 
 			// Set the title of the icon (the ToolTipText) to our IContextMenuTranslations.Title
-			ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.Title));
+			ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
 
 			var items = new List<IMenuItem>();
 

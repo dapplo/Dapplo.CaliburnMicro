@@ -66,7 +66,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			// Remove all items, so we can build them
 			Items.Clear();
 
-			var contextMenuNameBinding = ContextMenuTranslations.CreateBinding(this, nameof(IContextMenuTranslations.SomeWindow));
+			var contextMenuNameBinding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
 
 			// Make sure the contextMenuNameBinding is disposed when this is no longer active
 			_disposables.Add(contextMenuNameBinding);
@@ -76,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
 			{
 				Id = "1_File"
 			};
-			var menuNameBinding = MenuTranslations.CreateBinding(fileMenuItem, nameof(IMenuTranslations.File));
+			var menuNameBinding = MenuTranslations.CreateDisplayNameBinding(fileMenuItem, nameof(IMenuTranslations.File));
 			// Make sure the menuNameBinding is disposed when this is no longer active
 			_disposables.Add(menuNameBinding);
 			items.Add(fileMenuItem);

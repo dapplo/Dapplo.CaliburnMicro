@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Demo.Addon.ViewModels
 		public void OnImportsSatisfied()
 		{
 			// automatically update the DisplayName
-			AddonTranslations.CreateBinding(this, nameof(IAddonTranslations.Admin));
+			AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
 		}
 	}
 }

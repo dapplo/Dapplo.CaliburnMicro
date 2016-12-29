@@ -78,7 +78,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
 				};
 				menuItem.VisibleOnPermissions("Admin");
 				// Binding without disposing
-				ContextMenuTranslations.CreateBinding(menuItem, nameof(IContextMenuTranslations.SomeWindow));
+				ContextMenuTranslations.CreateDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.SomeWindow));
 				return menuItem;
 			}
 		}

@@ -49,7 +49,7 @@ namespace Dapplo.CaliburnMicro
 	/// </summary>
 	[ShutdownAction(ShutdownOrder = (int) CaliburnStartOrder.Bootstrapper)]
 	[Export]
-	public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdownAction
+	public class CaliburnMicroBootstrapper : BootstrapperBase, IAsyncShutdownAction
 	{
 		private static readonly LogSource Log = new LogSource();
 

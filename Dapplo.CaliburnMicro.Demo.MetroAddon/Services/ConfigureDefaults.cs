@@ -27,8 +27,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Threading;
-using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Demo.MetroAddon.Configurations;
@@ -47,7 +45,7 @@ namespace Dapplo.CaliburnMicro.Demo.MetroAddon.Services
 		[Import]
 		public IUiConfiguration UiConfiguration { get; set; }
 
-		public Task StartAsync(CancellationToken token = new CancellationToken())
+		public void Start()
 		{
 			// Override the ConfigView with a much nicer looking version
 			ViewLocator.NameTransformer.AddRule(@"^Dapplo\.CaliburnMicro\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Dapplo.CaliburnMicro.Demo.MetroAddon.Views.ConfigView");
@@ -56,7 +54,6 @@ namespace Dapplo.CaliburnMicro.Demo.MetroAddon.Services
 
 			MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
 			MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
-			return Task.FromResult(true);
 		}
 	}
 }

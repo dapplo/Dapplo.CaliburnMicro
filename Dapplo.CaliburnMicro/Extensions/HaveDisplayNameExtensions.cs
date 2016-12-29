@@ -35,14 +35,14 @@ namespace Dapplo.CaliburnMicro.Extensions
 	/// <summary>
 	/// Binding describing all information needed for binding names
 	/// </summary>
-	public class NameBinding : IDisposable
+	public class DisplayNameBinding : IDisposable
 	{
 		/// <summary>
 		/// Create the name binding object
 		/// </summary>
 		/// <param name="observable"></param>
 		/// <param name="notifyPropertyChanged"></param>
-		public NameBinding(IObservable<EventPattern<PropertyChangedEventArgs>> observable, INotifyPropertyChanged notifyPropertyChanged)
+		public DisplayNameBinding(IObservable<EventPattern<PropertyChangedEventArgs>> observable, INotifyPropertyChanged notifyPropertyChanged)
 		{
 			Observable = observable;
 			NotifyPropertyChanged = notifyPropertyChanged;
@@ -97,10 +97,10 @@ namespace Dapplo.CaliburnMicro.Extensions
 		/// <param name="haveDisplayName">optional IHaveDisplayName for the first binding</param>
 		/// <param name="propertyName">optional property name for the first binding</param>
 		/// <returns>NameBinding</returns>
-		public static NameBinding CreateBinding(this INotifyPropertyChanged notifyPropertyChanged, IHaveDisplayName haveDisplayName = null, string propertyName = null)
+		public static DisplayNameBinding CreateDisplayNameBinding(this INotifyPropertyChanged notifyPropertyChanged, IHaveDisplayName haveDisplayName = null, string propertyName = null)
 		{
 			var propertyChangedObservable = notifyPropertyChanged.OnPropertyChangedPattern();
-			var nameBinding =  new NameBinding(propertyChangedObservable, notifyPropertyChanged);
+			var nameBinding =  new DisplayNameBinding(propertyChangedObservable, notifyPropertyChanged);
 			if (haveDisplayName != null)
 			{
 				nameBinding.AddDisplayNameBinding(haveDisplayName, propertyName);
@@ -111,11 +111,11 @@ namespace Dapplo.CaliburnMicro.Extensions
 		/// <summary>
 		/// Add a displayname binding to the NameBinding
 		/// </summary>
-		/// <param name="nameBinding">NameBinding to bind to</param>
+		/// <param name="displayNameBinding">NameBinding to bind to</param>
 		/// <param name="haveDisplayName">IHaveDisplayName</param>
 		/// <param name="propertyName">Name of the property in the original INotifyPropertyChanged object</param>
 		/// <returns>binding</returns>
-		public static NameBinding AddDisplayNameBinding(this NameBinding nameBinding, IHaveDisplayName haveDisplayName, string propertyName)
+		public static DisplayNameBinding AddDisplayNameBinding(this DisplayNameBinding displayNameBinding, IHaveDisplayName haveDisplayName, string propertyName)
 		{
 			if (haveDisplayName == null)
 			{
@@ -125,12 +125,12 @@ namespace Dapplo.CaliburnMicro.Extensions
 			{
 				throw new ArgumentNullException(nameof(propertyName));
 			}
-			var disposable = nameBinding.Observable.Where(args => args.EventArgs.PropertyName == propertyName).Subscribe(haveDisplayName.CopyValue);
+			var disposable = displayNameBinding.Observable.Where(args => args.EventArgs.PropertyName == propertyName).Subscribe(haveDisplayName.CopyValue);
 			// Update the display name right away
-			haveDisplayName.DisplayName = nameBinding.NotifyPropertyChanged.GetType().GetProperty(propertyName).GetValue(nameBinding.NotifyPropertyChanged) as string;
+			haveDisplayName.DisplayName = displayNameBinding.NotifyPropertyChanged.GetType().GetProperty(propertyName).GetValue(displayNameBinding.NotifyPropertyChanged) as string;
 			// If the disposables is passed, add the disposable
-			nameBinding.Disposables?.Add(disposable);
-			return nameBinding;
+			displayNameBinding.Disposables?.Add(disposable);
+			return displayNameBinding;
 		}
 	}
 }
