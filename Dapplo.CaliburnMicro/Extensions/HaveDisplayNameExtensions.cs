@@ -26,52 +26,11 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using Caliburn.Micro;
 using System.Reactive;
-using System.Reactive.Disposables;
 
 #endregion
 
 namespace Dapplo.CaliburnMicro.Extensions
 {
-	/// <summary>
-	/// Binding describing all information needed for binding names
-	/// </summary>
-	public class DisplayNameBinding : IDisposable
-	{
-		/// <summary>
-		/// Create the name binding object
-		/// </summary>
-		/// <param name="observable"></param>
-		/// <param name="notifyPropertyChanged"></param>
-		public DisplayNameBinding(IObservable<EventPattern<PropertyChangedEventArgs>> observable, INotifyPropertyChanged notifyPropertyChanged)
-		{
-			Observable = observable;
-			NotifyPropertyChanged = notifyPropertyChanged;
-			Disposables = new CompositeDisposable();
-		}
-		/// <summary>
-		/// Observable as event provider for the name binding
-		/// </summary>
-		public IObservable<EventPattern<PropertyChangedEventArgs>> Observable { get; }
-
-		/// <summary>
-		/// The source of the events
-		/// </summary>
-		public INotifyPropertyChanged NotifyPropertyChanged { get; }
-
-		/// <summary>
-		/// All bindings are stored here
-		/// </summary>tran
-		public CompositeDisposable Disposables { get; }
-
-		/// <summary>
-		/// Dispose the underlying bindings which are stored in a CompositeDisposable
-		/// </summary>
-		public void Dispose()
-		{
-			Disposables?.Dispose();
-		}
-	}
-
 	/// <summary>
 	/// Extensions for IHaveDisplayName
 	/// </summary>

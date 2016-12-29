@@ -110,6 +110,7 @@
     <Compile Include="Behaviors\AttachedBehavior.cs" />
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
+    <Compile Include="Extensions\DisplayNameBinding.cs" />
     <Compile Include="Security\IChangeableNeedAuthentication.cs" />
     <Compile Include="Security\INeedAuthentication.cs" />
     <Compile Include="Behaviors\Security\AuthenticationTargetProperties.cs" />
