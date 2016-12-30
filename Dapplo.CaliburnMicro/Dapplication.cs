@@ -46,7 +46,7 @@ namespace Dapplo.CaliburnMicro
 	///     This extends the System.Windows.Application to make it easier to startup you application.
 	///     It will initialize MEF, Caliburn.Micro, handle exceptions and more.
 	/// </summary>
-	public class Dapplication : Application
+	public sealed class Dapplication : Application
 	{
 		private static readonly LogSource Log = new LogSource();
 
@@ -114,11 +114,6 @@ namespace Dapplo.CaliburnMicro
 		public Action OnAlreadyRunning { get; set; }
 
 		/// <summary>
-		///     This is called when the application is alreay running
-		/// </summary>
-		public Action<Exception> OnUnhandledException { get; set; }
-
-		/// <summary>
 		///     Helper method to stop the bootstrapper, if needed
 		/// </summary>
 		private async Task StopBootstrapperAsync()
@@ -159,12 +154,14 @@ namespace Dapplo.CaliburnMicro
 				_bootstrapper.ExportProviders.Add(new ServiceProviderExportProvider(languageLoader, _bootstrapper));
 			}
 
-			// The following is a solution to make sure Caliburn.Micro is correctly initialized on the right thread, so Execute.OnUIThread works
+			// Prepare the bootstrapper
 			await _bootstrapper.InitializeAsync();
-			var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>().Value;
 
+			// The following makes sure that Caliburn.Micro is correctly initialized on the right thread and Execute.OnUIThread works
+			var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>().Value;
 			caliburnBootstrapper.Initialize();
 
+			// Now check if there is a lock, if so we invoke OnAlreadyRunning and return
 			if (!_bootstrapper.IsMutexLocked)
 			{
 				OnAlreadyRunning?.Invoke();
@@ -192,7 +189,7 @@ namespace Dapplo.CaliburnMicro
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">DispatcherUnhandledExceptionEventArgs</param>
-		protected virtual void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs eventArgs)
+		private void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs eventArgs)
 		{
 			Log.Error().WriteLine(eventArgs.Exception, "Exception in Dispatcher");
 			if (OnUnhandledDispatcherException == null)
@@ -226,7 +223,7 @@ namespace Dapplo.CaliburnMicro
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">UnhandledExceptionEventArgs</param>
-		protected virtual void HandleAppDomainException(object sender, UnhandledExceptionEventArgs eventArgs)
+		private void HandleAppDomainException(object sender, UnhandledExceptionEventArgs eventArgs)
 		{
 			if (eventArgs.IsTerminating)
 			{
@@ -271,7 +268,7 @@ namespace Dapplo.CaliburnMicro
 		/// </summary>
 		/// <param name="sender">Sender of this event</param>
 		/// <param name="eventArgs">UnobservedTaskExceptionEventArgs</param>
-		protected virtual void HandleTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
+		private void HandleTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
 		{
 			Log.Error().WriteLine(eventArgs.Exception, "Exception in Task");
 			if (!ObserveUnhandledTaskException || OnUnhandledTaskException == null)

@@ -189,7 +189,7 @@ namespace Dapplo.CaliburnMicro
 			var shells = ServiceLocator.GetExports<IShell>();
 			if (shells.Any())
 			{
-				// Display the IShell viewmodel
+				// Display the IShell ViewModel
 				DisplayRootViewFor<IShell>();
 			}
 			else
@@ -208,15 +208,12 @@ namespace Dapplo.CaliburnMicro
 		}
 
 		/// <summary>
-		///     Return all assemblies that the Dapplo Bootstrapper knows of
+		///     Return all assemblies that the Dapplo bootstrapper knows, this is used to find your views and viewmodels
 		/// </summary>
 		/// <returns></returns>
 		protected override IEnumerable<Assembly> SelectAssemblies()
 		{
-			foreach (var assembly in AssemblyResolver.AssemblyCache)
-			{
-				yield return assembly;
-			}
+			return AssemblyResolver.AssemblyCache;
 		}
 	}
 }
