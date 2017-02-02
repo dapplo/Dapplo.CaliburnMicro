@@ -46,12 +46,15 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 		}
 
 		[Import]
-		private IWizardTranslations WizardTranslations { get; set; }
+		public IWizardTranslations WizardTranslations { get; set; }
 
 		public override void Initialize()
 		{
 			// automatically update the DisplayName
 			_displayNameUpdater = WizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.TitleStep4));
+
+			ParentWizard.OnPropertyChanged(nameof(WizardExampleViewModel.IsStep4Complete)).Subscribe(s => IsComplete = ParentWizard.IsStep4Complete);
+			IsComplete = ParentWizard.IsStep4Complete;
 		}
 
 		public override void Terminate()

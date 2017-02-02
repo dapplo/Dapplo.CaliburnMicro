@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
 
 #endregion
@@ -43,7 +44,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 	{
 		// ReSharper disable once StaticMemberInGenericType
 		private static readonly LogSource Log = new LogSource();
-
+		private IDisposable _screenObservable;
 		/// <summary>
 		///     This is called when the wizard needs to initialize stuff, it will call Initialize on every screen
 		/// </summary>
@@ -63,6 +64,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// </summary>
 		public virtual void Terminate()
 		{
+			_screenObservable?.Dispose();
 			Log.Verbose().WriteLine("Terminating wizard");
 			foreach (var wizardScreen in WizardScreens.OrderBy(x => x.Order))
 			{
@@ -137,15 +139,33 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
+		/// Helper Property to get the next screen
+		/// </summary>
+		private TWizardScreen NextScreen
+		{
+			get
+			{
+				// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
+				return WizardScreens.
+					OrderBy(x => x.Order).
+					SkipWhile(w => w != CurrentWizardScreen).
+					Skip(1).
+					SkipWhile(w => !w.IsEnabled || !w.IsVisible).
+					FirstOrDefault();
+			}
+		}
+
+		/// <summary>
 		///     Changes the ActiveItem of the conductor to the next IWizardScreen
 		/// </summary>
 		/// <returns>bool if next was possible</returns>
 		public virtual bool Next()
 		{
-			// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
-			// Take the first available.
-			var nextWizardScreen =
-				WizardScreens.OrderBy(x => x.Order).SkipWhile(w => w != CurrentWizardScreen).Skip(1).SkipWhile(w => !w.IsEnabled || !w.IsVisible).FirstOrDefault();
+			if (CurrentWizardScreen?.IsComplete != true)
+			{
+				return false;
+			}
+			var nextWizardScreen = NextScreen;
 			if (nextWizardScreen == null)
 			{
 				return false;
@@ -155,21 +175,25 @@ namespace Dapplo.CaliburnMicro.Wizard
 		}
 
 		/// <summary>
-		///     This returns true if there is a IWizardScreen after the current
+		///     This returns true we can move to the next screen, which is true when:
+		///     1) if the current IsComplete
+		///     2) if there is a IWizardScreen after the current
 		/// </summary>
 		/// <returns>true if next can be called</returns>
-		public virtual bool CanNext
+		public virtual bool CanNext => CurrentWizardScreen?.IsComplete == true && NextScreen != null;
+
+		/// <summary>
+		/// Helper Property to get the previous screen
+		/// </summary>
+		private TWizardScreen PreviousScreen
 		{
 			get
 			{
-				// Skip as long as there is a CurrentWizardScreen, and the item is not the current, skip 1 (the current) and skip as long as the item can not be shown.
-				// Return if there is anything left 
-				return
-					WizardScreens.OrderBy(x => x.Order)
-						.SkipWhile(w => CurrentWizardScreen != null && w != CurrentWizardScreen)
-						.Skip(1)
-						.SkipWhile(w => !w.IsEnabled || !w.IsVisible)
-						.Any();
+				if (CurrentWizardScreen == null)
+				{
+					return null;
+				}
+				return WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).LastOrDefault(w => w.IsEnabled && w.IsVisible);
 			}
 		}
 
@@ -180,9 +204,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		public virtual bool Previous()
 		{
 			// Take until 
-			var previousWizardScreen = CurrentWizardScreen != null
-				? WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).LastOrDefault(w => w.IsEnabled && w.IsVisible)
-				: null;
+			var previousWizardScreen = PreviousScreen;
 			if (previousWizardScreen == null)
 			{
 				return false;
@@ -191,18 +213,12 @@ namespace Dapplo.CaliburnMicro.Wizard
 			return true;
 		}
 
+
 		/// <summary>
 		///     Is there a previous WizardScreen?
 		/// </summary>
 		/// <returns></returns>
-		public virtual bool CanPrevious
-		{
-			get
-			{
-				return CurrentWizardScreen != null &&
-						WizardScreens.OrderBy(x => x.Order).TakeWhile(w => w != CurrentWizardScreen).Any(w => w.IsEnabled && w.IsVisible);
-			}
-		}
+		public virtual bool CanPrevious => PreviousScreen != null;
 
 		/// <summary>
 		///     This will call TryClose with false if all IWizardScreen items are okay with closing
@@ -282,7 +298,9 @@ namespace Dapplo.CaliburnMicro.Wizard
 		/// <param name="item">The TWizardScreen to activate.</param>
 		public override void ActivateItem(TWizardScreen item)
 		{
+			_screenObservable?.Dispose();
 			base.ActivateItem(item);
+			_screenObservable = item.OnPropertyChanged(nameof(IWizardScreen.IsComplete)).Subscribe(args => NotifyOfPropertyChange(nameof(CanNext)));
 			NotifyOfPropertyChange(nameof(CurrentWizardScreen));
 			NotifyOfPropertyChange(nameof(Progress));
 			NotifyOfPropertyChange(nameof(CanNext));

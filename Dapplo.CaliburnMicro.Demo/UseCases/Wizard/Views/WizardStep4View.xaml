@@ -6,5 +6,6 @@
 			mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 	<StackPanel>
 		<Label Content="This is step 4" />
+		<CheckBox x:Name="ParentWizard_IsStep4Complete" Content="{Binding WizardTranslations.CompleteStep4}"/>
 	</StackPanel>
 </UserControl>

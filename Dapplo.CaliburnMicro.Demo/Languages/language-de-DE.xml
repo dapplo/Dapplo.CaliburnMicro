@@ -51,5 +51,6 @@
 		<resource name="title_step3">Schritt 3</resource>
 		<resource name="title_step4">Schritt 4</resource>
 		<resource name="title_step5">Schritt 5</resource>
+		<resource name="complete_step4">Fertig</resource>
 	</resources>
 </language>

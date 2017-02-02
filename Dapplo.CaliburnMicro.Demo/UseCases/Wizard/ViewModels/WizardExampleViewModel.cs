@@ -44,6 +44,7 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 	{
 		private bool _isStep2Enabled;
 		private bool _isStep3Visible;
+		private bool _isStep4Complete;
 
 		[ImportMany]
 		private IEnumerable<Lazy<IWizardScreen>> WizardItems { get; set; }
@@ -73,6 +74,16 @@ namespace Dapplo.CaliburnMicro.Demo.UseCases.Wizard.ViewModels
 			{
 				_isStep3Visible = value;
 				NotifyOfPropertyChange(nameof(IsStep3Visible));
+			}
+		}
+
+		public bool IsStep4Complete
+		{
+			get { return _isStep4Complete; }
+			set
+			{
+				_isStep4Complete = value;
+				NotifyOfPropertyChange(nameof(IsStep4Complete));
 			}
 		}
 

@@ -65,6 +65,11 @@ namespace Dapplo.CaliburnMicro.Wizard
 		///     This is called when the parent wizard is terminated
 		/// </summary>
 		void Terminate();
+
+		/// <summary>
+		/// Defines if we can leave the current screen, for the next, as it's complete
+		/// </summary>
+		bool IsComplete { get; }
 	}
 
 	/// <summary>

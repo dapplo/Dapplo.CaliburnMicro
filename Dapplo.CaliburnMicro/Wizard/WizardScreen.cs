@@ -38,6 +38,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 	{
 		private bool _isEnabled = true;
 		private bool _isVisible = true;
+		private bool _isComplete = true;
 		private int _order = 1;
 		private TWizard _parent;
 
@@ -121,6 +122,19 @@ namespace Dapplo.CaliburnMicro.Wizard
 			{
 				_isVisible = value;
 				NotifyOfPropertyChange(nameof(IsVisible));
+			}
+		}
+
+		/// <summary>
+		///     Returns if the wizard screen is complete (to go to the next)
+		/// </summary>
+		public virtual bool IsComplete
+		{
+			get { return _isComplete; }
+			protected set
+			{
+				_isComplete = value;
+				NotifyOfPropertyChange(nameof(IsComplete));
 			}
 		}
 	}
