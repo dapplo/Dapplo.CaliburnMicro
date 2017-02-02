@@ -211,7 +211,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			if (CanCancel)
 			{
-				TryClose();
+				TryClose(false);
 			}
 		}
 
@@ -235,7 +235,7 @@ namespace Dapplo.CaliburnMicro.Wizard
 		{
 			if (CanFinish)
 			{
-				TryClose();
+				TryClose(true);
 			}
 		}
 
