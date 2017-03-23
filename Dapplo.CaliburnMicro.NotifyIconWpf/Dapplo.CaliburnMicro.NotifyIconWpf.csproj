@@ -97,7 +97,7 @@
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
       <Name>Dapplo.CaliburnMicro.Security</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Tree\Dapplo.CaliburnMicro.Menu.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
       <Project>{d5dc762f-1a6b-4296-ac60-952d5269ca25}</Project>
       <Name>Dapplo.CaliburnMicro.Menu</Name>
     </ProjectReference>

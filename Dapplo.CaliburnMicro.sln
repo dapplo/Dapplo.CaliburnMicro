@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Wizard
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Configuration", "Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj", "{C05C532B-D73F-4C9B-B8CF-E1C9966B219E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Menu", "Dapplo.CaliburnMicro.Tree\Dapplo.CaliburnMicro.Menu.csproj", "{D5DC762F-1A6B-4296-AC60-952D5269CA25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Menu", "Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj", "{D5DC762F-1A6B-4296-AC60-952D5269CA25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Translations", "Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj", "{0750F2C3-2C86-4CC7-A240-4A261033A2F0}"
 EndProject

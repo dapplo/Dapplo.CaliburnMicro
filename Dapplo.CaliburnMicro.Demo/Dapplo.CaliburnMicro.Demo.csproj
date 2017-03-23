@@ -194,7 +194,7 @@
       <Project>{0750f2c3-2c86-4cc7-a240-4a261033a2f0}</Project>
       <Name>Dapplo.CaliburnMicro.Translations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Tree\Dapplo.CaliburnMicro.Menu.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
       <Project>{d5dc762f-1a6b-4296-ac60-952d5269ca25}</Project>
       <Name>Dapplo.CaliburnMicro.Menu</Name>
     </ProjectReference>
