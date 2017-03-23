@@ -1,71 +1,76 @@
 ﻿<!--
-	Notes on the view:
-	1) Default the icon visibility is collapsed, the owner decides when its shown
-	2) The DisplayName property from the HasDisplayName interface, implemented in Screen, defines the ToolTipText
-	3) A left-click calls the Click method, which does nothing by default
-	4) A click on a context-menu items bubbles up th IMenuItem entities with the original data context
+    Notes on the view:
+    1) Default the icon visibility is collapsed, the owner decides when its shown
+    2) The DisplayName property from the HasDisplayName interface, implemented in Screen, defines the ToolTipText
+    3) A left-click calls the Click method, which does nothing by default
+    4) A click on a context-menu items bubbles up th IMenuItem entities with the original data context
 -->
 <notifyIconWpf:TrayIcon x:Class="Dapplo.CaliburnMicro.NotifyIconWpf.Views.TrayIconView"
-						xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-						xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-						xmlns:cal="http://www.caliburnproject.org"
-						xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
-						xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
-						xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
-						xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
-						cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]"
-						ToolTipText="{Binding DisplayName}"
-						Visibility="Collapsed">
-	<notifyIconWpf:TrayIcon.Resources>
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-		<converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
-		<ControlTemplate x:Key="MenuSeparatorTemplate">
-			<Separator />
-		</ControlTemplate>
-	</notifyIconWpf:TrayIcon.Resources>
-	<notifyIconWpf:TrayIcon.ContextMenu>
-		<ContextMenu ItemsSource="{Binding TrayMenuItems}">
-			<ContextMenu.Resources>
-				<Style TargetType="{x:Type ContextMenu}">
-					<Style.Triggers>
-						<Trigger Property="HasItems" Value="False">
-							<Setter Property="Visibility" Value="Collapsed" />
-						</Trigger>
-					</Style.Triggers>
-				</Style>
-				<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-					<Setter Property="Tag" Value="{Binding}" />
-					<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
-					<Setter Property="Icon" Value="{Binding Icon}" />
-					<Setter Property="Header" Value="{Binding DisplayName}" />
-					<Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
-					<Setter Property="InputGestureText" Value="{Binding HotKeyHint}"/>
-					<Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
-					<Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
-							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Title}">
-							<Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
-							<Setter Property="FontWeight" Value="Bold" />
-							<Setter Property="IsEnabled" Value="False"/>
-							<Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}"/>
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
-							<Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permissions}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
-							<Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permissions}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</ContextMenu.Resources>
-		</ContextMenu>
-	</notifyIconWpf:TrayIcon.ContextMenu>
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:cal="http://www.caliburnproject.org"
+                        xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
+                        xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
+                        xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
+                        xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+                        cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]"
+                        ToolTipText="{Binding DisplayName}"
+                        Visibility="Collapsed">
+    <notifyIconWpf:TrayIcon.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        <converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <ControlTemplate x:Key="MenuSeparatorTemplate">
+            <Separator />
+        </ControlTemplate>
+    </notifyIconWpf:TrayIcon.Resources>
+    <notifyIconWpf:TrayIcon.ContextMenu>
+        <ContextMenu ItemsSource="{Binding TrayMenuItems}">
+            <ContextMenu.Resources>
+                <Style TargetType="{x:Type ContextMenu}">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Tag" Value="{Binding}" />
+                    <Setter Property="Height" Value="40" />
+                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                    <Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
+                    <Setter Property="Icon" Value="{Binding Icon}" />
+                    <Setter Property="Header" Value="{Binding DisplayName}" />
+                    <Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
+                    <Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
+                    <Setter Property="cal:Action.TargetWithoutContext"
+                            Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                    <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
+                            <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Title}">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="IsEnabled" Value="False" />
+                            <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
+                                     Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+                            <Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permissions}" />
+                            <Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
+                            <Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing"
+                                    Value="{Binding WhenPermissionMissing}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
+                                     Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+                            <Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permissions}" />
+                            <Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
+                            <Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContextMenu.Resources>
+        </ContextMenu>
+    </notifyIconWpf:TrayIcon.ContextMenu>
 </notifyIconWpf:TrayIcon>

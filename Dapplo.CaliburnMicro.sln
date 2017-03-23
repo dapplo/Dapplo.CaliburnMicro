@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Notify
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo", "Dapplo.CaliburnMicro.Demo\Dapplo.CaliburnMicro.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Dapplo.CaliburnMicro.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo.Addon", "Dapplo.CaliburnMicro.Demo.Addon\Dapplo.CaliburnMicro.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Addon", "Dapplo.CaliburnMicro.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Demo.MetroAddon", "Dapplo.CaliburnMicro.Demo.MetroAddon\Dapplo.CaliburnMicro.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.MetroAddon", "Dapplo.CaliburnMicro.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Dapp", "Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj", "{D8C2622B-B621-4467-A3BA-1B744AF7E8D6}"
 EndProject

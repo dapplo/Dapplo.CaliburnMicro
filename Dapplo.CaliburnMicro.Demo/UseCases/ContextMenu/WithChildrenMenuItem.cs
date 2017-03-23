@@ -1,34 +1,30 @@
-﻿#region Dapplo 2016 - GNU Lesser General Public License
+﻿//  Dapplo - building blocks for desktop applications
+//  Copyright (C) 2016-2017 Dapplo
+// 
+//  For more information see: http://dapplo.net/
+//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+//  This file is part of Dapplo.CaliburnMicro
+// 
+//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+// 
+//  You should have a copy of the GNU Lesser General Public License
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-// Dapplo - building blocks for .NET applications
-// Copyright (C) 2016 Dapplo
-// 
-// For more information see: http://dapplo.net/
-// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-// This file is part of Dapplo.CaliburnMicro
-// 
-// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have a copy of the GNU Lesser General Public License
-// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
-
-#endregion
-
-#region Usings
+#region using
 
 using System.ComponentModel.Composition;
+using Application.Demo.Languages;
+using Application.Demo.UseCases.Configuration.ViewModels;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Demo.Languages;
-using Dapplo.CaliburnMicro.Demo.UseCases.Configuration.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log;
@@ -36,61 +32,61 @@ using MahApps.Metro.IconPacks;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.ContextMenu
+namespace Application.Demo.UseCases.ContextMenu
 {
-	/// <summary>
-	/// This will add an extry which shows children to the context menu
-	/// </summary>
-	[Export("contextmenu", typeof(IMenuItem))]
-	public sealed class WithChildrenMenuItem : MenuItem
-	{
-		private static readonly LogSource Log = new LogSource();
+    /// <summary>
+    ///     This will add an extry which shows children to the context menu
+    /// </summary>
+    [Export("contextmenu", typeof(IMenuItem))]
+    public sealed class WithChildrenMenuItem : MenuItem
+    {
+        private static readonly LogSource Log = new LogSource();
 
-		[Import]
-		public IWindowManager WindowManager { get; set; }
+        [Import]
+        private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		[Import]
-		public ConfigViewModel DemoConfigViewModel { get; set; }
+        [Import]
+        public ConfigViewModel DemoConfigViewModel { get; set; }
 
-		[Import]
-		private IContextMenuTranslations ContextMenuTranslations { get; set; }
+        [Import]
+        public IWindowManager WindowManager { get; set; }
 
-		public override void Initialize()
-		{
-			Icon = new PackIconMaterial
-			{
-				Kind = PackIconMaterialKind.HumanChild
-			};
-			// automatically update the DisplayName
-			var binding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.WithChildren));
-			var menuItem = new MenuItem
-			{
-				Id = "1"
-			};
-			ChildNodes.Add(menuItem);
+        public override void Click(IMenuItem clickedItem)
+        {
+            Log.Debug().WriteLine("child {0} clicked", clickedItem.Id);
+        }
 
-			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.One));
+        public override void Initialize()
+        {
+            Icon = new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.HumanChild
+            };
+            // automatically update the DisplayName
+            var binding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.WithChildren));
+            var menuItem = new MenuItem
+            {
+                Id = "1"
+            };
+            ChildNodes.Add(menuItem);
 
-			ChildNodes.Add(new MenuItem { Style = MenuItemStyles.Separator });
+            binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.One));
 
-			menuItem = new MenuItem
-			{
-				Id = "2"
-			};
-			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Two));
-			ChildNodes.Add(menuItem);
+            ChildNodes.Add(new MenuItem {Style = MenuItemStyles.Separator});
 
-			menuItem = new MenuItem
-			{
-				Id = "3"
-			};
-			binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Three));
-			ChildNodes.Add(menuItem);
-		}
+            menuItem = new MenuItem
+            {
+                Id = "2"
+            };
+            binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Two));
+            ChildNodes.Add(menuItem);
 
-		public override void Click(IMenuItem clickedItem)
-		{
-			Log.Debug().WriteLine("child {0} clicked", clickedItem.Id);
-		}
-	}
+            menuItem = new MenuItem
+            {
+                Id = "3"
+            };
+            binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Three));
+            ChildNodes.Add(menuItem);
+        }
+    }
 }

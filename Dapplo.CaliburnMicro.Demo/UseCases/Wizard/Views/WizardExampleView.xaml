@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.UseCases.Wizard.Views.WizardExampleView"
-				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-				Width="400" Height="400">
+﻿<UserControl x:Class="Application.Demo.UseCases.Wizard.Views.WizardExampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Width="400" Height="400">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="60" />
@@ -14,19 +14,23 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="30" />
 		</Grid.ColumnDefinitions>
-		<ContentControl x:Name="WizardProgress" Grid.Row="0" Grid.Column="1"  Margin="0,5,0,5" />
-		<ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<ContentControl x:Name="WizardProgress" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" />
+		<ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"
+		                VerticalAlignment="Center" />
 		<Button x:Name="Previous" ToolTip="{Binding WizardTranslations.Previous}" Style="{DynamicResource SquareButtonStyle}"
-				Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center">
-			<iconPacks:PackIconMaterial Kind="SkipPrevious"/>
+		        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center">
+			<iconPacks:PackIconMaterial Kind="SkipPrevious" />
 		</Button>
 		<Button x:Name="Next" ToolTip="{Binding WizardTranslations.Next}" Style="{DynamicResource SquareButtonStyle}"
-				Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center">
-			<iconPacks:PackIconMaterial Kind="SkipNext"/>
+		        Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center">
+			<iconPacks:PackIconMaterial Kind="SkipNext" />
 		</Button>
-		<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="5,5,5,5">
-			<Button x:Name="Cancel" ToolTip="{Binding WizardTranslations.Cancel}" Content="{Binding WizardTranslations.Cancel}" Margin="0,0,5,0"  Width="100" Style="{DynamicResource SquareButtonStyle}"/>
-			<Button x:Name="Finish" ToolTip="{Binding WizardTranslations.Finish}" Content="{Binding WizardTranslations.Finish}" Width="100" Style="{DynamicResource SquareButtonStyle}"/>
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right"
+		            Margin="5,5,5,5">
+			<Button x:Name="Cancel" ToolTip="{Binding WizardTranslations.Cancel}" Content="{Binding WizardTranslations.Cancel}"
+			        Margin="0,0,5,0" Width="100" Style="{DynamicResource SquareButtonStyle}" />
+			<Button x:Name="Finish" ToolTip="{Binding WizardTranslations.Finish}" Content="{Binding WizardTranslations.Finish}"
+			        Width="100" Style="{DynamicResource SquareButtonStyle}" />
 		</StackPanel>
 	</Grid>
 </UserControl>

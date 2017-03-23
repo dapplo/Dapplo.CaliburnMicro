@@ -1,51 +1,47 @@
-﻿#region Dapplo 2016 - GNU Lesser General Public License
+﻿//  Dapplo - building blocks for desktop applications
+//  Copyright (C) 2016-2017 Dapplo
+// 
+//  For more information see: http://dapplo.net/
+//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+//  This file is part of Dapplo.CaliburnMicro
+// 
+//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+// 
+//  You should have a copy of the GNU Lesser General Public License
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-// Dapplo - building blocks for .NET applications
-// Copyright (C) 2016 Dapplo
-// 
-// For more information see: http://dapplo.net/
-// Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-// This file is part of Dapplo.CaliburnMicro
-// 
-// Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have a copy of the GNU Lesser General Public License
-// along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
-
-#endregion
-
-#region Usings
+#region using
 
 using System.ComponentModel;
 using Dapplo.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.Languages
+namespace Application.Demo.Languages
 {
-	[Language("Wizard")]
-	public interface IWizardTranslations : ILanguage, INotifyPropertyChanged
-	{
-		string Next { get; }
-		string Previous { get; }
-		string Finish { get; }
-		string Cancel { get; }
-		string Title { get; }
-		string TitleStep1 { get; }
-		string TitleStep2 { get; }
-		string TitleStep3 { get; }
-		string TitleStep4 { get; }
-		string CompleteStep4 { get; }
+    [Language("Wizard")]
+    public interface IWizardTranslations : ILanguage, INotifyPropertyChanged
+    {
+        string Cancel { get; }
+        string CompleteStep4 { get; }
+        string Finish { get; }
+        string Next { get; }
+        string Previous { get; }
+        string Title { get; }
+        string TitleStep1 { get; }
+        string TitleStep2 { get; }
+        string TitleStep3 { get; }
+        string TitleStep4 { get; }
 
-		string TitleStep5 { get; }
-	}
+        string TitleStep5 { get; }
+    }
 }

@@ -7,8 +7,8 @@
     <ProjectGuid>{BF0A40B2-D678-4226-828E-1CB2918E0FD0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dapplo.CaliburnMicro.Demo.MetroAddon</RootNamespace>
-    <AssemblyName>Dapplo.CaliburnMicro.Demo.MetroAddon</AssemblyName>
+    <RootNamespace>Application.Demo.MetroAddon</RootNamespace>
+    <AssemblyName>Application.Demo.MetroAddon</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -122,9 +122,9 @@
       <Project>{c05c532b-d73f-4c9b-b8cf-e1c9966b219e}</Project>
       <Name>Dapplo.CaliburnMicro.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Dapplo.CaliburnMicro.Demo.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Application.Demo.csproj">
       <Project>{ad035fb9-c435-49d7-982a-5a8bfe8dcf84}</Project>
-      <Name>Dapplo.CaliburnMicro.Demo</Name>
+      <Name>Application.Demo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
       <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>

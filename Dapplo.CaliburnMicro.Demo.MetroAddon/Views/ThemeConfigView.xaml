@@ -1,11 +1,13 @@
-﻿<UserControl x:Class="Dapplo.CaliburnMicro.Demo.MetroAddon.Views.ThemeConfigView"
-			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<UserControl x:Class="Application.Demo.MetroAddon.Views.ThemeConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<StackPanel>
 		<DockPanel>
 			<Label x:Name="UiTranslations_Theme" Width="50" />
-			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding UiConfiguration.Theme}"/>
-			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2" SelectedValue="{Binding UiConfiguration.ThemeAccent}"/>
+			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
+			          SelectedValue="{Binding UiConfiguration.Theme}" />
+			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
+			          SelectedValue="{Binding UiConfiguration.ThemeAccent}" />
 		</DockPanel>
 	</StackPanel>
 </UserControl>

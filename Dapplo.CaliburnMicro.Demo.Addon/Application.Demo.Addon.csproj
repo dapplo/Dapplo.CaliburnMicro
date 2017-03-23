@@ -7,8 +7,8 @@
     <ProjectGuid>{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dapplo.CaliburnMicro.Demo.Addon</RootNamespace>
-    <AssemblyName>Dapplo.CaliburnMicro.Demo.Addon</AssemblyName>
+    <RootNamespace>Application.Demo.Addon</RootNamespace>
+    <AssemblyName>Application.Demo.Addon</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -103,9 +103,9 @@
       <Project>{c05c532b-d73f-4c9b-b8cf-e1c9966b219e}</Project>
       <Name>Dapplo.CaliburnMicro.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Dapplo.CaliburnMicro.Demo.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Application.Demo.csproj">
       <Project>{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}</Project>
-      <Name>Dapplo.CaliburnMicro.Demo</Name>
+      <Name>Application.Demo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>

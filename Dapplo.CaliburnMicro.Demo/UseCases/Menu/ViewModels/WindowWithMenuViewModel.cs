@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016 Dapplo
+//  Copyright (C) 2016-2017 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -27,113 +27,113 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reactive.Disposables;
+using Application.Demo.Languages;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Dapp;
-using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Demo.UseCases.Menu.ViewModels
+namespace Application.Demo.UseCases.Menu.ViewModels
 {
-	[Export]
-	public class WindowWithMenuViewModel : Screen
-	{
-		/// <summary>
-		/// Here all disposables are registered, so we can clean the up
-		/// </summary>
-		private CompositeDisposable _disposables;
+    [Export]
+    public class WindowWithMenuViewModel : Screen
+    {
+        /// <summary>
+        ///     Here all disposables are registered, so we can clean the up
+        /// </summary>
+        private CompositeDisposable _disposables;
 
-		// ReSharper disable once CollectionNeverQueried.Global
-		public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
+        [Import]
+        private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
-		[Import]
-		private IMenuTranslations MenuTranslations { get; set; }
+        // ReSharper disable once CollectionNeverQueried.Global
+        public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
 
-		[Import]
-		private IContextMenuTranslations ContextMenuTranslations { get; set; }
-		
-		[ImportMany("menu", typeof(IMenuItem))]
-		private IEnumerable<Lazy<IMenuItem>> MenuItems { get; set; }
+        [ImportMany("menu", typeof(IMenuItem))]
+        private IEnumerable<Lazy<IMenuItem>> MenuItems { get; set; }
 
-		protected override void OnActivate()
-		{
-			// Prepare disposables
-			_disposables?.Dispose();
-			_disposables = new CompositeDisposable();
+        [Import]
+        private IMenuTranslations MenuTranslations { get; set; }
 
-			// Remove all items, so we can build them
-			Items.Clear();
+        protected override void OnActivate()
+        {
+            // Prepare disposables
+            _disposables?.Dispose();
+            _disposables = new CompositeDisposable();
 
-			var contextMenuNameBinding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
+            // Remove all items, so we can build them
+            Items.Clear();
 
-			// Make sure the contextMenuNameBinding is disposed when this is no longer active
-			_disposables.Add(contextMenuNameBinding);
-			
-			var items = MenuItems.Select(x => x.Value).ToList();
-			var fileMenuItem = new MenuItem
-			{
-				Id = "1_File"
-			};
-			var menuNameBinding = MenuTranslations.CreateDisplayNameBinding(fileMenuItem, nameof(IMenuTranslations.File));
-			// Make sure the menuNameBinding is disposed when this is no longer active
-			_disposables.Add(menuNameBinding);
-			items.Add(fileMenuItem);
+            var contextMenuNameBinding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
 
-			var editMenuItem = new MenuItem
-			{
-				Id = "2_Edit"
-			};
-			menuNameBinding.AddDisplayNameBinding(editMenuItem, nameof(IMenuTranslations.Edit));
-			items.Add(editMenuItem);
+            // Make sure the contextMenuNameBinding is disposed when this is no longer active
+            _disposables.Add(contextMenuNameBinding);
 
-			var aboutMenuItem = new MenuItem
-			{
-				Id = "3_About"
-			};
-			menuNameBinding.AddDisplayNameBinding(aboutMenuItem, nameof(IMenuTranslations.About));
-			items.Add(aboutMenuItem);
+            var items = MenuItems.Select(x => x.Value).ToList();
+            var fileMenuItem = new MenuItem
+            {
+                Id = "1_File"
+            };
+            var menuNameBinding = MenuTranslations.CreateDisplayNameBinding(fileMenuItem, nameof(IMenuTranslations.File));
+            // Make sure the menuNameBinding is disposed when this is no longer active
+            _disposables.Add(menuNameBinding);
+            items.Add(fileMenuItem);
 
-			items.Add(new MenuItem
-			{
-				Style = MenuItemStyles.Separator,
-				Id = "Y_Separator",
-				ParentId = "1_File"
-			});
+            var editMenuItem = new MenuItem
+            {
+                Id = "2_Edit"
+            };
+            menuNameBinding.AddDisplayNameBinding(editMenuItem, nameof(IMenuTranslations.Edit));
+            items.Add(editMenuItem);
 
-			var exitMenuItem = new MenuItem
-			{
-				Id = "Z_Exit",
-				ParentId = "1_File",
-				ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
-			};
-			contextMenuNameBinding.AddDisplayNameBinding(exitMenuItem, nameof(IContextMenuTranslations.Exit));
-			items.Add(exitMenuItem);
+            var aboutMenuItem = new MenuItem
+            {
+                Id = "3_About"
+            };
+            menuNameBinding.AddDisplayNameBinding(aboutMenuItem, nameof(IMenuTranslations.About));
+            items.Add(aboutMenuItem);
 
-			// Make sure all items are initialized
-			foreach (var menuItem in items)
-			{
-				menuItem.Initialize();
-			}
-			// Add the root elements to the Items
-			foreach (var item in items.CreateTree())
-			{
-				Items.Add(item);
-			}
+            items.Add(new MenuItem
+            {
+                Style = MenuItemStyles.Separator,
+                Id = "Y_Separator",
+                ParentId = "1_File"
+            });
 
-			base.OnActivate();
-		}
+            var exitMenuItem = new MenuItem
+            {
+                Id = "Z_Exit",
+                ParentId = "1_File",
+                ClickAction = clickedMenuItem => Dapplication.Current.Shutdown()
+            };
+            contextMenuNameBinding.AddDisplayNameBinding(exitMenuItem, nameof(IContextMenuTranslations.Exit));
+            items.Add(exitMenuItem);
 
-		/// <summary>
-		/// Called when deactivating.
-		/// Removes all event subscriptions
-		/// </summary>
-		/// <param name="close">Inidicates whether this instance will be closed.</param>
-		protected override void OnDeactivate(bool close)
-		{
-			_disposables.Dispose();
-			base.OnDeactivate(close);
-		}
-	}
+            // Make sure all items are initialized
+            foreach (var menuItem in items)
+            {
+                menuItem.Initialize();
+            }
+            // Add the root elements to the Items
+            foreach (var item in items.CreateTree())
+            {
+                Items.Add(item);
+            }
+
+            base.OnActivate();
+        }
+
+        /// <summary>
+        ///     Called when deactivating.
+        ///     Removes all event subscriptions
+        /// </summary>
+        /// <param name="close">Inidicates whether this instance will be closed.</param>
+        protected override void OnDeactivate(bool close)
+        {
+            _disposables.Dispose();
+            base.OnDeactivate(close);
+        }
+    }
 }

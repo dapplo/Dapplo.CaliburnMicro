@@ -1,21 +1,45 @@
-﻿using System.ComponentModel;
+﻿//  Dapplo - building blocks for desktop applications
+//  Copyright (C) 2016-2017 Dapplo
+// 
+//  For more information see: http://dapplo.net/
+//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+//  This file is part of Dapplo.CaliburnMicro
+// 
+//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+// 
+//  You should have a copy of the GNU Lesser General Public License
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+#region using
+
+using System.ComponentModel;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Ini;
 using Dapplo.InterfaceImpl.Extensions;
 using MahApps.Metro.Controls;
 
-namespace Dapplo.CaliburnMicro.Demo.MetroAddon.Configurations
+#endregion
+
+namespace Application.Demo.MetroAddon.Configurations
 {
-	[IniSection("Metro")]
-	public interface IUiConfiguration : IIniSection, ITransactionalProperties
-	{
+    [IniSection("Metro")]
+    public interface IUiConfiguration : IIniSection, ITransactionalProperties
+    {
+        HotKey HotKey { get; set; }
 
-		[DefaultValue(Themes.BaseLight)]
-		Themes Theme { get; set; }
+        [DefaultValue(Themes.BaseLight)]
+        Themes Theme { get; set; }
 
-		[DefaultValue(ThemeAccents.Orange)]
-		ThemeAccents ThemeAccent { get; set; }
-
-		HotKey HotKey { get; set; }
-	}
+        [DefaultValue(ThemeAccents.Orange)]
+        ThemeAccents ThemeAccent { get; set; }
+    }
 }
