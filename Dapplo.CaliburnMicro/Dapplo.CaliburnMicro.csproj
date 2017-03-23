@@ -39,20 +39,8 @@
       <HintPath>..\packages\Caliburn.Micro.Core.3.0.3\lib\net45\Caliburn.Micro.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Caliburn.Micro.Platform, Version=3.0.3.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Caliburn.Micro.Platform.Core, Version=3.0.3.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.4.2\lib\net45\Dapplo.Addons.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.4.2\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.4.6\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Ini, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
@@ -63,10 +51,6 @@
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.7\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Language, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Language.0.5.17\lib\net45\Dapplo.Language.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.0.23\lib\net45\Dapplo.Log.dll</HintPath>
       <Private>True</Private>
@@ -75,12 +59,9 @@
       <HintPath>..\packages\Dapplo.Utils.1.0.132\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
@@ -96,14 +77,7 @@
       <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -111,72 +85,27 @@
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="Extensions\DisplayNameBinding.cs" />
-    <Compile Include="Security\IChangeableNeedAuthentication.cs" />
-    <Compile Include="Security\INeedAuthentication.cs" />
-    <Compile Include="Behaviors\Security\AuthenticationTargetProperties.cs" />
-    <Compile Include="Security\NeedAuthenticationExtensions.cs" />
     <Compile Include="Behaviors\ValueChecker.cs" />
     <Compile Include="Behaviors\EnumVisibility.cs" />
     <Compile Include="Behaviors\IBehavior.cs" />
     <Compile Include="Behaviors\FrameworkElementIcon.cs" />
     <Compile Include="Behaviors\NullVisibility.cs" />
-    <Compile Include="CaliburnLogger.cs" />
-    <Compile Include="CaliburnMicroBootstrapper.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
-    <Compile Include="Security\AuthenticatedConfigScreen.cs" />
-    <Compile Include="Configuration\ConfigScreen.cs" />
-    <Compile Include="Configuration\IConfigScreen.cs" />
-    <Compile Include="Security\PermissionOperations.cs" />
-    <Compile Include="Tree\AuthenticatedTreeScreen.cs" />
-    <Compile Include="Tree\ITreeScreenNode.cs" />
-    <Compile Include="Tree\TreeScreen.cs" />
-    <Compile Include="Tree\ITreeScreen.cs" />
-    <Compile Include="Configuration\IConfig.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Converters\AuthenticationTargetPropertyConverter.cs" />
-    <Compile Include="Extensions\IniSectionExtensions.cs" />
-    <Compile Include="Extensions\LanguageChangedExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
-    <Compile Include="Security\AuthenticatedMenuItem.cs" />
-    <Compile Include="Menu\MenuItemStyles.cs" />
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Behaviors\Security\AuthenticationEnabled.cs" />
-    <Compile Include="Behaviors\Security\AuthenticationVisibility.cs" />
-    <Compile Include="Security\SimpleAuthenticationProvider.cs" />
-    <Compile Include="Security\IAuthenticationProvider.cs" />
-    <Compile Include="Translations\IConfigTranslations.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
     <Compile Include="Extensions\HaveIconExtensions.cs" />
     <Compile Include="Extensions\IconExtensions.cs" />
     <Compile Include="IAmDisplayable.cs" />
-    <Compile Include="Translations\ICoreTranslations.cs" />
     <Compile Include="IHaveId.cs" />
     <Compile Include="IHaveIcon.cs" />
-    <Compile Include="Menu\IMenuItem.cs" />
-    <Compile Include="Menu\MenuItem.cs" />
-    <Compile Include="Tree\ITreeNode.cs" />
-    <Compile Include="Dapplication.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tree\TreeNodeExtensions.cs" />
-    <Compile Include="Wizard\Converters\IsLastItemConverter.cs" />
-    <Compile Include="Wizard\Converters\IsProgressedConverter.cs" />
-    <Compile Include="Wizard\IWizard.cs" />
-    <Compile Include="Wizard\IWizardScreen.cs" />
-    <Compile Include="Wizard\ViewModels\WizardProgressViewModel.cs" />
-    <Compile Include="Wizard\Wizard.cs" />
-    <Compile Include="Wizard\WizardScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="Wizard\Views\WizardProgressView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

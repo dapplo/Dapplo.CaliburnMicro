@@ -29,7 +29,6 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 

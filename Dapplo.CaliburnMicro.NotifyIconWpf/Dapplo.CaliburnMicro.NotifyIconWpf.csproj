@@ -47,8 +47,8 @@
       <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.4.2\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.4.6\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.7.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,16 +67,12 @@
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -97,6 +93,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
+      <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
+      <Name>Dapplo.CaliburnMicro.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Tree\Dapplo.CaliburnMicro.Menu.csproj">
+      <Project>{d5dc762f-1a6b-4296-ac60-952d5269ca25}</Project>
+      <Name>Dapplo.CaliburnMicro.Menu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Project>{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}</Project>
       <Name>Dapplo.CaliburnMicro</Name>

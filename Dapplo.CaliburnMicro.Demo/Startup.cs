@@ -27,6 +27,7 @@
 
 using System;
 using System.Windows;
+using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.Log;
 using Dapplo.Log.Loggers;
 
@@ -64,13 +65,7 @@ namespace Dapplo.CaliburnMicro.Demo
 #endif
 
 			// Load the assemblies Dapplo.CaliburnMicro, Dapplo.CaliburnMicro.NotifyIconWpf, Dapplo.CaliburnMicro.Metro
-			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro");
-			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.Metro");
-			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.NotifyIconWpf");
-
-			// Load the demo addons
-			application.Bootstrapper.FindAndLoadAssembly("Dapplo.CaliburnMicro.Demo.Addon");
-			application.Bootstrapper.FindAndLoadAssembly("Dapplo.CaliburnMicro.Demo.MetroAddon");
+			application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
 
 			application.Run();
 		}

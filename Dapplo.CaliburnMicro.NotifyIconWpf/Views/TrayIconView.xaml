@@ -10,9 +10,9 @@
 						xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						xmlns:cal="http://www.caliburnproject.org"
 						xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
-						xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro"
-						xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
-						xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
+						xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
+						xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
+						xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
 						cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]"
 						ToolTipText="{Binding DisplayName}"
 						Visibility="Collapsed">

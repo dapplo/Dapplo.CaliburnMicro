@@ -43,8 +43,8 @@
       <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.4.2\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.4.6\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Ini, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
@@ -118,6 +118,10 @@
     <Compile Include="ViewModels\ThemeConfigViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj">
+      <Project>{c05c532b-d73f-4c9b-b8cf-e1c9966b219e}</Project>
+      <Name>Dapplo.CaliburnMicro.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Dapplo.CaliburnMicro.Demo.csproj">
       <Project>{ad035fb9-c435-49d7-982a-5a8bfe8dcf84}</Project>
       <Name>Dapplo.CaliburnMicro.Demo</Name>
@@ -125,6 +129,14 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
       <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
       <Name>Dapplo.CaliburnMicro.Metro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
+      <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
+      <Name>Dapplo.CaliburnMicro.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Tree\Dapplo.CaliburnMicro.Menu.csproj">
+      <Project>{d5dc762f-1a6b-4296-ac60-952d5269ca25}</Project>
+      <Name>Dapplo.CaliburnMicro.Menu</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Project>{971d2ce0-140c-40c1-bff7-34ff74fc0b04}</Project>

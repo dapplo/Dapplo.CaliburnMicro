@@ -5,9 +5,8 @@
 					xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
 					xmlns:behaviors="clr-namespace:Dapplo.CaliburnMicro.Behaviors;assembly=Dapplo.CaliburnMicro"
 					xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-					xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Behaviors.Security;assembly=Dapplo.CaliburnMicro"
-					xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
-					xmlns:security1="clr-namespace:Dapplo.CaliburnMicro.Security;assembly=Dapplo.CaliburnMicro"
+					xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
+					xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
 					Width="500" Height="400">
 	<behaviors:FrameworkElementIcon.Value>
 		<iconPacks:PackIconMaterial Kind="Settings" Margin="10" Visibility="Visible"/>

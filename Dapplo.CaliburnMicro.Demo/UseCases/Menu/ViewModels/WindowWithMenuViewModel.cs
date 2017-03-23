@@ -28,10 +28,10 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reactive.Disposables;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.CaliburnMicro.Tree;
 
 #endregion
 
