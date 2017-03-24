@@ -103,7 +103,7 @@
       <Project>{c05c532b-d73f-4c9b-b8cf-e1c9966b219e}</Project>
       <Name>Dapplo.CaliburnMicro.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Demo\Application.Demo.csproj">
+    <ProjectReference Include="..\Application.Demo\Application.Demo.csproj">
       <Project>{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}</Project>
       <Name>Application.Demo</Name>
     </ProjectReference>
