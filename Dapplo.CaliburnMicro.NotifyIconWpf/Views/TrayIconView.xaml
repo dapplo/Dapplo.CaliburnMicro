@@ -35,7 +35,6 @@
                 </Style>
                 <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
                     <Setter Property="Tag" Value="{Binding}" />
-                    <Setter Property="Height" Value="40" />
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                     <Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
                     <Setter Property="Icon" Value="{Binding Icon}" />
