@@ -17,20 +17,21 @@ Available Packages:
 
 # Quick-start documentation
 
-A demo-project is supplied, see: Dapplo.CaliburnMicro.Demo
+A demo-project is supplied, see: Application.Demo
 
 ## Dapplo.CaliburnMicro
 
-Caliburn.Micro Bootstrapper with Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
-This bases on Dapplo.Addons.Bootstrapper, to use it you will need to instanciate the bootstrapper.
+A Caliburn.Micro support project, with Dapplo.CaliburnMicro.Dapp taking care of bootstrapping Caliburn.Micro with Dapplo.Addons, which takes care of initializing MEF and o.a. your IShell ViewModel
 
 There is functionality available to support your with building:
-- Context menus (with tree support)
-- Wizard
 - Simplified binding of properties
 - Some build in behaviors, like Visibility, IsEnabled and authentication behaviors which hide/disable elements depending on a value.
-- a structured configuration, with a tree where you can hang your "config screens"
-
+- Dapplo.CaliburnMicro.Configuration a structured configuration, with a tree where you can hang your "config screens"
+- Dapplo.CaliburnMicro.Menu Context menus (with tree support)
+- Dapplo.CaliburnMicro.Translations to support translations
+- Dapplo.CaliburnMicro.Wizard a simple wizard component
+- Dapplo.CaliburnMicro.Security add security behaviour (enables / visible) depending on rights
+ 
 Usage:
 
 1. Create ViewModels & Views for Caliburn.Micro which have MEF [Export] attributes, and use [Import] on the Properties you want
@@ -51,7 +52,7 @@ Usage:
 ```
   // Add optional directory to scan
   application.Bootstrapper.AddScanDirectory(@"MyComponents");
-  // Make sure Dapplo is loaded
+  // Make sure Dapplo and all modules are loaded
   application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
 ```
 
@@ -81,3 +82,7 @@ Usage:
 - Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 
 Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/
+
+
+TODO:
+Add better error support
