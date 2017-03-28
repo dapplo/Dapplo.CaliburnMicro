@@ -28,7 +28,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dapplo.Addons;
 using Dapplo.Ini;
-using Dapplo.Log;
 
 #endregion
 
@@ -40,18 +39,21 @@ namespace Dapplo.CaliburnMicro.Configuration
     [StartupAction(StartupOrder = int.MinValue)]
     public class ConfigurationStartup : IAsyncStartupAction
     {
-        private static readonly LogSource Log = new LogSource();
-
         [Import]
         private IApplicationBootstrapper ApplicationBootstrapper { get; set; }
 
-        public async Task StartAsync(CancellationToken token = new CancellationToken())
+        /// <summary>
+        /// async Start of the IniConfig
+        /// </summary>
+        /// <param name="cancellationToken">CancellationToken</param>
+        /// <returns>Task</returns>
+        public async Task StartAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var iniConfig = IniConfig.Current;
             if (iniConfig == null)
             {
                 iniConfig = new IniConfig(ApplicationBootstrapper.ApplicationName, ApplicationBootstrapper.ApplicationName);
-                await iniConfig.LoadIfNeededAsync(token);
+                await iniConfig.LoadIfNeededAsync(cancellationToken);
             }
             ApplicationBootstrapper.Export<IServiceProvider>(iniConfig);
 

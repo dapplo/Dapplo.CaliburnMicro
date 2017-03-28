@@ -42,13 +42,18 @@ namespace Dapplo.CaliburnMicro.Translations
         [Import]
         private IApplicationBootstrapper ApplicationBootstrapper { get; set; }
 
-        public async Task StartAsync(CancellationToken token = new CancellationToken())
+        /// <summary>
+        /// async Start of the LanguageLoader
+        /// </summary>
+        /// <param name="cancellationToken">CancellationToken</param>
+        /// <returns>Task</returns>
+        public async Task StartAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var languageLoader = LanguageLoader.Current;
             if (languageLoader == null)
             {
                 languageLoader = LanguageLoader.Current ?? new LanguageLoader(ApplicationBootstrapper.ApplicationName);
-                await languageLoader.LoadIfNeededAsync(token);
+                await languageLoader.LoadIfNeededAsync(cancellationToken);
             }
             ApplicationBootstrapper.Export<IServiceProvider>(languageLoader);
 
