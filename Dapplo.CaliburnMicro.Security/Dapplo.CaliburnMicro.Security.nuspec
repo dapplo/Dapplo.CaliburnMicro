@@ -19,6 +19,10 @@
 			<frameworkAssembly assemblyName="System.Xaml" targetFramework="net45" />
 			<frameworkAssembly assemblyName="WindowsBase" targetFramework="net45" />
 		</frameworkAssemblies>
+		<dependencies>
+			<dependency id="Dapplo.CaliburnMicro" version="$version$" />
+			<dependency id="Dapplo.CaliburnMicro.Dapp" version="$version$" />
+		</dependencies>
 	</metadata>
 	<files>
 		<file src="bin\release\$id$.pdb" target="lib\net45" />
