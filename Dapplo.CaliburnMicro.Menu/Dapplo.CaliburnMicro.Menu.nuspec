@@ -8,16 +8,15 @@
         <projectUrl>http://www.dapplo.net/blocks/Dapplo.CaliburnMicro</projectUrl>
         <iconUrl>http://www.dapplo.net/favicon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Dapplo.CaliburnMicro.Metro adds a IWindowManager for MahApps MetroWindow support to Dapplo.CaliburnMicro</description>
-		<summary>An MahApps supporting IWindowManager for Dapplo.CaliburnMicro</summary>
+        <description>Dapplo.CaliburnMicro.Menu brings modular menus to Dapplo.CaliburnMicro</description>
+		<summary>Dapplo.CaliburnMicro.Menu brings modular menus to Dapplo.CaliburnMicro</summary>
         <language>en-us</language>
 		<copyright>$author$</copyright>
-		<tags>Dapplo Caliburn.Micro MahApps</tags>
+		<tags>Dapplo Caliburn.Micro MVVM menu</tags>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="PresentationCore" targetFramework="net45" />
 			<frameworkAssembly assemblyName="PresentationFramework" targetFramework="net45" />
 			<frameworkAssembly assemblyName="System.Xaml" targetFramework="net45" />
-			<frameworkAssembly assemblyName="WindowsBase" targetFramework="net45" />
 		</frameworkAssemblies>
 	</metadata>
 	<files>
