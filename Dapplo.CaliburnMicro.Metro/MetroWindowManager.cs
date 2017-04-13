@@ -27,7 +27,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.Log;
 using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
@@ -48,7 +47,7 @@ namespace Dapplo.CaliburnMicro.Metro
     ///     <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
     /// </summary>
     [Export(typeof(IWindowManager))]
-    public sealed class MetroWindowManager : WindowManager, IPartImportsSatisfiedNotification
+    public sealed class MetroWindowManager : DapploWindowManager, IPartImportsSatisfiedNotification
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -62,16 +61,6 @@ namespace Dapplo.CaliburnMicro.Metro
         /// </summary>
         [Export]
         public IDialogCoordinator MahAppsDialogCoordinator => DialogCoordinator.Instance;
-
-        /// <summary>
-        ///     Implement this to make specific configuration changes to your owned (dialog) window.
-        /// </summary>
-        public Action<MetroWindow> OnConfigureOwnedWindow { get; set; }
-
-        /// <summary>
-        ///     Implement this to make specific configuration changes to your window.
-        /// </summary>
-        public Action<MetroWindow> OnConfigureWindow { get; set; }
 
         /// <summary>
         ///     The current theme
@@ -169,33 +158,6 @@ namespace Dapplo.CaliburnMicro.Metro
         }
 
         /// <summary>
-        ///     Create a MetroWindow
-        /// </summary>
-        /// <param name="view"></param>
-        /// <param name="windowIsView"></param>
-        /// <returns></returns>
-        public MetroWindow CreateCustomWindow(object view, bool windowIsView)
-        {
-            MetroWindow result;
-            if (windowIsView)
-            {
-                result = view as MetroWindow;
-            }
-            else
-            {
-                result = new MetroWindow
-                {
-                    Content = view,
-                    SizeToContent = SizeToContent.WidthAndHeight
-                };
-            }
-            result?.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
-            result?.SetValue(Control.BorderThicknessProperty, new Thickness(1));
-
-            return result;
-        }
-
-        /// <summary>
         ///     Create a MapApps Uri for the supplied style
         /// </summary>
         /// <param name="style">e.g. Fonts or Controls</param>
@@ -205,56 +167,30 @@ namespace Dapplo.CaliburnMicro.Metro
             return new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
         }
 
-        /// <summary>Makes sure the view is a window or is wrapped by one.</summary>
-        /// <param name="model">The view model.</param>
-        /// <param name="view">The view.</param>
-        /// <param name="isDialog">Whethor or not the window is being shown as a dialog.</param>
-        /// <returns>The window.</returns>
-        protected override Window EnsureWindow(object model, object view, bool isDialog)
+        /// <summary>
+        ///     Create a MetroWindow
+        /// </summary>
+        /// <param name="model">the model as object</param>
+        /// <param name="view">the view as object</param>
+        /// <param name="isDialog">Is this for a dialog?</param>
+        /// <returns></returns>
+        protected override Window CreateCustomWindow(object model, object view, bool isDialog)
         {
-            MetroWindow window = null;
-            Window inferOwnerOf;
-            if (view is MetroWindow)
+            var result = view as MetroWindow ?? new MetroWindow
             {
-                window = CreateCustomWindow(view, true);
-                inferOwnerOf = InferOwnerOf(window);
-                if (inferOwnerOf != null && isDialog)
-                {
-                    window.Owner = inferOwnerOf;
-                }
-            }
-
-            if (window == null)
-            {
-                window = CreateCustomWindow(view, false);
-            }
-
+                Content = view,
+                SizeToContent = SizeToContent.WidthAndHeight
+            };
+            result.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
+            result.SetValue(Control.BorderThicknessProperty, new Thickness(1));
             // Allow dialogs
-            window.SetValue(DialogParticipation.RegisterProperty, model);
-            window.SetValue(View.IsGeneratedProperty, true);
-            inferOwnerOf = InferOwnerOf(window);
-            if (inferOwnerOf != null)
+            if (isDialog)
             {
-                // "Dialog", center it on top of the owner
-                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                window.Owner = inferOwnerOf;
-                OnConfigureOwnedWindow?.Invoke(window);
+                result.SetValue(DialogParticipation.RegisterProperty, model);
             }
-            else
-            {
-                // Free window, without owner
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                OnConfigureWindow?.Invoke(window);
-            }
-            var haveIcon = model as IHaveIcon;
-            if (haveIcon != null && window.Icon == null)
-            {
-                // Now use the attached behavior to set the icon
-                window.SetCurrentValue(FrameworkElementIcon.ValueProperty, haveIcon.Icon);
-            }
-            // Just in case, make sure it's activated
-            window.Activate();
-            return window;
+            result.SetValue(View.IsGeneratedProperty, true);
+
+            return result;
         }
 
         /// <summary>

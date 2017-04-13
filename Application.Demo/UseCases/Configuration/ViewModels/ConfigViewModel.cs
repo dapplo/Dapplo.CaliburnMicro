@@ -27,10 +27,13 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Application.Demo.Languages;
 using Application.Demo.Models;
+using Application.Demo.UseCases.Wizard.ViewModels;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Language;
+using Dapplo.Log;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -43,6 +46,8 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     [Export]
     public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
     {
+        private static readonly LogSource Log = new LogSource();
+
         /// <summary>
         ///     Get all settings controls, these are the items that are displayed.
         /// </summary>
@@ -58,6 +63,21 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         [Import]
         private IDemoConfiguration DemoConfiguration { get; set; }
 
+        [Import]
+        private WizardExampleViewModel DemoDialogViewModel { get; set; }
+
+        /// <summary>
+        ///     Used to make it possible to show a MahApps dialog
+        /// </summary>
+        [Import]
+        private IDialogCoordinator Dialogcoordinator { get; set; }
+
+        /// <summary>
+        ///     Used to show a "normal" dialog
+        /// </summary>
+        [Import]
+        private IWindowManager WindowsManager { get; set; }
+
         /// <summary>
         ///     Used to send events
         /// </summary>
@@ -72,6 +92,24 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             // Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
             var lang = DemoConfiguration.Language;
             Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        ///     Show the credentials for the login
+        /// </summary>
+        public void Login()
+        {
+            var result = WindowsManager.ShowDialog(DemoDialogViewModel);
+            Log.Info().WriteLine($"Girl you know it's {result}");
+        }
+
+        /// <summary>
+        ///     Show a MahApps dialog from the MVVM
+        /// </summary>
+        /// <returns></returns>
+        public async Task Dialog()
+        {
+            await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
         }
     }
 }

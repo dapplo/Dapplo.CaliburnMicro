@@ -96,7 +96,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             var windowManagers = ServiceLocator.GetExports<IWindowManager>();
             if (!windowManagers.Any())
             {
-                ServiceExporter.Export<IWindowManager>(new WindowManager());
+                ServiceExporter.Export<IWindowManager>(new DapploWindowManager());
             }
 
             // Test if there is a IEventAggregator available, if not use the default

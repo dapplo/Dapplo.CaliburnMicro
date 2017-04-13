@@ -166,12 +166,6 @@ namespace Dapplo.CaliburnMicro.Behaviors
                         size = new Size(image.Width, image.Height);
                     }
                     var iconIcon = icon.ToBitmapSource(size);
-                    using (var fileStream = new FileStream(@"C:\LocalData\icon.png", FileMode.Create))
-                    {
-                        BitmapEncoder encoder = new PngBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(iconIcon));
-                        encoder.Save(fileStream);
-                    }
                     propertyInfo.SetValue(uiElement, iconIcon);
                 }
                 else if (propertyInfo.PropertyType == typeof(Icon))

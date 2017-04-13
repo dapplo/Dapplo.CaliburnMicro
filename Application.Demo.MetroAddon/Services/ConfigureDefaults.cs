@@ -44,13 +44,14 @@ namespace Application.Demo.MetroAddon.Services
 
         public void Start()
         {
-            // Override the ConfigView with a much nicer looking version
-            ViewLocator.NameTransformer.AddRule(@"^Dapplo\.CaliburnMicro\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Dapplo.CaliburnMicro.Demo.MetroAddon.Views.ConfigView");
-            var demoUri = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
+            var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
             MetroWindowManager.AddResourceDictionary(demoUri);
 
             MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
             MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
+
+            // Override the ConfigView with a much nicer looking version
+            ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
         }
     }
 }
