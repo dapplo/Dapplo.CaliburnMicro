@@ -23,7 +23,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapplo.Addons;
@@ -56,12 +55,6 @@ namespace Dapplo.CaliburnMicro.Configuration
                 await iniConfig.LoadIfNeededAsync(cancellationToken);
             }
             ApplicationBootstrapper.Export<IServiceProvider>(iniConfig);
-
-            var s = ApplicationBootstrapper.GetExports<IServiceProvider>();
-            if (!s.Any())
-            {
-                throw new Exception();
-            }
         }
     }
 }

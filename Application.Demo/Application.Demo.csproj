@@ -272,7 +272,7 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets') And '$(Configuration)|$(Platform)' == 'Release|AnyCPU'" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
@@ -312,7 +312,7 @@ foreach (var item in filesToCleanup)
 ]]></Code>
     </Task>
   </UsingTask>
-  <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget">
+  <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget" Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CosturaCleanup Config="FodyWeavers.xml" Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

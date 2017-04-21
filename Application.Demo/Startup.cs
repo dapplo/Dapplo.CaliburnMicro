@@ -61,7 +61,7 @@ namespace Application.Demo
 #endif
 
             // Load the Dapplo.CaliburnMicro.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
+            application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
             // Load the Application.Demo.* assemblies
             application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
 

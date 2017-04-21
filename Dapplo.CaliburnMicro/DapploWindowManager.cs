@@ -49,7 +49,9 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         ///     Create the window type for this window manager
         /// </summary>
-        /// <param name="view">object</param>
+        /// <param name="model">object with the model</param>
+        /// <param name="view">object with the view</param>
+        /// <param name="isDialog">specifies if this is a dialog</param>
         /// <returns>Window</returns>
         protected virtual Window CreateCustomWindow(object model, object view, bool isDialog)
         {
