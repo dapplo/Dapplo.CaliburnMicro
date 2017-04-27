@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
@@ -36,7 +37,7 @@ using Dapplo.Utils.Collections;
 namespace Application.Demo.UseCases.Wizard.ViewModels
 {
     [Export]
-    public class WizardExampleViewModel : Wizard<IWizardScreen>, IPartImportsSatisfiedNotification
+    public sealed class WizardExampleViewModel : Wizard<IWizardScreen>
     {
         private bool _isStep2Enabled;
         private bool _isStep3Visible;
@@ -52,7 +53,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
             set
             {
                 _isStep2Enabled = value;
-                NotifyOfPropertyChange(nameof(IsStep2Enabled));
+                NotifyOfPropertyChange();
             }
         }
 
@@ -62,7 +63,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
             set
             {
                 _isStep3Visible = value;
-                NotifyOfPropertyChange(nameof(IsStep3Visible));
+                NotifyOfPropertyChange();
             }
         }
 
@@ -72,24 +73,25 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
             set
             {
                 _isStep4Complete = value;
-                NotifyOfPropertyChange(nameof(IsStep4Complete));
+                NotifyOfPropertyChange();
             }
         }
 
-        [ImportMany]
-        private IEnumerable<Lazy<IWizardScreen>> WizardItems { get; set; }
+        public WizardProgressViewModel WizardProgress { get; }
 
-        public WizardProgressViewModel WizardProgress { get; set; }
+        public IWizardTranslations WizardTranslations { get; }
 
-        [Import]
-        public IWizardTranslations WizardTranslations { get; set; }
-
-        public void OnImportsSatisfied()
+        [ImportingConstructor]
+        public WizardExampleViewModel(
+            [ImportMany]
+            IEnumerable<Lazy<IWizardScreen>> wizardItems,
+            IWizardTranslations wizardTranslations)
         {
+            WizardTranslations = wizardTranslations;
             // automatically update the DisplayName
             WizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.Title));
             // Set the WizardScreens as TrulyObservableCollection (needed for the WizardProgressViewModel) and by ordering them
-            WizardScreens = new TrulyObservableCollection<IWizardScreen>(WizardItems.Select(x => x.Value).OrderBy(x => x.Order));
+            WizardScreens = new TrulyObservableCollection<IWizardScreen>(wizardItems.Select(x => x.Value).OrderBy(x => x.Order));
             WizardProgress = new WizardProgressViewModel(this);
         }
 

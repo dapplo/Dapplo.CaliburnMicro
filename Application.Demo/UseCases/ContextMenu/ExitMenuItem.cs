@@ -39,20 +39,12 @@ namespace Application.Demo.UseCases.ContextMenu
     [Export("contextmenu", typeof(IMenuItem))]
     public sealed class ExitMenuItem : MenuItem
     {
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-        public override void Click(IMenuItem clickedItem)
+        [ImportingConstructor]
+        public ExitMenuItem(IContextMenuTranslations contextMenuTranslations)
         {
-            System.Windows.Application.Current.Shutdown();
-        }
-
-        public override void Initialize()
-        {
-            Id = "Z_Exit";
             // automatically update the DisplayName
-            ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Exit));
-
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Exit));
+            Id = "Z_Exit";
             Icon = new PackIconMaterial
             {
                 Kind = PackIconMaterialKind.Close,
@@ -60,6 +52,10 @@ namespace Application.Demo.UseCases.ContextMenu
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Stretch
+            };
+            ClickAction = clickedItem =>
+            {
+                System.Windows.Application.Current.Shutdown();
             };
             this.ApplyIconForegroundColor(Brushes.DarkRed);
         }

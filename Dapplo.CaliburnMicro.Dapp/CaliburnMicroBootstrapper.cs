@@ -33,6 +33,7 @@ using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log;
 using Dapplo.Utils.Resolving;
+using System.Diagnostics.CodeAnalysis;
 
 #endregion
 
@@ -47,16 +48,27 @@ namespace Dapplo.CaliburnMicro.Dapp
     public class CaliburnMicroBootstrapper : BootstrapperBase, IAsyncShutdownAction
     {
         private static readonly LogSource Log = new LogSource();
+        private readonly IServiceExporter _serviceExporter;
+        private readonly IServiceLocator _serviceLocator;
+        private readonly IServiceRepository _serviceRepository;
 
-        [Import]
-        private IServiceExporter ServiceExporter { get; set; }
-
-        [Import]
-        private IServiceLocator ServiceLocator { get; set; }
-
-        [Import]
-        private IServiceRepository ServiceRepository { get; set; }
-
+        /// <summary>
+        /// CaliburnMicroBootstrapper
+        /// </summary>
+        /// <param name="serviceExporter">Used to export</param>
+        /// <param name="serviceLocator">Used to locate</param>
+        /// <param name="serviceRepository">Used to add assemblies</param>
+        [ImportingConstructor]
+        public CaliburnMicroBootstrapper(
+            IServiceExporter serviceExporter,
+            IServiceLocator serviceLocator,
+            IServiceRepository serviceRepository
+            )
+        {
+            _serviceExporter = serviceExporter;
+            _serviceLocator = serviceLocator;
+            _serviceRepository = serviceRepository;
+        }
         /// <summary>
         ///     Shutdown Caliburn
         /// </summary>
@@ -75,35 +87,36 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="instance">some object to fill</param>
         protected override void BuildUp(object instance)
         {
-            ServiceLocator.FillImports(instance);
+            _serviceLocator.FillImports(instance);
         }
 
         /// <summary>
         ///     Configure the Dapplo.Addon.Bootstrapper with the AssemblySource.Instance values
         /// </summary>
+        [SuppressMessage("Sonar Code Smell", "S2696:Instance members should not write to static fields", Justification = "This is the only location where it makes sense.")]
         protected override void Configure()
         {
             LogManager.GetLog = type => new CaliburnLogger(type);
 
             foreach (var assembly in AssemblySource.Instance)
             {
-                ServiceRepository.Add(assembly);
+                _serviceRepository.Add(assembly);
             }
 
             ConfigureViewLocator();
 
             // Test if there is a IWindowManager available, if not use the default
-            var windowManagers = ServiceLocator.GetExports<IWindowManager>();
+            var windowManagers = _serviceLocator.GetExports<IWindowManager>();
             if (!windowManagers.Any())
             {
-                ServiceExporter.Export<IWindowManager>(new DapploWindowManager());
+                _serviceExporter.Export<IWindowManager>(new DapploWindowManager());
             }
 
             // Test if there is a IEventAggregator available, if not use the default
-            var eventAggregators = ServiceLocator.GetExports<IEventAggregator>();
+            var eventAggregators = _serviceLocator.GetExports<IEventAggregator>();
             if (!eventAggregators.Any())
             {
-                ServiceExporter.Export<IEventAggregator>(new EventAggregator());
+                _serviceExporter.Export<IEventAggregator>(new EventAggregator());
             }
 
             // TODO: Documentation
@@ -120,6 +133,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Add logic to find the base viewtype if the default locator can't find a view.
         /// </summary>
+        [SuppressMessage("Sonar Code Smell", "S2696:Instance members should not write to static fields", Justification = "This is the only location where it makes sense.")]
         private void ConfigureViewLocator()
         {
             var defaultLocator = ViewLocator.LocateTypeForModelType;
@@ -153,7 +167,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="serviceType"></param>
         protected override IEnumerable<object> GetAllInstances(Type serviceType)
         {
-            return ServiceLocator.GetExports(serviceType).Select(x => x.Value);
+            return _serviceLocator.GetExports(serviceType).Select(x => x.Value);
         }
 
         /// <summary>
@@ -165,7 +179,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         protected override object GetInstance(Type serviceType, string key)
         {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-            return ServiceLocator.GetExport(serviceType, contract);
+            return _serviceLocator.GetExport(serviceType, contract);
         }
 
         /// <summary>
@@ -179,7 +193,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             base.OnStartup(sender, e);
 
             // Inform when no IShell export is found
-            var shells = ServiceLocator.GetExports<IShell>();
+            var shells = _serviceLocator.GetExports<IShell>();
             if (shells.Any())
             {
                 // Display the IShell ViewModel

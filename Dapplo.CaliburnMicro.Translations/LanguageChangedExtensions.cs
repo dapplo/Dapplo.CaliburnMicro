@@ -37,7 +37,6 @@ namespace Dapplo.CaliburnMicro.Translations
         /// <summary>
         ///     Automatically call the update action when the LanguageChanged fires
         ///     If the is called on a DI object, make sure it's available.
-        ///     When using MEF, it would be best to call this from IPartImportsSatisfiedNotification.OnImportsSatisfied
         /// </summary>
         /// <param name="language">ILanguage</param>
         /// <param name="updateAction">Action to call on active and update, the argument is the property name</param>

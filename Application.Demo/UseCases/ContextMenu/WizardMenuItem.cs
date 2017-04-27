@@ -40,36 +40,24 @@ namespace Application.Demo.UseCases.ContextMenu
     [Export("contextmenu", typeof(IMenuItem))]
     public sealed class WizardMenuItem : AuthenticatedMenuItem<bool>
     {
-        public WizardMenuItem()
-        {
-            this.EnabledOnPermissions("Admin");
-        }
-
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-        [Import]
-        public IWindowManager WindowManager { get; set; }
-
-        [Import]
-        private WizardExampleViewModel WizardExample { get; set; }
-
-        /// <summary>
-        ///     Is called when the IMenuItem is clicked
-        /// </summary>
-        public override void Click(IMenuItem clickedItem)
-        {
-            WindowManager.ShowDialog(WizardExample);
-        }
-
-        public override void Initialize()
+        [ImportingConstructor]
+        public WizardMenuItem(
+            IContextMenuTranslations contextMenuTranslations,
+            IWindowManager windowManager,
+            WizardExampleViewModel wizardExample)
         {
             // automatically update the DisplayName
-            ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Wizard));
+            // automatically update the DisplayName
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Wizard));
             Icon = new PackIconMaterial
             {
                 Kind = PackIconMaterialKind.AutoFix
             };
+            ClickAction = clickedItem =>
+            {
+                windowManager.ShowDialog(wizardExample);
+            };
+            this.EnabledOnPermissions("Admin");
         }
     }
 }

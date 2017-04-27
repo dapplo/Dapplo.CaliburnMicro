@@ -43,7 +43,13 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         ///     Here all disposables are registered, so we can clean the up
         /// </summary>
         private CompositeDisposable _disposables;
+        private readonly IEventAggregator _eventAggregator;
 
+
+        /// <summary>
+        /// Used from the View
+        /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
 
         /// <summary>
@@ -52,20 +58,26 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         public bool CanChangeLanguage
             => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
 
-        [Import]
-        public ICoreTranslations CoreTranslations { get; set; }
+        public ICoreTranslations CoreTranslations { get; }
 
-        [Import]
-        public IDemoConfiguration DemoConfiguration { get; set; }
+        public IDemoConfiguration DemoConfiguration { get;}
 
-        [Import]
-        private IEventAggregator EventAggregator { get; set; }
+        [ImportingConstructor]
+        public LanguageConfigViewModel(
+            ICoreTranslations coreTranslations,
+            IDemoConfiguration demoConfiguration,
+            IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            DemoConfiguration = demoConfiguration;
+            CoreTranslations = coreTranslations;
+        }
 
         public override void Commit()
         {
             // Manually commit
             DemoConfiguration.CommitTransaction();
-            EventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
+            _eventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
             Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
 
             base.Commit();

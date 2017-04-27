@@ -42,20 +42,27 @@ namespace Application.Demo.UseCases.ContextMenu
     {
         private static readonly LogSource Log = new LogSource();
 
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
+        private readonly ConfigViewModel _demoConfigViewModel;
+        private readonly IWindowManager _windowManager;
 
-        [Import]
-        public ConfigViewModel DemoConfigViewModel { get; set; }
+        [ImportingConstructor]
+        public ConfigMenuItem(
+            IWindowManager windowManager,
+            IContextMenuTranslations contextMenuTranslations,
+            ConfigViewModel demoConfigViewModel)
+        {
+            // automatically update the DisplayName
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Configure));
 
-        [Import]
-        public IWindowManager WindowManager { get; set; }
+            _demoConfigViewModel = demoConfigViewModel;
+            _windowManager = windowManager;
+        }
 
         public override void Click(IMenuItem clickedItem)
         {
             Log.Debug().WriteLine("Configure");
             // TODO: Closing the DemoConfigViewModel also closes other windows, check / fix
-            if (WindowManager.ShowDialog(DemoConfigViewModel) == false)
+            if (_windowManager.ShowDialog(_demoConfigViewModel) == false)
             {
                 Log.Warn().WriteLine("You cancelled the configuration");
             }
@@ -70,8 +77,6 @@ namespace Application.Demo.UseCases.ContextMenu
                 SpinDuration = 3
             };
             HotKeyHint = "Alt+C";
-            // automatically update the DisplayName
-            ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Configure));
         }
     }
 }

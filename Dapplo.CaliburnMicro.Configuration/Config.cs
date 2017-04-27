@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
@@ -55,7 +56,7 @@ namespace Dapplo.CaliburnMicro.Configuration
             set
             {
                 _filter = value;
-                NotifyOfPropertyChange(_filter);
+                NotifyOfPropertyChange();
 
                 TreeItems.Clear();
                 // Rebuild a tree for the ConfigScreens
@@ -236,6 +237,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         ///     Activates the specified config screen, and sends notify property changed events.
         /// </summary>
         /// <param name="configScreen">The TConfigScreen to activate.</param>
+        [SuppressMessage("Sonar Code Smell", "S3236:Caller information arguments should not be provided explicitly", Justification = "Notification of a different property is triggered.")]
         public override void ActivateItem(TConfigScreen configScreen)
         {
             if (configScreen != null && !configScreen.CanActivate)

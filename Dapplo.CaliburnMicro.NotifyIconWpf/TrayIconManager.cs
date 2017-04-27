@@ -46,6 +46,8 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     public class TrayIconManager : IAsyncStartupAction, IAsyncShutdownAction, ITrayIconManager
     {
         private static readonly LogSource Log = new LogSource();
+        private readonly IEnumerable<Lazy<ITrayIconViewModel>> _trayIconViewModels;
+        private readonly IWindowManager _windowsManager;
 
         /// <summary>
         ///     Cache for the created tray icons
@@ -53,11 +55,21 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         private readonly IDictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>> _trayIcons =
             new Dictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>>();
 
-        [ImportMany]
-        private IEnumerable<Lazy<ITrayIconViewModel>> TrayIconViewModels { get; set; }
 
-        [Import]
-        private IWindowManager WindowsManager { get; set; }
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="trayIconViewModels">IEnumerable with laze trayicon ViewModels</param>
+        /// <param name="windowsManager">IWindowManager</param>
+        [ImportingConstructor]
+        public TrayIconManager(
+            [ImportMany]IEnumerable<Lazy<ITrayIconViewModel>> trayIconViewModels,
+            IWindowManager windowsManager
+            )
+        {
+            _windowsManager = windowsManager;
+            _trayIconViewModels = trayIconViewModels;
+        }
 
         /// <summary>
         ///     Hide all trayicons to prevent them hanging useless in the system tray
@@ -103,7 +115,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         {
             await Execute.OnUIThreadAsync(() =>
             {
-                foreach (var trayIconViewModel in TrayIconViewModels.Select(x => x.Value))
+                foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
                 {
                     // Get the view, to store it as ITrayIcon
                     trayIconViewModel.ViewAttached += (sender, e) =>
@@ -113,7 +125,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
                         var trayIcon = popup?.Child as ITrayIcon ?? contentControl?.Content as ITrayIcon ?? e.View as ITrayIcon;
                         _trayIcons.Add(new WeakReference<ITrayIconViewModel>(trayIconViewModel), new WeakReference<ITrayIcon>(trayIcon));
                     };
-                    WindowsManager.ShowPopup(trayIconViewModel);
+                    _windowsManager.ShowPopup(trayIconViewModel);
                 }
             });
         }

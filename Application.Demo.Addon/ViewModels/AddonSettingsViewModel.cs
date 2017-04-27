@@ -34,40 +34,46 @@ using Dapplo.CaliburnMicro.Security;
 namespace Application.Demo.Addon.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class AddonSettingsViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+    public sealed class AddonSettingsViewModel : ConfigScreen
     {
         public AddonSettingsViewModel()
         {
             ParentId = nameof(ConfigIds.Addons);
         }
 
-        [Import]
-        public IAddonTranslations AddonTranslations { get; set; }
+        public IAddonTranslations AddonTranslations { get; }
 
+        private IAuthenticationProvider AuthenticationProvider { get; }
 
-        [Import]
-        private IAuthenticationProvider AuthenticationProvider { get; set; }
+        private IEventAggregator EventAggregator { get; }
 
-        [Import]
-        private IEventAggregator EventAggregator { get; set; }
-
-        public void OnImportsSatisfied()
+        [ImportingConstructor]
+        public AddonSettingsViewModel(
+            IAddonTranslations addonTranslations,
+            IAuthenticationProvider authenticationProvider,
+            IEventAggregator eventAggregator)
         {
+            AddonTranslations = addonTranslations;
+            EventAggregator = eventAggregator;
+            AuthenticationProvider = authenticationProvider;
             // automatically update the DisplayName
             AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Addon));
         }
 
+        // ReSharper disable once UnusedMember.Global
         public void AddAdmin()
         {
             var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;
             authenticationProvider?.AddPermission("Admin");
         }
 
+        // ReSharper disable once UnusedMember.Global
         public void DoSomething()
         {
             EventAggregator.PublishOnUIThread("Addon button clicked");
         }
 
+        // ReSharper disable once UnusedMember.Global
         public void RemoveAdmin()
         {
             var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;

@@ -47,7 +47,7 @@ namespace Dapplo.CaliburnMicro.Metro
     ///     <a href="https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/">here</a>
     /// </summary>
     [Export(typeof(IWindowManager))]
-    public sealed class MetroWindowManager : DapploWindowManager, IPartImportsSatisfiedNotification
+    public sealed class MetroWindowManager : DapploWindowManager
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -73,9 +73,9 @@ namespace Dapplo.CaliburnMicro.Metro
         public ThemeAccents ThemeAccent { get; private set; }
 
         /// <summary>
-        ///     Called when a part's imports have been satisfied and it is safe to use.
+        /// Default constructor taking care of initialization
         /// </summary>
-        public void OnImportsSatisfied()
+        public MetroWindowManager()
         {
             foreach (var style in Styles)
             {

@@ -28,7 +28,6 @@ using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log;
 
@@ -78,13 +77,10 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
         /// <summary>
         ///     Set the Icon to the underlying TrayIcon.Icon
         /// </summary>
-        public FrameworkElement Icon
+        public void SetIcon(FrameworkElement value)
         {
-            set
-            {
-                var taskbarIcon = TrayIcon as FrameworkElement;
-                taskbarIcon?.SetCurrentValue(FrameworkElementIcon.ValueProperty, value);
-            }
+            var taskbarIcon = TrayIcon as FrameworkElement;
+            taskbarIcon?.SetCurrentValue(FrameworkElementIcon.ValueProperty, value);
         }
 
         /// <summary>

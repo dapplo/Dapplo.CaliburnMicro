@@ -78,27 +78,28 @@ namespace Dapplo.CaliburnMicro.Menu
                 }
             }
 
-            if (predicate != null)
+            if (predicate == null)
             {
-                // Filter out the ones which don't match the predicate
-                foreach (var treeNodeItem in treeNodes)
+                return rootItems;
+            }
+            // Filter out the ones which don't match the predicate
+            foreach (var treeNodeItem in treeNodes)
+            {
+                if (treeNodeItem.ChildNodes.Any())
                 {
-                    if (treeNodeItem.ChildNodes.Any())
-                    {
-                        continue;
-                    }
-                    if (predicate(treeNodeItem))
-                    {
-                        continue;
-                    }
-                    // should not be shown, removed it from it's parent or the root
-                    treeNodeItem.ParentNode?.ChildNodes.Remove(treeNodeItem);
-                    if (treeNodeItem.ParentNode?.ChildNodes != null && !treeNodeItem.ParentNode.ChildNodes.Any())
-                    {
-                        rootItems.Remove(treeNodeItem.ParentNode);
-                    }
-                    rootItems.Remove(treeNodeItem);
+                    continue;
                 }
+                if (predicate(treeNodeItem))
+                {
+                    continue;
+                }
+                // should not be shown, removed it from it's parent or the root
+                treeNodeItem.ParentNode?.ChildNodes.Remove(treeNodeItem);
+                if (treeNodeItem.ParentNode?.ChildNodes != null && !treeNodeItem.ParentNode.ChildNodes.Any())
+                {
+                    rootItems.Remove(treeNodeItem.ParentNode);
+                }
+                rootItems.Remove(treeNodeItem);
             }
             return rootItems;
         }

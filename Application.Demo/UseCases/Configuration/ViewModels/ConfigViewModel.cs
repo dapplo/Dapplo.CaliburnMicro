@@ -44,62 +44,63 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     ///     It is a conductor where one item is active.
     /// </summary>
     [Export]
-    public class ConfigViewModel : Config<IConfigScreen>, IPartImportsSatisfiedNotification
+    public sealed class ConfigViewModel : Config<IConfigScreen>
     {
         private static readonly LogSource Log = new LogSource();
-
-        /// <summary>
-        ///     Get all settings controls, these are the items that are displayed.
-        /// </summary>
-        [ImportMany]
-        public override IEnumerable<Lazy<IConfigScreen>> ConfigScreens { get; set; }
-
-        [Import]
-        public IConfigTranslations ConfigTranslations { get; set; }
-
-        [Import]
-        public ICoreTranslations CoreTranslations { get; set; }
-
-        [Import]
-        private IDemoConfiguration DemoConfiguration { get; set; }
-
-        [Import]
-        private WizardExampleViewModel DemoDialogViewModel { get; set; }
+        private readonly WizardExampleViewModel _demoDialogViewModel;
 
         /// <summary>
         ///     Used to make it possible to show a MahApps dialog
         /// </summary>
-        [Import]
-        private IDialogCoordinator Dialogcoordinator { get; set; }
+        private readonly IDialogCoordinator _dialogcoordinator;
 
         /// <summary>
         ///     Used to show a "normal" dialog
         /// </summary>
-        [Import]
-        private IWindowManager WindowsManager { get; set; }
+        private readonly IWindowManager _windowsManager;
 
         /// <summary>
-        ///     Used to send events
+        /// Is used from View
         /// </summary>
-        [Import]
-        private IEventAggregator EventAggregator { get; set; }
+        public IConfigTranslations ConfigTranslations { get; }
 
-        public void OnImportsSatisfied()
+        /// <summary>
+        /// Is used from View
+        /// </summary>
+        public ICoreTranslations CoreTranslations { get; }
+
+        [ImportingConstructor]
+        public ConfigViewModel(
+            [ImportMany] IEnumerable<Lazy<IConfigScreen>> configScreens,
+            IWindowManager windowsManager,
+            IConfigTranslations configTranslations,
+            ICoreTranslations coreTranslations,
+            IDialogCoordinator dialogcoordinator,
+            IDemoConfiguration demoConfiguration,
+            WizardExampleViewModel demoDialogViewModel)
         {
+            ConfigScreens = configScreens;
+            ConfigTranslations = configTranslations;
+            CoreTranslations = coreTranslations;
+            _windowsManager = windowsManager;
+            _dialogcoordinator = dialogcoordinator;
+            _demoDialogViewModel = demoDialogViewModel;
+
             // automatically update the DisplayName
             CoreTranslations.CreateDisplayNameBinding(this, nameof(ICoreTranslations.Settings));
 
             // Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
-            var lang = DemoConfiguration.Language;
+            var lang = demoConfiguration.Language;
             Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
         }
 
         /// <summary>
         ///     Show the credentials for the login
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public void Login()
         {
-            var result = WindowsManager.ShowDialog(DemoDialogViewModel);
+            var result = _windowsManager.ShowDialog(_demoDialogViewModel);
             Log.Info().WriteLine($"Girl you know it's {result}");
         }
 
@@ -107,9 +108,10 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         ///     Show a MahApps dialog from the MVVM
         /// </summary>
         /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
         public async Task Dialog()
         {
-            await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
+            await _dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
         }
     }
 }

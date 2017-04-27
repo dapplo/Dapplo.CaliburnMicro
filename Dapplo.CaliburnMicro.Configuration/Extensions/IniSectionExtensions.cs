@@ -38,7 +38,6 @@ namespace Dapplo.CaliburnMicro.Configuration.Extensions
         /// <summary>
         ///     Automatically call the update action when the Loaded fires
         ///     If the is called on a DI object, make sure it's available.
-        ///     When using MEF, it would be best to call this from IPartImportsSatisfiedNotification.OnImportsSatisfied
         /// </summary>
         /// <param name="iniSection">IIniSection</param>
         /// <param name="eventAction">Action to call on events, argument is the IniSectionEventArgs</param>
@@ -60,7 +59,6 @@ namespace Dapplo.CaliburnMicro.Configuration.Extensions
         /// <summary>
         ///     Automatically call the update action when the Reset fires
         ///     If the is called on a DI object, make sure it's available.
-        ///     When using MEF, it would be best to call this from IPartImportsSatisfiedNotification.OnImportsSatisfied
         /// </summary>
         /// <param name="iniSection">IIniSection</param>
         /// <param name="eventAction">Action to call on events, argument is the IniSectionEventArgs</param>
@@ -82,7 +80,6 @@ namespace Dapplo.CaliburnMicro.Configuration.Extensions
         /// <summary>
         ///     Automatically call the update action when the Saved fires
         ///     If the is called on a DI object, make sure it's available.
-        ///     When using MEF, it would be best to call this from IPartImportsSatisfiedNotification.OnImportsSatisfied
         /// </summary>
         /// <param name="iniSection">IIniSection</param>
         /// <param name="eventAction">Action to call on events, argument is the IniSectionEventArgs</param>
@@ -104,7 +101,6 @@ namespace Dapplo.CaliburnMicro.Configuration.Extensions
         /// <summary>
         ///     Automatically call the update action when the Saving fires
         ///     If the is called on a DI object, make sure it's available.
-        ///     When using MEF, it would be best to call this from IPartImportsSatisfiedNotification.OnImportsSatisfied
         /// </summary>
         /// <param name="iniSection">IIniSection</param>
         /// <param name="eventAction">Action to call on events, argument is the IniSectionEventArgs</param>

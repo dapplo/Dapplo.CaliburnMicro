@@ -30,14 +30,19 @@ using Dapplo.CaliburnMicro.Extensions;
 
 namespace Application.Demo.UseCases.Configuration.ViewModels
 {
+    /// <summary>
+    /// This represents a node in the config
+    /// </summary>
     [Export(typeof(IConfigScreen))]
-    public sealed class UiConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+    public sealed class UiConfigNodeViewModel : ConfigScreen
     {
-        [Import]
-        public IConfigTranslations ConfigTranslations { get; set; }
+        public IConfigTranslations ConfigTranslations { get; }
 
-        public void OnImportsSatisfied()
+        [ImportingConstructor]
+        public UiConfigNodeViewModel(IConfigTranslations configTranslations)
         {
+            ConfigTranslations = configTranslations;
+
             // automatically update the DisplayName
             ConfigTranslations.CreateDisplayNameBinding(this, nameof(IConfigTranslations.Ui));
 

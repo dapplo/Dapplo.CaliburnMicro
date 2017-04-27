@@ -34,24 +34,21 @@ using Dapplo.CaliburnMicro.Security;
 namespace Application.Demo.Addon.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class AdminConfigViewModel : AuthenticatedConfigScreen<Visibility>, IPartImportsSatisfiedNotification
+    public sealed class AdminConfigViewModel : AuthenticatedConfigScreen<Visibility>
     {
-        public AdminConfigViewModel()
+        public IAddonTranslations AddonTranslations { get; }
+
+        [ImportingConstructor]
+        public AdminConfigViewModel(IAddonTranslations addonTranslations)
         {
+            AddonTranslations = addonTranslations;
+
             ParentId = nameof(ConfigIds.Addons);
             this.VisibleOnPermissions("Admin");
-        }
 
-        [Import]
-        public IAddonTranslations AddonTranslations { get; set; }
-
-        [Import]
-        private IAuthenticationProvider AuthenticationProvider { get; set; }
-
-        public void OnImportsSatisfied()
-        {
             // automatically update the DisplayName
             AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
         }
+
     }
 }

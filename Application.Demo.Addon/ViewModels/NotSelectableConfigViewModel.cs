@@ -32,18 +32,15 @@ using Dapplo.CaliburnMicro.Extensions;
 namespace Application.Demo.Addon.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class NotSelectableConfigViewModel : ConfigScreen, IPartImportsSatisfiedNotification
+    public sealed class NotSelectableConfigViewModel : ConfigScreen
     {
-        public NotSelectableConfigViewModel()
+        public IAddonTranslations AddonTranslations { get; }
+
+        [ImportingConstructor]
+        public NotSelectableConfigViewModel(IAddonTranslations addonTranslations)
         {
+            AddonTranslations = addonTranslations;
             ParentId = nameof(ConfigIds.Addons);
-        }
-
-        [Import]
-        public IAddonTranslations AddonTranslations { get; set; }
-
-        public void OnImportsSatisfied()
-        {
             IsEnabled = false;
             // automatically update the DisplayName
             AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.NotSelectableAddon));

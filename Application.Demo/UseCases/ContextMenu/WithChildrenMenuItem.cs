@@ -36,6 +36,7 @@ namespace Application.Demo.UseCases.ContextMenu
 {
     /// <summary>
     ///     This will add an extry which shows children to the context menu
+    /// This example is verbose, meaning the actualy methods are implemented vs. everything in the constructor
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
     public sealed class WithChildrenMenuItem : MenuItem

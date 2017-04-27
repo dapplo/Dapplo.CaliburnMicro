@@ -42,6 +42,7 @@ namespace Application.Demo.UseCases.Menu
 
         public override void Click(IMenuItem clickedItem)
         {
+            // Method intentionally left empty.
         }
 
         public override void Initialize()

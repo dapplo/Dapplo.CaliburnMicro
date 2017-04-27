@@ -34,15 +34,13 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     ///     This is just a placeholder, doesn't have a view
     /// </summary>
     [Export(typeof(IConfigScreen))]
-    public sealed class AddonConfigNodeViewModel : ConfigScreen, IPartImportsSatisfiedNotification
-    {
-        [Import]
-        public IConfigTranslations ConfigTranslations { get; set; }
-
-        public void OnImportsSatisfied()
+    public sealed class AddonConfigNodeViewModel : ConfigScreen
+    {   
+        [ImportingConstructor]
+        public AddonConfigNodeViewModel(IConfigTranslations configTranslations)
         {
             // automatically update the DisplayName
-            ConfigTranslations.CreateDisplayNameBinding(this, nameof(ConfigTranslations.Addons));
+            configTranslations.CreateDisplayNameBinding(this, nameof(IConfigTranslations.Addons));
             CanActivate = false;
             Id = nameof(ConfigIds.Addons);
         }

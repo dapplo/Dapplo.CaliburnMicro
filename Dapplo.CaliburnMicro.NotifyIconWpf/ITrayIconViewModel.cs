@@ -40,7 +40,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <summary>
         ///     Gives write access to the "underlying" TrayIcon.Icon via a FrameworkElement
         /// </summary>
-        FrameworkElement Icon { set; }
+        void SetIcon(FrameworkElement icon);
 
         /// <summary>
         ///     The ITrayIcon for the ViewModel

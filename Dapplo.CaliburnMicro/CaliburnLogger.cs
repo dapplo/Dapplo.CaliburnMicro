@@ -27,7 +27,7 @@ using Dapplo.Log;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Dapp
+namespace Dapplo.CaliburnMicro
 {
     /// <summary>
     ///     A logger for Caliburn
@@ -55,14 +55,14 @@ namespace Dapplo.CaliburnMicro.Dapp
         }
 
         /// <summary>
-        ///     Log information
+        ///     Log information, this is actually reduced to the Dapplo-Level debug as Caliburn speaks a lot!
         /// </summary>
         /// <param name="format"></param>
         /// <param name="args"></param>
         public void Info(string format, params object[] args)
         {
             // Pre-format the message, otherwise we get problems with dependency objects etc
-            _log.Info().WriteLine(format, args);
+            _log.Debug().WriteLine(format, args);
         }
 
         /// <summary>

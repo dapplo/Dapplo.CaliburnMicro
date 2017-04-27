@@ -38,9 +38,17 @@ namespace Dapplo.CaliburnMicro.Configuration
     [StartupAction(StartupOrder = int.MinValue)]
     public class ConfigurationStartup : IAsyncStartupAction
     {
-        [Import]
-        private IApplicationBootstrapper ApplicationBootstrapper { get; set; }
+        private readonly IApplicationBootstrapper _applicationBootstrapper;
 
+        /// <summary>
+        /// Create the ConfigurationStartup
+        /// </summary>
+        /// <param name="applicationBootstrapper">IApplicationBootstrapper</param>
+        [ImportingConstructor]
+        public ConfigurationStartup(IApplicationBootstrapper applicationBootstrapper)
+        {
+            _applicationBootstrapper = applicationBootstrapper;
+        }
         /// <summary>
         /// async Start of the IniConfig
         /// </summary>
@@ -51,10 +59,10 @@ namespace Dapplo.CaliburnMicro.Configuration
             var iniConfig = IniConfig.Current;
             if (iniConfig == null)
             {
-                iniConfig = new IniConfig(ApplicationBootstrapper.ApplicationName, ApplicationBootstrapper.ApplicationName);
+                iniConfig = new IniConfig(_applicationBootstrapper.ApplicationName, _applicationBootstrapper.ApplicationName);
                 await iniConfig.LoadIfNeededAsync(cancellationToken);
             }
-            ApplicationBootstrapper.Export<IServiceProvider>(iniConfig);
+            _applicationBootstrapper.Export<IServiceProvider>(iniConfig);
         }
     }
 }

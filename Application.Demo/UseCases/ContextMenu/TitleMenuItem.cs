@@ -38,14 +38,12 @@ namespace Application.Demo.UseCases.ContextMenu
     [Export("contextmenu", typeof(IMenuItem))]
     public sealed class TitleMenuItem : MenuItem
     {
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-        public override void Initialize()
+        [ImportingConstructor]
+        public TitleMenuItem(IContextMenuTranslations contextMenuTranslations)
         {
-            Id = "A_Title";
             // automatically update the DisplayName
-            ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
+            Id = "A_Title";
             Style = MenuItemStyles.Title;
 
             Icon = new PackIconMaterial

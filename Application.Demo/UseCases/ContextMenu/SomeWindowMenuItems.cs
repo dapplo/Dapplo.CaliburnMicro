@@ -39,45 +39,32 @@ namespace Application.Demo.UseCases.ContextMenu
     /// <summary>
     ///     This provides the IMenuItem to open the WindowWithMenuViewModel
     /// </summary>
-    public sealed class SomeWindowMenuItems
+    [Export("contextmenu", typeof(IMenuItem))]
+    public sealed class SomeWindowMenuItems : AuthenticatedMenuItem<Visibility>
     {
         private static readonly LogSource Log = new LogSource();
 
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
-
-        /// <summary>
-        ///     This will add an extry for the SomeWindow to the context menu.
-        ///     As it's imported via "Lazy" the item will only be called on the UI thread!
-        /// </summary>
-        [Export("contextmenu", typeof(IMenuItem))]
-        public IMenuItem SomeWindowMenuItem
+        [ImportingConstructor]
+        public SomeWindowMenuItems(
+            IWindowManager windowManager,
+            IContextMenuTranslations contextMenuTranslations,
+            WindowWithMenuViewModel windowWithMenuViewModel)
         {
-            get
+            // automatically update the DisplayName
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
+
+            Icon = new PackIconMaterial
             {
-                var menuItem = new AuthenticatedMenuItem<Visibility>
-                {
-                    Icon = new PackIconMaterial
-                    {
-                        Kind = PackIconMaterialKind.ViewList
-                    },
-                    ClickAction = clickedItem =>
-                    {
-                        Log.Debug().WriteLine("SomeWindow");
-                        WindowManager.ShowWindow(WindowWithMenuViewModel);
-                    }
-                };
-                menuItem.VisibleOnPermissions("Admin");
-                // Binding without disposing
-                ContextMenuTranslations.CreateDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.SomeWindow));
-                return menuItem;
-            }
+                Kind = PackIconMaterialKind.ViewList
+            };
+            ClickAction = clickedItem =>
+            {
+                Log.Debug().WriteLine("SomeWindow");
+                windowManager.ShowWindow(windowWithMenuViewModel);
+            };
+
+            this.VisibleOnPermissions("Admin");
+
         }
-
-        [Import]
-        public IWindowManager WindowManager { get; set; }
-
-        [Import]
-        public WindowWithMenuViewModel WindowWithMenuViewModel { get; set; }
     }
 }
