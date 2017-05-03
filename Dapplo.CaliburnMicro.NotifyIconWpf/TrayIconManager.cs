@@ -113,21 +113,26 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <returns>Task</returns>
         public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            await Execute.OnUIThreadAsync(() =>
+            await Execute.OnUIThreadAsync(InitializeTrayIconViewModels);
+        }
+
+        /// <summary>
+        /// Do the initialization
+        /// </summary>
+        private void InitializeTrayIconViewModels()
+        {
+            foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
             {
-                foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
+                // Get the view, to store it as ITrayIcon
+                trayIconViewModel.ViewAttached += (sender, e) =>
                 {
-                    // Get the view, to store it as ITrayIcon
-                    trayIconViewModel.ViewAttached += (sender, e) =>
-                    {
-                        var popup = e.View as Popup;
-                        var contentControl = e.View as ContentControl;
-                        var trayIcon = popup?.Child as ITrayIcon ?? contentControl?.Content as ITrayIcon ?? e.View as ITrayIcon;
-                        _trayIcons.Add(new WeakReference<ITrayIconViewModel>(trayIconViewModel), new WeakReference<ITrayIcon>(trayIcon));
-                    };
-                    _windowsManager.ShowPopup(trayIconViewModel);
-                }
-            });
+                    var popup = e.View as Popup;
+                    var contentControl = e.View as ContentControl;
+                    var trayIcon = popup?.Child as ITrayIcon ?? contentControl?.Content as ITrayIcon ?? e.View as ITrayIcon;
+                    _trayIcons.Add(new WeakReference<ITrayIconViewModel>(trayIconViewModel), new WeakReference<ITrayIcon>(trayIcon));
+                };
+                _windowsManager.ShowPopup(trayIconViewModel);
+            }
         }
 
         /// <summary>

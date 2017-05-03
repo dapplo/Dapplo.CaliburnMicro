@@ -22,6 +22,7 @@
 #region using
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -113,6 +114,10 @@ namespace Dapplo.CaliburnMicro.Dapp
 
             // Prepare the bootstrapper
             await _bootstrapper.InitializeAsync();
+
+            // Export the UI SynchronizationContext, this can be retrieved by specifying:
+            // [Import("ui", typeof(SynchronizationContext))] on a SynchronizationContext property / constructor argument
+            _bootstrapper.Export("ui", SynchronizationContext.Current);
 
             // The following makes sure that Caliburn.Micro is correctly initialized on the right thread and Execute.OnUIThread works
             var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>().Value;

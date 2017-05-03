@@ -40,11 +40,6 @@ namespace Application.Demo.UseCases.Menu
         [Import]
         private IMenuTranslations MenuTranslations { get; set; }
 
-        public override void Click(IMenuItem clickedItem)
-        {
-            // Method intentionally left empty.
-        }
-
         public override void Initialize()
         {
             Id = "A_SaveAs";
