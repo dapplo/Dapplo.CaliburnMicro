@@ -19,35 +19,23 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System;
 
-using System.ComponentModel;
-using Caliburn.Micro;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Menu
+namespace Dapplo.CaliburnMicro.Diagnostics
 {
     /// <summary>
-    ///     This defines an IMenuItem
+    /// This interface is used to display the current version, and check the latest version
     /// </summary>
-    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon, IHaveDisplayName
+    public interface IVersionProvider
     {
         /// <summary>
-        ///     A string which describes which hotkey the menu entry would respond to.
-        ///     This does NOT implement the hotkey binding, it's only a hint
+        /// Returns the current version
         /// </summary>
-        string HotKeyHint { get; set; }
+        Version Current { get; }
 
         /// <summary>
-        ///     Is called when the IMenuItem it clicked
+        /// Return the latest version
         /// </summary>
-        void Click(IMenuItem clickedItem);
-
-        /// <summary>
-        ///     The initialize is called from the UI Thread before the menu-item is added to a context menu.
-        ///     This allows for any initialization, like icons etc, to be made
-        /// </summary>
-        void Initialize();
+        Version Latest { get; }
     }
 }

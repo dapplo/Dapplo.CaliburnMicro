@@ -40,7 +40,7 @@ namespace Dapplo.CaliburnMicro.Menu
     ///     Additionally some Dapplo.CaliburnMicro Interfaces are used:
     ///     IAmDisplayable: Covers the visiblity and enabled (extends IHaveDisplayName)
     /// </summary>
-    public interface ITreeScreen : IScreen, IAmDisplayable
+    public interface ITreeScreen : IScreen, IAmDisplayable, IHaveDisplayName
     {
         /// <summary>
         ///     Returns if the ITreeScreen can be activated (when clicking on it)

@@ -176,7 +176,7 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <returns></returns>
         protected override Window CreateCustomWindow(object model, object view, bool isDialog)
         {
-            var result = view as MetroWindow ?? new MetroWindow
+            var result = view as MetroWindow ?? view as Window ?? new MetroWindow
             {
                 Content = view,
                 SizeToContent = SizeToContent.WidthAndHeight

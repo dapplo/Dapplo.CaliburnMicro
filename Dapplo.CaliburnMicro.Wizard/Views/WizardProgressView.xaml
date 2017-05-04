@@ -9,156 +9,156 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:WizardProgressViewModel,IsDesignTimeCreatable=True}"
              d:DesignHeight="200" d:DesignWidth="500">
-	<UserControl.Resources>
-		<LinearGradientBrush x:Key="WizardBarBrush" StartPoint="0.5,0.0" EndPoint="0.5,1.0">
-			<GradientStop Color="#FFE4E4E4" Offset="0.25" />
-			<GradientStop Color="#FFededed" Offset="0.50" />
-			<GradientStop Color="#FFFCFCFC" Offset="0.75" />
-		</LinearGradientBrush>
-		<converters:IsProgressedConverter x:Key="IsProgressedConverter" />
-		<converters:IsLastItemConverter x:Key="IsLastItemConverter" />
-	</UserControl.Resources>
-	<ItemsControl x:Name="WizardScreensView" ItemsSource="{Binding WizardScreensView}">
-		<ItemsControl.Template>
-			<ControlTemplate TargetType="{x:Type ItemsControl}">
-				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-				        Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-						<ItemsControl ItemsSource="{TemplateBinding ItemsSource}"
-						              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<UniformGrid Rows="1">
-										<UniformGrid.Effect>
-											<DropShadowEffect Color="Black" BlurRadius="3" Opacity="0.6" ShadowDepth="0" />
-										</UniformGrid.Effect>
-									</UniformGrid>
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<DataTemplate.Resources>
-										<!-- The style for the connections between the dots -->
-										<Style TargetType="Path" x:Key="OuterPath">
-											<Setter Property="Data" Value="M0.0,0.0 L0.0,0.33 L1.0,0.33 L1.0,0.66 L0.0,0.66 L0.0,1.0" />
-											<Setter Property="StrokeThickness" Value="0" />
-											<Setter Property="Height" Value="21" />
-											<Setter Property="Stretch" Value="Fill" />
-											<Setter Property="Fill" Value="{StaticResource WizardBarBrush}" />
-											<Setter Property="StrokeEndLineCap" Value="Square" />
-											<Setter Property="StrokeStartLineCap" Value="Square" />
-											<Setter Property="Stroke" Value="Transparent" />
-										</Style>
-										<!-- The style for the path upto where the wizard is -->
-										<Style TargetType="Path" x:Key="InnerPath" BasedOn="{StaticResource OuterPath}">
-											<Setter Property="Data" Value="M0.0,0.0 L0.0,0.45 L1.0,0.45 L1.0,0.55 L0.0,0.55 L0.0,1.0" />
-											<Setter Property="Fill"
-											        Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.ProgressColorBrush}" />
-										</Style>
-									</DataTemplate.Resources>
-									<Grid SnapsToDevicePixels="True">
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="Auto" />
-										</Grid.RowDefinitions>
-										<Grid>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition />
-												<ColumnDefinition />
-											</Grid.ColumnDefinitions>
-											<!-- The path part which is left from the dots -->
-											<Path Grid.Column="0" Name="leftPath" Style="{StaticResource OuterPath}" />
-											<!-- The path part which is right from the dots -->
-											<Path Grid.Column="1" Name="rightPath" Style="{StaticResource OuterPath}" />
-											<!-- Outside of the dots -->
-											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="20"
-											         Width="20" Fill="{StaticResource WizardBarBrush}"
-											         cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]" />
-											<!-- Inside of the dots -->
-											<Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14"
-											         Width="14"
-											         Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ProgressColorBrush}"
-											         cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
-												<Ellipse.Visibility>
-													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
-														<Binding RelativeSource="{RelativeSource TemplatedParent}" />
-														<Binding Path="ParentWizard.Progress" />
-													</MultiBinding>
-												</Ellipse.Visibility>
-											</Ellipse>
-											<!-- Path for the  for the connections between the dots, bases on the OuterPath style -->
-											<Path Name="leftFillPath" Grid.Column="0" Style="{StaticResource InnerPath}">
-												<Path.Visibility>
-													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
-														<Binding RelativeSource="{RelativeSource TemplatedParent}" />
-														<Binding Path="ParentWizard.Progress" />
-													</MultiBinding>
-												</Path.Visibility>
-											</Path>
-											<!-- Path upto where the wizard is, bases on the InnerPath style -->
-											<Path Name="rightFillPath" Grid.Column="1" Style="{StaticResource InnerPath}">
-												<Path.Visibility>
-													<MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="True">
-														<Binding RelativeSource="{RelativeSource TemplatedParent}" />
-														<Binding Path="ParentWizard.Progress" />
-													</MultiBinding>
-												</Path.Visibility>
-											</Path>
-										</Grid>
-									</Grid>
-									<DataTemplate.Triggers>
-										<!-- A data trigger which make sure that when there was no previous data, the left side is collapsed -->
-										<DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-											<Setter TargetName="leftPath" Property="Visibility" Value="Collapsed" />
-											<Setter TargetName="leftFillPath" Property="Visibility" Value="Collapsed" />
-										</DataTrigger>
-										<!-- A data trigger which make sure that when the current item is the last, the right side is collapsed -->
-										<DataTrigger
-											Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource IsLastItemConverter}}"
-											Value="True">
-											<Setter TargetName="rightPath" Property="Visibility" Value="Collapsed" />
-											<Setter TargetName="rightFillPath" Property="Visibility" Value="Collapsed" />
-										</DataTrigger>
-									</DataTemplate.Triggers>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-						<ItemsControl Grid.Row="1" ItemsSource="{TemplateBinding ItemsSource}"
-						              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<UniformGrid Rows="1" />
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" Margin="0,5,0,0"
-									           cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
-										<TextBlock.Style>
-											<Style TargetType="TextBlock">
-												<Style.Triggers>
-													<DataTrigger Binding="{Binding IsActive}" Value="True">
-														<Setter Property="FontWeight" Value="Bold" />
-													</DataTrigger>
-													<DataTrigger Binding="{Binding IsEnabled}" Value="False">
-														<Setter Property="Foreground"
-														        Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DisabledColorBrush}" />
-														<Setter Property="FontStyle" Value="Italic" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</TextBlock.Style>
-									</TextBlock>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</Grid>
-				</Border>
-			</ControlTemplate>
-		</ItemsControl.Template>
-	</ItemsControl>
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="WizardBarBrush" StartPoint="0.5,0.0" EndPoint="0.5,1.0">
+            <GradientStop Color="#FFE4E4E4" Offset="0.25" />
+            <GradientStop Color="#FFededed" Offset="0.50" />
+            <GradientStop Color="#FFFCFCFC" Offset="0.75" />
+        </LinearGradientBrush>
+        <converters:IsProgressedConverter x:Key="IsProgressedConverter" />
+        <converters:IsLastItemConverter x:Key="IsLastItemConverter" />
+    </UserControl.Resources>
+    <ItemsControl x:Name="WizardScreensView" ItemsSource="{Binding WizardScreensView}">
+        <ItemsControl.Template>
+            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ItemsControl ItemsSource="{TemplateBinding ItemsSource}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1">
+                                        <UniformGrid.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="3" Opacity="0.6" ShadowDepth="0" />
+                                        </UniformGrid.Effect>
+                                    </UniformGrid>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DataTemplate.Resources>
+                                        <!-- The style for the connections between the dots -->
+                                        <Style TargetType="Path" x:Key="OuterPath">
+                                            <Setter Property="Data" Value="M0.0,0.0 L0.0,0.33 L1.0,0.33 L1.0,0.66 L0.0,0.66 L0.0,1.0" />
+                                            <Setter Property="StrokeThickness" Value="0" />
+                                            <Setter Property="Height" Value="21" />
+                                            <Setter Property="Stretch" Value="Fill" />
+                                            <Setter Property="Fill" Value="{StaticResource WizardBarBrush}" />
+                                            <Setter Property="StrokeEndLineCap" Value="Square" />
+                                            <Setter Property="StrokeStartLineCap" Value="Square" />
+                                            <Setter Property="Stroke" Value="Transparent" />
+                                        </Style>
+                                        <!-- The style for the path upto where the wizard is -->
+                                        <Style TargetType="Path" x:Key="InnerPath" BasedOn="{StaticResource OuterPath}">
+                                            <Setter Property="Data" Value="M0.0,0.0 L0.0,0.45 L1.0,0.45 L1.0,0.55 L0.0,0.55 L0.0,1.0" />
+                                            <Setter Property="Fill"
+                                                    Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.ProgressColorBrush}" />
+                                        </Style>
+                                    </DataTemplate.Resources>
+                                    <Grid SnapsToDevicePixels="True">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <!-- The path part which is left from the dots -->
+                                            <Path Grid.Column="0" Name="leftPath" Style="{StaticResource OuterPath}" />
+                                            <!-- The path part which is right from the dots -->
+                                            <Path Grid.Column="1" Name="rightPath" Style="{StaticResource OuterPath}" />
+                                            <!-- Outside of the dots -->
+                                            <Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="20"
+                                                     Width="20" Fill="{StaticResource WizardBarBrush}"
+                                                     cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]" />
+                                            <!-- Inside of the dots -->
+                                            <Ellipse Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center" Stroke="Transparent" Height="14"
+                                                     Width="14"
+                                                     Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ProgressColorBrush}"
+                                                     cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
+                                                <Ellipse.Visibility>
+                                                    <MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" />
+                                                        <Binding Path="ParentWizard.Progress" />
+                                                    </MultiBinding>
+                                                </Ellipse.Visibility>
+                                            </Ellipse>
+                                            <!-- Path for the  for the connections between the dots, bases on the OuterPath style -->
+                                            <Path Name="leftFillPath" Grid.Column="0" Style="{StaticResource InnerPath}">
+                                                <Path.Visibility>
+                                                    <MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="False">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" />
+                                                        <Binding Path="ParentWizard.Progress" />
+                                                    </MultiBinding>
+                                                </Path.Visibility>
+                                            </Path>
+                                            <!-- Path upto where the wizard is, bases on the InnerPath style -->
+                                            <Path Name="rightFillPath" Grid.Column="1" Style="{StaticResource InnerPath}">
+                                                <Path.Visibility>
+                                                    <MultiBinding Converter="{StaticResource IsProgressedConverter}" ConverterParameter="True">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" />
+                                                        <Binding Path="ParentWizard.Progress" />
+                                                    </MultiBinding>
+                                                </Path.Visibility>
+                                            </Path>
+                                        </Grid>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <!-- A data trigger which make sure that when there was no previous data, the left side is collapsed -->
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                            <Setter TargetName="leftPath" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="leftFillPath" Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <!-- A data trigger which make sure that when the current item is the last, the right side is collapsed -->
+                                        <DataTrigger
+                                            Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource IsLastItemConverter}}"
+                                            Value="True">
+                                            <Setter TargetName="rightPath" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="rightFillPath" Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Row="1" ItemsSource="{TemplateBinding ItemsSource}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" Margin="0,5,0,0"
+                                               cal:Message.Attach="[Event MouseUp] = [Action JumpTo($originalDataContext)]">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                                        <Setter Property="FontWeight" Value="Bold" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                        <Setter Property="Foreground"
+                                                                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DisabledColorBrush}" />
+                                                        <Setter Property="FontStyle" Value="Italic" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </ItemsControl.Template>
+    </ItemsControl>
 </UserControl>

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}</ProjectGuid>
+    <ProjectGuid>{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dapplo.CaliburnMicro</RootNamespace>
-    <AssemblyName>Dapplo.CaliburnMicro</AssemblyName>
+    <RootNamespace>Dapplo.CaliburnMicro.Overlays</RootNamespace>
+    <AssemblyName>Dapplo.CaliburnMicro.Overlays</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,8 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DocumentationFile>bin\Debug\Dapplo.CaliburnMicro.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,8 +28,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.XML</DocumentationFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro, Version=3.0.3.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
@@ -47,10 +42,6 @@
       <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.4.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.4.7\lib\net45\Dapplo.Addons.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.0.29\lib\net45\Dapplo.Log.dll</HintPath>
       <Private>True</Private>
@@ -63,9 +54,6 @@
     </Reference>
     <Reference Include="Dapplo.Windows.DesktopWindowsManager, Version=0.4.17.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Windows.DesktopWindowsManager.0.4.17\lib\net45\Dapplo.Windows.DesktopWindowsManager.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.Windows.Dpi, Version=0.4.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Dpi.0.4.17\lib\net45\Dapplo.Windows.Dpi.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Windows.Gdi, Version=0.4.17.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Windows.Gdi.0.4.17\lib\net45\Dapplo.Windows.Gdi.dll</HintPath>
@@ -84,8 +72,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
@@ -103,36 +89,35 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\AttachedBehavior.cs" />
-    <Compile Include="Behaviors\Behavior.cs" />
-    <Compile Include="Behaviors\BooleanVisibility.cs" />
-    <Compile Include="CaliburnLogger.cs" />
-    <Compile Include="DapploWindowManager.cs" />
-    <Compile Include="Extensions\DisplayNameBinding.cs" />
-    <Compile Include="Behaviors\ValueChecker.cs" />
-    <Compile Include="Behaviors\EnumVisibility.cs" />
-    <Compile Include="Behaviors\IBehavior.cs" />
-    <Compile Include="Behaviors\FrameworkElementIcon.cs" />
-    <Compile Include="Behaviors\NullVisibility.cs" />
-    <Compile Include="CaliburnStartOrder.cs" />
-    <Compile Include="Extensions\PropertyChangeExtensions.cs" />
-    <Compile Include="Extensions\TaskExtensions.cs" />
-    <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
-    <Compile Include="Extensions\HaveIconExtensions.cs" />
-    <Compile Include="Extensions\IconExtensions.cs" />
-    <Compile Include="IAmDisplayable.cs" />
-    <Compile Include="IHaveId.cs" />
-    <Compile Include="IHaveIcon.cs" />
-    <Compile Include="IShell.cs" />
+    <Compile Include="IOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\OverlayViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
+      <Project>{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}</Project>
+      <Name>Dapplo.CaliburnMicro</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Page Include="Views\OverlayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

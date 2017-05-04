@@ -9,47 +9,47 @@
              xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-	<UserControl.Resources>
-		<converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-		<ControlTemplate x:Key="MenuSeparatorTemplate">
-			<Separator />
-		</ControlTemplate>
-	</UserControl.Resources>
-	<DockPanel>
-		<Menu ItemsSource="{Binding Items}">
-			<Menu.Resources>
-				<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
-					<Setter Property="Tag" Value="{Binding}" />
-					<Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-					<Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
-					<Setter Property="Icon" Value="{Binding Icon}" />
-					<Setter Property="Header" Value="{Binding DisplayName}" />
-					<Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
-					<Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
-					<Setter Property="cal:Action.TargetWithoutContext"
-					        Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
-					<Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
-					<Style.Triggers>
-						<DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
-							<Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
-						             Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
-							<Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permission}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing"
-							        Value="{Binding WhenPermissionMissing}" />
-						</DataTrigger>
-						<DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
-						             Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
-							<Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permission}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
-							<Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
-						</DataTrigger>
-					</Style.Triggers>
-				</Style>
-			</Menu.Resources>
-		</Menu>
-	</DockPanel>
+    <UserControl.Resources>
+        <converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        <ControlTemplate x:Key="MenuSeparatorTemplate">
+            <Separator />
+        </ControlTemplate>
+    </UserControl.Resources>
+    <DockPanel>
+        <Menu ItemsSource="{Binding Items}">
+            <Menu.Resources>
+                <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Tag" Value="{Binding}" />
+                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                    <Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
+                    <Setter Property="Icon" Value="{Binding Icon}" />
+                    <Setter Property="Header" Value="{Binding DisplayName}" />
+                    <Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
+                    <Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
+                    <Setter Property="cal:Action.TargetWithoutContext"
+                            Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                    <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
+                            <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
+                                     Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+                            <Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permission}" />
+                            <Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
+                            <Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing"
+                                    Value="{Binding WhenPermissionMissing}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
+                                     Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+                            <Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permission}" />
+                            <Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
+                            <Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Menu.Resources>
+        </Menu>
+    </DockPanel>
 </UserControl>

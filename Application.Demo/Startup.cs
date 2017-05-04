@@ -55,9 +55,11 @@ namespace Application.Demo
 #if DEBUG
             application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
             application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
 #else
             application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
             application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
 #endif
 
             // Load the Dapplo.CaliburnMicro.* assemblies

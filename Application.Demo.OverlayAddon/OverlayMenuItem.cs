@@ -21,33 +21,36 @@
 
 #region using
 
-using System.ComponentModel;
+using Dapplo.CaliburnMicro.Menu;
+using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Menu
+namespace Application.Demo.OverlayAddon
 {
     /// <summary>
-    ///     This defines an IMenuItem
+    ///     This will add an extry for the exit to the context menu
     /// </summary>
-    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon, IHaveDisplayName
+    [Export("contextmenu", typeof(IMenuItem))]
+    public sealed class OverlayMenuItem : MenuItem
     {
-        /// <summary>
-        ///     A string which describes which hotkey the menu entry would respond to.
-        ///     This does NOT implement the hotkey binding, it's only a hint
-        /// </summary>
-        string HotKeyHint { get; set; }
+        [Import]
+        private DemoOverlayViewModel OverlayViewModel { get; set; }
 
-        /// <summary>
-        ///     Is called when the IMenuItem it clicked
-        /// </summary>
-        void Click(IMenuItem clickedItem);
+        [Import]
+        private IWindowManager WindowManager { get; set; }
 
-        /// <summary>
-        ///     The initialize is called from the UI Thread before the menu-item is added to a context menu.
-        ///     This allows for any initialization, like icons etc, to be made
-        /// </summary>
-        void Initialize();
+        public override void Click(IMenuItem clickedItem)
+        {
+            WindowManager.ShowWindow(OverlayViewModel);
+        }
+
+        public override void Initialize()
+        {
+            Id = "Y_Overlay";
+            // automatically update the DisplayName
+            DisplayName = "Overlay";
+        }
     }
 }

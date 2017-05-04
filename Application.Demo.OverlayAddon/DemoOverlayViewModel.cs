@@ -19,35 +19,32 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using Dapplo.CaliburnMicro.Overlays;
+using Dapplo.CaliburnMicro.Overlays.ViewModels;
 
-using System.ComponentModel;
-using Caliburn.Micro;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Menu
+namespace Application.Demo.OverlayAddon
 {
     /// <summary>
-    ///     This defines an IMenuItem
+    /// This is the view model which will display all IOverlay items.
+    /// If you want, you can have the overlay extend IActivate to get called when it's activated.
     /// </summary>
-    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon, IHaveDisplayName
+    [Export]
+    public sealed class DemoOverlayViewModel : OverlayViewModel
     {
-        /// <summary>
-        ///     A string which describes which hotkey the menu entry would respond to.
-        ///     This does NOT implement the hotkey binding, it's only a hint
-        /// </summary>
-        string HotKeyHint { get; set; }
+        [ImportMany("demo", typeof(IOverlay))]
+        private IEnumerable<Lazy<IOverlay>> Overlays { get; set; }
 
         /// <summary>
-        ///     Is called when the IMenuItem it clicked
+        /// Make sure all the items are assigned
         /// </summary>
-        void Click(IMenuItem clickedItem);
-
-        /// <summary>
-        ///     The initialize is called from the UI Thread before the menu-item is added to a context menu.
-        ///     This allows for any initialization, like icons etc, to be made
-        /// </summary>
-        void Initialize();
+        protected override void OnActivate()
+        {
+            Items.AddRange(Overlays.Select(lazy => lazy.Value));
+            base.OnActivate();
+        }
     }
 }

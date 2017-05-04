@@ -21,7 +21,7 @@
 
 #region using
 
-using Caliburn.Micro;
+
 
 #endregion
 
@@ -30,7 +30,7 @@ namespace Dapplo.CaliburnMicro
     /// <summary>
     ///     This interface is implemented by elements that can be displayed
     /// </summary>
-    public interface IAmDisplayable : IHaveDisplayName
+    public interface IAmDisplayable
     {
         /// <summary>
         ///     Returns if the element can be selected (visible but not usable)
