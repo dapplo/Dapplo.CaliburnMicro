@@ -25,7 +25,7 @@ using System;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.Windows.Dpi;
+using Dapplo.Windows.Dpi.Wpf;
 
 #endregion
 
