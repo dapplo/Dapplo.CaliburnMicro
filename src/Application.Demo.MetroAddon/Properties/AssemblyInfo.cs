@@ -22,6 +22,7 @@
 #region using
 
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 #endregion
 
@@ -37,6 +38,8 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © Dapplo 2016-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+[assembly: ComVisible(false)]
 
 // Version information for an assembly consists of the following four values:
 //

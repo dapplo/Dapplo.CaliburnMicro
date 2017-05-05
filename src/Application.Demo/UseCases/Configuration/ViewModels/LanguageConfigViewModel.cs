@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
 using Application.Demo.Languages;
 using Application.Demo.Models;
@@ -37,14 +38,14 @@ using Dapplo.Language;
 namespace Application.Demo.UseCases.Configuration.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class LanguageConfigViewModel : ConfigScreen
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
+    public sealed class LanguageConfigViewModel : ConfigScreen, IDisposable
     {
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
         /// </summary>
         private CompositeDisposable _disposables;
         private readonly IEventAggregator _eventAggregator;
-
 
         /// <summary>
         /// Used from the View
@@ -108,6 +109,11 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         {
             _disposables.Dispose();
             base.OnDeactivate(close);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
         }
     }
 }

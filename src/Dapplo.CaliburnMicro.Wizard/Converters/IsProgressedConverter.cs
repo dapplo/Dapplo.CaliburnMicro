@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Wizard.Converters
     /// <summary>
     ///     This converter is specially written for the WizardProgress
     /// </summary>
-    public class IsProgressedConverter : IMultiValueConverter
+    public sealed class IsProgressedConverter : IMultiValueConverter
     {
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

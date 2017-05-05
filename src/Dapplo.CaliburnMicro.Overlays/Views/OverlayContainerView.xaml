@@ -1,14 +1,14 @@
-﻿<Window x:Class="Dapplo.CaliburnMicro.Overlays.Views.OverlayView"
+﻿<Window x:Class="Dapplo.CaliburnMicro.Overlays.Views.OverlayContainerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:cal="http://www.caliburnproject.org"
         xmlns:viewModels="clr-namespace:Dapplo.CaliburnMicro.Overlays.ViewModels"
+        xmlns:cal="http://www.caliburnproject.org"
         Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize" Topmost="True" WindowStyle="None"
 		BorderThickness="0"
         mc:Ignorable="d" IsEnabled="{Binding IsEnabled}"
-        d:DataContext="{d:DesignInstance viewModels:OverlayViewModel,IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance viewModels:OverlayContainerViewModel,IsDesignTimeCreatable=True}"
         Left="{Binding Left}" Top="{Binding Top}" Width="{Binding Width}" Height="{Binding Height}"
 		ShowInTaskbar="False"
         d:DesignHeight="500" d:DesignWidth="500">
@@ -25,9 +25,9 @@
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemContainerStyle>
-            <Style>
-                <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+            <Style TargetType="ContentPresenter">
+                <Setter Property="Canvas.Left" Value="{Binding Path=Left}" />
+                <Setter Property="Canvas.Top" Value="{Binding Path=Top}" />
             </Style>
         </ItemsControl.ItemContainerStyle>
         <ItemsControl.ItemTemplate>

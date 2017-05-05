@@ -22,6 +22,7 @@
 #region using
 
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 #endregion
 
@@ -38,6 +39,7 @@ using System.Reflection;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
+[assembly: ComVisible(false)]
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version

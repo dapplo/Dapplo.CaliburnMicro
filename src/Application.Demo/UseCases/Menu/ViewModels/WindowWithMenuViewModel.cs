@@ -38,7 +38,7 @@ using Dapplo.CaliburnMicro.Menu;
 namespace Application.Demo.UseCases.Menu.ViewModels
 {
     [Export]
-    public class WindowWithMenuViewModel : Screen
+    public sealed class WindowWithMenuViewModel : Screen, IDisposable
     {
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
@@ -134,6 +134,11 @@ namespace Application.Demo.UseCases.Menu.ViewModels
         {
             _disposables.Dispose();
             base.OnDeactivate(close);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
         }
     }
 }

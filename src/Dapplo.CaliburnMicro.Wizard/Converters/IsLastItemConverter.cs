@@ -33,7 +33,7 @@ namespace Dapplo.CaliburnMicro.Wizard.Converters
     /// <summary>
     ///     This converter is specially written for the WizardProgress
     /// </summary>
-    public class IsLastItemConverter : IValueConverter
+    public sealed class IsLastItemConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

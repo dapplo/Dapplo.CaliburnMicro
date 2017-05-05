@@ -176,13 +176,18 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <returns></returns>
         protected override Window CreateCustomWindow(object model, object view, bool isDialog)
         {
-            var result = view as MetroWindow ?? view as Window ?? new MetroWindow
+            bool isMetroWindow = view is MetroWindow;
+            bool isWindow = view is Window;
+            var result = view as Window ?? new MetroWindow
             {
                 Content = view,
                 SizeToContent = SizeToContent.WidthAndHeight
             };
-            result.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
-            result.SetValue(Control.BorderThicknessProperty, new Thickness(1));
+            if (isMetroWindow || !isWindow)
+            {
+                result.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
+                result.SetValue(Control.BorderThicknessProperty, new Thickness(1));
+            }
             // Allow dialogs
             if (isDialog)
             {

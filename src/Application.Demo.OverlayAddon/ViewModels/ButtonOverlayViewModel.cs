@@ -19,32 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 
-namespace Application.Demo.OverlayAddon
+namespace Application.Demo.OverlayAddon.ViewModels
 {
-    /// <summary>
-    /// This is the view model which will display all IOverlay items.
-    /// If you want, you can have the overlay extend IActivate to get called when it's activated.
-    /// </summary>
-    [Export]
-    public sealed class DemoOverlayViewModel : OverlayViewModel
+    [Export("demo", typeof(IOverlay))]
+    public sealed class ButtonOverlayViewModel : OverlayViewModel
     {
-        [ImportMany("demo", typeof(IOverlay))]
-        private IEnumerable<Lazy<IOverlay>> Overlays { get; set; }
-
-        /// <summary>
-        /// Make sure all the items are assigned
-        /// </summary>
-        protected override void OnActivate()
+        public ButtonOverlayViewModel()
         {
-            Items.AddRange(Overlays.Select(lazy => lazy.Value));
-            base.OnActivate();
+            Left = 400;
+            Top = 300;
         }
     }
 }

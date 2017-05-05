@@ -19,21 +19,34 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Dapplo.CaliburnMicro.Overlays
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Dapplo.CaliburnMicro.Overlays;
+using Dapplo.CaliburnMicro.Overlays.ViewModels;
+
+namespace Application.Demo.OverlayAddon
 {
     /// <summary>
-    /// Things marked with this interface overlay the screen
+    /// This is the view model which will display all IOverlay items.
+    /// If you want, you can have the overlay extend IActivate to get called when it's activated.
     /// </summary>
-    public interface IOverlay : IAmDisplayable
+    [Export]
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
+    public sealed class DemoOverlayContainerViewModel : OverlayContainerViewModel
     {
-        /// <summary>
-        /// X Location
-        /// </summary>
-        double Left { get; }
+        [ImportMany("demo", typeof(IOverlay))]
+        private IEnumerable<Lazy<IOverlay>> Overlays { get; set; }
 
         /// <summary>
-        /// Y Location
+        /// Make sure all the items are assigned
         /// </summary>
-        double Top { get; }
+        protected override void OnActivate()
+        {
+            Items.AddRange(Overlays.Select(lazy => lazy.Value));
+            base.OnActivate();
+        }
     }
 }

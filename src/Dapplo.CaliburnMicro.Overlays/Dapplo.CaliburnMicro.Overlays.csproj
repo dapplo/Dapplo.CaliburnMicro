@@ -101,6 +101,7 @@
     <Compile Include="IOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
+    <Compile Include="ViewModels\OverlayContainerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
@@ -113,7 +114,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\OverlayView.xaml">
+    <Page Include="Views\OverlayContainerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

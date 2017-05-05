@@ -24,6 +24,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
@@ -42,7 +43,8 @@ using MahApps.Metro.Controls.Dialogs;
 namespace Application.Demo.MetroAddon.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class ThemeConfigViewModel : ConfigScreen
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
+    public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -149,6 +151,11 @@ namespace Application.Demo.MetroAddon.ViewModels
         {
             _disposables.Dispose();
             base.OnDeactivate(close);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
         }
     }
 }

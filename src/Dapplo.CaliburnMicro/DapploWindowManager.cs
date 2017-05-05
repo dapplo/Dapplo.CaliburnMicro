@@ -22,7 +22,10 @@
 #region using
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.Windows.Dpi.Wpf;
@@ -39,7 +42,7 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         ///     Implement this to make specific configuration changes to your owned (dialog) window.
         /// </summary>
-        public Action<Window> OnConfigureOwnedWindow { get; set; }
+        public Action<Window> OnConfigureDialog { get; set; }
 
         /// <summary>
         ///     Implement this to make specific configuration changes to your window.
@@ -63,6 +66,26 @@ namespace Dapplo.CaliburnMicro
             return result;
         }
 
+        public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
+        {
+            return base.CreatePage(rootModel, context, settings);
+        }
+
+        protected override Popup CreatePopup(object rootModel, IDictionary<string, object> settings)
+        {
+            return base.CreatePopup(rootModel, settings);
+        }
+
+        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
+        {
+            return base.CreateWindow(rootModel, isDialog, context, settings);
+        }
+
+        protected override Page EnsurePage(object model, object view)
+        {
+            return base.EnsurePage(model, view);
+        }
+
         /// <inheritdoc />
         protected override Window EnsureWindow(object model, object view, bool isDialog)
         {
@@ -76,12 +99,11 @@ namespace Dapplo.CaliburnMicro
                 // "Dialog", center it on top of the owner
                 window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 window.Owner = inferOwnerOf;
-                OnConfigureOwnedWindow?.Invoke(window);
+                OnConfigureDialog?.Invoke(window);
             }
             else
             {
                 // Free window, without owner
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 OnConfigureWindow?.Invoke(window);
             }
             var haveIcon = model as IHaveIcon;

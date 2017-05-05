@@ -36,21 +36,21 @@ namespace Application.Demo.OverlayAddon
     public sealed class OverlayMenuItem : MenuItem
     {
         [Import]
-        private DemoOverlayViewModel OverlayViewModel { get; set; }
+        private DemoOverlayContainerViewModel OverlayContainerViewModel { get; set; }
 
         [Import]
         private IWindowManager WindowManager { get; set; }
 
         public override void Click(IMenuItem clickedItem)
         {
-            WindowManager.ShowWindow(OverlayViewModel);
+            WindowManager.ShowWindow(OverlayContainerViewModel);
         }
 
         public override void Initialize()
         {
             Id = "Y_Overlay";
             // automatically update the DisplayName
-            DisplayName = "Overlay";
+            DisplayName = "Show Overlay";
         }
     }
 }

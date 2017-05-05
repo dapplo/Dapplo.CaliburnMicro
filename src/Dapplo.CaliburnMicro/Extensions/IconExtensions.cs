@@ -26,11 +26,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Dapplo.Windows.User32;
+using Dapplo.Windows.User32.Enums;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
@@ -41,23 +42,9 @@ namespace Dapplo.CaliburnMicro.Extensions
     /// <summary>
     ///     Extension method to support Icon conversion
     /// </summary>
+    
     public static class IconExtensions
     {
-        /// <summary>
-        ///     The default width of an icon, in pixels. The LoadIcon function can load only icons with the dimensions
-        ///     that SM_CXICON and SM_CYICON specifies.
-        /// </summary>
-        // ReSharper disable once InconsistentNaming
-        private const int SM_CXICON = 11;
-
-        /// <summary>
-        ///     GetSystemMetrics
-        /// </summary>
-        /// <param name="smIndex">SystemMetric:int</param>
-        /// <returns>int with requested value</returns>
-        [DllImport("user32.dll")]
-        private static extern int GetSystemMetrics(int smIndex);
-
         /// <summary>
         ///     Disassociate the child from the parent
         /// </summary>
@@ -163,7 +150,7 @@ namespace Dapplo.CaliburnMicro.Extensions
             {
                 throw new ArgumentNullException(nameof(frameworkElement));
             }
-            int iconSize = size ?? GetSystemMetrics(SM_CXICON);
+            int iconSize = size ?? User32.GetSystemMetrics(SystemMetric.SM_CXICON);
             var stream = new MemoryStream();
             frameworkElement.WriteAsIconToStream(stream, new[] {iconSize});
             // Reset the stream position, otherwise the icon won't be read correctly (pointer is behind the icon)

@@ -19,7 +19,9 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+using System.Diagnostics.CodeAnalysis;
 using Caliburn.Micro;
+using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Overlays.ViewModels
 {
@@ -28,15 +30,27 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
     /// If you want, you can have the overlay extend IActivate to get called when it's activated.
     /// By default the overlay takes the whole screen.
     /// </summary>
-    public class OverlayViewModel : Screen, IOverlay
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
+    public class OverlayContainerViewModel : Conductor<IOverlay>.Collection.AllActive, IAmDisplayable
     {
         private bool _isEnabled = true;
         private bool _isVisible = true;
         private double _left;
         private double _top;
+        private double _width;
+        private double _height;
 
+        protected override void OnActivate()
+        {
+            var bounds = DisplayInfo.GetAllScreenBounds();
+            Left = bounds.Left;
+            Top = bounds.Top;
+            Width = bounds.Width;
+            Height = bounds.Height;
+            base.OnActivate();
+        }
 
-        #region IOverlay
+        #region Location
 
         /// <summary>
         ///     Returns if the Left of the displays
@@ -66,6 +80,40 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
             set
             {
                 _top = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+
+        /// <summary>
+        ///     Returns if the Width of the displays
+        /// </summary>
+        public virtual double Width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+
+        /// <summary>
+        ///     Returns if the Height of the displays
+        /// </summary>
+        public virtual double Height
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = value;
                 NotifyOfPropertyChange();
             }
         }

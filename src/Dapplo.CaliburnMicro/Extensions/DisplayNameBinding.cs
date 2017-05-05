@@ -33,8 +33,9 @@ namespace Dapplo.CaliburnMicro.Extensions
     /// <summary>
     ///     Binding describing all information needed for binding names
     /// </summary>
-    public class DisplayNameBinding : IDisposable
+    public sealed class DisplayNameBinding : IDisposable
     {
+        private readonly CompositeDisposable _disposables;
         /// <summary>
         ///     Create the name binding object
         /// </summary>
@@ -44,14 +45,13 @@ namespace Dapplo.CaliburnMicro.Extensions
         {
             Observable = observable;
             NotifyPropertyChanged = notifyPropertyChanged;
-            Disposables = new CompositeDisposable();
+            _disposables = new CompositeDisposable();
         }
 
         /// <summary>
         ///     All bindings are stored here
         /// </summary>
-        /// tran
-        public CompositeDisposable Disposables { get; }
+        internal CompositeDisposable Disposables => _disposables;
 
         /// <summary>
         ///     The source of the events
@@ -68,7 +68,10 @@ namespace Dapplo.CaliburnMicro.Extensions
         /// </summary>
         public void Dispose()
         {
-            Disposables?.Dispose();
+            if (_disposables != null)
+            {
+                _disposables.Dispose();
+            }
         }
     }
 }
