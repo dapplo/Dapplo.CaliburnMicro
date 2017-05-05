@@ -40,6 +40,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         private double _width;
         private double _height;
 
+        /// <inheritdoc />
         protected override void OnActivate()
         {
             var bounds = DisplayInfo.GetAllScreenBounds();

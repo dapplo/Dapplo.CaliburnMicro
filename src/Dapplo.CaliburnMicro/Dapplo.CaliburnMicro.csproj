@@ -126,6 +126,7 @@
     <Compile Include="IAmDisplayable.cs" />
     <Compile Include="IHaveId.cs" />
     <Compile Include="IHaveIcon.cs" />
+    <Compile Include="IHaveSettings.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

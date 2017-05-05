@@ -49,6 +49,74 @@ namespace Dapplo.CaliburnMicro
         /// </summary>
         public Action<Window> OnConfigureWindow { get; set; }
 
+
+        /// <inheritdoc />
+        public override void ShowPopup(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+            base.ShowPopup(rootModel, context, settings);
+        }
+
+        /// <inheritdoc />
+        public override bool? ShowDialog(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+            return base.ShowDialog(rootModel, context, settings);
+        }
+
+        /// <inheritdoc />
+        public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+            return base.CreatePage(rootModel, context, settings);
+        }
+
+        /// <inheritdoc />
+        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+            return base.CreateWindow(rootModel, isDialog, context, settings);
+        }
+
+        /// <inheritdoc />
+        protected override Popup CreatePopup(object rootModel, IDictionary<string, object> settings)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+            return base.CreatePopup(rootModel, settings);
+        }
+
+        /// <inheritdoc />
+        public override void ShowWindow(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+
+            base.ShowWindow(rootModel, context, settings);
+        }
+
         /// <summary>
         ///     Create the window type for this window manager
         /// </summary>

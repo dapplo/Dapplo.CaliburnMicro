@@ -19,25 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using System.ComponentModel.Composition;
-using System.Windows;
-using Dapplo.CaliburnMicro.Overlays;
-using Dapplo.CaliburnMicro.Overlays.ViewModels;
+using System.Collections.Generic;
 
-namespace Application.Demo.OverlayAddon.ViewModels
+namespace Dapplo.CaliburnMicro
 {
-    [Export("demo", typeof(IOverlay))]
-    public sealed class ButtonOverlayViewModel : OverlayViewModel
+    /// <summary>
+    /// A ViewModel can supply settings for a dialog or window
+    /// </summary>
+    public interface IHaveSettings
     {
-        public ButtonOverlayViewModel()
-        {
-            Left = 400;
-            Top = 300;
-        }
+        /// <summary>
+        /// A IDictionary with properties for the window or dialog
+        /// </summary>
+        IDictionary<string, object> Settings { get; }
 
-        public void GotMe()
-        {
-            MessageBox.Show("You got me!");
-        }
     }
 }

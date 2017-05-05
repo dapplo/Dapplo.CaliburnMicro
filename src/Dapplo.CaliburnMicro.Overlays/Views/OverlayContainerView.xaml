@@ -6,11 +6,11 @@
         xmlns:viewModels="clr-namespace:Dapplo.CaliburnMicro.Overlays.ViewModels"
         xmlns:cal="http://www.caliburnproject.org"
         Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize" Topmost="True" WindowStyle="None"
-		BorderThickness="0"
+        BorderThickness="0"
         mc:Ignorable="d" IsEnabled="{Binding IsEnabled}"
         d:DataContext="{d:DesignInstance viewModels:OverlayContainerViewModel,IsDesignTimeCreatable=True}"
-        Left="{Binding Left}" Top="{Binding Top}" Width="{Binding Width}" Height="{Binding Height}"
-		ShowInTaskbar="False"
+        Left="{Binding Left, Mode=TwoWay}" Top="{Binding Top, Mode=TwoWay}" Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}"
+        ShowInTaskbar="False"
         d:DesignHeight="500" d:DesignWidth="500">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
