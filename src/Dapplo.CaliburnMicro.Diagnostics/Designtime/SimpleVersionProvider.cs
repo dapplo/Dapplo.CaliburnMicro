@@ -19,29 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System;
+using System.Reflection;
 
-using System.ComponentModel;
-using Dapplo.Language;
-
-#endregion
-
-namespace Application.Demo.Languages
+namespace Dapplo.CaliburnMicro.Diagnostics.Designtime
 {
-    [Language("ContextMenu")]
-    public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
+#if DEBUG
+    /// <summary>
+    /// A very simple version provider
+    /// </summary>
+    public class SimpleVersionProvider : IVersionProvider
     {
-        string Configure { get; }
-        string Exit { get; }
-        string CreateError { get; }
-
-        string One { get; }
-        string SomeWindow { get; }
-        string Three { get; }
-
-        string Title { get; }
-        string Two { get; }
-        string WithChildren { get; }
-        string Wizard { get; }
+        public Version Current { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public Version Latest { get; } = Assembly.GetExecutingAssembly().GetName().Version;
     }
+#endif
 }

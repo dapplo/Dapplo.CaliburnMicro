@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Application.Demo.OverlayAddon</RootNamespace>
     <AssemblyName>Application.Demo.OverlayAddon</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +62,10 @@
     <Compile Include="ViewModels\ButtonOverlayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application.Demo\Application.Demo.csproj">
+      <Project>{ad035fb9-c435-49d7-982a-5a8bfe8dcf84}</Project>
+      <Name>Application.Demo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
       <Project>{D5DC762F-1A6B-4296-AC60-952D5269CA25}</Project>
       <Name>Dapplo.CaliburnMicro.Menu</Name>

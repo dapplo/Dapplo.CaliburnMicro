@@ -66,26 +66,6 @@ namespace Dapplo.CaliburnMicro
             return result;
         }
 
-        public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
-        {
-            return base.CreatePage(rootModel, context, settings);
-        }
-
-        protected override Popup CreatePopup(object rootModel, IDictionary<string, object> settings)
-        {
-            return base.CreatePopup(rootModel, settings);
-        }
-
-        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
-        {
-            return base.CreateWindow(rootModel, isDialog, context, settings);
-        }
-
-        protected override Page EnsurePage(object model, object view)
-        {
-            return base.EnsurePage(model, view);
-        }
-
         /// <inheritdoc />
         protected override Window EnsureWindow(object model, object view, bool isDialog)
         {

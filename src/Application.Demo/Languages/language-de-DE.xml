@@ -33,7 +33,8 @@
 		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>
-	</resources>
+        <resource name="createerror">Fehler generieren</resource>
+    </resources>
 	<resources prefix="menu">
 		<resource name="about">Über</resource>
 		<resource name="edit">Bearbeiten</resource>

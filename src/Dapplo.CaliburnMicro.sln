@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro", "Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj", "{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.OverlayAddon", "Application.Demo.OverlayAddon\Application.Demo.OverlayAddon.csproj", "{8A499838-F55D-454C-B22C-831AF7506E81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Overlays", "Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj", "{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Diagnostics", "Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj", "{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

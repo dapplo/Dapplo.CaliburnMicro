@@ -3,7 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dapplo.CaliburnMicro.Diagnostics.Views"
+             xmlns:viewModels="clr-namespace:Dapplo.CaliburnMicro.Diagnostics.ViewModels"
+             Title="Something went wrong" ResizeMode="NoResize"
+             d:DataContext="{d:DesignInstance viewModels:ErrorViewModel,IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Current version" Width="100"/>
+            <Label Content="{Binding VersionProvider.Current}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Latest version" Width="100"/>
+            <Label Content="{Binding VersionProvider.Latest}" Width="100"/>
+        </StackPanel>
+        <Label Content="{Binding Message}"></Label>
+        <Label Content="{Binding Stacktrace}"></Label>
+    </StackPanel>
 </Window>

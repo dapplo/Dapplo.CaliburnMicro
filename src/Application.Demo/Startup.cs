@@ -24,6 +24,7 @@
 using System;
 using System.Windows;
 using Dapplo.CaliburnMicro.Dapp;
+using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
 using Dapplo.Log.Loggers;
 
@@ -67,6 +68,8 @@ namespace Application.Demo
             // Load the Application.Demo.* assemblies
             application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
 
+            // Handle exceptions
+            application.DisplayErrorView();
             application.Run();
         }
     }

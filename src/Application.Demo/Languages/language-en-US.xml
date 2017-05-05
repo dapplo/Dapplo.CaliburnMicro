@@ -1,56 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <language>
-	<resources prefix="core">
-		<resource name="ok">Ok</resource>
-		<resource name="cancel">Cancel</resource>
-		<resource name="language">Language</resource>
-		<resource name="settings">Settings</resource>
-	</resources>
-	<resources prefix="config">
-		<resource name="apply">Apply</resource>
-		<resource name="restore_defaults">Defaults</resource>
-		<resource name="ui">User interface</resource>
-		<resource name="addons">Addons</resource>
-		<resource name="filter">type filter text</resource>
-		<resource name="hotkey">Hotkeys</resource>
-	</resources>
-	<resources prefix="ui">
-		<resource name="theme">Theme</resource>
-	</resources>
-	<resources prefix="credentials">
-		<resource name="username">Username</resource>
-		<resource name="password">Password</resource>
-		<resource name="login">Login</resource>
-	</resources>
-	<resources prefix="contextmenu">
-		<resource name="title">Demo application</resource>
-		<resource name="withchildren">Children</resource>
-		<resource name="one">One</resource>
-		<resource name="two">Two</resource>
-		<resource name="three">Three</resource>
-		<resource name="somewindow">Just a Window</resource>
-		<resource name="wizard">Wizard</resource>
-		<resource name="configure">Configure</resource>
-		<resource name="exit">Exit</resource>
-	</resources>
-	<resources prefix="menu">
-		<resource name="about">About</resource>
-		<resource name="edit">Edit</resource>
-		<resource name="file">File</resource>
-		<resource name="save_as">Save As</resource>
-	</resources>
-	<resources prefix="wizard">
-		<resource name="next">Next</resource>
-		<resource name="previous">Previous</resource>
-		<resource name="cancel">Cancel</resource>
-		<resource name="finish">Ok</resource>
-		<resource name="title">My wizard</resource>
-		<resource name="title_step1">Step 1</resource>
-		<resource name="title_step2">Step 2</resource>
-		<resource name="title_step3">Step 3</resource>
-		<resource name="title_step4">Step 4</resource>
-		<resource name="title_step5">Step 5</resource>
-		<resource name="complete_step4">Done</resource>
-	</resources>
+    <resources prefix="core">
+        <resource name="ok">Ok</resource>
+        <resource name="cancel">Cancel</resource>
+        <resource name="language">Language</resource>
+        <resource name="settings">Settings</resource>
+    </resources>
+    <resources prefix="config">
+        <resource name="apply">Apply</resource>
+        <resource name="restore_defaults">Defaults</resource>
+        <resource name="ui">User interface</resource>
+        <resource name="addons">Addons</resource>
+        <resource name="filter">type filter text</resource>
+        <resource name="hotkey">Hotkeys</resource>
+    </resources>
+    <resources prefix="ui">
+        <resource name="theme">Theme</resource>
+    </resources>
+    <resources prefix="credentials">
+        <resource name="username">Username</resource>
+        <resource name="password">Password</resource>
+        <resource name="login">Login</resource>
+    </resources>
+    <resources prefix="contextmenu">
+        <resource name="title">Demo application</resource>
+        <resource name="withchildren">Children</resource>
+        <resource name="one">One</resource>
+        <resource name="two">Two</resource>
+        <resource name="three">Three</resource>
+        <resource name="somewindow">Just a Window</resource>
+        <resource name="wizard">Wizard</resource>
+        <resource name="configure">Configure</resource>
+        <resource name="exit">Exit</resource>
+        <resource name="createerror">Generate error</resource>
+    </resources>
+    <resources prefix="menu">
+        <resource name="about">About</resource>
+        <resource name="edit">Edit</resource>
+        <resource name="file">File</resource>
+        <resource name="save_as">Save As</resource>
+    </resources>
+    <resources prefix="wizard">
+        <resource name="next">Next</resource>
+        <resource name="previous">Previous</resource>
+        <resource name="cancel">Cancel</resource>
+        <resource name="finish">Ok</resource>
+        <resource name="title">My wizard</resource>
+        <resource name="title_step1">Step 1</resource>
+        <resource name="title_step2">Step 2</resource>
+        <resource name="title_step3">Step 3</resource>
+        <resource name="title_step4">Step 4</resource>
+        <resource name="title_step5">Step 5</resource>
+        <resource name="complete_step4">Done</resource>
+    </resources>
 </language>

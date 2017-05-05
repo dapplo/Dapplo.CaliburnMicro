@@ -139,10 +139,12 @@
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Models\IWizardModel.cs" />
     <Compile Include="Services\AuthenticationProvider.cs" />
+    <Compile Include="Services\SimpleVersionProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\ContextMenu\CreateErrorMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\SomeWindowMenuItems.cs" />
     <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
@@ -181,6 +183,10 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj">
       <Project>{d8c2622b-b621-4467-a3ba-1b744af7e8d6}</Project>
       <Name>Dapplo.CaliburnMicro.Dapp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
+      <Project>{a1c54578-3ebb-48ca-bb9f-f5d2f8fc2714}</Project>
+      <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
       <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
