@@ -104,9 +104,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\OverlayContainerViewModel.cs" />
-    <Compile Include="Views\OverlayContainerView.xaml.cs">
-      <DependentUpon>OverlayContainerView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
