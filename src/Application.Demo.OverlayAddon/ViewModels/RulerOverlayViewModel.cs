@@ -21,18 +21,13 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 using Dapplo.Windows.Input;
 using Dapplo.Windows.User32.Structs;
 using Application.Demo.OverlayAddon.Views;
-using Dapplo.Windows.Messages;
 
 namespace Application.Demo.OverlayAddon.ViewModels
 {
