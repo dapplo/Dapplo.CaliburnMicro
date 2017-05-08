@@ -30,7 +30,10 @@ namespace Dapplo.CaliburnMicro.Diagnostics.Designtime
     /// </summary>
     public class SimpleVersionProvider : IVersionProvider
     {
+        /// <inheritdoc />
         public Version Current { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+
+        /// <inheritdoc />
         public Version Latest { get; } = Assembly.GetExecutingAssembly().GetName().Version;
     }
 #endif

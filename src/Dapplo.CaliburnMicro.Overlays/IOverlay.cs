@@ -35,5 +35,10 @@ namespace Dapplo.CaliburnMicro.Overlays
         /// Y Location
         /// </summary>
         double Top { get; }
+
+        /// <summary>
+        /// Specifies if the overlay is visible to hit-testing
+        /// </summary>
+        bool IsHittestable { get; }
     }
 }

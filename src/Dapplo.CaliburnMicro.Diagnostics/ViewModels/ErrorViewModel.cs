@@ -24,6 +24,9 @@ using System.ComponentModel;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
 using System.Windows;
+#if DEBUG
+using Dapplo.CaliburnMicro.Diagnostics.Designtime;
+#endif
 
 namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
 {
@@ -33,9 +36,16 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ErrorViewModel : Screen
     {
+        /// <summary>
+        /// This is the version provider, which makes the screen show a warning when the current != latest
+        /// </summary>
         [Import(AllowDefault = true)]
         public IVersionProvider VersionProvider { get; set; }
 
+#if DEBUG
+        /// <summary>
+        /// Used for design time
+        /// </summary>
         public ErrorViewModel()
         {
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -46,11 +56,10 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
             // Design mode code
             Stacktrace =
                 "ConsoleApplication1.MyCustomException: some message .... ---> System.Exception: Oh noes!\r\n   at ConsoleApplication1.SomeObject.OtherMethod() in C:\\ConsoleApplication1\\SomeObject.cs:line 24\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 14\r\n   --- End of inner exception stack trace ---\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 18\r\n   at ConsoleApplication1.Program.DoSomething() in C:\\ConsoleApplication1\\Program.cs:line 23\r\n   at ConsoleApplication1.Program.Main(String[] args) in C:\\ConsoleApplication1\\Program.cs:line 13";
-#if DEBUG
-            VersionProvider = new Dapplo.CaliburnMicro.Diagnostics.Designtime.SimpleVersionProvider();
-#endif
+            VersionProvider = new SimpleVersionProvider();
             Message = "Oh noes!";
         }
+#endif
 
         /// <summary>
         /// Checks if the current version is the latest

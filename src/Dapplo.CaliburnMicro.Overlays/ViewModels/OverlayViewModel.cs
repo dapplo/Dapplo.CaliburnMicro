@@ -32,15 +32,29 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
     {
         private bool _isEnabled = true;
         private bool _isVisible = true;
+        private bool _isHittestable = true;
         private double _left;
         private double _top;
 
 
         #region IOverlay
 
-        /// <summary>
-        ///     Returns if the Left of the displays
-        /// </summary>
+        /// <inheritdoc />
+        public virtual bool IsHittestable
+        {
+            get
+            {
+                return _isHittestable;
+            }
+            set
+            {
+                _isHittestable = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+
+        /// <inheritdoc />
         public virtual double Left
         {
             get
@@ -52,11 +66,9 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
                 _left = value;
                 NotifyOfPropertyChange();
             }
-        } 
+        }
 
-        /// <summary>
-        ///     Returns if the Top of the displays
-        /// </summary>
+        /// <inheritdoc />
         public virtual double Top
         {
             get
@@ -75,9 +87,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
 
         #region IAmDisplayable
 
-        /// <summary>
-        ///     Returns if the OverlayViewModel can be selected
-        /// </summary>
+        /// <inheritdoc />
         public virtual bool IsEnabled
         {
             get { return _isEnabled; }
@@ -88,9 +98,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
             }
         }
 
-        /// <summary>
-        ///     Returns if the OverlayViewModel is visible
-        /// </summary>
+        /// <inheritdoc />
         public virtual bool IsVisible
         {
             get { return _isVisible; }

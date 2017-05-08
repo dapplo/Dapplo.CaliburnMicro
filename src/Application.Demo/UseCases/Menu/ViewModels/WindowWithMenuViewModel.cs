@@ -138,7 +138,7 @@ namespace Application.Demo.UseCases.Menu.ViewModels
 
         public void Dispose()
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
         }
     }
 }

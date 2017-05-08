@@ -19,8 +19,13 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Interop;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Overlays.Views;
+using Dapplo.Windows.User32;
+using Dapplo.Windows.User32.Enums;
 using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Overlays.ViewModels

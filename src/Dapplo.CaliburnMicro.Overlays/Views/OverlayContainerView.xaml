@@ -28,6 +28,7 @@
             <Style TargetType="ContentPresenter">
                 <Setter Property="Canvas.Left" Value="{Binding Path=Left}" />
                 <Setter Property="Canvas.Top" Value="{Binding Path=Top}" />
+                <Setter Property="IsHitTestVisible" Value="{Binding Path=IsHittestable}" />
             </Style>
         </ItemsControl.ItemContainerStyle>
         <ItemsControl.ItemTemplate>
@@ -37,4 +38,3 @@
         </ItemsControl.ItemTemplate>
     </ItemsControl>
 </Window>
-

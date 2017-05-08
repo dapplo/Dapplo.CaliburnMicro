@@ -41,12 +41,7 @@ namespace Application.Demo.UseCases.ContextMenu
     public sealed class ExitMenuItem : MenuItem
     {
         [ImportingConstructor]
-        public ExitMenuItem(
-            IContextMenuTranslations contextMenuTranslations,
-            // Test for the exporting SynchronizationContext
-            [Import("ui", typeof(SynchronizationContext))]
-            SynchronizationContext uiSynchronizationContext
-            )
+        public ExitMenuItem(IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
             contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Exit));
