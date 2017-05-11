@@ -22,7 +22,10 @@
 #region using
 
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
+using System.Windows.Markup;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
@@ -47,6 +50,11 @@ namespace Application.Demo
             // Initialize a debug logger for Dapplo packages
             LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Info);
 #endif
+
+            var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
             var application = new Dapplication("Application.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown

@@ -118,6 +118,9 @@
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="CaliburnLogger.cs" />
+    <Compile Include="Configurers\DpiAwareViewConfigurer.cs" />
+    <Compile Include="Configurers\CultureViewConfigurer.cs" />
+    <Compile Include="Configurers\IconViewConfigurer.cs" />
     <Compile Include="DapploWindowManager.cs" />
     <Compile Include="Extensions\DisplayNameBinding.cs" />
     <Compile Include="Behaviors\ValueChecker.cs" />
@@ -132,6 +135,8 @@
     <Compile Include="Extensions\HaveIconExtensions.cs" />
     <Compile Include="Extensions\IconExtensions.cs" />
     <Compile Include="IAmDisplayable.cs" />
+    <Compile Include="IConfigureDialogViews.cs" />
+    <Compile Include="IConfigureWindowViews.cs" />
     <Compile Include="IHaveId.cs" />
     <Compile Include="IHaveIcon.cs" />
     <Compile Include="IHaveSettings.cs" />

@@ -53,9 +53,14 @@ namespace Application.Demo.UseCases.Menu.ViewModels
 
         [ImportMany("menu", typeof(IMenuItem))]
         private IEnumerable<Lazy<IMenuItem>> MenuItems { get; set; }
-
+        
         [Import]
         private IMenuTranslations MenuTranslations { get; set; }
+
+        /// <summary>
+        /// Used to show a date in the UI
+        /// </summary>
+        public DateTimeOffset CurrentDate { get; } = DateTimeOffset.Now;
 
         protected override void OnActivate()
         {

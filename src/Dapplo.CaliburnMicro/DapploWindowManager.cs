@@ -21,16 +21,12 @@
 
 #region using
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Markup;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.Windows.Dpi.Wpf;
 
 #endregion
 
@@ -42,15 +38,16 @@ namespace Dapplo.CaliburnMicro
     public class DapploWindowManager : WindowManager
     {
         /// <summary>
-        ///     Implement this to make specific configuration changes to your owned (dialog) window.
+        /// These imports make it possible to configure every window that is created
         /// </summary>
-        public Action<Window> OnConfigureDialog { get; set; }
+        [ImportMany(AllowRecomposition = true)]
+        protected IEnumerable<IConfigureWindowViews> ConfigureWindows { get; private set; }
 
         /// <summary>
-        ///     Implement this to make specific configuration changes to your window.
+        /// These imports make it possible to configure every dialog that is created
         /// </summary>
-        public Action<Window> OnConfigureWindow { get; set; }
-
+        [ImportMany(AllowRecomposition = true)]
+        protected IEnumerable<IConfigureDialogViews> ConfigureDialogs { get; private set; }
 
         /// <inheritdoc />
         public override void ShowPopup(object rootModel, object context = null, IDictionary<string, object> settings = null)
@@ -133,8 +130,6 @@ namespace Dapplo.CaliburnMicro
                 Content = view,
                 SizeToContent = SizeToContent.WidthAndHeight
             };
-            // Make sure the current culture is used by default for binding / formatting
-            window.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
             return window;
         }
 
@@ -143,7 +138,7 @@ namespace Dapplo.CaliburnMicro
         {
             var window = CreateCustomWindow(model, view, isDialog);
 
-            // Allow dialogs
+            // Make dialogs possible
             window.SetValue(View.IsGeneratedProperty, true);
             var inferOwnerOf = InferOwnerOf(window);
             if (inferOwnerOf != null && isDialog)
@@ -151,21 +146,22 @@ namespace Dapplo.CaliburnMicro
                 // "Dialog", center it on top of the owner
                 window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 window.Owner = inferOwnerOf;
-                OnConfigureDialog?.Invoke(window);
+
+                // "External" configuration, make sure the configurations are applied
+                foreach (var configureWindow in ConfigureDialogs)
+                {
+                    configureWindow.ConfigureDialogView(window);
+                }
             }
             else
             {
-                // Free window, without owner
-                OnConfigureWindow?.Invoke(window);
+                // "External" configuration, make sure the configurations are applied
+                foreach (var configureWindow in ConfigureWindows)
+                {
+                    configureWindow.ConfigureWindowView(window);
+                }
             }
-            var haveIcon = model as IHaveIcon;
-            if (haveIcon != null && window.Icon == null)
-            {
-                // Now use the attached behavior to set the icon
-                window.SetCurrentValue(FrameworkElementIcon.ValueProperty, haveIcon.Icon);
-            }
-            // Make sure DPI handling is done correctly
-            window.AttachWindowDpiHandler();
+            
             // Just in case, make sure it's activated
             window.Activate();
             return window;
