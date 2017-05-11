@@ -23,9 +23,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.Windows.Dpi.Wpf;
@@ -126,12 +128,14 @@ namespace Dapplo.CaliburnMicro
         /// <returns>Window</returns>
         protected virtual Window CreateCustomWindow(object model, object view, bool isDialog)
         {
-            var result = view as Window ?? new Window
+            var window = view as Window ?? new Window
             {
                 Content = view,
                 SizeToContent = SizeToContent.WidthAndHeight
             };
-            return result;
+            // Make sure the current culture is used by default for binding / formatting
+            window.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            return window;
         }
 
         /// <inheritdoc />
