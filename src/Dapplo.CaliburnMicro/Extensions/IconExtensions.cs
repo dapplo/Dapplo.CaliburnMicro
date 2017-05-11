@@ -150,7 +150,7 @@ namespace Dapplo.CaliburnMicro.Extensions
             {
                 throw new ArgumentNullException(nameof(frameworkElement));
             }
-            int iconSize = size ?? User32.GetSystemMetrics(SystemMetric.SM_CXICON);
+            int iconSize = size ?? User32Api.GetSystemMetrics(SystemMetric.SM_CXICON);
             var stream = new MemoryStream();
             frameworkElement.WriteAsIconToStream(stream, new[] {iconSize});
             // Reset the stream position, otherwise the icon won't be read correctly (pointer is behind the icon)
