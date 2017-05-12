@@ -114,6 +114,16 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
       <Private>True</Private>
@@ -152,7 +162,6 @@
     <Compile Include="Services\AuthenticationProvider.cs" />
     <Compile Include="Services\SimpleVersionProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UseCases\Configuration\ConfigIds.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\CreateErrorMenuItem.cs" />

@@ -28,12 +28,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Application.Demo.Languages;
-using Application.Demo.ViewModels;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Cards.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
-using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 
@@ -45,7 +44,7 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
     ///     Implementation of the system-tray icon
     /// </summary>
     [Export(typeof(ITrayIconViewModel))]
-    public class DemoTrayIconViewModel : TrayIconViewModel, IHandle<string>
+    public class DemoTrayIconViewModel : AdaptiveCardTrayIconViewModel
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -60,18 +59,6 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
 
         [Import]
         public IWindowManager WindowManager { get; set; }
-
-        public void Handle(string message)
-        {
-            var trayIcon = TrayIconManager.GetTrayIconFor(this);
-            trayIcon.ShowBalloonTip("Event", message);
-        }
-
-        public override void Click()
-        {
-            Log.Debug().WriteLine("ShowSomething");
-            TrayIcon.ShowBalloonTip<NotificationExampleViewModel>();
-        }
 
         protected override void OnActivate()
         {

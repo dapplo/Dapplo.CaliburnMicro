@@ -23,9 +23,9 @@
 
 using System.ComponentModel.Composition;
 using Application.Demo.Addon.Languages;
-using Application.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
+using Application.Demo.Shared;
 
 #endregion
 

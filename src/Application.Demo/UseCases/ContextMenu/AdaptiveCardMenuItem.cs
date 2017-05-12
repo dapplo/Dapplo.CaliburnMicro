@@ -27,7 +27,6 @@ using System.Windows;
 using AdaptiveCards;
 using Application.Demo.Languages;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Cards.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
@@ -50,19 +49,18 @@ namespace Application.Demo.UseCases.ContextMenu
         [ImportingConstructor]
         public AdaptiveCardMenuItem(
             IEventAggregator eventAggregator,
-            IContextMenuTranslations contextMenuTranslations,
-            AdaptiveCardViewModel activeCardViewModel)
+            IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
             contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.ActiveCard));
 
             Icon = new PackIconMaterial
             {
-                Kind = PackIconMaterialKind.ViewList
+                Kind = PackIconMaterialKind.Cards
             };
 
 
-            ClickAction = clickedItem =>
+            ClickAction = async clickedItem =>
             {
                 Log.Debug().WriteLine("ActiveCard");
 
@@ -73,8 +71,14 @@ namespace Application.Demo.UseCases.ContextMenu
                         new Image
                         {
                             HorizontalAlignment = HorizontalAlignment.Center,
-                            Size = ImageSize.Small,
+                            Size = ImageSize.Large,
                             Url = "http://static.nichtlustig.de/comics/full/150422.jpg"
+                        },
+                        new Image
+                        {
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Size = ImageSize.Large,
+                            Url = "http://static.nichtlustig.de/comics/full/150421.jpg"
                         }
                     },
                     Actions = new List<ActionBase>
@@ -95,7 +99,7 @@ namespace Application.Demo.UseCases.ContextMenu
                         }
                     }
                 };
-                eventAggregator.PublishOnUIThread(card);
+                await eventAggregator.PublishOnUIThreadAsync(card);
             };
 
             this.VisibleOnPermissions("Admin");

@@ -23,6 +23,7 @@
 
 using System.ComponentModel.Composition;
 using Application.Demo.Languages;
+using Application.Demo.Shared;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 

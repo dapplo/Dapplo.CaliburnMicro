@@ -19,7 +19,7 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Application.Demo.UseCases.Configuration
+namespace Application.Demo.Shared
 {
     /// <summary>
     ///     Used to make it possible to add a ConfigScreen to a well defined parent node

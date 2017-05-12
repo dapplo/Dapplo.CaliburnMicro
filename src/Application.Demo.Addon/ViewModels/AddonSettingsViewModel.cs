@@ -23,11 +23,11 @@
 
 using System.ComponentModel.Composition;
 using Application.Demo.Addon.Languages;
-using Application.Demo.UseCases.Configuration;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
+using Application.Demo.Shared;
 
 #endregion
 

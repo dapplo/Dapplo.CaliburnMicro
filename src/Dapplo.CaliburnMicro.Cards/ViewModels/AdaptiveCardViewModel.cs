@@ -1,12 +1,31 @@
-﻿using System;
+﻿//  Dapplo - building blocks for desktop applications
+//  Copyright (C) 2016-2017 Dapplo
+// 
+//  For more information see: http://dapplo.net/
+//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
+// 
+//  This file is part of Dapplo.CaliburnMicro
+// 
+//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+// 
+//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+// 
+//  You should have a copy of the GNU Lesser General Public License
+//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows;
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
-using AdaptiveCards.Rendering.Config;
 using Caliburn.Micro;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
 
@@ -16,12 +35,12 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// This can display an Active-Card, 
     /// See the active-card <a href="http://adaptivecards.io/documentation/#display-libraries-wpf">WPF library</a>
     /// </summary>
-    [Export]
-    public sealed class AdaptiveCardViewModel : Screen, IHaveSettings, IHandle<AdaptiveCard>
+    public sealed class AdaptiveCardViewModel : Screen
     {
         private FrameworkElement _card;
-        private readonly IWindowManager _windowManager;
-        private readonly IEventAggregator _eventAggregator;
+        /// <summary>
+        /// A constructor which helps the designer.
+        /// </summary>
         public AdaptiveCardViewModel()
         {
 #if DEBUG
@@ -59,19 +78,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                     }
                 }
             };
-            Handle(card);
 #endif
-        }
-
-        [ImportingConstructor]
-        public AdaptiveCardViewModel(
-            IWindowManager windowManager,
-            IEventAggregator eventAggregator)
-        {
-            _windowManager = windowManager;
-            _eventAggregator = eventAggregator;
-            eventAggregator.Subscribe(this);
-            DisplayName = "Card";
         }
 
         /// <summary>
@@ -87,12 +94,23 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             }
         }
 
-        private void OnMissingInput(object sender, MissingInputEventArgs args)
+        /// <summary>
+        /// Called when the AdaptiveCard is missing input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public void OnMissingInput(object sender, MissingInputEventArgs args)
         {
             MessageBox.Show($"Required input {args.Input.Id} is missing.");
         }
 
-        private void OnAction(object sender, ActionEventArgs e)
+        /// <summary>
+        /// Called when an action on a card is invoked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotSupportedException"></exception>
+        public void OnAction(object sender, ActionEventArgs e)
         {
             if (e.Action != null && e.Action is OpenUrlAction)
             {
@@ -103,7 +121,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             {
                 var showCardAction = (ShowCardAction)e.Action;
                 // Call "ourselves"
-                _eventAggregator.PublishOnUIThread(showCardAction.Card);
+                // TODO: _eventAggregator.PublishOnUIThread(showCardAction.Card);
             }
             else if (e.Action != null && e.Action is SubmitAction)
             {
@@ -122,36 +140,5 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             }
         }
 
-        /// <summary>
-        /// Handle an AdaptiveCard message
-        /// </summary>
-        /// <param name="card">AdaptiveCard</param>
-        public void Handle(AdaptiveCard card)
-        {
-            var hostConfig = new HostConfig
-            {
-                FontSizes = {
-                    Small = 15,
-                    Normal =20,
-                    Medium = 25,
-                    Large = 30,
-                    ExtraLarge= 40
-                }
-            };
-
-            var renderer = new XamlRenderer(hostConfig, new ResourceDictionary(), OnAction, OnMissingInput);
-            Card = renderer.RenderAdaptiveCard(card);
-
-            // Make sure it's active
-            if (!IsActive)
-            {
-                _windowManager?.ShowWindow(this);
-            }
-        }
-
-        public IDictionary<string, object> Settings { get; } = new Dictionary<string, object>
-        {
-            {"SizeToContent", SizeToContent.WidthAndHeight}
-        };
     }
 }

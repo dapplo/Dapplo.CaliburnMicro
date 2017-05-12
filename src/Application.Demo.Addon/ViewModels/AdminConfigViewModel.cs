@@ -24,10 +24,10 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using Application.Demo.Addon.Languages;
-using Application.Demo.UseCases.Configuration;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
+using Application.Demo.Shared;
 
 #endregion
 

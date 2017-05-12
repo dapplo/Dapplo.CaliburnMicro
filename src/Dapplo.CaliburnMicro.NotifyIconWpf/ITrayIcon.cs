@@ -59,10 +59,20 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         ///     Show a custom balloon (ViewModel first), using the specified animation.
         ///     After the timeout, the balloon is removed.
         /// </summary>
-        /// <typeparam name="T">Type for the ViewModel to show</typeparam>
+        /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = null);
+        void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = null) where TViewModel : class;
+
+        /// <summary>
+        ///     Show a custom balloon (ViewModel first), using the specified animation.
+        ///     After the timeout, the balloon is removed.
+        /// </summary>
+        /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
+        /// <param name="viewModel">Instance of the ViewModel</param>
+        /// <param name="animation">PopupAnimation</param>
+        /// <param name="timeout">TimeSpan</param>
+        void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = null) where TViewModel : class;
 
         /// <summary>
         ///     Show a balloon with title, message and an Error-icon

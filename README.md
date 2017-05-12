@@ -69,7 +69,7 @@ This is based on a Hardcodet.Wpf.TaskbarNotification dependency, and supplies co
 
 Usage:
 - Annotate your ViewModel class with the ExportAttribute, give it the typeof(ITrayIconViewModel) parameter. This make sure it's found and instanciated, you can set the initial visibility (as expected) in the view.
-- Make your ViewModel extend the ITrayIconViewModel, this forces you to implement the IViewAware from Caliburn.Micro but this can be done by extending e.g. Screen or ViewAware.
+- Make your ViewModel extend the TrayIconViewModel, this forces you to implement the IViewAware from Caliburn.Micro but this can be done by extending e.g. Screen or ViewAware.
 - Create a View with a TrayIcon, you don't NEED code behind, e.g. <ni:TrayIcon xmlns:ni="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf;assembly=Dapplo.CaliburnMicro.NotifyIconWpf" />
 - TrayIcon extends TaskbarIcon (from Hardcodet.Wpf.TaskbarNotification) and only adds an interface and a minimal implementation. This allows you to use it exactly like the documentation of Hardcodet.Wpf.TaskbarNotification describes. Also due to the way things are wired, all Caliburn.Micro logic works as designed (even cal:Message.Attach="[Event TrayLeftMouseDown] = [Action xxxx]")
 - ToolTipText -> The IHasDisplayName interface forces the DisplayName property, this is automatically bound to the ToolTipText
@@ -84,5 +84,8 @@ Usage:
 Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/
 
 
-TODO:
+TODO: The popup is shown briefly, so briefly it's impossible to use actions.
+
+
+General TODO:
 Add better error support

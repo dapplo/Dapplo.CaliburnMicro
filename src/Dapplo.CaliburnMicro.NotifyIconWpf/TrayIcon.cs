@@ -56,32 +56,29 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         ///     Show a custom balloon (ViewModel first), using the specified animation.
         ///     After the timeout, the balloon is removed.
         /// </summary>
-        /// <typeparam name="T">Type for the ViewModel to show</typeparam>
+        /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        public void ShowBalloonTip<T>(PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?))
+        public void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
         {
-            var rootModel = IoC.Get<T>();
+            var viewModel = IoC.Get<TViewModel>();
+            ShowBalloonTip(viewModel, animation, timeout);
+        }
 
-            var view = ViewLocator.LocateForModel(rootModel, null, null);
-            ViewModelBinder.Bind(rootModel, view, null);
+        /// <summary>
+        ///     Show a custom balloon (ViewModel first), using the specified animation.
+        ///     After the timeout, the balloon is removed.
+        /// </summary>
+        /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
+        /// <param name="viewModel">instance of your ViewModel</param>
+        /// <param name="animation">PopupAnimation</param>
+        /// <param name="timeout">TimeSpan</param>
+        public void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
+        {
+            var view = ViewLocator.LocateForModel(viewModel, null, null);
+            ViewModelBinder.Bind(viewModel, view, null);
 
-            // TODO: This is a workaround for the popup to be at the wrong location
-            var customPopupPosition = CustomPopupPosition;
-            var frameworkElement = view as FrameworkElement;
-            if (frameworkElement != null)
-            {
-                CustomPopupPosition = () =>
-                {
-                    var point = GetPopupTrayPosition();
-                    point.Y -= (int) frameworkElement.Height;
-                    return point;
-                };
-            }
-            // Show the balloon
             ShowCustomBalloon(view, animation, timeout.HasValue ? (int) timeout.Value.TotalMilliseconds : (int) TimeSpan.FromSeconds(4).TotalMilliseconds);
-            CustomPopupPosition = customPopupPosition;
-            // End of workaround
         }
 
         /// <summary>

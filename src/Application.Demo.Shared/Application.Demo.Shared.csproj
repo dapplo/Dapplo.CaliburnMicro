@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigIds.cs" />
     <Compile Include="ICoreTranslations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
