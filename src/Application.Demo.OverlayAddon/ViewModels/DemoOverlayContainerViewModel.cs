@@ -27,7 +27,7 @@ using System.Linq;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 
-namespace Application.Demo.OverlayAddon
+namespace Application.Demo.OverlayAddon.ViewModels
 {
     /// <summary>
     /// This is the view model which will display all IOverlay items.

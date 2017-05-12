@@ -25,7 +25,6 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
-using System.Windows.Markup;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;

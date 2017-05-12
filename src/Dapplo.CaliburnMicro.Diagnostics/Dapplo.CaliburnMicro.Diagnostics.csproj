@@ -84,7 +84,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ErrorView.xaml">
       <SubType>Designer</SubType>

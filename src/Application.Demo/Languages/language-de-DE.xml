@@ -30,6 +30,7 @@
 		<resource name="two">Zwei</resource>
 		<resource name="three">Drei</resource>
 		<resource name="somewindow">Nur ein Window</resource>
+	    <resource name="activecard">Karte anzeigen</resource>
 		<resource name="wizard">Wizard</resource>
 		<resource name="configure">Einstellungen</resource>
 		<resource name="exit">Abschließen</resource>

@@ -37,6 +37,7 @@ namespace Application.Demo.Languages
 
         string One { get; }
         string SomeWindow { get; }
+        string ActiveCard { get; }
         string Three { get; }
 
         string Title { get; }

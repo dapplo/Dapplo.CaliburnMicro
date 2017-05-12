@@ -23,6 +23,7 @@
 
 using Dapplo.CaliburnMicro.Menu;
 using System.ComponentModel.Composition;
+using Application.Demo.OverlayAddon.ViewModels;
 using Caliburn.Micro;
 
 #endregion

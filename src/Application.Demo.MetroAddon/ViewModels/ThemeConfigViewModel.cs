@@ -29,7 +29,6 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using Application.Demo.MetroAddon.Configurations;
-using Application.Demo.UseCases.Configuration;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
@@ -127,7 +126,7 @@ namespace Application.Demo.MetroAddon.ViewModels
             }
 
             // Place this under the Ui parent
-            ParentId = nameof(ConfigIds.Ui);
+            ParentId = "Ui";
 
             // Make sure Commit/Rollback is called on the UiConfiguration
             config.Register(UiConfiguration);

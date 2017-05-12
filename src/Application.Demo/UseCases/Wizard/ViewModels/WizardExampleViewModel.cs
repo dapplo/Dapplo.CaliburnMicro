@@ -36,7 +36,11 @@ using Dapplo.Utils.Collections;
 
 namespace Application.Demo.UseCases.Wizard.ViewModels
 {
+    /// <summary>
+    /// An example of the wizard
+    /// </summary>
     [Export]
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class WizardExampleViewModel : Wizard<IWizardScreen>
     {
         private bool _isStep2Enabled;

@@ -22,7 +22,8 @@
 #region using
 
 using System.ComponentModel.Composition;
-using Application.Demo.Languages;
+using Application.Demo.MetroAddon.Configurations;
+using Application.Demo.Shared;
 using Caliburn.Micro;
 
 #endregion

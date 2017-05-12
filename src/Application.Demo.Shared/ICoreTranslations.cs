@@ -26,14 +26,12 @@ using Dapplo.Language;
 
 #endregion
 
-namespace Application.Demo.Languages
+namespace Application.Demo.Shared
 {
-    [Language("Credentials")]
-    public interface ICredentialsTranslations : ILanguage, INotifyPropertyChanged
+    [Language("Core")]
+    public interface ICoreTranslations : Dapplo.CaliburnMicro.Translations.ICoreTranslations, ILanguage, INotifyPropertyChanged
     {
-        string Login { get; }
-
-        string Password { get; }
-        string Username { get; }
+        string Language { get; }
+        string Settings { get; }
     }
 }

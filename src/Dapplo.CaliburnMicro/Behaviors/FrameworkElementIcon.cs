@@ -23,10 +23,8 @@
 
 using System.Diagnostics.Contracts;
 using System.Drawing;
-using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
 using Size = System.Windows.Size;

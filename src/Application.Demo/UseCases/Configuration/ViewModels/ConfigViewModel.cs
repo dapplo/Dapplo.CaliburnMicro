@@ -27,6 +27,7 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Application.Demo.Languages;
 using Application.Demo.Models;
+using Application.Demo.Shared;
 using Application.Demo.UseCases.Wizard.ViewModels;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
