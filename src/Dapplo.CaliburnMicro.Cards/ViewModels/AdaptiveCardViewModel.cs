@@ -35,7 +35,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// This can display an Active-Card, 
     /// See the active-card <a href="http://adaptivecards.io/documentation/#display-libraries-wpf">WPF library</a>
     /// </summary>
-    public sealed class AdaptiveCardViewModel : Screen
+    public class AdaptiveCardViewModel : Screen, IAdaptiveCardViewModel
     {
         private FrameworkElement _card;
         /// <summary>
@@ -84,7 +84,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <summary>
         /// The actual card
         /// </summary>
-        public FrameworkElement Card
+        public virtual FrameworkElement Card
         {
             get { return _card; }
             set
@@ -99,7 +99,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void OnMissingInput(object sender, MissingInputEventArgs args)
+        public virtual void OnMissingInput(object sender, MissingInputEventArgs args)
         {
             MessageBox.Show($"Required input {args.Input.Id} is missing.");
         }
@@ -110,7 +110,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <exception cref="NotSupportedException"></exception>
-        public void OnAction(object sender, ActionEventArgs e)
+        public virtual void OnAction(object sender, ActionEventArgs e)
         {
             if (e.Action != null && e.Action is OpenUrlAction)
             {
@@ -135,7 +135,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                 // action.Body has content body
                 // action.Method has method to use
                 // action.Url has url to post to
-                // TODO: use Dapplo.HttpExtensions
+                // TODO: use Dapplo.HttpExtensions?
                 throw new NotSupportedException(httpAction.Title);
             }
         }

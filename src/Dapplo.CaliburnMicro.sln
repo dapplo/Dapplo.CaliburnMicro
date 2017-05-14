@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Application.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
+	ProjectSection(ProjectDependencies) = postProject
+		{767650A6-25A4-42EC-A029-80E73B544B5D} = {767650A6-25A4-42EC-A029-80E73B544B5D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
 EndProject

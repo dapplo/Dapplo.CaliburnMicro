@@ -39,6 +39,9 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         [Import]
         private IEventAggregator EventAggregator { get; set; }
 
+        [Import(AllowDefault = true)]
+        private IAdaptiveCardViewModel AdaptiveCardViewModel { get; set; }
+
         /// <summary>
         /// Handle the fact that the ViewModel is activated.
         /// Subscribe to the AdaptiveCard event
@@ -46,6 +49,11 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         protected override void OnActivate()
         {
             base.OnActivate();
+            // select the default implementation of the IAdaptiveCardViewModel
+            if (AdaptiveCardViewModel == null)
+            {
+                AdaptiveCardViewModel = new AdaptiveCardViewModel();
+            }
             EventAggregator.Subscribe(this);
         }
 
@@ -83,13 +91,11 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                 }
                 
             };
+           
+            var renderer = new XamlRenderer(hostConfig, new ResourceDictionary(), AdaptiveCardViewModel.OnAction, AdaptiveCardViewModel.OnMissingInput);
+            AdaptiveCardViewModel.Card = renderer.RenderAdaptiveCard(card);
 
-            var adaptiveCardViewModel = new AdaptiveCardViewModel();
-
-            var renderer = new XamlRenderer(hostConfig, new ResourceDictionary(), adaptiveCardViewModel.OnAction, adaptiveCardViewModel.OnMissingInput);
-            adaptiveCardViewModel.Card = renderer.RenderAdaptiveCard(card);
-
-            TrayIcon.ShowBalloonTip(adaptiveCardViewModel, PopupAnimation.Scroll, TimeSpan.FromSeconds(8));
+            TrayIcon.ShowBalloonTip(AdaptiveCardViewModel, PopupAnimation.Scroll, TimeSpan.FromSeconds(8));
         }
     }
 }
