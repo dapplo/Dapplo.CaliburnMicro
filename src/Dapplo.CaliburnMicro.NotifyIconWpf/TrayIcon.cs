@@ -22,6 +22,7 @@
 #region using
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
@@ -34,6 +35,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     /// <summary>
     ///     This is the TrayIcon, which makes the TaskbarIcon usable from Caliburn
     /// </summary>
+    [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public class TrayIcon : TaskbarIcon, ITrayIcon
     {
         /// <summary>
@@ -59,7 +61,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        public void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
+        public void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
         {
             var viewModel = IoC.Get<TViewModel>();
             ShowBalloonTip(viewModel, animation, timeout);
@@ -73,7 +75,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <param name="viewModel">instance of your ViewModel</param>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        public void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Fade, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
+        public void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
         {
             var view = ViewLocator.LocateForModel(viewModel, null, null);
             ViewModelBinder.Bind(viewModel, view, null);

@@ -170,7 +170,7 @@
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Toast\ToastMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\CreateErrorMenuItem.cs" />
-    <Compile Include="UseCases\ContextMenu\AdaptiveCardMenuItem.cs" />
+    <Compile Include="UseCases\Toast\AdaptiveCardMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\SomeWindowMenuItems.cs" />
     <Compile Include="UseCases\ContextMenu\WithChildrenMenuItem.cs" />
@@ -235,9 +235,9 @@
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
       <Name>Dapplo.CaliburnMicro.Security</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toast.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toasts.csproj">
       <Project>{77a4950a-7e56-4591-93f9-a39100916815}</Project>
-      <Name>Dapplo.CaliburnMicro.Toast</Name>
+      <Name>Dapplo.CaliburnMicro.Toasts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj">
       <Project>{0750f2c3-2c86-4cc7-a240-4a261033a2f0}</Project>

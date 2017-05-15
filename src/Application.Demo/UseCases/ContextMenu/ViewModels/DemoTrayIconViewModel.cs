@@ -29,11 +29,10 @@ using System.Windows;
 using System.Windows.Media;
 using Application.Demo.Languages;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Cards.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
-using Dapplo.Log;
+using Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels;
 using MahApps.Metro.IconPacks;
 
 #endregion
@@ -44,10 +43,8 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
     ///     Implementation of the system-tray icon
     /// </summary>
     [Export(typeof(ITrayIconViewModel))]
-    public class DemoTrayIconViewModel : AdaptiveCardTrayIconViewModel
+    public class DemoTrayIconViewModel : TrayIconViewModel
     {
-        private static readonly LogSource Log = new LogSource();
-
         [ImportMany("contextmenu", typeof(IMenuItem))]
         private IEnumerable<Lazy<IMenuItem>> ContextMenuItems { get; set; }
 

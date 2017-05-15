@@ -47,7 +47,7 @@ namespace Application.Demo
         {
 #if DEBUG
             // Initialize a debug logger for Dapplo packages
-            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Info);
+            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 #endif
 
             var cultureInfo = CultureInfo.GetCultureInfo("de-DE");

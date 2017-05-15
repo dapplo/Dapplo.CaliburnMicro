@@ -23,16 +23,17 @@ using System;
 using Caliburn.Micro;
 using ToastNotifications.Core;
 
-namespace Dapplo.CaliburnMicro.Toast.ViewModels
+namespace Dapplo.CaliburnMicro.Toasts.ViewModels
 {
     /// <summary>
     /// Base ViewModel for a Toast
     /// </summary>
-    public class ToastViewModel : Screen, INotification
+    public abstract class ToastBaseViewModel : Screen, IToast
     {
         private Action<INotification> _closeAction;
 
-        public ToastViewModel()
+        /// <inheritdoc />
+        protected override void OnActivate()
         {
             var view = ViewLocator.LocateForModel(this, null, null);
             if (view == null)
@@ -46,17 +47,35 @@ namespace Dapplo.CaliburnMicro.Toast.ViewModels
             }
             // Bind this to the datacontext
             notificationView.DataContext = this;
+            ViewModelBinder.Bind(this, view, null);
             DisplayPart = notificationView;
+            base.OnActivate();
         }
 
-        public int Id { get; set; }
+        /// <summary>
+        /// Id of the toast
+        /// </summary>
+        public virtual int Id { get; set; }
 
+        /// <summary>
+        /// Sets the close action for the toast
+        /// </summary>
+        /// <param name="closeAction"></param>
         public virtual void Bind(Action<INotification> closeAction)
         {
             _closeAction = closeAction;
         }
 
+        /// <summary>
+        /// Close the toast, using the internal Caliburn TryClose
+        /// </summary>
         public virtual void Close()
+        {
+            TryClose(true);
+        }
+
+        /// <inheritdoc />
+        public override void TryClose(bool? dialogResult = null)
         {
             _closeAction(this);
         }
@@ -64,6 +83,6 @@ namespace Dapplo.CaliburnMicro.Toast.ViewModels
         /// <summary>
         /// Return the view for this ViewModel, it needs to base upon NotificationDisplayPart 
         /// </summary>
-        public NotificationDisplayPart DisplayPart { get; }
+        public virtual NotificationDisplayPart DisplayPart { get; private set; }
     }
 }

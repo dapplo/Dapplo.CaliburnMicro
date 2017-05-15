@@ -25,10 +25,10 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using Application.Demo.Languages;
 using Application.Demo.UseCases.Toast.ViewModels;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
+using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 
@@ -46,7 +46,8 @@ namespace Application.Demo.UseCases.Toast
 
         [ImportingConstructor]
         public ToastMenuItem(
-            IEventAggregator eventAggregator,
+            ToastConductor toastConductor,
+            ToastExampleViewModel toastExampleViewModel,
             IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
@@ -58,12 +59,11 @@ namespace Application.Demo.UseCases.Toast
             };
 
 
-            ClickAction = async clickedItem =>
+            ClickAction = clickedItem =>
             {
                 Log.Debug().WriteLine("Toast");
 
-                
-                await eventAggregator.PublishOnUIThreadAsync(new ToastExampleViewModel());
+                toastConductor.ActivateItem(toastExampleViewModel);
             };
 
             this.VisibleOnPermissions("Admin");

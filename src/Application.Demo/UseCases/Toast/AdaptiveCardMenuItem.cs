@@ -26,17 +26,18 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using AdaptiveCards;
 using Application.Demo.Languages;
-using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Cards.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
+using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
 
 #endregion
 
-namespace Application.Demo.UseCases.ContextMenu
+namespace Application.Demo.UseCases.Toast
 {
     /// <summary>
     ///     This provides the IMenuItem to open the WindowWithMenuViewModel
@@ -48,7 +49,7 @@ namespace Application.Demo.UseCases.ContextMenu
 
         [ImportingConstructor]
         public AdaptiveCardMenuItem(
-            IEventAggregator eventAggregator,
+            ToastConductor toastConductor,
             IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
@@ -60,7 +61,7 @@ namespace Application.Demo.UseCases.ContextMenu
             };
 
 
-            ClickAction = async clickedItem =>
+            ClickAction = clickedItem =>
             {
                 Log.Debug().WriteLine("ActiveCard");
 
@@ -99,7 +100,8 @@ namespace Application.Demo.UseCases.ContextMenu
                         }
                     }
                 };
-                await eventAggregator.PublishOnUIThreadAsync(card);
+
+                toastConductor.ActivateItem(new AdaptiveCardViewModel(card));
             };
 
             this.VisibleOnPermissions("Admin");

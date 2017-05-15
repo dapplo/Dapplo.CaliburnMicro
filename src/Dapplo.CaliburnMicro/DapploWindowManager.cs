@@ -72,6 +72,19 @@ namespace Dapplo.CaliburnMicro
         }
 
         /// <inheritdoc />
+        public override void ShowWindow(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        {
+            // Maybe the ViewModel supplies settings
+            if (settings == null)
+            {
+                settings = (rootModel as IHaveSettings)?.Settings;
+            }
+
+            base.ShowWindow(rootModel, context, settings);
+        }
+
+
+        /// <inheritdoc />
         public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
         {
             // Maybe the ViewModel supplies settings
@@ -80,17 +93,6 @@ namespace Dapplo.CaliburnMicro
                 settings = (rootModel as IHaveSettings)?.Settings;
             }
             return base.CreatePage(rootModel, context, settings);
-        }
-
-        /// <inheritdoc />
-        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
-        {
-            // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
-            return base.CreateWindow(rootModel, isDialog, context, settings);
         }
 
         /// <inheritdoc />
@@ -105,15 +107,14 @@ namespace Dapplo.CaliburnMicro
         }
 
         /// <inheritdoc />
-        public override void ShowWindow(object rootModel, object context = null, IDictionary<string, object> settings = null)
+        protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
         {
             // Maybe the ViewModel supplies settings
             if (settings == null)
             {
                 settings = (rootModel as IHaveSettings)?.Settings;
             }
-
-            base.ShowWindow(rootModel, context, settings);
+            return base.CreateWindow(rootModel, isDialog, context, settings);
         }
 
         /// <summary>

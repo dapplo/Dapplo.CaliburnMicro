@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid  Margin="5">
-        <TextBlock Text="{Binding Message}" FontWeight="Light" Foreground="White" Grid.Row="0" TextWrapping="Wrap" />
-    </Grid>
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
+             d:DesignHeight="300" d:DesignWidth="300" HorizontalContentAlignment="Stretch">
+    <StackPanel>
+        <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
+        <TextBlock Text="{Binding Message}" FontWeight="Light" Foreground="White" TextWrapping="Wrap" />
+        <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Watermark example" />
+    </StackPanel>
 </core:NotificationDisplayPart>
 

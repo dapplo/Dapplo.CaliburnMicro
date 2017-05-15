@@ -26,7 +26,8 @@ using System.Diagnostics;
 using System.Windows;
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
-using Caliburn.Micro;
+using AdaptiveCards.Rendering.Config;
+using Dapplo.CaliburnMicro.Toasts.ViewModels;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
 
 namespace Dapplo.CaliburnMicro.Cards.ViewModels
@@ -35,21 +36,23 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// This can display an Active-Card, 
     /// See the active-card <a href="http://adaptivecards.io/documentation/#display-libraries-wpf">WPF library</a>
     /// </summary>
-    public class AdaptiveCardViewModel : Screen, IAdaptiveCardViewModel
+    public class AdaptiveCardViewModel : ToastBaseViewModel
     {
         private FrameworkElement _card;
+        private AdaptiveCard _adaptiveCard;
+
+#if DEBUG
         /// <summary>
         /// A constructor which helps the designer.
         /// </summary>
         public AdaptiveCardViewModel()
         {
-#if DEBUG
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 return;
             }
             // Some designtime example
-            var card = new AdaptiveCard
+            Card = new AdaptiveCard
             {
                 Body = new List<CardElement>
                 {
@@ -78,13 +81,57 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                     }
                 }
             };
+        }
 #endif
+
+        /// <summary>
+        /// Constructor with AdaptiveCard
+        /// </summary>
+        /// <param name="adaptiveCard"></param>
+        public AdaptiveCardViewModel(AdaptiveCard adaptiveCard)
+        {
+            Card = adaptiveCard;
+        }
+
+        /// <summary>
+        /// Property for the AdaptiveCard
+        /// </summary>
+        public AdaptiveCard Card
+        {
+            get
+            {
+                return _adaptiveCard;
+            }
+            set
+            {
+                _adaptiveCard = value;
+                var hostConfig = new HostConfig
+                {
+                    FontSizes = {
+                        Small = 15,
+                        Normal =20,
+                        Medium = 25,
+                        Large = 30,
+                        ExtraLarge= 40
+                    },
+                    ImageSizes =
+                    {
+                        Large = 100,
+                        Medium = 70,
+                        Small = 40
+                    }
+
+                };
+
+                var renderer = new XamlRenderer(hostConfig, new ResourceDictionary(), OnAction, OnMissingInput);
+                RenderedCard = renderer.RenderAdaptiveCard(_adaptiveCard);
+            }
         }
 
         /// <summary>
         /// The actual card
         /// </summary>
-        public virtual FrameworkElement Card
+        public virtual FrameworkElement RenderedCard
         {
             get { return _card; }
             set
@@ -107,9 +154,9 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <summary>
         /// Called when an action on a card is invoked
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="NotSupportedException"></exception>
+        /// <param name="sender">object</param>
+        /// <param name="e">ActionEventArgs</param>
+        /// <exception cref="NotSupportedException">Thrown when an action is not supported</exception>
         public virtual void OnAction(object sender, ActionEventArgs e)
         {
             if (e.Action != null && e.Action is OpenUrlAction)
@@ -119,9 +166,9 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             }
             else if (e.Action != null && e.Action is ShowCardAction)
             {
-                var showCardAction = (ShowCardAction)e.Action;
-                // Call "ourselves"
-                // TODO: _eventAggregator.PublishOnUIThread(showCardAction.Card);
+                var showAction = (ShowCardAction)e.Action;
+                throw new NotSupportedException(showAction.Title);
+
             }
             else if (e.Action != null && e.Action is SubmitAction)
             {
@@ -131,10 +178,10 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             else if (e.Action != null && e.Action is HttpAction)
             {
                 var httpAction = (HttpAction)e.Action;
-                // action.Headers  has headers for HTTP operation
-                // action.Body has content body
-                // action.Method has method to use
-                // action.Url has url to post to
+                // httpAction.Headers  has headers for HTTP operation
+                // httpAction.Body has content body
+                // httpAction.Method has method to use
+                // httpAction.Url has url to post to
                 // TODO: use Dapplo.HttpExtensions?
                 throw new NotSupportedException(httpAction.Title);
             }

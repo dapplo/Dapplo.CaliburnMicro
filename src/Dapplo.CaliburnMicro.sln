@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Cards"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Shared", "Application.Demo.Shared\Application.Demo.Shared.csproj", "{4DB45B8E-D655-42A3-8663-D86138EADD07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Toast", "Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toast.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Toasts", "Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toasts.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

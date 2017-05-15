@@ -32,7 +32,7 @@ namespace Dapplo.CaliburnMicro.Cards
         /// <summary>
         /// The card for the View
         /// </summary>
-        FrameworkElement Card { get; set; }
+        FrameworkElement RenderedCard { get; set; }
 
         /// <summary>
         /// Handle missing input

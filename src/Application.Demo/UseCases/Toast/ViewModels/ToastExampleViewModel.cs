@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapplo.CaliburnMicro.Toast.ViewModels;
+﻿using System.ComponentModel.Composition;
+using Dapplo.CaliburnMicro.Toasts.ViewModels;
 
 namespace Application.Demo.UseCases.Toast.ViewModels
 {
-    public class ToastExampleViewModel : ToastViewModel
+    [Export]
+    public class ToastExampleViewModel : ToastBaseViewModel
     {
         public string Message => "Hello World";
     }
