@@ -9,15 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Notify
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Application.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
-	ProjectSection(ProjectDependencies) = postProject
-		{767650A6-25A4-42EC-A029-80E73B544B5D} = {767650A6-25A4-42EC-A029-80E73B544B5D}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.MetroAddon", "Application.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Dapp", "Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj", "{D8C2622B-B621-4467-A3BA-1B744AF7E8D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Security", "Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj", "{B9850F45-5EFC-4CA0-B7CD-AAEB1FE6D5DF}"
@@ -42,9 +33,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Diagno
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Cards", "Dapplo.CaliburnMicro.Cards\Dapplo.CaliburnMicro.Cards.csproj", "{767650A6-25A4-42EC-A029-80E73B544B5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Toasts", "Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Shared", "Application.Demo.Shared\Application.Demo.Shared.csproj", "{4DB45B8E-D655-42A3-8663-D86138EADD07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Toasts", "Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toasts.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Application.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
+	ProjectSection(ProjectDependencies) = postProject
+		{767650A6-25A4-42EC-A029-80E73B544B5D} = {767650A6-25A4-42EC-A029-80E73B544B5D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.MetroAddon", "Application.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
