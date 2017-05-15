@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Dapplo.Caliburn.AdaptiveCards")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A library to create AdaptiveCards, from Microsoft, toasts with MVVM - CalbirnMicro")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ING-DiBa AG")]
+[assembly: AssemblyCompany("Dapplo")]
 [assembly: AssemblyProduct("Dapplo.Caliburn.AdaptiveCards")]
-[assembly: AssemblyCopyright("Copyright © ING-DiBa AG 2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © Dapplo 2017")]
+[assembly: AssemblyTrademark("Dapplo")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
