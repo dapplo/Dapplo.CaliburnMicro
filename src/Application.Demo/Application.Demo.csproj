@@ -235,7 +235,7 @@
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
       <Name>Dapplo.CaliburnMicro.Security</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toasts.csproj">
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
       <Project>{77a4950a-7e56-4591-93f9-a39100916815}</Project>
       <Name>Dapplo.CaliburnMicro.Toasts</Name>
     </ProjectReference>
