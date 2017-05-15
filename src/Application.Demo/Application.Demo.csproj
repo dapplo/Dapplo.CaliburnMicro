@@ -147,6 +147,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToastNotifications, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.1.0\lib\net452\ToastNotifications.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -164,6 +168,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\Toast\ToastMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\CreateErrorMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\AdaptiveCardMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\TitleMenuItem.cs" />
@@ -174,6 +179,7 @@
     <Compile Include="UseCases\ContextMenu\WizardMenuItem.cs" />
     <Compile Include="UseCases\Menu\SaveAsMenuItem.cs" />
     <Compile Include="UseCases\Menu\ViewModels\WindowWithMenuViewModel.cs" />
+    <Compile Include="UseCases\Toast\ViewModels\ToastExampleViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep5ViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
     <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
@@ -229,6 +235,10 @@
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
       <Name>Dapplo.CaliburnMicro.Security</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toast\Dapplo.CaliburnMicro.Toast.csproj">
+      <Project>{77a4950a-7e56-4591-93f9-a39100916815}</Project>
+      <Name>Dapplo.CaliburnMicro.Toast</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj">
       <Project>{0750f2c3-2c86-4cc7-a240-4a261033a2f0}</Project>
       <Name>Dapplo.CaliburnMicro.Translations</Name>
@@ -263,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UseCases\Menu\Views\WindowWithMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UseCases\Toast\Views\ToastExampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
