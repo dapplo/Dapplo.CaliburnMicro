@@ -148,15 +148,18 @@ namespace Dapplo.CaliburnMicro
                 window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 window.Owner = inferOwnerOf;
 
-                // "External" configuration, make sure the configurations are applied
-                foreach (var configureWindow in ConfigureDialogs)
+                // Make sure the configurations, coming from elsewhere, are applied
+                if (ConfigureDialogs != null)
                 {
-                    configureWindow.ConfigureDialogView(window);
+                    foreach (var configureWindow in ConfigureDialogs)
+                    {
+                        configureWindow.ConfigureDialogView(window);
+                    }
                 }
             }
-            else
+            else if (ConfigureWindows != null)
             {
-                // "External" configuration, make sure the configurations are applied
+                // Make sure the configurations, coming from elsewhere, are applied
                 foreach (var configureWindow in ConfigureWindows)
                 {
                     configureWindow.ConfigureWindowView(window);
