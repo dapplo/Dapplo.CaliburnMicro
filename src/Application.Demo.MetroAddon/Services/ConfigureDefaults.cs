@@ -25,7 +25,6 @@ using System;
 using System.ComponentModel.Composition;
 using Application.Demo.MetroAddon.Configurations;
 using Caliburn.Micro;
-using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Metro;
 
@@ -33,22 +32,21 @@ using Dapplo.CaliburnMicro.Metro;
 
 namespace Application.Demo.MetroAddon.Services
 {
-    [StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper + 1)]
-    public class ConfigureDefaults : IStartupAction
+    [Export(typeof(IUiService))]
+    public class ConfigureDefaults : IUiService
     {
-        [Import(typeof(IWindowManager))]
-        private MetroWindowManager MetroWindowManager { get; set; }
-
-        [Import]
-        public IUiConfiguration UiConfiguration { get; set; }
-
-        public void Start()
+        [ImportingConstructor]
+        public ConfigureDefaults(
+            [Import(typeof(IWindowManager))]
+            MetroWindowManager metroWindowManager,
+            IUiConfiguration uiConfiguration
+            )
         {
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
-            MetroWindowManager.AddResourceDictionary(demoUri);
+            metroWindowManager.AddResourceDictionary(demoUri);
 
-            MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
-            MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
+            metroWindowManager.ChangeTheme(uiConfiguration.Theme);
+            metroWindowManager.ChangeThemeAccent(uiConfiguration.ThemeAccent);
 
             // Override the ConfigView with a much nicer looking version
             ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");

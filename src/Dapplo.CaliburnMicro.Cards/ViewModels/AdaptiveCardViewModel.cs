@@ -27,8 +27,13 @@ using System.Windows;
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
 using AdaptiveCards.Rendering.Config;
+using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Cards.Entities;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
+using Dapplo.CaliburnMicro.Dapp;
+using Dapplo.HttpExtensions;
+using Dapplo.Log;
 
 namespace Dapplo.CaliburnMicro.Cards.ViewModels
 {
@@ -38,6 +43,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// </summary>
     public class AdaptiveCardViewModel : ToastBaseViewModel
     {
+        private static readonly LogSource Log = new LogSource();
         private FrameworkElement _card;
         private AdaptiveCard _adaptiveCard;
 
@@ -157,33 +163,58 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <param name="sender">object</param>
         /// <param name="e">ActionEventArgs</param>
         /// <exception cref="NotSupportedException">Thrown when an action is not supported</exception>
-        public virtual void OnAction(object sender, ActionEventArgs e)
+        public virtual async void OnAction(object sender, ActionEventArgs e)
         {
-            if (e.Action != null && e.Action is OpenUrlAction)
+            if (e.Action == null)
             {
-                var openUrlAction = (OpenUrlAction)e.Action;
+                return;
+            }
+            var openUrlAction = e.Action as OpenUrlAction;
+            if (openUrlAction != null)
+            {
                 Process.Start(openUrlAction.Url);
+                return;
             }
-            else if (e.Action != null && e.Action is ShowCardAction)
-            {
-                var showAction = (ShowCardAction)e.Action;
-                throw new NotSupportedException(showAction.Title);
 
-            }
-            else if (e.Action != null && e.Action is SubmitAction)
+            var showCardAction = e.Action as ShowCardAction;
+            if (showCardAction != null)
             {
-                var submitAction = (SubmitAction)e.Action;
+                // TODO: Currently kinda a hack
+                var eventAggregator = Dapplication.Current.Bootstrapper.GetExport<IEventAggregator>().Value;
+                eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card));
+                return;
+            }
+
+            var submitAction = e.Action as SubmitAction;
+            if (submitAction != null)
+            {
+                // TODO: submit how / where?
                 throw new NotSupportedException(submitAction.Title);
             }
-            else if (e.Action != null && e.Action is HttpAction)
+
+            var httpAction = e.Action as HttpAction;
+            if (httpAction != null)
             {
-                var httpAction = (HttpAction)e.Action;
-                // httpAction.Headers  has headers for HTTP operation
-                // httpAction.Body has content body
-                // httpAction.Method has method to use
-                // httpAction.Url has url to post to
-                // TODO: use Dapplo.HttpExtensions?
-                throw new NotSupportedException(httpAction.Title);
+                var httpActionRequest = new HttpActionRequest
+                {
+                    Body = httpAction.Body
+                    // TODO: How to unpack the headers?
+                    // httpAction.Headers has headers for HTTP operation
+                };
+                var uri = new Uri(httpAction.Url);
+                switch (httpAction.Method)
+                {
+                    case "POST":
+                        var postResponse = await uri.PostAsync<HttpResponse<string>>(httpActionRequest);
+                        Log.Debug().WriteLine("Response: {0}", postResponse.Response);
+                        break;
+                    case "GET":
+                        var getResponse = await uri.GetAsAsync<HttpResponse<string>>();
+                        Log.Debug().WriteLine("Response: {0}", getResponse.Response);
+                        break;
+                    default:
+                        throw new NotSupportedException($"{httpAction.Title} - {httpAction.Method}");
+                }
             }
         }
 

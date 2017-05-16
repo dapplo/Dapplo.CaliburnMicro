@@ -7,6 +7,6 @@
              xmlns:toast="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:AdaptiveCardViewModel,IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <ContentPresenter Content="{Binding RenderedCard}"></ContentPresenter>
+    <ContentPresenter Content="{Binding RenderedCard}" HorizontalAlignment="Stretch"></ContentPresenter>
 </toast:NotificationDisplayPart>
 

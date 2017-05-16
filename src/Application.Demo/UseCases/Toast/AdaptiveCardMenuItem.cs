@@ -26,11 +26,11 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using AdaptiveCards;
 using Application.Demo.Languages;
+using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Cards.ViewModels;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
-using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
@@ -49,7 +49,7 @@ namespace Application.Demo.UseCases.Toast
 
         [ImportingConstructor]
         public AdaptiveCardMenuItem(
-            ToastConductor toastConductor,
+            IEventAggregator eventAggregator,
             IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
@@ -97,11 +97,17 @@ namespace Application.Demo.UseCases.Toast
                                     }
                                 }
                             }
+                        },
+                        new HttpAction
+                        {
+                            Body = "Testing 1 2 3",
+                            Url = "https://httpbin.org/post",
+                            Title = "Call HTTP Bin"
                         }
                     }
                 };
 
-                toastConductor.ActivateItem(new AdaptiveCardViewModel(card));
+                eventAggregator.PublishOnCurrentThread(new AdaptiveCardViewModel(card));
             };
 
             this.VisibleOnPermissions("Admin");

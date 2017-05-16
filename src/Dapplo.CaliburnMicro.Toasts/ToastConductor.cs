@@ -32,25 +32,61 @@ using ToastNotifications.Position;
 namespace Dapplo.CaliburnMicro.Toasts
 {
     /// <summary>
-    /// The toast conductor is exported, and can be used to display toasts
+    /// The toast conductor handles IToast message which can be used to display toasts.
+    /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
     /// </summary>
+    [Export(typeof(IUiService))]
     [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
-    public class ToastConductor: Conductor<IToast>.Collection.AllActive
+    public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiService
     {
-        private readonly Notifier _notifier = new Notifier(configuration => {
-            configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
-            configuration.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 10, 10);
-            configuration.DisplayOptions.TopMost = true;
-            configuration.Dispatcher = Application.Current.Dispatcher;
-        });
+        private readonly IEventAggregator _eventAggregator;
+        private Notifier _notifier;
 
         /// <summary>
-        /// Make sure this is always activated
+        /// Importing constructor to add the dependencies of the ToastConductor
+        /// <param name="eventAggregator">IEventAggregator to subscribe to the IToast messages</param>
+        /// <param name="notifier">optional Notifier configuration, if not supplied a default is used</param>
         /// </summary>
-        public ToastConductor()
+        [ImportingConstructor]
+        public ToastConductor(
+            IEventAggregator eventAggregator,
+            [Import(AllowDefault = true)]
+            Notifier notifier
+            )
         {
+            if (eventAggregator == null)
+            {
+                throw new ArgumentNullException(nameof(eventAggregator));
+            }
+            _notifier = notifier;
+            _eventAggregator = eventAggregator;
             ScreenExtensions.TryActivate(this);
+        }
+
+        /// <inheritdoc />
+        protected override void OnActivate()
+        {
+            if (_notifier == null)
+            {
+                _notifier = new Notifier(configuration => {
+                    configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
+                    configuration.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 10, 10);
+                    configuration.DisplayOptions.TopMost = true;
+                    configuration.Dispatcher = Application.Current.Dispatcher;
+                });
+            }
+            _eventAggregator.Subscribe(this);
+            base.OnActivate();
+        }
+
+        /// <inheritdoc />
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
+            _notifier.Dispose();
+            base.OnDeactivate(close);
+
         }
 
         /// <inheritdoc />
@@ -84,6 +120,13 @@ namespace Dapplo.CaliburnMicro.Toasts
             {
                 DeactivateItem(toast, true);
             }
+        }
+
+        /// <summary>Handles the IToast message, and will display the toast.</summary>
+        /// <param name="message">IToast with the toast to show.</param>
+        public void Handle(IToast message)
+        {
+            ActivateItem(message);
         }
     }
 }

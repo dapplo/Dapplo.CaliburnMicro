@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -105,6 +106,7 @@ namespace Dapplo.CaliburnMicro.Dapp
 
             ConfigureViewLocator();
 
+            // TODO: Documentation
             // Test if there is a IWindowManager available, if not use the default
             var windowManagers = _serviceLocator.GetExports<IWindowManager>();
             if (!windowManagers.Any())
@@ -112,6 +114,7 @@ namespace Dapplo.CaliburnMicro.Dapp
                 _serviceExporter.Export<IWindowManager>(new DapploWindowManager());
             }
 
+            // TODO: Documentation
             // Test if there is a IEventAggregator available, if not use the default
             var eventAggregators = _serviceLocator.GetExports<IEventAggregator>();
             if (!eventAggregators.Any())
@@ -142,19 +145,20 @@ namespace Dapplo.CaliburnMicro.Dapp
                 var viewType = defaultLocator(modelType, displayLocation, context);
                 bool initialViewFound = viewType != null;
 
-                if (!initialViewFound)
+                if (initialViewFound)
                 {
-                    Log.Verbose().WriteLine("No view for {0}, looking into base types.", modelType);
-                    var currentModelType = modelType;
-                    while (viewType == null && currentModelType != null && currentModelType != typeof(object))
-                    {
-                        currentModelType = currentModelType.BaseType;
-                        viewType = defaultLocator(currentModelType, displayLocation, context);
-                    }
-                    if (viewType != null)
-                    {
-                        Log.Verbose().WriteLine("Found view for {0} in base type {1}, the view is {2}", modelType, currentModelType, viewType);
-                    }
+                    return viewType;
+                }
+                Log.Verbose().WriteLine("No view for {0}, looking into base types.", modelType);
+                var currentModelType = modelType;
+                while (viewType == null && currentModelType != null && currentModelType != typeof(object))
+                {
+                    currentModelType = currentModelType.BaseType;
+                    viewType = defaultLocator(currentModelType, displayLocation, context);
+                }
+                if (viewType != null)
+                {
+                    Log.Verbose().WriteLine("Found view for {0} in base type {1}, the view is {2}", modelType, currentModelType, viewType);
                 }
 
                 return viewType;
@@ -202,6 +206,17 @@ namespace Dapplo.CaliburnMicro.Dapp
             else
             {
                 Log.Info().WriteLine("No IShell export found, if you want to have an initial window make sure you exported your ViewModel with [Export(typeof(IShell))]");
+            }
+
+            // Activate all "UI" Services
+            foreach (var lazyUiService in _serviceLocator.GetExports<IUiService>())
+            {
+                if (lazyUiService.IsValueCreated)
+                {
+                    continue;
+                }
+                var uiService = lazyUiService.Value;
+                Debug.Assert(uiService != null);
             }
         }
 

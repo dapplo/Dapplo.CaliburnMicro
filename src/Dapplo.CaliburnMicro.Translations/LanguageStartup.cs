@@ -60,7 +60,7 @@ namespace Dapplo.CaliburnMicro.Translations
             var s = ApplicationBootstrapper.GetExports<IServiceProvider>();
             if (!s.Any())
             {
-                throw new Exception();
+                throw new ChangeRejectedException("Couldn't export IServiceProvider");
             }
         }
     }
