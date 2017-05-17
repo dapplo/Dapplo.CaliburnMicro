@@ -21,7 +21,6 @@
 
 #region using
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -38,7 +37,6 @@ namespace Dapplo.CaliburnMicro.Menu
     {
         private string _displayName;
         private Control _icon;
-        private string _id;
 
         private bool _isEnabled = true;
         private bool _isVisible = true;
@@ -49,13 +47,8 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public MenuItem()
         {
-            _id = GetType().Name;
+            Id = GetType().Name;
         }
-
-        /// <summary>
-        ///     This action is called when Click is invoked
-        /// </summary>
-        public Action<IMenuItem> ClickAction { get; set; }
 
         /// <summary>
         ///     This property defines the style the item uses.
@@ -76,14 +69,6 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public virtual void Initialize()
         {
-        }
-
-        /// <summary>
-        ///     Is called when the IMenuItem is clicked
-        /// </summary>
-        public virtual void Click(IMenuItem clickedItem)
-        {
-            ClickAction?.Invoke(clickedItem);
         }
 
         /// <inheritdoc />
@@ -129,11 +114,7 @@ namespace Dapplo.CaliburnMicro.Menu
         ///     The Id of this IMenuItem, is also used to order children of a parent
         ///     Default the Id is the name of the Type
         /// </summary>
-        public virtual string Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public string Id { get; set; }
 
         #endregion
 

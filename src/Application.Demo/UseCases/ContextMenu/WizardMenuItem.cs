@@ -38,7 +38,7 @@ namespace Application.Demo.UseCases.ContextMenu
     ///     This will add an extry for the wizard to the context menu
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class WizardMenuItem : AuthenticatedMenuItem<bool>
+    public sealed class WizardMenuItem : AuthenticatedMenuItem<IMenuItem, bool>
     {
         [ImportingConstructor]
         public WizardMenuItem(

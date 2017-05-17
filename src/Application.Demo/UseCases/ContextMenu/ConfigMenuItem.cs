@@ -38,7 +38,7 @@ namespace Application.Demo.UseCases.ContextMenu
     ///     This will add an extry for the configuration to the context menu
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class ConfigMenuItem : MenuItem
+    public sealed class ConfigMenuItem : ClickableMenuItem
     {
         private static readonly LogSource Log = new LogSource();
 

@@ -21,37 +21,41 @@
 
 #region using
 
-using Dapplo.CaliburnMicro.Menu;
-using System.ComponentModel.Composition;
-using Application.Demo.OverlayAddon.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using Caliburn.Micro;
 
 #endregion
 
-namespace Application.Demo.OverlayAddon
+namespace Dapplo.CaliburnMicro.Menu
 {
     /// <summary>
-    ///     This will add an extry for the exit to the context menu
+    /// Default type for the ClickableMenuItem
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class OverlayMenuItem : ClickableMenuItem
+    public class ClickableMenuItem : ClickableMenuItem<IMenuItem>
     {
-        [Import]
-        private DemoOverlayContainerViewModel OverlayContainerViewModel { get; set; }
+        
+    }
 
-        [Import]
-        private IWindowManager WindowManager { get; set; }
+    /// <summary>
+    ///     Extend this to make your IMenuItem
+    /// </summary>
+    public class ClickableMenuItem<TClickArgument> : MenuItem, ICanBeClicked<TClickArgument>
+    {
+        /// <summary>
+        ///     This action is called when Click is invoked
+        /// </summary>
+        public Action<TClickArgument> ClickAction { get; set; }
 
-        public override void Click(IMenuItem clickedItem)
+ 
+        /// <summary>
+        ///     Is called when the IMenuItem is clicked
+        /// </summary>
+        public virtual void Click(TClickArgument clickedItem)
         {
-            WindowManager.ShowWindow(OverlayContainerViewModel);
-        }
-
-        public override void Initialize()
-        {
-            Id = "Y_Overlay";
-            // automatically update the DisplayName
-            DisplayName = "Show Overlay";
+            ClickAction?.Invoke(clickedItem);
         }
     }
 }

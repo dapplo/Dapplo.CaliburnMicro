@@ -39,7 +39,7 @@ namespace Application.Demo.UseCases.ContextMenu
     /// This example is verbose, meaning the actualy methods are implemented vs. everything in the constructor
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class WithChildrenMenuItem : MenuItem
+    public sealed class WithChildrenMenuItem : ClickableMenuItem
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -75,7 +75,7 @@ namespace Application.Demo.UseCases.ContextMenu
 
             ChildNodes.Add(new MenuItem {Style = MenuItemStyles.Separator});
 
-            menuItem = new MenuItem
+            menuItem = new ClickableMenuItem
             {
                 Id = "2"
             };

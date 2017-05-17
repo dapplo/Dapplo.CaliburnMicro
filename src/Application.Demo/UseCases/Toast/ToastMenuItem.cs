@@ -40,7 +40,7 @@ namespace Application.Demo.UseCases.Toast
     ///     This provides the IMenuItem to open the WindowWithMenuViewModel
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class ToastMenuItem : AuthenticatedMenuItem<Visibility>
+    public sealed class ToastMenuItem : AuthenticatedMenuItem<IMenuItem, Visibility>
     {
         private static readonly LogSource Log = new LogSource();
 

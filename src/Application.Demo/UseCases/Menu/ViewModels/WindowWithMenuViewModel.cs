@@ -107,7 +107,7 @@ namespace Application.Demo.UseCases.Menu.ViewModels
                 ParentId = "1_File"
             });
 
-            var exitMenuItem = new MenuItem
+            var exitMenuItem = new ClickableMenuItem
             {
                 Id = "Z_Exit",
                 ParentId = "1_File",

@@ -49,6 +49,7 @@
     <Compile Include="ITreeNode.cs" />
     <Compile Include="ITreeScreen.cs" />
     <Compile Include="ITreeScreenNode.cs" />
+    <Compile Include="ClickableMenuItem.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="MenuItemStyles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

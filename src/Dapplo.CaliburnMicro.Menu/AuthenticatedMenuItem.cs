@@ -32,7 +32,7 @@ namespace Dapplo.CaliburnMicro.Menu
     /// <summary>
     ///     Extend this to make your IMenuItem authentication aware, e.g. controling the IsEnabled / Visibility
     /// </summary>
-    public class AuthenticatedMenuItem<TWhen> : MenuItem, IChangeableNeedAuthentication<TWhen>
+    public class AuthenticatedMenuItem<TClickArgument, TWhen> : ClickableMenuItem<TClickArgument>, IChangeableNeedAuthentication<TWhen>
     {
         private AuthenticationTargetProperties _authenticationTargetProperty = AuthenticationTargetProperties.None;
         private PermissionOperations _permissionOperation = PermissionOperations.Or;

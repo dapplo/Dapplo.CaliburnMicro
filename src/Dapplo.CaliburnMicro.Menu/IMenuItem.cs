@@ -40,11 +40,6 @@ namespace Dapplo.CaliburnMicro.Menu
         string HotKeyHint { get; set; }
 
         /// <summary>
-        ///     Is called when the IMenuItem it clicked
-        /// </summary>
-        void Click(IMenuItem clickedItem);
-
-        /// <summary>
         ///     The initialize is called from the UI Thread before the menu-item is added to a context menu.
         ///     This allows for any initialization, like icons etc, to be made
         /// </summary>

@@ -40,7 +40,7 @@ namespace Application.Demo.UseCases.ContextMenu
     ///     This provides the IMenuItem to open the WindowWithMenuViewModel
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
-    public sealed class SomeWindowMenuItems : AuthenticatedMenuItem<Visibility>
+    public sealed class SomeWindowMenuItems : AuthenticatedMenuItem<IMenuItem, Visibility>
     {
         private static readonly LogSource Log = new LogSource();
 
