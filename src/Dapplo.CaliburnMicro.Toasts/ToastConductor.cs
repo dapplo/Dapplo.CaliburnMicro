@@ -54,6 +54,7 @@ namespace Dapplo.CaliburnMicro.Toasts
             Notifier notifier
             )
         {
+            // Fail fast, if there is no IEventAggregator than something went wrong in the bootstrapper
             if (eventAggregator == null)
             {
                 throw new ArgumentNullException(nameof(eventAggregator));
@@ -63,12 +64,15 @@ namespace Dapplo.CaliburnMicro.Toasts
             ScreenExtensions.TryActivate(this);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Activate the Conductor for IToast
+        /// Checks if a Notifier is available, else it will create one itself.
+        /// Subscribe to the IEventAggregator, to handle IToast messages.
+        /// </summary>
         protected override void OnActivate()
         {
             if (_notifier == null)
             {
-               
                 _notifier = new Notifier(configuration => {
                     configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
                     configuration.PositionProvider = new SystemTrayPositionProvider();
@@ -80,31 +84,61 @@ namespace Dapplo.CaliburnMicro.Toasts
             base.OnActivate();
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Remove the IToast subscription via the IEventAggregator and dispose the notifier.
+        /// </summary>
+        /// <param name="close"></param>
         protected override void OnDeactivate(bool close)
         {
             _eventAggregator.Unsubscribe(this);
             _notifier.Dispose();
             base.OnDeactivate(close);
-
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Override to make sure that the View (NotificationDisplayPart) is located and bound with the ViewModel (IToast)
+        /// </summary>
+        /// <param name="item">IToast</param>
+        public override void ActivateItem(IToast item)
+        {
+            var view = ViewLocator.LocateForModel(item, null, null);
+            if (view == null)
+            {
+                throw new NotSupportedException($"Couldn't locate view for {GetType()}");
+            }
+            ViewModelBinder.Bind(item, view, null);
+
+            base.ActivateItem(item);
+        }
+
+        /// <summary>
+        /// Override to make sure the Unloaded event of the view is hooked, so we can deactivate the item.
+        /// Also, as the INotifier is showing the items, and not the IWindowManager, we need to call the INotifier here.
+        /// </summary>
+        /// <param name="item">IToast</param>
+        /// <param name="success">bool which tells us if the activation worked</param>
         protected override void OnActivationProcessed(IToast item, bool success)
         {
             // Make sure we hook the Unloaded event
-            item.DisplayPart.Unloaded += InternalUnload;
+            if (success)
+            {
+                item.DisplayPart.Unloaded += InternalUnload;
+
+            }
             base.OnActivationProcessed(item, success);
 
-            // Show the toast
-            _notifier.Notify<NotificationDisplayPart>(() => item);
+            // Show the toast via the notifier
+            if (success)
+            {
+                _notifier.Notify<NotificationDisplayPart>(() => item);
+            }
         }
 
         /// <summary>
         /// This takes care of deactivating correctly, as Caliburn.Micro wouldn't know when it's no longer visible
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
+        /// <param name="sender">object</param>
+        /// <param name="eventArgs">RoutedEventArgs</param>
         private void InternalUnload(object sender, RoutedEventArgs eventArgs)
         {
             var displayPart = sender as NotificationDisplayPart;
@@ -115,14 +149,16 @@ namespace Dapplo.CaliburnMicro.Toasts
             }
 
             var toast = displayPart?.DataContext as IToast;
-            // Deactivate
+            // Deactivate the item
             if (toast != null)
             {
                 DeactivateItem(toast, true);
             }
         }
 
-        /// <summary>Handles the IToast message, and will display the toast.</summary>
+        /// <summary>
+        /// Handles the IToast message, and will display the toast.
+        /// </summary>
         /// <param name="message">IToast with the toast to show.</param>
         public void Handle(IToast message)
         {

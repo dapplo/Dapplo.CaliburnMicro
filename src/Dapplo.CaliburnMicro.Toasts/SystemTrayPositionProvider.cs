@@ -43,10 +43,10 @@ namespace Dapplo.CaliburnMicro.Toasts
 
         private readonly IDisposable _subscription;
         /// <summary>
-        /// 
+        /// Initialize the SystemTrayPositionProvider, this hooks all the event handlers
         /// </summary>
-        /// <param name="xOffset"></param>
-        /// <param name="yOffset"></param>
+        /// <param name="xOffset">X-offset for the toasts relative to the location of the taskbar</param>
+        /// <param name="yOffset">Y-offset for the toasts relative to the location of the taskbar</param>
         public SystemTrayPositionProvider(int xOffset = 10, int yOffset = 10)
         {
             _xOffset = xOffset;
@@ -57,7 +57,11 @@ namespace Dapplo.CaliburnMicro.Toasts
                 // Only on SPI_SETWORKAREA changes
                 .Where(args => args.SystemParametersInfoAction == SystemParametersInfoActions.SPI_SETWORKAREA)
                 // Create UpdatePositionRequested event 
-                .Subscribe(args => UpdatePositionRequested?.Invoke(this, EventArgs.Empty));
+                .Subscribe(args =>
+                {
+                    UpdateEjectDirectionRequested?.Invoke(this, EventArgs.Empty);
+                    UpdatePositionRequested?.Invoke(this, EventArgs.Empty);
+                });
         }
 
         /// <summary>
@@ -133,5 +137,10 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// ToastNotifications framework registers this event, to get notified of changes
         /// </summary>
         public event EventHandler UpdatePositionRequested;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler UpdateEjectDirectionRequested;
     }
 }

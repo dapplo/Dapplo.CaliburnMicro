@@ -32,30 +32,27 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
     {
         private Action<INotification> _closeAction;
 
-        /// <inheritdoc />
-        protected override void OnActivate()
+        /// <summary>
+        /// Id of the toast
+        /// </summary>
+        public virtual int Id { get; set; }
+
+        /// <summary>
+        /// This takes care of assigning the new view to the DisplayPart
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="context"></param>
+        protected override void OnViewAttached(object view, object context)
         {
-            var view = ViewLocator.LocateForModel(this, null, null);
-            if (view == null)
-            {
-                throw new NotSupportedException($"Couldn't locate view for {GetType()}");
-            }
             var notificationView = view as NotificationDisplayPart;
             if (notificationView == null)
             {
                 throw new NotSupportedException("View doesn't base on NotificationDisplayPart");
             }
-            // Bind this to the datacontext
-            notificationView.DataContext = this;
-            ViewModelBinder.Bind(this, view, null);
             DisplayPart = notificationView;
-            base.OnActivate();
-        }
 
-        /// <summary>
-        /// Id of the toast
-        /// </summary>
-        public virtual int Id { get; set; }
+            base.OnViewAttached(view, context);
+        }
 
         /// <summary>
         /// Sets the close action for the toast
@@ -78,11 +75,12 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         public override void TryClose(bool? dialogResult = null)
         {
             _closeAction(this);
+            base.TryClose(dialogResult);
         }
 
         /// <summary>
         /// Return the view for this ViewModel, it needs to base upon NotificationDisplayPart 
         /// </summary>
-        public virtual NotificationDisplayPart DisplayPart { get; private set; }
+        public virtual NotificationDisplayPart DisplayPart { get; set; }
     }
 }
