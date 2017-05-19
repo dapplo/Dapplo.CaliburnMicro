@@ -52,9 +52,6 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
         private IContextMenuTranslations ContextMenuTranslations { get; set; }
 
         [Import]
-        private IEventAggregator EventAggregator { get; set; }
-
-        [Import]
         public IWindowManager WindowManager { get; set; }
 
         protected override void OnActivate()
@@ -86,7 +83,6 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
                 Foreground = Brushes.Black
             });
             Show();
-            EventAggregator.Subscribe(this);
         }
     }
 }

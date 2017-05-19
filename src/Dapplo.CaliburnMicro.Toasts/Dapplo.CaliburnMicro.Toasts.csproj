@@ -98,9 +98,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml" />
-    <Reference Include="ToastNotifications, Version=2.1.0.0, Culture=neutral, PublicKeyToken=c8166e8e02d32210, processorArchitecture=MSIL">
-      <HintPath>..\packages\ToastNotifications.2.1.0\lib\net452\ToastNotifications.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ToastNotifications, Version=2.1.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.1.1\lib\net452\ToastNotifications.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />

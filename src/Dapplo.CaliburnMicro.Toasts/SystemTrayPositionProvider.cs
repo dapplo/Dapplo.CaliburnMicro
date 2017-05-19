@@ -59,6 +59,8 @@ namespace Dapplo.CaliburnMicro.Toasts
                 // Create UpdatePositionRequested event 
                 .Subscribe(args =>
                 {
+                    // TODO: Make it also work for when the taskbar moves screens or a resolution change is made.
+                    UpdateHeightRequested?.Invoke(this, EventArgs.Empty);
                     UpdateEjectDirectionRequested?.Invoke(this, EventArgs.Empty);
                     UpdatePositionRequested?.Invoke(this, EventArgs.Empty);
                 });
@@ -134,13 +136,18 @@ namespace Dapplo.CaliburnMicro.Toasts
         public EjectDirection EjectDirection => Shell32Api.TaskbarPosition.AppBarEdge == AppBarEdges.Top ? EjectDirection.ToBottom: EjectDirection.ToTop;
 
         /// <summary>
-        /// ToastNotifications framework registers this event, to get notified of changes
+        /// ToastNotifications framework registers this event, to get notified of changes which influence the position
         /// </summary>
         public event EventHandler UpdatePositionRequested;
 
         /// <summary>
-        /// 
+        /// ToastNotifications framework registers this event, to get notified of changes which influence the direction
         /// </summary>
         public event EventHandler UpdateEjectDirectionRequested;
+
+        /// <summary>
+        /// ToastNotifications framework registers this event, to get notified of changes to the screen height
+        /// </summary>
+        public event EventHandler UpdateHeightRequested;
     }
 }

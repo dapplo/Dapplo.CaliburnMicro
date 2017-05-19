@@ -43,6 +43,16 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
         private static readonly LogSource Log = new LogSource();
 
         /// <summary>
+        /// 
+        /// </summary>
+        public TrayIconViewModel()
+        {
+            // Make sure the default DisplayName (class name) is not used on the ToolTipText
+            // ReSharper disable once VirtualMemberCallInConstructor, I know what I am doing here...
+            DisplayName = "";
+        }
+
+        /// <summary>
         ///     The ITrayIconManager, which makes it possible to show and hide the icon
         /// </summary>
         [Import]
@@ -109,16 +119,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
             {
                 TrayMenuItems.Add(contextMenuItem);
             }
-        }
-
-        /// <summary>
-        ///     Set some sensible defaults
-        /// </summary>
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            // Make sure the default DisplayName (class name) is not used on the ToolTipText
-            DisplayName = "";
         }
     }
 }
