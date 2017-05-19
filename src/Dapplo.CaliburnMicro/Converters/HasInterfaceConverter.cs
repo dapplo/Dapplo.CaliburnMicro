@@ -19,31 +19,30 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
-using System.Globalization;
 using System.Windows.Data;
-using Dapplo.CaliburnMicro.Security.Behaviors;
 
-#endregion
-
-namespace Dapplo.CaliburnMicro.Security.Converters
+namespace Dapplo.CaliburnMicro.Converters
 {
     /// <summary>
-    ///     Returns AuthenticationTargetProperties from INeedAuthentication, or AuthenticationTargetProperties.None as a default
+    /// This can be used to test if a value is a type which implements a certain interface
     /// </summary>
-    public class AuthenticationTargetPropertyConverter : IValueConverter
+    public class HasInterfaceConverter : IValueConverter
     {
         /// <inheritdoc />
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var needAuthentication = value as INeedAuthentication;
-            return needAuthentication?.AuthenticationTargetProperty ?? AuthenticationTargetProperties.None;
+            if (value == null)
+            {
+                return false;
+            }
+            var typeToTest = value.GetType();
+            var interfaceType = parameter as Type;
+            return interfaceType?.IsAssignableFrom(typeToTest) == true;
         }
 
         /// <inheritdoc />
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }

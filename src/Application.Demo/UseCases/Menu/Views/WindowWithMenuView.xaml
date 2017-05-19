@@ -6,11 +6,14 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
              xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
-             xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+             xmlns:securityConverters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+             xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
+             xmlns:caliburnMicro="clr-namespace:Dapplo.CaliburnMicro;assembly=Dapplo.CaliburnMicro"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <securityConverters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <converters:HasInterfaceConverter x:Key="HasInterfaceConverter"/>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
         <ControlTemplate x:Key="MenuSeparatorTemplate">
             <Separator />
@@ -28,10 +31,11 @@
                         <Setter Property="Header" Value="{Binding DisplayName}" />
                         <Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
                         <Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
-                        <Setter Property="cal:Action.TargetWithoutContext"
-                                Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
-                        <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Click($originalDataContext)]" />
+                        <Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=.,Converter={StaticResource HasInterfaceConverter}, ConverterParameter={x:Type caliburnMicro:ICanBeClicked}}" Value="True">
+                                <Setter Property="cal:Message.Attach" Value="Click($originalDataContext)" />
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
                                 <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
                             </DataTrigger>

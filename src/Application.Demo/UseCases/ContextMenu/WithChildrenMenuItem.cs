@@ -54,7 +54,7 @@ namespace Application.Demo.UseCases.ContextMenu
 
         public override void Click(IMenuItem clickedItem)
         {
-            Log.Debug().WriteLine("child {0} clicked", clickedItem.Id);
+            Log.Debug().WriteLine("From base: child {0} clicked", clickedItem.Id);
         }
 
         public override void Initialize()
@@ -77,7 +77,8 @@ namespace Application.Demo.UseCases.ContextMenu
 
             menuItem = new ClickableMenuItem
             {
-                Id = "2"
+                Id = "2",
+                ClickAction = item => Log.Debug().WriteLine("From 2 - child {0} clicked", item.Id)
             };
             binding.AddDisplayNameBinding(menuItem, nameof(IContextMenuTranslations.Two));
             ChildNodes.Add(menuItem);

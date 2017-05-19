@@ -12,13 +12,16 @@
                         xmlns:notifyIconWpf="clr-namespace:Dapplo.CaliburnMicro.NotifyIconWpf"
                         xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
                         xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
-                        xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+                        xmlns:securityConverters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+                        xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
+                        xmlns:caliburnMicro="clr-namespace:Dapplo.CaliburnMicro;assembly=Dapplo.CaliburnMicro"
                         cal:Message.Attach="[Event TrayLeftMouseDown] = [Action Click()]"
                         ToolTipText="{Binding DisplayName}"
                         Visibility="Collapsed">
     <notifyIconWpf:TrayIcon.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-        <converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <converters:HasInterfaceConverter x:Key="HasInterfaceConverter"/>
+        <securityConverters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
         <ControlTemplate x:Key="MenuSeparatorTemplate">
             <Separator />
         </ControlTemplate>
@@ -42,8 +45,10 @@
                     <Setter Property="ItemsSource" Value="{Binding ChildNodes}" />
                     <Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
                     <Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
-                    <Setter Property="cal:Message.Attach" Value="Click($originalDataContext)" />
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=.,Converter={StaticResource HasInterfaceConverter}, ConverterParameter={x:Type caliburnMicro:ICanBeClicked}}" Value="True">
+                            <Setter Property="cal:Message.Attach" Value="Click($originalDataContext)" />
+                        </DataTrigger>
                         <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
                             <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
                         </DataTrigger>
