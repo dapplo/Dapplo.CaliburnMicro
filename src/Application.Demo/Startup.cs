@@ -22,13 +22,17 @@
 #region using
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
 using Dapplo.Log.Loggers;
+using Dapplo.Utils.Resolving;
 
 #endregion
 
@@ -39,6 +43,7 @@ namespace Application.Demo
     /// </summary>
     public static class Startup
     {
+        private static readonly LogSource Log = new LogSource();
         /// <summary>
         ///     Start the application
         /// </summary>
@@ -59,25 +64,73 @@ namespace Application.Demo
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
             };
 
-            // Add the directory where scanning takes place
-#if DEBUG
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
-#else
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
-#endif
-
-            // Load the Dapplo.CaliburnMicro.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
-            // Load the Application.Demo.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
+            bool didWeLoad = false;
+            foreach (var assembly in LoadEmbedded())
+            {
+                assembly.Register();
+                application.Bootstrapper.Add(assembly);
+                didWeLoad = true;
+            }
+            if (!didWeLoad)
+            {
+                // Load the Dapplo.CaliburnMicro.* assemblies
+                application.Bootstrapper.FindAndLoadAssemblies("Dapplo.*");
+                // Load the Application.Demo.* assemblies
+                application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
+            }
 
             // Handle exceptions
             application.DisplayErrorView();
             application.Run();
+        }
+
+        /// <summary>
+        /// Load
+        /// </summary>
+        /// <returns></returns>
+        private static IEnumerable<Assembly> LoadEmbedded()
+        {
+            var assemblyLoader = Type.GetType("Costura.AssemblyLoader");
+
+            var assembliesAsResourcesFieldInfo = assemblyLoader?.GetField("assemblyNames", BindingFlags.Static | BindingFlags.NonPublic);
+            if (assembliesAsResourcesFieldInfo == null)
+            {
+                return Enumerable.Empty<Assembly>();
+            }
+
+            var assembliesAsResources = (IDictionary<string, string>)assembliesAsResourcesFieldInfo.GetValue(null);
+
+            var symbolsAsResourcesFieldInfo = assemblyLoader.GetField("symbolNames", BindingFlags.Static | BindingFlags.NonPublic);
+            var symbolsAsResources = (IDictionary<string, string>)symbolsAsResourcesFieldInfo?.GetValue(null);
+
+            var readFromEmbeddedResourcesMethodInfo = assemblyLoader.GetMethod("ReadFromEmbeddedResources", BindingFlags.Static | BindingFlags.NonPublic);
+            if (readFromEmbeddedResourcesMethodInfo == null || symbolsAsResources == null)
+            {
+                return Enumerable.Empty<Assembly>();
+            }
+            return LoadAssemblies(assembliesAsResources, readFromEmbeddedResourcesMethodInfo, symbolsAsResources);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assembliesAsResources"></param>
+        /// <param name="readFromEmbeddedResourcesMethodInfo"></param>
+        /// <param name="symbolsAsResources"></param>
+        /// <returns></returns>
+        private static IEnumerable<Assembly> LoadAssemblies(IDictionary<string, string> assembliesAsResources, MethodInfo readFromEmbeddedResourcesMethodInfo, IDictionary<string, string> symbolsAsResources)
+        {
+            return assembliesAsResources.Select(assemblyKeyValuePair =>
+            {
+                var loadedAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLowerInvariant().Contains($"{assemblyKeyValuePair.Key},"));
+                if (loadedAssembly != null)
+                {
+                    return loadedAssembly;
+                }
+                Log.Debug().WriteLine("Forcing load from Costura packed assembly '{0}'", assemblyKeyValuePair.Key);
+
+                return readFromEmbeddedResourcesMethodInfo.Invoke(null, new object[] { assembliesAsResources, symbolsAsResources, new AssemblyName(assemblyKeyValuePair.Key) }) as Assembly;
+            }).Where(assembly => assembly != null);
         }
     }
 }

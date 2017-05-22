@@ -49,26 +49,18 @@ namespace Dapplo.CaliburnMicro.Dapp
     public class CaliburnMicroBootstrapper : BootstrapperBase, IAsyncShutdownAction
     {
         private static readonly LogSource Log = new LogSource();
-        private readonly IServiceExporter _serviceExporter;
-        private readonly IServiceLocator _serviceLocator;
-        private readonly IServiceRepository _serviceRepository;
+        private readonly IBootstrapper _bootstrapper;
 
         /// <summary>
         /// CaliburnMicroBootstrapper
         /// </summary>
-        /// <param name="serviceExporter">Used to export</param>
-        /// <param name="serviceLocator">Used to locate</param>
-        /// <param name="serviceRepository">Used to add assemblies</param>
+        /// <param name="bootstrapper">Used to inject, export and locate</param>
         [ImportingConstructor]
         public CaliburnMicroBootstrapper(
-            IServiceExporter serviceExporter,
-            IServiceLocator serviceLocator,
-            IServiceRepository serviceRepository
+            IBootstrapper bootstrapper
             )
         {
-            _serviceExporter = serviceExporter;
-            _serviceLocator = serviceLocator;
-            _serviceRepository = serviceRepository;
+            _bootstrapper = bootstrapper;
         }
         /// <summary>
         ///     Shutdown Caliburn
@@ -88,7 +80,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="instance">some object to fill</param>
         protected override void BuildUp(object instance)
         {
-            _serviceLocator.FillImports(instance);
+            _bootstrapper.ProvideDependencies(instance);
         }
 
         /// <summary>
@@ -101,25 +93,25 @@ namespace Dapplo.CaliburnMicro.Dapp
 
             foreach (var assembly in AssemblySource.Instance)
             {
-                _serviceRepository.Add(assembly);
+                _bootstrapper.Add(assembly);
             }
 
             ConfigureViewLocator();
 
             // TODO: Documentation
             // Test if there is a IWindowManager available, if not use the default
-            var windowManagers = _serviceLocator.GetExports<IWindowManager>();
+            var windowManagers = _bootstrapper.GetExports<IWindowManager>();
             if (!windowManagers.Any())
             {
-                _serviceExporter.Export<IWindowManager>(new DapploWindowManager());
+                _bootstrapper.Export<IWindowManager>(new DapploWindowManager());
             }
 
             // TODO: Documentation
             // Test if there is a IEventAggregator available, if not use the default
-            var eventAggregators = _serviceLocator.GetExports<IEventAggregator>();
+            var eventAggregators = _bootstrapper.GetExports<IEventAggregator>();
             if (!eventAggregators.Any())
             {
-                _serviceExporter.Export<IEventAggregator>(new EventAggregator());
+                _bootstrapper.Export<IEventAggregator>(new EventAggregator());
             }
 
             // TODO: Documentation
@@ -171,7 +163,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="serviceType"></param>
         protected override IEnumerable<object> GetAllInstances(Type serviceType)
         {
-            return _serviceLocator.GetExports(serviceType).Select(x => x.Value);
+            return _bootstrapper.GetExports(serviceType).Select(x => x.Value);
         }
 
         /// <summary>
@@ -183,7 +175,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         protected override object GetInstance(Type serviceType, string key)
         {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-            return _serviceLocator.GetExport(serviceType, contract);
+            return _bootstrapper.GetExport(serviceType, contract);
         }
 
         /// <summary>
@@ -197,7 +189,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             base.OnStartup(sender, e);
 
             // Inform when no IShell export is found
-            var shells = _serviceLocator.GetExports<IShell>();
+            var shells = _bootstrapper.GetExports<IShell>();
             if (shells.Any())
             {
                 // Display the IShell ViewModel
@@ -209,7 +201,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             }
 
             // Activate all "UI" Services
-            foreach (var lazyUiService in _serviceLocator.GetExports<IUiService>())
+            foreach (var lazyUiService in _bootstrapper.GetExports<IUiService>())
             {
                 if (lazyUiService.IsValueCreated)
                 {
