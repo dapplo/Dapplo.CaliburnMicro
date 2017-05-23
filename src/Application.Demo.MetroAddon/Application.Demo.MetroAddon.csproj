@@ -46,28 +46,28 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.9\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.11\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Ini, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Ini.0.5.17\lib\net45\Dapplo.Ini.dll</HintPath>
+    <Reference Include="Dapplo.Ini, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Ini.0.5.18\lib\net45\Dapplo.Ini.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.InterfaceImpl, Version=0.2.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.7\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
+    <Reference Include="Dapplo.InterfaceImpl, Version=0.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.9\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Language, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Language.0.5.17\lib\net45\Dapplo.Language.dll</HintPath>
+    <Reference Include="Dapplo.Language, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Language.0.5.18\lib\net45\Dapplo.Language.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.0.29\lib\net45\Dapplo.Log.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.1.0.132\lib\net45\Dapplo.Utils.dll</HintPath>
+    <Reference Include="Dapplo.Utils, Version=1.0.150.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Utils.1.0.150\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">

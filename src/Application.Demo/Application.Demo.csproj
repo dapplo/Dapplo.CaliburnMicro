@@ -70,24 +70,24 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.9\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.11\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.9\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.11\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Ini, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Ini.0.5.17\lib\net45\Dapplo.Ini.dll</HintPath>
+    <Reference Include="Dapplo.Ini, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Ini.0.5.18\lib\net45\Dapplo.Ini.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.InterfaceImpl, Version=0.2.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.7\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
+    <Reference Include="Dapplo.InterfaceImpl, Version=0.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.9\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Language, Version=0.5.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Language.0.5.17\lib\net45\Dapplo.Language.dll</HintPath>
+    <Reference Include="Dapplo.Language, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Language.0.5.18\lib\net45\Dapplo.Language.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
@@ -98,8 +98,8 @@
       <HintPath>..\packages\Dapplo.Log.Loggers.1.0.29\lib\net45\Dapplo.Log.Loggers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.1.0.132\lib\net45\Dapplo.Utils.dll</HintPath>
+    <Reference Include="Dapplo.Utils, Version=1.0.150.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Utils.1.0.150\lib\net45\Dapplo.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -332,7 +332,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
@@ -376,12 +378,12 @@ foreach (var item in filesToCleanup)
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.2.0.9\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.9\build\dotnet\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.2.0.10\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.10\build\dotnet\Fody.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\packages\Fody.2.0.9\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.9\build\dotnet\Fody.targets')" />
   <Import Project="..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets')" />
+  <Import Project="..\packages\Fody.2.0.10\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.10\build\dotnet\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

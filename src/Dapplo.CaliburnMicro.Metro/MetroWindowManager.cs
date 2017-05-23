@@ -28,10 +28,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dapplo.Log;
-using Dapplo.Utils.Embedded;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-
+using Dapplo.Addons.Bootstrapper.Resolving;
 #endregion
 
 namespace Dapplo.CaliburnMicro.Metro
@@ -109,7 +108,7 @@ namespace Dapplo.CaliburnMicro.Metro
         public void AddMahappsStyle(string style)
         {
             var packUri = CreateMahappStyleUri(style);
-            // TODO: Fix Dapplo.Utils resource checking
+            // TODO: Fix resource checking, needing Dapplo.Addons.Bootstrapper just for this check??
             if (!packUri.EmbeddedResourceExists())
             {
                 Log.Warn().WriteLine("Style {0} might not be available as {1}.", style, packUri);

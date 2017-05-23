@@ -33,8 +33,8 @@ using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log;
-using Dapplo.Utils.Resolving;
 using System.Diagnostics.CodeAnalysis;
+using Dapplo.Addons.Bootstrapper.Resolving;
 
 #endregion
 
