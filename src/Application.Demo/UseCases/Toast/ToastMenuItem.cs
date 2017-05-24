@@ -21,6 +21,7 @@
 
 #region using
 
+using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using Application.Demo.Languages;
@@ -37,7 +38,8 @@ using MahApps.Metro.IconPacks;
 namespace Application.Demo.UseCases.Toast
 {
     /// <summary>
-    ///     This provides the IMenuItem to open the WindowWithMenuViewModel
+    ///     This provides the IMenuItem to show a ToastNotification
+    /// It uses a ExportFactory for the ViewModel, the ViewModel should not be shared, and it will dispose everything as soon as the toast is deactivated.
     /// </summary>
     [Export("contextmenu", typeof(IMenuItem))]
     public sealed class ToastMenuItem : AuthenticatedMenuItem<IMenuItem, Visibility>
@@ -47,27 +49,49 @@ namespace Application.Demo.UseCases.Toast
         [ImportingConstructor]
         public ToastMenuItem(
             IEventAggregator eventAggregator,
-            ToastExampleViewModel toastExampleViewModel,
+            ExportFactory<ToastExampleViewModel> toastExampleViewModelFactory,
             IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
-            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.ActiveCard));
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Toast));
 
             Icon = new PackIconMaterial
             {
-                Kind = PackIconMaterialKind.MessageAlert
+                Kind = PackIconMaterialKind.MessageText
             };
 
 
             ClickAction = clickedItem =>
             {
                 Log.Debug().WriteLine("Toast");
-
-                eventAggregator.PublishOnCurrentThread(toastExampleViewModel);
+                ShowToast(eventAggregator, toastExampleViewModelFactory);
+ 
             };
 
             this.VisibleOnPermissions("Admin");
+        }
 
+        /// <summary>
+        /// This takes care of creating the view model, publishing it, and disposing afterwards
+        /// </summary>
+        /// <param name="eventAggregator">IEventAggregator</param>
+        /// <param name="toastExampleViewModelFactory">ExportFactory of type ToastExampleViewModel</param>
+        private void ShowToast(IEventAggregator eventAggregator, ExportFactory<ToastExampleViewModel> toastExampleViewModelFactory)
+        {
+            // Create the ViewModel "part"
+            var message = toastExampleViewModelFactory.CreateExport();
+
+            // Prepare to dispose the view model parts automatically if it's finished
+            EventHandler<DeactivationEventArgs> disposeHandler = null;
+            disposeHandler = (sender, args) =>
+            {
+                message.Value.Deactivated -= disposeHandler;
+                message.Dispose();
+            };
+            message.Value.Deactivated += disposeHandler;
+
+            // Show the ViewModel as toast 
+            eventAggregator.PublishOnCurrentThread(message.Value);
         }
     }
 }

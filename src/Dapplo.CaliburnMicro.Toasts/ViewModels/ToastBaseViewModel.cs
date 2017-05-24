@@ -31,11 +31,19 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
     public abstract class ToastBaseViewModel : Screen, IToast
     {
         private Action<INotification> _closeAction;
+        private int _id;
 
         /// <summary>
         /// Id of the toast
         /// </summary>
-        public virtual int Id { get; set; }
+        public virtual int Id {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
         /// <summary>
         /// This takes care of assigning the new view to the DisplayPart

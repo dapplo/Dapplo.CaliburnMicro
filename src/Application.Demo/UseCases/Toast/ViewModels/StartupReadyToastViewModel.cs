@@ -20,15 +20,26 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System.ComponentModel.Composition;
+using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
 
 namespace Application.Demo.UseCases.Toast.ViewModels
 {
     [Export]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ToastExampleViewModel : ToastBaseViewModel
+    public class StartupReadyToastViewModel : ToastBaseViewModel
     {
-        public string Message => "Hello World";
+        private readonly IToastTranslations _toastTranslations;
+
+        [ImportingConstructor]
+        public StartupReadyToastViewModel(IToastTranslations toastTranslations)
+        {
+            _toastTranslations = toastTranslations;
+        }
+
+        /// <summary>
+        /// This contains the message for the ViewModel
+        /// </summary>
+        public string Message => _toastTranslations.StartupNotify;
 
     }
 }

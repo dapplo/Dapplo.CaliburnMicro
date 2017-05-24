@@ -34,6 +34,11 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         ///     This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
         /// </summary>
-        TrayIcons = 200
+        TrayIcons = 200,
+
+        /// <summary>
+        /// From here on, Dapplo.CaliburnMicro is started and user code can use everything
+        /// </summary>
+        User = 1000
     }
 }

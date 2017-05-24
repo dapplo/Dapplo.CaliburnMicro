@@ -30,7 +30,8 @@
         <resource name="two">Two</resource>
         <resource name="three">Three</resource>
         <resource name="somewindow">Just a Window</resource>
-        <resource name="activecard">Show card</resource>
+        <resource name="activecard">Show card as toast</resource>
+        <resource name="toast">Show toast</resource>
         <resource name="wizard">Wizard</resource>
         <resource name="configure">Configure</resource>
         <resource name="exit">Exit</resource>

@@ -59,8 +59,6 @@ namespace Application.Demo
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
             };
 
-            // Load the Dapplo* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Dapplo.*");
             // Load the Application.Demo.* assemblies
             application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
 

@@ -1,4 +1,4 @@
-﻿<core:NotificationDisplayPart x:Class="Application.Demo.UseCases.Toast.Views.ToastExampleView"
+﻿<core:NotificationDisplayPart x:Class="Application.Demo.UseCases.Toast.Views.StartupReadyToastView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,13 +7,11 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Toast.ViewModels"
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
-             d:DataContext="{d:DesignInstance viewModels:ToastExampleViewModel,IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance viewModels:StartupReadyToastViewModel,IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300" HorizontalContentAlignment="Stretch">
     <StackPanel>
         <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
-        <Label Content="{Binding Id}"></Label>
         <TextBlock Text="{Binding Message}" FontWeight="Light" Foreground="White" TextWrapping="Wrap" />
-        <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Watermark example" />
     </StackPanel>
 </core:NotificationDisplayPart>
 

@@ -1,58 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <language>
-	<resources prefix="core">
-		<resource name="ok">Ok</resource>
-		<resource name="cancel">Abbrechen</resource>
-		<resource name="language">Sprache</resource>
-		<resource name="settings">Einstellungen</resource>
-	</resources>
-	<resources prefix="config">
-		<resource name="apply">Anwenden</resource>
-		<resource name="restore_defaults">Standardeinstellungen</resource>
-		<resource name="ui">Benutzeroberfläche</resource>
-		<resource name="addons">Erweiterungen</resource>
-		<resource name="filter">Typ Filtertext</resource>
-		<resource name="hotkey">Abkürzungstasten</resource>
-	</resources>
-	<resources prefix="ui">
-		<resource name="theme">Theme</resource>
-	</resources>
-	<resources prefix="credentials">
-		<resource name="username">Benutzername</resource>
-		<resource name="password">Paswort</resource>
-		<resource name="login">Anmelden</resource>
-	</resources>
-	<resources prefix="contextmenu">
-		<resource name="title">Demo Anwendung</resource>
-		<resource name="withchildren">Kinder</resource>
-		<resource name="one">Eins</resource>
-		<resource name="two">Zwei</resource>
-		<resource name="three">Drei</resource>
-		<resource name="somewindow">Nur ein Window</resource>
-	    <resource name="activecard">Karte anzeigen</resource>
-		<resource name="wizard">Wizard</resource>
-		<resource name="configure">Einstellungen</resource>
-		<resource name="exit">Abschließen</resource>
+    <resources prefix="core">
+        <resource name="ok">Ok</resource>
+        <resource name="cancel">Abbrechen</resource>
+        <resource name="language">Sprache</resource>
+        <resource name="settings">Einstellungen</resource>
+    </resources>
+    <resources prefix="config">
+        <resource name="apply">Anwenden</resource>
+        <resource name="restore_defaults">Standardeinstellungen</resource>
+        <resource name="ui">Benutzeroberfläche</resource>
+        <resource name="addons">Erweiterungen</resource>
+        <resource name="filter">Typ Filtertext</resource>
+        <resource name="hotkey">Abkürzungstasten</resource>
+    </resources>
+    <resources prefix="ui">
+        <resource name="theme">Theme</resource>
+    </resources>
+    <resources prefix="credentials">
+        <resource name="username">Benutzername</resource>
+        <resource name="password">Paswort</resource>
+        <resource name="login">Anmelden</resource>
+    </resources>
+    <resources prefix="contextmenu">
+        <resource name="title">Demo Anwendung</resource>
+        <resource name="withchildren">Kinder</resource>
+        <resource name="one">Eins</resource>
+        <resource name="two">Zwei</resource>
+        <resource name="three">Drei</resource>
+        <resource name="somewindow">Nur ein Window</resource>
+        <resource name="activecard">Karte anzeigen</resource>
+        <resource name="toast">Karte als toast anzeigen</resource>
+        <resource name="wizard">Wizard</resource>
+        <resource name="configure">Einstellungen</resource>
+        <resource name="exit">Abschließen</resource>
         <resource name="createerror">Fehler generieren</resource>
     </resources>
-	<resources prefix="menu">
-		<resource name="about">Über</resource>
-		<resource name="edit">Bearbeiten</resource>
-		<resource name="file">Bestand</resource>
-		<resource name="save_as">Speichern unter</resource>
-	</resources>
-	<resources prefix="wizard">
-		<resource name="next">Weiter</resource>
-		<resource name="previous">Zurück</resource>
-		<resource name="cancel">Abbrechen</resource>
-		<resource name="finish">Ok</resource>
-		<resource name="title">Mein Wizard</resource>
-		<resource name="title_step1">Schritt 1</resource>
-		<resource name="title_step2">Schritt 2</resource>
-		<resource name="title_step3">Schritt 3</resource>
-		<resource name="title_step4">Schritt 4</resource>
-		<resource name="title_step5">Schritt 5</resource>
-		<resource name="complete_step4">Fertig</resource>
-	</resources>
+    <resources prefix="menu">
+        <resource name="about">Über</resource>
+        <resource name="edit">Bearbeiten</resource>
+        <resource name="file">Bestand</resource>
+        <resource name="save_as">Speichern unter</resource>
+    </resources>
+    <resources prefix="wizard">
+        <resource name="next">Weiter</resource>
+        <resource name="previous">Zurück</resource>
+        <resource name="cancel">Abbrechen</resource>
+        <resource name="finish">Ok</resource>
+        <resource name="title">Mein Wizard</resource>
+        <resource name="title_step1">Schritt 1</resource>
+        <resource name="title_step2">Schritt 2</resource>
+        <resource name="title_step3">Schritt 3</resource>
+        <resource name="title_step4">Schritt 4</resource>
+        <resource name="title_step5">Schritt 5</resource>
+        <resource name="complete_step4">Fertig</resource>
+    </resources>
 </language>

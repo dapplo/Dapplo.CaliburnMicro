@@ -170,6 +170,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Languages\IToastTranslations.cs" />
     <Compile Include="Languages\IDemoConfigTranslations.cs" />
     <Compile Include="Languages\IMenuTranslations.cs" />
     <Compile Include="Languages\IValidationErrors.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Models\IDemoConfiguration.cs" />
     <Compile Include="Models\IWizardModel.cs" />
     <Compile Include="Services\AuthenticationProvider.cs" />
+    <Compile Include="Services\NotifyOfStartupReady.cs" />
     <Compile Include="Services\SimpleVersionProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="UseCases\ContextMenu\WizardMenuItem.cs" />
     <Compile Include="UseCases\Menu\SaveAsMenuItem.cs" />
     <Compile Include="UseCases\Menu\ViewModels\WindowWithMenuViewModel.cs" />
+    <Compile Include="UseCases\Toast\ViewModels\StartupReadyToastViewModel.cs" />
     <Compile Include="UseCases\Toast\ViewModels\ToastExampleViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep5ViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
@@ -289,6 +292,10 @@
     <Page Include="UseCases\Menu\Views\WindowWithMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UseCases\Toast\Views\StartupReadyToastView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UseCases\Toast\Views\ToastExampleView.xaml">
       <SubType>Designer</SubType>

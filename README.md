@@ -1,14 +1,23 @@
 # Dapplo.CaliburnMicro
 This will help you to get started with bootstrapping Caliburn.Micro (and eventually MahApps or NotifyIcon WPF)
 
-WORK IN PROGRESS
-
 - Documentation can be found [here](http://www.dapplo.net/blocks/Dapplo.CaliburnMicro) (soon)
 - Current build status: [![Build status](https://ci.appveyor.com/api/projects/status/fuaq8ppel23aqqva?svg=true)](https://ci.appveyor.com/project/dapplo/dapplo-caliburnmicro)
 - Coverage Status: [![Coverage Status](https://coveralls.io/repos/github/dapplo/Dapplo.CaliburnMicro/badge.svg?branch=master)](https://coveralls.io/github/dapplo/Dapplo.CaliburnMicro?branch=master)
 - NuGet package Dapplo.CaliburnMicro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro)
 - NuGet package Dapplo.CaliburnMicro.Metro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro)
 - NuGet package Dapplo.CaliburnMicro.NotifyIconWpf: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf)
+
+
+This project is a combination of multiple Dapplo libraries, and brings roughly:
+- A bootstrapper for Caliburn.Micro with MEF (Managed Extension Framework)
+- addons to your application, via Dapplo.Addons. Use MVVM via composition (e.g. you can make a context menu and have the items provided by addons)
+- configuration & translations based on interfaces via Dapplo.Config
+- Some UI components like System-tray icon, menus, wizard are provided with a MVVM first approach.
+- Automatically style your Views via MahApps (if there is a reference to the DLL, this will be used automatically)
+
+THIS IS WORK IN PROGRESS
+
 
 Available Packages:
 - Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel

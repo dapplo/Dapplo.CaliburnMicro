@@ -19,16 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using System.ComponentModel.Composition;
-using Dapplo.CaliburnMicro.Toasts.ViewModels;
+#region using
 
-namespace Application.Demo.UseCases.Toast.ViewModels
+using System.ComponentModel;
+using Dapplo.Language;
+
+#endregion
+
+namespace Application.Demo.Languages
 {
-    [Export]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ToastExampleViewModel : ToastBaseViewModel
+    [Language("Toasts")]
+    public interface IToastTranslations : ILanguage, INotifyPropertyChanged
     {
-        public string Message => "Hello World";
-
+        [DefaultValue("Startup finished")]
+        string StartupNotify { get; }
     }
 }

@@ -81,6 +81,9 @@ namespace Dapplo.CaliburnMicro.Dapp
 
             // Make the bootstrapper stop when the CurrentDispatcher is going to shutdown, this uses a little hack to make sure there is no block
             Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) => StopBootstrapperAsync().WaitWithNestedMessageLoop();
+
+            // Load the Dapplo.Caliburn* assemblies
+            _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
         }
 
         /// <summary>
