@@ -14,13 +14,22 @@ This project is a combination of multiple Dapplo libraries, and brings roughly:
 - addons to your application, via Dapplo.Addons. Use MVVM via composition (e.g. you can make a context menu and have the items provided by addons)
 - configuration & translations based on interfaces via Dapplo.Config
 - Some UI components like System-tray icon, menus, wizard are provided with a MVVM first approach.
-- Automatically style your Views via MahApps (if there is a reference to the DLL, this will be used automatically)
+- Automatically style your Views via MahApps (if there is a reference to the Dapplo.CaliburnMicro.Metro.dll this will be used automatically)
 
 THIS IS WORK IN PROGRESS
 
 
 Available Packages:
 - Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
+- Dapplo.CaliburnMicro.Dapp, adds a replacement for Application which helps to bootstrap
+- Dapplo.CaliburnMicro.Configuration, adds a MVVM configuration component and automatic Dapplo.Ini importing
+- Dapplo.CaliburnMicro.Translation, adds automatic Dapplo.Language importing
+- Dapplo.CaliburnMicro.Security, adds security to your UI
+- Dapplo.CaliburnMicro.Security.ActiveDirectory, adds AD-Role based permissions to your UI
+- Dapplo.CaliburnMicro.Wizard, adds a MVVM wizard component
+- Dapplo.CaliburnMicro.Menu, adds a MVVM menu component
+- Dapplo.CaliburnMicro.Toasts, adds a MVVM toasts
+- Dapplo.CaliburnMicro.Cards, adds a MVVM adaptive card implementation
 - Dapplo.CaliburnMicro.Metro, contains a MetroWindowManager to make it work with MahApps
 - Dapplo.CaliburnMicro.NotifyIconWpf, adds functionality to display a system tray icon ViewModel first, via Hardcodet.NotifyIcon.Wpf
 
