@@ -71,24 +71,24 @@
       <HintPath>..\packages\Costura.Fody.1.6.0\lib\dotnet\Costura.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.16.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.16\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.18\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.16.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.16\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.18\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Ini, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Ini.0.5.18\lib\net45\Dapplo.Ini.dll</HintPath>
+    <Reference Include="Dapplo.Ini, Version=0.5.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Ini.0.5.19\lib\net45\Dapplo.Ini.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.9\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Language, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Language.0.5.18\lib\net45\Dapplo.Language.dll</HintPath>
+    <Reference Include="Dapplo.Language, Version=0.5.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Language.0.5.19\lib\net45\Dapplo.Language.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
@@ -105,10 +105,6 @@
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -153,10 +149,6 @@
     </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.3.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -241,17 +233,9 @@
       <Project>{a1c54578-3ebb-48ca-bb9f-f5d2f8fc2714}</Project>
       <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj">
-      <Project>{e6597c99-3721-42f3-87b6-219b9dfd9879}</Project>
-      <Name>Dapplo.CaliburnMicro.Metro</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj">
       <Project>{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}</Project>
       <Name>Dapplo.CaliburnMicro.NotifyIconWpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj">
-      <Project>{3ab2ad6a-ed68-4e4a-bee6-7eed7b8a6176}</Project>
-      <Name>Dapplo.CaliburnMicro.Overlays</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
       <Project>{b9850f45-5efc-4ca0-b7cd-aaeb1fe6d5df}</Project>
@@ -342,17 +326,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\Application.Demo.Addon\bin\$(Configuration)\Application.Demo.Addon.dll">
-      <Link>costura.application.demo.addon.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\Application.Demo.MetroAddon\bin\$(Configuration)\Application.Demo.MetroAddon.dll">
-      <Link>costura.application.demo.metroaddon.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\Application.Demo.OverlayAddon\bin\$(Configuration)\Application.Demo.OverlayAddon.dll">
-      <Link>costura.application.demo.overlayaddon.dll</Link>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml">

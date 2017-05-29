@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Toast.ViewModels"
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
              d:DataContext="{d:DesignInstance viewModels:ToastExampleViewModel,IsDesignTimeCreatable=True}"
@@ -13,7 +12,7 @@
         <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
         <Label Content="{Binding Id}"></Label>
         <TextBlock Text="{Binding Message}" FontWeight="Light" Foreground="White" TextWrapping="Wrap" />
-        <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Watermark example" />
+        <TextBox />
     </StackPanel>
 </core:NotificationDisplayPart>
 

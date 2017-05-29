@@ -59,6 +59,16 @@ namespace Application.Demo
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
             };
 
+#if DEBUG
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
+#else
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
+#endif
+
             // Load the Application.Demo.* assemblies
             application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
 

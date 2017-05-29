@@ -81,9 +81,6 @@ namespace Dapplo.CaliburnMicro.Dapp
 
             // Make the bootstrapper stop when the CurrentDispatcher is going to shutdown, this uses a little hack to make sure there is no block
             Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) => StopBootstrapperAsync().WaitWithNestedMessageLoop();
-
-            // Load the Dapplo.Caliburn* assemblies
-            _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
         }
 
         /// <summary>
@@ -114,6 +111,9 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Enable UI access for different Dapplo packages, especially the UiContext.RunOn
             // This only works here, not before the Application is started and not later
             UiContext.Initialize();
+            
+            // Load the Dapplo.CaliburnMicro.* assemblies
+            _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
 
             // Prepare the bootstrapper
             await _bootstrapper.InitializeAsync();

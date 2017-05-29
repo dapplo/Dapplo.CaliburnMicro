@@ -34,7 +34,6 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Language;
 using Dapplo.Log;
-using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -49,11 +48,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     {
         private static readonly LogSource Log = new LogSource();
         private readonly WizardExampleViewModel _demoDialogViewModel;
-
-        /// <summary>
-        ///     Used to make it possible to show a MahApps dialog
-        /// </summary>
-        private readonly IDialogCoordinator _dialogcoordinator;
 
         /// <summary>
         ///     Used to show a "normal" dialog
@@ -76,7 +70,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             IWindowManager windowsManager,
             IConfigTranslations configTranslations,
             ICoreTranslations coreTranslations,
-            IDialogCoordinator dialogcoordinator,
             IDemoConfiguration demoConfiguration,
             WizardExampleViewModel demoDialogViewModel)
         {
@@ -84,7 +77,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             ConfigTranslations = configTranslations;
             CoreTranslations = coreTranslations;
             _windowsManager = windowsManager;
-            _dialogcoordinator = dialogcoordinator;
             _demoDialogViewModel = demoDialogViewModel;
 
             // automatically update the DisplayName
@@ -103,16 +95,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         {
             var result = _windowsManager.ShowDialog(_demoDialogViewModel);
             Log.Info().WriteLine($"Girl you know it's {result}");
-        }
-
-        /// <summary>
-        ///     Show a MahApps dialog from the MVVM
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once UnusedMember.Global
-        public async Task Dialog()
-        {
-            await _dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
         }
     }
 }
