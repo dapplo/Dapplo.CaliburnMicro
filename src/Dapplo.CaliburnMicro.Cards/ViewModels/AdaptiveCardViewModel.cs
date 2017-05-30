@@ -31,7 +31,6 @@ using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Cards.Entities;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
 using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
-using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.HttpExtensions;
 using Dapplo.Log;
 
@@ -46,6 +45,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         private static readonly LogSource Log = new LogSource();
         private FrameworkElement _card;
         private AdaptiveCard _adaptiveCard;
+        private readonly IEventAggregator _eventAggregator;
 
 #if DEBUG
         /// <summary>
@@ -94,9 +94,11 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// Constructor with AdaptiveCard
         /// </summary>
         /// <param name="adaptiveCard"></param>
-        public AdaptiveCardViewModel(AdaptiveCard adaptiveCard)
+        /// <param name="eventAggregator">Optional IEventAggregator for when the AdativeCard has a ShowCardAction</param>
+        public AdaptiveCardViewModel(AdaptiveCard adaptiveCard, IEventAggregator eventAggregator = null)
         {
             Card = adaptiveCard;
+            _eventAggregator = eventAggregator;
         }
 
         /// <summary>
@@ -179,9 +181,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             var showCardAction = e.Action as ShowCardAction;
             if (showCardAction != null)
             {
-                // TODO: Currently kinda a hack
-                var eventAggregator = Dapplication.Current.Bootstrapper.GetExport<IEventAggregator>().Value;
-                eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card));
+                _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
                 return;
             }
 

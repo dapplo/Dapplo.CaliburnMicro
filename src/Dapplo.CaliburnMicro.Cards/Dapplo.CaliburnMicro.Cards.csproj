@@ -51,8 +51,8 @@
       <HintPath>..\packages\Caliburn.Micro.3.1.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.18\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.20\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.HttpExtensions, Version=0.6.22.0, Culture=neutral, processorArchitecture=MSIL">
@@ -134,10 +134,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj">
-      <Project>{D8C2622B-B621-4467-A3BA-1B744AF7E8D6}</Project>
-      <Name>Dapplo.CaliburnMicro.Dapp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
       <Project>{77a4950a-7e56-4591-93f9-a39100916815}</Project>
       <Name>Dapplo.CaliburnMicro.Toasts</Name>

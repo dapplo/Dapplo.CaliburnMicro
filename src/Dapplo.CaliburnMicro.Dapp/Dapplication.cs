@@ -145,6 +145,16 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// </summary>
         private async Task StopBootstrapperAsync()
         {
+            // TODO: What to disable here? Ist unregistering the exception handlers here smart?
+            // Unhook unhandled exceptions in the Dispatcher
+            DispatcherUnhandledException -= HandleDispatcherException;
+
+            // Unhook unhandled exceptions in the AppDomain
+            AppDomain.CurrentDomain.UnhandledException -= HandleAppDomainException;
+
+            // Unhook unhandled exceptions in tasks
+            TaskScheduler.UnobservedTaskException -= HandleTaskException;
+
             if (_bootstrapper.IsInitialized)
             {
                 await _bootstrapper.StopAsync().ConfigureAwait(false);

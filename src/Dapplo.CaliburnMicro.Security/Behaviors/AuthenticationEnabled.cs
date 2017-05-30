@@ -25,8 +25,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Behaviors;
-using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Extensions;
 
 #endregion
@@ -195,7 +195,7 @@ namespace Dapplo.CaliburnMicro.Security.Behaviors
             protected override void Attach(UIElement host)
             {
                 base.Attach(host);
-                _authenticationProvider = Dapplication.Current?.Bootstrapper?.GetExport<IAuthenticationProvider>();
+                _authenticationProvider = BootstrapperLocator.CurrentBootstrapper?.GetExport<IAuthenticationProvider>();
 
                 // if INotifyPropertyChanged is implemented: Call update when the _authenticationProvider changes it's values, 
                 var notifyPropertyChangedAuthenticationProvider = _authenticationProvider?.Value as INotifyPropertyChanged;
@@ -233,11 +233,6 @@ namespace Dapplo.CaliburnMicro.Security.Behaviors
             {
                 var permissions = GetPermissions(uiElement);
                 var permissionsOperation = GetPermissionsOperations(uiElement);
-
-                //var neededPermissions = permissions.Split(',')
-                //	.Where(permission => permission != null)
-                //	.Select(permission => permission.Trim().ToLowerInvariant())
-                //	.Where(permission => !string.IsNullOrEmpty(permission));
 
                 uiElement.IsEnabled = HasPermissions(permissions, permissionsOperation)
                     ? GetWhenPermissions(uiElement)
