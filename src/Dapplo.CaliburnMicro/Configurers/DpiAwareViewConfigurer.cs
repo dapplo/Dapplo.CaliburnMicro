@@ -47,7 +47,7 @@ namespace Dapplo.CaliburnMicro.Configurers
         private void Configure(Window view)
         {
             // Make sure DPI handling is done correctly
-            view.AttachWindowDpiHandler();
+            view.AttachDpiHandler();
         }
     }
 }
