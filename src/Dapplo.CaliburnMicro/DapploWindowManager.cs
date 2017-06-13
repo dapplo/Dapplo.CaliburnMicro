@@ -144,8 +144,11 @@ namespace Dapplo.CaliburnMicro
             var inferOwnerOf = InferOwnerOf(window);
             if (inferOwnerOf != null && isDialog)
             {
-                // "Dialog", center it on top of the owner
-                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                // "Dialog", center it on top of the owner (is this is visible)
+                if (inferOwnerOf.IsVisible)
+                {
+                    window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                }
                 window.Owner = inferOwnerOf;
 
                 // Make sure the configurations, coming from elsewhere, are applied
