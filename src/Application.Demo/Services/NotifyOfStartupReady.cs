@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Composition;
-using Application.Demo.Languages;
 using Application.Demo.UseCases.Toast.ViewModels;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Toasts;

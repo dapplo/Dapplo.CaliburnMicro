@@ -27,6 +27,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro.Configuration;
 
 #endregion
 
@@ -37,6 +38,12 @@ namespace Dapplo.CaliburnMicro
     /// </summary>
     public class DapploWindowManager : WindowManager
     {
+        /// <summary>
+        /// Defines the configuration for the UI
+        /// </summary>
+        [Import(AllowDefault = true)]
+        protected IUiConfiguration UiConfiguration { get; private set; }
+
         /// <summary>
         /// These imports make it possible to configure every window that is created
         /// </summary>
@@ -79,7 +86,6 @@ namespace Dapplo.CaliburnMicro
             {
                 settings = (rootModel as IHaveSettings)?.Settings;
             }
-
             base.ShowWindow(rootModel, context, settings);
         }
 
@@ -128,8 +134,7 @@ namespace Dapplo.CaliburnMicro
         {
             var window = view as Window ?? new Window
             {
-                Content = view,
-                SizeToContent = SizeToContent.WidthAndHeight
+                Content = view
             };
             return window;
         }
@@ -141,14 +146,10 @@ namespace Dapplo.CaliburnMicro
 
             // Make dialogs possible
             window.SetValue(View.IsGeneratedProperty, true);
+
             var inferOwnerOf = InferOwnerOf(window);
             if (inferOwnerOf != null && isDialog)
             {
-                // "Dialog", center it on top of the owner (is this is visible)
-                if (inferOwnerOf.IsVisible)
-                {
-                    window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                }
                 window.Owner = inferOwnerOf;
 
                 // Make sure the configurations, coming from elsewhere, are applied
@@ -156,7 +157,7 @@ namespace Dapplo.CaliburnMicro
                 {
                     foreach (var configureWindow in ConfigureDialogs)
                     {
-                        configureWindow.ConfigureDialogView(window);
+                        configureWindow.ConfigureDialogView(window, model);
                     }
                 }
             }
@@ -165,7 +166,7 @@ namespace Dapplo.CaliburnMicro
                 // Make sure the configurations, coming from elsewhere, are applied
                 foreach (var configureWindow in ConfigureWindows)
                 {
-                    configureWindow.ConfigureWindowView(window);
+                    configureWindow.ConfigureWindowView(window, model);
                 }
             }
             

@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\ICredentialsTranslations.cs" />
-    <Compile Include="Configurations\IUiConfiguration.cs" />
+    <Compile Include="Configurations\IMetroConfiguration.cs" />
     <Compile Include="Configurations\IUiTranslations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigureDefaults.cs" />

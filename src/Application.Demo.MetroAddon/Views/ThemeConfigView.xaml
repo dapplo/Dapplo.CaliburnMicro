@@ -5,9 +5,9 @@
 		<DockPanel>
 			<Label x:Name="UiTranslations_Theme" Width="50" />
 			<ComboBox ItemsSource="{Binding AvailableThemes}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
-			          SelectedValue="{Binding UiConfiguration.Theme}" />
+			          SelectedValue="{Binding MetroConfiguration.Theme}" />
 			<ComboBox ItemsSource="{Binding AvailableThemeAccents}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
-			          SelectedValue="{Binding UiConfiguration.ThemeAccent}" />
+			          SelectedValue="{Binding MetroConfiguration.ThemeAccent}" />
 		</DockPanel>
 	</StackPanel>
 </UserControl>

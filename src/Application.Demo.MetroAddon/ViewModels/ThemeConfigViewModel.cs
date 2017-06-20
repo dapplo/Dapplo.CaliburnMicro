@@ -75,7 +75,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         private MetroWindowManager MetroWindowManager { get; set; }
 
         [Import]
-        public IUiConfiguration UiConfiguration { get; set; }
+        public IMetroConfiguration MetroConfiguration { get; set; }
 
         [Import]
         public IUiTranslations UiTranslations { get; set; }
@@ -89,9 +89,9 @@ namespace Application.Demo.MetroAddon.ViewModels
         public override void Commit()
         {
             // Manually commit
-            UiConfiguration.CommitTransaction();
-            MetroWindowManager.ChangeTheme(UiConfiguration.Theme);
-            MetroWindowManager.ChangeThemeAccent(UiConfiguration.ThemeAccent);
+            MetroConfiguration.CommitTransaction();
+            MetroWindowManager.ChangeTheme(MetroConfiguration.Theme);
+            MetroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
             base.Commit();
         }
 
@@ -129,7 +129,7 @@ namespace Application.Demo.MetroAddon.ViewModels
             ParentId = "Ui";
 
             // Make sure Commit/Rollback is called on the UiConfiguration
-            config.Register(UiConfiguration);
+            config.Register(MetroConfiguration);
 
             // automatically update the DisplayName
             _disposables.Add(UiTranslations.CreateDisplayNameBinding(this, nameof(IUiTranslations.Theme)));

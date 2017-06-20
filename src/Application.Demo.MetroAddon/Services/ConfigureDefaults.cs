@@ -39,14 +39,14 @@ namespace Application.Demo.MetroAddon.Services
         public ConfigureDefaults(
             [Import(typeof(IWindowManager))]
             MetroWindowManager metroWindowManager,
-            IUiConfiguration uiConfiguration
+            IMetroConfiguration metroConfiguration
             )
         {
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
             metroWindowManager.AddResourceDictionary(demoUri);
 
-            metroWindowManager.ChangeTheme(uiConfiguration.Theme);
-            metroWindowManager.ChangeThemeAccent(uiConfiguration.ThemeAccent);
+            metroWindowManager.ChangeTheme(metroConfiguration.Theme);
+            metroWindowManager.ChangeThemeAccent(metroConfiguration.ThemeAccent);
 
             // Override the ConfigView with a much nicer looking version
             ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");

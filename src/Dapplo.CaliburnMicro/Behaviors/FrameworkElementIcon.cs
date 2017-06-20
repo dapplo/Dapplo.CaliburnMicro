@@ -24,6 +24,7 @@
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
@@ -122,21 +123,35 @@ namespace Dapplo.CaliburnMicro.Behaviors
         /// </summary>
         private sealed class IconBehavior : Behavior<FrameworkElement>
         {
+            private readonly FrameworkElement _icon;
+
             internal IconBehavior(FrameworkElement uiElement) : base(uiElement)
             {
+                _icon = GetValue(uiElement);
             }
 
             protected override void Update(FrameworkElement uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs)
             {
-                var icon = GetValue(uiElement);
-                if (icon == null)
+                if (uiElement == null)
                 {
                     return;
                 }
+
+                // For user controls, find the parent - parent
+                while (typeof(UserControl).IsAssignableFrom(uiElement.GetType().BaseType))
+                {
+                    var parentUiElement = uiElement.Parent as FrameworkElement;
+                    if (parentUiElement == null)
+                    {
+                        break;
+                    }
+                    uiElement = parentUiElement;
+                }
+
                 if (!uiElement.IsLoaded)
                 {
                     // If the host is not loaded, wait until it is.
-                    FrameworkElement target = uiElement.IsLoaded ? icon : uiElement;
+                    var target = uiElement.IsLoaded ? _icon : uiElement;
                     var handlers = new RoutedEventHandler[1];
                     handlers[0] = (sender, args) =>
                     {
@@ -163,13 +178,13 @@ namespace Dapplo.CaliburnMicro.Behaviors
                     {
                         size = new Size(image.Width, image.Height);
                     }
-                    var iconIcon = icon.ToBitmapSource(size);
+                    var iconIcon = _icon.ToBitmapSource(size);
                     propertyInfo.SetValue(uiElement, iconIcon);
                 }
                 else if (propertyInfo.PropertyType == typeof(Icon))
                 {
                     // Icon is of type System.Drawing.Icon
-                    propertyInfo.SetValue(uiElement, icon.ToIcon());
+                    propertyInfo.SetValue(uiElement, _icon.ToIcon());
                 }
                 else
                 {

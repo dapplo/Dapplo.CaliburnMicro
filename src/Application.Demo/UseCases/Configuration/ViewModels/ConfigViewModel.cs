@@ -28,12 +28,9 @@ using System.Threading.Tasks;
 using Application.Demo.Languages;
 using Application.Demo.Models;
 using Application.Demo.Shared;
-using Application.Demo.UseCases.Wizard.ViewModels;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Language;
-using Dapplo.Log;
 
 #endregion
 
@@ -46,14 +43,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     [Export]
     public sealed class ConfigViewModel : Config<IConfigScreen>
     {
-        private static readonly LogSource Log = new LogSource();
-        private readonly WizardExampleViewModel _demoDialogViewModel;
-
-        /// <summary>
-        ///     Used to show a "normal" dialog
-        /// </summary>
-        private readonly IWindowManager _windowsManager;
-
         /// <summary>
         /// Is used from View
         /// </summary>
@@ -67,17 +56,13 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         [ImportingConstructor]
         public ConfigViewModel(
             [ImportMany] IEnumerable<Lazy<IConfigScreen>> configScreens,
-            IWindowManager windowsManager,
             IConfigTranslations configTranslations,
             ICoreTranslations coreTranslations,
-            IDemoConfiguration demoConfiguration,
-            WizardExampleViewModel demoDialogViewModel)
+            IDemoConfiguration demoConfiguration)
         {
             ConfigScreens = configScreens;
             ConfigTranslations = configTranslations;
             CoreTranslations = coreTranslations;
-            _windowsManager = windowsManager;
-            _demoDialogViewModel = demoDialogViewModel;
 
             // automatically update the DisplayName
             CoreTranslations.CreateDisplayNameBinding(this, nameof(ICoreTranslations.Settings));
@@ -85,16 +70,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             // Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
             var lang = demoConfiguration.Language;
             Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
-        }
-
-        /// <summary>
-        ///     Show the credentials for the login
-        /// </summary>
-        // ReSharper disable once UnusedMember.Global
-        public void Login()
-        {
-            var result = _windowsManager.ShowDialog(_demoDialogViewModel);
-            Log.Info().WriteLine($"Girl you know it's {result}");
         }
     }
 }

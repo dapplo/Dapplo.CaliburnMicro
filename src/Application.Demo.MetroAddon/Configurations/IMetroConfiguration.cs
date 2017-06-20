@@ -32,7 +32,7 @@ using MahApps.Metro.Controls;
 namespace Application.Demo.MetroAddon.Configurations
 {
     [IniSection("Metro")]
-    public interface IUiConfiguration : IIniSection, ITransactionalProperties
+    public interface IMetroConfiguration : IIniSection, ITransactionalProperties
     {
         HotKey HotKey { get; set; }
 

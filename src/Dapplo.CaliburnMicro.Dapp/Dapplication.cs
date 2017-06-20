@@ -117,7 +117,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             UiContext.Initialize();
             
             // Load the Dapplo.CaliburnMicro.* assemblies
-            _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro.*");
+            _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
 
             // Prepare the bootstrapper
             await _bootstrapper.InitializeAsync();
