@@ -69,6 +69,10 @@ namespace Dapplo.CaliburnMicro.Dapp
         public Dapplication(ApplicationBootstrapper applicationBootstrapper)
         {
             _bootstrapper = applicationBootstrapper;
+
+            // Enable the cleaning of double assemblies, this makes sure doubles are deleted, solves Costura issues
+            _bootstrapper.AllowAssemblyCleanup = true;
+
             Current = this;
             // Hook unhandled exceptions in the Dispatcher
             DispatcherUnhandledException += HandleDispatcherException;

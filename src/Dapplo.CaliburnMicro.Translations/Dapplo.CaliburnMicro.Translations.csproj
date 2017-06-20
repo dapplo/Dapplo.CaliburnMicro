@@ -32,8 +32,8 @@
     <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.Translations.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapplo.Addons, Version=0.5.21.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.21\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.22\lib\net45\Dapplo.Addons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.9.0, Culture=neutral, processorArchitecture=MSIL">
