@@ -158,6 +158,7 @@
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
     <Compile Include="Extensions\HaveIconExtensions.cs" />
     <Compile Include="Extensions\IconExtensions.cs" />
+    <Compile Include="IMaintainPosition.cs" />
     <Compile Include="IAmDisplayable.cs" />
     <Compile Include="ICanBeClicked.cs" />
     <Compile Include="IConfigureDialogViews.cs" />
