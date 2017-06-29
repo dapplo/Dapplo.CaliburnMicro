@@ -71,11 +71,20 @@
   <ItemGroup>
     <Compile Include="ClickOnceService.cs" />
     <Compile Include="Configuration\IClickOnceConfiguration.cs" />
+    <Compile Include="IHandleClickOnceRestarts.cs" />
     <Compile Include="IClickOnceInformation.cs" />
+    <Compile Include="IApplyClickOnceUpdates.cs" />
+    <Compile Include="IHandleClickOnceUpdates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
+      <Project>{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}</Project>
+      <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

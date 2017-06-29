@@ -19,24 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Dapplo.CaliburnMicro.Diagnostics;
-using System;
+using System.Deployment.Application;
 
 namespace Dapplo.CaliburnMicro.ClickOnce
 {
     /// <summary>
-    /// Information on ClickOnce status
+    /// If you want to handle ClickOnce updates yourself, implement this and export your class as typeof(IHandleClickOnceUpdates)
     /// </summary>
-    public interface IClickOnceInformation : IVersionProvider
+    public interface IHandleClickOnceUpdates
     {
         /// <summary>
-        /// Is this a ClickOnce application?
+        /// Handle the update, this is usually handled by the ClickOnceService itself
         /// </summary>
-        bool IsClickOnce { get; }
-
-        /// <summary>
-        /// The time the last check was made on
-        /// </summary>
-        DateTimeOffset LastCheckedOn { get; }
+        /// <param name="updateCheckInfo">UpdateCheckInfo</param>
+        void HandleUpdateCheck(UpdateCheckInfo updateCheckInfo);
     }
 }

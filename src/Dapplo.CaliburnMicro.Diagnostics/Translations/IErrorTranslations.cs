@@ -19,24 +19,37 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Dapplo.CaliburnMicro.Diagnostics;
-using System;
+#region using
 
-namespace Dapplo.CaliburnMicro.ClickOnce
+using System.ComponentModel;
+using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Language;
+
+#endregion
+
+namespace Dapplo.CaliburnMicro.Diagnostics.Translations
 {
     /// <summary>
-    /// Information on ClickOnce status
+    ///     These are the translations used on the ErrorView
     /// </summary>
-    public interface IClickOnceInformation : IVersionProvider
+    public interface IErrorTranslations : IDefaultValue, ILanguagePart, INotifyPropertyChanged
     {
         /// <summary>
-        /// Is this a ClickOnce application?
+        ///     Used for the title of the error view
         /// </summary>
-        bool IsClickOnce { get; }
+        [DefaultValue("Something went wrong")]
+        string ErrorTitle { get; }
 
         /// <summary>
-        /// The time the last check was made on
+        ///     Used for the current version label
         /// </summary>
-        DateTimeOffset LastCheckedOn { get; }
+        [DefaultValue("Current version")]
+        string CurrentVersion { get; }
+
+        /// <summary>
+        ///     Used for the latest version label
+        /// </summary>
+        [DefaultValue("Latest version")]
+        string LatestVersion { get; }
     }
 }

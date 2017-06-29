@@ -23,9 +23,11 @@ using System;
 using System.ComponentModel.Composition;
 using System.Deployment.Application;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Windows;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.ClickOnce.Configuration;
+using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
 
 namespace Dapplo.CaliburnMicro.ClickOnce
@@ -35,14 +37,23 @@ namespace Dapplo.CaliburnMicro.ClickOnce
     /// </summary>
     [StartupAction]
     [Export(typeof(IClickOnceInformation))]
-    public class ClickOnceService : IStartupAction, IClickOnceInformation
+    [Export(typeof(IVersionProvider))]
+    public class ClickOnceService : IStartupAction, IClickOnceInformation, IHandleClickOnceUpdates, IApplyClickOnceUpdates, IHandleClickOnceRestarts
     {
         private static readonly LogSource Log = new LogSource();
-        private Version _clickOnceVersion;
         private bool _isInCheck;
 
         [Import]
         private IClickOnceConfiguration ClickOnceConfiguration { get; set; }
+
+        [Import(AllowDefault = true)]
+        private IHandleClickOnceUpdates HandleClickOnceUpdates { get; set; }
+
+        [Import(AllowDefault = true)]
+        private IHandleClickOnceRestarts HandleClickOnceRestarts { get; set; }
+
+        [Import(AllowDefault = true)]
+        private IApplyClickOnceUpdates ApplyClickOnceUpdates { get; set; }
 
         /// <inheritdoc />
         public void Start()
@@ -52,6 +63,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
                 Log.Info().WriteLine("Application is not deployed via ClickOnce, there will be no checks for updates.");
                 return;
             }
+
             IObservable<long> updateObservable = null;
 
             var checkInBackground = ClickOnceConfiguration.EnableBackgroundUpdateCheck && ClickOnceConfiguration.CheckInterval > 0;
@@ -71,43 +83,62 @@ namespace Dapplo.CaliburnMicro.ClickOnce
                 updateObservable = Observable.Timer(TimeSpan.Zero);
             }
             // Register the check, if there is an update observable
-            updateObservable?.Select(l => CheckForUpdate()).Where(updateCheckInfo => updateCheckInfo != null).Subscribe();
+            updateObservable?.Select(l => CheckForUpdate())
+                .Where(updateCheckInfo => updateCheckInfo != null)
+                .Subscribe(HandleUpdateCheck);
         }
+
+        /// <inheritdoc />
+        public DateTimeOffset LastCheckedOn { get; private set; }
 
         /// <inheritdoc />
         public bool IsClickOnce { get; } = ApplicationDeployment.IsNetworkDeployed;
 
         /// <inheritdoc />
-        public Version CurrentVersion => _clickOnceVersion ?? (_clickOnceVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion);
+        public Version CurrentVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
 
         /// <inheritdoc />
-        public Version LatestVersion { get; private set; }
+        public Version LatestVersion { get; private set; } = Assembly.GetExecutingAssembly().GetName().Version;
 
         /// <summary>
         /// Process the update check
         /// </summary>
         /// <param name="updateCheckInfo">UpdateCheckInfo</param>
-        private void HandleUpdateCheck(UpdateCheckInfo updateCheckInfo)
+        public void HandleUpdateCheck(UpdateCheckInfo updateCheckInfo)
         {
             if (!updateCheckInfo.UpdateAvailable)
             {
                 Log.Debug().WriteLine("No update available.");
                 return;
             }
+            Log.Info().WriteLine("An updated version of the application is available: {0}", updateCheckInfo.AvailableVersion);
             LatestVersion = updateCheckInfo.AvailableVersion;
 
-            if (updateCheckInfo.IsUpdateRequired || ClickOnceConfiguration.AutoUpdate)
+            if (HandleClickOnceUpdates != null)
             {
-                // "Force" update
-                Update();
+                // Have the application handle the check
+                HandleClickOnceUpdates.HandleUpdateCheck(updateCheckInfo);
             }
-            // TODO: Have something handle the update request, if this is not automatically done.
+            else
+            {
+                if (ApplyClickOnceUpdates == null && (updateCheckInfo.IsUpdateRequired || ClickOnceConfiguration.AutoUpdate))
+                {
+                    // "Force" update
+                    ApplyUpdate(updateCheckInfo);
+                }
+                else
+                {
+                    // Have the application handle the update
+                    ApplyClickOnceUpdates?.ApplyUpdate(updateCheckInfo);
+                }
+            }
         }
 
         /// <summary>
         /// Apply an update
         /// </summary>
-        public void Update()
+        /// <param name="updateCheckInfo">UpdateCheckInfo</param>
+        public void ApplyUpdate(UpdateCheckInfo updateCheckInfo)
         {
             Log.Info().WriteLine("Applying update.");
             var updated = ApplicationDeployment.CurrentDeployment.Update();
@@ -115,12 +146,13 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             if (updated)
             {
                 Log.Info().WriteLine("Application succesfully updated.");
-                if (ClickOnceConfiguration.AutoRestart)
+                if (HandleClickOnceRestarts != null)
                 {
-                    Log.Info().WriteLine("Automatically restarting.");
-                    RestartApplication();
+                    // Have the application the need for a restart
+                    HandleClickOnceRestarts?.HandleRestart(updateCheckInfo);
+                    return;
                 }
-                // TODO: When to restart when auto-restart is not set?
+                HandleRestart(updateCheckInfo);
             }
             else
             {
@@ -146,6 +178,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             try
             {
                 Log.Debug().WriteLine("Checking for ClickOnce updates.");
+                LastCheckedOn = DateTimeOffset.Now;
                 return ApplicationDeployment.CurrentDeployment.CheckForDetailedUpdate(false);
             }
             catch (DeploymentDownloadException dde)
@@ -154,7 +187,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             }
             catch (InvalidDeploymentException ide)
             {
-                // TODO: Handle this
+                // TODO: Handle this with an event or something
                 Log.Error().WriteLine(ide, "Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: ");
             }
             catch (InvalidOperationException ioe)
@@ -175,8 +208,13 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         /// <summary>
         /// Restart the current application
         /// </summary>
-        private static void RestartApplication()
+        public void HandleRestart(UpdateCheckInfo updateCheckInfo)
         {
+            if (!ClickOnceConfiguration.AutoRestart)
+            {
+                return;
+            }
+            Log.Info().WriteLine("Automatically restarting.");
             // TODO: This should be replaced by a better, non System.Windows.Forms.dll, implementation?
             // Note: CorLaunchApplication is deprecated, haven't been able to find a replacement yet.
             System.Windows.Forms.Application.Restart();

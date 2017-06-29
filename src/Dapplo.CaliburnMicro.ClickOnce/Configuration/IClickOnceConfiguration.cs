@@ -35,7 +35,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
         /// <summary>
         /// When set to true, the update check is done on startup, this does delay the starting of the application.
         /// </summary>
-        [Description("When set to true, the update check is done on startup, this does delay the starting of the application.")]
+        [Description("When set to true, the update check is done on startup, this does delay the starting of the application. (default = false)")]
         [DefaultValue(false)]
         [DataMember(EmitDefaultValue = false)]
         bool CheckOnStart { get; set; }
@@ -43,15 +43,15 @@ namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
         /// <summary>
         /// Do we need to check for updates in the background.
         /// </summary>
-        [Description("Do we need to check for updates in the background.")]
-        [DefaultValue(false)]
+        [Description("Do we need to check for updates in the background. (default = true)")]
+        [DefaultValue(true)]
         [DataMember(EmitDefaultValue = false)]
         bool EnableBackgroundUpdateCheck { get; set; }
 
         /// <summary>
         /// The interfal between checks in minutes
         /// </summary>
-        [Description("The interfal between checks in minutes.")]
+        [Description("The interfal between checks in minutes. (default = 60)")]
         [DefaultValue(60)]
         [DataMember(EmitDefaultValue = false)]
         int CheckInterval { get; set; }
@@ -59,7 +59,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
         /// <summary>
         /// Is a found update automatically applied?
         /// </summary>
-        [Description("Is a found update automatically applied?")]
+        [Description("Is a found update automatically applied? (default = true)")]
         [DefaultValue(true)]
         [DataMember(EmitDefaultValue = false)]
         bool AutoUpdate { get; set; }
@@ -67,7 +67,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
         /// <summary>
         /// Does the application restart automatically after updating?
         /// </summary>
-        [Description("Does the application restart automatically after updating?")]
+        [Description("Does the application restart automatically after updating? (default = false)")]
         [DefaultValue(false)]
         [DataMember(EmitDefaultValue = false)]
         bool AutoRestart { get; set; }

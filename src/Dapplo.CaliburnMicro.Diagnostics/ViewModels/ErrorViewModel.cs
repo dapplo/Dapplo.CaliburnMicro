@@ -24,6 +24,8 @@ using System.ComponentModel;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
 using System.Windows;
+using Dapplo.CaliburnMicro.Diagnostics.Translations;
+using Dapplo.CaliburnMicro.Extensions;
 #if DEBUG
 using Dapplo.CaliburnMicro.Diagnostics.Designtime;
 #endif
@@ -41,6 +43,12 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
         /// </summary>
         [Import(AllowDefault = true)]
         public IVersionProvider VersionProvider { get; set; }
+
+        /// <summary>
+        /// This is used for the translations in the view
+        /// </summary>
+        [Import]
+        public IErrorTranslations ErrorTranslations { get; set; }
 
 #if DEBUG
         /// <summary>
@@ -60,6 +68,12 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
             Message = "Oh noes!";
         }
 #endif
+
+        /// <inheritdoc />
+        protected override void OnActivate()
+        {
+            var viewNameBinding = ErrorTranslations.CreateDisplayNameBinding(this, nameof(IErrorTranslations.ErrorTitle));
+        }
 
         /// <summary>
         /// Checks if the current version is the latest
