@@ -64,7 +64,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
         /// <summary>
         /// Checks if the current version is the latest
         /// </summary>
-        public bool IsMostRecent => VersionProvider.Current.Equals(VersionProvider.Latest);
+        public bool IsMostRecent => VersionProvider.CurrentVersion.Equals(VersionProvider.LatestVersion);
 
         /// <summary>
         /// Set the exception to display

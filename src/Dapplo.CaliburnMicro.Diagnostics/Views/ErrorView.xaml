@@ -11,11 +11,11 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Current version" Width="100"/>
-            <Label Content="{Binding VersionProvider.Current}" Width="100"/>
+            <Label Content="{Binding VersionProvider.CurrentVersion}" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Latest version" Width="100"/>
-            <Label Content="{Binding VersionProvider.Latest}" Width="100"/>
+            <Label Content="{Binding VersionProvider.LatestVersion}" Width="100"/>
         </StackPanel>
         <Label Content="{Binding Message}"></Label>
         <Label Content="{Binding Stacktrace}"></Label>

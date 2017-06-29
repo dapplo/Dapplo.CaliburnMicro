@@ -21,20 +21,25 @@
 
 using System;
 
-namespace Dapplo.CaliburnMicro.Diagnostics
+namespace Dapplo.CaliburnMicro.ClickOnce
 {
     /// <summary>
-    /// This interface is used to display the current version, and check the latest version
+    /// Information on ClickOnce
     /// </summary>
-    public interface IVersionProvider
+    public interface IClickOnceInformation
     {
         /// <summary>
-        /// Returns the current version
+        /// Is this a ClickOnce application?
+        /// </summary>
+        bool IsClickOnce { get; }
+
+        /// <summary>
+        /// Current ClickOnce version
         /// </summary>
         Version CurrentVersion { get; }
 
         /// <summary>
-        /// Return the latest version
+        /// Available ClickOnce version
         /// </summary>
         Version LatestVersion { get; }
     }

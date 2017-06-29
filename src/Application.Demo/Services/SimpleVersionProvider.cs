@@ -32,7 +32,7 @@ namespace Application.Demo.Services
     [Export(typeof(IVersionProvider))]
     public class SimpleVersionProvider : IVersionProvider
     {
-        public Version Current { get; } = Assembly.GetExecutingAssembly().GetName().Version;
-        public Version Latest { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public Version CurrentVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public Version LatestVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
     }
 }
