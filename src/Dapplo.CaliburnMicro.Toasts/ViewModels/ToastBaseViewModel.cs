@@ -32,7 +32,6 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
     {
         private Action<INotification> _closeAction;
         private int _id;
-        private Action<bool> _canCloseCallback;
 
         /// <summary>
         /// Id of the toast
@@ -87,16 +86,9 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
             base.TryClose(dialogResult);
         }
 
-        public string GetMessage()
-        {
-            return "what is this?";
-        }
-
         /// <summary>
         /// Return the view for this ViewModel, it needs to base upon NotificationDisplayPart 
         /// </summary>
         public virtual NotificationDisplayPart DisplayPart { get; set; }
-
-        bool INotification.CanClose { get => true; set => throw new NotImplementedException(); }
     }
 }
