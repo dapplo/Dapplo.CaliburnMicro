@@ -4,15 +4,36 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9311CFAD-8EAB-4148-BD84-6E2728CF912A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dapplo.CaliburnMicro.ClickOnce</RootNamespace>
-    <AssemblyName>Dapplo.CaliburnMicro.ClickOnce</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ProjectGuid>{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Application.Demo.ClickOnce</RootNamespace>
+    <AssemblyName>Application.Demo.ClickOnce</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>ClickOnceTest\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <PublisherName>Dapplo</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,16 +41,28 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Dapplo.CaliburnMicro.ClickOnce.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.ClickOnce.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EED3E15DBF45B2BBB4824A6349C17EB083E2BFA2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Application.Demo.ClickOnce_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro, Version=3.0.3.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
@@ -44,6 +77,9 @@
     <Reference Include="Dapplo.Addons, Version=0.5.31.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Addons.0.5.31\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.31.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.31\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    </Reference>
     <Reference Include="Dapplo.Ini, Version=0.5.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Ini.0.5.19\lib\net45\Dapplo.Ini.dll</HintPath>
     </Reference>
@@ -53,16 +89,23 @@
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.0.29\lib\net45\Dapplo.Log.dll</HintPath>
     </Reference>
+    <Reference Include="Dapplo.Log.LogFile, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Log.LogFile.1.0.29\lib\net45\Dapplo.Log.LogFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapplo.Log.Loggers, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Log.Loggers.1.0.29\lib\net45\Dapplo.Log.Loggers.dll</HintPath>
+    </Reference>
     <Reference Include="Dapplo.Utils, Version=1.0.150.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Utils.1.0.150\lib\net45\Dapplo.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
@@ -76,36 +119,86 @@
     <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClickOnceService.cs" />
-    <Compile Include="Configuration\IClickOnceConfiguration.cs" />
-    <Compile Include="IHandleClickOnceRestarts.cs" />
-    <Compile Include="IClickOnceService.cs" />
-    <Compile Include="IApplyClickOnceUpdates.cs" />
-    <Compile Include="IHandleClickOnceUpdates.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="HandleClickOnceRestarts.cs" />
+    <Compile Include="Config\IClickOnceDemoConfiguration.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <None Include="Application.Demo.ClickOnce_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.ClickOnce\Dapplo.CaliburnMicro.ClickOnce.csproj">
+      <Project>{9311cfad-8eab-4148-bd84-6e2728cf912a}</Project>
+      <Name>Dapplo.CaliburnMicro.ClickOnce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj">
+      <Project>{c05c532b-d73f-4c9b-b8cf-e1c9966b219e}</Project>
+      <Name>Dapplo.CaliburnMicro.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj">
+      <Project>{d8c2622b-b621-4467-a3ba-1b744af7e8d6}</Project>
+      <Name>Dapplo.CaliburnMicro.Dapp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
-      <Project>{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}</Project>
+      <Project>{a1c54578-3ebb-48ca-bb9f-f5d2f8fc2714}</Project>
       <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
+      <Project>{77a4950a-7e56-4591-93f9-a39100916815}</Project>
+      <Name>Dapplo.CaliburnMicro.Toasts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj">
+      <Project>{0750f2c3-2c86-4cc7-a240-4a261033a2f0}</Project>
+      <Name>Dapplo.CaliburnMicro.Translations</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Project>{971d2ce0-140c-40c1-bff7-34ff74fc0b04}</Project>
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

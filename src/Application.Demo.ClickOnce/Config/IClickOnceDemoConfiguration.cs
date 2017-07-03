@@ -19,31 +19,30 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Dapplo.CaliburnMicro
+using System.ComponentModel;
+using System.Runtime.Serialization;
+using Dapplo.CaliburnMicro.ClickOnce.Configuration;
+using Dapplo.Ini;
+
+namespace Application.Demo.ClickOnce.Config
 {
-    /// <summary>
-    ///     Helps to structure the order of starting Dappo StartupActions
-    /// </summary>
-    public enum CaliburnStartOrder
+    [IniSection("ClickOnce")]
+    public interface IClickOnceDemoConfiguration : IIniSection, IClickOnceConfiguration
     {
         /// <summary>
-        ///     This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
+        /// The interfal between checks in minutes
         /// </summary>
-        Bootstrapper = 100,
+        [Description("When set to true, the update check is done on startup, this does delay the starting of the application. (default = false)")]
+        [DefaultValue(true)]
+        [DataMember(EmitDefaultValue = false)]
+        new bool CheckOnStart { get; set; }
 
         /// <summary>
-        ///     This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+        /// The interfal between checks in minutes
         /// </summary>
-        TrayIcons = 200,
-
-        /// <summary>
-        ///     This is the order for the Shell
-        /// </summary>
-        Shell = 300,
-
-        /// <summary>
-        /// From here on, Dapplo.CaliburnMicro is started and user code can use everything
-        /// </summary>
-        User = 1000
+        [Description("The interfal between checks in minutes. (default = 1)")]
+        [DefaultValue(1)]
+        [DataMember(EmitDefaultValue = false)]
+        new int CheckInterval { get; set; }
     }
 }

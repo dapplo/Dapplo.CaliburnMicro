@@ -29,8 +29,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
     /// <summary>
     /// Configuration for Click-Once
     /// </summary>
-    [IniSection("ClickOnce")]
-    public interface IClickOnceConfiguration : IIniSection, IDefaultValue
+    public interface IClickOnceConfiguration : IIniSubSection, IDefaultValue
     {
         /// <summary>
         /// When set to true, the update check is done on startup, this does delay the starting of the application.

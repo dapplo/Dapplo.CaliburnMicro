@@ -40,7 +40,7 @@ namespace Dapplo.CaliburnMicro.Dapp
     ///     This extends the System.Windows.Application to make it easier to startup you application.
     ///     It will initialize MEF, Caliburn.Micro, handle exceptions and more.
     /// </summary>
-    public sealed class Dapplication : Application
+    public sealed class Dapplication : Application, IDisposable
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -84,7 +84,10 @@ namespace Dapplo.CaliburnMicro.Dapp
             TaskScheduler.UnobservedTaskException += HandleTaskException;
 
             // Make the bootstrapper stop when the CurrentDispatcher is going to shutdown, this uses a little hack to make sure there is no block
-            Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) => StopBootstrapperAsync().WaitWithNestedMessageLoop();
+            Dispatcher.CurrentDispatcher.ShutdownStarted += (s, e) =>
+            {
+                StopBootstrapperAsync().WaitWithNestedMessageLoop();
+            };
         }
 
         /// <summary>
@@ -279,5 +282,11 @@ namespace Dapplo.CaliburnMicro.Dapp
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            _bootstrapper.Dispose();
+        }
     }
 }

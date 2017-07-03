@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Application.Demo.Shared")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ING-DiBa AG")]
+[assembly: AssemblyCompany("Dapplo")]
 [assembly: AssemblyProduct("Application.Demo.Shared")]
-[assembly: AssemblyCopyright("Copyright © ING-DiBa AG 2017")]
+[assembly: AssemblyCopyright("Copyright © Dapplo 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -23,6 +23,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapplo.Addons;
@@ -30,7 +31,7 @@ using Dapplo.Ini;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Configuration
+namespace Dapplo.CaliburnMicro.Configuration.Services
 {
     /// <summary>
     ///     This registers a ServiceProviderExportProvider for providing IIniSection
@@ -38,8 +39,9 @@ namespace Dapplo.CaliburnMicro.Configuration
     [StartupAction(StartupOrder = int.MinValue)]
     public class ConfigurationStartup : IAsyncStartupAction
     {
+        private static readonly Type IniSectionType = typeof(IIniSection);
+        private static readonly Type IniSectionGenericType = typeof(IIniSection<>);
         private readonly IApplicationBootstrapper _applicationBootstrapper;
-
         /// <summary>
         /// Create the ConfigurationStartup
         /// </summary>
@@ -63,6 +65,15 @@ namespace Dapplo.CaliburnMicro.Configuration
                 await iniConfig.LoadIfNeededAsync(cancellationToken);
             }
             _applicationBootstrapper.Export<IServiceProvider>(iniConfig);
+            var iniSectionTypes = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                from type in assembly.GetTypes()
+                where type.IsInterface && type != IniSectionType && type.Namespace?.StartsWith("Dapplo.Ini") != true && IniSectionType.IsAssignableFrom(type)
+                select type;
+            foreach (var iniSectionType in iniSectionTypes)
+            {
+                iniConfig.Get(iniSectionType);
+            }
+
         }
     }
 }

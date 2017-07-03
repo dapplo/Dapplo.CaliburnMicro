@@ -22,17 +22,20 @@
 #region using
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
+using Dapplo.Log.LogFile;
 using Dapplo.Log.Loggers;
 
 #endregion
 
-namespace Application.Demo
+namespace Application.Demo.ClickOnce
 {
     /// <summary>
     ///     This takes care or starting the Application
@@ -45,37 +48,31 @@ namespace Application.Demo
         [STAThread]
         public static void Main()
         {
-#if DEBUG
-            // Initialize a debug logger for Dapplo packages
-            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Debug);
-#endif
+            //LogSettings.RegisterDefaultLogger<FileLogger>(LogLevels.Verbose);
+            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 
-            var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
+            var cultureInfo = CultureInfo.GetCultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            using (var application = new Dapplication("Application.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
+            Dapplication application = null;
+            using (application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
             {
-                ShutdownMode = ShutdownMode.OnExplicitShutdown
+                ShutdownMode = ShutdownMode.OnLastWindowClose,
+                OnAlreadyRunning = () =>
+                {
+                    MessageBox.Show("Already started, exiting");
+                    application?.Shutdown();
+                }
             })
             {
-#if DEBUG
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
-#else
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
-#endif
-
                 // Load the Application.Demo.* assemblies
-                application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
-
+                application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.ClickOnce");
                 // Handle exceptions
                 application.DisplayErrorView();
                 application.Run();
             }
+            Debug.WriteLine("Test");
         }
     }
 }

@@ -19,24 +19,44 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Dapplo.CaliburnMicro.Diagnostics;
-using System;
+#region Usings
 
-namespace Dapplo.CaliburnMicro.ClickOnce
+using System.ComponentModel.Composition;
+using Caliburn.Micro;
+using Dapplo.CaliburnMicro;
+using Dapplo.CaliburnMicro.ClickOnce;
+
+#endregion
+
+namespace Application.Demo.ClickOnce.ViewModels
 {
     /// <summary>
-    /// Information on ClickOnce status
+    /// This is the ViewModel for the about
     /// </summary>
-    public interface IClickOnceInformation : IVersionProvider
+    [Export(typeof(IShell))]
+    public sealed class AboutViewModel : Screen, IShell
     {
         /// <summary>
-        /// Is this a ClickOnce application?
+        /// Information on the ClickOnce status
         /// </summary>
-        bool IsClickOnce { get; }
+        public IClickOnceService ClickOnceService { get; }
 
         /// <summary>
-        /// The time the last check was made on
+        /// Construct the view model
         /// </summary>
-        DateTimeOffset LastCheckedOn { get; }
+        [ImportingConstructor]
+        public AboutViewModel(IClickOnceService clickOnceService)
+        {
+            ClickOnceService = clickOnceService;
+            DisplayName = "ClickOnce Info";
+        }
+
+        /// <summary>
+        /// This handles the restart when the button in the view is pressed
+        /// </summary>
+        public void Restart()
+        {
+            ClickOnceService.Restart();
+        }
     }
 }

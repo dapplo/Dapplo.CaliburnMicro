@@ -22,9 +22,12 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Deployment.Application;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
+using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.ClickOnce.Configuration;
 using Dapplo.CaliburnMicro.Diagnostics;
@@ -35,16 +38,26 @@ namespace Dapplo.CaliburnMicro.ClickOnce
     /// <summary>
     /// This StartupAction takes care of managing ClickOnce applications
     /// </summary>
-    [StartupAction]
-    [Export(typeof(IClickOnceInformation))]
+    [StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper + 1, AwaitStart = true)]
+    [Export(typeof(IClickOnceService))]
     [Export(typeof(IVersionProvider))]
-    public class ClickOnceService : IStartupAction, IClickOnceInformation, IHandleClickOnceUpdates, IApplyClickOnceUpdates, IHandleClickOnceRestarts
+    public class ClickOnceService : PropertyChangedBase, IStartupAction, IClickOnceService, IHandleClickOnceUpdates, IApplyClickOnceUpdates, IHandleClickOnceRestarts
     {
         private static readonly LogSource Log = new LogSource();
         private bool _isInCheck;
+        private Version _currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        private Version _latestVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        private bool _isUpdateAvailable;
+        private DateTimeOffset _lastCheckedOn;
+
+        [Import]
+        private IStartupShutdownBootstrapper StartupShutdownBootstrapper { get; set; }
 
         [Import]
         private IClickOnceConfiguration ClickOnceConfiguration { get; set; }
+
+        [Import("ui")]
+        private SynchronizationContext UiSynchronizationContext { get; set; }
 
         [Import(AllowDefault = true)]
         private IHandleClickOnceUpdates HandleClickOnceUpdates { get; set; }
@@ -61,58 +74,114 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             if (!IsClickOnce)
             {
                 Log.Info().WriteLine("Application is not deployed via ClickOnce, there will be no checks for updates.");
+                if (MessageBox.Show("Testing UI stop during start?", "Update", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+                // Make sure the startup of the bootstrapper is not continued
+                StartupShutdownBootstrapper.CancelStartup();
+                Execute.BeginOnUIThread(Restart);
                 return;
             }
+            Log.Info().WriteLine("Configuring ClickOnce update handling.");
 
-            IObservable<long> updateObservable = null;
+            CurrentVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+
+            IObservable <long> updateObservable = null;
 
             var checkInBackground = ClickOnceConfiguration.EnableBackgroundUpdateCheck && ClickOnceConfiguration.CheckInterval > 0;
-            if (!ClickOnceConfiguration.CheckOnStart && checkInBackground)
+            if (checkInBackground)
             {
-                // Only in background
-                updateObservable = Observable.Timer(TimeSpan.FromMinutes(ClickOnceConfiguration.CheckInterval));
-            }
-            else if  (ClickOnceConfiguration.CheckOnStart && ClickOnceConfiguration.CheckOnStart)
-            {
-                // On start and background
+                // Check in background
                 updateObservable = Observable.Interval(TimeSpan.FromMinutes(ClickOnceConfiguration.CheckInterval));
             }
-            else if (ClickOnceConfiguration.CheckOnStart)
+
+            if (ClickOnceConfiguration.CheckOnStart)
             {
-                // On start 
-                updateObservable = Observable.Timer(TimeSpan.Zero);
+                Log.Info().WriteLine("Starting application update check.");
+                var updateCheckInfo = CheckForUpdate();
+                HandleUpdateCheck(updateCheckInfo);
             }
             // Register the check, if there is an update observable
-            updateObservable?.Select(l => CheckForUpdate())
+            updateObservable?.ObserveOn(UiSynchronizationContext).Select(l => CheckForUpdate())
                 .Where(updateCheckInfo => updateCheckInfo != null)
                 .Subscribe(HandleUpdateCheck);
         }
 
         /// <inheritdoc />
-        public DateTimeOffset LastCheckedOn { get; private set; }
+        public DateTimeOffset LastCheckedOn
+        {
+            get
+            {
+                return _lastCheckedOn;
+            }
+            private set
+            {
+                _lastCheckedOn = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+        /// <inheritdoc />
+        public bool IsUpdateAvailable
+        {
+            get
+            {
+                return _isUpdateAvailable;
+            }
+            set
+            {
+                _isUpdateAvailable = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
         /// <inheritdoc />
         public bool IsClickOnce { get; } = ApplicationDeployment.IsNetworkDeployed;
 
         /// <inheritdoc />
-        public Version CurrentVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public Version CurrentVersion
+        {
+            get
+            {
+                return _currentVersion;
+            }
+            private set
+            {
+                _currentVersion = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
         /// <inheritdoc />
-        public Version LatestVersion { get; private set; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public Version LatestVersion
+        {
+            get { return _latestVersion; }
+            private set {
+                _latestVersion = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
-        /// <summary>
-        /// Process the update check
-        /// </summary>
-        /// <param name="updateCheckInfo">UpdateCheckInfo</param>
+        /// <inheritdoc />
         public void HandleUpdateCheck(UpdateCheckInfo updateCheckInfo)
         {
-            if (!updateCheckInfo.UpdateAvailable)
+            LatestVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            IsUpdateAvailable = updateCheckInfo.UpdateAvailable;
+            if (!IsUpdateAvailable)
             {
                 Log.Debug().WriteLine("No update available.");
                 return;
             }
-            Log.Info().WriteLine("An updated version of the application is available: {0}", updateCheckInfo.AvailableVersion);
             LatestVersion = updateCheckInfo.AvailableVersion;
+            Log.Info().WriteLine("Update is available. Version information: Current: {0}, updated {1}, new: {2}", ApplicationDeployment.CurrentDeployment.CurrentVersion, ApplicationDeployment.CurrentDeployment.UpdatedVersion, updateCheckInfo.AvailableVersion);
+
+            if (ApplicationDeployment.CurrentDeployment.UpdatedVersion >= updateCheckInfo.AvailableVersion)
+            {
+                Log.Info().WriteLine("For version {0} there is an update to version {1} available, it was already applied and will be used at next start.", ApplicationDeployment.CurrentDeployment.CurrentVersion, updateCheckInfo.AvailableVersion);
+                return;
+            }
+            Log.Info().WriteLine("For version {0} there is an update to version {1} available, starting the update.", ApplicationDeployment.CurrentDeployment.CurrentVersion, updateCheckInfo.AvailableVersion);
 
             if (HandleClickOnceUpdates != null)
             {
@@ -134,10 +203,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             }
         }
 
-        /// <summary>
-        /// Apply an update
-        /// </summary>
-        /// <param name="updateCheckInfo">UpdateCheckInfo</param>
+        /// <inheritdoc />
         public void ApplyUpdate(UpdateCheckInfo updateCheckInfo)
         {
             Log.Info().WriteLine("Applying update.");
@@ -177,7 +243,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             _isInCheck = true;
             try
             {
-                Log.Debug().WriteLine("Checking for ClickOnce updates.");
+                Log.Debug().WriteLine("Checking for ClickOnce updates from {0}", ApplicationDeployment.CurrentDeployment.UpdateLocation);
                 LastCheckedOn = DateTimeOffset.Now;
                 return ApplicationDeployment.CurrentDeployment.CheckForDetailedUpdate(false);
             }
@@ -205,20 +271,26 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             return null;
         }
 
-        /// <summary>
-        /// Restart the current application
-        /// </summary>
+        /// <inheritdoc />
+        public void Restart()
+        {
+            Log.Info().WriteLine("Restarting application.");
+
+            // TODO: This should be replaced by a better, non System.Windows.Forms.dll, implementation?
+            // Note: CorLaunchApplication is deprecated, haven't been able to find a replacement yet.
+            StartupShutdownBootstrapper.CancelStartup();
+            StartupShutdownBootstrapper.RegisterForDisposal(Disposable.Create(System.Windows.Forms.Application.Restart));
+            Application.Current.Shutdown();
+        }
+
+        /// <inheritdoc />
         public void HandleRestart(UpdateCheckInfo updateCheckInfo)
         {
             if (!ClickOnceConfiguration.AutoRestart)
             {
                 return;
             }
-            Log.Info().WriteLine("Automatically restarting.");
-            // TODO: This should be replaced by a better, non System.Windows.Forms.dll, implementation?
-            // Note: CorLaunchApplication is deprecated, haven't been able to find a replacement yet.
-            System.Windows.Forms.Application.Restart();
-            Application.Current.Shutdown();
+            Restart();
         }
     }
 }

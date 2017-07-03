@@ -19,31 +19,34 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Dapplo.CaliburnMicro
+using Dapplo.CaliburnMicro.Diagnostics;
+using System;
+
+namespace Dapplo.CaliburnMicro.ClickOnce
 {
     /// <summary>
-    ///     Helps to structure the order of starting Dappo StartupActions
+    /// Information on ClickOnce status
     /// </summary>
-    public enum CaliburnStartOrder
+    public interface IClickOnceService : IVersionProvider
     {
         /// <summary>
-        ///     This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
+        /// Is this a ClickOnce application?
         /// </summary>
-        Bootstrapper = 100,
+        bool IsClickOnce { get; }
 
         /// <summary>
-        ///     This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+        /// The time the last check was made on
         /// </summary>
-        TrayIcons = 200,
+        DateTimeOffset LastCheckedOn { get; }
 
         /// <summary>
-        ///     This is the order for the Shell
+        /// This is set to true if there is an update available
         /// </summary>
-        Shell = 300,
+        bool IsUpdateAvailable { get; }
 
         /// <summary>
-        /// From here on, Dapplo.CaliburnMicro is started and user code can use everything
+        /// Trigger an application restart
         /// </summary>
-        User = 1000
+        void Restart();
     }
 }

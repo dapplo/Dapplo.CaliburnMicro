@@ -24,7 +24,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -176,40 +175,6 @@ namespace Dapplo.CaliburnMicro.Dapp
         {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
             return _bootstrapper.GetExport(serviceType, contract);
-        }
-
-        /// <summary>
-        ///     This is the startup of the Caliburn bootstrapper, here the only implementation of IShell is displayed as root view
-        /// </summary>
-        /// <param name="sender">object, as it's called internally this is actually null</param>
-        /// <param name="e">StartupEventArgs, as it's called internally this is actually null</param>
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            // Call the base, this actually currently does nothing but who knows what is added later.
-            base.OnStartup(sender, e);
-
-            // Inform when no IShell export is found
-            var shells = _bootstrapper.GetExports<IShell>();
-            if (shells.Any())
-            {
-                // Display the IShell ViewModel
-                DisplayRootViewFor<IShell>();
-            }
-            else
-            {
-                Log.Info().WriteLine("No IShell export found, if you want to have an initial window make sure you exported your ViewModel with [Export(typeof(IShell))]");
-            }
-
-            // Activate all "UI" Services
-            foreach (var lazyUiService in _bootstrapper.GetExports<IUiService>())
-            {
-                if (lazyUiService.IsValueCreated)
-                {
-                    continue;
-                }
-                var uiService = lazyUiService.Value;
-                Debug.Assert(uiService != null);
-            }
         }
 
         /// <summary>
