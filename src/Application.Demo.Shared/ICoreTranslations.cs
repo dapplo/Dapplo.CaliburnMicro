@@ -23,13 +23,14 @@
 
 using System.ComponentModel;
 using Dapplo.Language;
+using Dapplo.CaliburnMicro.Diagnostics.Translations;
 
 #endregion
 
 namespace Application.Demo.Shared
 {
     [Language("Core")]
-    public interface ICoreTranslations : Dapplo.CaliburnMicro.Translations.ICoreTranslations, ILanguage, INotifyPropertyChanged
+    public interface ICoreTranslations : ILanguage, Dapplo.CaliburnMicro.Translations.ICoreTranslations, IErrorTranslations, INotifyPropertyChanged
     {
         string Language { get; }
         string Settings { get; }

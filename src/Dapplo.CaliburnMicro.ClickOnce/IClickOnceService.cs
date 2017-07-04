@@ -40,11 +40,6 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         DateTimeOffset LastCheckedOn { get; }
 
         /// <summary>
-        /// This is set to true if there is an update available
-        /// </summary>
-        bool IsUpdateAvailable { get; }
-
-        /// <summary>
         /// Trigger an application restart
         /// </summary>
         void Restart();

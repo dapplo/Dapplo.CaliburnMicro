@@ -5,7 +5,13 @@ This will help you to get started with bootstrapping Caliburn.Micro (and eventua
 - Current build status: [![Build status](https://ci.appveyor.com/api/projects/status/fuaq8ppel23aqqva?svg=true)](https://ci.appveyor.com/project/dapplo/dapplo-caliburnmicro)
 - Coverage Status: [![Coverage Status](https://coveralls.io/repos/github/dapplo/Dapplo.CaliburnMicro/badge.svg?branch=master)](https://coveralls.io/github/dapplo/Dapplo.CaliburnMicro?branch=master)
 - NuGet package Dapplo.CaliburnMicro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro)
-- NuGet package Dapplo.CaliburnMicro.Metro: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Metro)
+- NuGet package Dapplo.CaliburnMicro.Dapp: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Dapp.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Dapp)
+- NuGet package Dapplo.CaliburnMicro.Configuration: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Configuration.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Configuration)
+- NuGet package Dapplo.CaliburnMicro.Translation: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Translation.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Translation)
+- NuGet package Dapplo.CaliburnMicro.Security: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Security.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Security)
+- NuGet package Dapplo.CaliburnMicro.Security.ActiveDirectory: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Security.ActiveDirectory.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Security.ActiveDirectory)
+- NuGet package Dapplo.CaliburnMicro.ClickOnce: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.ClickOnce.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.ClickOnce)
+- NuGet package Dapplo.CaliburnMicro.Wizard: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Wizard.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.Wizard)
 - NuGet package Dapplo.CaliburnMicro.NotifyIconWpf: [![NuGet package](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf.svg)](https://badge.fury.io/nu/Dapplo.CaliburnMicro.NotifyIconWpf)
 
 
@@ -32,16 +38,17 @@ Available Packages:
 - Dapplo.CaliburnMicro.Cards, adds a MVVM adaptive card implementation
 - Dapplo.CaliburnMicro.Metro, contains a MetroWindowManager to make it work with MahApps
 - Dapplo.CaliburnMicro.NotifyIconWpf, adds functionality to display a system tray icon ViewModel first, via Hardcodet.NotifyIcon.Wpf
+- Dapplo.CaliburnMicro.ClickOnce, adds ClickOnce supporting functionality to simplify your 
 
 # Quick-start documentation
 
-A demo-project is supplied, see: Application.Demo
+A demo-project is supplied, see: Application.Demo, or Application.Demo.ClickOnce
 
 ## Dapplo.CaliburnMicro
 
 A Caliburn.Micro support project, with Dapplo.CaliburnMicro.Dapp taking care of bootstrapping Caliburn.Micro with Dapplo.Addons, which takes care of initializing MEF and o.a. your IShell ViewModel
 
-There is functionality available to support your with building:
+There is functionality available to support you with building:
 - Simplified binding of properties
 - Some build in behaviors, like Visibility, IsEnabled and authentication behaviors which hide/disable elements depending on a value.
 - Dapplo.CaliburnMicro.Configuration a structured configuration, with a tree where you can hang your "config screens"

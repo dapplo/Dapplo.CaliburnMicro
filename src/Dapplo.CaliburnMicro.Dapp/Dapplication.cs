@@ -101,13 +101,14 @@ namespace Dapplo.CaliburnMicro.Dapp
         public new static Dapplication Current { get; private set; }
 
         /// <summary>
-        ///     This is called when the application is alreay running
+        ///     This function is called when the application is alreay running
         ///     Facts:
         ///     1: it will be run on the UI thread and
         ///     2: Caliburn.Micro is actually fully configured
         ///     3: Dapplo Startup is NOT made, so you have no access to ILanguage etc (yet?)
+        ///     4: The application will be shut down for you, when the function returns and uses the returned error code for the exit
         /// </summary>
-        public Action OnAlreadyRunning { get; set; }
+        public Func<int> OnAlreadyRunning { get; set; }
 
         /// <summary>
         ///     Make sure we startup everything after WPF instanciated
@@ -136,7 +137,8 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Now check if there is a lock, if so we invoke OnAlreadyRunning and return
             if (!_bootstrapper.IsMutexLocked)
             {
-                OnAlreadyRunning?.Invoke();
+                var exitCode = OnAlreadyRunning?.Invoke() ?? -1;
+                Shutdown(exitCode);
                 return;
             }
 

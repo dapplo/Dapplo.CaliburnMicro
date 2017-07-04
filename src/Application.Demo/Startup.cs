@@ -50,6 +50,7 @@ namespace Application.Demo
             LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Debug);
 #endif
 
+            // Use this to setup the culture of your UI
             var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
@@ -71,7 +72,6 @@ namespace Application.Demo
 
                 // Load the Application.Demo.* assemblies
                 application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
-
                 // Handle exceptions
                 application.DisplayErrorView();
                 application.Run();

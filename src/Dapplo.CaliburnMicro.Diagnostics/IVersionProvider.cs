@@ -37,5 +37,10 @@ namespace Dapplo.CaliburnMicro.Diagnostics
         /// Return the latest version
         /// </summary>
         Version LatestVersion { get; }
+
+        /// <summary>
+        /// Returns a boolean to specify if there is an update available
+        /// </summary>
+        bool IsUpdateAvailable { get; }
     }
 }

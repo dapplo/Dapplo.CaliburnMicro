@@ -32,7 +32,8 @@ namespace Dapplo.CaliburnMicro.Diagnostics
     public static class DapplicationExtensions
     {
         /// <summary>
-        /// Handle exceptions, and display them in a view
+        /// Handle exceptions, and display them in a view.
+        /// Make sure that 
         /// </summary>
         /// <param name="application">Dapplication to handle the exceptions for</param>
         public static void DisplayErrorView(this Dapplication application)

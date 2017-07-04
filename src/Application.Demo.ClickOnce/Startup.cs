@@ -49,18 +49,18 @@ namespace Application.Demo.ClickOnce
             LogSettings.RegisterDefaultLogger<FileLogger>(LogLevels.Verbose);
             //LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 
+            // Use this to setup the culture of your UI
             var cultureInfo = CultureInfo.GetCultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            Dapplication application = null;
-            using (application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
+            using (Dapplication application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
             {
                 ShutdownMode = ShutdownMode.OnLastWindowClose,
                 OnAlreadyRunning = () =>
                 {
                     MessageBox.Show("Already started, exiting");
-                    application?.Shutdown();
+                    return -1;
                 }
             })
             {

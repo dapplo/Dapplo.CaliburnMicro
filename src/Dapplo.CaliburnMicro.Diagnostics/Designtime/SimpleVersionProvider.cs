@@ -35,6 +35,9 @@ namespace Dapplo.CaliburnMicro.Diagnostics.Designtime
 
         /// <inheritdoc />
         public Version LatestVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+
+        /// <inheritdoc />
+        public bool IsUpdateAvailable => LatestVersion > CurrentVersion;
     }
 #endif
 }
