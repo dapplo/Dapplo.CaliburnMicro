@@ -40,7 +40,7 @@ namespace Dapplo.CaliburnMicro.Dapp
     ///     This extends the System.Windows.Application to make it easier to startup you application.
     ///     It will initialize MEF, Caliburn.Micro, handle exceptions and more.
     /// </summary>
-    public sealed class Dapplication : Application, IDisposable
+    public sealed class Dapplication : Application
     {
         private static readonly LogSource Log = new LogSource();
 
@@ -168,6 +168,8 @@ namespace Dapplo.CaliburnMicro.Dapp
             {
                 await _bootstrapper.StopAsync().ConfigureAwait(false);
             }
+            // Make sure everything is disposed (and all disposables which were registered via _bootstrapper.RegisterForDisposal() are called)
+            _bootstrapper.Dispose();
         }
 
         #region Error handling
@@ -284,11 +286,5 @@ namespace Dapplo.CaliburnMicro.Dapp
         }
 
         #endregion
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            _bootstrapper.Dispose();
-        }
     }
 }
