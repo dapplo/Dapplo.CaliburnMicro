@@ -51,8 +51,8 @@
       <HintPath>..\packages\Caliburn.Micro.3.1.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.31.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.31\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.0.5.32\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.HttpExtensions, Version=0.6.22.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.HttpExtensions.0.6.22\lib\net46\Dapplo.HttpExtensions.dll</HintPath>

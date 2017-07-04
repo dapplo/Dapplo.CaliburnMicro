@@ -74,13 +74,6 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             if (!IsClickOnce)
             {
                 Log.Info().WriteLine("Application is not deployed via ClickOnce, there will be no checks for updates.");
-                if (MessageBox.Show("Testing UI stop during start?", "Update", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
-                {
-                    return;
-                }
-                // Make sure the startup of the bootstrapper is not continued
-                StartupShutdownBootstrapper.CancelStartup();
-                Execute.BeginOnUIThread(Restart);
                 return;
             }
             Log.Info().WriteLine("Configuring ClickOnce update handling.");
@@ -275,12 +268,12 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         public void Restart()
         {
             Log.Info().WriteLine("Restarting application.");
-
+            StartupShutdownBootstrapper.CancelStartup();
             // TODO: This should be replaced by a better, non System.Windows.Forms.dll, implementation?
             // Note: CorLaunchApplication is deprecated, haven't been able to find a replacement yet.
-            StartupShutdownBootstrapper.CancelStartup();
             StartupShutdownBootstrapper.RegisterForDisposal(Disposable.Create(System.Windows.Forms.Application.Restart));
-            Application.Current.Shutdown();
+            // The shutdown needs to be on the UI thread, otherwise we can't release resources etc.
+            Execute.BeginOnUIThread(Application.Current.Shutdown);
         }
 
         /// <inheritdoc />

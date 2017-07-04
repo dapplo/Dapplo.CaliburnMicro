@@ -26,12 +26,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
 using Dapplo.Log.LogFile;
-using Dapplo.Log.Loggers;
 
 #endregion
 
@@ -48,8 +46,8 @@ namespace Application.Demo.ClickOnce
         [STAThread]
         public static void Main()
         {
-            //LogSettings.RegisterDefaultLogger<FileLogger>(LogLevels.Verbose);
-            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
+            LogSettings.RegisterDefaultLogger<FileLogger>(LogLevels.Verbose);
+            //LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 
             var cultureInfo = CultureInfo.GetCultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
