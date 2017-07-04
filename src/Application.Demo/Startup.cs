@@ -55,27 +55,25 @@ namespace Application.Demo
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            using (var application = new Dapplication("Application.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
+            var application = new Dapplication("Application.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
-            })
-            {
+            };
 #if DEBUG
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
 #else
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
-                application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
+            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
 #endif
 
-                // Load the Application.Demo.* assemblies
-                application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
-                // Handle exceptions
-                application.DisplayErrorView();
-                application.Run();
-            }
+            // Load the Application.Demo.* assemblies
+            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
+            // Handle exceptions
+            application.DisplayErrorView();
+            application.Run();
         }
     }
 }

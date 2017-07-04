@@ -22,7 +22,6 @@
 #region using
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -54,7 +53,7 @@ namespace Application.Demo.ClickOnce
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            using (Dapplication application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
+            var application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
             {
                 ShutdownMode = ShutdownMode.OnLastWindowClose,
                 OnAlreadyRunning = () =>
@@ -62,15 +61,12 @@ namespace Application.Demo.ClickOnce
                     MessageBox.Show("Already started, exiting");
                     return -1;
                 }
-            })
-            {
-                // Load the Application.Demo.* assemblies
-                application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.ClickOnce");
-                // Handle exceptions
-                application.DisplayErrorView();
-                application.Run();
-            }
-            Debug.WriteLine("Test");
+            };
+            // Load the Application.Demo.* assemblies
+            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.ClickOnce");
+            // Handle exceptions
+            application.DisplayErrorView();
+            application.Run();
         }
     }
 }
