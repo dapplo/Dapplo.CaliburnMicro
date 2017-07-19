@@ -1,6 +1,6 @@
-version: 0.4.{build}
+version: 0.5.{build}
 skip_tags: true
-os: Visual Studio 2015
+os: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 clone_depth: 2
@@ -8,6 +8,9 @@ test: off
 branches:
   only:
   - master
+# Workaround for http://help.appveyor.com/discussions/problems/7097-builds-timing-out
+hosts:
+  api.nuget.org: 93.184.221.200
 environment:
   NuGetApiKey:
     secure: xkDQ385+smLqdzhESsXBJvnUjK4FZ4Djjrqi9tFR29dwESIvPYOrQAqgri5Nf/fA
