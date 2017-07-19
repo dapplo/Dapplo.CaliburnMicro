@@ -78,7 +78,7 @@ namespace Dapplo.CaliburnMicro.Configurers
             var hasPlacement = _uiConfiguration.WindowLocations.TryGetValue(windowName, out placement);
             if (!hasPlacement || placement.ShowCmd == ShowWindowCommands.Normal && !screenBounds.Contains(placement.NormalPosition))
             {
-                view.WindowStartupLocation = view.Owner != null ? WindowStartupLocation.CenterOwner : _uiConfiguration.StartupLocation;
+                view.WindowStartupLocation = view.Owner != null ? WindowStartupLocation.CenterOwner : _uiConfiguration.DefaultWindowStartupLocation;
                 hasPlacement = false;
             }
             if (hasPlacement)
@@ -92,7 +92,13 @@ namespace Dapplo.CaliburnMicro.Configurers
             // Store Placement
             eventHandlers[1] = (sender, args) =>
             {
+                // ReSharper disable once InvokeAsExtensionMethod
                 var newPlacement = WindowsExtensions.RetrievePlacement(view);
+                if (newPlacement.ShowCmd == ShowWindowCommands.Hide)
+                {
+                    // Ignore
+                    return;
+                }
                 Log.Debug().WriteLine("Stored placement {0} for Window {1}", newPlacement.NormalPosition, windowName);
                 _uiConfiguration.WindowLocations[windowName] = newPlacement;
             };

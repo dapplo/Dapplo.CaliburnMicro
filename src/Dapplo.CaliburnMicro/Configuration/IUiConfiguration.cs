@@ -38,13 +38,15 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <summary>
         /// Defines the default value of the startup location for windows
         /// </summary>
+        [Description("This defines the default startup location of newly created windows.")]
         [DefaultValue(WindowStartupLocation.CenterScreen)]
         [DataMember(EmitDefaultValue = false)]
-        WindowStartupLocation StartupLocation { get; set; }
+        WindowStartupLocation DefaultWindowStartupLocation { get; set; }
 
         /// <summary>
         /// Defines if the locations of the windows are stored, so if they open again it's at the same location
         /// </summary>
+        [Description("When set to true, the application will try to maintain the windows position of some windows.")]
         [DefaultValue(true)]
         [DataMember(EmitDefaultValue = false)]
         bool AreWindowLocationsStored { get; set; }
@@ -52,7 +54,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <summary>
         /// A store for the window locations
         /// </summary>
-        [Description("Store for the window placements")]
+        [Description("This stores the locations of all windows which maintain a position")]
         [DataMember(EmitDefaultValue = false)]
         IDictionary<string, WindowPlacement> WindowLocations { get; set; }
     }

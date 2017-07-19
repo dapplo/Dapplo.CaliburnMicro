@@ -70,9 +70,8 @@
       <HintPath>..\packages\Microsoft.AdaptiveCards.Xaml.Wpf.0.5.6339.19873\lib\net46\Microsoft.AdaptiveCards.Xaml.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.MarkedNet, Version=1.0.11.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.MarkedNet.1.0.11\lib\net452\Microsoft.MarkedNet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.MarkedNet, Version=1.0.12.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.MarkedNet.1.0.12\lib\net452\Microsoft.MarkedNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>

@@ -29,6 +29,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using Application.Demo.Languages;
 using Caliburn.Micro;
+using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
@@ -38,7 +39,7 @@ using Dapplo.CaliburnMicro.Menu;
 namespace Application.Demo.UseCases.Menu.ViewModels
 {
     [Export]
-    public sealed class WindowWithMenuViewModel : Screen, IDisposable
+    public sealed class WindowWithMenuViewModel : Screen, IDisposable, IMaintainPosition
     {
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
