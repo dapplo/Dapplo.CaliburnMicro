@@ -22,7 +22,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Reflection;
-using Dapplo.CaliburnMicro.Diagnostics;
+using Dapplo.CaliburnMicro;
 
 namespace Application.Demo.Services
 {

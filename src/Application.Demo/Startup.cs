@@ -27,8 +27,6 @@ using System.Threading;
 using System.Windows;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
-using Dapplo.Log;
-using Dapplo.Log.Loggers;
 
 #endregion
 

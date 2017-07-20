@@ -30,7 +30,6 @@ using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.ClickOnce.Configuration;
-using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
 
 namespace Dapplo.CaliburnMicro.ClickOnce

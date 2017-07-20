@@ -83,7 +83,6 @@
   <ItemGroup>
     <Compile Include="DapplicationExtensions.cs" />
     <Compile Include="Designtime\SimpleVersionProvider.cs" />
-    <Compile Include="IVersionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Translations\IErrorTranslations.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />

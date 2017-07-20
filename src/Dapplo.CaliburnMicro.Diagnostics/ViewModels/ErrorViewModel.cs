@@ -20,10 +20,8 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.ComponentModel;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
-using System.Windows;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Extensions;
 #if DEBUG

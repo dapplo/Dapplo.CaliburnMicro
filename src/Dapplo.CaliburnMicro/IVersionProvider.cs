@@ -21,7 +21,7 @@
 
 using System;
 
-namespace Dapplo.CaliburnMicro.Diagnostics
+namespace Dapplo.CaliburnMicro
 {
     /// <summary>
     /// This interface is used to display the current version, and check the latest version

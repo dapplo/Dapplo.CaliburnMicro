@@ -98,10 +98,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
-      <Project>{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}</Project>
-      <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Project>{971d2ce0-140c-40c1-bff7-34ff74fc0b04}</Project>
       <Name>Dapplo.CaliburnMicro</Name>

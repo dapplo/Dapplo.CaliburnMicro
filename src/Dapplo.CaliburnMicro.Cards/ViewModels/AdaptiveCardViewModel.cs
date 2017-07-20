@@ -20,8 +20,6 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using AdaptiveCards;
@@ -30,7 +28,6 @@ using AdaptiveCards.Rendering.Config;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Cards.Entities;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
-using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
 using Dapplo.HttpExtensions;
 using Dapplo.Log;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Deployment.Application;
 using System.Windows;
 using Dapplo.CaliburnMicro.ClickOnce;
