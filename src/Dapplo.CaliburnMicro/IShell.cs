@@ -23,7 +23,6 @@ namespace Dapplo.CaliburnMicro
 {
     /// <summary>
     ///     Implement (and export with) this interface on your main ViewModel, if available this will be started automatically.
-    ///     P.S. There can be only one!
     /// </summary>
     public interface IShell
     {

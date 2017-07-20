@@ -25,7 +25,9 @@ using System.ComponentModel.Composition;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Extensions;
 #if DEBUG
+using System.ComponentModel;
 using Dapplo.CaliburnMicro.Diagnostics.Designtime;
+using System.Windows;
 #endif
 
 namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
@@ -36,6 +38,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ErrorViewModel : Screen
     {
+        private IDisposable _disposables;
         /// <summary>
         /// This is the version provider, which makes the screen show a warning when the current != latest
         /// </summary>
@@ -70,7 +73,16 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
         /// <inheritdoc />
         protected override void OnActivate()
         {
-            var viewNameBinding = ErrorTranslations.CreateDisplayNameBinding(this, nameof(IErrorTranslations.ErrorTitle));
+            _disposables = ErrorTranslations.CreateDisplayNameBinding(this, nameof(IErrorTranslations.ErrorTitle));
+            base.OnActivate();
+        }
+
+        /// <inheritdoc />
+        protected override void OnDeactivate(bool close)
+        {
+            _disposables?.Dispose();
+            _disposables = null;
+            base.OnDeactivate(close);
         }
 
         /// <summary>

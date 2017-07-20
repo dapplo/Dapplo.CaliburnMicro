@@ -19,9 +19,12 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+#if DEBUG
+using System;
+using System.Reflection;
+
 namespace Dapplo.CaliburnMicro.Diagnostics.Designtime
 {
-#if DEBUG
     /// <summary>
     /// A very simple version provider
     /// </summary>
@@ -36,5 +39,5 @@ namespace Dapplo.CaliburnMicro.Diagnostics.Designtime
         /// <inheritdoc />
         public bool IsUpdateAvailable => LatestVersion > CurrentVersion;
     }
-#endif
 }
+#endif

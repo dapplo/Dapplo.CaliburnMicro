@@ -39,10 +39,14 @@ namespace Dapplo.CaliburnMicro.Wizard.Converters
         {
             var contentPresenter = value as ContentPresenter;
             var itemsControl = ItemsControl.ItemsControlFromItemContainer(contentPresenter);
+            if (itemsControl == null)
+            {
+                return false;
+            }
             var index = 0;
             if (contentPresenter != null)
             {
-                index = itemsControl.ItemContainerGenerator.IndexFromContainer(contentPresenter);
+                index = itemsControl.ItemContainerGenerator?.IndexFromContainer(contentPresenter) ?? -1;
             }
             return index == itemsControl.Items.Count - 1;
         }

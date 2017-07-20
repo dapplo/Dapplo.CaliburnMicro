@@ -20,6 +20,12 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
+
+#if DEBUG
+using System.Collections.Generic;
+using System.ComponentModel;
+#endif
+
 using System.Diagnostics;
 using System.Windows;
 using AdaptiveCards;
@@ -61,7 +67,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                 {
                     new Image
                     {
-                        HorizontalAlignment = HorizontalAlignment.Center,
+                        HorizontalAlignment = AdaptiveCards.HorizontalAlignment.Center,
                         Size = ImageSize.Small,
                         Url = "http://static.nichtlustig.de/comics/full/150422.jpg"
                     }
