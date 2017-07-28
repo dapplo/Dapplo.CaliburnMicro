@@ -28,8 +28,7 @@ using Caliburn.Micro;
 namespace Dapplo.CaliburnMicro.Menu
 {
     /// <summary>
-    ///     Implement this for elements that are visible in an IConfig
-    ///     Every element in the config UI should implement this
+    ///     Implement this for elements that are visible in a tree
     ///     Some of the configuration functionality is covered in standard Caliburn.Micro interfaces
     ///     which are supplied by the interfaces which IScreen extends:
     ///     IHaveDisplayName: Covers the name and title of the config screen
@@ -40,33 +39,11 @@ namespace Dapplo.CaliburnMicro.Menu
     ///     Additionally some Dapplo.CaliburnMicro Interfaces are used:
     ///     IAmDisplayable: Covers the visiblity and enabled (extends IHaveDisplayName)
     /// </summary>
-    public interface ITreeScreen : IScreen, IAmDisplayable, IHaveDisplayName
+    public interface ITreeScreen : IScreen, IAmDisplayable
     {
         /// <summary>
         ///     Returns if the ITreeScreen can be activated (when clicking on it)
         /// </summary>
         bool CanActivate { get; }
-
-        /// <summary>
-        ///     This is called when the configuration should be "persisted"
-        /// </summary>
-        void Commit();
-
-        /// <summary>
-        ///     Tests if the ITreeScreen contains the supplied text
-        /// </summary>
-        /// <param name="text">the text to search for</param>
-        bool Contains(string text);
-
-        /// <summary>
-        ///     This is called when the configuration should be "rolled back"
-        /// </summary>
-        void Rollback();
-
-        /// <summary>
-        ///     Terminate the config screen.
-        ///     This is called when the parent config UI is terminated
-        /// </summary>
-        void Terminate();
     }
 }

@@ -52,7 +52,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// </summary>
         public virtual string Filter
         {
-            get { return _filter; }
+            get => _filter;
             set
             {
                 _filter = value;
@@ -114,8 +114,8 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// </summary>
         IEnumerable<Lazy<IConfigScreen>> IConfig.ConfigScreens
         {
-            get { return ConfigScreens.Cast<Lazy<IConfigScreen>>(); }
-            set { ConfigScreens = value as IEnumerable<Lazy<TConfigScreen>>; }
+            get => ConfigScreens.Cast<Lazy<IConfigScreen>>();
+            set => ConfigScreens = value as IEnumerable<Lazy<TConfigScreen>>;
         }
 
         /// <summary>
@@ -128,8 +128,8 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// </summary>
         public virtual TConfigScreen CurrentConfigScreen
         {
-            get { return ActiveItem; }
-            set { ActivateItem(value); }
+            get => ActiveItem;
+            set => ActivateItem(value);
         }
 
         /// <summary>
@@ -137,8 +137,8 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// </summary>
         IConfigScreen IConfig.CurrentConfigScreen
         {
-            get { return CurrentConfigScreen; }
-            set { CurrentConfigScreen = value as TConfigScreen; }
+            get => CurrentConfigScreen;
+            set => CurrentConfigScreen = value as TConfigScreen;
         }
 
         /// <summary>
