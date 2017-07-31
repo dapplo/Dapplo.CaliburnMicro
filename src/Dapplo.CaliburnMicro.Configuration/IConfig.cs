@@ -92,6 +92,12 @@ namespace Dapplo.CaliburnMicro.Configuration
         ///     Terminate the config.
         /// </summary>
         void Terminate();
+
+        /// <summary>
+        /// This updates the state of the configuration window, like the Ok and Cancel buttons.
+        /// e.g. this can be called from a IConfigScreen to notify of changes to the CanClose
+        /// </summary>
+        void RefreshState();
     }
 
     /// <summary>

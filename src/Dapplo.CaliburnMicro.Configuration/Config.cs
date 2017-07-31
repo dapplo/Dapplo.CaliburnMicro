@@ -250,6 +250,13 @@ namespace Dapplo.CaliburnMicro.Configuration
             NotifyOfPropertyChange(nameof(CanOk));
         }
 
+        /// <inheritdoc />
+        public void RefreshState()
+        {
+            NotifyOfPropertyChange(nameof(CanCancel));
+            NotifyOfPropertyChange(nameof(CanOk));
+        }
+
         /// <summary>
         ///     Called to check whether or not this instance can close.
         /// </summary>
