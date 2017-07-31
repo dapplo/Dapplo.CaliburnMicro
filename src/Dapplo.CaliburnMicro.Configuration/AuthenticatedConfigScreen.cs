@@ -43,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <inheritdoc />
         public AuthenticationTargetProperties AuthenticationTargetProperty
         {
-            get { return _authenticationTargetProperty; }
+            get => _authenticationTargetProperty;
             set
             {
                 _authenticationTargetProperty = value;
@@ -54,7 +54,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <inheritdoc />
         public PermissionOperations PermissionOperation
         {
-            get { return _permissionOperation; }
+            get => _permissionOperation;
             set
             {
                 _permissionOperation = value;
@@ -66,7 +66,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <inheritdoc />
         public IEnumerable<string> Permissions
         {
-            get { return _permissions; }
+            get => _permissions;
             set
             {
                 _permissions = value;
@@ -77,7 +77,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <inheritdoc />
         public TWhen WhenPermission
         {
-            get { return _whenPermission; }
+            get => _whenPermission;
             set
             {
                 _whenPermission = value;
@@ -88,7 +88,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <inheritdoc />
         public TWhen WhenPermissionMissing
         {
-            get { return _whenPermissionMissing; }
+            get => _whenPermissionMissing;
             set
             {
                 _whenPermissionMissing = value;

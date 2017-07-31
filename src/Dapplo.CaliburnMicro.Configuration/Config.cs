@@ -56,14 +56,14 @@ namespace Dapplo.CaliburnMicro.Configuration
             set
             {
                 _filter = value;
-                NotifyOfPropertyChange();
 
                 TreeItems.Clear();
                 // Rebuild a tree for the ConfigScreens
-                foreach (var configScreen in ConfigScreens.Select(c => c.Value).CreateTree(screen => screen.Contains(_filter)))
+                foreach (var configScreen in ConfigScreens.Select(c => c.Value).CreateTree(screen => string.IsNullOrEmpty(_filter) || screen.Contains(_filter)))
                 {
                     TreeItems.Add(configScreen);
                 }
+                NotifyOfPropertyChange();
             }
         }
 
@@ -166,17 +166,25 @@ namespace Dapplo.CaliburnMicro.Configuration
         ICollection<ITreeNode<IConfigScreen>> IConfig.TreeItems => TreeItems as ICollection<ITreeNode<IConfigScreen>>;
 
         /// <summary>
-        ///     check every IConfigScreen if it can close
+        /// Helper property which checks the state of the config screens
         /// </summary>
-        public virtual bool CanCancel
+        private bool CanCancelOrOk
         {
             get
             {
                 var result = true;
-                CanClose(b => result = b);
+                foreach (var configScreen in ConfigScreens.Select(c => c.Value).Where(screen => screen.IsVisible))
+                {
+                    configScreen.CanClose(canClose => result &= canClose);
+                }
                 return result;
             }
         }
+
+        /// <summary>
+        ///     check every IConfigScreen if it can close
+        /// </summary>
+        public virtual bool CanCancel => CanCancelOrOk;
 
         /// <summary>
         ///     If CanOk is true, this will call Commit on all IConfigScreens and TryClose afterwards
@@ -213,15 +221,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <summary>
         ///     check every IConfigScreen if it can close
         /// </summary>
-        public virtual bool CanOk
-        {
-            get
-            {
-                var result = true;
-                CanClose(b => result = b);
-                return result;
-            }
-        }
+        public virtual bool CanOk => CanCancelOrOk;
 
         /// <summary>
         ///     This is called when an item from the itemssource is selected
@@ -255,20 +255,6 @@ namespace Dapplo.CaliburnMicro.Configuration
         {
             NotifyOfPropertyChange(nameof(CanCancel));
             NotifyOfPropertyChange(nameof(CanOk));
-        }
-
-        /// <summary>
-        ///     Called to check whether or not this instance can close.
-        /// </summary>
-        /// <param name="callback">The implementor calls this action with the result of the close check.</param>
-        public override void CanClose(Action<bool> callback)
-        {
-            var result = true;
-            foreach (var configScreen in ConfigScreens.Select(c => c.Value))
-            {
-                configScreen.CanClose(canClose => result &= canClose);
-            }
-            callback(result);
         }
 
         /// <summary>

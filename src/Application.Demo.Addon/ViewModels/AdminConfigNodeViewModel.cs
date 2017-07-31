@@ -22,8 +22,8 @@
 #region using
 
 using System.ComponentModel.Composition;
+using System.Windows;
 using Application.Demo.Addon.Languages;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Security;
@@ -34,50 +34,21 @@ using Application.Demo.Shared;
 namespace Application.Demo.Addon.ViewModels
 {
     [Export(typeof(IConfigScreen))]
-    public sealed class AddonSettingsViewModel : SimpleConfigScreen
+    public sealed class AdminConfigNodeViewModel : AuthenticatedConfigNode<Visibility>
     {
-        public AddonSettingsViewModel()
-        {
-            ParentId = nameof(ConfigIds.Addons);
-        }
-
         public IAddonTranslations AddonTranslations { get; }
 
-        private IAuthenticationProvider AuthenticationProvider { get; }
-
-        private IEventAggregator EventAggregator { get; }
-
         [ImportingConstructor]
-        public AddonSettingsViewModel(
-            IAddonTranslations addonTranslations,
-            IAuthenticationProvider authenticationProvider,
-            IEventAggregator eventAggregator)
+        public AdminConfigNodeViewModel(IAddonTranslations addonTranslations)
         {
             AddonTranslations = addonTranslations;
-            EventAggregator = eventAggregator;
-            AuthenticationProvider = authenticationProvider;
+
+            ParentId = nameof(ConfigIds.Addons);
+            this.VisibleOnPermissions("Admin");
+
             // automatically update the DisplayName
-            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Addon));
+            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
         }
 
-        // ReSharper disable once UnusedMember.Global
-        public void AddAdmin()
-        {
-            var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;
-            authenticationProvider?.AddPermission("Admin");
-        }
-
-        // ReSharper disable once UnusedMember.Global
-        public void DoSomething()
-        {
-            EventAggregator.PublishOnUIThread("Addon button clicked");
-        }
-
-        // ReSharper disable once UnusedMember.Global
-        public void RemoveAdmin()
-        {
-            var authenticationProvider = AuthenticationProvider as SimpleAuthenticationProvider;
-            authenticationProvider?.RemovePermission("Admin");
-        }
     }
 }

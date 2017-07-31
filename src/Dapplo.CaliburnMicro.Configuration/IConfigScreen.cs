@@ -55,8 +55,8 @@ namespace Dapplo.CaliburnMicro.Configuration
         void Rollback();
 
         /// <summary>
-        ///     Terminate the config screen.
-        ///     This is called when the parent config UI is terminated
+        ///     Terminate is called (must!) for every ITreeScreen when the parent IConfig Terminate is called.
+        ///     No matter if this config screen was every shown and what reason there is to leave the configuration screen.
         /// </summary>
         void Terminate();
     }

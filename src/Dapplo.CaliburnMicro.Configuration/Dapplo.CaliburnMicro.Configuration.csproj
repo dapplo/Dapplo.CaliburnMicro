@@ -82,8 +82,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticatedConfigNode.cs" />
     <Compile Include="AuthenticatedConfigScreen.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="ConfigNode.cs" />
+    <Compile Include="SimpleConfigScreen.cs" />
     <Compile Include="ConfigScreen.cs" />
     <Compile Include="Services\ConfigurationStartup.cs" />
     <Compile Include="Extensions\IniSectionExtensions.cs" />

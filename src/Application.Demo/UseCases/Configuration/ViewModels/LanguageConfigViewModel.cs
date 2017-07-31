@@ -74,16 +74,28 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             CoreTranslations = coreTranslations;
         }
 
+        /// <inheritdoc />
         public override void Commit()
         {
             // Manually commit
             DemoConfiguration.CommitTransaction();
             _eventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
             Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
-
-            base.Commit();
         }
 
+        /// <inheritdoc />
+        public override void Rollback()
+        {
+            // Nothing to do
+        }
+
+        /// <inheritdoc />
+        public override void Terminate()
+        {
+            // Nothing to do
+        }
+
+        /// <inheritdoc />
         public override void Initialize(IConfig config)
         {
             // Prepare disposables
@@ -105,12 +117,14 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             base.Initialize(config);
         }
 
+        /// <inheritdoc />
         protected override void OnDeactivate(bool close)
         {
             _disposables.Dispose();
             base.OnDeactivate(close);
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             _disposables.Dispose();

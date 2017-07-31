@@ -23,7 +23,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using Caliburn.Micro;
 
 #endregion
@@ -49,42 +48,11 @@ namespace Dapplo.CaliburnMicro.Menu
         }
 
         /// <summary>
-        ///     Tests if the ITreeScreen contains the supplied text
-        /// </summary>
-        /// <param name="text">the text to search for</param>
-        public virtual bool Contains(string text)
-        {
-            return string.IsNullOrEmpty(text) || CultureInfo.CurrentUICulture.CompareInfo.IndexOf(DisplayName, text, CompareOptions.IgnoreCase) >= 0;
-        }
-
-        /// <summary>
-        ///     Terminate is called (must!) for every ITreeScreen when the parent IConfig Terminate is called.
-        ///     No matter if this config screen was every shown and what reason there is to leave the configuration screen.
-        /// </summary>
-        public virtual void Terminate()
-        {
-        }
-
-        /// <summary>
-        ///     This is called when the configuration should be "persisted"
-        /// </summary>
-        public virtual void Commit()
-        {
-        }
-
-        /// <summary>
-        ///     This is called when the configuration should be "rolled back"
-        /// </summary>
-        public virtual void Rollback()
-        {
-        }
-
-        /// <summary>
         ///     Returns if the ITreeScreen can be activated
         /// </summary>
         public virtual bool CanActivate
         {
-            get { return _canActivate; }
+            get => _canActivate;
             protected set
             {
                 _canActivate = value;
@@ -100,8 +68,8 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public virtual string Id
         {
-            get { return _id; }
-            set { _id = value; }
+            get => _id;
+            set => _id = value;
         }
 
         #endregion
@@ -113,7 +81,7 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public virtual bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             protected set
             {
                 _isEnabled = value;
@@ -126,7 +94,7 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public virtual bool IsVisible
         {
-            get { return _isVisible; }
+            get => _isVisible;
             protected set
             {
                 _isVisible = value;

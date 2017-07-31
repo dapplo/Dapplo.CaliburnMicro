@@ -35,7 +35,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     ///     This is just a placeholder, doesn't have a view
     /// </summary>
     [Export(typeof(IConfigScreen))]
-    public sealed class AddonConfigNodeViewModel : ConfigScreen
+    public sealed class AddonConfigNodeViewModel : ConfigNode
     {   
         [ImportingConstructor]
         public AddonConfigNodeViewModel(IConfigTranslations configTranslations)

@@ -86,13 +86,24 @@ namespace Application.Demo.MetroAddon.ViewModels
         [Import]
         private IWindowManager WindowsManager { get; set; }
 
+        /// <inheritdoc />
+        public override void Rollback()
+        {
+            // Nothing to do
+        }
+
+        /// <inheritdoc />
+        public override void Terminate()
+        {
+            // Nothing to do
+        }
+
         public override void Commit()
         {
             // Manually commit
             MetroConfiguration.CommitTransaction();
             MetroWindowManager.ChangeTheme(MetroConfiguration.Theme);
             MetroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
-            base.Commit();
         }
 
 

@@ -21,34 +21,28 @@
 
 #region using
 
-using System.ComponentModel.Composition;
-using System.Windows;
-using Application.Demo.Addon.Languages;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Security;
-using Application.Demo.Shared;
-
 #endregion
 
-namespace Application.Demo.Addon.ViewModels
+namespace Dapplo.CaliburnMicro.Configuration
 {
-    [Export(typeof(IConfigScreen))]
-    public sealed class AdminConfigViewModel : AuthenticatedConfigScreen<Visibility>
+    /// <summary>
+    ///     An authenticatable config node, which is an extension of the AuthenticatedConfigScreen with empty (and sealed) transaction methods.
+    /// </summary>
+    public class AuthenticatedConfigNode<TWhen> : AuthenticatedConfigScreen<TWhen>
     {
-        public IAddonTranslations AddonTranslations { get; }
-
-        [ImportingConstructor]
-        public AdminConfigViewModel(IAddonTranslations addonTranslations)
+        /// <inheritdoc />
+        public sealed override void Rollback()
         {
-            AddonTranslations = addonTranslations;
-
-            ParentId = nameof(ConfigIds.Addons);
-            this.VisibleOnPermissions("Admin");
-
-            // automatically update the DisplayName
-            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
         }
 
+        /// <inheritdoc />
+        public sealed override void Terminate()
+        {
+        }
+
+        /// <inheritdoc />
+        public sealed override void Commit()
+        {
+        }
     }
 }

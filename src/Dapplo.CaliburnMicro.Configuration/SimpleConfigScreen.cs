@@ -21,29 +21,35 @@
 
 #region using
 
-using System.ComponentModel.Composition;
-using Application.Demo.Addon.Languages;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Extensions;
-using Application.Demo.Shared;
-
 #endregion
 
-namespace Application.Demo.Addon.ViewModels
+namespace Dapplo.CaliburnMicro.Configuration
 {
-    [Export(typeof(IConfigScreen))]
-    public sealed class NotSelectableConfigViewModel : SimpleConfigScreen
+    /// <summary>
+    ///     A simple implementation of the ConfigScreen, this implements empty transactional methods which can be overriden when needed
+    /// </summary>
+    public class SimpleConfigScreen : ConfigScreen
     {
-        public IAddonTranslations AddonTranslations { get; }
-
-        [ImportingConstructor]
-        public NotSelectableConfigViewModel(IAddonTranslations addonTranslations)
+        /// <summary>
+        ///     Terminate is called (must!) for every ITreeScreen when the parent IConfig Terminate is called.
+        ///     No matter if this config screen was every shown and what reason there is to leave the configuration screen.
+        /// </summary>
+        public override void Terminate()
         {
-            AddonTranslations = addonTranslations;
-            ParentId = nameof(ConfigIds.Addons);
-            IsEnabled = false;
-            // automatically update the DisplayName
-            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.NotSelectableAddon));
+        }
+
+        /// <summary>
+        ///     This is called when the configuration should be "persisted"
+        /// </summary>
+        public override void Commit()
+        {
+        }
+
+        /// <summary>
+        ///     This is called when the configuration should be "rolled back"
+        /// </summary>
+        public override void Rollback()
+        {
         }
     }
 }

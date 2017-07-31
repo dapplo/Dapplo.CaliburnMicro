@@ -21,29 +21,28 @@
 
 #region using
 
-using System.ComponentModel.Composition;
-using Application.Demo.Addon.Languages;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Extensions;
-using Application.Demo.Shared;
-
 #endregion
 
-namespace Application.Demo.Addon.ViewModels
+namespace Dapplo.CaliburnMicro.Configuration
 {
-    [Export(typeof(IConfigScreen))]
-    public sealed class NotSelectableConfigViewModel : SimpleConfigScreen
+    /// <summary>
+    ///     A node for the config screens, this has empty and sealed transactional methods
+    /// </summary>
+    public class ConfigNode : ConfigScreen
     {
-        public IAddonTranslations AddonTranslations { get; }
-
-        [ImportingConstructor]
-        public NotSelectableConfigViewModel(IAddonTranslations addonTranslations)
+        /// <inheritdoc />
+        public sealed override void Rollback()
         {
-            AddonTranslations = addonTranslations;
-            ParentId = nameof(ConfigIds.Addons);
-            IsEnabled = false;
-            // automatically update the DisplayName
-            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.NotSelectableAddon));
+        }
+
+        /// <inheritdoc />
+        public sealed override void Terminate()
+        {
+        }
+
+        /// <inheritdoc />
+        public sealed override void Commit()
+        {
         }
     }
 }
