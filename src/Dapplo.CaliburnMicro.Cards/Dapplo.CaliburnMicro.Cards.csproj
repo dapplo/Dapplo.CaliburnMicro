@@ -54,9 +54,8 @@
     <Reference Include="Dapplo.Addons, Version=0.5.32.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Addons.0.5.32\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.HttpExtensions, Version=0.6.22.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.HttpExtensions.0.6.22\lib\net46\Dapplo.HttpExtensions.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Dapplo.HttpExtensions, Version=0.8.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.HttpExtensions.0.8.23\lib\net46\Dapplo.HttpExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.0.29.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.0.29\lib\net45\Dapplo.Log.dll</HintPath>
@@ -70,6 +69,7 @@
       <HintPath>..\packages\Microsoft.AdaptiveCards.Xaml.Wpf.0.5.6339.19873\lib\net46\Microsoft.AdaptiveCards.Xaml.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.MarkedNet, Version=1.0.12.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.MarkedNet.1.0.12\lib\net452\Microsoft.MarkedNet.dll</HintPath>
     </Reference>
