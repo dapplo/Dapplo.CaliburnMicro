@@ -21,6 +21,12 @@ artifacts:
 - path: artifacts\**\site.zip
 - path: artifacts\*.xml
 - path: artifacts\*.html
+# Test with Blackduck CoPilot
+on_success:
+- nuget install Hub-Nuget -Version 1.1.1
+- Hub-NuGet.1.1.1\tools\buildBom.exe --hub_deploy_bdio=false --hub_create_merged_bdio=true
+- curl -s https://copilot.blackducksoftware.com/batch/appveyor > appveyor.bat
+- appveyor
 notifications:
 - provider: Email
   to:
