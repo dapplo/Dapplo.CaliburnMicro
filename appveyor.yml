@@ -24,7 +24,7 @@ artifacts:
 # Test with Blackduck CoPilot
 on_success:
 - nuget install Hub-Nuget -Version 1.1.1
-- Hub-NuGet.1.1.1\tools\buildBom.exe --hub_deploy_bdio=false --hub_create_merged_bdio=true
+- Hub-NuGet.1.1.1\tools\buildBom.exe --solution_path=src/Dapplo.CaliburnMicro.sln --hub_deploy_bdio=false --hub_create_merged_bdio=true
 - curl -s https://copilot.blackducksoftware.com/batch/appveyor > appveyor.bat
 - appveyor
 notifications:
