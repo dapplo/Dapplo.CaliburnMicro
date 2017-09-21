@@ -1,17 +1,20 @@
 #tool "xunit.runner.console"
 #tool "OpenCover"
 #tool "docfx.console"
+#tool "Hub-Nuget"
 #addin "SharpZipLib"
-#addin "Cake.FileHelpers"
-#addin "Cake.DocFx"
 #addin "Cake.Compression"
+#addin "Cake.DocFx"
+#addin "Cake.Http"
+#addin "Cake.FileHelpers"
 
 var target = Argument("target", "Build");
 var configuration = Argument("configuration", "release");
 var nugetApiKey = Argument("nugetApiKey", EnvironmentVariable("NuGetApiKey"));
 var solutionFilePath = GetFiles("./**/*.sln").First();
 var solutionName = solutionFilePath.GetDirectory().GetDirectoryName();
-
+var repositoryName = EnvironmentVariable("APPVEYOR_REPO_NAME") ?? solutionName;
+var repositoryBranch = EnvironmentVariable("APPVEYOR_REPO_BRANCH") ?? "master";
 // Used to store the version, which is needed during the build and the packaging
 var version = EnvironmentVariable("APPVEYOR_BUILD_VERSION") ?? "1.0.0";
 
@@ -45,6 +48,7 @@ Task("Publish")
 // Package the results of the build, if the tests worked, into a NuGet Package
 Task("Package")
     .IsDependentOn("Coverage")
+    .IsDependentOn("CoPilot")
     .IsDependentOn("AssemblyVersion")
     .IsDependentOn("Documentation")
     .Does(()=>
@@ -64,13 +68,50 @@ Task("Package")
 
     var projectFilePaths = GetFiles("./**/*.csproj")
 		.Where(p => !p.FullPath.Contains("Test") && !p.FullPath.Contains("Demo") && !p.FullPath.Contains("Diagnostics") &&!p.FullPath.Contains("packages") &&!p.FullPath.Contains("tools"));
-    foreach(var projectFilePath in projectFilePaths)
-    {
-        Information("Packaging: " + projectFilePath.FullPath);
-        NuGetPack(projectFilePath.FullPath, settings);
-    }
+	foreach(var projectFilePath in projectFilePaths)
+	{
+		Information("Packaging: " + projectFilePath.FullPath);
+		NuGetPack(projectFilePath.FullPath, settings);
+	}
 });
 
+// Use Blackduck CoPilot, this is all done manually and I hope they will write a cake addon
+Task("CoPilot")
+    .IsDependentOn("Build")
+	.Does(() =>
+{
+	// Create the Bill Of Materials by using their Hub-Nuget tool
+	FilePath buildBomPath = Context.Tools.Resolve("buildBom.exe");
+	StartProcess(buildBomPath, new ProcessSettings {
+		Arguments = new ProcessArgumentBuilder()
+			.Append("--solution_path=" + solutionFilePath.FullPath)
+			.Append("--hub_create_merged_bdio=true")
+			.Append("--hub_deploy_bdio=false")
+		});
+		
+	// Find files with the BOM
+	var copilotFiles = GetFiles("./blackduck/**/*.jsonld").Where(p => !p.FullPath.Contains("Test") && !p.FullPath.Contains("Demo") && !p.FullPath.Contains("Diagnostics") &&!p.FullPath.Contains("packages") &&!p.FullPath.Contains("tools"));
+
+	// and upload the files to blackduck's CoPilot
+	var copilotUrl = string.Format(
+		"https://copilot.blackducksoftware.com/hub/import?provider=github&repository={0}&branch={1}&pull_request={2}",
+		repositoryName,
+		repositoryBranch,
+		isPullRequest
+	);
+	
+	foreach(var copilotFile in copilotFiles)
+	{
+		var content = FileReadText(copilotFile.FullPath);
+		// curl -v -f -k --data @<filename> -H "Content-Type:application/ld+json" "https://copilot.blackducksoftware.com/hub/import?provider=github&repository=dapplo/Dapplo.CaliburnMicro&branch=master&pull_request=false"
+		var response = HttpPost(copilotUrl, settings => { settings.
+			SetContentType("application/ld+json").
+			SetRequestBody(content);
+		});
+		Information("CoPilot upload " + copilotFile.FullPath + " answer: " + response);
+	}
+});
+	
 // Build the DocFX documentation site
 Task("Documentation")
     .Does(() =>
