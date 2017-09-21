@@ -48,7 +48,7 @@ Task("Publish")
 // Package the results of the build, if the tests worked, into a NuGet Package
 Task("Package")
     .IsDependentOn("Coverage")
-    .IsDependentOn("CoPilot")
+    //.IsDependentOn("CoPilot")
     .IsDependentOn("AssemblyVersion")
     .IsDependentOn("Documentation")
     .Does(()=>
