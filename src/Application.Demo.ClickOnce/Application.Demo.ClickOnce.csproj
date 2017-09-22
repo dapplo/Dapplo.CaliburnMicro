@@ -77,10 +77,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.4.0\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Addons, Version=0.5.36.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.36\lib\net45\Dapplo.Addons.dll</HintPath>
+      <HintPath>..\packages\Dapplo.Addons.0.5.38\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Addons.Bootstrapper, Version=0.5.36.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.36\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.0.5.38\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Ini, Version=0.5.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Ini.0.5.19\lib\net45\Dapplo.Ini.dll</HintPath>
