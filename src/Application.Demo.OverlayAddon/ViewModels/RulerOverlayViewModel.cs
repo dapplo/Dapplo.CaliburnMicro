@@ -23,6 +23,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 using Dapplo.Windows.Input;

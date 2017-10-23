@@ -33,6 +33,12 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         private Action<INotification> _closeAction;
         private int _id;
 
+        /// <inheritdoc />
+        public string GetMessage()
+        {
+            return DisplayPart.GetMessage();
+        }
+
         /// <summary>
         /// Id of the toast
         /// </summary>
@@ -53,11 +59,7 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         protected override void OnViewAttached(object view, object context)
         {
             var notificationView = view as NotificationDisplayPart;
-            if (notificationView == null)
-            {
-                throw new NotSupportedException("View doesn't base on NotificationDisplayPart");
-            }
-            DisplayPart = notificationView;
+            DisplayPart = notificationView ?? throw new NotSupportedException("View doesn't base on NotificationDisplayPart");
 
             base.OnViewAttached(view, context);
         }
@@ -65,7 +67,7 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         /// <summary>
         /// Sets the close action for the toast
         /// </summary>
-        /// <param name="closeAction"></param>
+        /// <param name="closeAction">Action which accepts a INotification</param>
         public virtual void Bind(Action<INotification> closeAction)
         {
             _closeAction = closeAction;
@@ -90,5 +92,8 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         /// Return the view for this ViewModel, it needs to base upon NotificationDisplayPart 
         /// </summary>
         public virtual NotificationDisplayPart DisplayPart { get; set; }
+
+        /// <inheritdoc />
+        bool INotification.CanClose { get; set; } = true;
     }
 }

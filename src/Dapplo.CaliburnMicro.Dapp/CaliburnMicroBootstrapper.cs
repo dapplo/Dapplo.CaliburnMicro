@@ -159,22 +159,23 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Return all instances of a certain service type
         /// </summary>
-        /// <param name="serviceType"></param>
-        protected override IEnumerable<object> GetAllInstances(Type serviceType)
+        /// <param name="service">Type</param>
+        protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return _bootstrapper.GetExports(serviceType).Select(x => x.Value);
+            return _bootstrapper.GetExports(service).Select(x => x.Value);
         }
 
         /// <summary>
         ///     Locate an instance of a service, used in Caliburn.
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <param name="key"></param>
-        /// <returns>instance</returns>
-        protected override object GetInstance(Type serviceType, string key)
+        /// <param name="service">Type for the service to locate</param>
+        /// <param name="contractName">string with the name of the contract</param>
+        /// <returns>instance of the service</returns>
+        [SuppressMessage("Sonar Code Smell", "S927:Name parameter to match the base definition", Justification = "The base name is not so clear.")]
+        protected override object GetInstance(Type service, string contractName)
         {
-            var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-            return _bootstrapper.GetExport(serviceType, contract);
+            var contract = string.IsNullOrEmpty(contractName) ? AttributedModelServices.GetContractName(service) : contractName;
+            return _bootstrapper.GetExport(service, contract);
         }
 
         /// <summary>

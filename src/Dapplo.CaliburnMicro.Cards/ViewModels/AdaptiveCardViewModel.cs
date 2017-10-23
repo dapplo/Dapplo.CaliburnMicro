@@ -109,10 +109,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// </summary>
         public AdaptiveCard Card
         {
-            get
-            {
-                return _adaptiveCard;
-            }
+            get => _adaptiveCard;
             set
             {
                 _adaptiveCard = value;
@@ -144,7 +141,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// </summary>
         public virtual FrameworkElement RenderedCard
         {
-            get { return _card; }
+            get => _card;
             set
             {
                 _card = value;
@@ -174,29 +171,25 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             {
                 return;
             }
-            var openUrlAction = e.Action as OpenUrlAction;
-            if (openUrlAction != null)
+            if (e.Action is OpenUrlAction openUrlAction)
             {
                 Process.Start(openUrlAction.Url);
                 return;
             }
 
-            var showCardAction = e.Action as ShowCardAction;
-            if (showCardAction != null)
+            if (e.Action is ShowCardAction showCardAction)
             {
                 _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
                 return;
             }
 
-            var submitAction = e.Action as SubmitAction;
-            if (submitAction != null)
+            if (e.Action is SubmitAction submitAction)
             {
                 // TODO: submit how / where?
                 throw new NotSupportedException(submitAction.Title);
             }
 
-            var httpAction = e.Action as HttpAction;
-            if (httpAction != null)
+            if (e.Action is HttpAction httpAction)
             {
                 var httpActionRequest = new HttpActionRequest
                 {
