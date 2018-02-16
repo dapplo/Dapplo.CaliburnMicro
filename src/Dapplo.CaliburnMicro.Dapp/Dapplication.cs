@@ -93,7 +93,12 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Allows access to the Dapplo.Addons.ApplicationBootstrapper
         /// </summary>
-        public ApplicationBootstrapper Bootstrapper => _bootstrapper;
+        public IBootstrapper Bootstrapper => _bootstrapper;
+
+        /// <summary>
+        /// Returns true if the application was already running, only works when a mutex is used
+        /// </summary>
+        public bool WasAlreadyRunning => !_bootstrapper.IsMutexLocked;
 
         /// <summary>
         ///     Access the current Dapplication
