@@ -93,7 +93,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Allows access to the Dapplo.Addons.ApplicationBootstrapper
         /// </summary>
-        public IBootstrapper Bootstrapper => _bootstrapper;
+        public ApplicationBootstrapper Bootstrapper => _bootstrapper;
 
         /// <summary>
         ///     Access the current Dapplication
