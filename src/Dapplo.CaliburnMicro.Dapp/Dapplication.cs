@@ -60,6 +60,8 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
         public Dapplication(string applicationName, string mutexId = null, bool global = false) : this(new ApplicationBootstrapper(applicationName, mutexId, global))
         {
+            // Set the Thread name, is better than "1"
+            Thread.CurrentThread.Name = applicationName;
         }
 
         /// <summary>
