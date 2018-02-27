@@ -1,5 +1,6 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+﻿#region Dapplo 2016-2018 - GNU Lesser General Public License
+//  Dapplo - building blocks for desktop applications
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -18,14 +19,21 @@
 // 
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+#endregion
+
+using System.ComponentModel;
 
 namespace Dapplo.CaliburnMicro
 {
     /// <summary>
-    /// Marker interface for UI Services, every class exported with this interface is automatically instanciated right after CaliburnMicro is.
-    /// Except for the constructor, nothing is called. All dependencies are injected.
+    ///     Meta-data belonging to the UiStartupActionAttribute, which makes it possible to specify type-safe meta-data.
     /// </summary>
-    public interface IUiService
+    public interface IUiStartupMetadata
     {
+        /// <summary>
+        ///     Order in which IUiStartupAction.Start is called
+        /// </summary>
+        [DefaultValue(1)]
+        int StartupOrder { get; }
     }
 }

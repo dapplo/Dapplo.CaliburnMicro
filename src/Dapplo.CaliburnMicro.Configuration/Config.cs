@@ -42,6 +42,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         where TConfigScreen : class, IConfigScreen, ITreeScreenNode<TConfigScreen>
     {
         // ReSharper disable once StaticMemberInGenericType
+        [SuppressMessage("Sonar Code Smell", "S2743:A static field in a generic type is not shared among instances of different close constructed types.", Justification = "We need a logger")]
         private static readonly LogSource Log = new LogSource();
 
         private readonly ISet<ITransactionalProperties> _transactionalPropertyRegistrations = new HashSet<ITransactionalProperties>();
@@ -236,15 +237,15 @@ namespace Dapplo.CaliburnMicro.Configuration
         /// <summary>
         ///     Activates the specified config screen, and sends notify property changed events.
         /// </summary>
-        /// <param name="configScreen">The TConfigScreen to activate.</param>
+        /// <param name="item">The TConfigScreen to activate.</param>
         [SuppressMessage("Sonar Code Smell", "S3236:Caller information arguments should not be provided explicitly", Justification = "Notification of a different property is triggered.")]
-        public override void ActivateItem(TConfigScreen configScreen)
+        public override void ActivateItem(TConfigScreen item)
         {
-            if (configScreen != null && !configScreen.CanActivate)
+            if (item != null && !item.CanActivate)
             {
                 return;
             }
-            base.ActivateItem(configScreen);
+            base.ActivateItem(item);
             NotifyOfPropertyChange(nameof(CurrentConfigScreen));
             NotifyOfPropertyChange(nameof(CanCancel));
             NotifyOfPropertyChange(nameof(CanOk));

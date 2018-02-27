@@ -34,10 +34,10 @@ namespace Dapplo.CaliburnMicro.Toasts
     /// The toast conductor handles IToast message which can be used to display toasts.
     /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
     /// </summary>
-    [Export(typeof(IUiService))]
+    [Export(typeof(IUiStartupAction))]
     [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
-    public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiService
+    public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiStartupAction
     {
         private readonly IEventAggregator _eventAggregator;
         private Notifier _notifier;
@@ -51,16 +51,17 @@ namespace Dapplo.CaliburnMicro.Toasts
         public ToastConductor(
             IEventAggregator eventAggregator,
             [Import(AllowDefault = true)]
-            Notifier notifier
-            )
+            Notifier notifier)
         {
             // Fail fast, if there is no IEventAggregator than something went wrong in the bootstrapper
-            if (eventAggregator == null)
-            {
-                throw new ArgumentNullException(nameof(eventAggregator));
-            }
             _notifier = notifier;
-            _eventAggregator = eventAggregator;
+            _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
+            
+        }
+
+        /// <inheritdoc />
+        public void Start()
+        {
             ScreenExtensions.TryActivate(this);
         }
 
@@ -148,9 +149,8 @@ namespace Dapplo.CaliburnMicro.Toasts
                 displayPart.Unloaded -= InternalUnload;
             }
 
-            var toast = displayPart?.DataContext as IToast;
             // Deactivate the item
-            if (toast != null)
+            if (displayPart?.DataContext is IToast toast)
             {
                 DeactivateItem(toast, true);
             }
@@ -164,5 +164,6 @@ namespace Dapplo.CaliburnMicro.Toasts
         {
             ActivateItem(message);
         }
+
     }
 }

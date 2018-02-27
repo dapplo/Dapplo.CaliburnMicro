@@ -31,12 +31,12 @@ using Dapplo.Language;
 
 #endregion
 
-namespace Dapplo.CaliburnMicro.Translations
+namespace Dapplo.CaliburnMicro.Translations.Services
 {
     /// <summary>
     ///     This registers a ServiceProviderExportProvider for providing ILanguage
     /// </summary>
-    [StartupAction(StartupOrder = int.MinValue)]
+    [StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper + 1)]
     public class LanguageStartup : IAsyncStartupAction
     {
         [Import]

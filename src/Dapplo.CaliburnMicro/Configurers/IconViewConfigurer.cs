@@ -46,8 +46,7 @@ namespace Dapplo.CaliburnMicro.Configurers
 
         private void Configure(Window window, object model = null)
         {
-            var haveIcon = model as IHaveIcon;
-            if (haveIcon != null && window.Icon == null)
+            if (model is IHaveIcon haveIcon && window.Icon == null)
             {
                 // Now use the attached behavior to set the icon
                 window.SetCurrentValue(FrameworkElementIcon.ValueProperty, haveIcon.Icon);

@@ -55,9 +55,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// </summary>
         /// <param name="bootstrapper">Used to inject, export and locate</param>
         [ImportingConstructor]
-        public CaliburnMicroBootstrapper(
-            IBootstrapper bootstrapper
-            )
+        public CaliburnMicroBootstrapper(IBootstrapper bootstrapper)
         {
             _bootstrapper = bootstrapper;
         }

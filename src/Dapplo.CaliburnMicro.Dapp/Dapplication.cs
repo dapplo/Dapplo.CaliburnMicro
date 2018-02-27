@@ -120,8 +120,8 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Make sure we startup everything after WPF instanciated
         /// </summary>
-        /// <param name="startupEventArgs">StartupEventArgs</param>
-        protected override async void OnStartup(StartupEventArgs startupEventArgs)
+        /// <param name="e">StartupEventArgs</param>
+        protected override async void OnStartup(StartupEventArgs e)
         {
             // Enable UI access for different Dapplo packages, especially the UiContext.RunOn
             // This only works here, not before the Application is started and not later
@@ -153,7 +153,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             await _bootstrapper.RunAsync();
 
             // This also triggers the Caliburn.Micro.BootstrapperBase.OnStartup
-            base.OnStartup(startupEventArgs);
+            base.OnStartup(e);
         }
 
         /// <summary>

@@ -46,8 +46,7 @@ namespace Dapplo.CaliburnMicro.Configurers
         /// </summary>
         /// <param name="uiConfiguration">IUiConfiguration</param>
         [ImportingConstructor]
-        public PlacementViewConfigurer(
-            IUiConfiguration uiConfiguration)
+        public PlacementViewConfigurer(IUiConfiguration uiConfiguration)
         {
             _uiConfiguration = uiConfiguration;
         }
@@ -71,11 +70,11 @@ namespace Dapplo.CaliburnMicro.Configurers
             {
                 return;
             }
-            WindowPlacement placement;
+
             var windowName = viewModel.GetType().FullName;
 
             var screenBounds = DisplayInfo.GetAllScreenBounds();
-            var hasPlacement = _uiConfiguration.WindowLocations.TryGetValue(windowName, out placement);
+            var hasPlacement = _uiConfiguration.WindowLocations.TryGetValue(windowName, out var placement);
             if (!hasPlacement || placement.ShowCmd == ShowWindowCommands.Normal && !screenBounds.Contains(placement.NormalPosition))
             {
                 view.WindowStartupLocation = view.Owner != null ? WindowStartupLocation.CenterOwner : _uiConfiguration.DefaultWindowStartupLocation;

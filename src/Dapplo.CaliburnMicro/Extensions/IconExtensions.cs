@@ -42,48 +42,39 @@ namespace Dapplo.CaliburnMicro.Extensions
     /// <summary>
     ///     Extension method to support Icon conversion
     /// </summary>
-    
     public static class IconExtensions
     {
         /// <summary>
         ///     Disassociate the child from the parent
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="child"></param>
+        /// <param name="parent">DependencyObject</param>
+        /// <param name="child">UIElement</param>
         private static void RemoveChild(this DependencyObject parent, UIElement child)
         {
-            var panel = parent as Panel;
-            if (panel != null)
+            switch (parent)
             {
-                panel.Children.Remove(child);
+                case Panel panel:
+                    panel.Children.Remove(child);
+                    return;
+                case Decorator decorator:
+                    if (ReferenceEquals(decorator.Child, child))
+                    {
+                        decorator.Child = null;
+                    }
+                    return;
+                case ContentPresenter contentPresenter:
+                    if (Equals(contentPresenter.Content, child))
+                    {
+                        contentPresenter.Content = null;
+                    }
+                    return;
+            }
+
+            if (!(parent is ContentControl contentControl))
+            {
                 return;
             }
 
-            var decorator = parent as Decorator;
-            if (decorator != null)
-            {
-                if (ReferenceEquals(decorator.Child, child))
-                {
-                    decorator.Child = null;
-                }
-                return;
-            }
-
-            var contentPresenter = parent as ContentPresenter;
-            if (contentPresenter != null)
-            {
-                if (Equals(contentPresenter.Content, child))
-                {
-                    contentPresenter.Content = null;
-                }
-                return;
-            }
-
-            var contentControl = parent as ContentControl;
-            if (contentControl == null)
-            {
-                return;
-            }
             if (Equals(contentControl.Content, child))
             {
                 contentControl.Content = null;

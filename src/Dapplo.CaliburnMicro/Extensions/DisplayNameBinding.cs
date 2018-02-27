@@ -68,10 +68,7 @@ namespace Dapplo.CaliburnMicro.Extensions
         /// </summary>
         public void Dispose()
         {
-            if (_disposables != null)
-            {
-                _disposables.Dispose();
-            }
+            _disposables?.Dispose();
         }
     }
 }

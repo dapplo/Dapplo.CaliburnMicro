@@ -39,8 +39,8 @@ namespace Dapplo.CaliburnMicro.Diagnostics
         public static void DisplayErrorView(this Dapplication application)
         {
             application.OnUnhandledAppDomainException += (exception, b) => DisplayErrorViewModel(exception);
-            application.OnUnhandledDispatcherException += exception => DisplayErrorViewModel(exception);
-            application.OnUnhandledTaskException += exception => DisplayErrorViewModel(exception);
+            application.OnUnhandledDispatcherException += DisplayErrorViewModel;
+            application.OnUnhandledTaskException += DisplayErrorViewModel;
         }
 
         private static void DisplayErrorViewModel(Exception exception)

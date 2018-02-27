@@ -140,8 +140,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
                 // For user controls, find the parent - parent
                 while (typeof(UserControl).IsAssignableFrom(uiElement.GetType().BaseType))
                 {
-                    var parentUiElement = uiElement.Parent as FrameworkElement;
-                    if (parentUiElement == null)
+                    if (!(uiElement.Parent is FrameworkElement parentUiElement))
                     {
                         break;
                     }
