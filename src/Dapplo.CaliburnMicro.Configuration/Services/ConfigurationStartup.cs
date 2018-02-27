@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Configuration.Services
     /// <summary>
     ///     This registers a ServiceProviderExportProvider for providing IIniSection
     /// </summary>
-    [StartupAction(StartupOrder = (int) CaliburnStartOrder.Bootstrapper + 1)]
+    [StartupAction(StartupOrder = int.MinValue)]
     public class ConfigurationStartup : IAsyncStartupAction
     {
         private static readonly Type IniSectionType = typeof(IIniSection);

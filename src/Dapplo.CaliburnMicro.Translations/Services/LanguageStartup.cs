@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Translations.Services
     /// <summary>
     ///     This registers a ServiceProviderExportProvider for providing ILanguage
     /// </summary>
-    [StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper + 1)]
+    [StartupAction(StartupOrder = int.MinValue)]
     public class LanguageStartup : IAsyncStartupAction
     {
         [Import]
