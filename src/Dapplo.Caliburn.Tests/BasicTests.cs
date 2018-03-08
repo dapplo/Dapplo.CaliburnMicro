@@ -11,21 +11,21 @@ namespace Dapplo.Caliburn.Tests
         {
             var item1 = new MenuItem
             {
-                Id = "A_1",
+                Id = "A_1"
             };
             var item11 = new MenuItem
             {
                 Id = "A_1_1",
-                ParentId = "A_1",
+                ParentId = "A_1"
             };
             var item12 = new MenuItem
             {
                 Id = "A_1_2",
-                ParentId = "A_1",
+                ParentId = "A_1"
             };
             var item0 = new MenuItem
             {
-                Id = "A_0",
+                Id = "A_0"
             };
             var items = new List<IMenuItem> {
                 item11, item1, item12, item0

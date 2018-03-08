@@ -43,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Behaviors
         /// <param name="uiElement">DependencyObject</param>
         protected Behavior(THost uiElement)
         {
-            Contract.Requires(uiElement is THost, "Host is not the expected type");
+            Contract.Requires(uiElement != null, "Host is not the expected type");
 
             _hostReference = new WeakReference(uiElement);
         }

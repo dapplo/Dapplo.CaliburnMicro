@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Caliburn.Micro;
@@ -44,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
         private static readonly LogSource Log = new LogSource();
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [ImportMany] private IEnumerable<Lazy<IShell>> Shells = null;
+        [ImportMany] private IEnumerable<Lazy<IShell>> _shells = null;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
         [ImportMany] private IEnumerable<Lazy<IUiStartupAction, IUiStartupMetadata>> _uiStartupModules = null;
@@ -53,7 +52,7 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
         [ImportMany] private IEnumerable<Lazy<IUiShutdownAction, IShutdownMetadata>> _uiShutdownModules = null;
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [Import] private IWindowManager _windowManager = null;
+        [Import] private IWindowManager _windowManager;
 
         /// <inheritdoc />
         public async Task StartAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -75,7 +74,7 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
                     startupModule.Value.Start();
                 }
 
-                foreach (var shell in Shells)
+                foreach (var shell in _shells)
                 {
                     if (cancellationToken.IsCancellationRequested)
                     {

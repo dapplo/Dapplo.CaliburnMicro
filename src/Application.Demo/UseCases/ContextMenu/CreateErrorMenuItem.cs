@@ -54,10 +54,7 @@ namespace Application.Demo.UseCases.ContextMenu
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Stretch
             };
-            ClickAction = clickedItem =>
-            {
-                throw new NotSupportedException("This should be shown in an error windows!");
-            };
+            ClickAction = clickedItem => throw new NotSupportedException("This should be shown in an error windows!");
             this.ApplyIconForegroundColor(Brushes.DarkRed);
         }
     }

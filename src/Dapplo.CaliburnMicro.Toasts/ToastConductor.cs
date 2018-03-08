@@ -27,6 +27,7 @@ using Caliburn.Micro;
 using ToastNotifications;
 using ToastNotifications.Core;
 using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
 
 namespace Dapplo.CaliburnMicro.Toasts
 {
@@ -75,8 +76,13 @@ namespace Dapplo.CaliburnMicro.Toasts
             if (_notifier == null)
             {
                 _notifier = new Notifier(configuration => {
+                    configuration.DisplayOptions.TopMost = true;
                     configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
-                    configuration.PositionProvider = new SystemTrayPositionProvider();
+                    //configuration.PositionProvider = new SystemTrayPositionProvider();
+                    configuration.PositionProvider = new PrimaryScreenPositionProvider(
+                        corner: Corner.BottomRight,
+                        offsetX: 10,
+                        offsetY: 10);
                     configuration.DisplayOptions.TopMost = true;
                     configuration.Dispatcher = Application.Current.Dispatcher;
                 });
@@ -93,6 +99,7 @@ namespace Dapplo.CaliburnMicro.Toasts
         {
             _eventAggregator.Unsubscribe(this);
             _notifier.Dispose();
+            _notifier = null;
             base.OnDeactivate(close);
         }
 

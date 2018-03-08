@@ -102,7 +102,7 @@ namespace Dapplo.CaliburnMicro.Toasts
                     x = taskbarBounds.Left - _xOffset - (int)actualPopupWidth;
                     y = taskbarBounds.Bottom - _yOffset - (int)actualPopupHeight;
                     break;
-                // case AppBarEdges.Bottom:
+                case AppBarEdges.Bottom:
                 default:
                     x = taskbarBounds.Right - _xOffset - (int)actualPopupWidth;
                     y = taskbarBounds.Top - _yOffset - (int)actualPopupHeight;

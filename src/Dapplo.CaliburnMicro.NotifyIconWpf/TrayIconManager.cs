@@ -76,12 +76,11 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// </summary>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
-        public async Task ShutdownAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task ShutdownAsync(CancellationToken cancellationToken = default)
         {
             var trayIcons = _trayIcons.Values.Select(x =>
                 {
-                    ITrayIcon trayIcon;
-                    x.TryGetTarget(out trayIcon);
+                    x.TryGetTarget(out var trayIcon);
                     return trayIcon;
                 })
                 .Where(x => x != null)
@@ -111,7 +110,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// </summary>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
-        public async Task StartAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task StartAsync(CancellationToken cancellationToken = default)
         {
             await Execute.OnUIThreadAsync(InitializeTrayIconViewModels);
         }
@@ -145,17 +144,14 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
             var result = _trayIcons.Where(x =>
                 {
                     // Try to get the key to compare
-                    ITrayIconViewModel currentTrayIconViewModel;
-                    x.Key.TryGetTarget(out currentTrayIconViewModel);
+                    x.Key.TryGetTarget(out var currentTrayIconViewModel);
                     // Try to get the value to check if it's available
-                    ITrayIcon trayIcon;
-                    x.Value.TryGetTarget(out trayIcon);
+                    x.Value.TryGetTarget(out var trayIcon);
                     return trayIconViewModel == currentTrayIconViewModel && trayIcon != null;
                 })
                 .Select(x =>
                 {
-                    ITrayIcon trayIcon;
-                    x.Value.TryGetTarget(out trayIcon);
+                    x.Value.TryGetTarget(out var trayIcon);
                     return trayIcon;
                 })
                 .FirstOrDefault();

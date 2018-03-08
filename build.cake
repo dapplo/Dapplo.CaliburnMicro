@@ -2,6 +2,7 @@
 #tool "OpenCover"
 #tool "docfx.console"
 #tool "Hub-Nuget"
+#tool "PdbGit"
 #addin "SharpZipLib"
 #addin "Cake.Compression"
 #addin "Cake.DocFx"
@@ -51,6 +52,7 @@ Task("Package")
     //.IsDependentOn("CoPilot")
     .IsDependentOn("AssemblyVersion")
     .IsDependentOn("Documentation")
+	.IsDependentOn("GitLink")
     .Does(()=>
 {
     var settings = new NuGetPackSettings 
@@ -67,7 +69,13 @@ Task("Package")
     };
 
     var projectFilePaths = GetFiles("./**/*.csproj")
-		.Where(p => !p.FullPath.Contains("Test") && !p.FullPath.Contains("Demo") && !p.FullPath.Contains("Diagnostics") &&!p.FullPath.Contains("packages") &&!p.FullPath.Contains("tools"));
+		.Where(p => !p.FullPath.ToLower().Contains("test"))
+		.Where(p => !p.FullPath.ToLower().Contains("packages"))
+		.Where(p => !p.FullPath.ToLower().Contains("tools"))
+		.Where(p => !p.FullPath.ToLower().Contains("demo"))
+		.Where(p => !p.FullPath.ToLower().Contains("diagnostics"))
+		.Where(p => !p.FullPath.ToLower().Contains("power"))
+		.Where(p => !p.FullPath.ToLower().Contains("example"));
 	foreach(var projectFilePath in projectFilePaths)
 	{
 		Information("Packaging: " + projectFilePath.FullPath);
@@ -153,7 +161,7 @@ Task("Coverage")
     OpenCover(
         // The test tool Lamdba
         tool => {
-            tool.XUnit2("./**/*.Tests.dll",
+            tool.XUnit2("./**/bin/**/*.Tests.dll",
                 new XUnit2Settings {
                     // Add AppVeyor output, this "should" take care of a report inside AppVeyor
                     ArgumentCustomization = args => {
@@ -195,6 +203,25 @@ Task("Build")
     
     // Make sure the .dlls in the obj path are not found elsewhere
     CleanDirectories("./**/obj");
+});
+
+
+// Generate Git links in the PDB files
+Task("GitLink")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+	FilePath pdbGitPath = Context.Tools.Resolve("PdbGit.exe");
+	var pdbFiles = GetFiles("./**/*.pdb")
+		.Where(p => !p.FullPath.ToLower().Contains("test"))
+		.Where(p => !p.FullPath.ToLower().Contains("tools"))
+		.Where(p => !p.FullPath.ToLower().Contains("packages"))
+		.Where(p => !p.FullPath.ToLower().Contains("example"));
+    foreach(var pdbFile in pdbFiles)
+    {
+		Information("Processing: " + pdbFile.FullPath);
+		StartProcess(pdbGitPath, new ProcessSettings { Arguments = new ProcessArgumentBuilder().Append(pdbFile.FullPath)});
+	}
 });
 
 // Load the needed NuGet packages to make the build work

@@ -55,16 +55,13 @@ namespace Dapplo.CaliburnMicro.Wizard.Converters
                 index++;
             }
 
-            var wizardProgressViewModel = itemsControl.DataContext as WizardProgressViewModel;
-            if (wizardProgressViewModel != null)
+            if (!(itemsControl.DataContext is WizardProgressViewModel wizardProgressViewModel))
             {
-                var percent = (int) ((double) index / wizardProgressViewModel.Wizard.WizardScreens.Count(x => x.IsVisible) * 100);
-                if (percent < progress)
-                {
-                    return Visibility.Visible;
-                }
+                return Visibility.Collapsed;
             }
-            return Visibility.Collapsed;
+
+            var percent = (int) ((double) index / wizardProgressViewModel.Wizard.WizardScreens.Count(x => x.IsVisible) * 100);
+            return percent < progress ? Visibility.Visible : Visibility.Collapsed;
         }
 
         object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

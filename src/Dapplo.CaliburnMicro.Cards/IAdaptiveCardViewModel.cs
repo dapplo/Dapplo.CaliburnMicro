@@ -19,8 +19,8 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using AdaptiveCards.Rendering;
 using System.Windows;
+using AdaptiveCards.Rendering.Wpf;
 
 namespace Dapplo.CaliburnMicro.Cards
 {
@@ -46,6 +46,6 @@ namespace Dapplo.CaliburnMicro.Cards
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="actionEventArgs"></param>
-        void OnAction(object sender, ActionEventArgs actionEventArgs);
+        void OnAction(object sender, AdaptiveActionEventArgs actionEventArgs);
     }
 }

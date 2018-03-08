@@ -61,7 +61,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <typeparam name="TViewModel">Type for the ViewModel to show</typeparam>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        public void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
+        public void ShowBalloonTip<TViewModel>(PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default) where TViewModel : class
         {
             var viewModel = IoC.Get<TViewModel>();
             ShowBalloonTip(viewModel, animation, timeout);
@@ -75,7 +75,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <param name="viewModel">instance of your ViewModel</param>
         /// <param name="animation">PopupAnimation</param>
         /// <param name="timeout">TimeSpan</param>
-        public void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default(TimeSpan?)) where TViewModel : class
+        public void ShowBalloonTip<TViewModel>(TViewModel viewModel, PopupAnimation animation = PopupAnimation.Scroll, TimeSpan? timeout = default) where TViewModel : class
         {
             var view = ViewLocator.LocateForModel(viewModel, null, null);
             ViewModelBinder.Bind(viewModel, view, null);

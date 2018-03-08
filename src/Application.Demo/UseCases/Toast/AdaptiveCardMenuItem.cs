@@ -21,6 +21,7 @@
 
 #region using
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
@@ -33,7 +34,6 @@ using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
-using HorizontalAlignment = AdaptiveCards.HorizontalAlignment;
 
 #endregion
 
@@ -67,42 +67,36 @@ namespace Application.Demo.UseCases.Toast
 
                 var card = new AdaptiveCard
                 {
-                    Body = new List<CardElement>
+                    Body = new List<AdaptiveElement>
                     {
-                        new Image
+                        new AdaptiveImage
                         {
-                            HorizontalAlignment = HorizontalAlignment.Center,
-                            Size = ImageSize.Large,
-                            Url = "http://static.nichtlustig.de/comics/full/150422.jpg"
+                            HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                            Size = AdaptiveImageSize.Large,
+                            Url = new Uri("http://static.nichtlustig.de/comics/full/150422.jpg")
                         },
-                        new Image
+                        new AdaptiveImage
                         {
-                            HorizontalAlignment = HorizontalAlignment.Center,
-                            Size = ImageSize.Large,
-                            Url = "http://static.nichtlustig.de/comics/full/150421.jpg"
+                            HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                            Size = AdaptiveImageSize.Large,
+                            Url = new Uri("http://static.nichtlustig.de/comics/full/150421.jpg")
                         }
                     },
-                    Actions = new List<ActionBase>
+                    Actions = new List<AdaptiveAction>
                     {
-                        new ShowCardAction
+                        new AdaptiveShowCardAction
                         {
                             Title = "Do you like this?",
                             Card = new AdaptiveCard
                             {
-                                Body = new List<CardElement>
+                                Body = new List<AdaptiveElement>
                                 {
-                                    new TextInput
+                                    new AdaptiveTextInput
                                     {
                                         Id = "rating"
                                     }
                                 }
                             }
-                        },
-                        new HttpAction
-                        {
-                            Body = "Testing 1 2 3",
-                            Url = "https://httpbin.org/post",
-                            Title = "Call HTTP Bin"
                         }
                     }
                 };

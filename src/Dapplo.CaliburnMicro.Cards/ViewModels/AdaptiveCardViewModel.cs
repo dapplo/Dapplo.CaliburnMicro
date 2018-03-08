@@ -30,12 +30,9 @@ using System.Diagnostics;
 using System.Windows;
 using AdaptiveCards;
 using AdaptiveCards.Rendering;
-using AdaptiveCards.Rendering.Config;
+using AdaptiveCards.Rendering.Wpf;
 using Caliburn.Micro;
-using Dapplo.CaliburnMicro.Cards.Entities;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
-using Dapplo.HttpExtensions;
-using Dapplo.Log;
 
 namespace Dapplo.CaliburnMicro.Cards.ViewModels
 {
@@ -45,7 +42,6 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// </summary>
     public class AdaptiveCardViewModel : ToastBaseViewModel
     {
-        private static readonly LogSource Log = new LogSource();
         private FrameworkElement _card;
         private AdaptiveCard _adaptiveCard;
         private readonly IEventAggregator _eventAggregator;
@@ -63,25 +59,25 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             // Some designtime example
             Card = new AdaptiveCard
             {
-                Body = new List<CardElement>
+                Body = new List<AdaptiveElement>
                 {
-                    new Image
+                    new AdaptiveImage
                     {
-                        HorizontalAlignment = AdaptiveCards.HorizontalAlignment.Center,
-                        Size = ImageSize.Small,
-                        Url = "http://static.nichtlustig.de/comics/full/150422.jpg"
+                        HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                        Size = AdaptiveImageSize.Small,
+                        Url = new Uri("http://static.nichtlustig.de/comics/full/150422.jpg")
                     }
                 },
-                Actions = new List<ActionBase>
+                Actions = new List<AdaptiveAction>
                 {
-                    new ShowCardAction
+                    new AdaptiveShowCardAction
                     {
                         Title = "Do you like this?",
                         Card = new AdaptiveCard
                         {
-                            Body = new List<CardElement>
+                            Body = new List<AdaptiveElement>
                             {
-                                new TextInput
+                                new AdaptiveTextInput
                                 {
                                     Id = "rating"
                                 }
@@ -113,11 +109,11 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             set
             {
                 _adaptiveCard = value;
-                var hostConfig = new HostConfig
+                var hostConfig = new AdaptiveHostConfig
                 {
                     FontSizes = {
                         Small = 15,
-                        Normal =20,
+                        Default = 20,
                         Medium = 25,
                         Large = 30,
                         ExtraLarge= 40
@@ -128,11 +124,13 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                         Medium = 70,
                         Small = 40
                     }
-
                 };
-
-                var renderer = new XamlRenderer(hostConfig, new ResourceDictionary(), OnAction, OnMissingInput);
-                RenderedCard = renderer.RenderAdaptiveCard(_adaptiveCard);
+                var renderer = new AdaptiveCardRenderer(hostConfig)
+                {
+                    // Set defined resources here.
+                    Resources = new ResourceDictionary()
+                };
+                RenderedCard = renderer.RenderCard(_adaptiveCard).FrameworkElement;
             }
         }
 
@@ -156,7 +154,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <param name="args"></param>
         public virtual void OnMissingInput(object sender, MissingInputEventArgs args)
         {
-            MessageBox.Show($"Required input {args.Input.Id} is missing.");
+            MessageBox.Show($"Required input {args.AdaptiveInput.Id} is missing.");
         }
 
         /// <summary>
@@ -165,52 +163,21 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <param name="sender">object</param>
         /// <param name="e">ActionEventArgs</param>
         /// <exception cref="NotSupportedException">Thrown when an action is not supported</exception>
-        public virtual async void OnAction(object sender, ActionEventArgs e)
+        public virtual void OnAction(object sender, AdaptiveActionEventArgs e)
         {
-            if (e.Action == null)
+            switch (e.Action)
             {
-                return;
-            }
-            if (e.Action is OpenUrlAction openUrlAction)
-            {
-                Process.Start(openUrlAction.Url);
-                return;
-            }
-
-            if (e.Action is ShowCardAction showCardAction)
-            {
-                _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
-                return;
-            }
-
-            if (e.Action is SubmitAction submitAction)
-            {
-                // TODO: submit how / where?
-                throw new NotSupportedException(submitAction.Title);
-            }
-
-            if (e.Action is HttpAction httpAction)
-            {
-                var httpActionRequest = new HttpActionRequest
-                {
-                    Body = httpAction.Body
-                    // TODO: How to unpack the headers?
-                    // httpAction.Headers has headers for HTTP operation
-                };
-                var uri = new Uri(httpAction.Url);
-                switch (httpAction.Method)
-                {
-                    case "POST":
-                        var postResponse = await uri.PostAsync<HttpResponse<string>>(httpActionRequest);
-                        Log.Debug().WriteLine("Response: {0}", postResponse.Response);
-                        break;
-                    case "GET":
-                        var getResponse = await uri.GetAsAsync<HttpResponse<string>>();
-                        Log.Debug().WriteLine("Response: {0}", getResponse.Response);
-                        break;
-                    default:
-                        throw new NotSupportedException($"{httpAction.Title} - {httpAction.Method}");
-                }
+                case null:
+                    return;
+                case AdaptiveOpenUrlAction openUrlAction:
+                    Process.Start(openUrlAction.Url.AbsoluteUri);
+                    return;
+                case AdaptiveShowCardAction showCardAction:
+                    _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
+                    return;
+                case AdaptiveSubmitAction submitAction:
+                    // TODO: submit how / where?
+                    throw new NotSupportedException(submitAction.Title);
             }
         }
 

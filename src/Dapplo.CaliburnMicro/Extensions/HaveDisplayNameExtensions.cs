@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Extensions
             }
             var disposable = displayNameBinding.Observable.Where(args => args.EventArgs.PropertyName == propertyName).Subscribe(haveDisplayName.CopyValue);
             // Update the display name right away
-            haveDisplayName.DisplayName = displayNameBinding.NotifyPropertyChanged.GetType().GetProperty(propertyName).GetValue(displayNameBinding.NotifyPropertyChanged) as string;
+            haveDisplayName.DisplayName = displayNameBinding.NotifyPropertyChanged.GetType().GetProperty(propertyName)?.GetValue(displayNameBinding.NotifyPropertyChanged) as string;
             // If the disposables is passed, add the disposable
             displayNameBinding.Disposables?.Add(disposable);
             return displayNameBinding;
