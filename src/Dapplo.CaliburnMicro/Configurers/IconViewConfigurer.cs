@@ -39,14 +39,14 @@ namespace Dapplo.CaliburnMicro.Configurers
         }
 
         /// <inheritdoc />
-        public void ConfigureDialogView(Window window, object model = null)
+        public void ConfigureDialogView(Window view, object viewModel = null)
         {
-            Configure(window, model);
+            Configure(view, viewModel);
         }
 
-        private void Configure(Window window, object model = null)
+        private void Configure(Window window, object viewModel = null)
         {
-            if (model is IHaveIcon haveIcon && window.Icon == null)
+            if (viewModel is IHaveIcon haveIcon && window.Icon == null)
             {
                 // Now use the attached behavior to set the icon
                 window.SetCurrentValue(FrameworkElementIcon.ValueProperty, haveIcon.Icon);

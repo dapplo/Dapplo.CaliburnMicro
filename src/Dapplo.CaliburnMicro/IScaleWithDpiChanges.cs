@@ -19,38 +19,18 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using System.ComponentModel.Composition;
-using System.Windows;
-using Dapplo.Windows.Dpi.Wpf;
+#region using
 
-namespace Dapplo.CaliburnMicro.Configurers
+using System.Windows.Controls;
+
+#endregion
+
+namespace Dapplo.CaliburnMicro
 {
     /// <summary>
-    /// This takes care that every window is DPI aware
+    ///     Implement this interface to scale with DPI settings, for WPF windows this is not always needed!!
     /// </summary>
-    [Export(typeof(IConfigureWindowViews))]
-    [Export(typeof(IConfigureDialogViews))]
-    public class DpiAwareViewConfigurer : IConfigureWindowViews, IConfigureDialogViews
+    public interface IScaleWithDpiChanges
     {
-        /// <inheritdoc />
-        public void ConfigureWindowView(Window view, object viewModel = null)
-        {
-            Configure(view, viewModel);
-        }
-
-        /// <inheritdoc />
-        public void ConfigureDialogView(Window view, object viewModel = null)
-        {
-            Configure(view, viewModel);
-        }
-
-        private void Configure(Window view, object viewModel)
-        {
-            if (viewModel is IScaleWithDpiChanges)
-            {
-                // Make sure DPI handling is active
-                view.AttachDpiHandler();
-            }
-        }
     }
 }
