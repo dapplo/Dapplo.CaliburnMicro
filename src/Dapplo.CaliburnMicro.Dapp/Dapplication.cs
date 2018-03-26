@@ -136,6 +136,9 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Export the UI SynchronizationContext, this can be retrieved by specifying:
             // [Import("ui", typeof(SynchronizationContext))] on a SynchronizationContext property / constructor argument
             _bootstrapper.Export("ui", SynchronizationContext.Current);
+            // Export the UI TaskScheduler, this can be retrieved by specifying:
+            // [Import("ui", typeof(TaskScheduler))] on a TaskScheduler property / constructor argument
+            _bootstrapper.Export("ui", TaskScheduler.FromCurrentSynchronizationContext());
 
             // The following makes sure that Caliburn.Micro is correctly initialized on the right thread and Execute.OnUIThread works
             var caliburnBootstrapper = _bootstrapper.GetExport<CaliburnMicroBootstrapper>().Value;
