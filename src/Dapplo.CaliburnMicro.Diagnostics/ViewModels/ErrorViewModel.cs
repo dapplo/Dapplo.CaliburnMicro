@@ -22,6 +22,7 @@
 using System;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Extensions;
 #if DEBUG
@@ -63,8 +64,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
             }
 
             // Design mode code
-            Stacktrace =
-                "ConsoleApplication1.MyCustomException: some message .... ---> System.Exception: Oh noes!\r\n   at ConsoleApplication1.SomeObject.OtherMethod() in C:\\ConsoleApplication1\\SomeObject.cs:line 24\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 14\r\n   --- End of inner exception stack trace ---\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 18\r\n   at ConsoleApplication1.Program.DoSomething() in C:\\ConsoleApplication1\\Program.cs:line 23\r\n   at ConsoleApplication1.Program.Main(String[] args) in C:\\ConsoleApplication1\\Program.cs:line 13";
+            Stacktrace = "ConsoleApplication1.MyCustomException: some message .... ---> System.Exception: Oh noes!\r\n   at ConsoleApplication1.SomeObject.OtherMethod() in C:\\ConsoleApplication1\\SomeObject.cs:line 24\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 14\r\n   --- End of inner exception stack trace ---\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 18\r\n   at ConsoleApplication1.Program.DoSomething() in C:\\ConsoleApplication1\\Program.cs:line 23\r\n   at ConsoleApplication1.Program.Main(String[] args) in C:\\ConsoleApplication1\\Program.cs:line 13";
             VersionProvider = new SimpleVersionProvider();
             Message = "Oh noes!";
         }
@@ -95,7 +95,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
         /// </summary>
         public void SetExceptionToDisplay(Exception exception)
         {
-            Stacktrace = exception.StackTrace;
+            Stacktrace = exception.ToStringDemystified();
             Message = exception.Message;
         }
 

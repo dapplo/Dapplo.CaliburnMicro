@@ -22,6 +22,7 @@
 #region using
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -47,6 +48,8 @@ namespace Application.Demo
         [STAThread]
         public static void Main()
         {
+            // Make sure the log entries are demystified
+            LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();
 #if DEBUG
             // Initialize a debug logger for Dapplo packages
             LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Debug);

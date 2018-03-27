@@ -48,8 +48,8 @@
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.12\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Log, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Log.1.1.4\lib\net45\Dapplo.Log.dll</HintPath>
+    <Reference Include="Dapplo.Log, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Log.1.1.5\lib\net45\Dapplo.Log.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Utils, Version=1.0.158.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Utils.1.0.158\lib\net45\Dapplo.Utils.dll</HintPath>
