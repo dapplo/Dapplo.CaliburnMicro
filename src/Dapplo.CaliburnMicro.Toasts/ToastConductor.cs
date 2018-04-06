@@ -35,7 +35,7 @@ namespace Dapplo.CaliburnMicro.Toasts
     /// The toast conductor handles IToast message which can be used to display toasts.
     /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
     /// </summary>
-    [Export(typeof(IUiStartupAction))]
+    [UiStartupAction]
     [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiStartupAction

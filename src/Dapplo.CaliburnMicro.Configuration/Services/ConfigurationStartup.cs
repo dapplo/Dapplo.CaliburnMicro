@@ -61,7 +61,7 @@ namespace Dapplo.CaliburnMicro.Configuration.Services
             if (iniConfig == null)
             {
                 iniConfig = new IniConfig(_applicationBootstrapper.ApplicationName, _applicationBootstrapper.ApplicationName);
-                await iniConfig.LoadIfNeededAsync(cancellationToken);
+                await iniConfig.LoadIfNeededAsync(cancellationToken).ConfigureAwait(true);
             }
             _applicationBootstrapper.Export<IServiceProvider>(iniConfig);
             var iniSectionTypes = from assembly in AppDomain.CurrentDomain.GetAssemblies()

@@ -113,7 +113,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// <returns></returns>
         public async Task Dialog()
         {
-            await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!");
+            await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!").ConfigureAwait(true);
         }
 
         public override void Initialize(IConfig config)

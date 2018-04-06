@@ -62,9 +62,9 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <summary>
         ///     Shutdown Caliburn
         /// </summary>
-        /// <param name="token">CancellationToken</param>
+        /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
-        public async Task ShutdownAsync(CancellationToken token = default)
+        public async Task ShutdownAsync(CancellationToken cancellationToken = default)
         {
             Log.Debug().WriteLine("Starting shutdown");
             await Execute.OnUIThreadAsync(() => { OnExit(this, new EventArgs()); }).ConfigureAwait(false);

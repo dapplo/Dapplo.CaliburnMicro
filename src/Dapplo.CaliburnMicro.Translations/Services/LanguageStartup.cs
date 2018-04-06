@@ -53,7 +53,7 @@ namespace Dapplo.CaliburnMicro.Translations.Services
             if (languageLoader == null)
             {
                 languageLoader = LanguageLoader.Current ?? new LanguageLoader(ApplicationBootstrapper.ApplicationName);
-                await languageLoader.LoadIfNeededAsync(cancellationToken);
+                await languageLoader.LoadIfNeededAsync(cancellationToken).ConfigureAwait(false);
             }
             ApplicationBootstrapper.Export<IServiceProvider>(languageLoader);
 

@@ -97,7 +97,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
                     {
                         trayIcon.Hide();
                     }
-                });
+                }).ConfigureAwait(false);
             }
             else
             {
@@ -112,7 +112,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <returns>Task</returns>
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
-            await Execute.OnUIThreadAsync(InitializeTrayIconViewModels);
+            await Execute.OnUIThreadAsync(InitializeTrayIconViewModels).ConfigureAwait(false);
         }
 
         /// <summary>

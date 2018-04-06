@@ -131,7 +131,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             _bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
 
             // Prepare the bootstrapper
-            await _bootstrapper.InitializeAsync();
+            await _bootstrapper.InitializeAsync().ConfigureAwait(true);
 
             // Export the UI SynchronizationContext, this can be retrieved by specifying:
             // [Import("ui", typeof(SynchronizationContext))] on a SynchronizationContext property / constructor argument
@@ -153,7 +153,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             }
 
             // Start Dapplo, do not use configure-await false here, so the OnStartup doesn't have any issues
-            await _bootstrapper.RunAsync();
+            await _bootstrapper.RunAsync().ConfigureAwait(true);
 
             // This also triggers the Caliburn.Micro.BootstrapperBase.OnStartup
             base.OnStartup(e);

@@ -55,7 +55,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// </summary>
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set
             {
                 _password = value;
@@ -69,7 +69,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// </summary>
         public string Username
         {
-            get { return _username; }
+            get => _username;
             set
             {
                 _username = value;
