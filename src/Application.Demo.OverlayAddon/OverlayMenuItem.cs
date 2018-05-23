@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,7 +22,6 @@
 #region using
 
 using Dapplo.CaliburnMicro.Menu;
-using System.ComponentModel.Composition;
 using Application.Demo.OverlayAddon.ViewModels;
 using Caliburn.Micro;
 
@@ -33,18 +32,23 @@ namespace Application.Demo.OverlayAddon
     /// <summary>
     ///     This will add an extry for the exit to the context menu
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
+    [Menu("contextmenu")]
     public sealed class OverlayMenuItem : ClickableMenuItem
     {
-        [Import]
-        private DemoOverlayContainerViewModel OverlayContainerViewModel { get; set; }
+        private readonly IWindowManager _windowManager;
+        private readonly DemoOverlayContainerViewModel _demoOverlayContainerViewModel;
 
-        [Import]
-        private IWindowManager WindowManager { get; set; }
+        public OverlayMenuItem(
+            IWindowManager windowManager,
+            DemoOverlayContainerViewModel demoOverlayContainerViewModel)
+        {
+            _windowManager = windowManager;
+            _demoOverlayContainerViewModel = demoOverlayContainerViewModel;
+        }
 
         public override void Click(IMenuItem clickedItem)
         {
-            WindowManager.ShowWindow(OverlayContainerViewModel);
+            _windowManager.ShowWindow(_demoOverlayContainerViewModel);
         }
 
         public override void Initialize()

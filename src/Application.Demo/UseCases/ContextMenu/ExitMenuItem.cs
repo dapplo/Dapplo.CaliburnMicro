@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
 using Application.Demo.Languages;
@@ -36,10 +35,9 @@ namespace Application.Demo.UseCases.ContextMenu
     /// <summary>
     ///     This will add an extry for the exit to the context menu
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
+    [Menu("contextmenu")]
     public sealed class ExitMenuItem : ClickableMenuItem
     {
-        [ImportingConstructor]
         public ExitMenuItem(IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName

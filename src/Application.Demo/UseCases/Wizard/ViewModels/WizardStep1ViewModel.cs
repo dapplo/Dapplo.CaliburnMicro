@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,7 +22,6 @@
 #region using
 
 using System;
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
@@ -31,18 +30,17 @@ using Dapplo.CaliburnMicro.Wizard;
 
 namespace Application.Demo.UseCases.Wizard.ViewModels
 {
-    [Export(typeof(IWizardScreen))]
     public sealed class WizardStep1ViewModel : WizardScreen<WizardExampleViewModel>
     {
         private IDisposable _displayNameUpdater;
 
-        public WizardStep1ViewModel()
+        public WizardStep1ViewModel(IWizardTranslations wizardTranslations)
         {
+            WizardTranslations = wizardTranslations;
             Order = 1;
         }
 
-        [Import]
-        public IWizardTranslations WizardTranslations { get; set; }
+        public IWizardTranslations WizardTranslations { get; }
 
         public override void Initialize()
         {

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using Dapplo.ActiveDirectory;
 using Dapplo.ActiveDirectory.Entities;
@@ -32,8 +31,6 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
     /// <summary>
     ///     IAuthenticationProvider which uses the Groups from the Active Directory for the current user
     /// </summary>
-    [Export(typeof(IAuthenticationProvider))]
-    [Export(typeof(ActiveDirectoryAuthenticationProvider))]
     public class ActiveDirectoryAuthenticationProvider : IAuthenticationProvider
     {
         private IList<string> _permissions;

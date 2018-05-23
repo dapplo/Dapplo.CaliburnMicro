@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -25,7 +25,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using Dapplo.Addons;
+using Autofac;
+using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Behaviors;
 using Dapplo.CaliburnMicro.Extensions;
 
@@ -195,8 +196,8 @@ namespace Dapplo.CaliburnMicro.Security.Behaviors
             protected override void Attach(UIElement host)
             {
                 base.Attach(host);
-                _authenticationProvider = BootstrapperLocator.CurrentBootstrapper?.GetExport<IAuthenticationProvider>();
-
+                _authenticationProvider = ApplicationBootstrapper.Instance.Container.Resolve<Lazy<IAuthenticationProvider>>();
+ 
                 // if INotifyPropertyChanged is implemented: Call update when the _authenticationProvider changes it's values, 
                 var notifyPropertyChangedAuthenticationProvider = _authenticationProvider?.Value as INotifyPropertyChanged;
                 _authenticationProviderSubscription = notifyPropertyChangedAuthenticationProvider?.OnPropertyChanged(nameof(IAuthenticationProvider.HasPermissions)).Subscribe(x => Update(host, null));

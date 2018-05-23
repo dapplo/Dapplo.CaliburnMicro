@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -19,18 +19,15 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
 
 namespace Application.Demo.UseCases.Toast.ViewModels
 {
-    [Export]
     public class StartupReadyToastViewModel : ToastBaseViewModel
     {
         private readonly IToastTranslations _toastTranslations;
 
-        [ImportingConstructor]
         public StartupReadyToastViewModel(IToastTranslations toastTranslations)
         {
             _toastTranslations = toastTranslations;
@@ -40,6 +37,5 @@ namespace Application.Demo.UseCases.Toast.ViewModels
         /// This contains the message for the ViewModel
         /// </summary>
         public string Message => _toastTranslations.StartupNotify;
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using Application.Demo.Addon.Languages;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
@@ -33,7 +32,6 @@ using Application.Demo.Shared;
 
 namespace Application.Demo.Addon.ViewModels
 {
-    [Export(typeof(IConfigScreen))]
     public sealed class AddonSettingsViewModel : SimpleConfigScreen
     {
         public AddonSettingsViewModel()
@@ -47,7 +45,6 @@ namespace Application.Demo.Addon.ViewModels
 
         private IEventAggregator EventAggregator { get; }
 
-        [ImportingConstructor]
         public AddonSettingsViewModel(
             IAddonTranslations addonTranslations,
             IAuthenticationProvider authenticationProvider,

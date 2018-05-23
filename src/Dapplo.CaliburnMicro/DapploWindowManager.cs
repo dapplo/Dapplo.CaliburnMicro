@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,7 +22,6 @@
 #region using
 
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -41,21 +40,29 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         /// Defines the configuration for the UI
         /// </summary>
-        [Import(AllowDefault = true)]
-        protected IUiConfiguration UiConfiguration { get; private set; }
+        protected IUiConfiguration UiConfiguration { get; }
 
         /// <summary>
         /// These imports make it possible to configure every window that is created
         /// </summary>
-        [ImportMany(AllowRecomposition = true)]
-        protected IEnumerable<IConfigureWindowViews> ConfigureWindows { get; private set; }
+        protected IEnumerable<IConfigureWindowViews> ConfigureWindows { get; }
 
         /// <summary>
         /// These imports make it possible to configure every dialog that is created
         /// </summary>
-        [ImportMany(AllowRecomposition = true)]
-        protected IEnumerable<IConfigureDialogViews> ConfigureDialogs { get; private set; }
+        protected IEnumerable<IConfigureDialogViews> ConfigureDialogs { get; }
 
+        /// <inheritdoc />
+        public DapploWindowManager(
+            IEnumerable<IConfigureWindowViews> configureWindows,
+            IEnumerable<IConfigureDialogViews> configureDialogs,
+            IUiConfiguration uiConfiguration = null
+            )
+        {
+            ConfigureWindows = configureWindows;
+            ConfigureDialogs = configureDialogs;
+            UiConfiguration = uiConfiguration;
+        }
         /// <inheritdoc />
         public override void ShowPopup(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {

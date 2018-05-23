@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using System.Windows;
 using Application.Demo.Languages;
 using Application.Demo.UseCases.Menu.ViewModels;
@@ -39,12 +38,11 @@ namespace Application.Demo.UseCases.ContextMenu
     /// <summary>
     ///     This provides the IMenuItem to open the WindowWithMenuViewModel
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
+    [Menu("contextmenu")]
     public sealed class SomeWindowMenuItems : AuthenticatedMenuItem<IMenuItem, Visibility>
     {
         private static readonly LogSource Log = new LogSource();
 
-        [ImportingConstructor]
         public SomeWindowMenuItems(
             IWindowManager windowManager,
             IContextMenuTranslations contextMenuTranslations,
@@ -64,7 +62,6 @@ namespace Application.Demo.UseCases.ContextMenu
             };
 
             this.VisibleOnPermissions("Admin");
-
         }
     }
 }

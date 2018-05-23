@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -58,10 +58,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual double Left
         {
-            get
-            {
-                return _left;
-            }
+            get => _left;
             set
             {
                 _left = value;
@@ -74,10 +71,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual double Top
         {
-            get
-            {
-                return _top;
-            }
+            get => _top;
             set
             {
                 _top = value;
@@ -91,10 +85,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual double Width
         {
-            get
-            {
-                return _width;
-            }
+            get => _width;
             set
             {
                 _width = value;
@@ -108,10 +99,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual double Height
         {
-            get
-            {
-                return _height;
-            }
+            get => _height;
             set
             {
                 _height = value;
@@ -129,7 +117,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             protected set
             {
                 _isEnabled = value;
@@ -142,7 +130,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// </summary>
         public virtual bool IsVisible
         {
-            get { return _isVisible; }
+            get => _isVisible;
             protected set
             {
                 _isVisible = value;

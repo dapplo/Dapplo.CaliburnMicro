@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,7 +22,6 @@
 #region using
 
 using System;
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
@@ -31,24 +30,23 @@ using Dapplo.CaliburnMicro.Wizard;
 
 namespace Application.Demo.UseCases.Wizard.ViewModels
 {
-    [Export(typeof(IWizardScreen))]
     public sealed class WizardStep2ViewModel : WizardScreen<WizardExampleViewModel>
     {
         private IDisposable _displayNameUpdater;
 
-        public WizardStep2ViewModel()
+        private readonly IWizardTranslations _wizardTranslations;
+
+        public WizardStep2ViewModel(IWizardTranslations wizardTranslations)
         {
+            _wizardTranslations = wizardTranslations;
             Order = 2;
             IsEnabled = false;
         }
 
-        [Import]
-        private IWizardTranslations WizardTranslations { get; set; }
-
         public override void Initialize()
         {
             // automatically update the DisplayName
-            _displayNameUpdater = WizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.TitleStep2));
+            _displayNameUpdater = _wizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.TitleStep2));
             ParentWizard.OnPropertyChanged(nameof(WizardExampleViewModel.IsStep2Enabled)).Subscribe(s => IsEnabled = ParentWizard.IsStep2Enabled);
         }
 

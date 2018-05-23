@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 using System;
 using Caliburn.Micro;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Extensions;
@@ -36,20 +35,17 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
     /// <summary>
     /// This view model shows the error that occurred
     /// </summary>
-    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class ErrorViewModel : Screen
     {
         private IDisposable _disposables;
         /// <summary>
         /// This is the version provider, which makes the screen show a warning when the current != latest
         /// </summary>
-        [Import(AllowDefault = true)]
         public IVersionProvider VersionProvider { get; set; }
 
         /// <summary>
         /// This is used for the translations in the view
         /// </summary>
-        [Import]
         public IErrorTranslations ErrorTranslations { get; set; }
 
 #if DEBUG

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,10 +21,7 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
-using Application.Demo.UseCases.Configuration.ViewModels;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Log;
@@ -38,19 +35,18 @@ namespace Application.Demo.UseCases.ContextMenu
     ///     This will add an extry which shows children to the context menu
     /// This example is verbose, meaning the actualy methods are implemented vs. everything in the constructor
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
+    [Menu("contextmenu")]
     public sealed class WithChildrenMenuItem : ClickableMenuItem
     {
         private static readonly LogSource Log = new LogSource();
 
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
+        private readonly IContextMenuTranslations _contextMenuTranslations;
 
-        [Import]
-        public ConfigViewModel DemoConfigViewModel { get; set; }
-
-        [Import]
-        public IWindowManager WindowManager { get; set; }
+        public WithChildrenMenuItem(
+            IContextMenuTranslations contextMenuTranslations            )
+        {
+            _contextMenuTranslations = contextMenuTranslations;
+        }
 
         public override void Click(IMenuItem clickedItem)
         {
@@ -64,7 +60,7 @@ namespace Application.Demo.UseCases.ContextMenu
                 Kind = PackIconMaterialKind.HumanChild
             };
             // automatically update the DisplayName
-            var binding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.WithChildren));
+            var binding = _contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.WithChildren));
             var menuItem = new MenuItem
             {
                 Id = "1"

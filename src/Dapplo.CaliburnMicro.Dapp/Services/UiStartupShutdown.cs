@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,7 +22,6 @@
 #region usings
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using Caliburn.Micro;
@@ -36,28 +35,34 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
     /// <summary>
     /// This takes care of showing the shell(s)
     /// </summary>
-    [StartupAction(StartupOrder = (int)CaliburnStartOrder.Shell)]
-    [ShutdownAction(ShutdownOrder = (int)CaliburnStartOrder.Shell)]
-    public class UiStartupShutdownAction : IAsyncStartupAction, IAsyncShutdownAction
+    [ServiceOrder(CaliburnStartOrder.Shell)]
+    public class UiStartupShutdown : IStartupAsync, IShutdownAsync
     {
         private static readonly LogSource Log = new LogSource();
+        private readonly IWindowManager _windowManager;
+        private readonly IEnumerable<Lazy<IShell>> _shells;
+        private readonly IEnumerable<Lazy<IUiStartup, ServiceOrderAttribute>> _uiStartupModules;
+        private readonly IEnumerable<Lazy<IUiShutdown, ServiceOrderAttribute>> _uiShutdownModules;
 
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [ImportMany] private IEnumerable<Lazy<IShell>> _shells = null;
+        /// <inheritdoc />
+        public UiStartupShutdown(
+            IWindowManager windowManager,
+            IEnumerable<Lazy<IShell>> shells,
+            IEnumerable<Lazy<IUiStartup, ServiceOrderAttribute>> uiStartupModules,
+            IEnumerable<Lazy<IUiShutdown, ServiceOrderAttribute>> uiShutdownModules
+            )
+        {
+            _windowManager = windowManager;
+            _shells = shells;
+            _uiStartupModules = uiStartupModules;
+            _uiShutdownModules = uiShutdownModules;
+        }
 
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [ImportMany] private IEnumerable<Lazy<IUiStartupAction, IUiStartupMetadata>> _uiStartupModules = null;
-
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [ImportMany] private IEnumerable<Lazy<IUiShutdownAction, IShutdownMetadata>> _uiShutdownModules = null;
-
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        [Import] private IWindowManager _windowManager;
 
         /// <inheritdoc />
         public async Task StartAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            Log.Debug().WriteLine("Start of all IUiStartupAction");
+            Log.Debug().WriteLine("Start of all IUIStartup");
 
             await Execute.OnUIThreadAsync(() =>
             {

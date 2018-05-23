@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,9 +21,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Autofac.Features.AttributeFilters;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 
@@ -33,19 +33,24 @@ namespace Application.Demo.OverlayAddon.ViewModels
     /// This is the view model which will display all IOverlay items.
     /// If you want, you can have the overlay extend IActivate to get called when it's activated.
     /// </summary>
-    [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class DemoOverlayContainerViewModel : OverlayContainerViewModel
     {
-        [ImportMany("demo", typeof(IOverlay))]
-        private IEnumerable<Lazy<IOverlay>> Overlays { get; set; }
+        private readonly IEnumerable<Lazy<IOverlay>> _overlays;
 
+        public DemoOverlayContainerViewModel(
+            [MetadataFilter("Overlay", "demo")]
+            IEnumerable<Lazy<IOverlay>> overlays
+        )
+        {
+            _overlays = overlays;
+        }
         /// <summary>
         /// Make sure all the items are assigned
         /// </summary>
         protected override void OnActivate()
         {
-            Items.AddRange(Overlays.Select(lazy => lazy.Value));
+            Items.AddRange(_overlays.Select(lazy => lazy.Value));
             base.OnActivate();
         }
     }

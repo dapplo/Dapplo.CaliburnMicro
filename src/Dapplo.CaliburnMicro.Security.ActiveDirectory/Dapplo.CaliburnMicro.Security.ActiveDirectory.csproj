@@ -33,8 +33,20 @@
     <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.Security.ActiveDirectory.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.AttributeMetadata, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.AttributeMetadata.4.0.1\lib\net45\Autofac.Extras.AttributeMetadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mef, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mef.4.0.0\lib\net45\Autofac.Integration.Mef.dll</HintPath>
+    </Reference>
     <Reference Include="Dapplo.ActiveDirectory, Version=0.1.51.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.ActiveDirectory.0.1.51\lib\net45\Dapplo.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapplo.Addons, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.1.0.40-beta\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.12\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
@@ -57,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveDirectoryAuthenticationProvider.cs" />
+    <Compile Include="ActiveDirectoryAddonModule.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserExtensions.cs" />

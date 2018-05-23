@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -63,7 +63,7 @@ namespace Application.Demo.ClickOnce
                 }
             };
             // Load the Application.Demo.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.ClickOnce");
+            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*.dll");
             // Handle exceptions
             application.DisplayErrorView();
             application.Run();

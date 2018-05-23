@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -26,10 +26,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
-#if DEBUG
 using Dapplo.Log;
+
+#if DEBUG
 using Dapplo.Log.Loggers;
 #endif
 
@@ -48,6 +50,30 @@ namespace Application.Demo
         [STAThread]
         public static void Main()
         {
+            var applicationConfig = ApplicationConfig.Create()
+                // Make sure the bootstrapper knows where to find it's DLL files
+                .WithScanDirectories(
+#if DEBUG
+                    @"..\..\..\Application.Demo.Addon\bin\Debug",
+                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug",
+                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug"
+#else
+                @"..\..\..\Application.Demo.Addon\bin\Release",
+                @"..\..\..\Application.Demo.MetroAddon\bin\Release",
+                @"..\..\..\Application.Demo.OverlayAddon\bin\Release"
+#endif
+                )
+                .WithApplicationName("Application.Demo")
+                .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
+                // Load the Dapplo.Addons.Config assembly to allow language and ini support
+                .WithAssemblyNames("Dapplo.Addons.Config")
+                // Load the Application.Demo.* assemblies
+                .WithAssemblyPatterns("Application.Demo.*");
+            Start(applicationConfig);
+        }
+
+        private static void Start(ApplicationConfig applicationConfig)
+        {
             // Make sure the log entries are demystified
             LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();
 #if DEBUG
@@ -60,24 +86,14 @@ namespace Application.Demo
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            var application = new Dapplication("Application.Demo", "f32dbad8-9904-473e-86e2-19275c2d06a5")
+            var application = new Dapplication(applicationConfig)
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
             };
-#if DEBUG
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Debug");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Debug");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Debug");
-#else
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.Addon\bin\Release");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.MetroAddon\bin\Release");
-            application.Bootstrapper.AddScanDirectory(@"..\..\..\Application.Demo.OverlayAddon\bin\Release");
-#endif
-
-            // Load the Application.Demo.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*");
             // Handle exceptions
             application.DisplayErrorView();
+
+            // Run!!!
             application.Run();
         }
     }

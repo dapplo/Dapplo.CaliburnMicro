@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -20,7 +20,6 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.Log;
@@ -34,8 +33,6 @@ namespace Dapplo.CaliburnMicro.Configurers
     /// <summary>
     /// This takes care that windows can store their locations, the ViewModel needs to extend IMaintainPosition
     /// </summary>
-    [Export(typeof(IConfigureWindowViews))]
-    [Export(typeof(IConfigureDialogViews))]
     public class PlacementViewConfigurer : IConfigureWindowViews, IConfigureDialogViews
     {
         private static readonly LogSource Log = new LogSource();
@@ -45,7 +42,6 @@ namespace Dapplo.CaliburnMicro.Configurers
         /// The constructor for the PlacementViewConfigurer
         /// </summary>
         /// <param name="uiConfiguration">IUiConfiguration</param>
-        [ImportingConstructor]
         public PlacementViewConfigurer(IUiConfiguration uiConfiguration)
         {
             _uiConfiguration = uiConfiguration;

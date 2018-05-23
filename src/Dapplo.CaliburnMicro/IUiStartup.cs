@@ -21,40 +21,19 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 #endregion 
 
-#region using
-
-using System;
-using System.ComponentModel.Composition;
-using Dapplo.Addons;
-#endregion
-
 namespace Dapplo.CaliburnMicro
 {
     /// <summary>
-    ///     This is the attribute for a IUiShutdownModule module
+    /// Marker interface for UI Services, every class exported with this interface is automatically instanciated right after CaliburnMicro is.
+    /// Except for the constructor, nothing is called. All dependencies are injected.
     /// </summary>
-    [MetadataAttribute]
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public class UiShutdownActionAttribute : ModuleAttribute, IShutdownMetadata
+    public interface IUiStartup
     {
         /// <summary>
-        ///     Default constructor
+        ///     Perform a start of whatever needs to be started.
+        ///     Make sure this can be called multiple times, e.g. do nothing when it was already started.
+        ///     throw a StartupException if something went terribly wrong and the application should NOT continue
         /// </summary>
-        public UiShutdownActionAttribute() : base(typeof(IUiShutdownAction))
-        {
-        }
-
-        /// <summary>
-        ///     Constructor with a contract name
-        /// </summary>
-        /// <param name="contractName"></param>
-        public UiShutdownActionAttribute(string contractName) : base(contractName, typeof(IUiShutdownAction))
-        {
-        }
-
-        /// <summary>
-        ///     Order for the shutdowns to be called
-        /// </summary>
-        public int ShutdownOrder { get; set; }
+        void Start();
     }
 }

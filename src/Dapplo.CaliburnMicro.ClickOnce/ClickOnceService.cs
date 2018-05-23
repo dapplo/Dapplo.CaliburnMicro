@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -20,13 +20,12 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.ComponentModel.Composition;
 using System.Deployment.Application;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using Autofac.Features.AttributeFilters;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.ClickOnce.Configuration;
@@ -37,10 +36,8 @@ namespace Dapplo.CaliburnMicro.ClickOnce
     /// <summary>
     /// This StartupAction takes care of managing ClickOnce applications
     /// </summary>
-    [StartupAction(StartupOrder = (int)CaliburnStartOrder.Bootstrapper + 1, AwaitStart = true)]
-    [Export(typeof(IClickOnceService))]
-    [Export(typeof(IVersionProvider))]
-    public class ClickOnceService : PropertyChangedBase, IStartupAction, IClickOnceService, IHandleClickOnceUpdates, IApplyClickOnceUpdates, IHandleClickOnceRestarts
+    [ServiceOrder((int)CaliburnStartOrder.Bootstrapper + 1, AwaitStart = true)]
+    public class ClickOnceService : PropertyChangedBase, IStartup, IClickOnceService, IHandleClickOnceUpdates, IApplyClickOnceUpdates, IHandleClickOnceRestarts
     {
         private static readonly LogSource Log = new LogSource();
         private bool _isInCheck;
@@ -49,23 +46,31 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         private bool _isUpdateAvailable;
         private DateTimeOffset _lastCheckedOn;
 
-        [Import]
-        private IStartupShutdownBootstrapper StartupShutdownBootstrapper { get; set; }
+        private readonly IClickOnceConfiguration _clickOnceConfiguration;
 
-        [Import]
-        private IClickOnceConfiguration ClickOnceConfiguration { get; set; }
+        private readonly SynchronizationContext _uiSynchronizationContext;
 
-        [Import("ui")]
-        private SynchronizationContext UiSynchronizationContext { get; set; }
+        private readonly IHandleClickOnceUpdates _handleClickOnceUpdates;
 
-        [Import(AllowDefault = true)]
-        private IHandleClickOnceUpdates HandleClickOnceUpdates { get; set; }
+        private readonly IHandleClickOnceRestarts _handleClickOnceRestarts;
 
-        [Import(AllowDefault = true)]
-        private IHandleClickOnceRestarts HandleClickOnceRestarts { get; set; }
+        private readonly IApplyClickOnceUpdates _applyClickOnceUpdates;
 
-        [Import(AllowDefault = true)]
-        private IApplyClickOnceUpdates ApplyClickOnceUpdates { get; set; }
+        /// <inheritdoc />
+        public ClickOnceService(
+            IClickOnceConfiguration clickOnceConfiguration,
+            [KeyFilter("ui")]SynchronizationContext synchronizationContext,
+            IHandleClickOnceUpdates handleClickOnceUpdates = null,
+            IHandleClickOnceRestarts handleClickOnceRestarts = null,
+            IApplyClickOnceUpdates applyClickOnceUpdates = null
+            )
+        {
+            _uiSynchronizationContext = synchronizationContext;
+            _handleClickOnceUpdates = handleClickOnceUpdates;
+            _handleClickOnceRestarts = handleClickOnceRestarts;
+            _applyClickOnceUpdates = applyClickOnceUpdates;
+            _clickOnceConfiguration = clickOnceConfiguration;
+        }
 
         /// <inheritdoc />
         public void Start()
@@ -81,21 +86,21 @@ namespace Dapplo.CaliburnMicro.ClickOnce
 
             IObservable <long> updateObservable = null;
 
-            var checkInBackground = ClickOnceConfiguration.EnableBackgroundUpdateCheck && ClickOnceConfiguration.CheckInterval > 0;
+            var checkInBackground = _clickOnceConfiguration.EnableBackgroundUpdateCheck && _clickOnceConfiguration.CheckInterval > 0;
             if (checkInBackground)
             {
                 // Check in background
-                updateObservable = Observable.Interval(TimeSpan.FromMinutes(ClickOnceConfiguration.CheckInterval));
+                updateObservable = Observable.Interval(TimeSpan.FromMinutes(_clickOnceConfiguration.CheckInterval));
             }
 
-            if (ClickOnceConfiguration.CheckOnStart)
+            if (_clickOnceConfiguration.CheckOnStart)
             {
                 Log.Info().WriteLine("Starting application update check.");
                 var updateCheckInfo = CheckForUpdate();
                 HandleUpdateCheck(updateCheckInfo);
             }
             // Register the check, if there is an update observable
-            updateObservable?.ObserveOn(UiSynchronizationContext).Select(l => CheckForUpdate())
+            updateObservable?.ObserveOn(_uiSynchronizationContext).Select(l => CheckForUpdate())
                 .Where(updateCheckInfo => updateCheckInfo != null)
                 .Subscribe(HandleUpdateCheck);
         }
@@ -103,10 +108,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         /// <inheritdoc />
         public DateTimeOffset LastCheckedOn
         {
-            get
-            {
-                return _lastCheckedOn;
-            }
+            get => _lastCheckedOn;
             private set
             {
                 _lastCheckedOn = value;
@@ -117,10 +119,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         /// <inheritdoc />
         public bool IsUpdateAvailable
         {
-            get
-            {
-                return _isUpdateAvailable;
-            }
+            get => _isUpdateAvailable;
             set
             {
                 _isUpdateAvailable = value;
@@ -134,10 +133,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         /// <inheritdoc />
         public Version CurrentVersion
         {
-            get
-            {
-                return _currentVersion;
-            }
+            get => _currentVersion;
             private set
             {
                 _currentVersion = value;
@@ -175,14 +171,14 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             }
             Log.Info().WriteLine("For version {0} there is an update to version {1} available, starting the update.", ApplicationDeployment.CurrentDeployment.CurrentVersion, updateCheckInfo.AvailableVersion);
 
-            if (HandleClickOnceUpdates != null)
+            if (_handleClickOnceUpdates != null)
             {
                 // Have the application handle the check
-                HandleClickOnceUpdates.HandleUpdateCheck(updateCheckInfo);
+                _handleClickOnceUpdates.HandleUpdateCheck(updateCheckInfo);
             }
             else
             {
-                if (ApplyClickOnceUpdates == null && (updateCheckInfo.IsUpdateRequired || ClickOnceConfiguration.AutoUpdate))
+                if (_applyClickOnceUpdates == null && (updateCheckInfo.IsUpdateRequired || _clickOnceConfiguration.AutoUpdate))
                 {
                     // "Force" update
                     ApplyUpdate(updateCheckInfo);
@@ -190,7 +186,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
                 else
                 {
                     // Have the application handle the update
-                    ApplyClickOnceUpdates?.ApplyUpdate(updateCheckInfo);
+                    _applyClickOnceUpdates?.ApplyUpdate(updateCheckInfo);
                 }
             }
         }
@@ -204,10 +200,10 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             if (updated)
             {
                 Log.Info().WriteLine("Application succesfully updated.");
-                if (HandleClickOnceRestarts != null)
+                if (_handleClickOnceRestarts != null)
                 {
                     // Have the application the need for a restart
-                    HandleClickOnceRestarts?.HandleRestart(updateCheckInfo);
+                    _handleClickOnceRestarts?.HandleRestart(updateCheckInfo);
                     return;
                 }
                 HandleRestart(updateCheckInfo);
@@ -267,10 +263,10 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         public void Restart()
         {
             Log.Info().WriteLine("Restarting application.");
-            StartupShutdownBootstrapper.CancelStartup();
+            // TODO: Test this
             // TODO: This should be replaced by a better, non System.Windows.Forms.dll, implementation?
             // Note: CorLaunchApplication is deprecated, haven't been able to find a replacement yet.
-            StartupShutdownBootstrapper.RegisterForDisposal(Disposable.Create(System.Windows.Forms.Application.Restart));
+            Application.Current.Exit += (sender, args) => { System.Windows.Forms.Application.Restart(); };
             // The shutdown needs to be on the UI thread, otherwise we can't release resources etc.
             Execute.BeginOnUIThread(Application.Current.Shutdown);
         }
@@ -278,7 +274,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         /// <inheritdoc />
         public void HandleRestart(UpdateCheckInfo updateCheckInfo)
         {
-            if (!ClickOnceConfiguration.AutoRestart)
+            if (!_clickOnceConfiguration.AutoRestart)
             {
                 return;
             }

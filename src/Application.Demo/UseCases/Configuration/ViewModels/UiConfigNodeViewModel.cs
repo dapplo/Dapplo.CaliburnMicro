@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
 using Application.Demo.Shared;
 using Dapplo.CaliburnMicro.Configuration;
@@ -34,12 +33,10 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     /// <summary>
     /// This represents a node in the config
     /// </summary>
-    [Export(typeof(IConfigScreen))]
     public sealed class UiConfigNodeViewModel : ConfigNode
     {
         public IConfigTranslations ConfigTranslations { get; }
 
-        [ImportingConstructor]
         public UiConfigNodeViewModel(IConfigTranslations configTranslations)
         {
             ConfigTranslations = configTranslations;

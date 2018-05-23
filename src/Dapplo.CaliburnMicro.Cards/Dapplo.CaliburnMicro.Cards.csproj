@@ -54,11 +54,8 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.56\lib\net45\Dapplo.Addons.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.HttpExtensions, Version=0.8.31.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.HttpExtensions.0.8.31\lib\net46\Dapplo.HttpExtensions.dll</HintPath>
+    <Reference Include="Dapplo.HttpExtensions, Version=0.8.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.HttpExtensions.0.8.35\lib\net46\Dapplo.HttpExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.2.1\lib\net45\Dapplo.Log.dll</HintPath>

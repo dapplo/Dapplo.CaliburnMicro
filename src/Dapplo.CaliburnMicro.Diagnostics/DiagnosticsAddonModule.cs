@@ -1,5 +1,4 @@
-﻿#region Dapplo 2016-2018 - GNU Lesser General Public License
-//  Dapplo - building blocks for desktop applications
+﻿//  Dapplo - building blocks for desktop applications
 //  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
@@ -19,21 +18,27 @@
 // 
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
-#endregion
 
-using System.ComponentModel;
+using Autofac;
+using Dapplo.Addons;
+using Dapplo.CaliburnMicro.Diagnostics.Translations;
+using Dapplo.CaliburnMicro.Diagnostics.ViewModels;
 
-namespace Dapplo.CaliburnMicro
+namespace Dapplo.CaliburnMicro.Diagnostics
 {
-    /// <summary>
-    ///     Meta-data belonging to the UiStartupActionAttribute, which makes it possible to specify type-safe meta-data.
-    /// </summary>
-    public interface IUiStartupMetadata
+    /// <inheritdoc />
+    public class DiagnosticsAddonModule : AddonModule
     {
-        /// <summary>
-        ///     Order in which IUiStartupAction.Start is called
-        /// </summary>
-        [DefaultValue(1)]
-        int StartupOrder { get; }
+        /// <inheritdoc />
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.Register(context => new ErrorViewModel
+            {
+                VersionProvider = context.ResolveOptional<IVersionProvider>(),
+                ErrorTranslations = context.ResolveOptional<IErrorTranslations>()
+            });
+
+            base.Load(builder);
+        }
     }
 }

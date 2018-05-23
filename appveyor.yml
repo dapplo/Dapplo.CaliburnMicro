@@ -1,4 +1,4 @@
-version: 0.5.{build}
+version: 1.0.{build}
 skip_tags: true
 os: Visual Studio 2017
 configuration: Release
@@ -8,6 +8,7 @@ test: off
 branches:
   only:
   - master
+  - /feature.*/
 environment:
   NuGetApiKey:
     secure: 0+4uMr/wsyh8BisfHCwkDbaWwzmKNvvB2MwFz45/ePwbOMB6WT1AfhzujeddcN/2

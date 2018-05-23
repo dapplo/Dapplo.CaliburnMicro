@@ -1,5 +1,4 @@
-﻿#region Dapplo 2016-2018 - GNU Lesser General Public License
-//  Dapplo - building blocks for desktop applications
+﻿//  Dapplo - building blocks for desktop applications
 //  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
@@ -19,17 +18,24 @@
 // 
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
-#endregion 
 
+using Autofac;
 using Dapplo.Addons;
 
-namespace Dapplo.CaliburnMicro
+namespace Dapplo.CaliburnMicro.ClickOnce
 {
-    /// <summary>
-    /// Marker interface for UI Services, every class exported with this interface is automatically instanciated right after CaliburnMicro is.
-    /// Except for the constructor, nothing is called. All dependencies are injected.
-    /// </summary>
-    public interface IUiStartupAction : IStartupAction
+    /// <inheritdoc />
+    public class ClickOnceAddonModule : AddonModule
     {
+        /// <inheritdoc />
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<ClickOnceService>()
+                .As<IService>()
+                .As<IClickOnceService>()
+                .As<IVersionProvider>().SingleInstance();
+
+            base.Load(builder);
+        }
     }
 }

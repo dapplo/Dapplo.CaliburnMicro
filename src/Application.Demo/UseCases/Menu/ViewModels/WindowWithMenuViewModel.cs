@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -24,10 +24,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reactive.Disposables;
 using Application.Demo.Languages;
+using Autofac.Features.AttributeFilters;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Dapp;
@@ -38,26 +38,34 @@ using Dapplo.CaliburnMicro.Menu;
 
 namespace Application.Demo.UseCases.Menu.ViewModels
 {
-    [Export]
+    /// <summary>
+    /// A window with menu
+    /// </summary>
     public sealed class WindowWithMenuViewModel : Screen, IDisposable, IMaintainPosition
     {
+        private readonly IMenuTranslations _menuTranslations;
+        private readonly IContextMenuTranslations _contextMenuTranslations;
+        private readonly IEnumerable<Lazy<IMenuItem>> _menuItems;
+
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
         /// </summary>
         private CompositeDisposable _disposables;
 
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
+        public WindowWithMenuViewModel(
+            IMenuTranslations menuTranslations,
+            IContextMenuTranslations contextMenuTranslations,
+            [MetadataFilter("Menu", "menu")]IEnumerable<Lazy<IMenuItem>> menuItems
+            )
+        {
+            _menuTranslations = menuTranslations;
+            _contextMenuTranslations = contextMenuTranslations;
+            _menuItems = menuItems;
+        }
 
         // ReSharper disable once CollectionNeverQueried.Global
         public ObservableCollection<ITreeNode<IMenuItem>> Items { get; } = new ObservableCollection<ITreeNode<IMenuItem>>();
-
-        [ImportMany("menu", typeof(IMenuItem))]
-        private IEnumerable<Lazy<IMenuItem>> MenuItems { get; set; }
         
-        [Import]
-        private IMenuTranslations MenuTranslations { get; set; }
-
         /// <summary>
         /// Used to show a date in the UI
         /// </summary>
@@ -72,17 +80,17 @@ namespace Application.Demo.UseCases.Menu.ViewModels
             // Remove all items, so we can build them
             Items.Clear();
 
-            var contextMenuNameBinding = ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
+            var contextMenuNameBinding = _contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.SomeWindow));
 
             // Make sure the contextMenuNameBinding is disposed when this is no longer active
             _disposables.Add(contextMenuNameBinding);
 
-            var items = MenuItems.Select(x => x.Value).ToList();
+            var items = _menuItems.Select(x => x.Value).ToList();
             var fileMenuItem = new MenuItem
             {
                 Id = "1_File"
             };
-            var menuNameBinding = MenuTranslations.CreateDisplayNameBinding(fileMenuItem, nameof(IMenuTranslations.File));
+            var menuNameBinding = _menuTranslations.CreateDisplayNameBinding(fileMenuItem, nameof(IMenuTranslations.File));
             // Make sure the menuNameBinding is disposed when this is no longer active
             _disposables.Add(menuNameBinding);
             items.Add(fileMenuItem);

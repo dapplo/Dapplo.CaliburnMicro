@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,7 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,10 +39,8 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     /// <summary>
     ///     This takes care of starting and managing your trayicons
     /// </summary>
-    [StartupAction(StartupOrder = (int) CaliburnStartOrder.TrayIcons)]
-    [ShutdownAction]
-    [Export(typeof(ITrayIconManager))]
-    public class TrayIconManager : IAsyncStartupAction, IAsyncShutdownAction, ITrayIconManager
+    [ServiceOrder(CaliburnStartOrder.TrayIcons)]
+    public class TrayIconManager : IStartupAsync, IShutdownAsync, ITrayIconManager
     {
         private static readonly LogSource Log = new LogSource();
         private readonly IEnumerable<Lazy<ITrayIconViewModel>> _trayIconViewModels;
@@ -61,9 +58,8 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// </summary>
         /// <param name="trayIconViewModels">IEnumerable with laze trayicon ViewModels</param>
         /// <param name="windowsManager">IWindowManager</param>
-        [ImportingConstructor]
         public TrayIconManager(
-            [ImportMany]IEnumerable<Lazy<ITrayIconViewModel>> trayIconViewModels,
+            IEnumerable<Lazy<ITrayIconViewModel>> trayIconViewModels,
             IWindowManager windowsManager
             )
         {

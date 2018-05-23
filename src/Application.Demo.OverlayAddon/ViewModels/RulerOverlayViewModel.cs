@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -20,19 +20,17 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
-using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
 using Dapplo.Windows.Input;
 using Dapplo.Windows.User32.Structs;
 using Application.Demo.OverlayAddon.Views;
+using Dapplo.CaliburnMicro.Overlays;
 
 namespace Application.Demo.OverlayAddon.ViewModels
 {
-    [Export("demo", typeof(IOverlay))]
+    [Overlay("demo")]
     public sealed class RulerOverlayViewModel : OverlayViewModel
     {
         private IDisposable _subscription;

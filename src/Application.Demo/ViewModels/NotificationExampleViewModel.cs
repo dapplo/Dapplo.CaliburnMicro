@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
 #endregion
@@ -33,8 +32,6 @@ namespace Application.Demo.ViewModels
     ///     to prevent exceptions as every time a popup is created a new instance is needed. Later I might add an attibute
     ///     covering this.
     /// </summary>
-    [Export]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class NotificationExampleViewModel : Screen
     {
     }

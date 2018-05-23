@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,13 +23,11 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using Application.Demo.MetroAddon.Configurations;
-using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
@@ -41,11 +39,14 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace Application.Demo.MetroAddon.ViewModels
 {
-    [Export(typeof(IConfigScreen))]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
         private static readonly LogSource Log = new LogSource();
+
+        private readonly CredentialsViewModel _credentialsViewModel;
+        private readonly IDialogCoordinator _dialogCoordinator;
+        private readonly MetroWindowManager _metroWindowManager;
 
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
@@ -62,29 +63,25 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// </summary>
         public ObservableCollection<Tuple<Themes, string>> AvailableThemes { get; set; } = new ObservableCollection<Tuple<Themes, string>>();
 
-        [Import]
-        private CredentialsViewModel CredentialsVm { get; set; }
+        public IMetroConfiguration MetroConfiguration { get; }
 
-        /// <summary>
-        ///     Used to make it possible to show a MahApps dialog
-        /// </summary>
-        [Import]
-        private IDialogCoordinator Dialogcoordinator { get; set; }
+        public IUiTranslations UiTranslations { get; }
 
-        [Import(typeof(IWindowManager))]
-        private MetroWindowManager MetroWindowManager { get; set; }
 
-        [Import]
-        public IMetroConfiguration MetroConfiguration { get; set; }
-
-        [Import]
-        public IUiTranslations UiTranslations { get; set; }
-
-        /// <summary>
-        ///     Used to show a "normal" dialog
-        /// </summary>
-        [Import]
-        private IWindowManager WindowsManager { get; set; }
+        public ThemeConfigViewModel(
+            CredentialsViewModel credentialsViewModel,
+            IDialogCoordinator dialogCoordinator,
+            MetroWindowManager metroWindowManager,
+            IMetroConfiguration metroConfiguration,
+            IUiTranslations uiTranslations
+            )
+        {
+            MetroConfiguration = metroConfiguration;
+            UiTranslations = uiTranslations;
+            _credentialsViewModel = credentialsViewModel;
+            _dialogCoordinator = dialogCoordinator;
+            _metroWindowManager = metroWindowManager;
+        }
 
         /// <inheritdoc />
         public override void Rollback()
@@ -102,8 +99,8 @@ namespace Application.Demo.MetroAddon.ViewModels
         {
             // Manually commit
             MetroConfiguration.CommitTransaction();
-            MetroWindowManager.ChangeTheme(MetroConfiguration.Theme);
-            MetroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
+            _metroWindowManager.ChangeTheme(MetroConfiguration.Theme);
+            _metroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
         }
 
 
@@ -113,7 +110,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// <returns></returns>
         public async Task Dialog()
         {
-            await Dialogcoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!").ConfigureAwait(true);
+            await _dialogCoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!").ConfigureAwait(true);
         }
 
         public override void Initialize(IConfig config)
@@ -153,7 +150,7 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// </summary>
         public void Login()
         {
-            var result = WindowsManager.ShowDialog(CredentialsVm);
+            var result = _metroWindowManager.ShowDialog(_credentialsViewModel);
             Log.Info().WriteLine($"Girl you know it's {result}");
         }
 

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,7 +23,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
@@ -41,27 +40,23 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
     public class TrayIconViewModel : Screen, ITrayIconViewModel
     {
         private static readonly LogSource Log = new LogSource();
+        private readonly ITrayIconManager _trayIconManager;
 
         /// <summary>
         /// 
         /// </summary>
-        public TrayIconViewModel()
+        public TrayIconViewModel(ITrayIconManager trayIconManager)
         {
+            _trayIconManager = trayIconManager;
             // Make sure the default DisplayName (class name) is not used on the ToolTipText
             // ReSharper disable once VirtualMemberCallInConstructor, I know what I am doing here...
             DisplayName = "";
         }
 
         /// <summary>
-        ///     The ITrayIconManager, which makes it possible to show and hide the icon
-        /// </summary>
-        [Import]
-        protected ITrayIconManager TrayIconManager { get; set; }
-
-        /// <summary>
         ///     The ITrayIcon for the ViewModel
         /// </summary>
-        public ITrayIcon TrayIcon => TrayIconManager.GetTrayIconFor(this);
+        public ITrayIcon TrayIcon => _trayIconManager.GetTrayIconFor(this);
 
         /// <summary>
         ///     These are the Context MenuItems for the system tray

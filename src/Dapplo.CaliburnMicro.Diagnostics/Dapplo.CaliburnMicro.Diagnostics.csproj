@@ -33,6 +33,15 @@
     <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.Diagnostics.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.AttributeMetadata, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.AttributeMetadata.4.0.1\lib\net45\Autofac.Extras.AttributeMetadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mef, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mef.4.0.0\lib\net45\Autofac.Integration.Mef.dll</HintPath>
+    </Reference>
     <Reference Include="Ben.Demystifier, Version=0.1.0.0, Culture=neutral, PublicKeyToken=a6d206e05440431a, processorArchitecture=MSIL">
       <HintPath>..\packages\Ben.Demystifier.0.1.1\lib\net45\Ben.Demystifier.dll</HintPath>
     </Reference>
@@ -48,14 +57,17 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.56\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.1.0.40-beta\lib\net45\Dapplo.Addons.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.1.0.40-beta\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.12\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Language, Version=0.5.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Language.0.5.24\lib\net45\Dapplo.Language.dll</HintPath>
+    <Reference Include="Dapplo.Language, Version=0.5.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Language.0.5.28\lib\net45\Dapplo.Language.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Log, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.2.1\lib\net45\Dapplo.Log.dll</HintPath>
@@ -89,6 +101,7 @@
   <ItemGroup>
     <Compile Include="DapplicationExtensions.cs" />
     <Compile Include="Designtime\SimpleVersionProvider.cs" />
+    <Compile Include="DiagnosticsAddonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Translations\IErrorTranslations.cs" />
     <Compile Include="ViewModels\ErrorViewModel.cs" />

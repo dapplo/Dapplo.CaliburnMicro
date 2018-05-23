@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -22,10 +22,10 @@
 #region using
 
 using System;
-using System.ComponentModel.Composition;
 using System.Windows;
 using Application.Demo.Languages;
 using Application.Demo.UseCases.Toast.ViewModels;
+using Autofac.Features.OwnedInstances;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
@@ -41,15 +41,14 @@ namespace Application.Demo.UseCases.Toast
     ///     This provides the IMenuItem to show a ToastNotification
     /// It uses a ExportFactory for the ViewModel, the ViewModel should not be shared, and it will dispose everything as soon as the toast is deactivated.
     /// </summary>
-    [Export("contextmenu", typeof(IMenuItem))]
+    [Menu("contextmenu")]
     public sealed class ToastMenuItem : AuthenticatedMenuItem<IMenuItem, Visibility>
     {
         private static readonly LogSource Log = new LogSource();
 
-        [ImportingConstructor]
         public ToastMenuItem(
             IEventAggregator eventAggregator,
-            ExportFactory<ToastExampleViewModel> toastExampleViewModelFactory,
+            Func<Owned<ToastExampleViewModel>> toastExampleViewModelFactory,
             IContextMenuTranslations contextMenuTranslations)
         {
             // automatically update the DisplayName
@@ -76,10 +75,10 @@ namespace Application.Demo.UseCases.Toast
         /// </summary>
         /// <param name="eventAggregator">IEventAggregator</param>
         /// <param name="toastExampleViewModelFactory">ExportFactory of type ToastExampleViewModel</param>
-        private void ShowToast(IEventAggregator eventAggregator, ExportFactory<ToastExampleViewModel> toastExampleViewModelFactory)
+        private void ShowToast(IEventAggregator eventAggregator, Func<Owned<ToastExampleViewModel>> toastExampleViewModelFactory)
         {
             // Create the ViewModel "part"
-            var message = toastExampleViewModelFactory.CreateExport();
+            var message = toastExampleViewModelFactory();
 
             // Prepare to dispose the view model parts automatically if it's finished
             EventHandler<DeactivationEventArgs> disposeHandler = null;

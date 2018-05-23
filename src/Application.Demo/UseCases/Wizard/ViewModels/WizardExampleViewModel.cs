@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,7 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Application.Demo.Languages;
@@ -39,7 +38,6 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
     /// <summary>
     /// An example of the wizard
     /// </summary>
-    [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class WizardExampleViewModel : Wizard<IWizardScreen>
     {
@@ -53,7 +51,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
 
         public bool IsStep2Enabled
         {
-            get { return _isStep2Enabled; }
+            get => _isStep2Enabled;
             set
             {
                 _isStep2Enabled = value;
@@ -63,7 +61,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
 
         public bool IsStep3Visible
         {
-            get { return _isStep3Visible; }
+            get => _isStep3Visible;
             set
             {
                 _isStep3Visible = value;
@@ -73,7 +71,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
 
         public bool IsStep4Complete
         {
-            get { return _isStep4Complete; }
+            get => _isStep4Complete;
             set
             {
                 _isStep4Complete = value;
@@ -85,9 +83,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
 
         public IWizardTranslations WizardTranslations { get; }
 
-        [ImportingConstructor]
         public WizardExampleViewModel(
-            [ImportMany]
             IEnumerable<Lazy<IWizardScreen>> wizardItems,
             IWizardTranslations wizardTranslations)
         {

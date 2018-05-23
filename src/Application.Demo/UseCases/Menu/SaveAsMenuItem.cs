@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel.Composition;
 using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
@@ -34,18 +33,22 @@ namespace Application.Demo.UseCases.Menu
     /// <summary>
     ///     This will add the File item to menu
     /// </summary>
-    [Export("menu", typeof(IMenuItem))]
+    [Menu("menu")]
     public sealed class SaveAsMenuItem : MenuItem
     {
-        [Import]
-        private IMenuTranslations MenuTranslations { get; set; }
+        private readonly IMenuTranslations _menuTranslations;
+
+        public SaveAsMenuItem(IMenuTranslations menuTranslations)
+        {
+            _menuTranslations = menuTranslations;
+        }
 
         public override void Initialize()
         {
             Id = "A_SaveAs";
             ParentId = "1_File";
             // automatically update the DisplayName
-            MenuTranslations.CreateDisplayNameBinding(this, nameof(IMenuTranslations.SaveAs));
+            _menuTranslations.CreateDisplayNameBinding(this, nameof(IMenuTranslations.SaveAs));
             Icon = new PackIconMaterial
             {
                 Kind = PackIconMaterialKind.ContentSave

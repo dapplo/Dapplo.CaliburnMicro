@@ -36,6 +36,15 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.AttributeMetadata, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Extras.AttributeMetadata.4.0.1\lib\net45\Autofac.Extras.AttributeMetadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mef, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mef.4.0.0\lib\net45\Autofac.Integration.Mef.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
@@ -48,11 +57,14 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.0.5.56\lib\net45\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.1.0.40-beta\lib\net45\Dapplo.Addons.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Ini, Version=0.5.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Ini.0.5.24\lib\net45\Dapplo.Ini.dll</HintPath>
+    <Reference Include="Dapplo.Addons.Bootstrapper, Version=1.0.40.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.Bootstrapper.1.0.40-beta\lib\net45\Dapplo.Addons.Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapplo.Ini, Version=0.5.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Ini.0.5.28\lib\net45\Dapplo.Ini.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.12\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>
@@ -63,32 +75,32 @@
     <Reference Include="Dapplo.Utils, Version=1.0.158.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Utils.1.0.158\lib\net45\Dapplo.Utils.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.0.5.54\lib\net45\Dapplo.Windows.dll</HintPath>
+    <Reference Include="Dapplo.Windows, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.0.5.56\lib\net45\Dapplo.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Common, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Common.0.5.54\lib\net45\Dapplo.Windows.Common.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Common, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Common.0.5.56\lib\net45\Dapplo.Windows.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.DesktopWindowsManager, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.DesktopWindowsManager.0.5.54\lib\net45\Dapplo.Windows.DesktopWindowsManager.dll</HintPath>
+    <Reference Include="Dapplo.Windows.DesktopWindowsManager, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.DesktopWindowsManager.0.5.56\lib\net45\Dapplo.Windows.DesktopWindowsManager.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Dpi, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Dpi.0.5.54\lib\net45\Dapplo.Windows.Dpi.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Dpi, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Dpi.0.5.56\lib\net45\Dapplo.Windows.Dpi.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Gdi32, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Gdi32.0.5.54\lib\net45\Dapplo.Windows.Gdi32.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Gdi32, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Gdi32.0.5.56\lib\net45\Dapplo.Windows.Gdi32.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Input, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Input.0.5.54\lib\net45\Dapplo.Windows.Input.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Input, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Input.0.5.56\lib\net45\Dapplo.Windows.Input.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Kernel32, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Kernel32.0.5.54\lib\net45\Dapplo.Windows.Kernel32.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Kernel32, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Kernel32.0.5.56\lib\net45\Dapplo.Windows.Kernel32.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Messages, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Messages.0.5.54\lib\net45\Dapplo.Windows.Messages.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Messages, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Messages.0.5.56\lib\net45\Dapplo.Windows.Messages.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.User32, Version=0.5.54.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.User32.0.5.54\lib\net45\Dapplo.Windows.User32.dll</HintPath>
+    <Reference Include="Dapplo.Windows.User32, Version=0.5.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.User32.0.5.56\lib\net45\Dapplo.Windows.User32.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
@@ -126,6 +138,7 @@
     <Compile Include="Behaviors\Behavior.cs" />
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="CaliburnLogger.cs" />
+    <Compile Include="CaliburnMicroAddonModule.cs" />
     <Compile Include="Configuration\IUiConfiguration.cs" />
     <Compile Include="Configurers\PlacementViewConfigurer.cs" />
     <Compile Include="Configurers\DpiAwareViewConfigurer.cs" />
@@ -141,6 +154,7 @@
     <Compile Include="Behaviors\FrameworkElementIcon.cs" />
     <Compile Include="Behaviors\NullVisibility.cs" />
     <Compile Include="CaliburnStartOrder.cs" />
+    <Compile Include="Extensions\PackExtensions.cs" />
     <Compile Include="Extensions\PropertyChangeExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
@@ -156,13 +170,10 @@
     <Compile Include="IHaveIcon.cs" />
     <Compile Include="IHaveSettings.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="IUiShutdownAction.cs" />
-    <Compile Include="IUiStartupMetadata.cs" />
-    <Compile Include="IUiStartupAction.cs" />
+    <Compile Include="IUiShutdown.cs" />
+    <Compile Include="IUiStartup.cs" />
     <Compile Include="IVersionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UiShutdownActionAttribute.cs" />
-    <Compile Include="UiStartupActionAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,12 +23,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Application.Demo.Languages;
-using Caliburn.Micro;
+using Autofac.Features.AttributeFilters;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
@@ -42,29 +41,33 @@ namespace Application.Demo.UseCases.ContextMenu.ViewModels
     /// <summary>
     ///     Implementation of the system-tray icon
     /// </summary>
-    [Export(typeof(ITrayIconViewModel))]
     public class DemoTrayIconViewModel : TrayIconViewModel
     {
-        [ImportMany("contextmenu", typeof(IMenuItem))]
-        private IEnumerable<Lazy<IMenuItem>> ContextMenuItems { get; set; }
+        private readonly IEnumerable<Lazy<IMenuItem>> _contextMenuItems;
 
-        [Import]
-        private IContextMenuTranslations ContextMenuTranslations { get; set; }
+        private readonly IContextMenuTranslations _contextMenuTranslations;
 
-        [Import]
-        public IWindowManager WindowManager { get; set; }
+        public DemoTrayIconViewModel(
+            ITrayIconManager trayIconManager,
+            [MetadataFilter("Menu", "contextmenu")]
+            IEnumerable<Lazy<IMenuItem>> contextMenuItems,
+            IContextMenuTranslations contextMenuTranslations) : base(trayIconManager)
+        {
+            _contextMenuItems = contextMenuItems;
+            _contextMenuTranslations = contextMenuTranslations;
+        }
 
         protected override void OnActivate()
         {
             base.OnActivate();
 
             // Set the title of the icon (the ToolTipText) to our IContextMenuTranslations.Title
-            ContextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
+            _contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
 
             var items = new List<IMenuItem>();
 
             // Lazy values
-            items.AddRange(ContextMenuItems.Select(lazy => lazy.Value));
+            items.AddRange(_contextMenuItems.Select(lazy => lazy.Value));
 
             items.Add(new MenuItem
             {

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -20,10 +20,10 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using Caliburn.Micro;
+using Dapplo.Addons;
 using ToastNotifications;
 using ToastNotifications.Core;
 using ToastNotifications.Lifetime;
@@ -35,10 +35,9 @@ namespace Dapplo.CaliburnMicro.Toasts
     /// The toast conductor handles IToast message which can be used to display toasts.
     /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
     /// </summary>
-    [UiStartupAction]
-    [Export]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
-    public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiStartupAction
+    [ServiceOrder(CaliburnStartOrder.User)]
+    public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IUiStartup
     {
         private readonly IEventAggregator _eventAggregator;
         private Notifier _notifier;
@@ -48,11 +47,9 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// <param name="eventAggregator">IEventAggregator to subscribe to the IToast messages</param>
         /// <param name="notifier">optional Notifier configuration, if not supplied a default is used</param>
         /// </summary>
-        [ImportingConstructor]
         public ToastConductor(
             IEventAggregator eventAggregator,
-            [Import(AllowDefault = true)]
-            Notifier notifier)
+            Notifier notifier = null)
         {
             // Fail fast, if there is no IEventAggregator than something went wrong in the bootstrapper
             _notifier = notifier;

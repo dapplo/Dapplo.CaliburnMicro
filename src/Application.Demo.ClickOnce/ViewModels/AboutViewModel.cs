@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -21,7 +21,6 @@
 
 #region Usings
 
-using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.ClickOnce;
@@ -33,7 +32,6 @@ namespace Application.Demo.ClickOnce.ViewModels
     /// <summary>
     /// This is the ViewModel for the about
     /// </summary>
-    [Export(typeof(IShell))]
     public sealed class AboutViewModel : Screen, IShell
     {
         /// <summary>
@@ -44,7 +42,6 @@ namespace Application.Demo.ClickOnce.ViewModels
         /// <summary>
         /// Construct the view model
         /// </summary>
-        [ImportingConstructor]
         public AboutViewModel(IClickOnceService clickOnceService)
         {
             ClickOnceService = clickOnceService;

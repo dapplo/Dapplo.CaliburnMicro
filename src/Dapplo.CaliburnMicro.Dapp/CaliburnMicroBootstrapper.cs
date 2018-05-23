@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,9 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +30,9 @@ using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log;
 using System.Diagnostics.CodeAnalysis;
-using Dapplo.Addons.Bootstrapper.Resolving;
+using System.Reflection;
+using Autofac;
+using Dapplo.Addons.Bootstrapper;
 
 #endregion
 
@@ -43,22 +42,21 @@ namespace Dapplo.CaliburnMicro.Dapp
     ///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
     ///     and uses this.
     /// </summary>
-    [ShutdownAction(ShutdownOrder = (int) CaliburnStartOrder.Bootstrapper)]
-    [Export]
-    public class CaliburnMicroBootstrapper : BootstrapperBase, IAsyncShutdownAction
+    [ServiceOrder(CaliburnStartOrder.Bootstrapper)]
+    public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdownAsync
     {
+        private readonly ApplicationBootstrapper _bootstrapper;
         private static readonly LogSource Log = new LogSource();
-        private readonly IBootstrapper _bootstrapper;
 
         /// <summary>
         /// CaliburnMicroBootstrapper
         /// </summary>
-        /// <param name="bootstrapper">Used to inject, export and locate</param>
-        [ImportingConstructor]
-        public CaliburnMicroBootstrapper(IBootstrapper bootstrapper)
+        /// <param name="bootstrapper">Used to register, inject, export and locate</param>
+        public CaliburnMicroBootstrapper(ApplicationBootstrapper bootstrapper)
         {
             _bootstrapper = bootstrapper;
         }
+
         /// <summary>
         ///     Shutdown Caliburn
         /// </summary>
@@ -77,7 +75,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="instance">some object to fill</param>
         protected override void BuildUp(object instance)
         {
-            _bootstrapper.ProvideDependencies(instance);
+            _bootstrapper.Container.InjectProperties(instance);
         }
 
         /// <summary>
@@ -88,28 +86,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         {
             LogManager.GetLog = type => new CaliburnLogger(type);
 
-            foreach (var assembly in AssemblySource.Instance)
-            {
-                _bootstrapper.Add(assembly);
-            }
-
             ConfigureViewLocator();
-
-            // TODO: Documentation
-            // Test if there is a IWindowManager available, if not use the default
-            var windowManagers = _bootstrapper.GetExports<IWindowManager>();
-            if (!windowManagers.Any())
-            {
-                _bootstrapper.Export<IWindowManager>(new DapploWindowManager());
-            }
-
-            // TODO: Documentation
-            // Test if there is a IEventAggregator available, if not use the default
-            var eventAggregators = _bootstrapper.GetExports<IEventAggregator>();
-            if (!eventAggregators.Any())
-            {
-                _bootstrapper.Export<IEventAggregator>(new EventAggregator());
-            }
 
             // TODO: Documentation
             // This make it possible to pass the data-context of the originally clicked object in the Message.Attach event bubbling.
@@ -140,7 +117,7 @@ namespace Dapplo.CaliburnMicro.Dapp
                 }
                 Log.Verbose().WriteLine("No view for {0}, looking into base types.", modelType);
                 var currentModelType = modelType;
-                while (viewType == null && currentModelType != null && currentModelType != typeof(object))
+                while (viewType == null && currentModelType != null && currentModelType != typeof(object) && currentModelType != typeof(Screen))
                 {
                     currentModelType = currentModelType.BaseType;
                     viewType = defaultLocator(currentModelType, displayLocation, context);
@@ -160,7 +137,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="service">Type</param>
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return _bootstrapper.GetExports(service).Select(x => x.Value);
+            return _bootstrapper.Container.Resolve(typeof(IEnumerable<>).MakeGenericType(service)) as IEnumerable<object>;
         }
 
         /// <summary>
@@ -172,17 +149,23 @@ namespace Dapplo.CaliburnMicro.Dapp
         [SuppressMessage("Sonar Code Smell", "S927:Name parameter to match the base definition", Justification = "The base name is not so clear.")]
         protected override object GetInstance(Type service, string contractName)
         {
-            var contract = string.IsNullOrEmpty(contractName) ? AttributedModelServices.GetContractName(service) : contractName;
-            return _bootstrapper.GetExport(service, contract);
+            if (string.IsNullOrWhiteSpace(contractName) && _bootstrapper.Container.TryResolve(service, out var instance))
+            {
+                return instance;
+            }
+
+            if (_bootstrapper.Container.TryResolveNamed(contractName, service, out instance))
+            {
+                return instance;
+            }
+
+            throw new Exception($"Could not locate any instances of contract {contractName ?? service.Name}.");
         }
 
-        /// <summary>
-        ///     Return all assemblies that the Dapplo bootstrapper knows, this is used to find your views and viewmodels
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc />
         protected override IEnumerable<Assembly> SelectAssemblies()
         {
-            return AssemblyResolver.AssemblyCache;
+            return _bootstrapper.LoadedAssemblies;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2017 Dapplo
+//  Copyright (C) 2016-2018 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -23,7 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Reactive.Disposables;
 using Application.Demo.Models;
@@ -37,7 +36,6 @@ using Dapplo.Language;
 
 namespace Application.Demo.UseCases.Configuration.ViewModels
 {
-    [Export(typeof(IConfigScreen))]
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class LanguageConfigViewModel : ConfigScreen, IDisposable
     {
@@ -63,7 +61,6 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
 
         public IDemoConfiguration DemoConfiguration { get;}
 
-        [ImportingConstructor]
         public LanguageConfigViewModel(
             ICoreTranslations coreTranslations,
             IDemoConfiguration demoConfiguration,
