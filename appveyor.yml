@@ -11,7 +11,7 @@ branches:
   - /feature.*/
 environment:
   NuGetApiKey:
-    secure: 0+4uMr/wsyh8BisfHCwkDbaWwzmKNvvB2MwFz45/ePwbOMB6WT1AfhzujeddcN/2
+    secure: FkbOZI29wVSKdzHuFOq9tY8cq05Sy6vFKwvqYnUhDVamagkTUrjNJElPPoACP8Ov
 build_script:
 - ps: .\build.ps1
 artifacts:
