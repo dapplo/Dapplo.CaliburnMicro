@@ -20,6 +20,7 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using Autofac;
+using Autofac.Features.AttributeFilters;
 using Dapplo.Addons;
 
 namespace Dapplo.CaliburnMicro.ClickOnce
@@ -33,7 +34,9 @@ namespace Dapplo.CaliburnMicro.ClickOnce
             builder.RegisterType<ClickOnceService>()
                 .As<IService>()
                 .As<IClickOnceService>()
-                .As<IVersionProvider>().SingleInstance();
+                .As<IVersionProvider>()
+                .WithAttributeFiltering()
+                .SingleInstance();
 
             base.Load(builder);
         }
