@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -110,7 +111,6 @@ namespace Dapplo.CaliburnMicro.Metro
         public void AddMahappsStyle(string style)
         {
             var packUri = CreateMahappStyleUri(style);
-            // TODO: Fix resource checking, needing Dapplo.Addons.Bootstrapper just for this check??
             if (!_resourceProvider.EmbeddedResourceExists(packUri))
             {
                 Log.Warn().WriteLine("Style {0} might not be available as {1}.", style, packUri);
@@ -165,7 +165,7 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <returns></returns>
         public static Uri CreateMahappStyleUri(string style)
         {
-            return new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
+            return new Uri($@"{PackUriHelper.UriSchemePack}://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
         }
 
         /// <summary>
