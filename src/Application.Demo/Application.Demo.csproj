@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdaptiveCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\AdaptiveCards.1.0.0\lib\net452\AdaptiveCards.dll</HintPath>
+      <HintPath>..\packages\AdaptiveCards.1.0.3\lib\net452\AdaptiveCards.dll</HintPath>
     </Reference>
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
@@ -83,8 +83,8 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
-    <Reference Include="Costura, Version=2.0.1.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Costura.Fody.2.0.1\lib\net452\Costura.dll</HintPath>
+    <Reference Include="Costura, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.3.0.0\lib\net46\Costura.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.Addons, Version=1.0.47.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Addons.1.0.47\lib\net45\Dapplo.Addons.dll</HintPath>
@@ -380,12 +380,12 @@ foreach (var item in filesToCleanup)
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.3.0.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.0.3\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.3.0.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.0.4\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.3\build\Fody.targets')" />
-  <Import Project="..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets')" />
+  <Import Project="..\packages\Fody.3.0.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.4\build\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
