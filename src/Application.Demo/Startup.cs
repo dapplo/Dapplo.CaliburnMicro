@@ -50,7 +50,8 @@ namespace Application.Demo
         [STAThread]
         public static void Main()
         {
-            var applicationConfig = ApplicationConfig.Create()
+            var applicationConfig = ApplicationConfigBuilder.
+                Create()
                 // Make sure the bootstrapper knows where to find it's DLL files
                 .WithScanDirectories(
 #if DEBUG
@@ -72,7 +73,7 @@ namespace Application.Demo
             Start(applicationConfig);
         }
 
-        private static void Start(ApplicationConfig applicationConfig)
+        private static void Start(ApplicationConfigBuilder applicationConfig)
         {
             // Make sure the log entries are demystified
             LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();

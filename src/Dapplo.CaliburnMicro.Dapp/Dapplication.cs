@@ -52,14 +52,14 @@ namespace Dapplo.CaliburnMicro.Dapp
         ///     Additionally the current or a matching IniConfig and LanguageLoader are added to help resoving confiration and
         ///     language imports.
         /// </summary>
-        /// <param name="applicationConfig">ApplicationConfig</param>
-        public Dapplication(ApplicationConfig applicationConfig)
+        /// <param name="applicationConfigBuilder">ApplicationConfigBuilder</param>
+        public Dapplication(ApplicationConfigBuilder applicationConfigBuilder)
         {
 
             // Load the Dapplo.CaliburnMicro.* assemblies
-            applicationConfig.WithAssemblyPatterns("Dapplo.CaliburnMicro*");
+            applicationConfigBuilder.WithAssemblyPatterns("Dapplo.CaliburnMicro*");
 
-            _bootstrapper = new ApplicationBootstrapper(applicationConfig);
+            _bootstrapper = new ApplicationBootstrapper(applicationConfigBuilder.BuildApplicationConfig());
 
             Current = this;
             // Hook unhandled exceptions in the Dispatcher
