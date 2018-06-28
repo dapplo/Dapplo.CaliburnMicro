@@ -47,19 +47,13 @@ namespace Dapplo.CaliburnMicro.Dapp
         private readonly ApplicationBootstrapper _bootstrapper;
 
         /// <summary>
-        ///     Create the Dapplication for the specified application name
-        ///     The mutex is created and locked in the contructor, and some of your application logic might depend on this.
-        ///     Additionally the current or a matching IniConfig and LanguageLoader are added to help resoving confiration and
-        ///     language imports.
+        ///     Create the Dapplication with the specified ApplicationConfig
+        ///     Take care that you called WithCaliburnMicro on your builder, or added the needed assemblies yourself
         /// </summary>
-        /// <param name="applicationConfigBuilder">ApplicationConfigBuilder</param>
-        public Dapplication(ApplicationConfigBuilder applicationConfigBuilder)
+        /// <param name="applicationConfig">ApplicationConfig</param>
+        public Dapplication(ApplicationConfig applicationConfig)
         {
-
-            // Load the Dapplo.CaliburnMicro.* assemblies
-            applicationConfigBuilder.WithAssemblyPatterns("Dapplo.CaliburnMicro*");
-
-            _bootstrapper = new ApplicationBootstrapper(applicationConfigBuilder.BuildApplicationConfig());
+            _bootstrapper = new ApplicationBootstrapper(applicationConfig);
 
             Current = this;
             // Hook unhandled exceptions in the Dispatcher

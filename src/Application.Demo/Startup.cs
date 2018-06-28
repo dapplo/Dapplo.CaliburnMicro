@@ -67,13 +67,15 @@ namespace Application.Demo
                 .WithApplicationName("Application.Demo")
                 .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
                 // Load the Dapplo.Addons.Config assembly to allow language and ini support
-                .WithAssemblyNames("Dapplo.Addons.Config")
+                .WithConfigSupport()
+                // Enable CaliburnMicro
+                .WithCaliburnMicro()
                 // Load the Application.Demo.* assemblies
-                .WithAssemblyPatterns("Application.Demo.*");
+                .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();
             Start(applicationConfig);
         }
 
-        private static void Start(ApplicationConfigBuilder applicationConfig)
+        private static void Start(ApplicationConfig applicationConfig)
         {
             // Make sure the log entries are demystified
             LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();

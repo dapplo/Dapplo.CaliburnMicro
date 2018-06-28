@@ -25,6 +25,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
@@ -53,7 +54,16 @@ namespace Application.Demo.ClickOnce
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            var application = new Dapplication("ClickOnceDemo", "2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
+            var applicationConfig = ApplicationConfigBuilder
+                .Create()
+                .WithApplicationName("ClickOnceDemo")
+                .WithMutex("2141D0DC-2B87-4B70-A8A7-A1EFDB588656")
+                .WithConfigSupport()
+                .WithCaliburnMicro()
+                .WithAssemblyPatterns("Application.Demo*")
+                .BuildApplicationConfig();
+
+            var application = new Dapplication(applicationConfig)
             {
                 ShutdownMode = ShutdownMode.OnLastWindowClose,
                 OnAlreadyRunning = () =>
@@ -62,8 +72,6 @@ namespace Application.Demo.ClickOnce
                     return -1;
                 }
             };
-            // Load the Application.Demo.* assemblies
-            application.Bootstrapper.FindAndLoadAssemblies("Application.Demo.*.dll");
             // Handle exceptions
             application.DisplayErrorView();
             application.Run();
