@@ -52,6 +52,7 @@ namespace Application.Demo
         {
             var applicationConfig = ApplicationConfigBuilder.
                 Create()
+                //.WithoutAsyncAssemblyLoading()
                 // Make sure the bootstrapper knows where to find it's DLL files
                 .WithScanDirectories(
 #if DEBUG
