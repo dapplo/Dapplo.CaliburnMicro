@@ -2,7 +2,6 @@
 using Application.Demo.MetroAddon.ViewModels;
 using Autofac;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Configuration;
 
 namespace Application.Demo.MetroAddon
@@ -13,7 +12,7 @@ namespace Application.Demo.MetroAddon
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ConfigureDefaults>().As<IUiStartup>().SingleInstance();
+            builder.RegisterType<ConfigureDefaults>().As<IService>().SingleInstance();
             builder.RegisterType<CredentialsViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<ThemeConfigViewModel>().As<IConfigScreen>().SingleInstance();
 

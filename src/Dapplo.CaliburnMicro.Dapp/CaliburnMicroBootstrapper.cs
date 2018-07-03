@@ -23,8 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
@@ -42,8 +40,8 @@ namespace Dapplo.CaliburnMicro.Dapp
     ///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
     ///     and uses this.
     /// </summary>
-    [ServiceOrder(CaliburnStartOrder.Bootstrapper)]
-    public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdownAsync
+    [Service(nameof(CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdown
     {
         private readonly ApplicationBootstrapper _bootstrapper;
         private static readonly LogSource Log = new LogSource();
@@ -57,15 +55,11 @@ namespace Dapplo.CaliburnMicro.Dapp
             _bootstrapper = bootstrapper;
         }
 
-        /// <summary>
-        ///     Shutdown Caliburn
-        /// </summary>
-        /// <param name="cancellationToken">CancellationToken</param>
-        /// <returns>Task</returns>
-        public async Task ShutdownAsync(CancellationToken cancellationToken = default)
+        /// <inheritdoc />
+        public void Shutdown()
         {
             Log.Debug().WriteLine("Starting shutdown");
-            await Execute.OnUIThreadAsync(() => { OnExit(this, new EventArgs()); }).ConfigureAwait(false);
+            OnExit(this, new EventArgs());
             Log.Debug().WriteLine("finished shutdown");
         }
 

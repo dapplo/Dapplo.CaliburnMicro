@@ -39,7 +39,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     /// <summary>
     ///     This takes care of starting and managing your trayicons
     /// </summary>
-    [ServiceOrder(CaliburnStartOrder.TrayIcons)]
+    [Service(nameof(TrayIconManager),nameof(CaliburnStartOrder.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
     public class TrayIconManager : IStartupAsync, IShutdownAsync, ITrayIconManager
     {
         private static readonly LogSource Log = new LogSource();

@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
+using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
@@ -112,13 +113,14 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Register the UI SynchronizationContext, this can be retrieved by specifying the name "ui" for the argument
             _bootstrapper.Builder.RegisterInstance(SynchronizationContext.Current).Named<SynchronizationContext>("ui");
             _bootstrapper.Builder.RegisterInstance(TaskScheduler.FromCurrentSynchronizationContext()).Named<TaskScheduler>("ui");
+            // The following makes sure that Caliburn.Micro is correctly initialized on the right thread and Execute.OnUIThread works
+            // Very important to do this, after all assemblies are loaded!
+            _caliburnMicroBootstrapper = new CaliburnMicroBootstrapper(_bootstrapper);
+            _bootstrapper.Builder.RegisterInstance(_caliburnMicroBootstrapper).As<IService>().SingleInstance();
 
             // Prepare the bootstrapper
             await _bootstrapper.InitializeAsync().ConfigureAwait(true);
 
-            // The following makes sure that Caliburn.Micro is correctly initialized on the right thread and Execute.OnUIThread works
-            // Very important to do this, after all assemblies are loaded!
-            _caliburnMicroBootstrapper = new CaliburnMicroBootstrapper(_bootstrapper);
             _caliburnMicroBootstrapper.Initialize();
 
             // Now check if there is a lock, if so we invoke OnAlreadyRunning and return
@@ -129,7 +131,7 @@ namespace Dapplo.CaliburnMicro.Dapp
                 return;
             }
 
-            // Start Dapplo, do not use configure-await false here, so the OnStartup doesn't have any issues
+            // Start Dapplo, services which need a UI context need to configure this
             await _bootstrapper.StartupAsync().ConfigureAwait(true);
 
             // This also triggers the Caliburn.Micro.BootstrapperBase.OnStartup
@@ -152,7 +154,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             TaskScheduler.UnobservedTaskException -= HandleTaskException;
 
             // Shutdown Caliburn Micro
-            await _caliburnMicroBootstrapper.ShutdownAsync().ConfigureAwait(true);
+            _caliburnMicroBootstrapper.Shutdown();
 
             await _bootstrapper.ShutdownAsync().ConfigureAwait(false);
             // Make sure everything is disposed (and all disposables which were registered via _bootstrapper.RegisterForDisposal() are called)

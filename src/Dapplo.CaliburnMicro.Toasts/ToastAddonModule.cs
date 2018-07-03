@@ -31,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Toasts
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ToastConductor>()
-                .As<IUiStartup>()
+                .As<IService>()
                 .AsSelf()
                 .SingleInstance();
 

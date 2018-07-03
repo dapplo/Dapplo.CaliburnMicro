@@ -8,8 +8,8 @@ namespace Application.Demo.Services
     /// <summary>
     /// Shows a toast when the application starts
     /// </summary>
-    [ServiceOrder(int.MaxValue)]
-    public class NotifyOfStartupReady : IUiStartup
+    [Service(nameof(NotifyOfStartupReady), nameof(CaliburnStartOrder.ToastConductor), TaskSchedulerName = "ui")]
+    public class NotifyOfStartupReady : IStartup
     {
         private readonly ToastConductor _toastConductor;
         private readonly StartupReadyToastViewModel _startupReadyToastViewModel;

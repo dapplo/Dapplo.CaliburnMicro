@@ -52,7 +52,7 @@ namespace Application.Demo
                 .As<IAuthenticationProvider>()
                 .SingleInstance();
             builder.RegisterType<NotifyOfStartupReady>()
-                .As<IUiStartup>()
+                .As<IService>()
                 .SingleInstance();
             builder.RegisterType<SimpleVersionProvider>()
                 .As<IVersionProvider>()

@@ -29,21 +29,16 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         ///     This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
         /// </summary>
-        Bootstrapper = 100,
+        CaliburnMicroBootstrapper,
 
         /// <summary>
-        ///     This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+        ///     This is the id of the TrayIconManager, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
         /// </summary>
-        TrayIcons = 200,
+        TrayIconManager,
 
         /// <summary>
-        ///     This is the order for the Shell
+        /// If you want to show toasts, set this as your prerequisite
         /// </summary>
-        Shell = 300,
-
-        /// <summary>
-        /// From here on, Dapplo.CaliburnMicro is started and user code can use everything
-        /// </summary>
-        User = 1000
+        ToastConductor
     }
 }

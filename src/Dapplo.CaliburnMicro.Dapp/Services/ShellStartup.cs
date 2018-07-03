@@ -19,37 +19,48 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Autofac;
+#region usings
+using System;
+using System.Collections.Generic;
 using Caliburn.Micro;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro.Dapp.Services;
+using Dapplo.Log;
 
-namespace Dapplo.CaliburnMicro.Dapp
+#endregion
+
+namespace Dapplo.CaliburnMicro.Dapp.Services
 {
-    /// <inheritdoc />
-    public class DaplicationAddonModule : AddonModule
+    /// <summary>
+    /// This takes care of showing the shell(s)
+    /// </summary>
+    [Service(nameof(ShellStartup), nameof(CaliburnStartOrder.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    public class ShellStartup : IStartup
     {
+        private static readonly LogSource Log = new LogSource();
+        private readonly IWindowManager _windowManager;
+        private readonly IEnumerable<Lazy<IShell>> _shells;
+
         /// <inheritdoc />
-        protected override void Load(ContainerBuilder builder)
+        public ShellStartup(
+            IWindowManager windowManager,
+            IEnumerable<Lazy<IShell>> shells)
         {
-            builder.RegisterType<ShellStartup>()
-                .As<IService>()
-                .SingleInstance();
-
-
-            // Export the DapploWindowManager if no other IWindowManager is registered
-            builder.RegisterType<DapploWindowManager>()
-                .As<IWindowManager>()
-                .IfNotRegistered(typeof(IWindowManager))
-                .SingleInstance();
-
-            // Export the EventAggregator if no other IEventAggregator is registered
-            builder.RegisterType<EventAggregator>()
-                .As<IEventAggregator>()
-                .IfNotRegistered(typeof(IEventAggregator))
-                .SingleInstance();
-
-            base.Load(builder);
+            _windowManager = windowManager;
+            _shells = shells;
         }
+
+
+        /// <inheritdoc />
+        public void Start()
+        {
+            Log.Debug().WriteLine("Start of all IShell");
+
+            foreach (var shell in _shells)
+            {
+                var viewModel = shell.Value;
+                _windowManager.ShowWindow(viewModel);
+            }
+        }
+
     }
 }
