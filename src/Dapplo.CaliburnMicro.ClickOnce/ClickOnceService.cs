@@ -73,7 +73,7 @@ namespace Dapplo.CaliburnMicro.ClickOnce
         }
 
         /// <inheritdoc />
-        public void Start()
+        public void Startup()
         {
             if (!IsClickOnce)
             {

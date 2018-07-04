@@ -106,7 +106,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// </summary>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
-        public async Task StartAsync(CancellationToken cancellationToken = default)
+        public async Task StartupAsync(CancellationToken cancellationToken = default)
         {
             await Execute.OnUIThreadAsync(InitializeTrayIconViewModels).ConfigureAwait(false);
         }

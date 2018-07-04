@@ -58,7 +58,7 @@ namespace Dapplo.CaliburnMicro.Toasts
         }
 
         /// <inheritdoc />
-        public void Start()
+        public void Startup()
         {
             ScreenExtensions.TryActivate(this);
         }

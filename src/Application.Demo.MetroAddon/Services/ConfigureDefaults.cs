@@ -50,7 +50,7 @@ namespace Application.Demo.MetroAddon.Services
             _metroConfiguration = metroConfiguration;
         }
 
-        public void Start()
+        public void Startup()
         {
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
             _metroWindowManager.AddResourceDictionary(demoUri);

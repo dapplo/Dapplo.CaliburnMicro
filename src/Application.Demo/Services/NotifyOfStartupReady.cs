@@ -23,7 +23,7 @@ namespace Application.Demo.Services
         }
 
         /// <inheritdoc />
-        public void Start()
+        public void Startup()
         {
             _toastConductor.ActivateItem(_startupReadyToastViewModel);
         }

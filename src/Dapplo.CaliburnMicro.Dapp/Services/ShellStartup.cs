@@ -51,7 +51,7 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
 
 
         /// <inheritdoc />
-        public void Start()
+        public void Startup()
         {
             Log.Debug().WriteLine("Start of all IShell");
 
