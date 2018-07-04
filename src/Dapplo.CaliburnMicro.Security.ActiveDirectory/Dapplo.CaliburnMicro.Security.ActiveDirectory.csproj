@@ -46,8 +46,8 @@
     <Reference Include="Dapplo.ActiveDirectory, Version=0.1.51.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.ActiveDirectory.0.1.51\lib\net45\Dapplo.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Addons, Version=1.0.61.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.1.0.61\lib\net46\Dapplo.Addons.dll</HintPath>
+    <Reference Include="Dapplo.Addons, Version=1.0.64.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Addons.1.0.64\lib\net46\Dapplo.Addons.dll</HintPath>
     </Reference>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.2.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.2.12\lib\net45\Dapplo.InterfaceImpl.dll</HintPath>

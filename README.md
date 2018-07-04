@@ -65,20 +65,37 @@ Usage:
 3. Create a Dapplication
 
 ```
-			var application = new Dapplication("Your applicatio name", "optional unique Guid to prevent multiple instances")
-			{
-				ShutdownMode = ShutdownMode.OnExplicitShutdown
-			};
+	// Configure your application
+	var applicationConfig = ApplicationConfigBuilder
+    .Create()
+	// Used for logging, configuration, and thread names
+	.WithApplicationName("application name")
+	// Used to prevent multiple instances
+	.WithMutex("<your GUID>")
+	// Enable Dapplo.Ini & Dapplo.Language support
+	.WithConfigSupport()
+	// Enable the Dapplo.CalliburnMicro libraries
+	.WithCaliburnMicro()
+	// Add directories to scan for dlls
+	.WithScanDirectories("... directory ...")
+	// Scan for all the assemblies, in the exe directory or specified scan directories, called Greenshot.Addon.*.dll
+	.WithAssemblyPatterns("Greenshot.Addon*")
+	.BuildApplicationConfig();
+	
+	var application = new Dapplication(applicationConfig)
+	{
+		ShutdownMode = ShutdownMode.OnExplicitShutdown
+	};
 			
 ```
 
-4. Scan/load assemblies
+4. Check is the application was already running
 
 ```
-  // Add optional directory to scan
-  application.Bootstrapper.AddScanDirectory(@"MyComponents");
-  // Make sure Dapplo and all modules are loaded
-  application.Bootstrapper.FindAndLoadAssemblies("Dapplo.CaliburnMicro*");
+	if (application.WasAlreadyRunning)
+	{
+		// Show message / exit
+	}
 ```
 
 5. Run
@@ -102,9 +119,6 @@ Usage:
 ## Dapplo.CaliburnMicro.Metro
 
 This is based on a MahApps.Metro dependency, and supplies a IWindowManager implementation which makes things look like "metro" apps.
-
-Usage:
-- Make Dapplo.Addons.Bootstrapper scan the dll, by e.g. adding it like this: _bootstrapper.Add(@".", "Dapplo.CaliburnMicro.Metro.dll");
 
 Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/
 
