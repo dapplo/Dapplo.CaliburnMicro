@@ -33,7 +33,7 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
     /// <summary>
     /// This takes care of showing the shell(s)
     /// </summary>
-    [Service(nameof(ShellStartup), nameof(CaliburnStartOrder.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    [Service(nameof(ShellStartup), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
     public class ShellStartup : IStartup
     {
         private static readonly LogSource Log = new LogSource();

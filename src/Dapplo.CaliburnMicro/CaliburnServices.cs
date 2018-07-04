@@ -24,15 +24,15 @@ namespace Dapplo.CaliburnMicro
     /// <summary>
     ///     Helps to structure the order of starting Dappo StartupActions
     /// </summary>
-    public enum CaliburnStartOrder
+    public enum CaliburnServices
     {
         /// <summary>
-        ///     This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
+        ///     If you want to make sure that the IEventAggregator, IWindowManager etc are available, set this as your prerequisite
         /// </summary>
         CaliburnMicroBootstrapper,
 
         /// <summary>
-        ///     This is the id of the TrayIconManager, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+        ///     If you want to interact with the systemtray set this as your prerequisite
         /// </summary>
         TrayIconManager,
 

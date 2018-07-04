@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Toasts
     /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
     /// </summary>
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
-    [Service(nameof(ToastConductor), nameof(CaliburnStartOrder.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    [Service(nameof(ToastConductor), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
     public class ToastConductor: Conductor<IToast>.Collection.AllActive, IHandle<IToast>, IStartup
     {
         private readonly IEventAggregator _eventAggregator;
