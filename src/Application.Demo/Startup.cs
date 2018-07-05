@@ -27,6 +27,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using Dapplo.Addons.Bootstrapper;
+using Dapplo.Addons.Config;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
@@ -67,8 +68,12 @@ namespace Application.Demo
                 )
                 .WithApplicationName("Application.Demo")
                 .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
-                // Load the Dapplo.Addons.Config assembly to allow language and ini support
+                // Load the Dapplo.Addons.Config assembly and initialize the LanguageLoader / IniSection 
                 .WithConfigSupport()
+                // Activate automatic "IniSection" resolving
+                .WithIniSectionResolving()
+                // Activate automatic "ILanguage" resolving
+                .WithLanguageResolving()
                 // Enable CaliburnMicro
                 .WithCaliburnMicro()
                 // Load the Application.Demo.* assemblies
