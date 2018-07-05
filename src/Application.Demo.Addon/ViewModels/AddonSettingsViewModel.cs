@@ -21,6 +21,7 @@
 
 #region using
 
+using System.Threading.Tasks;
 using Application.Demo.Addon.Languages;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
@@ -65,9 +66,9 @@ namespace Application.Demo.Addon.ViewModels
         }
 
         // ReSharper disable once UnusedMember.Global
-        public void DoSomething()
+        public Task DoSomething()
         {
-            EventAggregator.PublishOnUIThread("Addon button clicked");
+            return EventAggregator.PublishOnUIThreadAsync("Addon button clicked");
         }
 
         // ReSharper disable once UnusedMember.Global

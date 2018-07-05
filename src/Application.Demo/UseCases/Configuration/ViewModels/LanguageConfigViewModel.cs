@@ -76,7 +76,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         {
             // Manually commit
             DemoConfiguration.CommitTransaction();
-            _eventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
+            _eventAggregator.PublishOnUIThreadAsync($"Changing to language: {DemoConfiguration.Language}");
             Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
         }
 

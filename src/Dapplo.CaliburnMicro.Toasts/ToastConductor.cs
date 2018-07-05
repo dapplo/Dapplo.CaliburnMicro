@@ -21,6 +21,8 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Dapplo.Addons;
@@ -84,7 +86,7 @@ namespace Dapplo.CaliburnMicro.Toasts
                     configuration.Dispatcher = Application.Current.Dispatcher;
                 });
             }
-            _eventAggregator.Subscribe(this);
+            _eventAggregator.SubscribeOnUIThread(this);
             base.OnActivate();
         }
 
@@ -164,10 +166,11 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// Handles the IToast message, and will display the toast.
         /// </summary>
         /// <param name="message">IToast with the toast to show.</param>
-        public void Handle(IToast message)
+        /// <param name="cancellationToken">CancellationToken</param>
+        public Task HandleAsync(IToast message, CancellationToken cancellationToken)
         {
             ActivateItem(message);
+            return Task.CompletedTask;
         }
-
     }
 }

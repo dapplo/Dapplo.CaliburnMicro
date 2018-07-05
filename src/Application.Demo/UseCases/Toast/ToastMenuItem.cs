@@ -90,7 +90,7 @@ namespace Application.Demo.UseCases.Toast
             message.Value.Deactivated += disposeHandler;
 
             // Show the ViewModel as toast 
-            eventAggregator.PublishOnCurrentThread(message.Value);
+            eventAggregator.PublishOnCurrentThreadAsync(message.Value);
         }
     }
 }

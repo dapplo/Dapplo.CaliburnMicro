@@ -99,7 +99,7 @@ namespace Application.Demo.UseCases.Toast
                     }
                 };
 
-                eventAggregator.PublishOnCurrentThread(new AdaptiveCardViewModel(card, eventAggregator));
+                eventAggregator.PublishOnCurrentThreadAsync(new AdaptiveCardViewModel(card, eventAggregator));
             };
 
             this.VisibleOnPermissions("Admin");

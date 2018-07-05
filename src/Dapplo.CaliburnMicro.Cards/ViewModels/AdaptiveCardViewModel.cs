@@ -173,7 +173,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                     Process.Start(openUrlAction.Url.AbsoluteUri);
                     return;
                 case AdaptiveShowCardAction showCardAction:
-                    _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
+                    _eventAggregator.PublishOnBackgroundThreadAsync(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
                     return;
                 case AdaptiveSubmitAction submitAction:
                     // TODO: submit how / where?
