@@ -14,14 +14,14 @@
 		<copyright>$author$</copyright>
 		<tags>Dapplo MEF Caliburn.Micro Hardcodet.NotifyIcon.Wpf</tags>
 		<dependencies>
-			<group targetFramework="net46">
+			<group targetFramework="net461">
 				<dependency id="Dapplo.CaliburnMicro" version="$version$" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\release\$id$.pdb" target="lib\net46" />
-		<file src="bin\release\$id$.xml" target="lib\net46" />
-		<file src="bin\release\$id$.dll" target="lib\net46" />
+		<file src="bin\release\$id$.pdb" target="lib\net461" />
+		<file src="bin\release\$id$.xml" target="lib\net461" />
+		<file src="bin\release\$id$.dll" target="lib\net461" />
 	</files>
 </package>

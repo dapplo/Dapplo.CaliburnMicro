@@ -14,15 +14,15 @@
 		<copyright>$author$</copyright>
 		<tags>Dapplo Caliburn.Micro MVVM</tags>
 		<frameworkAssemblies>
-			<frameworkAssembly assemblyName="PresentationCore" targetFramework="net46" />
-			<frameworkAssembly assemblyName="PresentationFramework" targetFramework="net46" />
-			<frameworkAssembly assemblyName="System.Xaml" targetFramework="net46" />
-			<frameworkAssembly assemblyName="WindowsBase" targetFramework="net46" />
+			<frameworkAssembly assemblyName="PresentationCore" targetFramework="net461" />
+			<frameworkAssembly assemblyName="PresentationFramework" targetFramework="net461" />
+			<frameworkAssembly assemblyName="System.Xaml" targetFramework="net461" />
+			<frameworkAssembly assemblyName="WindowsBase" targetFramework="net461" />
 		</frameworkAssemblies>
 	</metadata>
 	<files>
-		<file src="bin\release\$id$.pdb" target="lib\net46" />
-		<file src="bin\release\$id$.xml" target="lib\net46" />
-		<file src="bin\release\$id$.dll" target="lib\net46" />
+		<file src="bin\release\$id$.pdb" target="lib\net461" />
+		<file src="bin\release\$id$.xml" target="lib\net461" />
+		<file src="bin\release\$id$.dll" target="lib\net461" />
 	</files>
 </package>
