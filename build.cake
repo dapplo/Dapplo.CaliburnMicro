@@ -3,8 +3,6 @@
 #tool "docfx.console"
 #tool "Hub-Nuget"
 #tool "PdbGit"
-#addin "SharpZipLib"
-#addin "Cake.Compression"
 #addin "Cake.DocFx"
 #addin "Cake.Http"
 #addin "Cake.FileHelpers"
@@ -132,7 +130,7 @@ Task("Documentation")
 
     CreateDirectory("artifacts");
     // Archive the generated site
-    ZipCompress("./doc/_site", "./artifacts/site.zip");
+    Zip("./doc/_site", "./artifacts/site.zip");
 });
 
 // Run the XUnit tests via OpenCover, so be get an coverage.xml report
