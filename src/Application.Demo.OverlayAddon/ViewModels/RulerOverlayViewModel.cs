@@ -23,10 +23,10 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
-using Dapplo.Windows.Input;
 using Dapplo.Windows.User32.Structs;
 using Application.Demo.OverlayAddon.Views;
 using Dapplo.CaliburnMicro.Overlays;
+using Dapplo.Windows.Input.Mouse;
 
 namespace Application.Demo.OverlayAddon.ViewModels
 {
