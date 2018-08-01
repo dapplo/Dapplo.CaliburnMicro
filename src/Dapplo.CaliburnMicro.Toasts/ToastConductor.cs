@@ -75,12 +75,7 @@ namespace Dapplo.CaliburnMicro.Toasts
                 _notifier = new Notifier(configuration => {
                     configuration.DisplayOptions.TopMost = true;
                     configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
-                    //configuration.PositionProvider = new SystemTrayPositionProvider();
-                    configuration.PositionProvider = new PrimaryScreenPositionProvider(
-                        corner: Corner.BottomRight,
-                        offsetX: 10,
-                        offsetY: 10);
-                    configuration.DisplayOptions.TopMost = true;
+                    configuration.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 0,0 );
                     configuration.Dispatcher = Application.Current.Dispatcher;
                 });
             }
