@@ -23,12 +23,15 @@ using System;
 using System.Reactive.Linq;
 using System.Windows;
 using Dapplo.Log;
+using Dapplo.Windows.Common.Structs;
 using Dapplo.Windows.Desktop;
+using Dapplo.Windows.Dpi;
 using Dapplo.Windows.Shell32;
 using ToastNotifications.Core;
 using Dapplo.Windows.Shell32.Enums;
 using Dapplo.Windows.User32.Enums;
 using Dapplo.Windows.User32.Structs;
+using ToastNotifications.Position;
 
 namespace Dapplo.CaliburnMicro.Toasts
 {
@@ -41,7 +44,6 @@ namespace Dapplo.CaliburnMicro.Toasts
         private readonly IDisposable _subscription;
         private readonly int _xOffset;
         private readonly int _yOffset;
-
 
         /// <summary>
         /// Initialize the SystemTrayPositionProvider, this hooks all the event handlers
@@ -83,10 +85,13 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// <returns>Point</returns>
         public Point GetPosition(double actualPopupWidth, double actualPopupHeight)
         {
-            Log.Debug().WriteLine("Calculating for {0},{1}", actualPopupWidth, actualPopupHeight);
             var taskbar = Shell32Api.TaskbarPosition;
             var taskbarBounds = taskbar.Bounds;
 
+            var actualSize = new NativeSize((int)actualPopupWidth, (int)actualPopupHeight);
+
+            var dpi = NativeDpiMethods.GetDpiForSystem();
+            actualSize = DpiHandler.ScaleWithDpi(actualSize, dpi);
             int x, y;
 
             // Define the new position
@@ -94,24 +99,24 @@ namespace Dapplo.CaliburnMicro.Toasts
             {
                 case AppBarEdges.Left:
                     x = taskbarBounds.Right + _xOffset;
-                    y = taskbarBounds.Bottom - _yOffset - (int)actualPopupHeight;
+                    y = taskbarBounds.Bottom - _yOffset - actualSize.Height;
                     break;
                 case AppBarEdges.Top:
-                    x = taskbarBounds.Right - _xOffset - (int)actualPopupWidth;
+                    x = taskbarBounds.Right - _xOffset - actualSize.Width;
                     y = taskbarBounds.Bottom + _yOffset;
                     break;
                 case AppBarEdges.Right:
-                    x = taskbarBounds.Left - _xOffset - (int)actualPopupWidth;
-                    y = taskbarBounds.Bottom - _yOffset - (int)actualPopupHeight;
+                    x = taskbarBounds.Left - _xOffset - actualSize.Width;
+                    y = taskbarBounds.Bottom - _yOffset - actualSize.Height;
                     break;
                 case AppBarEdges.Bottom:
                 default:
-                    x = taskbarBounds.Right - _xOffset - (int)actualPopupWidth;
-                    y = taskbarBounds.Top - _yOffset - (int)actualPopupHeight;
+                    x = taskbarBounds.Right - _xOffset - actualSize.Width;
+                    y = taskbarBounds.Top - _yOffset - actualSize.Height;
                     break;
             }
             Log.Debug().WriteLine("Taskbar location {0} at {1}, calculate popup location: {2},{3}", taskbar.AppBarEdge, taskbarBounds, x, y);
-            return new Point(x,y);
+            return DpiHandler.UnscaleWithDpi(new NativePoint(x,y), dpi);
         }
 
         /// <summary>
