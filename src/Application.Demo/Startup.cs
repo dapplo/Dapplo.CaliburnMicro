@@ -76,6 +76,7 @@ namespace Application.Demo
                 .WithLanguageResolving()
                 // Enable CaliburnMicro
                 .WithCaliburnMicro()
+                .WithoutCopyOfEmbeddedAssemblies()
                 // Load the Application.Demo.* assemblies
                 .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();
             Start(applicationConfig);

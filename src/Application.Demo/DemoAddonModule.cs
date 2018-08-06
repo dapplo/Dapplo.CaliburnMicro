@@ -34,7 +34,9 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.Security;
+using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.CaliburnMicro.Wizard;
+using ToastNotifications.Events;
 
 namespace Application.Demo
 {
@@ -99,6 +101,10 @@ namespace Application.Demo
                 .AsSelf();
             builder.RegisterType<NotificationExampleViewModel>()
                 .AsSelf();
+
+            builder.RegisterType<AllowAllKeyInputEventHandler>()
+                .As<IKeyboardEventHandler>()
+                .SingleInstance();
 
             base.Load(builder);
         }

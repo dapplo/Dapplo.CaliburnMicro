@@ -1,18 +1,17 @@
-﻿<core:NotificationDisplayPart x:Class="Application.Demo.UseCases.Toast.Views.ToastExampleView"
+﻿<toastNotifications:NotificationDisplayPart x:Class="Application.Demo.UseCases.Toast.Views.ToastExampleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
+             xmlns:toastNotifications="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
              xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Toast.ViewModels"
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
              d:DataContext="{d:DesignInstance viewModels:ToastExampleViewModel,IsDesignTimeCreatable=True}"
-             d:DesignHeight="300" d:DesignWidth="300" HorizontalContentAlignment="Stretch">
-    <StackPanel>
+             d:DesignHeight="300" d:DesignWidth="300" HorizontalContentAlignment="Stretch" HorizontalAlignment="Right">
+    <StackPanel >
         <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
         <Label Content="{Binding Id}"></Label>
         <TextBlock Text="{Binding Message}" FontWeight="Light" Foreground="White" TextWrapping="Wrap" />
-        <TextBox />
+        <TextBox Text="{Binding Text}"/>
     </StackPanel>
-</core:NotificationDisplayPart>
-
+</toastNotifications:NotificationDisplayPart>

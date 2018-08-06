@@ -156,7 +156,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Shutdown Caliburn Micro
             _caliburnMicroBootstrapper.Shutdown();
 
-            await _bootstrapper.ShutdownAsync().ConfigureAwait(false);
+            await _bootstrapper.ShutdownAsync().ConfigureAwait(true);
             // Make sure everything is disposed (and all disposables which were registered via _bootstrapper.RegisterForDisposal() are called)
             _bootstrapper.Dispose();
         }

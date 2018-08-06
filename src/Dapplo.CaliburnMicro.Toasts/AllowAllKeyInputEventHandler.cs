@@ -19,14 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Dapplo.CaliburnMicro.Toasts.ViewModels;
+using System.Windows.Input;
+using ToastNotifications.Events;
 
-namespace Application.Demo.UseCases.Toast.ViewModels
+namespace Dapplo.CaliburnMicro.Toasts
 {
-    public class ToastExampleViewModel : ToastBaseViewModel
+    /// <summary>
+    /// This allows all keys to be handled by a notification
+    /// </summary>
+    public class AllowAllKeyInputEventHandler : IKeyboardEventHandler
     {
-        public string Message => "Hello World";
-
-        public string Text { get; set; }
+        /// <inheritdoc />
+        public void Handle(KeyEventArgs eventArgs)
+        {
+        }
     }
 }

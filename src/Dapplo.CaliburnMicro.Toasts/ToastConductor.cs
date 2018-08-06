@@ -26,14 +26,13 @@ using Caliburn.Micro;
 using Dapplo.Addons;
 using ToastNotifications;
 using ToastNotifications.Core;
-using ToastNotifications.Lifetime;
-using ToastNotifications.Position;
 
 namespace Dapplo.CaliburnMicro.Toasts
 {
     /// <summary>
     /// The toast conductor handles IToast message which can be used to display toasts.
     /// It's also possible to import the ToastConductor directly and use ActivateItem on it.
+    /// By default the setup is in such a way, that the toast arrive near the system tray
     /// </summary>
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     [Service(nameof(ToastConductor), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
@@ -45,14 +44,15 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// <summary>
         /// Importing constructor to add the dependencies of the ToastConductor
         /// <param name="eventAggregator">IEventAggregator to subscribe to the IToast messages</param>
-        /// <param name="notifier">optional Notifier configuration, if not supplied a default is used</param>
+        /// <param name="notifier">Notifier configuration</param>
         /// </summary>
         public ToastConductor(
             IEventAggregator eventAggregator,
-            Notifier notifier = null)
+            Notifier notifier)
         {
+            // Fail fast, if there is no Notifier than something was configured wrong
+            _notifier = notifier ?? throw new ArgumentNullException(nameof(notifier));
             // Fail fast, if there is no IEventAggregator than something went wrong in the bootstrapper
-            _notifier = notifier;
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             
         }
@@ -70,15 +70,6 @@ namespace Dapplo.CaliburnMicro.Toasts
         /// </summary>
         protected override void OnActivate()
         {
-            if (_notifier == null)
-            {
-                _notifier = new Notifier(configuration => {
-                    configuration.DisplayOptions.TopMost = true;
-                    configuration.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(10), MaximumNotificationCount.FromCount(15));
-                    configuration.PositionProvider = new PrimaryScreenPositionProvider(Corner.BottomRight, 0,0 );
-                    configuration.Dispatcher = Application.Current.Dispatcher;
-                });
-            }
             _eventAggregator.Subscribe(this);
             base.OnActivate();
         }

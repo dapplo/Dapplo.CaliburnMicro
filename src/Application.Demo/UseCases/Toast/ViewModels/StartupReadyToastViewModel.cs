@@ -24,6 +24,7 @@ using Dapplo.CaliburnMicro.Toasts.ViewModels;
 
 namespace Application.Demo.UseCases.Toast.ViewModels
 {
+    /// <inheritdoc />
     public class StartupReadyToastViewModel : ToastBaseViewModel
     {
         private readonly IToastTranslations _toastTranslations;
