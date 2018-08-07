@@ -31,7 +31,6 @@ using ToastNotifications.Core;
 using Dapplo.Windows.Shell32.Enums;
 using Dapplo.Windows.User32.Enums;
 using Dapplo.Windows.User32.Structs;
-using ToastNotifications.Position;
 
 namespace Dapplo.CaliburnMicro.Toasts
 {
@@ -90,7 +89,8 @@ namespace Dapplo.CaliburnMicro.Toasts
 
             var actualSize = new NativeSize((int)actualPopupWidth, (int)actualPopupHeight);
 
-            var dpi = NativeDpiMethods.GetDpiForSystem();
+            // Use the DPI of the desktop
+            var dpi = NativeDpiMethods.GetDpi(IntPtr.Zero);
             actualSize = DpiHandler.ScaleWithDpi(actualSize, dpi);
             int x, y;
 

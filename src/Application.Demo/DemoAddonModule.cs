@@ -25,7 +25,6 @@ using Application.Demo.UseCases.ContextMenu.ViewModels;
 using Application.Demo.UseCases.Menu.ViewModels;
 using Application.Demo.UseCases.Toast.ViewModels;
 using Application.Demo.UseCases.Wizard.ViewModels;
-using Application.Demo.ViewModels;
 using Autofac;
 using Autofac.Features.AttributeFilters;
 using Dapplo.Addons;
@@ -98,8 +97,6 @@ namespace Application.Demo
             
             // Not a single instance
             builder.RegisterType<ToastExampleViewModel>()
-                .AsSelf();
-            builder.RegisterType<NotificationExampleViewModel>()
                 .AsSelf();
 
             builder.RegisterType<AllowAllKeyInputEventHandler>()

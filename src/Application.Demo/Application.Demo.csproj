@@ -196,7 +196,6 @@
     <Compile Include="UseCases\Toast\ViewModels\ToastExampleViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep5ViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\LanguageConfigViewModel.cs" />
-    <Compile Include="ViewModels\NotificationExampleViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\ConfigViewModel.cs" />
     <Compile Include="UseCases\ContextMenu\ViewModels\DemoTrayIconViewModel.cs" />
     <Compile Include="UseCases\Wizard\ViewModels\WizardStep4ViewModel.cs" />
@@ -299,10 +298,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UseCases\Configuration\Views\LanguageConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NotificationExampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
