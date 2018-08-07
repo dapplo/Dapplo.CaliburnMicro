@@ -90,7 +90,7 @@ namespace Dapplo.CaliburnMicro.Toasts
             var actualSize = new NativeSize((int)actualPopupWidth, (int)actualPopupHeight);
 
             // Use the DPI of the desktop
-            var dpi = NativeDpiMethods.GetDpi(IntPtr.Zero);
+            var dpi = NativeDpiMethods.GetDpi(InteropWindowQuery.GetDesktopWindow().Handle);
             actualSize = DpiHandler.ScaleWithDpi(actualSize, dpi);
             int x, y;
 
