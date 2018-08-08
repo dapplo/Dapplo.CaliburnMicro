@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Dapplo.CaliburnMicro.Configuration.Controls.ConfigurationTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Dapplo.CaliburnMicro.Controls;assembly=Dapplo.CaliburnMicro"
+             xmlns:configuration="clr-namespace:Dapplo.CaliburnMicro.Configuration"
+             xmlns:securityBehaviors="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
+             xmlns:securityDesigntime="clr-namespace:Dapplo.CaliburnMicro.Security.DesignTime;assembly=Dapplo.CaliburnMicro.Security"
+             xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
+             xmlns:designTime="clr-namespace:Dapplo.CaliburnMicro.Configuration.DesignTime"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance designTime:DefaultConfig,IsDesignTimeCreatable=False}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        <converters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
+        <Style TargetType="controls:BindableTreeView" BasedOn="{StaticResource {x:Type TreeView}}"/>
+    </UserControl.Resources>
+    <controls:BindableTreeView SelectedItem="{Binding CurrentConfigScreen, Mode=TwoWay}" ItemsSource="{Binding TreeItems}" >
+        <TreeView.ItemContainerStyle>
+            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                <d:Style.DataContext>
+                    <x:Type Type="configuration:IConfigScreen" />
+                </d:Style.DataContext>
+                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                <Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource BooleanToVisibility} }" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static securityBehaviors:AuthenticationTargetProperties.Visibility}" >
+                        <d:Style.DataContext>
+                            <x:Type Type="securityDesigntime:VisibilityAuthentication" />
+                        </d:Style.DataContext>
+                        <Setter Property="securityBehaviors:AuthenticationVisibility.Permissions" Value="{Binding Permissions}" />
+                        <Setter Property="securityBehaviors:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
+                        <Setter Property="securityBehaviors:AuthenticationVisibility.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static securityBehaviors:AuthenticationTargetProperties.IsEnabled}">
+                        <d:Style.DataContext>
+                            <x:Type Type="securityDesigntime:BoolAuthentication" />
+                        </d:Style.DataContext>
+                        <Setter Property="securityBehaviors:AuthenticationEnabled.Permissions" Value="{Binding Permissions}" />
+                        <Setter Property="securityBehaviors:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
+                        <Setter Property="securityBehaviors:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </TreeView.ItemContainerStyle>
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
+                <Label Content="{Binding DisplayName}" />
+            </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+    </controls:BindableTreeView>
+</UserControl>

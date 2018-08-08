@@ -19,32 +19,19 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System.Windows.Controls;
 
-using System.ComponentModel;
-using Dapplo.Language;
-
-#endregion
-
-namespace Application.Demo.Languages
+namespace Dapplo.CaliburnMicro.Configuration.Controls
 {
-    [Language("ContextMenu")]
-    public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for ConfigurationTreeView.xaml
+    /// </summary>
+    public partial class ConfigurationTreeView : UserControl
     {
-        string Configure { get; }
-        string JumpToConfigure { get; }
-        string Exit { get; }
-        string CreateError { get; }
-
-        string One { get; }
-        string SomeWindow { get; }
-        string ActiveCard { get; }
-        string Toast { get; }
-        string Three { get; }
-
-        string Title { get; }
-        string Two { get; }
-        string WithChildren { get; }
-        string Wizard { get; }
+        /// <inheritdoc />
+        public ConfigurationTreeView()
+        {
+            InitializeComponent();
+        }
     }
 }

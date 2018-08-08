@@ -21,38 +21,31 @@
 
 #region using
 
-using System.Windows.Media;
-using Application.Demo.Languages;
+using System.Windows;
+using Application.Demo.Addon.Languages;
+using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Menu;
-using MahApps.Metro.IconPacks;
+using Dapplo.CaliburnMicro.Security;
+using Application.Demo.Shared;
 
 #endregion
 
-namespace Application.Demo.UseCases.ContextMenu
+namespace Application.Demo.Addon.ViewModels
 {
-    /// <summary>
-    ///     This will add an extry for the title of the context menu
-    /// </summary>
-    [Menu("contextmenu")]
-    public sealed class TitleMenuItem : MenuItem
+    public sealed class AdminConfigViewModel : AuthenticatedConfigNode<Visibility>
     {
-        /// <summary>
-        /// Configure the title menu item
-        /// </summary>
-        /// <param name="contextMenuTranslations">IContextMenuTranslations</param>
-        public TitleMenuItem(IContextMenuTranslations contextMenuTranslations)
-        {
-            // automatically update the DisplayName
-            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
-            Id = "A_Title";
-            Style = MenuItemStyles.Title;
+        public IAddonTranslations AddonTranslations { get; }
 
-            Icon = new PackIconMaterial
-            {
-                Kind = PackIconMaterialKind.Exclamation
-            };
-            this.ApplyIconForegroundColor(Brushes.DarkRed);
+        public AdminConfigViewModel(IAddonTranslations addonTranslations)
+        {
+            AddonTranslations = addonTranslations;
+
+            ParentId = nameof(ConfigIds.Addons);
+            this.VisibleOnPermissions("Admin");
+
+            // automatically update the DisplayName
+            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
         }
+
     }
 }

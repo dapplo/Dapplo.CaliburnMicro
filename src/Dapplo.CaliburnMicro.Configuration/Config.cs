@@ -125,7 +125,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         public virtual ICollection<ITreeNode<TConfigScreen>> TreeItems { get; } = new ObservableCollection<ITreeNode<TConfigScreen>>();
 
         /// <summary>
-        ///     This return or sets the current config screen
+        ///     This return or sets the current config screen, a set is represented in the config view.
         /// </summary>
         public virtual TConfigScreen CurrentConfigScreen
         {
@@ -156,7 +156,6 @@ namespace Dapplo.CaliburnMicro.Configuration
             {
                 configScreen.Rollback();
             }
-
             TryClose(false);
         }
 
@@ -246,6 +245,7 @@ namespace Dapplo.CaliburnMicro.Configuration
                 return;
             }
             base.ActivateItem(item);
+            NotifyOfPropertyChange(nameof(ActiveItem));
             NotifyOfPropertyChange(nameof(CurrentConfigScreen));
             NotifyOfPropertyChange(nameof(CanCancel));
             NotifyOfPropertyChange(nameof(CanOk));

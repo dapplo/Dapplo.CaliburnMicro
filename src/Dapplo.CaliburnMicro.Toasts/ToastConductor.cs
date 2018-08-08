@@ -54,7 +54,6 @@ namespace Dapplo.CaliburnMicro.Toasts
             _notifier = notifier ?? throw new ArgumentNullException(nameof(notifier));
             // Fail fast, if there is no IEventAggregator than something went wrong in the bootstrapper
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
-            
         }
 
         /// <inheritdoc />

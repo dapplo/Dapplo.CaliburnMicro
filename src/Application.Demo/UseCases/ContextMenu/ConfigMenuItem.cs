@@ -59,10 +59,9 @@ namespace Application.Demo.UseCases.ContextMenu
         public override void Click(IMenuItem clickedItem)
         {
             Log.Debug().WriteLine("Configure");
-            // TODO: Closing the DemoConfigViewModel also closes other windows, check / fix
-            if (_windowManager.ShowDialog(_demoConfigViewModel) == false)
+            if (!_demoConfigViewModel.IsActive)
             {
-                Log.Warn().WriteLine("You cancelled the configuration");
+                _windowManager.ShowDialog(_demoConfigViewModel);
             }
         }
 

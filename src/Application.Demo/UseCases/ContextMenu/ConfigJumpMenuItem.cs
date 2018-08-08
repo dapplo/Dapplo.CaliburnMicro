@@ -21,8 +21,11 @@
 
 #region using
 
+using System.Windows;
 using System.Windows.Media;
 using Application.Demo.Languages;
+using Application.Demo.UseCases.Configuration.ViewModels;
+using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using MahApps.Metro.IconPacks;
@@ -35,24 +38,35 @@ namespace Application.Demo.UseCases.ContextMenu
     ///     This will add an extry for the title of the context menu
     /// </summary>
     [Menu("contextmenu")]
-    public sealed class TitleMenuItem : MenuItem
+    public sealed class ConfigJumpMenuItem : ClickableMenuItem
     {
-        /// <summary>
-        /// Configure the title menu item
-        /// </summary>
-        /// <param name="contextMenuTranslations">IContextMenuTranslations</param>
-        public TitleMenuItem(IContextMenuTranslations contextMenuTranslations)
+        public ConfigJumpMenuItem(
+            IContextMenuTranslations contextMenuTranslations,
+            IWindowManager windowManager,
+            ConfigViewModel configViewModel,
+            LanguageConfigViewModel languageConfigViewModel
+            )
         {
             // automatically update the DisplayName
-            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
-            Id = "A_Title";
-            Style = MenuItemStyles.Title;
-
+            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.JumpToConfigure));
+            Id = "G_ConfigJump";
             Icon = new PackIconMaterial
             {
-                Kind = PackIconMaterialKind.Exclamation
+                Kind = PackIconMaterialKind.Settings,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Stretch
             };
-            this.ApplyIconForegroundColor(Brushes.DarkRed);
+            ClickAction = clickedItem =>
+            {
+                configViewModel.CurrentConfigScreen = languageConfigViewModel;
+                if (!configViewModel.IsActive)
+                {
+                    windowManager.ShowDialog(configViewModel);
+                }
+            };
+            this.ApplyIconForegroundColor(Brushes.Gray);
         }
     }
 }

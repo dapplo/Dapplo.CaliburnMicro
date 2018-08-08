@@ -22,6 +22,7 @@
 #region using
 
 using System.Collections.Generic;
+using Caliburn.Micro;
 
 #endregion
 
@@ -31,7 +32,7 @@ namespace Dapplo.CaliburnMicro.Menu
     ///     Interface for tree nodes
     /// </summary>
     /// <typeparam name="TTreeItem"></typeparam>
-    public interface ITreeNode<TTreeItem> : IHaveId
+    public interface ITreeNode<TTreeItem> : IHaveId, IHaveDisplayName
     {
         /// <summary>
         ///     The children for this ITreeNode, the collections MUST be initialized!!

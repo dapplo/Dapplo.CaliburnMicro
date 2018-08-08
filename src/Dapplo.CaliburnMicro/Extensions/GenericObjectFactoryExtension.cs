@@ -19,40 +19,35 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System;
+using System.Windows.Markup;
 
-using System.Windows.Media;
-using Application.Demo.Languages;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Menu;
-using MahApps.Metro.IconPacks;
-
-#endregion
-
-namespace Application.Demo.UseCases.ContextMenu
+namespace Dapplo.CaliburnMicro.Extensions
 {
     /// <summary>
-    ///     This will add an extry for the title of the context menu
+    /// This MarkupExtension helps to solve the issue with using generic design time classes
     /// </summary>
-    [Menu("contextmenu")]
-    public sealed class TitleMenuItem : MenuItem
+    public class GenericObjectFactoryExtension : MarkupExtension
     {
         /// <summary>
-        /// Configure the title menu item
+        /// your generic (viewmodel) type
         /// </summary>
-        /// <param name="contextMenuTranslations">IContextMenuTranslations</param>
-        public TitleMenuItem(IContextMenuTranslations contextMenuTranslations)
-        {
-            // automatically update the DisplayName
-            contextMenuTranslations.CreateDisplayNameBinding(this, nameof(IContextMenuTranslations.Title));
-            Id = "A_Title";
-            Style = MenuItemStyles.Title;
+        public Type Type { get; set; }
 
-            Icon = new PackIconMaterial
-            {
-                Kind = PackIconMaterialKind.Exclamation
-            };
-            this.ApplyIconForegroundColor(Brushes.DarkRed);
+        /// <summary>
+        /// The argument for the generic type
+        /// </summary>
+        public Type GenericTypeArgument { get; set; }
+
+        /// <summary>
+        /// Privide the value, if an instance is requested
+        /// </summary>
+        /// <param name="serviceProvider">IServiceProvider</param>
+        /// <returns>object</returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            var genericType = Type.MakeGenericType(GenericTypeArgument);
+            return Activator.CreateInstance(genericType);
         }
     }
 }

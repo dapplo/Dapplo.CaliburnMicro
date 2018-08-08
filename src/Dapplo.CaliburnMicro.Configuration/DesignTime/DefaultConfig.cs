@@ -19,33 +19,14 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
-using System.Windows;
-using Application.Demo.Addon.Languages;
-using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.CaliburnMicro.Security;
-using Application.Demo.Shared;
-
-#endregion
-
-namespace Application.Demo.Addon.ViewModels
+namespace Dapplo.CaliburnMicro.Configuration.DesignTime
 {
-    public sealed class AdminConfigNodeViewModel : AuthenticatedConfigNode<Visibility>
+#if DEBUG
+    /// <summary>
+    /// Designtime class
+    /// </summary>
+    public class DefaultConfig : Config<IConfigScreen>
     {
-        public IAddonTranslations AddonTranslations { get; }
-
-        public AdminConfigNodeViewModel(IAddonTranslations addonTranslations)
-        {
-            AddonTranslations = addonTranslations;
-
-            ParentId = nameof(ConfigIds.Addons);
-            this.VisibleOnPermissions("Admin");
-
-            // automatically update the DisplayName
-            AddonTranslations.CreateDisplayNameBinding(this, nameof(IAddonTranslations.Admin));
-        }
-
     }
+#endif
 }

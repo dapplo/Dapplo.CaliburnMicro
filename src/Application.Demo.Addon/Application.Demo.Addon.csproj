@@ -93,7 +93,7 @@
     <Compile Include="DemoAddonModule.cs" />
     <Compile Include="Languages\IAddonTranslations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AdminConfigNodeViewModel.cs" />
+    <Compile Include="ViewModels\AdminConfigViewModel.cs" />
     <Compile Include="ViewModels\NotSelectableConfigViewModel.cs" />
     <Compile Include="ViewModels\AddonSettingsViewModel.cs" />
   </ItemGroup>

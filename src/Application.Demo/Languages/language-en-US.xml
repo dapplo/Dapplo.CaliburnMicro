@@ -33,7 +33,8 @@
         <resource name="activecard">Show card as toast</resource>
         <resource name="toast">Show toast</resource>
         <resource name="wizard">Wizard</resource>
-        <resource name="configure">Configure</resource>
+        <resource name="configure">Configuration</resource>
+        <resource name="jump_to_configure">Jump into configuration</resource>
         <resource name="exit">Exit</resource>
         <resource name="createerror">Generate error</resource>
     </resources>

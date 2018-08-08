@@ -56,17 +56,17 @@
     <Reference Include="Dapplo.Log, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.Log.1.2.1\lib\net45\Dapplo.Log.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Common, Version=0.5.104.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Common.0.5.104\lib\net461\Dapplo.Windows.Common.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Common, Version=0.5.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Common.0.5.105\lib\net461\Dapplo.Windows.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Input, Version=0.5.104.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Input.0.5.104\lib\net461\Dapplo.Windows.Input.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Input, Version=0.5.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Input.0.5.105\lib\net461\Dapplo.Windows.Input.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.Messages, Version=0.5.104.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.Messages.0.5.104\lib\net461\Dapplo.Windows.Messages.dll</HintPath>
+    <Reference Include="Dapplo.Windows.Messages, Version=0.5.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.Messages.0.5.105\lib\net461\Dapplo.Windows.Messages.dll</HintPath>
     </Reference>
-    <Reference Include="Dapplo.Windows.User32, Version=0.5.104.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Windows.User32.0.5.104\lib\net461\Dapplo.Windows.User32.dll</HintPath>
+    <Reference Include="Dapplo.Windows.User32, Version=0.5.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapplo.Windows.User32.0.5.105\lib\net461\Dapplo.Windows.User32.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />

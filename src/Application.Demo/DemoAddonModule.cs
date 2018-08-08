@@ -69,6 +69,7 @@ namespace Application.Demo
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IConfigScreen>()
                 .As<IConfigScreen>()
+                .AsSelf()
                 .SingleInstance();
 
             // All wizard screens

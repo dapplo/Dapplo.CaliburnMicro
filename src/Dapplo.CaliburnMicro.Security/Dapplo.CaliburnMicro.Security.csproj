@@ -84,6 +84,8 @@
     <Compile Include="Behaviors\AuthenticationTargetProperties.cs" />
     <Compile Include="Behaviors\AuthenticationVisibility.cs" />
     <Compile Include="Converters\AuthenticationTargetPropertyConverter.cs" />
+    <Compile Include="DesignTime\BoolAuthentication.cs" />
+    <Compile Include="DesignTime\VisibilityAuthentication.cs" />
     <Compile Include="IAuthenticationProvider.cs" />
     <Compile Include="IChangeableNeedAuthentication.cs" />
     <Compile Include="INeedAuthentication.cs" />

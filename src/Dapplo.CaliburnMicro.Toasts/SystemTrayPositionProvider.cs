@@ -115,8 +115,10 @@ namespace Dapplo.CaliburnMicro.Toasts
                     y = taskbarBounds.Top - _yOffset - actualSize.Height;
                     break;
             }
-            Log.Debug().WriteLine("Taskbar location {0} at {1}, calculate popup location: {2},{3}", taskbar.AppBarEdge, taskbarBounds, x, y);
-            return DpiHandler.UnscaleWithDpi(new NativePoint(x,y), dpi);
+
+            var position = DpiHandler.UnscaleWithDpi(new NativePoint(x, y), dpi);
+            Log.Debug().WriteLine("Taskbar location {0} at {1}, calculate popup position: {2}", taskbar.AppBarEdge, taskbarBounds, position);
+            return position;
         }
 
         /// <summary>

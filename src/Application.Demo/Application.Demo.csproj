@@ -18,7 +18,6 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <LangVersion>latest</LangVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -158,8 +157,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="ToastNotifications, Version=2.3.3.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
-      <HintPath>..\packages\ToastNotifications.2.3.3\lib\net40\ToastNotifications.dll</HintPath>
+    <Reference Include="ToastNotifications, Version=2.3.4.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.3.4\lib\net40\ToastNotifications.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -181,6 +180,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\AddonConfigNodeViewModel.cs" />
     <Compile Include="UseCases\Configuration\ViewModels\UiConfigNodeViewModel.cs" />
+    <Compile Include="UseCases\ContextMenu\ConfigJumpMenuItem.cs" />
     <Compile Include="UseCases\Toast\ToastMenuItem.cs" />
     <Compile Include="UseCases\ContextMenu\CreateErrorMenuItem.cs" />
     <Compile Include="UseCases\Toast\AdaptiveCardMenuItem.cs" />
