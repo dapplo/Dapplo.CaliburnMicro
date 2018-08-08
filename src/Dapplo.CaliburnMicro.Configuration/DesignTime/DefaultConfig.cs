@@ -21,12 +21,10 @@
 
 namespace Dapplo.CaliburnMicro.Configuration.DesignTime
 {
-#if DEBUG
     /// <summary>
     /// Designtime class
     /// </summary>
     public class DefaultConfig : Config<IConfigScreen>
     {
     }
-#endif
 }
