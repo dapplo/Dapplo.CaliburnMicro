@@ -53,7 +53,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EED3E15DBF45B2BBB4824A6349C17EB083E2BFA2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4C34BE3EDFBD9F4AF6AA4B4FBEBD24263A3A9517</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Application.Demo.ClickOnce_TemporaryKey.pfx</ManifestKeyFile>
