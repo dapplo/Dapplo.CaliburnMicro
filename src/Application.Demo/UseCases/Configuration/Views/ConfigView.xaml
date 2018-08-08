@@ -21,7 +21,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" DataContext="{Binding}">
-            <TextBox x:Name="Filter" Text="Language"/>
+            <TextBox x:Name="Filter"/>
             <controls:ConfigurationTreeView />
         </StackPanel>
         <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0" />
