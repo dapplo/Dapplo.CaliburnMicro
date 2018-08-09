@@ -1,10 +1,10 @@
-﻿<core:NotificationDisplayPart x:Class="Application.Demo.UseCases.Toast.Views.StartupReadyToastView"
+﻿<toasts:ToastView x:Class="Application.Demo.UseCases.Toast.Views.StartupReadyToastView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
              xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Toast.ViewModels"
+             xmlns:toasts="clr-namespace:Dapplo.CaliburnMicro.Toasts;assembly=Dapplo.CaliburnMicro.Toasts"
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
              d:DataContext="{d:DesignInstance viewModels:StartupReadyToastViewModel,IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -12,5 +12,4 @@
         <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
         <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" />
     </StackPanel>
-</core:NotificationDisplayPart>
-
+</toasts:ToastView>

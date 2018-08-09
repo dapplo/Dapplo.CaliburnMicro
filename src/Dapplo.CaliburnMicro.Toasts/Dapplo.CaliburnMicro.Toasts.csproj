@@ -118,6 +118,7 @@
     <Compile Include="AllowAllKeyInputEventHandler.cs" />
     <Compile Include="IToast.cs" />
     <Compile Include="SystemTrayPositionProvider.cs" />
+    <Compile Include="ToastView.cs" />
     <Compile Include="ToastAddonModule.cs" />
     <Compile Include="ToastConductor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

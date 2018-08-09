@@ -146,7 +146,7 @@ namespace Application.Demo.UseCases.Menu.ViewModels
         /// <param name="close">Inidicates whether this instance will be closed.</param>
         protected override void OnDeactivate(bool close)
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
             base.OnDeactivate(close);
         }
 

@@ -156,13 +156,13 @@ namespace Application.Demo.MetroAddon.ViewModels
 
         protected override void OnDeactivate(bool close)
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
             base.OnDeactivate(close);
         }
 
         public void Dispose()
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
         }
     }
 }

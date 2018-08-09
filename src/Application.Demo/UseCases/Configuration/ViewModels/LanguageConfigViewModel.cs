@@ -117,14 +117,14 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         /// <inheritdoc />
         protected override void OnDeactivate(bool close)
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
             base.OnDeactivate(close);
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
         }
     }
 }

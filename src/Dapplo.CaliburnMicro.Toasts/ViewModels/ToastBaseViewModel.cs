@@ -43,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         /// Id of the toast
         /// </summary>
         public virtual int Id {
-            get { return _id; }
+            get => _id;
             set
             {
                 _id = value;
@@ -58,8 +58,14 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         /// <param name="context"></param>
         protected override void OnViewAttached(object view, object context)
         {
-            var notificationView = view as NotificationDisplayPart;
-            DisplayPart = notificationView ?? throw new NotSupportedException("View doesn't base on NotificationDisplayPart");
+            var toastView = view as ToastView;
+            DisplayPart = toastView ?? throw new NotSupportedException("View doesn't base on ToastView");
+
+            // Specify MessageOptions if any
+            if (toastView.Options == null)
+            {
+                toastView.Options = Options;
+            }
 
             base.OnViewAttached(view, context);
         }
@@ -91,9 +97,12 @@ namespace Dapplo.CaliburnMicro.Toasts.ViewModels
         /// <summary>
         /// Return the view for this ViewModel, it needs to base upon NotificationDisplayPart 
         /// </summary>
-        public virtual NotificationDisplayPart DisplayPart { get; set; }
+        public virtual NotificationDisplayPart DisplayPart { get; protected set; }
 
         /// <inheritdoc />
         bool INotification.CanClose { get; set; } = true;
+
+        /// <inheritdoc />
+        public MessageOptions Options { get; set; } = new MessageOptions {FreezeOnMouseEnter = true, UnfreezeOnMouseLeave = true};
     }
 }
