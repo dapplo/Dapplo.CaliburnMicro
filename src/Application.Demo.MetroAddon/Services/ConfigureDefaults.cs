@@ -42,24 +42,29 @@ namespace Application.Demo.MetroAddon.Services
         private readonly IMetroConfiguration _metroConfiguration;
 
         public ConfigureDefaults(
-            MetroWindowManager metroWindowManager,
-            IMetroConfiguration metroConfiguration
+            IMetroConfiguration metroConfiguration,
+            MetroWindowManager metroWindowManager = null
             )
         {
             _metroWindowManager = metroWindowManager;
             _metroConfiguration = metroConfiguration;
         }
 
+        /// <inheritdoc />
         public void Startup()
         {
+
+            // Override the ConfigView with a much nicer looking version
+            ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
+            if (_metroWindowManager == null)
+            {
+                return;
+            }
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
             _metroWindowManager.AddResourceDictionary(demoUri);
 
             _metroWindowManager.ChangeTheme(_metroConfiguration.Theme);
             _metroWindowManager.ChangeThemeAccent(_metroConfiguration.ThemeAccent);
-
-            // Override the ConfigView with a much nicer looking version
-            ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
         }
     }
 }

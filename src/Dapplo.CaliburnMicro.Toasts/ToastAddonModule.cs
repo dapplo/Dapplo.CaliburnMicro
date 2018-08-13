@@ -20,7 +20,9 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
+using System.Windows;
 using Autofac;
+using System.Linq;
 using Dapplo.Addons;
 using ToastNotifications;
 using ToastNotifications.Core;

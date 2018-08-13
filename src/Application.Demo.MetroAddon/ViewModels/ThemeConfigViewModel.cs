@@ -26,14 +26,12 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Threading.Tasks;
 using Application.Demo.MetroAddon.Configurations;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Log;
 using Dapplo.Utils.Extensions;
-using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -44,8 +42,6 @@ namespace Application.Demo.MetroAddon.ViewModels
     {
         private static readonly LogSource Log = new LogSource();
 
-        private readonly CredentialsViewModel _credentialsViewModel;
-        private readonly IDialogCoordinator _dialogCoordinator;
         private readonly MetroWindowManager _metroWindowManager;
 
         /// <summary>
@@ -69,17 +65,13 @@ namespace Application.Demo.MetroAddon.ViewModels
 
 
         public ThemeConfigViewModel(
-            CredentialsViewModel credentialsViewModel,
-            IDialogCoordinator dialogCoordinator,
-            MetroWindowManager metroWindowManager,
             IMetroConfiguration metroConfiguration,
-            IUiTranslations uiTranslations
+            IUiTranslations uiTranslations,
+            MetroWindowManager metroWindowManager = null
             )
         {
             MetroConfiguration = metroConfiguration;
             UiTranslations = uiTranslations;
-            _credentialsViewModel = credentialsViewModel;
-            _dialogCoordinator = dialogCoordinator;
             _metroWindowManager = metroWindowManager;
         }
 
@@ -99,18 +91,12 @@ namespace Application.Demo.MetroAddon.ViewModels
         {
             // Manually commit
             MetroConfiguration.CommitTransaction();
+            if (_metroWindowManager == null)
+            {
+                return;
+            }
             _metroWindowManager.ChangeTheme(MetroConfiguration.Theme);
             _metroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
-        }
-
-
-        /// <summary>
-        ///     Show a MahApps dialog from the MVVM
-        /// </summary>
-        /// <returns></returns>
-        public async Task Dialog()
-        {
-            await _dialogCoordinator.ShowMessageAsync(this, "Message from VM", "MVVM based dialogs!").ConfigureAwait(true);
         }
 
         public override void Initialize(IConfig config)
@@ -143,15 +129,6 @@ namespace Application.Demo.MetroAddon.ViewModels
             _disposables.Add(UiTranslations.CreateDisplayNameBinding(this, nameof(IUiTranslations.Theme)));
 
             base.Initialize(config);
-        }
-
-        /// <summary>
-        ///     Show the credentials for the login
-        /// </summary>
-        public void Login()
-        {
-            var result = _metroWindowManager.ShowDialog(_credentialsViewModel);
-            Log.Info().WriteLine($"Girl you know it's {result}");
         }
 
         protected override void OnDeactivate(bool close)

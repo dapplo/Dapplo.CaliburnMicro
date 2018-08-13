@@ -109,7 +109,6 @@
     <Compile Include="MetroAddonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigureDefaults.cs" />
-    <Compile Include="ViewModels\CredentialsViewModel.cs" />
     <Compile Include="ViewModels\ThemeConfigViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,10 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CredentialsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

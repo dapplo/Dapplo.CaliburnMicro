@@ -22,7 +22,6 @@
 using Autofac;
 using Caliburn.Micro;
 using Dapplo.Addons;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace Dapplo.CaliburnMicro.Metro
 {
@@ -37,9 +36,6 @@ namespace Dapplo.CaliburnMicro.Metro
                 .As<IWindowManager>()
                 .SingleInstance();
             
-            // Register the IDialogCoordinator of MahApps, so ViewModels can open MahApps dialogs
-            builder.RegisterInstance(DialogCoordinator.Instance).As<IDialogCoordinator>().SingleInstance();
-
             base.Load(builder);
         }
     }

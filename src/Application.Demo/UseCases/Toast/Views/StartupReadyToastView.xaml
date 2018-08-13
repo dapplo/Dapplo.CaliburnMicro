@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Toast.ViewModels"
              xmlns:toasts="clr-namespace:Dapplo.CaliburnMicro.Toasts;assembly=Dapplo.CaliburnMicro.Toasts"
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}" Width="200" Padding="5"
-             d:DataContext="{d:DesignInstance viewModels:StartupReadyToastViewModel,IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance viewModels:StartupReadyToastViewModel,IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <Button Name="Close" Content="X" Height="20" HorizontalAlignment="Right"/>
