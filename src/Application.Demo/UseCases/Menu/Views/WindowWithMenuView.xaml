@@ -9,7 +9,9 @@
              xmlns:securityConverters="clr-namespace:Dapplo.CaliburnMicro.Security.Converters;assembly=Dapplo.CaliburnMicro.Security"
              xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
              xmlns:caliburnMicro="clr-namespace:Dapplo.CaliburnMicro;assembly=Dapplo.CaliburnMicro"
-             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Application.Demo.UseCases.Menu.ViewModels"
+             xmlns:securityDesigntime="clr-namespace:Dapplo.CaliburnMicro.Security.DesignTime;assembly=Dapplo.CaliburnMicro.Security"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WindowWithMenuViewModel,IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <securityConverters:AuthenticationTargetPropertyConverter x:Key="AuthenticationTargetPropertyConverter" />
@@ -24,6 +26,9 @@
             <Menu ItemsSource="{Binding Items}">
                 <Menu.Resources>
                     <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+                        <d:Style.DataContext>
+                            <x:Type Type="cmMenu:MenuItem" />
+                        </d:Style.DataContext>
                         <Setter Property="Tag" Value="{Binding}" />
                         <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                         <Setter Property="Visibility" Value="{Binding IsVisible,  Converter={StaticResource BooleanToVisibility} }" />
@@ -39,16 +44,19 @@
                             <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
                                 <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
-                                         Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
-                                <Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permission}" />
+                            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+                                <d:Style.DataContext>
+                                    <x:Type Type="securityDesigntime:VisibilityAuthentication" />
+                                </d:Style.DataContext>
+                                <Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permissions}" />
                                 <Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
-                                <Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing"
-                                        Value="{Binding WhenPermissionMissing}" />
+                                <Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
-                                         Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
-                                <Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permission}" />
+                            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.IsEnabled}">
+                                <d:Style.DataContext>
+                                    <x:Type Type="securityDesigntime:BoolAuthentication" />
+                                </d:Style.DataContext>
+                                <Setter Property="security:AuthenticationEnabled.Permissions" Value="{Binding Permissions}" />
                                 <Setter Property="security:AuthenticationEnabled.WhenPermissions" Value="{Binding WhenPermission}" />
                                 <Setter Property="security:AuthenticationEnabled.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />
                             </DataTrigger>

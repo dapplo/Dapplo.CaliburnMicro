@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public MenuItemStyles Style
         {
-            get { return _style; }
+            get => _style;
             set
             {
                 _style = value;
@@ -98,7 +98,7 @@ namespace Dapplo.CaliburnMicro.Menu
         /// </summary>
         public virtual string DisplayName
         {
-            get { return _displayName ?? GetType().Name; }
+            get => _displayName ?? GetType().Name;
             set
             {
                 _displayName = value;

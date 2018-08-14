@@ -104,6 +104,8 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// <param name="e">StartupEventArgs</param>
         protected override async void OnStartup(StartupEventArgs e)
         {
+            Log.Debug().WriteLine("Starting application startup");
+
             // Enable UI access for different Dapplo packages, especially the UiContext.RunOn
             // This only works here, not before the Application is started and not later
             UiContext.Initialize();
@@ -134,6 +136,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             // Start Dapplo, services which need a UI context need to configure this
             await _bootstrapper.StartupAsync().ConfigureAwait(true);
 
+            Log.Debug().WriteLine("Finished application startup");
             // This also triggers the Caliburn.Micro.BootstrapperBase.OnStartup
             base.OnStartup(e);
         }
