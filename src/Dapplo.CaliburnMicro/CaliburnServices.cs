@@ -39,6 +39,16 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         /// If you want to show toasts, set this as your prerequisite
         /// </summary>
-        ToastConductor
+        ToastConductor,
+
+        /// <summary>
+        /// Reference this when you want to make sure the configuration is loaded
+        /// </summary>
+        IniSectionService,
+
+        /// <summary>
+        /// Reference this when you want to make sure the language is loaded
+        /// </summary>
+        LanguageService
     }
 }

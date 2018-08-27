@@ -35,7 +35,7 @@ namespace Application.Demo.MetroAddon.Services
     /// <summary>
     /// Configure some of the CaliburnMicro defaults
     /// </summary>
-    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.CaliburnMicroBootstrapper), nameof(CaliburnServices.IniSectionService), TaskSchedulerName = "ui")]
     public class ConfigureDefaults : IStartup
     {
         private readonly MetroWindowManager _metroWindowManager;
@@ -53,7 +53,6 @@ namespace Application.Demo.MetroAddon.Services
         /// <inheritdoc />
         public void Startup()
         {
-
             // Override the ConfigView with a much nicer looking version
             ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
             if (_metroWindowManager == null)
