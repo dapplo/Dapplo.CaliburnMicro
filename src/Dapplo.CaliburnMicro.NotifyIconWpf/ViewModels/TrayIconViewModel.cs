@@ -40,14 +40,18 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
     public class TrayIconViewModel : Screen, ITrayIconViewModel
     {
         private static readonly LogSource Log = new LogSource();
-        private readonly ITrayIconManager _trayIconManager;
+
+        /// <summary>
+        /// The ITrayIconManager
+        /// </summary>
+        protected ITrayIconManager TrayIconManager { get; }
 
         /// <summary>
         /// 
         /// </summary>
         public TrayIconViewModel(ITrayIconManager trayIconManager)
         {
-            _trayIconManager = trayIconManager;
+            TrayIconManager = trayIconManager;
             // Make sure the default DisplayName (class name) is not used on the ToolTipText
             // ReSharper disable once VirtualMemberCallInConstructor, I know what I am doing here...
             DisplayName = "";
@@ -56,7 +60,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels
         /// <summary>
         ///     The ITrayIcon for the ViewModel
         /// </summary>
-        public ITrayIcon TrayIcon => _trayIconManager.GetTrayIconFor(this);
+        public ITrayIcon TrayIcon => TrayIconManager.GetTrayIconFor(this);
 
         /// <summary>
         ///     These are the Context MenuItems for the system tray
