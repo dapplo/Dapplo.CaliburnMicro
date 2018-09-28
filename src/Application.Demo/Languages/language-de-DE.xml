@@ -34,7 +34,7 @@
         <resource name="toast">Karte als toast anzeigen</resource>
         <resource name="wizard">Wizard</resource>
         <resource name="configure">Einstellungen</resource>
-        <resource name="jump_to_configure">Spinge zu Einstellungen</resource>
+        <resource name="jump_to_configure">Springe zum Einstellungen</resource>
         <resource name="exit">Abschließen</resource>
         <resource name="createerror">Fehler generieren</resource>
     </resources>
