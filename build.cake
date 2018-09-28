@@ -188,7 +188,6 @@ Task("Coverage")
 
 // This starts the actual MSBuild
 Task("Build")
-    .IsDependentOn("RestoreNuGetPackages")
     .IsDependentOn("Clean")
     .IsDependentOn("AssemblyVersion")
     .Does(() =>
@@ -197,6 +196,7 @@ Task("Build")
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
         Configuration = configuration,
+		Restore = true,
         PlatformTarget = PlatformTarget.MSIL
     };
 
@@ -224,13 +224,6 @@ Task("GitLink")
 		Information("Processing: " + pdbFile.FullPath);
 		StartProcess(pdbGitPath, new ProcessSettings { Arguments = new ProcessArgumentBuilder().Append(pdbFile.FullPath)});
 	}
-});
-
-// Load the needed NuGet packages to make the build work
-Task("RestoreNuGetPackages")
-    .Does(() =>
-{
-    NuGetRestore(solutionFilePath.FullPath);
 });
 
 // Version is written to the AssemblyInfo files when !BuildSystem.IsLocalBuild
