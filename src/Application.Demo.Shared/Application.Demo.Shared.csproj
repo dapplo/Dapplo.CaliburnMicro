@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapplo.InterfaceImpl, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5be96fed5d651fee, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapplo.InterfaceImpl.0.3.2\lib\net461\Dapplo.InterfaceImpl.dll</HintPath>

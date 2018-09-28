@@ -33,25 +33,10 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Dapplo.CaliburnMicro.Security.ActiveDirectory.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.ActiveDirectory, Version=0.1.51.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.ActiveDirectory.0.1.51\lib\net45\Dapplo.ActiveDirectory.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.Addons, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5be96fed5d651fee, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Addons.1.1.3\lib\net461\Dapplo.Addons.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.InterfaceImpl, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5be96fed5d651fee, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.InterfaceImpl.0.3.2\lib\net461\Dapplo.InterfaceImpl.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.Log, Version=1.3.0.0, Culture=neutral, PublicKeyToken=26f3e58a2304a05e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Log.1.3.11\lib\net45\Dapplo.Log.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapplo.Utils, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5be96fed5d651fee, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapplo.Utils.1.1.3\lib\net45\Dapplo.Utils.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -79,7 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapplo.ActiveDirectory">
+      <Version>0.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Dapplo.Addons">
+      <Version>1.1.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
