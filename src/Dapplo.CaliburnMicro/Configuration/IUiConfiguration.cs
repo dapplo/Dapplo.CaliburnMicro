@@ -23,8 +23,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Windows;
-using Dapplo.Ini;
-using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Config.Ini;
+using Dapplo.Config.Interfaces;
 using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Configuration

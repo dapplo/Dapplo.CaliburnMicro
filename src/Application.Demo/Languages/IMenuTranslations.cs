@@ -22,14 +22,14 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("Menu")]
-    public interface IMenuTranslations : ILanguage, INotifyPropertyChanged
+    public interface IMenuTranslations : ILanguage
     {
         string About { get; }
         string Edit { get; }

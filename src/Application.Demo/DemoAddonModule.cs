@@ -19,6 +19,10 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+using Application.Demo.Languages;
+using Application.Demo.Languages.Impl;
+using Application.Demo.Models;
+using Application.Demo.Models.Impl;
 using Application.Demo.Services;
 using Application.Demo.UseCases.Configuration.ViewModels;
 using Application.Demo.UseCases.ContextMenu.ViewModels;
@@ -45,6 +49,36 @@ namespace Application.Demo
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
+            #region Configuration and Language
+            builder.RegisterType<DemoConfigurationImpl>()
+                .As<IDemoConfiguration>()
+                .SingleInstance();
+
+            builder.RegisterType<DemoConfigTranslationsImpl>()
+                .As<IDemoConfigTranslations>()
+                .SingleInstance();
+            builder.RegisterType<ContextMenuTranslationsImpl>()
+                .As<IContextMenuTranslations>()
+                .SingleInstance();
+
+            builder.RegisterType<MenuTranslationsImpl>()
+                .As<IMenuTranslations>()
+                .SingleInstance();
+
+            builder.RegisterType<ToastTranslationsImpl>()
+                .As<IToastTranslations>()
+                .SingleInstance();
+
+            builder.RegisterType<ValidationErrorsImpl>()
+                .As<IValidationErrors>()
+                .SingleInstance();
+
+            builder.RegisterType<WizardTranslationsImpl>()
+                .As<IWizardTranslations>()
+                .SingleInstance();
+            #endregion
+
+
             builder.RegisterType<DemoTrayIconViewModel>()
                 .As<ITrayIconViewModel>()
                 .WithAttributeFiltering()

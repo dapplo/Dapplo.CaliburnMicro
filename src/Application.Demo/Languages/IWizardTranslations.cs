@@ -21,15 +21,14 @@
 
 #region using
 
-using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("Wizard")]
-    public interface IWizardTranslations : ILanguage, INotifyPropertyChanged
+    public interface IWizardTranslations : ILanguage
     {
         string Cancel { get; }
         string CompleteStep4 { get; }

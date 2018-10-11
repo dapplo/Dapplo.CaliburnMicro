@@ -22,14 +22,15 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.CaliburnMicro.Translations;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("Config")]
-    public interface IConfigTranslations : Dapplo.CaliburnMicro.Translations.IConfigTranslations, ILanguage, INotifyPropertyChanged
+    public interface IDemoConfigTranslations : IConfigTranslations, ILanguage
     {
         string Addons { get; }
         string Apply { get; }

@@ -21,15 +21,14 @@
 
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Dapplo.Ini;
-using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Config.Interfaces;
 
 namespace Dapplo.CaliburnMicro.ClickOnce.Configuration
 {
     /// <summary>
     /// Configuration for Click-Once
     /// </summary>
-    public interface IClickOnceConfiguration : IIniSubSection, IDefaultValue
+    public interface IClickOnceConfiguration : IDefaultValue
     {
         /// <summary>
         /// When set to true, the update check is done on startup, this does delay the starting of the application.

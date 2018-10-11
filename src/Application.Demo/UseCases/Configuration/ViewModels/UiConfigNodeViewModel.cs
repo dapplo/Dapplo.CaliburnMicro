@@ -35,14 +35,14 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     /// </summary>
     public sealed class UiConfigNodeViewModel : ConfigNode
     {
-        public IConfigTranslations ConfigTranslations { get; }
+        public IDemoConfigTranslations ConfigTranslations { get; }
 
-        public UiConfigNodeViewModel(IConfigTranslations configTranslations)
+        public UiConfigNodeViewModel(IDemoConfigTranslations configTranslations)
         {
             ConfigTranslations = configTranslations;
 
             // automatically update the DisplayName
-            ConfigTranslations.CreateDisplayNameBinding(this, nameof(IConfigTranslations.Ui));
+            ConfigTranslations.CreateDisplayNameBinding(this, nameof(IDemoConfigTranslations.Ui));
 
             // automatically update the DisplayName
             CanActivate = false;

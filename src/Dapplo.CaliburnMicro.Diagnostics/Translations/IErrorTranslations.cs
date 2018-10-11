@@ -21,9 +21,8 @@
 
 #region using
 
+using Dapplo.Config.Interfaces;
 using System.ComponentModel;
-using Dapplo.InterfaceImpl.Extensions;
-using Dapplo.Language;
 
 #endregion
 
@@ -32,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.Translations
     /// <summary>
     ///     These are the translations used on the ErrorView
     /// </summary>
-    public interface IErrorTranslations : IDefaultValue, ILanguagePart, INotifyPropertyChanged
+    public interface IErrorTranslations : IDefaultValue, INotifyPropertyChanged
     {
         /// <summary>
         ///     Used for the title of the error view

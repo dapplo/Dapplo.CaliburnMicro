@@ -22,8 +22,7 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.InterfaceImpl.Extensions;
-using Dapplo.Language;
+using Dapplo.Config.Interfaces;
 
 #endregion
 
@@ -32,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Translations
     /// <summary>
     ///     These are the translations used on the ConfigViewModel
     /// </summary>
-    public interface IConfigTranslations : IDefaultValue, ILanguagePart
+    public interface IConfigTranslations : IDefaultValue
     {
         /// <summary>
         ///     Used for the label / watermark test where the filter can be specified

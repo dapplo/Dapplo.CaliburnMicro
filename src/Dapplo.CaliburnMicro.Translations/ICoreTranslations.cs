@@ -22,8 +22,7 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.InterfaceImpl.Extensions;
-using Dapplo.Language;
+using Dapplo.Config.Interfaces;
 
 #endregion
 
@@ -32,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Translations
     /// <summary>
     ///     These are translations used throughout the project
     /// </summary>
-    public interface ICoreTranslations : IDefaultValue, ILanguagePart
+    public interface ICoreTranslations : IDefaultValue
     {
         /// <summary>
         ///     Used everywhere where cancel is used

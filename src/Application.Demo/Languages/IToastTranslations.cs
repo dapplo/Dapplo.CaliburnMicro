@@ -22,14 +22,14 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("Toasts")]
-    public interface IToastTranslations : ILanguage, INotifyPropertyChanged
+    public interface IToastTranslations : ILanguage
     {
         [DefaultValue("Startup finished")]
         string StartupNotify { get; }

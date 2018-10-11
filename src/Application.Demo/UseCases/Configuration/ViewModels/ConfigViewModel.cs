@@ -29,7 +29,7 @@ using Application.Demo.Models;
 using Application.Demo.Shared;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
@@ -44,7 +44,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         /// <summary>
         /// Is used from View
         /// </summary>
-        public IConfigTranslations ConfigTranslations { get; }
+        public IDemoConfigTranslations ConfigTranslations { get; }
 
         /// <summary>
         /// Is used from View
@@ -53,7 +53,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
 
         public ConfigViewModel(
             IEnumerable<Lazy<IConfigScreen>> configScreens,
-            IConfigTranslations configTranslations,
+            IDemoConfigTranslations configTranslations,
             ICoreTranslations coreTranslations,
             IDemoConfiguration demoConfiguration)
         {

@@ -23,7 +23,7 @@
 
 using System;
 using System.Reactive.Linq;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 

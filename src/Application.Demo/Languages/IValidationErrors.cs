@@ -22,14 +22,14 @@
 #region using
 
 using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("ValidationErrors")]
-    public interface IValidationErrors : ILanguage, INotifyPropertyChanged
+    public interface IValidationErrors : ILanguage
     {
         string Name { get; }
     }

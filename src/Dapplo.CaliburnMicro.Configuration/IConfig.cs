@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Config.Interfaces;
 
 #endregion
 

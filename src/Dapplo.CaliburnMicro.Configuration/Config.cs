@@ -28,7 +28,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Menu;
-using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Config.Interfaces;
 using Dapplo.Log;
 
 #endregion

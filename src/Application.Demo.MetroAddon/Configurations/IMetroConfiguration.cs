@@ -23,8 +23,8 @@
 
 using System.ComponentModel;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.Ini;
-using Dapplo.InterfaceImpl.Extensions;
+using Dapplo.Config.Ini;
+using Dapplo.Config.Interfaces;
 using MahApps.Metro.Controls;
 
 #endregion

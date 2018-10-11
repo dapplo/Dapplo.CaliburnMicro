@@ -21,15 +21,14 @@
 
 #region using
 
-using System.ComponentModel;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 
 namespace Application.Demo.Languages
 {
     [Language("ContextMenu")]
-    public interface IContextMenuTranslations : ILanguage, INotifyPropertyChanged
+    public interface IContextMenuTranslations : ILanguage
     {
         string Configure { get; }
         string JumpToConfigure { get; }

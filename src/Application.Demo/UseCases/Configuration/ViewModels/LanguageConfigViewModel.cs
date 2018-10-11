@@ -30,7 +30,7 @@ using Application.Demo.Shared;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
-using Dapplo.Language;
+using Dapplo.Config.Language;
 
 #endregion
 

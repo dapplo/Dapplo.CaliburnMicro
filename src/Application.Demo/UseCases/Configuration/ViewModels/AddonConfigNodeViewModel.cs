@@ -35,10 +35,10 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
     /// </summary>
     public sealed class AddonConfigNodeViewModel : ConfigNode
     {   
-        public AddonConfigNodeViewModel(IConfigTranslations configTranslations)
+        public AddonConfigNodeViewModel(IDemoConfigTranslations configTranslations)
         {
             // automatically update the DisplayName
-            configTranslations.CreateDisplayNameBinding(this, nameof(IConfigTranslations.Addons));
+            configTranslations.CreateDisplayNameBinding(this, nameof(IDemoConfigTranslations.Addons));
             CanActivate = false;
             Id = nameof(ConfigIds.Addons);
         }

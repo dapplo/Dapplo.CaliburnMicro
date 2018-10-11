@@ -21,17 +21,16 @@
 
 #region using
 
+using Dapplo.Config.Ini;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Dapplo.Ini;
-using Dapplo.InterfaceImpl.Extensions;
 
 #endregion
 
 namespace Application.Demo.Models
 {
     [IniSection("Demo")]
-    public interface IDemoConfiguration : IIniSection, INotifyPropertyChanged, IDefaultValue, ITransactionalProperties
+    public interface IDemoConfiguration : IIniSection
     {
         [DataMember(EmitDefaultValue = false)]
         [DefaultValue("en-US")]

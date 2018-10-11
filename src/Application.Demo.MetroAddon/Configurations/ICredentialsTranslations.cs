@@ -21,8 +21,8 @@
 
 #region using
 
+using Dapplo.Config.Language;
 using System.ComponentModel;
-using Dapplo.Language;
 
 #endregion
 
