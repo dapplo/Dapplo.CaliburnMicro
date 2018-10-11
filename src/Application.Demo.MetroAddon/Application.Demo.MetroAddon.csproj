@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="Configurations\ICredentialsTranslations.cs" />
     <Compile Include="Configurations\IMetroConfiguration.cs" />
+    <Compile Include="Configurations\Impl\CredentialsTranslationsImpl.cs" />
+    <Compile Include="Configurations\Impl\MetroConfigurationImpl.cs" />
+    <Compile Include="Configurations\Impl\UiTranslationsImpl.cs" />
     <Compile Include="Configurations\IUiTranslations.cs" />
     <Compile Include="MetroAddonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -62,6 +62,7 @@
     <Compile Include="Behaviors\BooleanVisibility.cs" />
     <Compile Include="CaliburnLogger.cs" />
     <Compile Include="CaliburnMicroAddonModule.cs" />
+    <Compile Include="Configuration\Impl\UiConfigurationImpl.cs" />
     <Compile Include="Configuration\IUiConfiguration.cs" />
     <Compile Include="Configurers\PlacementViewConfigurer.cs" />
     <Compile Include="Configurers\DpiAwareViewConfigurer.cs" />

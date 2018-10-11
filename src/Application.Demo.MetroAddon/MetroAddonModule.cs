@@ -24,6 +24,8 @@ using Application.Demo.MetroAddon.ViewModels;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
+using Application.Demo.MetroAddon.Configurations.Impl;
+using Application.Demo.MetroAddon.Configurations;
 
 namespace Application.Demo.MetroAddon
 {
@@ -33,6 +35,20 @@ namespace Application.Demo.MetroAddon
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
+            var accents = MahApps.Metro.ThemeManager.Accents;
+            builder
+                .RegisterType<CredentialsTranslationsImpl>()
+                .As<ICredentialsTranslations>()
+                .SingleInstance();
+            builder
+                .RegisterType<MetroConfigurationImpl>()
+                .As<IMetroConfiguration>()
+                .SingleInstance();
+            builder
+                .RegisterType<UiTranslationsImpl>()
+                .As<IUiTranslations>()
+                .SingleInstance();
+            
             builder.RegisterType<ConfigureDefaults>().As<IService>().SingleInstance();
             builder.RegisterType<ThemeConfigViewModel>().As<IConfigScreen>().SingleInstance();
 

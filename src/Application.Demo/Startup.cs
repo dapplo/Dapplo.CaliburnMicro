@@ -70,6 +70,7 @@ namespace Application.Demo
                 // Enable CaliburnMicro
                 .WithCaliburnMicro()
                 .WithoutCopyOfEmbeddedAssemblies()
+                .WithoutStrictChecking()
                 // Load the Application.Demo.* assemblies
                 .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();
             Start(applicationConfig);

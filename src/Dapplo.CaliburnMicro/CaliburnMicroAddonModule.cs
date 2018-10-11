@@ -23,6 +23,8 @@ using Autofac;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configurers;
+using Dapplo.CaliburnMicro.Configuration.Impl;
+using Dapplo.CaliburnMicro.Configuration;
 
 namespace Dapplo.CaliburnMicro
 {
@@ -32,6 +34,10 @@ namespace Dapplo.CaliburnMicro
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<UiConfigurationImpl>()
+                .As<IUiConfiguration>()
+                .SingleInstance();
+
             builder.RegisterType<CultureViewConfigurer>()
                 .As<IConfigureDialogViews>()
                 .As<IConfigureWindowViews>()
