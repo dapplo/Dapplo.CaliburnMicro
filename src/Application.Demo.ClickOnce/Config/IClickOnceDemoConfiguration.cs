@@ -22,7 +22,7 @@
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Dapplo.CaliburnMicro.ClickOnce.Configuration;
-using Dapplo.Ini;
+using Dapplo.Config.Ini;
 
 namespace Application.Demo.ClickOnce.Config
 {

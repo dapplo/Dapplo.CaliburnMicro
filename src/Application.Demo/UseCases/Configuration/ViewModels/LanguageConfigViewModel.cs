@@ -49,13 +49,13 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         /// Used from the View
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public IDictionary<string, string> AvailableLanguages => LanguageLoader.Current.AvailableLanguages;
+        public IDictionary<string, string> AvailableLanguages { get; } = new Dictionary<string, string>(); // => LanguageLoader.Current.AvailableLanguages;
 
         /// <summary>
         ///     Can the login button be pressed?
         /// </summary>
-        public bool CanChangeLanguage
-            => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
+        public bool CanChangeLanguage { get; } = false;
+            // => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
 
         public ICoreTranslations CoreTranslations { get; }
 
@@ -77,7 +77,8 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             // Manually commit
             DemoConfiguration.CommitTransaction();
             _eventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-            Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
+            // TODO: Fix
+            //Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
         }
 
         /// <inheritdoc />
