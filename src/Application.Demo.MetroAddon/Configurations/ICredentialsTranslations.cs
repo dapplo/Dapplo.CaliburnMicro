@@ -22,14 +22,13 @@
 #region using
 
 using Dapplo.Config.Language;
-using System.ComponentModel;
 
 #endregion
 
 namespace Application.Demo.MetroAddon.Configurations
 {
     [Language("Credentials")]
-    public interface ICredentialsTranslations : ILanguage, INotifyPropertyChanged
+    public interface ICredentialsTranslations : ILanguage
     {
         string Login { get; }
 

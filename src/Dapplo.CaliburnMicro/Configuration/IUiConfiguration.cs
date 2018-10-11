@@ -24,7 +24,6 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Windows;
 using Dapplo.Config.Ini;
-using Dapplo.Config.Interfaces;
 using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Configuration
@@ -33,7 +32,7 @@ namespace Dapplo.CaliburnMicro.Configuration
     /// This is a configuration for some of the UI behavior
     /// </summary>
     [IniSection("Dapplo.Caliburn")]
-    public interface IUiConfiguration : IIniSection, INotifyPropertyChanged, IDefaultValue
+    public interface IUiConfiguration : IIniSection
     {
         /// <summary>
         /// Defines the default value of the startup location for windows

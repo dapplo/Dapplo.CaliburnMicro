@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel;
 using Dapplo.CaliburnMicro.Translations;
 using Dapplo.Config.Language;
 

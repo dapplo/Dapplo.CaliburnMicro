@@ -1,7 +1,9 @@
-﻿using Dapplo.Config.Language;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dapplo.Config.Language;
 
 namespace Application.Demo.Languages.Impl
 {
+    [SuppressMessage("ReSharper", "UnassignedGetOnlyAutoProperty")]
     internal class DemoConfigTranslationsImpl : LanguageBase<IDemoConfigTranslations>, IDemoConfigTranslations
     {
         public string Addons { get; }

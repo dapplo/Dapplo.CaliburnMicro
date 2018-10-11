@@ -40,7 +40,7 @@ namespace Dapplo.CaliburnMicro.Dapp
     ///     An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
     ///     and uses this.
     /// </summary>
-    [Service(nameof(CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    [Service(nameof(CaliburnServices.CaliburnMicroBootstrapper), null, TaskSchedulerName = "ui")]
     public class CaliburnMicroBootstrapper : BootstrapperBase, IShutdown
     {
         private readonly ApplicationBootstrapper _bootstrapper;

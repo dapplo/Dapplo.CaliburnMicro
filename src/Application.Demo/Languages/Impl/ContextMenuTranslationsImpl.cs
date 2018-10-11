@@ -1,7 +1,9 @@
-﻿using Dapplo.Config.Language;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dapplo.Config.Language;
 
 namespace Application.Demo.Languages.Impl
 {
+    [SuppressMessage("ReSharper", "UnassignedGetOnlyAutoProperty")]
     internal class ContextMenuTranslationsImpl : LanguageBase<IContextMenuTranslations>, IContextMenuTranslations
     {
         public string Configure { get; }

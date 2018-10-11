@@ -31,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Menu
     /// <summary>
     ///     This defines an IMenuItem
     /// </summary>
-    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon, IHaveDisplayName
+    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon
     {
         /// <summary>
         ///     A string which describes which hotkey the menu entry would respond to.

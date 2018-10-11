@@ -21,7 +21,6 @@
 
 #region using
 
-using System.ComponentModel;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.Config.Language;
 
@@ -30,7 +29,7 @@ using Dapplo.Config.Language;
 namespace Application.Demo.Shared
 {
     [Language("Core")]
-    public interface ICoreTranslations : ILanguage, Dapplo.CaliburnMicro.Translations.ICoreTranslations, IErrorTranslations, INotifyPropertyChanged
+    public interface ICoreTranslations : ILanguage, Dapplo.CaliburnMicro.Translations.ICoreTranslations, IErrorTranslations
     {
         string Language { get; }
         string Settings { get; }

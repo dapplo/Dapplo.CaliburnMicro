@@ -24,6 +24,7 @@ using Application.Demo.Languages.Impl;
 using Application.Demo.Models;
 using Application.Demo.Models.Impl;
 using Application.Demo.Services;
+using Application.Demo.Shared;
 using Application.Demo.UseCases.Configuration.ViewModels;
 using Application.Demo.UseCases.ContextMenu.ViewModels;
 using Application.Demo.UseCases.Menu.ViewModels;
@@ -50,6 +51,10 @@ namespace Application.Demo
         protected override void Load(ContainerBuilder builder)
         {
             #region Configuration and Language
+            builder.RegisterType<CoreTranslationsImpl>()
+                .As<ICoreTranslations>()
+                .SingleInstance();
+
             builder.RegisterType<DemoConfigurationImpl>()
                 .As<IDemoConfiguration>()
                 .SingleInstance();

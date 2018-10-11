@@ -29,7 +29,7 @@ using System.ComponentModel;
 namespace Application.Demo.Addon.Languages
 {
     [Language("Addon1")]
-    public interface IAddonTranslations : ILanguage, INotifyPropertyChanged
+    public interface IAddonTranslations : ILanguage
     {
         [DefaultValue("Blub")]
         string Addon { get; }

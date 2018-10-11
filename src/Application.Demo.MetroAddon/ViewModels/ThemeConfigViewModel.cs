@@ -30,7 +30,6 @@ using Application.Demo.MetroAddon.Configurations;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.Log;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -40,8 +39,6 @@ namespace Application.Demo.MetroAddon.ViewModels
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
-        private static readonly LogSource Log = new LogSource();
-
         private readonly MetroWindowManager _metroWindowManager;
 
         /// <summary>

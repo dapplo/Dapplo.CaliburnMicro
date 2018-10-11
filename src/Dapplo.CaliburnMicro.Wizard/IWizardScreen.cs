@@ -37,7 +37,7 @@ namespace Dapplo.CaliburnMicro.Wizard
     ///     IGuardClose.CanClose: Prevents leaving the wizard screen
     ///     A default implementation is to extend Screen
     /// </summary>
-    public interface IWizardScreen : IScreen, IAmDisplayable, IHaveDisplayName
+    public interface IWizardScreen : IScreen, IAmDisplayable
     {
         /// <summary>
         ///     Defines if we can leave the current screen, for the next, as it's complete
