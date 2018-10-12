@@ -23,11 +23,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Application.Demo.Languages;
 using Application.Demo.Models;
 using Application.Demo.Shared;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
+using Dapplo.Config.Language;
 
 #endregion
 
@@ -50,6 +52,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         public ICoreTranslations CoreTranslations { get; }
 
         public ConfigViewModel(
+            LanguageContainer languageContainer,
             IEnumerable<Lazy<IConfigScreen>> configScreens,
             IDemoConfigTranslations configTranslations,
             ICoreTranslations coreTranslations,
@@ -64,8 +67,7 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
 
             // Set the current language (this should update all registered OnPropertyChanged anyway, so it can run in the background
             var lang = demoConfiguration.Language;
-            // TODO: Fix this
-            //Task.Run(async () => await LanguageLoader.Current.ChangeLanguageAsync(lang).ConfigureAwait(false));
+            Task.Run(async () => await languageContainer.ChangeLanguageAsync(lang).ConfigureAwait(false));
         }
     }
 }

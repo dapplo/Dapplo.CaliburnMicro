@@ -43,29 +43,32 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
         ///     Here all disposables are registered, so we can clean the up
         /// </summary>
         private CompositeDisposable _disposables;
+
+        private readonly LanguageContainer _languageContainer;
         private readonly IEventAggregator _eventAggregator;
 
         /// <summary>
         /// Used from the View
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public IDictionary<string, string> AvailableLanguages { get; } = new Dictionary<string, string>(); // => LanguageLoader.Current.AvailableLanguages;
+        public IDictionary<string, string> AvailableLanguages => _languageContainer.AvailableLanguages;
 
         /// <summary>
         ///     Can the login button be pressed?
         /// </summary>
-        public bool CanChangeLanguage { get; } = false;
-            // => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != LanguageLoader.Current.CurrentLanguage;
+        public bool CanChangeLanguage => !string.IsNullOrWhiteSpace(DemoConfiguration.Language) && DemoConfiguration.Language != _languageContainer.CurrentLanguage;
 
         public ICoreTranslations CoreTranslations { get; }
 
         public IDemoConfiguration DemoConfiguration { get;}
 
         public LanguageConfigViewModel(
+            LanguageContainer languageContainer,
             ICoreTranslations coreTranslations,
             IDemoConfiguration demoConfiguration,
             IEventAggregator eventAggregator)
         {
+            _languageContainer = languageContainer;
             _eventAggregator = eventAggregator;
             DemoConfiguration = demoConfiguration;
             CoreTranslations = coreTranslations;
@@ -77,8 +80,10 @@ namespace Application.Demo.UseCases.Configuration.ViewModels
             // Manually commit
             DemoConfiguration.CommitTransaction();
             _eventAggregator.PublishOnUIThread($"Changing to language: {DemoConfiguration.Language}");
-            // TODO: Fix
-            //Execute.OnUIThread(async () => { await LanguageLoader.Current.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false); });
+            Execute.OnUIThread(async () =>
+            {
+                await _languageContainer.ChangeLanguageAsync(DemoConfiguration.Language).ConfigureAwait(false);
+            });
         }
 
         /// <inheritdoc />
