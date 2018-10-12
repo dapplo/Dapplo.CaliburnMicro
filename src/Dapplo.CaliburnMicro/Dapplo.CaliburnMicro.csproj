@@ -110,7 +110,7 @@
       <Version>1.1.9-g095b9ce2a8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Config.Ini">
-      <Version>1.0.4</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
       <Version>0.6.6</Version>

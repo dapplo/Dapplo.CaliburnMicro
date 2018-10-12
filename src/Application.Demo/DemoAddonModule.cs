@@ -53,6 +53,24 @@ namespace Application.Demo
         protected override void Load(ContainerBuilder builder)
         {
             #region Configuration and Language
+
+            // Specify the directories for the translations manually
+            builder.Register(context => LanguageConfigBuilder.Create()
+                    .WithSpecificDirectories(
+#if DEBUG
+                        @"..\..\..\Application.Demo.Addon\bin\Debug",
+                        @"..\..\..\Application.Demo.MetroAddon\bin\Debug",
+                        @"..\..\..\Application.Demo.OverlayAddon\bin\Debug"
+#else
+                @"..\..\..\Application.Demo.Addon\bin\Release",
+                @"..\..\..\Application.Demo.MetroAddon\bin\Release",
+                @"..\..\..\Application.Demo.OverlayAddon\bin\Release"
+#endif
+                    )
+                    .BuildLanguageConfig())
+                .As<LanguageConfig>()
+                .SingleInstance();
+
             builder.RegisterType<CoreTranslationsImpl>()
                 .As<ICoreTranslations>()
                 .As<ILanguage>()
