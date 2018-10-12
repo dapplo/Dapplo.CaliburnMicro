@@ -35,15 +35,16 @@ namespace Application.Demo.MetroAddon
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
-            var accents = MahApps.Metro.ThemeManager.Accents;
             builder
                 .RegisterType<CredentialsTranslationsImpl>()
                 .As<ICredentialsTranslations>()
                 .SingleInstance();
+
             builder
                 .RegisterType<MetroConfigurationImpl>()
                 .As<IMetroConfiguration>()
                 .SingleInstance();
+
             builder
                 .RegisterType<UiTranslationsImpl>()
                 .As<IUiTranslations>()

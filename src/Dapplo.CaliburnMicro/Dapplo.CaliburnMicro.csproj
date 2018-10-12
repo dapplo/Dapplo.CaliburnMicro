@@ -109,7 +109,7 @@
       <Version>1.1.9-g095b9ce2a8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Config.Ini">
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
       <Version>0.6.6</Version>
@@ -117,6 +117,14 @@
     <PackageReference Include="Dapplo.Windows.Dpi">
       <Version>0.6.6</Version>
     </PackageReference>
+    <PackageReference Include="Fody">
+      <Version>3.2.9</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

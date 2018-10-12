@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DemoAddonModule.cs" />
+    <Compile Include="Languages\Impl\AddonTranslationsImpl.cs" />
     <Compile Include="Languages\IAddonTranslations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AdminConfigViewModel.cs" />
@@ -94,7 +95,7 @@
       <Version>1.1.9-g095b9ce2a8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Config.Ini">
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

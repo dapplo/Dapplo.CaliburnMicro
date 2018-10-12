@@ -1,4 +1,6 @@
-﻿using Application.Demo.ClickOnce.ViewModels;
+﻿using Application.Demo.ClickOnce.Config;
+using Application.Demo.ClickOnce.Config.Impl;
+using Application.Demo.ClickOnce.ViewModels;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
@@ -10,6 +12,10 @@ namespace Application.Demo.ClickOnce
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ClickOnceDemoConfigurationImpl>()
+                .As<IClickOnceDemoConfiguration>()
+                .SingleInstance();
+
             builder.RegisterType<HandleClickOnceRestarts>()
                 .As<IHandleClickOnceRestarts>()
                 .SingleInstance();

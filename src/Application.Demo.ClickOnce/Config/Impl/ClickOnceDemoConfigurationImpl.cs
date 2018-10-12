@@ -19,29 +19,20 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using Dapplo.Config.Ini;
 
-using System.ComponentModel;
-
-#endregion
-
-namespace Dapplo.CaliburnMicro.Menu
+namespace Application.Demo.ClickOnce.Config.Impl
 {
-    /// <summary>
-    ///     This defines an IMenuItem
-    /// </summary>
-    public interface IMenuItem : ITreeNode<IMenuItem>, INotifyPropertyChanged, IAmDisplayable, IHaveIcon
+    internal class ClickOnceDemoConfigurationImpl : IniSectionBase<IClickOnceDemoConfiguration>, IClickOnceDemoConfiguration
     {
-        /// <summary>
-        ///     A string which describes which hotkey the menu entry would respond to.
-        ///     This does NOT implement the hotkey binding, it's only a hint
-        /// </summary>
-        string HotKeyHint { get; set; }
+        #region Implementation of IClickOnceConfiguration
 
-        /// <summary>
-        ///     The initialize is called from the UI Thread before the menu-item is added to a context menu.
-        ///     This allows for any initialization, like icons etc, to be made
-        /// </summary>
-        void Initialize();
+        public bool CheckOnStart { get; set; }
+        public bool EnableBackgroundUpdateCheck { get; set; }
+        public int CheckInterval { get; set; }
+        public bool AutoUpdate { get; set; }
+        public bool AutoRestart { get; set; }
+
+        #endregion
     }
 }
