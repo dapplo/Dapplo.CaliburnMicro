@@ -93,7 +93,7 @@
       <Version>1.1.9-g095b9ce2a8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Input">
-      <Version>0.6.6</Version>
+      <Version>0.7.9-beta.g99be5e4046</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

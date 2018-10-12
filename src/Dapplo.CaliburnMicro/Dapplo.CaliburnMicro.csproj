@@ -113,10 +113,10 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
-      <Version>0.6.6</Version>
+      <Version>0.7.9-beta.g99be5e4046</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Dpi">
-      <Version>0.6.6</Version>
+      <Version>0.7.9-beta.g99be5e4046</Version>
     </PackageReference>
     <PackageReference Include="Fody">
       <Version>3.2.9</Version>
