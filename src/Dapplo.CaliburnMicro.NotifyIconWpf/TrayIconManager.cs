@@ -52,7 +52,6 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         private readonly IDictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>> _trayIcons =
             new Dictionary<WeakReference<ITrayIconViewModel>, WeakReference<ITrayIcon>>();
 
-
         /// <summary>
         /// Default constructor
         /// </summary>

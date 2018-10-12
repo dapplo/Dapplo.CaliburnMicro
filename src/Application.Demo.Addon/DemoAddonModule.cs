@@ -3,6 +3,7 @@ using Application.Demo.Addon.Languages.Impl;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.Config.Language;
 
 namespace Application.Demo.Addon
 {
@@ -15,6 +16,7 @@ namespace Application.Demo.Addon
         {
             builder.RegisterType<AddonTranslationsImpl>()
                 .As<IAddonTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterAssemblyTypes(ThisAssembly)

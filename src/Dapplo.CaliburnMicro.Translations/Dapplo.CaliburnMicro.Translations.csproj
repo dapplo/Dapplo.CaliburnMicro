@@ -53,9 +53,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TranslationsAddonModule.cs" />
     <Compile Include="LanguageChangedExtensions.cs" />
     <Compile Include="IConfigTranslations.cs" />
     <Compile Include="ICoreTranslations.cs" />
+    <Compile Include="LanguageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

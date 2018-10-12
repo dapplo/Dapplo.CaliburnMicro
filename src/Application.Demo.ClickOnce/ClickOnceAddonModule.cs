@@ -5,6 +5,7 @@ using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.ClickOnce;
+using Dapplo.Config.Ini;
 
 namespace Application.Demo.ClickOnce
 {
@@ -14,6 +15,7 @@ namespace Application.Demo.ClickOnce
         {
             builder.RegisterType<ClickOnceDemoConfigurationImpl>()
                 .As<IClickOnceDemoConfiguration>()
+                .As<IIniSection>()
                 .SingleInstance();
 
             builder.RegisterType<HandleClickOnceRestarts>()

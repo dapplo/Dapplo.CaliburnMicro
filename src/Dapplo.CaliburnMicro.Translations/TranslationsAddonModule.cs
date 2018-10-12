@@ -19,34 +19,33 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Application.Demo.UseCases.Toast.ViewModels;
+using Autofac;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro;
-using Dapplo.CaliburnMicro.Toasts;
+using Dapplo.Config.Language;
 
-namespace Application.Demo.Services
+namespace Dapplo.CaliburnMicro.Translations
 {
-    /// <summary>
-    /// Shows a toast when the application starts
-    /// </summary>
-    [Service(nameof(NotifyOfStartupReady), nameof(CaliburnServices.ToastConductor), TaskSchedulerName = "ui")]
-    public class NotifyOfStartupReady : IStartup
+    /// <inheritdoc />
+    public class TranslationsAddonModule : AddonModule
     {
-        private readonly ToastConductor _toastConductor;
-        private readonly StartupReadyToastViewModel _startupReadyToastViewModel;
-
-        public NotifyOfStartupReady(
-            ToastConductor toastConductor,
-            StartupReadyToastViewModel startupReadyToastViewModel)
-        {
-            _toastConductor = toastConductor;
-            _startupReadyToastViewModel = startupReadyToastViewModel;
-        }
-
         /// <inheritdoc />
-        public void Startup()
+        protected override void Load(ContainerBuilder builder)
         {
-            _toastConductor.ActivateItem(_startupReadyToastViewModel);
+            // Create a default configuration, if none exists
+            builder.Register(context => LanguageConfigBuilder.Create().BuildLanguageConfig())
+                .IfNotRegistered(typeof(LanguageConfig))
+                .As<LanguageConfig>()
+                .SingleInstance();
+
+            builder.RegisterType<LanguageContainer>()
+                .AsSelf()
+                .SingleInstance();
+
+            builder.RegisterType<LanguageService>()
+                .As<IService>()
+                .SingleInstance();
+
+            base.Load(builder);
         }
     }
 }

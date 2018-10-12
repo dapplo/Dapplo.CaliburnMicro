@@ -19,34 +19,37 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Application.Demo.UseCases.Toast.ViewModels;
+using System.Threading;
+using System.Threading.Tasks;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro;
-using Dapplo.CaliburnMicro.Toasts;
+using Dapplo.Config.Ini;
 
-namespace Application.Demo.Services
+namespace Dapplo.CaliburnMicro.Services
 {
     /// <summary>
     /// Shows a toast when the application starts
     /// </summary>
-    [Service(nameof(NotifyOfStartupReady), nameof(CaliburnServices.ToastConductor), TaskSchedulerName = "ui")]
-    public class NotifyOfStartupReady : IStartup
+    [Service(nameof(CaliburnServices.ConfigurationService), nameof(CaliburnServices.CaliburnMicroBootstrapper))]
+    public class ConfigurationService : IStartupAsync, IShutdownAsync
     {
-        private readonly ToastConductor _toastConductor;
-        private readonly StartupReadyToastViewModel _startupReadyToastViewModel;
+        private readonly IniFileContainer _iniFileContainer;
 
-        public NotifyOfStartupReady(
-            ToastConductor toastConductor,
-            StartupReadyToastViewModel startupReadyToastViewModel)
+        /// <inheritdoc />
+        public ConfigurationService(IniFileContainer iniFileContainer)
         {
-            _toastConductor = toastConductor;
-            _startupReadyToastViewModel = startupReadyToastViewModel;
+            _iniFileContainer = iniFileContainer;
         }
 
         /// <inheritdoc />
-        public void Startup()
+        public Task StartupAsync(CancellationToken cancellationToken = default)
         {
-            _toastConductor.ActivateItem(_startupReadyToastViewModel);
+            return _iniFileContainer.ReloadAsync(true, cancellationToken);
+        }
+
+        /// <inheritdoc />
+        public Task ShutdownAsync(CancellationToken cancellationToken = default)
+        {
+            return _iniFileContainer.WriteAsync(cancellationToken);
         }
     }
 }

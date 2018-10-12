@@ -26,6 +26,8 @@ using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
 using Application.Demo.MetroAddon.Configurations.Impl;
 using Application.Demo.MetroAddon.Configurations;
+using Dapplo.Config.Ini;
+using Dapplo.Config.Language;
 
 namespace Application.Demo.MetroAddon
 {
@@ -38,16 +40,19 @@ namespace Application.Demo.MetroAddon
             builder
                 .RegisterType<CredentialsTranslationsImpl>()
                 .As<ICredentialsTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder
                 .RegisterType<MetroConfigurationImpl>()
                 .As<IMetroConfiguration>()
+                .As<IIniSection>()
                 .SingleInstance();
 
             builder
                 .RegisterType<UiTranslationsImpl>()
                 .As<IUiTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
             
             builder.RegisterType<ConfigureDefaults>().As<IService>().SingleInstance();

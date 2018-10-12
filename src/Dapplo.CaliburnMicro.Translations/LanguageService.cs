@@ -19,34 +19,35 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-using Application.Demo.UseCases.Toast.ViewModels;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro;
-using Dapplo.CaliburnMicro.Toasts;
+using Dapplo.Config.Language;
 
-namespace Application.Demo.Services
+namespace Dapplo.CaliburnMicro.Translations
 {
     /// <summary>
-    /// Shows a toast when the application starts
+    /// Loads the translations at startup
     /// </summary>
-    [Service(nameof(NotifyOfStartupReady), nameof(CaliburnServices.ToastConductor), TaskSchedulerName = "ui")]
-    public class NotifyOfStartupReady : IStartup
+    [Service(nameof(CaliburnServices.LanguageService), nameof(CaliburnServices.CaliburnMicroBootstrapper))]
+    public class LanguageService : IStartupAsync
     {
-        private readonly ToastConductor _toastConductor;
-        private readonly StartupReadyToastViewModel _startupReadyToastViewModel;
+        private readonly LanguageContainer _languageContainer;
 
-        public NotifyOfStartupReady(
-            ToastConductor toastConductor,
-            StartupReadyToastViewModel startupReadyToastViewModel)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="languageContainer">LanguageContainer</param>
+        public LanguageService(LanguageContainer languageContainer)
         {
-            _toastConductor = toastConductor;
-            _startupReadyToastViewModel = startupReadyToastViewModel;
+            _languageContainer = languageContainer;
         }
 
         /// <inheritdoc />
-        public void Startup()
+        public Task StartupAsync(CancellationToken cancellationToken = default)
         {
-            _toastConductor.ActivateItem(_startupReadyToastViewModel);
+            return _languageContainer.ReloadAsync(cancellationToken);
         }
     }
 }

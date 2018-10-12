@@ -44,7 +44,7 @@ namespace Dapplo.CaliburnMicro
         /// <summary>
         /// Reference this when you want to make sure the configuration is loaded
         /// </summary>
-        IniSectionService,
+        ConfigurationService,
 
         /// <summary>
         /// Reference this when you want to make sure the language is loaded

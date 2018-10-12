@@ -35,7 +35,7 @@ namespace Application.Demo.MetroAddon.Services
     /// <summary>
     /// Configure some of the CaliburnMicro defaults
     /// </summary>
-    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
+    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.ConfigurationService), TaskSchedulerName = "ui")]
     public class ConfigureDefaults : IStartup
     {
         private readonly MetroWindowManager _metroWindowManager;

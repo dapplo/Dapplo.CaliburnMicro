@@ -85,6 +85,7 @@
     <Compile Include="Extensions\HaveDisplayNameExtensions.cs" />
     <Compile Include="Extensions\HaveIconExtensions.cs" />
     <Compile Include="Extensions\IconExtensions.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="IScaleWithDpiChanges.cs" />
     <Compile Include="IMaintainPosition.cs" />
     <Compile Include="IAmDisplayable.cs" />
@@ -126,6 +127,7 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

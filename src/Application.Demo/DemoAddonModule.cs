@@ -40,6 +40,8 @@ using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.Security;
 using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.CaliburnMicro.Wizard;
+using Dapplo.Config.Ini;
+using Dapplo.Config.Language;
 using ToastNotifications.Events;
 
 namespace Application.Demo
@@ -53,36 +55,43 @@ namespace Application.Demo
             #region Configuration and Language
             builder.RegisterType<CoreTranslationsImpl>()
                 .As<ICoreTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterType<DemoConfigurationImpl>()
                 .As<IDemoConfiguration>()
+                .As<IIniSection>()
                 .SingleInstance();
 
             builder.RegisterType<DemoConfigTranslationsImpl>()
                 .As<IDemoConfigTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
             builder.RegisterType<ContextMenuTranslationsImpl>()
                 .As<IContextMenuTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterType<MenuTranslationsImpl>()
                 .As<IMenuTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterType<ToastTranslationsImpl>()
                 .As<IToastTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterType<ValidationErrorsImpl>()
                 .As<IValidationErrors>()
+                .As<ILanguage>()
                 .SingleInstance();
 
             builder.RegisterType<WizardTranslationsImpl>()
                 .As<IWizardTranslations>()
+                .As<ILanguage>()
                 .SingleInstance();
             #endregion
-
 
             builder.RegisterType<DemoTrayIconViewModel>()
                 .As<ITrayIconViewModel>()

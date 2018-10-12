@@ -25,6 +25,8 @@ using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Configuration.Impl;
 using Dapplo.CaliburnMicro.Configurers;
+using Dapplo.CaliburnMicro.Services;
+using Dapplo.Config.Ini;
 
 namespace Dapplo.CaliburnMicro
 {
@@ -34,8 +36,23 @@ namespace Dapplo.CaliburnMicro
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
+            // Create a default configuration, if none exists
+            builder.Register(context => IniFileConfigBuilder.Create().BuildIniFileConfig())
+                .IfNotRegistered(typeof(IniFileConfig))
+                .As<IniFileConfig>()
+                .SingleInstance();
+
+            builder.RegisterType<IniFileContainer>()
+                .AsSelf()
+                .SingleInstance();
+
+            builder.RegisterType<ConfigurationService>()
+                .As<IService>()
+                .SingleInstance();
+
             builder.RegisterType<UiConfigurationImpl>()
                 .As<IUiConfiguration>()
+                .As<IIniSection>()
                 .SingleInstance();
 
             builder.RegisterType<CultureViewConfigurer>()
