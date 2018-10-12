@@ -1,40 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A499838-F55D-454C-B22C-831AF7506E81}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Application.Demo.OverlayAddon</RootNamespace>
+    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <AssemblyTitle>Application.Demo.OverlayAddon</AssemblyTitle>
     <AssemblyName>Application.Demo.OverlayAddon</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <LangVersion>latest</LangVersion>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
+    <FrameworkReference Include="Microsoft.DesktopUI" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -47,31 +26,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="OverlayAddonModule.cs" />
-    <Compile Include="ViewModels\DemoOverlayContainerViewModel.cs" />
-    <Compile Include="OverlayMenuItem.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\RulerOverlayViewModel.cs" />
-    <Compile Include="ViewModels\ButtonOverlayViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
-      <Project>{D5DC762F-1A6B-4296-AC60-952D5269CA25}</Project>
-      <Name>Dapplo.CaliburnMicro.Menu</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj">
-      <Project>{3ab2ad6a-ed68-4e4a-bee6-7eed7b8a6176}</Project>
-      <Name>Dapplo.CaliburnMicro.Overlays</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
-      <Project>{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}</Project>
-      <Name>Dapplo.CaliburnMicro</Name>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
+
   <ItemGroup>
     <Page Include="Views\ButtonOverlayView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,11 +37,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
+	<PackageReference Include="Caliburn.Micro">
       <Version>3.2.0</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Addons">
@@ -96,12 +49,19 @@
       <Version>0.7.9-beta.g99be5e4046</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
+      <Name>Dapplo.CaliburnMicro.Menu</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj">
+      <Name>Dapplo.CaliburnMicro.Overlays</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
+      <Name>Dapplo.CaliburnMicro</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
