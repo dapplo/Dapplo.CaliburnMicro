@@ -58,25 +58,23 @@ namespace Application.Demo
                 .WithScanDirectories(
 #if !NET461
 #if DEBUG
-
-                    @"..\..\..\Application.Demo.Addon\bin\Debug\netcoreapp3.0",
-                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug\netcoreapp3.0",
-                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug\netcoreapp3.0"
+                    @"..\..\..\..\Application.Demo.Addon\bin\Debug\netcoreapp3.0",
+                    @"..\..\..\..\Application.Demo.MetroAddon\bin\Debug\netcoreapp3.0",
+                    @"..\..\..\..\Application.Demo.OverlayAddon\bin\Debug\netcoreapp3.0"
 #else
-                @"..\..\..\Application.Demo.Addon\bin\Release\netcoreapp3.0",
-                @"..\..\..\Application.Demo.MetroAddon\bin\Release\netcoreapp3.0",
-                @"..\..\..\Application.Demo.OverlayAddon\bin\Release\netcoreapp3.0"
+                @"..\..\..\..\Application.Demo.Addon\bin\Release\netcoreapp3.0",
+                @"..\..\..\..\Application.Demo.MetroAddon\bin\Release\netcoreapp3.0",
+                @"..\..\..\..\Application.Demo.OverlayAddon\bin\Release\netcoreapp3.0"
 #endif
 #else
 #if DEBUG
-
-                    @"..\..\..\Application.Demo.Addon\bin\Debug\net461",
-                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug\net461",
-                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug\net461"
+                    @"..\..\..\..\Application.Demo.Addon\bin\Debug\net461",
+                    @"..\..\..\..\Application.Demo.MetroAddon\bin\Debug\net461",
+                    @"..\..\..\..\Application.Demo.OverlayAddon\bin\Debug\net461"
 #else
-                @"..\..\..\Application.Demo.Addon\bin\Release\net461",
-                @"..\..\..\Application.Demo.MetroAddon\bin\Release\net461",
-                @"..\..\..\Application.Demo.OverlayAddon\bin\Release\net461"
+                @"..\..\..\..\Application.Demo.Addon\bin\Release\net461",
+                @"..\..\..\..\Application.Demo.MetroAddon\bin\Release\net461",
+                @"..\..\..\..\Application.Demo.OverlayAddon\bin\Release\net461"
 #endif
 #endif
 
@@ -87,7 +85,7 @@ namespace Application.Demo
                 // Enable CaliburnMicro
                 .WithCaliburnMicro()
                 .WithoutCopyOfEmbeddedAssemblies()
-                .WithoutStrictChecking()
+                //.WithoutStrictChecking()
                 // Load the Application.Demo.* assemblies
                 .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();
             Start(applicationConfig);
