@@ -12,7 +12,7 @@
     <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <FrameworkReference Include="Microsoft.DesktopUI" />
   </ItemGroup>
   

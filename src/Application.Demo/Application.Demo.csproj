@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Application.Demo</AssemblyTitle>
     <AssemblyName>Application.Demo</AssemblyName>
     <Version>1.0.0</Version>
@@ -39,6 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="UseCases\Configuration\Views\ConfigView.xaml" Generator="MSBuild:Compile"/>
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="AdaptiveCards">
       <Version>1.1.0</Version>
     </PackageReference>
@@ -48,6 +52,7 @@
     <PackageReference Include="Caliburn.Micro">
       <Version>3.2.0</Version>
     </PackageReference>
+    <PackageReference Include="ControlzEx" Version="3.0.2.4" />
     <PackageReference Include="Costura.Fody">
       <Version>3.1.4</Version>
       <ExcludeAssets>runtime</ExcludeAssets>

@@ -31,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Configuration.Controls
         /// <inheritdoc />
         public ConfigurationTreeView()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

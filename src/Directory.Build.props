@@ -43,12 +43,17 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
   	<!--ApplicationDefinition Include="App.xaml">
 	  <Generator>MSBuild:Compile</Generator>
 	  <SubType>Designer</SubType>
 	</ApplicationDefinition-->
 	<Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" Exclude="App.xaml" />
+	<Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+	<Page Include="**\*.xaml" Generator="MSBuild:Compile" />
 	<Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 

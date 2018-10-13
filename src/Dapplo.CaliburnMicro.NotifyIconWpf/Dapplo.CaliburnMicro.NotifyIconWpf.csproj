@@ -15,7 +15,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
     <FrameworkReference Include="Microsoft.DesktopUI" />
   </ItemGroup>
-  
+    
   <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />

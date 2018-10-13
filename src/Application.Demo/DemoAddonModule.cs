@@ -57,14 +57,28 @@ namespace Application.Demo
             // Specify the directories for the translations manually
             builder.Register(context => LanguageConfigBuilder.Create()
                     .WithSpecificDirectories(
+#if !NET461
 #if DEBUG
-                        @"..\..\..\Application.Demo.Addon\bin\Debug",
-                        @"..\..\..\Application.Demo.MetroAddon\bin\Debug",
-                        @"..\..\..\Application.Demo.OverlayAddon\bin\Debug"
+
+                    @"..\..\..\Application.Demo.Addon\bin\Debug\netcoreapp3.0",
+                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug\netcoreapp3.0",
+                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug\netcoreapp3.0"
 #else
-                @"..\..\..\Application.Demo.Addon\bin\Release",
-                @"..\..\..\Application.Demo.MetroAddon\bin\Release",
-                @"..\..\..\Application.Demo.OverlayAddon\bin\Release"
+                @"..\..\..\Application.Demo.Addon\bin\Release\netcoreapp3.0",
+                @"..\..\..\Application.Demo.MetroAddon\bin\Release\netcoreapp3.0",
+                @"..\..\..\Application.Demo.OverlayAddon\bin\Release\netcoreapp3.0"
+#endif
+#else
+#if DEBUG
+
+                    @"..\..\..\Application.Demo.Addon\bin\Debug\net461",
+                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug\net461",
+                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug\net461"
+#else
+                @"..\..\..\Application.Demo.Addon\bin\Release\net461",
+                @"..\..\..\Application.Demo.MetroAddon\bin\Release\net461",
+                @"..\..\..\Application.Demo.OverlayAddon\bin\Release\net461"
+#endif
 #endif
                     )
                     .BuildLanguageConfig())
