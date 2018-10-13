@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Cards brings toast via AdaptiveCard definitions</Description>
@@ -78,5 +78,11 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
       <Name>Dapplo.CaliburnMicro.Toasts</Name>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\AdaptiveCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro is a Caliburn bootstrapper (and more) to quickly start with a WPF MVVM Application</Description>
@@ -51,5 +51,11 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\WizardProgressView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

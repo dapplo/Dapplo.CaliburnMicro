@@ -53,8 +53,8 @@
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-	<Page Include="**\*.xaml" Generator="MSBuild:Compile" />
-	<Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
+	<Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" Exclude="App.xaml" />
+    <Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <ItemGroup Condition="!$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Demo'))">

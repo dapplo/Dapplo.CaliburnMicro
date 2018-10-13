@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro, a CaliburnMicro MEF Bootstrapper</Description>

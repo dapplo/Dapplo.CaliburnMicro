@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -36,10 +36,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="UseCases\Configuration\Views\ConfigView.xaml" Generator="MSBuild:Compile"/>
   </ItemGroup>
   
   <ItemGroup>
@@ -137,5 +133,41 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="DemoResourceDirectory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Configuration\Views\LanguageConfigView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Menu\Views\WindowWithMenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Toast\Views\StartupReadyToastView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Toast\Views\ToastExampleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardExampleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardStep1View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardStep2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardStep3View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardStep4View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="UseCases\Wizard\Views\WizardStep5View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

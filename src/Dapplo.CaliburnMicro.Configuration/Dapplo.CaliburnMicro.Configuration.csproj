@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Configuration is an extension to Dapplo.CaliburnMicro and brings Dapplo.Config.Ini configuration</Description>
@@ -53,5 +53,11 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\ConfigurationTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
