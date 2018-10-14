@@ -24,11 +24,6 @@ using Caliburn.Micro;
 using System.Diagnostics;
 using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Extensions;
-#if DEBUG
-using System.ComponentModel;
-using Dapplo.CaliburnMicro.Diagnostics.Designtime;
-using System.Windows;
-#endif
 
 namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
 {
@@ -41,30 +36,18 @@ namespace Dapplo.CaliburnMicro.Diagnostics.ViewModels
         /// <summary>
         /// This is the version provider, which makes the screen show a warning when the current != latest
         /// </summary>
-        public IVersionProvider VersionProvider { get; set; }
+        public IVersionProvider VersionProvider { get; }
 
         /// <summary>
         /// This is used for the translations in the view
         /// </summary>
-        public IErrorTranslations ErrorTranslations { get; set; }
+        public IErrorTranslations ErrorTranslations { get; }
 
-#if DEBUG
-        /// <summary>
-        /// Used for design time
-        /// </summary>
-        public ErrorViewModel()
+        public ErrorViewModel(IErrorTranslations errorTranslations, IVersionProvider versionProvider)
         {
-            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            {
-                return;
-            }
-
-            // Design mode code
-            Stacktrace = "ConsoleApplication1.MyCustomException: some message .... ---> System.Exception: Oh noes!\r\n   at ConsoleApplication1.SomeObject.OtherMethod() in C:\\ConsoleApplication1\\SomeObject.cs:line 24\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 14\r\n   --- End of inner exception stack trace ---\r\n   at ConsoleApplication1.SomeObject..ctor() in C:\\ConsoleApplication1\\SomeObject.cs:line 18\r\n   at ConsoleApplication1.Program.DoSomething() in C:\\ConsoleApplication1\\Program.cs:line 23\r\n   at ConsoleApplication1.Program.Main(String[] args) in C:\\ConsoleApplication1\\Program.cs:line 13";
-            VersionProvider = new SimpleVersionProvider();
-            Message = "Oh noes!";
+            ErrorTranslations = errorTranslations;
+            VersionProvider = versionProvider;
         }
-#endif
 
         /// <inheritdoc />
         protected override void OnActivate()

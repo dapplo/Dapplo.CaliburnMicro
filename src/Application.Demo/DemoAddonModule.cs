@@ -35,6 +35,7 @@ using Autofac.Features.AttributeFilters;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.Security;
@@ -85,6 +86,7 @@ namespace Application.Demo
 
             builder.RegisterType<CoreTranslationsImpl>()
                 .As<ICoreTranslations>()
+                .As<IErrorTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 

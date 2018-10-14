@@ -77,8 +77,6 @@ namespace Application.Demo
                 @"..\..\..\..\Application.Demo.OverlayAddon\bin\Release\net461"
 #endif
 #endif
-
-
                 )
                 .WithApplicationName("Application.Demo")
                 .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
@@ -94,10 +92,10 @@ namespace Application.Demo
         private static void Start(ApplicationConfig applicationConfig)
         {
             // Make sure the log entries are demystified
-            LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();
+            //LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();
 #if DEBUG
             // Initialize a debug logger for Dapplo packages
-            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Debug);
+            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 #endif
 
             // Use this to setup the culture of your UI

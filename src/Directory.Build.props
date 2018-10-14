@@ -44,6 +44,12 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   
+  <ItemGroup>
+    <None Include="**\language*.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
   	<!--ApplicationDefinition Include="App.xaml">
 	  <Generator>MSBuild:Compile</Generator>

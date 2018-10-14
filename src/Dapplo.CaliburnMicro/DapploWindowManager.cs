@@ -67,7 +67,7 @@ namespace Dapplo.CaliburnMicro
         public override void ShowPopup(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
+            if (settings == null && rootModel != null)
             {
                 settings = (rootModel as IHaveSettings)?.Settings;
             }

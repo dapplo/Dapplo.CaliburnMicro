@@ -32,11 +32,10 @@ namespace Dapplo.CaliburnMicro.Diagnostics
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(context => new ErrorViewModel
-            {
-                VersionProvider = context.ResolveOptional<IVersionProvider>(),
-                ErrorTranslations = context.ResolveOptional<IErrorTranslations>()
-            });
+            builder
+                .RegisterType<ErrorViewModel>()
+                .AsSelf()
+                .SingleInstance();
 
             base.Load(builder);
         }

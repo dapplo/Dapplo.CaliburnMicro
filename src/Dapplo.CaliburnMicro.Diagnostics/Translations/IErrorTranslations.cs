@@ -31,7 +31,7 @@ namespace Dapplo.CaliburnMicro.Diagnostics.Translations
     /// <summary>
     ///     These are the translations used on the ErrorView
     /// </summary>
-    public interface IErrorTranslations : IDefaultValue, INotifyPropertyChanged
+    public interface IErrorTranslations : INotifyPropertyChanged
     {
         /// <summary>
         ///     Used for the title of the error view
