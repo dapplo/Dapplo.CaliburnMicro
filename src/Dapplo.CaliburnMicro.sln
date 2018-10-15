@@ -3,41 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro", "Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj", "{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro", "Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj", "{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.NotifyIconWpf", "Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj", "{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.NotifyIconWpf", "Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj", "{33FF7672-BB0D-4B91-8FE2-51DFB4B25C98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Metro", "Dapplo.CaliburnMicro.Metro\Dapplo.CaliburnMicro.Metro.csproj", "{E6597C99-3721-42F3-87B6-219B9DFD9879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Dapp", "Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj", "{D8C2622B-B621-4467-A3BA-1B744AF7E8D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Dapp", "Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj", "{D8C2622B-B621-4467-A3BA-1B744AF7E8D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Security", "Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj", "{B9850F45-5EFC-4CA0-B7CD-AAEB1FE6D5DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Security", "Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj", "{B9850F45-5EFC-4CA0-B7CD-AAEB1FE6D5DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Wizard", "Dapplo.CaliburnMicro.Wizard\Dapplo.CaliburnMicro.Wizard.csproj", "{27EF0A14-789A-4B3C-AD54-B4C2F921AFBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Wizard", "Dapplo.CaliburnMicro.Wizard\Dapplo.CaliburnMicro.Wizard.csproj", "{27EF0A14-789A-4B3C-AD54-B4C2F921AFBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Configuration", "Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj", "{C05C532B-D73F-4C9B-B8CF-E1C9966B219E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Configuration", "Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj", "{C05C532B-D73F-4C9B-B8CF-E1C9966B219E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Menu", "Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj", "{D5DC762F-1A6B-4296-AC60-952D5269CA25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Menu", "Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj", "{D5DC762F-1A6B-4296-AC60-952D5269CA25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Translations", "Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj", "{0750F2C3-2C86-4CC7-A240-4A261033A2F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Translations", "Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj", "{0750F2C3-2C86-4CC7-A240-4A261033A2F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Security.ActiveDirectory", "Dapplo.CaliburnMicro.Security.ActiveDirectory\Dapplo.CaliburnMicro.Security.ActiveDirectory.csproj", "{294B4089-CF38-4F09-ADAC-C85C481C2EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Security.ActiveDirectory", "Dapplo.CaliburnMicro.Security.ActiveDirectory\Dapplo.CaliburnMicro.Security.ActiveDirectory.csproj", "{294B4089-CF38-4F09-ADAC-C85C481C2EF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.Caliburn.Tests", "Dapplo.Caliburn.Tests\Dapplo.Caliburn.Tests.csproj", "{C62CC807-6929-4DDE-9B30-EA3483E46D41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.Caliburn.Tests", "Dapplo.Caliburn.Tests\Dapplo.Caliburn.Tests.csproj", "{C62CC807-6929-4DDE-9B30-EA3483E46D41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.OverlayAddon", "Application.Demo.OverlayAddon\Application.Demo.OverlayAddon.csproj", "{8A499838-F55D-454C-B22C-831AF7506E81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.OverlayAddon", "Application.Demo.OverlayAddon\Application.Demo.OverlayAddon.csproj", "{8A499838-F55D-454C-B22C-831AF7506E81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Overlays", "Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj", "{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Overlays", "Dapplo.CaliburnMicro.Overlays\Dapplo.CaliburnMicro.Overlays.csproj", "{3AB2AD6A-ED68-4E4A-BEE6-7EED7B8A6176}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Diagnostics", "Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj", "{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Diagnostics", "Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj", "{A1C54578-3EBB-48CA-BB9F-F5D2F8FC2714}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Cards", "Dapplo.CaliburnMicro.Cards\Dapplo.CaliburnMicro.Cards.csproj", "{767650A6-25A4-42EC-A029-80E73B544B5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Cards", "Dapplo.CaliburnMicro.Cards\Dapplo.CaliburnMicro.Cards.csproj", "{767650A6-25A4-42EC-A029-80E73B544B5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.Toasts", "Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.Toasts", "Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj", "{77A4950A-7E56-4591-93F9-A39100916815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Shared", "Application.Demo.Shared\Application.Demo.Shared.csproj", "{4DB45B8E-D655-42A3-8663-D86138EADD07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.Shared", "Application.Demo.Shared\Application.Demo.Shared.csproj", "{4DB45B8E-D655-42A3-8663-D86138EADD07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Application.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo", "Application.Demo\Application.Demo.csproj", "{AD035FB9-C435-49D7-982A-5A8BFE8DCF84}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8A499838-F55D-454C-B22C-831AF7506E81} = {8A499838-F55D-454C-B22C-831AF7506E81}
 		{767650A6-25A4-42EC-A029-80E73B544B5D} = {767650A6-25A4-42EC-A029-80E73B544B5D}
@@ -45,13 +45,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "Applica
 		{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8} = {AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.MetroAddon", "Application.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapplo.CaliburnMicro.ClickOnce", "Dapplo.CaliburnMicro.ClickOnce\Dapplo.CaliburnMicro.ClickOnce.csproj", "{9311CFAD-8EAB-4148-BD84-6E2728CF912A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo.ClickOnce", "Application.Demo.ClickOnce\Application.Demo.ClickOnce.csproj", "{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.MetroAddon", "Application.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,14 +135,6 @@ Global
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9311CFAD-8EAB-4148-BD84-6E2728CF912A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9311CFAD-8EAB-4148-BD84-6E2728CF912A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9311CFAD-8EAB-4148-BD84-6E2728CF912A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9311CFAD-8EAB-4148-BD84-6E2728CF912A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{624DDF67-6E89-443D-86EA-CBCDFFAAE07C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
