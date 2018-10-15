@@ -22,8 +22,8 @@
 #region using
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using Dapplo.Addons.Bootstrapper;
@@ -56,27 +56,10 @@ namespace Application.Demo
                 //.WithoutAsyncAssemblyLoading()
                 // Make sure the bootstrapper knows where to find it's DLL files
                 .WithScanDirectories(
-#if !NET461
-#if DEBUG
-                    @"..\..\..\..\Application.Demo.Addon\bin\Debug\netcoreapp3.0",
-                    @"..\..\..\..\Application.Demo.MetroAddon\bin\Debug\netcoreapp3.0",
-                    @"..\..\..\..\Application.Demo.OverlayAddon\bin\Debug\netcoreapp3.0"
-#else
-                @"..\..\..\..\Application.Demo.Addon\bin\Release\netcoreapp3.0",
-                @"..\..\..\..\Application.Demo.MetroAddon\bin\Release\netcoreapp3.0",
-                @"..\..\..\..\Application.Demo.OverlayAddon\bin\Release\netcoreapp3.0"
-#endif
-#else
-#if DEBUG
-                    @"..\..\..\..\Application.Demo.Addon\bin\Debug\net461",
-                    @"..\..\..\..\Application.Demo.MetroAddon\bin\Debug\net461",
-                    @"..\..\..\..\Application.Demo.OverlayAddon\bin\Debug\net461"
-#else
-                @"..\..\..\..\Application.Demo.Addon\bin\Release\net461",
-                @"..\..\..\..\Application.Demo.MetroAddon\bin\Release\net461",
-                @"..\..\..\..\Application.Demo.OverlayAddon\bin\Release\net461"
-#endif
-#endif
+                    ScanLocations.GenerateScanDirectories(
+                        "Application.Demo.Addon",
+                        "Application.Demo.MetroAddon",
+                        "Application.Demo.OverlayAddon").ToArray()
                 )
                 .WithApplicationName("Application.Demo")
                 .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
