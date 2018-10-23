@@ -23,7 +23,9 @@
 
 using System;
 using System.Collections.Generic;
+#if !NETCOREAPP30
 using System.IO.Packaging;
+#endif
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

@@ -35,7 +35,7 @@
       <Version>1.1.10-g858975613c</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Input">
-      <Version>0.7.9-beta.g99be5e4046</Version>
+      <Version>0.7.16</Version>
     </PackageReference>
   </ItemGroup>
 

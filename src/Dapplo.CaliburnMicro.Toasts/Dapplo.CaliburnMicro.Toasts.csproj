@@ -38,13 +38,13 @@
       <Version>1.1.10-g858975613c</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
-      <Version>0.7.9-beta.g99be5e4046</Version>
+      <Version>0.7.16</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Dpi">
-      <Version>0.7.9-beta.g99be5e4046</Version>
+      <Version>0.7.16</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Shell32">
-      <Version>0.7.9-beta.g99be5e4046</Version>
+      <Version>0.7.16</Version>
     </PackageReference>
     <PackageReference Include="ToastNotifications">
       <Version>2.5.0</Version>

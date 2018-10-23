@@ -40,7 +40,7 @@
       <Version>3.2.0</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
-      <Version>0.7.9-beta.g99be5e4046</Version>
+      <Version>0.7.16</Version>
     </PackageReference>
   </ItemGroup>
 
