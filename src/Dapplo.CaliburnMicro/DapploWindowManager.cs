@@ -96,7 +96,6 @@ namespace Dapplo.CaliburnMicro
             base.ShowWindow(rootModel, context, settings);
         }
 
-
         /// <inheritdoc />
         public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
         {

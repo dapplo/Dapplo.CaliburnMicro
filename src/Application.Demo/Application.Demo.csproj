@@ -7,10 +7,12 @@
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Application.Demo</AssemblyTitle>
     <AssemblyName>Application.Demo</AssemblyName>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="**\language*.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
     <FrameworkReference Include="Microsoft.DesktopUI" />
@@ -134,41 +136,5 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="DemoResourceDirectory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Configuration\Views\LanguageConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Menu\Views\WindowWithMenuView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Toast\Views\StartupReadyToastView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Toast\Views\ToastExampleView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardExampleView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardStep1View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardStep2View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardStep3View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardStep4View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="UseCases\Wizard\Views\WizardStep5View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

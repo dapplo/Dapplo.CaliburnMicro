@@ -131,11 +131,29 @@ namespace Dapplo.CaliburnMicro.Metro
             {
                 return;
             }
+
             var resourceDictionary = new ResourceDictionary
             {
                 Source = source
             };
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+        }
+
+        /// <summary>
+        ///     Remove all ResourceDictionaries for the specified MahApps style
+        ///     The Uri to the source is created by CreateMahappStyleUri
+        /// </summary>
+        /// <param name="style">string</param>
+        public void RemoveMahappsStyle(string style)
+        {
+            var mahappsStyleUri = CreateMahappStyleUri(style);
+            foreach (var resourceDirectory in Application.Current.Resources.MergedDictionaries.ToList())
+            {
+                if (resourceDirectory.Source == mahappsStyleUri)
+                {
+                    Application.Current.Resources.MergedDictionaries.Remove(resourceDirectory);
+                }
+            }
         }
 
         /// <summary>
@@ -179,13 +197,13 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <returns></returns>
         protected override Window CreateCustomWindow(object model, object view, bool isDialog)
         {
-            bool isMetroWindow = view is MetroWindow;
-            bool isWindow = view is Window;
             var result = view as Window ?? new MetroWindow
             {
                 Content = view,
                 SizeToContent = SizeToContent.WidthAndHeight
             };
+            bool isMetroWindow = result is MetroWindow;
+            bool isWindow = view is Window;
             if (isMetroWindow || !isWindow)
             {
                 result.SetResourceReference(Control.BorderBrushProperty, "AccentColorBrush");
@@ -199,23 +217,6 @@ namespace Dapplo.CaliburnMicro.Metro
             result.SetValue(View.IsGeneratedProperty, true);
 
             return result;
-        }
-
-        /// <summary>
-        ///     Remove all ResourceDictionaries for the specified MahApps style
-        ///     The Uri to the source is created by CreateMahappStyleUri
-        /// </summary>
-        /// <param name="style">string</param>
-        public void RemoveMahappsStyle(string style)
-        {
-            var mahappsStyleUri = CreateMahappStyleUri(style);
-            foreach (var resourceDirectory in Application.Current.Resources.MergedDictionaries.ToList())
-            {
-                if (resourceDirectory.Source == mahappsStyleUri)
-                {
-                    Application.Current.Resources.MergedDictionaries.Remove(resourceDirectory);
-                }
-            }
         }
     }
 }
