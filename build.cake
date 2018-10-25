@@ -195,7 +195,7 @@ Task("Build")
 
 	var binaryLoggerSettings = new MSBuildBinaryLogSettings {
 		Enabled = true,
-		FileName = "msbuild.binlog"
+		FileName = "./artifacts/msbuild.binlog"
 	};
 
     var settings = new MSBuildSettings {

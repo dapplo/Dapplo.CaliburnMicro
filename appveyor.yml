@@ -17,10 +17,12 @@ build_script:
 - ps: .\build.ps1 --settings_skipverification=true
 artifacts:
 - path: artifacts\**\*.nupkg
-- path: \**\msbuild.binlog
+- path: artifacts\msbuild.binlog
 - path: artifacts\**\site.zip
 - path: artifacts\*.xml
 - path: artifacts\*.html
+on_failure:
+- appveyor PushArtifact artifacts\msbuild.binlog
 notifications:
 - provider: Email
   to:
