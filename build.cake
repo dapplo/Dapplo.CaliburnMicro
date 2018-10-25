@@ -192,7 +192,14 @@ Task("Build")
     .IsDependentOn("AssemblyVersion")
     .Does(() =>
 {
+
+	var binaryLoggerSettings = new MSBuildBinaryLogSettings {
+		Enabled = true,
+		FileName = msbuild.binlog
+	};
+
     var settings = new MSBuildSettings {
+		BinaryLogger = binaryLoggerSettings,
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
         Configuration = configuration,
@@ -200,8 +207,6 @@ Task("Build")
         PlatformTarget = PlatformTarget.MSIL
     };
 
-	settings.EnableBinaryLogger("dapplo.caliburnmicro.binlog", MSBuildBinaryLogImports.ZipFile);
-	
     MSBuild(solutionFilePath.FullPath, settings);
     
     // Make sure the .dlls in the obj path are not found elsewhere
