@@ -195,7 +195,7 @@ Task("Build")
 
 	var binaryLoggerSettings = new MSBuildBinaryLogSettings {
 		Enabled = true,
-		FileName = msbuild.binlog
+		FileName = "msbuild.binlog"
 	};
 
     var settings = new MSBuildSettings {
