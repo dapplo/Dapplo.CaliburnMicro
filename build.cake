@@ -200,6 +200,8 @@ Task("Build")
         PlatformTarget = PlatformTarget.MSIL
     };
 
+	settings.EnableBinaryLogger("dapplo.caliburnmicro.binlog", MSBuildBinaryLogImports.ZipFile);
+	
     MSBuild(solutionFilePath.FullPath, settings);
     
     // Make sure the .dlls in the obj path are not found elsewhere
