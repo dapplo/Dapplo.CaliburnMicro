@@ -17,7 +17,7 @@ build_script:
 - ps: .\build.ps1 --settings_skipverification=true
 artifacts:
 - path: artifacts\**\*.nupkg
-- path: **\*.binlog
+- path: \**\*.binlog
 - path: artifacts\**\site.zip
 - path: artifacts\*.xml
 - path: artifacts\*.html
