@@ -192,14 +192,7 @@ Task("Build")
     .IsDependentOn("AssemblyVersion")
     .Does(() =>
 {
-
-	var binaryLoggerSettings = new MSBuildBinaryLogSettings {
-		Enabled = true,
-		FileName = "./artifacts/msbuild.binlog"
-	};
-
     var settings = new MSBuildSettings {
-		BinaryLogger = binaryLoggerSettings,
         Verbosity = Verbosity.Minimal,
         ToolVersion = MSBuildToolVersion.VS2017,
         Configuration = configuration,
