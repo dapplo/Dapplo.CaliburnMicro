@@ -19,21 +19,27 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
+using System.Collections.Generic;
+using Dapplo.ActiveDirectory.Entities;
 
-using Dapplo.Config.Ini;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-
-#endregion
-
-namespace Application.Demo.Models
+namespace Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities
 {
-    [IniSection("Demo")]
-    public interface IDemoConfiguration : IIniSection
+    public class SimpleUser : IUser
     {
-        [DataMember(EmitDefaultValue = false)]
-        [DefaultValue("en-US")]
-        string Language { get; set; }
+        public string IpTelephoneNumber { get; set; }
+        public string Description { get; set; }
+        public string TelephoneNumber { get; set; }
+        public string EmailAddress { get; set; }
+        public string Department { get; set; }
+        public string Displayname { get; set; }
+        public string Firstname { get; set; }
+        public string Location { get; set; }
+        public string Name { get; set; }
+        public string GivenName { get; set; }
+        public string Initials { get; set; }
+        public byte[] Thumbnail { get; set; }
+        public string Username { get; set; }
+        public IList<DistinguishedName> Groups { get; set; }
+        public string Id { get; set; }
     }
 }

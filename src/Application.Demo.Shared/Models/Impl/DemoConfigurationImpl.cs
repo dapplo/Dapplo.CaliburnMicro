@@ -1,6 +1,6 @@
 ﻿using Dapplo.Config.Ini;
 
-namespace Application.Demo.Models.Impl
+namespace Application.Demo.Shared.Models.Impl
 {
     public class DemoConfigurationImpl : IniSectionBase<IDemoConfiguration>, IDemoConfiguration
     {

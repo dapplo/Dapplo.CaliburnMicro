@@ -25,6 +25,7 @@ using System.Linq;
 using Dapplo.ActiveDirectory;
 using Dapplo.ActiveDirectory.Entities;
 using Dapplo.ActiveDirectory.Enums;
+using Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities;
 
 namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
 {
@@ -54,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
         public void Load()
         {
             // Read the current user from the AD
-            CurrentUser = Query.ForUser(Environment.UserName).Execute<IUser>().FirstOrDefault();
+            CurrentUser = Query.ForUser(Environment.UserName).Execute<SimpleUser>().FirstOrDefault();
             // From the groups, get the CN, place the result into the permissions
             _permissions = CurrentUser?.Groups.SelectMany(dn => dn.Where(v => v.Key == DistinguishedNameAttributes.CommonName).Select(v => v.Value.ToLowerInvariant())).ToList() ?? new List<string>();
         }
