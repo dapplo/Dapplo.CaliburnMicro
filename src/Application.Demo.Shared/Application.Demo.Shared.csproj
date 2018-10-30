@@ -31,13 +31,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Dapplo.Config.Ini" Version="1.0.6" />
     <PackageReference Include="Dapplo.Config.Language">
       <Version>1.0.6</Version>
-    </PackageReference>
-    <PackageReference Include="Fody" Version="3.2.13">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

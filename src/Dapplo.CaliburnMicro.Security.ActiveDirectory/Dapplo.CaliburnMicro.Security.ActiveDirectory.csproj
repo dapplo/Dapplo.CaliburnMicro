@@ -32,7 +32,7 @@
   
   <ItemGroup>
     <PackageReference Include="Dapplo.ActiveDirectory">
-      <Version>0.2.5</Version>
+      <Version>0.2.2</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Addons">
       <Version>1.1.11-g79b9a5b473</Version>

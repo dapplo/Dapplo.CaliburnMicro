@@ -19,6 +19,17 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+using Application.Demo.Languages;
+using Application.Demo.Languages.Impl;
+using Application.Demo.Models;
+using Application.Demo.Models.Impl;
+using Application.Demo.Services;
+using Application.Demo.Shared;
+using Application.Demo.UseCases.Configuration.ViewModels;
+using Application.Demo.UseCases.ContextMenu.ViewModels;
+using Application.Demo.UseCases.Menu.ViewModels;
+using Application.Demo.UseCases.Toast.ViewModels;
+using Application.Demo.UseCases.Wizard.ViewModels;
 using Autofac;
 using Autofac.Features.AttributeFilters;
 using Dapplo.Addons;
@@ -30,19 +41,10 @@ using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.CaliburnMicro.Security;
 using Dapplo.CaliburnMicro.Toasts;
 using Dapplo.CaliburnMicro.Wizard;
+using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using System.Linq;
 using ToastNotifications.Events;
-using Application.Demo.Languages;
-using Application.Demo.Languages.Impl;
-using Application.Demo.Services;
-using Application.Demo.Shared;
-using Application.Demo.UseCases.Configuration.ViewModels;
-using Application.Demo.UseCases.ContextMenu.ViewModels;
-using Application.Demo.UseCases.Menu.ViewModels;
-using Application.Demo.UseCases.Toast.ViewModels;
-using Application.Demo.UseCases.Wizard.ViewModels;
-
 
 namespace Application.Demo
 {
@@ -69,6 +71,11 @@ namespace Application.Demo
                 .As<ICoreTranslations>()
                 .As<IErrorTranslations>()
                 .As<ILanguage>()
+                .SingleInstance();
+
+            builder.RegisterType<DemoConfigurationImpl>()
+                .As<IDemoConfiguration>()
+                .As<IIniSection>()
                 .SingleInstance();
 
             builder.RegisterType<DemoConfigTranslationsImpl>()
