@@ -22,7 +22,7 @@ This project is a combination of multiple Dapplo libraries, and brings roughly:
 - Some UI components like System-tray icon, menus, wizard are provided with a MVVM first approach.
 - Automatically style your Views via MahApps (if there is a reference to the Dapplo.CaliburnMicro.Metro.dll this will be used automatically)
 
-THIS IS WORK IN PROGRESS, especially the dotnet core 3.0 support.
+THIS IS WORK IN PROGRESS, especially the dotnet core 3.0 support!
 
 
 Available Packages:
