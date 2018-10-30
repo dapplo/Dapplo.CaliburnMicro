@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <!--ApplicationIcon>Resources\icon.ico</ApplicationIcon-->
-    <!--ApplicationManifest>app.manifest</ApplicationManifest-->
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Application.Demo</AssemblyTitle>
     <AssemblyName>Application.Demo</AssemblyName>
