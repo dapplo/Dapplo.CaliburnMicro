@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Application.Demo;
 using Dapplo.Addons.Bootstrapper.Resolving;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Language;
@@ -45,17 +46,16 @@ namespace Dapplo.Caliburn.Tests
         {
             var languageConfig = LanguageConfigBuilder.Create()
                 .WithSpecificDirectories(
-#if DEBUG
-                    @"..\..\..\Application.Demo\bin\Debug",
-                    @"..\..\..\Application.Demo.Addon\bin\Debug",
-                    @"..\..\..\Application.Demo.MetroAddon\bin\Debug",
-                    @"..\..\..\Application.Demo.OverlayAddon\bin\Debug"
+                    ScanLocations.GenerateScanDirectories(
+#if !NET461
+                    "net461",
 #else
-                @"..\..\..\Application.Demo\bin\Release",
-                @"..\..\..\Application.Demo.Addon\bin\Release",
-                @"..\..\..\Application.Demo.MetroAddon\bin\Release",
-                @"..\..\..\Application.Demo.OverlayAddon\bin\Release"
+                    "netcoreapp3.0",
 #endif
+                        "Application.Demo",
+                        "Application.Demo.Addon",
+                        "Application.Demo.MetroAddon",
+                        "Application.Demo.OverlayAddon").ToArray()
                 )
                 .BuildLanguageConfig();
 

@@ -9,9 +9,10 @@ namespace Application.Demo
         /// <summary>
         /// Helper method to create 
         /// </summary>
+        /// <param name="platform">string with the platform</param>
         /// <param name="addons"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GenerateScanDirectories(params string[] addons)
+        public static IEnumerable<string> GenerateScanDirectories(string platform, params string[] addons)
         {
             var location = typeof(Startup).Assembly.Location;
             foreach (var addon in addons)
@@ -22,11 +23,7 @@ namespace Application.Demo
 #else
                     "Release",
 #endif
-#if !NET461
-                    "net461"
-#else
-                    "netcoreapp3.0"
-#endif
+                    platform
                     );
             }
         }

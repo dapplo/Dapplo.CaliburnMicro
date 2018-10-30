@@ -29,20 +29,35 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities
     /// </summary>
     public class UserImpl : IUser
     {
+        /// <inheritdoc />
         public string IpTelephoneNumber { get; set; }
+        /// <inheritdoc />
         public string Description { get; set; }
+        /// <inheritdoc />
         public string TelephoneNumber { get; set; }
+        /// <inheritdoc />
         public string EmailAddress { get; set; }
+        /// <inheritdoc />
         public string Department { get; set; }
+        /// <inheritdoc />
         public string Displayname { get; set; }
+        /// <inheritdoc />
         public string Firstname { get; set; }
+        /// <inheritdoc />
         public string Location { get; set; }
+        /// <inheritdoc />
         public string Name { get; set; }
+        /// <inheritdoc />
         public string GivenName { get; set; }
+        /// <inheritdoc />
         public string Initials { get; set; }
+        /// <inheritdoc />
         public byte[] Thumbnail { get; set; }
+        /// <inheritdoc />
         public string Username { get; set; }
+        /// <inheritdoc />
         public IList<DistinguishedName> Groups { get; set; }
+        /// <inheritdoc />
         public string Id { get; set; }
     }
 }
