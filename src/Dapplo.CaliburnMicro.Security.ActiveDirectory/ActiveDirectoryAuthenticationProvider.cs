@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
         public void Load()
         {
             // Read the current user from the AD
-            CurrentUser = Query.ForUser(Environment.UserName).Execute<SimpleUser>().FirstOrDefault();
+            CurrentUser = Query.ForUser(Environment.UserName).Execute<UserImpl>().FirstOrDefault();
             // From the groups, get the CN, place the result into the permissions
             _permissions = CurrentUser?.Groups.SelectMany(dn => dn.Where(v => v.Key == DistinguishedNameAttributes.CommonName).Select(v => v.Value.ToLowerInvariant())).ToList() ?? new List<string>();
         }
