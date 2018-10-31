@@ -151,20 +151,28 @@ Task("Coverage")
     {
         var projectName = projectFile.GetDirectory().GetDirectoryName();
         if (projectName.Contains("Test")) {
-			Information("Excluding coverage of: " + projectName);
+			Information("Excluding coverage of: " + projectFile.FullPath);
 			openCoverSettings.WithFilter("-["+projectName+"]*");
         }
         else {
-			Information("Including coverage of: " + projectName);
+			Information("Including coverage of: " + projectFile.FullPath);
 			openCoverSettings.WithFilter("+["+projectName+"]*");
         }
     }
+	var testDllGob = "./**/bin/" + configuration + "/net4*/*.Tests.dll";
+	Information("Searching for test DLL with: " + testDllGob);
+	var testDlls = GetFiles(testDllGob);
+	foreach(var testDll in testDlls)
+    {
+		Information("Found test DLL at: " + testDll.FullPath);
+	}
 
     // Make XUnit 2 run via the OpenCover process
+	var testDllPath = testDlls.First().FullPath;
     OpenCover(
         // The test tool Lamdba
         tool => {
-            tool.XUnit2("./**/bin/" + configuration + "/net461/*.Tests.dll",
+            tool.XUnit2(testDllPath,
                 new XUnit2Settings {
                     // Add AppVeyor output, this "should" take care of a report inside AppVeyor
                     ArgumentCustomization = args => {
