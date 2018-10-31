@@ -151,10 +151,12 @@ Task("Coverage")
     {
         var projectName = projectFile.GetDirectory().GetDirectoryName();
         if (projectName.Contains("Test")) {
-           openCoverSettings.WithFilter("-["+projectName+"]*");
+			Information("Excluding coverage of: " + projectName);
+			openCoverSettings.WithFilter("-["+projectName+"]*");
         }
         else {
-           openCoverSettings.WithFilter("+["+projectName+"]*");
+			Information("Including coverage of: " + projectName);
+			openCoverSettings.WithFilter("+["+projectName+"]*");
         }
     }
 
@@ -162,7 +164,7 @@ Task("Coverage")
     OpenCover(
         // The test tool Lamdba
         tool => {
-            tool.XUnit2("./**/bin/*/net461/*.Tests.dll",
+            tool.XUnit2("./**/bin/" + configuration + "/net461/*.Tests.dll",
                 new XUnit2Settings {
                     // Add AppVeyor output, this "should" take care of a report inside AppVeyor
                     ArgumentCustomization = args => {
