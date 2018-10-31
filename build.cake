@@ -103,9 +103,11 @@ Task("Coverage")
 	{
 		var projectName = projectFile.GetDirectory().GetDirectoryName();
 		if (projectName.ToLower().Contains("test") || !projectFile.FullPath.StartsWith(baseDirectory)) {
+			Information("Excluding from coverage: " + projectFile.FullPath);
 			openCoverSettings.WithFilter("-["+projectName+"]*");
 		}
 		else {
+			Information("Including to coverage: " + projectFile.FullPath);
 			openCoverSettings.WithFilter("+["+projectName+"]*");
 		}
 	}
