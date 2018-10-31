@@ -162,7 +162,7 @@ Task("Coverage")
     OpenCover(
         // The test tool Lamdba
         tool => {
-            tool.XUnit2("./**/bin/**/*.Tests.dll",
+            tool.XUnit2("./**/bin/*/net461/*.Tests.dll",
                 new XUnit2Settings {
                     // Add AppVeyor output, this "should" take care of a report inside AppVeyor
                     ArgumentCustomization = args => {
