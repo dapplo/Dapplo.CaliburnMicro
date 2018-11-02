@@ -59,7 +59,6 @@ namespace Application.Demo.UseCases.Toast
                 Kind = PackIconMaterialKind.MessageText
             };
 
-
             ClickAction = clickedItem =>
             {
                 Log.Debug().WriteLine("Toast");
