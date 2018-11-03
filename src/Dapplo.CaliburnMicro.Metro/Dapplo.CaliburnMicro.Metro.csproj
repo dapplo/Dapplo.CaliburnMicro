@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Metro adds a IWindowManager for MahApps MetroWindow support to Dapplo.CaliburnMicro</Description>
-    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Metro</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Metro</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Metro</PackageId>
@@ -13,7 +13,7 @@
     <FrameworkReference Include="Microsoft.DesktopUI" />
   </ItemGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />

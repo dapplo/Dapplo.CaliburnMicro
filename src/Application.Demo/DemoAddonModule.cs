@@ -59,6 +59,11 @@ namespace Application.Demo
             // Specify the directories for the translations manually
             builder.Register(context => LanguageConfigBuilder.Create()
                     .WithSpecificDirectories(ScanLocations.GenerateScanDirectories(
+#if NET471
+                    "net471",
+#else
+                    "netcoreapp3.0",
+#endif
                         "Application.Demo.Addon",
                         "Application.Demo.MetroAddon",
                         "Application.Demo.OverlayAddon").ToArray()

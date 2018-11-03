@@ -57,8 +57,8 @@ namespace Application.Demo
                 // Make sure the bootstrapper knows where to find it's DLL files
                 .WithScanDirectories(
                     ScanLocations.GenerateScanDirectories(
-#if !NET461
-                    "net461",
+#if NET471
+                    "net471",
 #else
                     "netcoreapp3.0",
 #endif
