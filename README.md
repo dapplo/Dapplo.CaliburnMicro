@@ -24,7 +24,6 @@ This project is a combination of multiple Dapplo libraries, and brings roughly:
 
 THIS IS WORK IN PROGRESS, especially the dotnet core 3.0 support!
 
-
 Available Packages:
 - Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
 - Dapplo.CaliburnMicro.Dapp, adds a replacement for Application which helps to bootstrap
