@@ -99,41 +99,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application.Demo.Shared\Application.Demo.Shared.csproj">
-      <Name>Application.Demo.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Cards\Dapplo.CaliburnMicro.Cards.csproj">
-      <Name>Dapplo.CaliburnMicro.Cards</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj">
-      <Name>Dapplo.CaliburnMicro.Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj">
-      <Name>Dapplo.CaliburnMicro.Dapp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
-      <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj">
-      <Name>Dapplo.CaliburnMicro.NotifyIconWpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
-      <Name>Dapplo.CaliburnMicro.Security</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
-      <Name>Dapplo.CaliburnMicro.Toasts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj">
-      <Name>Dapplo.CaliburnMicro.Translations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
-      <Name>Dapplo.CaliburnMicro.Menu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Wizard\Dapplo.CaliburnMicro.Wizard.csproj">
-      <Name>Dapplo.CaliburnMicro.Wizard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
-      <Name>Dapplo.CaliburnMicro</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Application.Demo.Shared\Application.Demo.Shared.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Cards\Dapplo.CaliburnMicro.Cards.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Configuration\Dapplo.CaliburnMicro.Configuration.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Dapp\Dapplo.CaliburnMicro.Dapp.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Wizard\Dapplo.CaliburnMicro.Wizard.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj" />
   </ItemGroup>
 </Project>

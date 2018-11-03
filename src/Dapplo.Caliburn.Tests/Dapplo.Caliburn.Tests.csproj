@@ -4,9 +4,6 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Tests</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Tests</AssemblyName>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
@@ -58,11 +55,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Demo\Application.Demo.csproj" />
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj">
-      <Name>Dapplo.CaliburnMicro.Menu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
-      <Name>Dapplo.CaliburnMicro</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Menu\Dapplo.CaliburnMicro.Menu.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj" />
   </ItemGroup>
 </Project>

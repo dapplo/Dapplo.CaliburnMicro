@@ -4,9 +4,6 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <AssemblyTitle>Application.Demo.MetroAddon</AssemblyTitle>
     <AssemblyName>Application.Demo.MetroAddon</AssemblyName>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
@@ -87,14 +84,5 @@
       <Name>Dapplo.CaliburnMicro</Name>
       <Private>True</Private>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\ConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\ThemeConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

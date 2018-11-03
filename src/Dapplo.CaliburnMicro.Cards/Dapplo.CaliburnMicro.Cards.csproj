@@ -7,9 +7,6 @@
     <AssemblyName>Dapplo.CaliburnMicro.Cards</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Cards</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM adaptivecard toast</PackageTags>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
@@ -78,11 +75,5 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Toasts\Dapplo.CaliburnMicro.Toasts.csproj">
       <Name>Dapplo.CaliburnMicro.Toasts</Name>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\AdaptiveCardView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

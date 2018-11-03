@@ -24,6 +24,8 @@
 using Dapplo.CaliburnMicro.Menu;
 using Application.Demo.OverlayAddon.ViewModels;
 using Caliburn.Micro;
+using System.Windows;
+using Dapplo.CaliburnMicro.Security;
 
 #endregion
 
@@ -33,7 +35,7 @@ namespace Application.Demo.OverlayAddon
     ///     This will add an extry for the exit to the context menu
     /// </summary>
     [Menu("contextmenu")]
-    public sealed class OverlayMenuItem : ClickableMenuItem
+    public sealed class OverlayMenuItem : AuthenticatedMenuItem<IMenuItem, Visibility>
     {
         private readonly IWindowManager _windowManager;
         private readonly DemoOverlayContainerViewModel _demoOverlayContainerViewModel;
@@ -44,6 +46,8 @@ namespace Application.Demo.OverlayAddon
         {
             _windowManager = windowManager;
             _demoOverlayContainerViewModel = demoOverlayContainerViewModel;
+
+            this.VisibleOnPermissions("Admin");
         }
 
         public override void Click(IMenuItem clickedItem)

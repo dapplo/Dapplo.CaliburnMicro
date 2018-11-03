@@ -7,14 +7,14 @@
     <AssemblyName>Dapplo.CaliburnMicro.Diagnostics</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Diagnostics</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM bootstrapper</PackageTags>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
     <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
+    <PackageReference Include="System.Reflection.Metadata">
+      <Version>1.6.0</Version>
+    </PackageReference>
+   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
     <Reference Include="Microsoft.CSharp" />
@@ -44,9 +44,6 @@
     <PackageReference Include="Dapplo.Addons.Bootstrapper">
       <Version>1.1.13-g11182fa922</Version>
     </PackageReference>
-    <PackageReference Include="System.Reflection.Metadata">
-      <Version>1.6.0</Version>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -59,11 +56,5 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\ErrorView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

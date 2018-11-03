@@ -4,9 +4,6 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <AssemblyTitle>Application.Demo.Addon</AssemblyTitle>
     <AssemblyName>Application.Demo.Addon</AssemblyName>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -75,14 +72,5 @@
       <Name>Dapplo.CaliburnMicro</Name>
       <Private>True</Private>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\AddonSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\AdminConfigView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

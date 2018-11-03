@@ -4,9 +4,6 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <AssemblyTitle>Application.Demo.Shared</AssemblyTitle>
     <AssemblyName>Application.Demo.Shared</AssemblyName>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
@@ -37,11 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj">
-      <Name>Dapplo.CaliburnMicro.Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj">
-      <Name>Dapplo.CaliburnMicro.Translations</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Diagnostics\Dapplo.CaliburnMicro.Diagnostics.csproj" />
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Translations\Dapplo.CaliburnMicro.Translations.csproj" />
   </ItemGroup>
 </Project>

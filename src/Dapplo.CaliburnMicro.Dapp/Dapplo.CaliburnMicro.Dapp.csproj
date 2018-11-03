@@ -7,9 +7,6 @@
     <AssemblyName>Dapplo.CaliburnMicro.Dapp</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Dapp</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM bootstrapper</PackageTags>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
