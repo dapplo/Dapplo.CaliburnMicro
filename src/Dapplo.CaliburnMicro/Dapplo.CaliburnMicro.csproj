@@ -40,7 +40,7 @@
       <Version>1.1.13-g11182fa922</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Config.Ini">
-      <Version>1.0.6</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
       <Version>0.7.19</Version>
