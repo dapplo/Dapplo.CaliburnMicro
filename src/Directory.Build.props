@@ -48,18 +48,9 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net471'">
-  	<!--ApplicationDefinition Include="App.xaml">
-	  <Generator>MSBuild:Compile</Generator>
-	  <SubType>Designer</SubType>
-	</ApplicationDefinition-->
+  <ItemGroup>
 	<Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" Exclude="App.xaml" />
 	<Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
-  </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-	<Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" Exclude="App.xaml" />
-    <Compile Update="**\*.xaml.cs" SubType="Designer" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <ItemGroup Condition="!$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Demo'))">
