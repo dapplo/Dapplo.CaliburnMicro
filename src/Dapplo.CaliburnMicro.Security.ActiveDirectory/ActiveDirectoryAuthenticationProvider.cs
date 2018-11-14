@@ -32,6 +32,7 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
     /// <summary>
     ///     IAuthenticationProvider which uses the Groups from the Active Directory for the current user
     /// </summary>
+    /// <inheritdoc />
     public class ActiveDirectoryAuthenticationProvider : IAuthenticationProvider
     {
         private IList<string> _permissions;

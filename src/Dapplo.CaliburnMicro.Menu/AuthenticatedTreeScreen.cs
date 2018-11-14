@@ -40,10 +40,10 @@ namespace Dapplo.CaliburnMicro.Menu
         private TWhen _whenPermission;
         private TWhen _whenPermissionMissing;
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public AuthenticationTargetProperties AuthenticationTargetProperty
         {
-            get { return _authenticationTargetProperty; }
+            get => _authenticationTargetProperty;
             set
             {
                 _authenticationTargetProperty = value;
@@ -51,10 +51,10 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public PermissionOperations PermissionOperation
         {
-            get { return _permissionOperation; }
+            get => _permissionOperation;
             set
             {
                 _permissionOperation = value;
@@ -62,10 +62,10 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public IEnumerable<string> Permissions
         {
-            get { return _permissions; }
+            get => _permissions;
             set
             {
                 _permissions = value;
@@ -73,10 +73,10 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public TWhen WhenPermission
         {
-            get { return _whenPermission; }
+            get => _whenPermission;
             set
             {
                 _whenPermission = value;
@@ -84,10 +84,10 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public TWhen WhenPermissionMissing
         {
-            get { return _whenPermissionMissing; }
+            get => _whenPermissionMissing;
             set
             {
                 _whenPermissionMissing = value;

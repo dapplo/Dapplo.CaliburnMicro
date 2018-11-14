@@ -96,7 +96,7 @@ namespace Application.Demo
                 ShutdownMode = ShutdownMode.OnExplicitShutdown
             };
             // Handle exceptions
-            //application.DisplayErrorView();
+            application.DisplayErrorView();
 
             // Run!!!
             application.Run();

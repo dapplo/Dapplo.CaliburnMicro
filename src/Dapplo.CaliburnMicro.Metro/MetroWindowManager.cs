@@ -23,9 +23,6 @@
 
 using System;
 using System.Collections.Generic;
-#if !NETCOREAPP30
-using System.IO.Packaging;
-#endif
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -185,7 +182,7 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <returns></returns>
         public static Uri CreateMahappStyleUri(string style)
         {
-            return new Uri($@"{PackUriHelper.UriSchemePack}://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
+            return new Uri($@"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
         }
 
         /// <summary>
