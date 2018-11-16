@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Overlays makes it possible to position viewmodels as overlays</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.Overlays</PackageId>
     <PackageTags>Dapplo MEF Caliburn.Micro overlays</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="PresentationCore" />

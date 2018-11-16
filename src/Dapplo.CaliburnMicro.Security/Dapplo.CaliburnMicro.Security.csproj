@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Security brings security to Dapplo.CaliburnMicro</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.Security</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM Security</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />

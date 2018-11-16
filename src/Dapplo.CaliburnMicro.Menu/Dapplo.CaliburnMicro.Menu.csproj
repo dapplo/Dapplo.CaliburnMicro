@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Menu brings modular menus to Dapplo.CaliburnMicro</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.Menu</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM menu</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />

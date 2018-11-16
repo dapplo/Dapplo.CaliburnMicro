@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Dapp is the bootstrapper for Dapplo.CaliburnMicro</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.Dapp</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM bootstrapper</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />

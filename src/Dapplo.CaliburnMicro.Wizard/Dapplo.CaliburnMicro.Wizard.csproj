@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro is a Caliburn bootstrapper (and more) to quickly start with a WPF MVVM Application</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.Wizard</PackageId>
     <PackageTags>Dapplo Caliburn.Micro MVVM</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />

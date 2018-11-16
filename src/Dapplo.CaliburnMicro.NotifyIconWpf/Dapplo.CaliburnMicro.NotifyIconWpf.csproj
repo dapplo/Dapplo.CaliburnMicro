@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Wpf">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro, a CaliburnMicro MEF Bootstrapper</Description>
@@ -8,10 +8,6 @@
     <PackageId>Dapplo.CaliburnMicro.NotifyIconWpf</PackageId>
     <PackageTags>Dapplo MEF Caliburn.Micro Hardcodet.NotifyIcon.Wpf</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' ">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
-  </ItemGroup>
     
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="Microsoft.CSharp" />
