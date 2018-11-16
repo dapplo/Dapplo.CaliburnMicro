@@ -1,5 +1,5 @@
 # Dapplo.CaliburnMicro
-This will help you to get started with bootstrapping Caliburn.Micro (and eventually MahApps or NotifyIcon WPF)
+This will help you to get started with bootstrapping Caliburn.Micro (and MahApps or NotifyIcon WPF)
 
 - Documentation can be found [here](http://www.dapplo.net/blocks/Dapplo.CaliburnMicro) (soon)
 - Current build status: [![Build status](https://ci.appveyor.com/api/projects/status/fuaq8ppel23aqqva?svg=true)](https://ci.appveyor.com/project/dapplo/dapplo-caliburnmicro)
@@ -16,16 +16,14 @@ This will help you to get started with bootstrapping Caliburn.Micro (and eventua
 
 
 This project is a combination of multiple Dapplo libraries, and brings roughly:
-- A bootstrapper for Caliburn.Micro with MEF (Managed Extension Framework)
+- A bootstrapper for Caliburn.Micro with Autofac
 - addons to your application, via Dapplo.Addons. Use MVVM via composition (e.g. you can make a context menu and have the items provided by addons)
 - configuration & translations based on interfaces via Dapplo.Config
 - Some UI components like System-tray icon, menus, wizard are provided with a MVVM first approach.
 - Automatically style your Views via MahApps (if there is a reference to the Dapplo.CaliburnMicro.Metro.dll this will be used automatically)
 
-THIS IS WORK IN PROGRESS, especially the dotnet core 3.0 support!
-
 Available Packages:
-- Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing MEF and o.a. your IShell ViewModel
+- Dapplo.CaliburnMicro, Caliburn.Micro Bootstrapper for Dapplo.Addons which takes care of initializing Autofac and o.a. your IShell ViewModel
 - Dapplo.CaliburnMicro.Dapp, adds a replacement for Application which helps to bootstrap
 - Dapplo.CaliburnMicro.Configuration, adds a MVVM configuration component and automatic Dapplo.Ini importing
 - Dapplo.CaliburnMicro.Translation, adds automatic Dapplo.Language importing
@@ -45,7 +43,7 @@ A demo-project is supplied, see: Application.Demo, or Application.Demo.ClickOnce
 
 ## Dapplo.CaliburnMicro
 
-A Caliburn.Micro support project, with Dapplo.CaliburnMicro.Dapp taking care of bootstrapping Caliburn.Micro with Dapplo.Addons, which takes care of initializing MEF and o.a. your IShell ViewModel
+A Caliburn.Micro support project, with Dapplo.CaliburnMicro.Dapp taking care of bootstrapping Caliburn.Micro with Dapplo.Addons, which takes care of initializing Autofac and o.a. your IShell ViewModel
 
 There is functionality available to support you with building:
 - Simplified binding of properties
@@ -58,8 +56,8 @@ There is functionality available to support you with building:
  
 Usage:
 
-1. Create ViewModels & Views for Caliburn.Micro which have MEF [Export] attributes, and use [Import] on the Properties you want
-2. Implement & export an IShell if you want to have a default "Window" to be opened
+1. Create ViewModels & Views for Caliburn.Micro, make sure you register your viewmodels in an AddonModule (Dapplo.Addon) to Autofac.
+2. Implement and register an IShell if you want to have a default "Window" to be opened
 
 3. Create a Dapplication
 
@@ -71,8 +69,6 @@ Usage:
 	.WithApplicationName("application name")
 	// Used to prevent multiple instances
 	.WithMutex("<your GUID>")
-	// Enable Dapplo.Ini & Dapplo.Language support
-	.WithConfigSupport()
 	// Enable the Dapplo.CalliburnMicro libraries
 	.WithCaliburnMicro()
 	// Add directories to scan for dlls
@@ -120,9 +116,6 @@ Usage:
 This is based on a MahApps.Metro dependency, and supplies a IWindowManager implementation which makes things look like "metro" apps.
 
 Note: Dialog boxes are *not yet* tested or supported... I might need to have a look at this: https://dragablz.net/2015/05/29/using-mahapps-dialog-boxes-in-a-mvvm-setup/
-
-
-TODO: The popup is shown briefly, so briefly it's impossible to use actions.
 
 
 General TODO:

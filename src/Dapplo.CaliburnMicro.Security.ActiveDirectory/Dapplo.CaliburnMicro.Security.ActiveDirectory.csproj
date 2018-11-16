@@ -32,7 +32,7 @@
       <Version>0.2.5</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Addons">
-      <Version>1.1.14-ga75466a567</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
   </ItemGroup>
 
