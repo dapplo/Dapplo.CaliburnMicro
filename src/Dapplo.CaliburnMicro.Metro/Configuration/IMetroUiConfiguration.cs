@@ -19,17 +19,25 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Dapplo.CaliburnMicro.Metro
+using System.ComponentModel;
+
+namespace Dapplo.CaliburnMicro.Metro.Configuration
 {
     /// <summary>
-    ///     The themes for MahApps
+    /// This is the configuration for the Metro UI settings
     /// </summary>
-    public enum Themes
+    public interface IMetroUiConfiguration
     {
-#pragma warning disable 1591
-        Default,
-        Dark,
-        Light
-#pragma warning restore 1591
+        /// <summary>
+        ///     The current theme
+        /// </summary>
+        [DefaultValue(Themes.Light)]
+        Themes Theme { get; set; }
+
+        /// <summary>
+        ///     The current theme accent
+        /// </summary>
+        [DefaultValue(ThemeAccents.Orange)]
+        ThemeAccents ThemeAccent { get; set; }
     }
 }

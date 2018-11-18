@@ -23,6 +23,7 @@
 
 using System.ComponentModel;
 using Dapplo.CaliburnMicro.Metro;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config.Ini;
 using MahApps.Metro.Controls;
 
@@ -31,14 +32,8 @@ using MahApps.Metro.Controls;
 namespace Application.Demo.MetroAddon.Configurations
 {
     [IniSection("Metro")]
-    public interface IMetroConfiguration : IIniSection
+    public interface IMetroConfiguration : IIniSection, IMetroUiConfiguration
     {
         HotKey HotKey { get; set; }
-
-        [DefaultValue(Themes.BaseLight)]
-        Themes Theme { get; set; }
-
-        [DefaultValue(ThemeAccents.Orange)]
-        ThemeAccents ThemeAccent { get; set; }
     }
 }

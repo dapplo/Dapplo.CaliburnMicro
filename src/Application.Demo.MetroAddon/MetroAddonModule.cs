@@ -28,6 +28,7 @@ using Application.Demo.MetroAddon.Configurations.Impl;
 using Application.Demo.MetroAddon.Configurations;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 
 namespace Application.Demo.MetroAddon
 {
@@ -47,6 +48,7 @@ namespace Application.Demo.MetroAddon
                 .RegisterType<MetroConfigurationImpl>()
                 .As<IMetroConfiguration>()
                 .As<IIniSection>()
+                .As<IMetroUiConfiguration>()
                 .SingleInstance();
 
             builder

@@ -61,9 +61,6 @@ namespace Application.Demo.MetroAddon.Services
             }
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
             _metroWindowManager.AddResourceDictionary(demoUri);
-
-            _metroWindowManager.ChangeTheme(_metroConfiguration.Theme);
-            _metroWindowManager.ChangeThemeAccent(_metroConfiguration.ThemeAccent);
         }
     }
 }

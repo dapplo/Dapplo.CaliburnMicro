@@ -32,6 +32,7 @@ using Dapplo.Log;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Dapplo.CaliburnMicro.Configuration;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 
 #endregion
 
@@ -54,18 +55,10 @@ namespace Dapplo.CaliburnMicro.Metro
 
         private static readonly string[] Styles =
         {
-            "Colors", "Fonts", "Controls", "Controls.AnimatedSingleRowTabControl"
+            "Controls", "Fonts", "Controls.AnimatedSingleRowTabControl"
         };
 
-        /// <summary>
-        ///     The current theme
-        /// </summary>
-        public Themes Theme { get; private set; }
-
-        /// <summary>
-        ///     The current theme accent
-        /// </summary>
-        public ThemeAccents ThemeAccent { get; private set; }
+        private readonly IMetroUiConfiguration _metroUiConfiguration;
 
         /// <summary>
         /// Default constructor taking care of initialization
@@ -74,29 +67,29 @@ namespace Dapplo.CaliburnMicro.Metro
             IEnumerable<IConfigureWindowViews> configureWindows,
             IEnumerable<IConfigureDialogViews> configureDialogs,
             IResourceProvider resourceProvider,
+            IMetroUiConfiguration metroUiConfiguration,
             IUiConfiguration uiConfiguration = null
         ) : base(configureWindows, configureDialogs, uiConfiguration)
         {
+            _metroUiConfiguration = metroUiConfiguration;
             _resourceProvider = resourceProvider;
             foreach (var style in Styles)
             {
                 AddMahappsStyle(style);
             }
             // Just in case, remove them before adding
-            RemoveMahappsStyle($"Accents/{Theme}");
-            RemoveMahappsStyle($"Accents/{ThemeAccent}");
+            RemoveMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
 
-            if (ThemeAccent == ThemeAccents.Default)
+            if (_metroUiConfiguration.ThemeAccent == ThemeAccents.Default)
             {
-                ThemeAccent = ThemeAccents.Blue;
+                _metroUiConfiguration.ThemeAccent = ThemeAccents.Blue;
             }
-            if (Theme == Themes.Default)
+            if (_metroUiConfiguration.Theme == Themes.Default)
             {
-                Theme = Themes.BaseLight;
+                _metroUiConfiguration.Theme = Themes.Light;
             }
 
-            AddMahappsStyle($"Accents/{ThemeAccent}");
-            AddMahappsStyle($"Accents/{Theme}");
+            AddMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
         }
 
         /// <summary>
@@ -157,22 +150,12 @@ namespace Dapplo.CaliburnMicro.Metro
         ///     Change the current theme
         /// </summary>
         /// <param name="theme"></param>
-        public void ChangeTheme(Themes theme)
+        public void ChangeTheme(Themes theme, ThemeAccents themeAccent)
         {
-            RemoveMahappsStyle($"Accents/{Theme}");
-            Theme = theme;
-            AddMahappsStyle($"Accents/{Theme}");
-        }
-
-        /// <summary>
-        ///     Change the current theme accent
-        /// </summary>
-        /// <param name="themeAccent">ThemeAccents</param>
-        public void ChangeThemeAccent(ThemeAccents themeAccent)
-        {
-            RemoveMahappsStyle($"Accents/{ThemeAccent}");
-            ThemeAccent = themeAccent;
-            AddMahappsStyle($"Accents/{ThemeAccent}");
+            RemoveMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
+            _metroUiConfiguration.Theme = theme;
+            _metroUiConfiguration.ThemeAccent = themeAccent;
+            AddMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
         }
 
         /// <summary>

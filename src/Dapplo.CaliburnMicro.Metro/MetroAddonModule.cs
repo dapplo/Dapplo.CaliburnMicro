@@ -22,6 +22,7 @@
 using Autofac;
 using Caliburn.Micro;
 using Dapplo.Addons;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 
 namespace Dapplo.CaliburnMicro.Metro
 {
@@ -35,7 +36,12 @@ namespace Dapplo.CaliburnMicro.Metro
                 .AsSelf()
                 .As<IWindowManager>()
                 .SingleInstance();
-            
+
+            builder.RegisterType<MetroUiConfigurationImpl>()
+                .IfNotRegistered(typeof(IMetroUiConfiguration))
+                .As<IMetroUiConfiguration>()
+                .SingleInstance();
+
             base.Load(builder);
         }
     }

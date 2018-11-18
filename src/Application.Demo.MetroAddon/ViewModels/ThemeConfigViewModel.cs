@@ -92,8 +92,7 @@ namespace Application.Demo.MetroAddon.ViewModels
             {
                 return;
             }
-            _metroWindowManager.ChangeTheme(MetroConfiguration.Theme);
-            _metroWindowManager.ChangeThemeAccent(MetroConfiguration.ThemeAccent);
+            _metroWindowManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
         }
 
         public override void Initialize(IConfig config)
