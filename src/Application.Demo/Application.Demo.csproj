@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Application.Demo</AssemblyTitle>
     <AssemblyName>Application.Demo</AssemblyName>
   </PropertyGroup>

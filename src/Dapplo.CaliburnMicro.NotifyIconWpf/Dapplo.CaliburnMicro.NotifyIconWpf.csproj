@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.NotifyIconWpf adds Hardcodet.NotifyIcon.Wpf support to Dapplo.CaliburnMicro, a CaliburnMicro MEF Bootstrapper</Description>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.NotifyIconWpf</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.NotifyIconWpf</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.NotifyIconWpf</PackageId>

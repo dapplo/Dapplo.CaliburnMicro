@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Configuration is an extension to Dapplo.CaliburnMicro and brings Dapplo.Config.Ini configuration</Description>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Configuration</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Configuration</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Configuration</PackageId>

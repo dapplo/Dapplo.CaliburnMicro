@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Diagnostics brings diagnostics functionality to Dapplo.CaliburnMicro</Description>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Diagnostics</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Diagnostics</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Diagnostics</PackageId>

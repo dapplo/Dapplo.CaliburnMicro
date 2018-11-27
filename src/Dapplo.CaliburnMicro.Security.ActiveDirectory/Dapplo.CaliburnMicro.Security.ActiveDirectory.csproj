@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>This adds Active Directory group permissions to Dapplo.CaliburnMicro based applications</Description>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Security.ActiveDirectory</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Security.ActiveDirectory</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Security.ActiveDirectory</PackageId>

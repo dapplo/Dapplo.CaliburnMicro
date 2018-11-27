@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Menu brings modular menus to Dapplo.CaliburnMicro</Description>
-    <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Menu</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Menu</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Menu</PackageId>
