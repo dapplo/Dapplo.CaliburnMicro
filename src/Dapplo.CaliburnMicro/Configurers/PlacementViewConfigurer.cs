@@ -25,8 +25,8 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.Log;
 using Dapplo.Windows.Common.Extensions;
 using Dapplo.Windows.Extensions;
+using Dapplo.Windows.User32;
 using Dapplo.Windows.User32.Enums;
-using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Configurers
 {
@@ -69,7 +69,7 @@ namespace Dapplo.CaliburnMicro.Configurers
 
             var windowName = viewModel.GetType().FullName;
 
-            var screenBounds = DisplayInfo.GetAllScreenBounds();
+            var screenBounds = DisplayInfo.ScreenBounds;
             var hasPlacement = _uiConfiguration.WindowLocations.TryGetValue(windowName, out var placement);
             if (!hasPlacement || placement.ShowCmd == ShowWindowCommands.Normal && !screenBounds.Contains(placement.NormalPosition))
             {

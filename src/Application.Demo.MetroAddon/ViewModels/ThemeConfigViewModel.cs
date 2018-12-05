@@ -30,6 +30,7 @@ using Application.Demo.MetroAddon.Configurations;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Utils.Extensions;
 
 #endregion

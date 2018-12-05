@@ -20,13 +20,12 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System;
-using System.Windows;
 using System.Windows.Media;
 using Dapplo.CaliburnMicro.Overlays.ViewModels;
-using Dapplo.Windows.User32.Structs;
 using Application.Demo.OverlayAddon.Views;
 using Dapplo.CaliburnMicro.Overlays;
 using Dapplo.Windows.Input.Mouse;
+using Dapplo.Windows.User32;
 
 namespace Application.Demo.OverlayAddon.ViewModels
 {
@@ -35,7 +34,6 @@ namespace Application.Demo.OverlayAddon.ViewModels
     {
         private IDisposable _subscription;
         private RulerOverlayView _rulerView;
-        private readonly Rect _screenbounds = DisplayInfo.GetAllScreenBounds();
         private bool _hasChange;
         protected override void OnActivate()
         {
@@ -63,16 +61,18 @@ namespace Application.Demo.OverlayAddon.ViewModels
             {
                 return;
             }
+
+            var screenbounds = DisplayInfo.ScreenBounds;
             _hasChange = false;
             _rulerView.RulerLeft.Y1 = Y;
             _rulerView.RulerLeft.Y2 = Y;
-            _rulerView.RulerLeft.X1 = _screenbounds.Left;
+            _rulerView.RulerLeft.X1 = screenbounds.Left;
             _rulerView.RulerLeft.X2 = X - 20;
 
             _rulerView.RulerRight.Y1 = Y;
             _rulerView.RulerRight.Y2 = Y;
             _rulerView.RulerRight.X1 = X + 20;
-            _rulerView.RulerRight.X2 = _screenbounds.Right;
+            _rulerView.RulerRight.X2 = screenbounds.Right;
         }
 
         protected override void OnDeactivate(bool close)

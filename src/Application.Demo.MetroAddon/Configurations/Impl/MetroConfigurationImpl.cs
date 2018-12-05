@@ -21,6 +21,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Dapplo.CaliburnMicro.Metro;
+using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config.Ini;
 using MahApps.Metro.Controls;
 
@@ -34,5 +35,24 @@ namespace Application.Demo.MetroAddon.Configurations.Impl
         public Themes Theme { get; set; }
 
         public ThemeAccents ThemeAccent { get; set; }
+
+        #region Overrides of IniSectionBase<IMetroConfiguration>
+
+        public override void AfterLoad()
+        {
+            // Correct wrong entries to their defaults
+            if (ThemeAccent == ThemeAccents.Default)
+            {
+                ThemeAccent = ThemeAccents.Blue;
+            }
+            if (Theme == Themes.Default)
+            {
+                Theme = Themes.Light;
+            }
+
+            base.AfterLoad();
+        }
+
+        #endregion
     }
 }

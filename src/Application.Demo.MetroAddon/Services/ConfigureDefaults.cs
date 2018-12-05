@@ -48,6 +48,9 @@ namespace Application.Demo.MetroAddon.Services
         {
             _metroWindowManager = metroWindowManager;
             _metroConfiguration = metroConfiguration;
+
+            // Apply default style
+            _metroWindowManager?.ChangeTheme(_metroConfiguration.Theme, _metroConfiguration.ThemeAccent);
         }
 
         /// <inheritdoc />

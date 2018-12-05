@@ -29,8 +29,8 @@ using Dapplo.Windows.Dpi;
 using Dapplo.Windows.Shell32;
 using ToastNotifications.Core;
 using Dapplo.Windows.Shell32.Enums;
+using Dapplo.Windows.User32;
 using Dapplo.Windows.User32.Enums;
-using Dapplo.Windows.User32.Structs;
 
 namespace Dapplo.CaliburnMicro.Toasts
 {

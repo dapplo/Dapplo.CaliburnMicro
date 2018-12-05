@@ -71,6 +71,9 @@ namespace Application.Demo
                 // Enable CaliburnMicro
                 .WithCaliburnMicro()
                 .WithoutCopyOfEmbeddedAssemblies()
+#if NET471
+                .WithoutCopyOfAssembliesToProbingPath()
+#endif
                 //.WithoutStrictChecking()
                 // Load the Application.Demo.* assemblies
                 .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();

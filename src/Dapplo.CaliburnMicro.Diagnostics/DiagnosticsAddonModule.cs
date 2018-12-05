@@ -21,7 +21,6 @@
 
 using Autofac;
 using Dapplo.Addons;
-using Dapplo.CaliburnMicro.Diagnostics.Translations;
 using Dapplo.CaliburnMicro.Diagnostics.ViewModels;
 
 namespace Dapplo.CaliburnMicro.Diagnostics

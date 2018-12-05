@@ -33,6 +33,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Metro.Configuration;
+using MahApps.Metro;
 
 #endregion
 
@@ -77,19 +78,6 @@ namespace Dapplo.CaliburnMicro.Metro
             {
                 AddMahappsStyle(style);
             }
-            // Just in case, remove them before adding
-            RemoveMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
-
-            if (_metroUiConfiguration.ThemeAccent == ThemeAccents.Default)
-            {
-                _metroUiConfiguration.ThemeAccent = ThemeAccents.Blue;
-            }
-            if (_metroUiConfiguration.Theme == Themes.Default)
-            {
-                _metroUiConfiguration.Theme = Themes.Light;
-            }
-
-            AddMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
         }
 
         /// <summary>
@@ -149,13 +137,23 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <summary>
         ///     Change the current theme
         /// </summary>
-        /// <param name="theme"></param>
+        /// <param name="theme">Themes</param>
+        /// <param name="themeAccent">ThemeAccents</param>
         public void ChangeTheme(Themes theme, ThemeAccents themeAccent)
         {
+            // Remove current
             RemoveMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
+
+            // Change the settings
             _metroUiConfiguration.Theme = theme;
             _metroUiConfiguration.ThemeAccent = themeAccent;
-            AddMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
+
+            // Apply the new
+            var themeName = $"{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}";
+            var themeString = $"Themes/{themeName}";
+            AddMahappsStyle(themeString);
+
+            ThemeManager.ChangeTheme(Application.Current, themeName);
         }
 
         /// <summary>

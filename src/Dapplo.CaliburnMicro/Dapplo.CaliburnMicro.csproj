@@ -39,10 +39,10 @@
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
-      <Version>0.7.26</Version>
+      <Version>0.8.2</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Dpi">
-      <Version>0.7.26</Version>
+      <Version>0.8.2</Version>
     </PackageReference>
     <PackageReference Include="Fody">
       <Version>3.3.2</Version>

@@ -21,8 +21,6 @@
 
 #region using
 
-using System.ComponentModel;
-using Dapplo.CaliburnMicro.Metro;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config.Ini;
 using MahApps.Metro.Controls;

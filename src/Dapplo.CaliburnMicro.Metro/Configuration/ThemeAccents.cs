@@ -19,17 +19,38 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-namespace Dapplo.CaliburnMicro.Metro
+namespace Dapplo.CaliburnMicro.Metro.Configuration
 {
     /// <summary>
-    ///     The themes for MahApps
+    ///     The accents for MahApps
     /// </summary>
-    public enum Themes
+    public enum ThemeAccents
     {
 #pragma warning disable 1591
         Default,
-        Dark,
-        Light
+        Amber,
+        Blue,
+        Brown,
+        Cobalt,
+        Crimso,
+        Cyan,
+        Emerald,
+        Green,
+        Indigo,
+        Lime,
+        Magenta,
+        Mauve,
+        Olive,
+        Orange,
+        Pink,
+        Purple,
+        Red,
+        Sienna,
+        Steel,
+        Taupe,
+        Teal,
+        Violet,
+        Yellow
 #pragma warning restore 1591
     }
 }

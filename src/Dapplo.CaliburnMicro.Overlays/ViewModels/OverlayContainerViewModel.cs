@@ -21,7 +21,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Caliburn.Micro;
-using Dapplo.Windows.User32.Structs;
+using Dapplo.Windows.User32;
 
 namespace Dapplo.CaliburnMicro.Overlays.ViewModels
 {
@@ -43,7 +43,7 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         /// <inheritdoc />
         protected override void OnActivate()
         {
-            var bounds = DisplayInfo.GetAllScreenBounds();
+            var bounds = DisplayInfo.ScreenBounds;
             Left = bounds.Left;
             Top = bounds.Top;
             Width = bounds.Width;
