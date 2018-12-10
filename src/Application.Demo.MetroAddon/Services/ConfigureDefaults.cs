@@ -22,7 +22,6 @@
 #region using
 
 using System;
-using Application.Demo.MetroAddon.Configurations;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
@@ -35,22 +34,14 @@ namespace Application.Demo.MetroAddon.Services
     /// <summary>
     /// Configure some of the CaliburnMicro defaults
     /// </summary>
-    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.ConfigurationService), TaskSchedulerName = "ui")]
+    [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
     public class ConfigureDefaults : IStartup
     {
-        private readonly MetroWindowManager _metroWindowManager;
-        private readonly IMetroConfiguration _metroConfiguration;
+        private readonly MetroThemeManager _metroThemeManager;
 
-        public ConfigureDefaults(
-            IMetroConfiguration metroConfiguration,
-            MetroWindowManager metroWindowManager = null
-            )
+        public ConfigureDefaults(MetroThemeManager metroThemeManager)
         {
-            _metroWindowManager = metroWindowManager;
-            _metroConfiguration = metroConfiguration;
-
-            // Apply default style
-            _metroWindowManager?.ChangeTheme(_metroConfiguration.Theme, _metroConfiguration.ThemeAccent);
+            _metroThemeManager = metroThemeManager;
         }
 
         /// <inheritdoc />
@@ -58,12 +49,8 @@ namespace Application.Demo.MetroAddon.Services
         {
             // Override the ConfigView with a much nicer looking version
             ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
-            if (_metroWindowManager == null)
-            {
-                return;
-            }
             var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
-            _metroWindowManager.AddResourceDictionary(demoUri);
+            _metroThemeManager.AddResourceDictionary(demoUri);
         }
     }
 }

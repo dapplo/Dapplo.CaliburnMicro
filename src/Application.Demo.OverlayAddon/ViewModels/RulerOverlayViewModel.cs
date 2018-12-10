@@ -62,17 +62,17 @@ namespace Application.Demo.OverlayAddon.ViewModels
                 return;
             }
 
-            var screenbounds = DisplayInfo.ScreenBounds;
+            var screenBounds = DisplayInfo.ScreenBounds;
             _hasChange = false;
             _rulerView.RulerLeft.Y1 = Y;
             _rulerView.RulerLeft.Y2 = Y;
-            _rulerView.RulerLeft.X1 = screenbounds.Left;
+            _rulerView.RulerLeft.X1 = screenBounds.Left;
             _rulerView.RulerLeft.X2 = X - 20;
 
             _rulerView.RulerRight.Y1 = Y;
             _rulerView.RulerRight.Y2 = Y;
             _rulerView.RulerRight.X1 = X + 20;
-            _rulerView.RulerRight.X2 = screenbounds.Right;
+            _rulerView.RulerRight.X2 = screenBounds.Right;
         }
 
         protected override void OnDeactivate(bool close)

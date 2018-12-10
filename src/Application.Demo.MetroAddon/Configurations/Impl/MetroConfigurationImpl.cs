@@ -20,7 +20,6 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System.Diagnostics.CodeAnalysis;
-using Dapplo.CaliburnMicro.Metro;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config.Ini;
 using MahApps.Metro.Controls;

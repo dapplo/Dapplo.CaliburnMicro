@@ -19,6 +19,8 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
+using System.Collections.Generic;
+
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     /// </summary>
     public interface ITrayIconManager
     {
+        /// <summary>
+        /// Provide all available tray icons
+        /// </summary>
+        IEnumerable<ITrayIcon> TrayIcons { get; }
+
         /// <summary>
         ///     Get the ITrayIcon belonging to the specified ITrayIconViewModel instance
         /// </summary>

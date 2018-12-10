@@ -34,7 +34,7 @@
       <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="Fody">
-      <Version>3.3.2</Version>
+      <Version>3.3.3</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -68,6 +68,7 @@
       <Name>Dapplo.CaliburnMicro.Metro</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.NotifyIconWpf\Dapplo.CaliburnMicro.NotifyIconWpf.csproj" />
     <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
       <Name>Dapplo.CaliburnMicro.Security</Name>
       <Private>True</Private>

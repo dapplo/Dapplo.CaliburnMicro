@@ -37,7 +37,7 @@ using Dapplo.Log;
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {
     /// <summary>
-    ///     This takes care of starting and managing your trayicons
+    ///     This takes care of starting and managing your tray icons
     /// </summary>
     [Service(nameof(CaliburnServices.TrayIconManager), nameof(CaliburnServices.ConfigurationService), TaskSchedulerName = "ui")]
     public class TrayIconManager : IStartupAsync, IShutdownAsync, ITrayIconManager
@@ -55,7 +55,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="trayIconViewModels">IEnumerable with laze trayicon ViewModels</param>
+        /// <param name="trayIconViewModels">IEnumerable with laze tray icon ViewModels</param>
         /// <param name="windowsManager">IWindowManager</param>
         public TrayIconManager(
             IEnumerable<Lazy<ITrayIconViewModel>> trayIconViewModels,
@@ -67,20 +67,13 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         }
 
         /// <summary>
-        ///     Hide all trayicons to prevent them hanging useless in the system tray
+        ///     Hide all tray icons to prevent them hanging useless in the system tray
         /// </summary>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
         public async Task ShutdownAsync(CancellationToken cancellationToken = default)
         {
-            var trayIcons = _trayIcons.Values.Select(x =>
-                {
-                    x.TryGetTarget(out var trayIcon);
-                    return trayIcon;
-                })
-                .Where(x => x != null)
-                .ToList();
-
+            var trayIcons = TrayIcons.ToList();
             if (trayIcons.Any())
             {
                 Log.Debug().WriteLine("Hiding all created tray-icons");
@@ -101,7 +94,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         }
 
         /// <summary>
-        ///     Find all trayicons and initialize them.
+        ///     Find all tray icons and initialize them.
         /// </summary>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns>Task</returns>
@@ -118,16 +111,24 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
             foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
             {
                 // Get the view, to store it as ITrayIcon
-                trayIconViewModel.ViewAttached += (sender, e) =>
+                trayIconViewModel.ViewAttached += (sender, viewAttachedEventArgs) =>
                 {
-                    var popup = e.View as Popup;
-                    var contentControl = e.View as ContentControl;
-                    var trayIcon = popup?.Child as ITrayIcon ?? contentControl?.Content as ITrayIcon ?? e.View as ITrayIcon;
+                    var trayIcon = viewAttachedEventArgs.View as ITrayIcon;
                     _trayIcons.Add(new WeakReference<ITrayIconViewModel>(trayIconViewModel), new WeakReference<ITrayIcon>(trayIcon));
                 };
                 _windowsManager.ShowPopup(trayIconViewModel);
             }
         }
+
+        /// <summary>
+        /// Provide all available tray icons
+        /// </summary>
+        public IEnumerable<ITrayIcon> TrayIcons => _trayIcons.Values.Select(x =>
+            {
+                x.TryGetTarget(out var trayIcon);
+                return trayIcon;
+            })
+            .Where(x => x != null);
 
         /// <summary>
         ///     Get the ITrayIcon belonging to the specified ITrayIconViewModel instance

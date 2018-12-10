@@ -37,6 +37,11 @@ namespace Dapplo.CaliburnMicro.Metro
                 .As<IWindowManager>()
                 .SingleInstance();
 
+            builder.RegisterType<MetroThemeManager>()
+                .AsSelf()
+                .As<IService>()
+                .SingleInstance();
+            
             builder.RegisterType<MetroUiConfigurationImpl>()
                 .IfNotRegistered(typeof(IMetroUiConfiguration))
                 .As<IMetroUiConfiguration>()

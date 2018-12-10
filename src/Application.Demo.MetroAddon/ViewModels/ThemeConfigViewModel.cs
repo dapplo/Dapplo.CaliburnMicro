@@ -31,6 +31,7 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.CaliburnMicro.Metro.Configuration;
+using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -40,7 +41,8 @@ namespace Application.Demo.MetroAddon.ViewModels
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
-        private readonly MetroWindowManager _metroWindowManager;
+        private readonly MetroThemeManager _metroThemeManager;
+        private readonly ITrayIconManager _trayIconManager;
 
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
@@ -48,54 +50,72 @@ namespace Application.Demo.MetroAddon.ViewModels
         private CompositeDisposable _disposables;
 
         /// <summary>
-        ///     The avaible theme accents
+        ///     The available theme accents
         /// </summary>
         public ObservableCollection<Tuple<ThemeAccents, string>> AvailableThemeAccents { get; set; } = new ObservableCollection<Tuple<ThemeAccents, string>>();
 
         /// <summary>
-        ///     The avaible themes
+        ///     The available themes
         /// </summary>
         public ObservableCollection<Tuple<Themes, string>> AvailableThemes { get; set; } = new ObservableCollection<Tuple<Themes, string>>();
 
+        /// <summary>
+        /// Used in the UI
+        /// </summary>
         public IMetroConfiguration MetroConfiguration { get; }
 
+        /// <summary>
+        /// Used in the UI
+        /// </summary>
         public IUiTranslations UiTranslations { get; }
 
-
+        /// <summary>
+        /// Default DI constructor
+        /// </summary>
+        /// <param name="metroConfiguration">IMetroConfiguration</param>
+        /// <param name="uiTranslations">IUiTranslations</param>
+        /// <param name="metroThemeManager">MetroThemeManager</param>
+        /// <param name="trayIconManager">TrayIconManager</param>
         public ThemeConfigViewModel(
             IMetroConfiguration metroConfiguration,
             IUiTranslations uiTranslations,
-            MetroWindowManager metroWindowManager = null
+            MetroThemeManager metroThemeManager,
+            ITrayIconManager trayIconManager
             )
         {
             MetroConfiguration = metroConfiguration;
             UiTranslations = uiTranslations;
-            _metroWindowManager = metroWindowManager;
+            _metroThemeManager = metroThemeManager;
+            _trayIconManager = trayIconManager;
         }
 
         /// <inheritdoc />
         public override void Rollback()
         {
-            // Nothing to do
+            MetroConfiguration.RollbackTransaction();
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
         }
 
         /// <inheritdoc />
         public override void Terminate()
         {
-            // Nothing to do
+            MetroConfiguration.RollbackTransaction();
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
         }
 
         public override void Commit()
         {
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
             // Manually commit
             MetroConfiguration.CommitTransaction();
-            if (_metroWindowManager == null)
+            _trayIconManager.TrayIcons.ForEach(trayIcon =>
             {
-                return;
-            }
-            _metroWindowManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
+                trayIcon.Hide();
+                trayIcon.Show();
+            });
         }
 
+        /// <inheritdoc />
         public override void Initialize(IConfig config)
         {
             // Prepare disposables
@@ -125,15 +145,21 @@ namespace Application.Demo.MetroAddon.ViewModels
             // automatically update the DisplayName
             _disposables.Add(UiTranslations.CreateDisplayNameBinding(this, nameof(IUiTranslations.Theme)));
 
+            // Automatically show theme changes, this would work if NotifyPropertyChanged events would be created when in a transaction.
+            _disposables.Add(
+                MetroConfiguration.OnPropertyChanged("Theme.*").Subscribe(args => _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent))
+            );
             base.Initialize(config);
         }
 
+        /// <inheritdoc />
         protected override void OnDeactivate(bool close)
         {
             _disposables?.Dispose();
             base.OnDeactivate(close);
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             _disposables?.Dispose();
