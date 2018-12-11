@@ -36,8 +36,7 @@ namespace Dapplo.CaliburnMicro.Metro
     /// <summary>
     /// This 
     /// </summary>
-    [Service(nameof(MetroThemeManager), nameof(CaliburnServices.ConfigurationService), TaskSchedulerName = "ui")]
-    public sealed class MetroThemeManager : IStartup
+    public sealed class MetroThemeManager
     {
         private readonly IResourceProvider _resourceProvider;
         private static readonly LogSource Log = new LogSource();
@@ -47,17 +46,15 @@ namespace Dapplo.CaliburnMicro.Metro
             "Controls", "Fonts", "Controls.AnimatedSingleRowTabControl"
         };
 
-        private readonly IMetroUiConfiguration _metroUiConfiguration;
+        private ThemeAccents? _themeAccent;
+        private Themes? _theme;
 
         /// <summary>
         /// Default constructor taking care of initialization
         /// </summary>
-        public MetroThemeManager(
-            IResourceProvider resourceProvider,
-            IMetroUiConfiguration metroUiConfiguration)
+        public MetroThemeManager(IResourceProvider resourceProvider)
         {
             _resourceProvider = resourceProvider;
-            _metroUiConfiguration = metroUiConfiguration;
             foreach (var style in Styles)
             {
                 AddMahappsStyle(style);
@@ -123,20 +120,32 @@ namespace Dapplo.CaliburnMicro.Metro
         /// </summary>
         /// <param name="theme">Themes</param>
         /// <param name="themeAccent">ThemeAccents</param>
-        public void ChangeTheme(Themes theme, ThemeAccents themeAccent)
+        public void ChangeTheme(Themes? theme, ThemeAccents? themeAccent)
         {
-            // Remove current
-            RemoveMahappsStyle($"Themes/{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}");
+            if (_themeAccent.HasValue && _theme.HasValue)
+            {
+                // Remove current
+                RemoveMahappsStyle($"Themes/{_theme.Value}.{_themeAccent.Value}");
+            }
 
-            // Change the settings
-            _metroUiConfiguration.Theme = theme;
-            _metroUiConfiguration.ThemeAccent = themeAccent;
+            if (theme.HasValue)
+            {
+                _theme = theme;
+            }
+            if(themeAccent.HasValue)
+            {
+                _themeAccent = themeAccent;
+            }
 
-            // Apply the new
-            var themeName = $"{_metroUiConfiguration.Theme}.{_metroUiConfiguration.ThemeAccent}";
+            if (!_themeAccent.HasValue || !_theme.HasValue)
+            {
+                return;
+            }
+
+            // Apply the new Theme information
+            var themeName = $"{_theme.Value}.{_themeAccent.Value}";
             var themeString = $"Themes/{themeName}";
             AddMahappsStyle(themeString);
-
             ThemeManager.ChangeTheme(Application.Current, themeName);
         }
 
@@ -149,17 +158,5 @@ namespace Dapplo.CaliburnMicro.Metro
         {
             return new Uri($@"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
         }
-
-        #region Implementation of IStartup
-
-        /// <summary>
-        /// Startup takes care of setting the Metro Theme coming from the configuration
-        /// </summary>
-        public void Startup()
-        {
-            ChangeTheme(_metroUiConfiguration.Theme, _metroUiConfiguration.ThemeAccent);
-        }
-
-        #endregion
     }
 }

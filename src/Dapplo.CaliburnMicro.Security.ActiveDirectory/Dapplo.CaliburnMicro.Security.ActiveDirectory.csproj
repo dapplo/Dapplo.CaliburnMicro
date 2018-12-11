@@ -28,7 +28,7 @@
       <Version>0.2.5</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Addons">
-      <Version>1.2.1</Version>
+      <Version>1.2.4</Version>
     </PackageReference>
   </ItemGroup>
 

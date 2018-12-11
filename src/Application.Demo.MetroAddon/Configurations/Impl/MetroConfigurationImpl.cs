@@ -20,6 +20,7 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System.Diagnostics.CodeAnalysis;
+using Dapplo.CaliburnMicro.Metro;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config.Ini;
 using MahApps.Metro.Controls;
@@ -29,6 +30,12 @@ namespace Application.Demo.MetroAddon.Configurations.Impl
     [SuppressMessage("ReSharper", "UnassignedGetOnlyAutoProperty")]
     internal class MetroConfigurationImpl : IniSectionBase<IMetroConfiguration>, IMetroConfiguration
     {
+        private readonly MetroThemeManager _metroThemeManager;
+
+        public MetroConfigurationImpl(MetroThemeManager metroThemeManager)
+        {
+            _metroThemeManager = metroThemeManager;
+        }
         public HotKey HotKey { get; set; }
 
         public Themes Theme { get; set; }
@@ -48,6 +55,8 @@ namespace Application.Demo.MetroAddon.Configurations.Impl
             {
                 Theme = Themes.Light;
             }
+
+            _metroThemeManager.ChangeTheme(Theme, ThemeAccent);
 
             base.AfterLoad();
         }

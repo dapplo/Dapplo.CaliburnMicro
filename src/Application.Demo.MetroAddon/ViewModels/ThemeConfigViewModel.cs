@@ -32,6 +32,7 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.CaliburnMicro.NotifyIconWpf;
+using Dapplo.Config.Intercepting;
 using Dapplo.Utils.Extensions;
 
 #endregion
@@ -145,9 +146,26 @@ namespace Application.Demo.MetroAddon.ViewModels
             // automatically update the DisplayName
             _disposables.Add(UiTranslations.CreateDisplayNameBinding(this, nameof(IUiTranslations.Theme)));
 
-            // Automatically show theme changes, this would work if NotifyPropertyChanged events would be created when in a transaction.
+            // Automatically show theme changes
             _disposables.Add(
-                MetroConfiguration.OnPropertyChanged("Theme.*").Subscribe(args => _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent))
+                MetroConfiguration.OnPropertyChanging(nameof(MetroConfiguration.ThemeAccent)).Subscribe(args =>
+                {
+                    if (args is PropertyChangingEventArgsEx propertyChangingEventArgsEx)
+                    {
+                        _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, (ThemeAccents)propertyChangingEventArgsEx.NewValue);
+                    }
+                })
+            );
+
+            // Automatically show theme accent changes
+            _disposables.Add(
+                MetroConfiguration.OnPropertyChanging(nameof(MetroConfiguration.Theme)).Subscribe(args =>
+                {
+                    if (args is PropertyChangingEventArgsEx propertyChangingEventArgsEx)
+                    {
+                        _metroThemeManager.ChangeTheme((Themes)propertyChangingEventArgsEx.NewValue, MetroConfiguration.ThemeAccent);
+                    }
+                })
             );
             base.Initialize(config);
         }

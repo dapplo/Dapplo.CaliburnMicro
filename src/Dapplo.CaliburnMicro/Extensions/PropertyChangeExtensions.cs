@@ -71,7 +71,19 @@ namespace Dapplo.CaliburnMicro.Extensions
                     try
                     {
                         var propertyName = propertyChangedEventArgs.PropertyName;
-                        return string.IsNullOrEmpty(propertyName) || propertyName == "*" || propertyNamePattern == propertyName || Regex.IsMatch(propertyName, propertyNamePattern);
+                        if (string.IsNullOrEmpty(propertyName))
+                        {
+                            return true;
+                        }
+                        if (propertyNamePattern.Contains("*") || propertyNamePattern.Contains("."))
+                        {
+                            if (Regex.IsMatch(propertyName, propertyNamePattern))
+                            {
+                                return true;
+                            }
+                        }
+
+                        return propertyName == "*" || propertyNamePattern == propertyName;
                     }
                     catch (Exception ex)
                     {
@@ -112,12 +124,24 @@ namespace Dapplo.CaliburnMicro.Extensions
             Func<EventPattern<PropertyChangedEventArgs>, bool> predicate;
             if (!string.IsNullOrEmpty(propertyNamePattern) && propertyNamePattern != "*")
             {
-                predicate = eventPattern =>
+                predicate = propertyChangedEventPattern =>
                 {
                     try
                     {
-                        var propertyName = eventPattern.EventArgs.PropertyName;
-                        return string.IsNullOrEmpty(propertyName) || propertyName == "*" || propertyNamePattern == propertyName || Regex.IsMatch(propertyName, propertyNamePattern);
+                        var propertyName = propertyChangedEventPattern.EventArgs.PropertyName;
+                        if (string.IsNullOrEmpty(propertyName))
+                        {
+                            return true;
+                        }
+                        if (propertyNamePattern.Contains("*") || propertyNamePattern.Contains("."))
+                        {
+                            if (Regex.IsMatch(propertyName, propertyNamePattern))
+                            {
+                                return true;
+                            }
+                        }
+
+                        return propertyName == "*" || propertyNamePattern == propertyName;
                     }
                     catch (Exception ex)
                     {
@@ -165,7 +189,19 @@ namespace Dapplo.CaliburnMicro.Extensions
                     try
                     {
                         var propertyName = propertyChangedEventArgs.PropertyName;
-                        return string.IsNullOrEmpty(propertyName) || propertyName == "*" || propertyNamePattern == propertyName || Regex.IsMatch(propertyName, propertyNamePattern);
+                        if (string.IsNullOrEmpty(propertyName))
+                        {
+                            return true;
+                        }
+                        if (propertyNamePattern.Contains("*") || propertyNamePattern.Contains("."))
+                        {
+                            if (Regex.IsMatch(propertyName, propertyNamePattern))
+                            {
+                                return true;
+                            }
+                        }
+
+                        return propertyName == "*" || propertyNamePattern == propertyName;
                     }
                     catch (Exception ex)
                     {
@@ -206,12 +242,24 @@ namespace Dapplo.CaliburnMicro.Extensions
             Func<EventPattern<PropertyChangingEventArgs>, bool> predicate;
             if (!string.IsNullOrEmpty(propertyNamePattern) && propertyNamePattern != "*")
             {
-                predicate = eventPattern =>
+                predicate = propertyChangingEventPattern =>
                 {
                     try
                     {
-                        var propertyName = eventPattern.EventArgs.PropertyName;
-                        return string.IsNullOrEmpty(propertyName) || propertyName == "*" || propertyNamePattern == propertyName || Regex.IsMatch(propertyName, propertyNamePattern);
+                        var propertyName = propertyChangingEventPattern.EventArgs.PropertyName;
+                        if (string.IsNullOrEmpty(propertyName))
+                        {
+                            return true;
+                        }
+                        if (propertyNamePattern.Contains("*") || propertyNamePattern.Contains("."))
+                        {
+                            if (Regex.IsMatch(propertyName, propertyNamePattern))
+                            {
+                                return true;
+                            }
+                        }
+
+                        return propertyName == "*" || propertyNamePattern == propertyName;
                     }
                     catch (Exception ex)
                     {
