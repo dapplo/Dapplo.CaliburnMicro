@@ -26,8 +26,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.Log;
@@ -44,6 +42,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
     {
         private static readonly LogSource Log = new LogSource();
         private readonly IEnumerable<Lazy<ITrayIconViewModel>> _trayIconViewModels;
+        private readonly ResourceManager _resourceManager;
         private readonly IWindowManager _windowsManager;
 
         /// <summary>
@@ -55,13 +54,15 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// <summary>
         /// Default constructor
         /// </summary>
+        /// <param name="resourceManager">ResourceManager</param>
         /// <param name="trayIconViewModels">IEnumerable with laze tray icon ViewModels</param>
         /// <param name="windowsManager">IWindowManager</param>
-        public TrayIconManager(
+        public TrayIconManager(ResourceManager resourceManager,
             IEnumerable<Lazy<ITrayIconViewModel>> trayIconViewModels,
             IWindowManager windowsManager
             )
         {
+            _resourceManager = resourceManager;
             _windowsManager = windowsManager;
             _trayIconViewModels = trayIconViewModels;
         }
@@ -108,6 +109,10 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         /// </summary>
         private void InitializeTrayIconViewModels()
         {
+            // Load the TrayIconResourceDirectory.xaml for the look & feel
+            var trayIconResourceDirectory = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.NotifyIconWpf;component/TrayIconResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
+            _resourceManager.AddResourceDictionary(trayIconResourceDirectory);
+
             foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
             {
                 // Get the view, to store it as ITrayIcon

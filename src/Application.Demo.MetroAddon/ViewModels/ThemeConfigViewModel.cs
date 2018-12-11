@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reactive.Disposables;
 using Application.Demo.MetroAddon.Configurations;
+using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
@@ -42,6 +43,7 @@ namespace Application.Demo.MetroAddon.ViewModels
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
+        private readonly ResourceManager _resourceManager;
         private readonly MetroThemeManager _metroThemeManager;
         private readonly ITrayIconManager _trayIconManager;
 
@@ -80,12 +82,14 @@ namespace Application.Demo.MetroAddon.ViewModels
         public ThemeConfigViewModel(
             IMetroConfiguration metroConfiguration,
             IUiTranslations uiTranslations,
+            ResourceManager resourceManager,
             MetroThemeManager metroThemeManager,
             ITrayIconManager trayIconManager
             )
         {
             MetroConfiguration = metroConfiguration;
             UiTranslations = uiTranslations;
+            _resourceManager = resourceManager;
             _metroThemeManager = metroThemeManager;
             _trayIconManager = trayIconManager;
         }
@@ -109,6 +113,10 @@ namespace Application.Demo.MetroAddon.ViewModels
             _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
             // Manually commit
             MetroConfiguration.CommitTransaction();
+            var trayIconResourceDirectory = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.NotifyIconWpf;component/TrayIconResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
+            _resourceManager.DeleteResourceDictionary(trayIconResourceDirectory);
+            _resourceManager.AddResourceDictionary(trayIconResourceDirectory);
+
             _trayIconManager.TrayIcons.ForEach(trayIcon =>
             {
                 trayIcon.Hide();

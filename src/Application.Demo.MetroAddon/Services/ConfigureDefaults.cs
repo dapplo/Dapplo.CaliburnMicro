@@ -25,7 +25,6 @@ using System;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro;
-using Dapplo.CaliburnMicro.Metro;
 
 #endregion
 
@@ -37,11 +36,11 @@ namespace Application.Demo.MetroAddon.Services
     [Service(nameof(ConfigureDefaults), nameof(CaliburnServices.CaliburnMicroBootstrapper), TaskSchedulerName = "ui")]
     public class ConfigureDefaults : IStartup
     {
-        private readonly MetroThemeManager _metroThemeManager;
+        private readonly ResourceManager _resourceManager;
 
-        public ConfigureDefaults(MetroThemeManager metroThemeManager)
+        public ConfigureDefaults(ResourceManager resourceManager)
         {
-            _metroThemeManager = metroThemeManager;
+            _resourceManager = resourceManager;
         }
 
         /// <inheritdoc />
@@ -49,8 +48,8 @@ namespace Application.Demo.MetroAddon.Services
         {
             // Override the ConfigView with a much nicer looking version
             ViewLocator.NameTransformer.AddRule(@"^Application\.Demo\.UseCases\.Configuration\.ViewModels\.ConfigViewModel$", "Application.Demo.MetroAddon.Views.ConfigView");
-            var demoUri = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
-            _metroThemeManager.AddResourceDictionary(demoUri);
+            var demoResources = new Uri("pack://application:,,,/Application.Demo;component/DemoResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
+            _resourceManager.AddResourceDictionary(demoResources);
         }
     }
 }

@@ -42,6 +42,10 @@ namespace Dapplo.CaliburnMicro
                 .As<IniFileConfig>()
                 .SingleInstance();
 
+            builder.RegisterType<ResourceManager>()
+                .AsSelf()
+                .SingleInstance();
+
             builder.RegisterType<IniFileContainer>()
                 .AsSelf()
                 .SingleInstance();

@@ -25,6 +25,10 @@
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <None Remove="TrayIconResourceDirectory.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro">
@@ -51,5 +55,11 @@
     <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
       <Name>Dapplo.CaliburnMicro</Name>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="TrayIconResourceDirectory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

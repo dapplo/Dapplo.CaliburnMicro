@@ -22,10 +22,7 @@
 #region using
 
 using System;
-using System.Linq;
 using System.Windows;
-using Dapplo.Addons;
-using Dapplo.Log;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using MahApps.Metro;
 
@@ -38,8 +35,7 @@ namespace Dapplo.CaliburnMicro.Metro
     /// </summary>
     public sealed class MetroThemeManager
     {
-        private readonly IResourceProvider _resourceProvider;
-        private static readonly LogSource Log = new LogSource();
+        private readonly ResourceManager _resourceManager;
 
         private static readonly string[] Styles =
         {
@@ -52,9 +48,9 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <summary>
         /// Default constructor taking care of initialization
         /// </summary>
-        public MetroThemeManager(IResourceProvider resourceProvider)
+        public MetroThemeManager(ResourceManager resourceManager)
         {
-            _resourceProvider = resourceProvider;
+            _resourceManager = resourceManager;
             foreach (var style in Styles)
             {
                 AddMahappsStyle(style);
@@ -72,30 +68,7 @@ namespace Dapplo.CaliburnMicro.Metro
         public void AddMahappsStyle(string style)
         {
             var packUri = CreateMahappStyleUri(style);
-            if (!_resourceProvider.EmbeddedResourceExists(packUri))
-            {
-                Log.Warn().WriteLine("Style {0} might not be available as {1}.", style, packUri);
-            }
-            AddResourceDictionary(packUri);
-        }
-
-        /// <summary>
-        ///     Add a single ResourceDictionary for the supplied source
-        ///     An example would be /Resources/Icons.xaml (which is in MahApps.Metro.Resources)
-        /// </summary>
-        /// <param name="source">Uri, e.g. /Resources/Icons.xaml or </param>
-        public void AddResourceDictionary(Uri source)
-        {
-            if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source == source))
-            {
-                return;
-            }
-
-            var resourceDictionary = new ResourceDictionary
-            {
-                Source = source
-            };
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            _resourceManager.AddResourceDictionary(packUri);
         }
 
         /// <summary>
@@ -106,13 +79,7 @@ namespace Dapplo.CaliburnMicro.Metro
         public void RemoveMahappsStyle(string style)
         {
             var mahappsStyleUri = CreateMahappStyleUri(style);
-            foreach (var resourceDirectory in Application.Current.Resources.MergedDictionaries.ToList())
-            {
-                if (resourceDirectory.Source == mahappsStyleUri)
-                {
-                    Application.Current.Resources.MergedDictionaries.Remove(resourceDirectory);
-                }
-            }
+            _resourceManager.DeleteResourceDictionary(mahappsStyleUri);
         }
 
         /// <summary>
