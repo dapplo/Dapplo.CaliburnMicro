@@ -13,18 +13,32 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 3.0'
   inputs:
     version: '3.0.100-preview-009825'
 
-- task: VSBuild@1
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.9.2'
   inputs:
-    restoreNugetPackages: true
+    versionSpec: 4.9.2
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: NuGet restore
+  inputs:
+    restoreSolution: '$(solution)'
+    feedsToUse: config
+
+- task: VSBuild@1
+  displayName: 'Build solution **\*.sln'
+  inputs:
     vsVersion: 'latest'
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: 'Run tests'
   inputs:
     testAssemblyVer2: |
      **\$(BuildConfiguration)\**\*test*.dll
