@@ -24,15 +24,11 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reactive.Disposables;
 using Application.Demo.MetroAddon.Configurations;
-using Dapplo.CaliburnMicro;
 using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
-using Dapplo.CaliburnMicro.Metro.Configuration;
-using Dapplo.CaliburnMicro.NotifyIconWpf;
 using Dapplo.Config.Intercepting;
 using Dapplo.Utils.Extensions;
 
@@ -40,12 +36,13 @@ using Dapplo.Utils.Extensions;
 
 namespace Application.Demo.MetroAddon.ViewModels
 {
+    /// <summary>
+    /// This is the ViewModel for the theme configuration
+    /// </summary>
     [SuppressMessage("Sonar Code Smell", "S110:Inheritance tree of classes should not be too deep", Justification = "MVVM Framework brings huge interitance tree.")]
     public sealed class ThemeConfigViewModel : ConfigScreen, IDisposable
     {
-        private readonly ResourceManager _resourceManager;
         private readonly MetroThemeManager _metroThemeManager;
-        private readonly ITrayIconManager _trayIconManager;
 
         /// <summary>
         ///     Here all disposables are registered, so we can clean the up
@@ -53,14 +50,14 @@ namespace Application.Demo.MetroAddon.ViewModels
         private CompositeDisposable _disposables;
 
         /// <summary>
-        ///     The available theme accents
-        /// </summary>
-        public ObservableCollection<Tuple<ThemeAccents, string>> AvailableThemeAccents { get; set; } = new ObservableCollection<Tuple<ThemeAccents, string>>();
-
-        /// <summary>
         ///     The available themes
         /// </summary>
-        public ObservableCollection<Tuple<Themes, string>> AvailableThemes { get; set; } = new ObservableCollection<Tuple<Themes, string>>();
+        public ObservableCollection<string> AvailableThemes { get; set; } = new ObservableCollection<string>();
+
+        /// <summary>
+        ///     The available theme colors
+        /// </summary>
+        public ObservableCollection<string> AvailableThemeColors { get; set; } = new ObservableCollection<string>();
 
         /// <summary>
         /// Used in the UI
@@ -78,50 +75,36 @@ namespace Application.Demo.MetroAddon.ViewModels
         /// <param name="metroConfiguration">IMetroConfiguration</param>
         /// <param name="uiTranslations">IUiTranslations</param>
         /// <param name="metroThemeManager">MetroThemeManager</param>
-        /// <param name="trayIconManager">TrayIconManager</param>
         public ThemeConfigViewModel(
             IMetroConfiguration metroConfiguration,
             IUiTranslations uiTranslations,
-            ResourceManager resourceManager,
-            MetroThemeManager metroThemeManager,
-            ITrayIconManager trayIconManager
+            MetroThemeManager metroThemeManager
             )
         {
             MetroConfiguration = metroConfiguration;
             UiTranslations = uiTranslations;
-            _resourceManager = resourceManager;
             _metroThemeManager = metroThemeManager;
-            _trayIconManager = trayIconManager;
         }
 
         /// <inheritdoc />
         public override void Rollback()
         {
             MetroConfiguration.RollbackTransaction();
-            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeColor);
         }
 
         /// <inheritdoc />
         public override void Terminate()
         {
             MetroConfiguration.RollbackTransaction();
-            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeColor);
         }
 
         public override void Commit()
         {
-            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeAccent);
+            _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, MetroConfiguration.ThemeColor);
             // Manually commit
             MetroConfiguration.CommitTransaction();
-            var trayIconResourceDirectory = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.NotifyIconWpf;component/TrayIconResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
-            _resourceManager.DeleteResourceDictionary(trayIconResourceDirectory);
-            _resourceManager.AddResourceDictionary(trayIconResourceDirectory);
-
-            _trayIconManager.TrayIcons.ForEach(trayIcon =>
-            {
-                trayIcon.Hide();
-                trayIcon.Show();
-            });
         }
 
         /// <inheritdoc />
@@ -131,19 +114,9 @@ namespace Application.Demo.MetroAddon.ViewModels
             _disposables?.Dispose();
             _disposables = new CompositeDisposable();
 
-            AvailableThemeAccents.Clear();
-            foreach (var themeAccent in Enum.GetValues(typeof(ThemeAccents)).Cast<ThemeAccents>())
-            {
-                var translation = themeAccent.EnumValueOf();
-                AvailableThemeAccents.Add(new Tuple<ThemeAccents, string>(themeAccent, translation));
-            }
-
             AvailableThemes.Clear();
-            foreach (var theme in Enum.GetValues(typeof(Themes)).Cast<Themes>())
-            {
-                var translation = theme.EnumValueOf();
-                AvailableThemes.Add(new Tuple<Themes, string>(theme, translation));
-            }
+            MetroThemeManager.AvailableThemes.ForEach(themeBaseColor => AvailableThemes.Add(themeBaseColor));
+            MetroThemeManager.AvailableThemeColors.ForEach(colorScheme => AvailableThemeColors.Add(colorScheme));
 
             // Place this under the Ui parent
             ParentId = "Ui";
@@ -156,22 +129,20 @@ namespace Application.Demo.MetroAddon.ViewModels
 
             // Automatically show theme changes
             _disposables.Add(
-                MetroConfiguration.OnPropertyChanging(nameof(MetroConfiguration.ThemeAccent)).Subscribe(args =>
-                {
-                    if (args is PropertyChangingEventArgsEx propertyChangingEventArgsEx)
-                    {
-                        _metroThemeManager.ChangeTheme(MetroConfiguration.Theme, (ThemeAccents)propertyChangingEventArgsEx.NewValue);
-                    }
-                })
-            );
-
-            // Automatically show theme accent changes
-            _disposables.Add(
                 MetroConfiguration.OnPropertyChanging(nameof(MetroConfiguration.Theme)).Subscribe(args =>
                 {
                     if (args is PropertyChangingEventArgsEx propertyChangingEventArgsEx)
                     {
-                        _metroThemeManager.ChangeTheme((Themes)propertyChangingEventArgsEx.NewValue, MetroConfiguration.ThemeAccent);
+                        _metroThemeManager.ChangeTheme(propertyChangingEventArgsEx.NewValue as string, null);
+                    }
+                })
+            );
+            _disposables.Add(
+                MetroConfiguration.OnPropertyChanging(nameof(MetroConfiguration.ThemeColor)).Subscribe(args =>
+                {
+                    if (args is PropertyChangingEventArgsEx propertyChangingEventArgsEx)
+                    {
+                        _metroThemeManager.ChangeTheme(null, propertyChangingEventArgsEx.NewValue as string);
                     }
                 })
             );

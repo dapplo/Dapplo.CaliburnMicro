@@ -111,7 +111,7 @@ namespace Dapplo.CaliburnMicro.NotifyIconWpf
         {
             // Load the TrayIconResourceDirectory.xaml for the look & feel
             var trayIconResourceDirectory = new Uri("pack://application:,,,/Dapplo.CaliburnMicro.NotifyIconWpf;component/TrayIconResourceDirectory.xaml", UriKind.RelativeOrAbsolute);
-            _resourceManager.AddResourceDictionary(trayIconResourceDirectory);
+            _resourceManager.AddResourceDictionary(trayIconResourceDirectory, 1);
 
             foreach (var trayIconViewModel in _trayIconViewModels.Select(x => x.Value))
             {

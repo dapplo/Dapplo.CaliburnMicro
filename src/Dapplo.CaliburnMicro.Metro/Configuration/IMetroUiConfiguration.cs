@@ -29,15 +29,16 @@ namespace Dapplo.CaliburnMicro.Metro.Configuration
     public interface IMetroUiConfiguration
     {
         /// <summary>
-        ///     The current theme
+        ///     The theme
         /// </summary>
-        [DefaultValue(Themes.Light)]
-        Themes Theme { get; set; }
+        [DefaultValue("Light")]
+        string Theme { get; set; }
 
         /// <summary>
-        ///     The current theme accent
+        ///     The color for the theme
         /// </summary>
-        [DefaultValue(ThemeAccents.Orange)]
-        ThemeAccents ThemeAccent { get; set; }
+        [DefaultValue("Orange")]
+        string ThemeColor { get; set; }
+
     }
 }

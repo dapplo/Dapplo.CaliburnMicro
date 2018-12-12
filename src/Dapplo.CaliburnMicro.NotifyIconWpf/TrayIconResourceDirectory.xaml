@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:cal="http://www.caliburnproject.org"
-                    xmlns:caliburnMicro="clr-namespace:Dapplo.CaliburnMicro;assembly=Dapplo.CaliburnMicro"
+                    xmlns:dapploCM="clr-namespace:Dapplo.CaliburnMicro;assembly=Dapplo.CaliburnMicro"
                     xmlns:cmMenu="clr-namespace:Dapplo.CaliburnMicro.Menu;assembly=Dapplo.CaliburnMicro.Menu"
                     xmlns:security="clr-namespace:Dapplo.CaliburnMicro.Security.Behaviors;assembly=Dapplo.CaliburnMicro.Security"
                     xmlns:converters="clr-namespace:Dapplo.CaliburnMicro.Converters;assembly=Dapplo.CaliburnMicro"
@@ -31,7 +31,7 @@
         <Setter Property="InputGestureText" Value="{Binding HotKeyHint}" />
         <Setter Property="cal:Action.TargetWithoutContext" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=.,Converter={StaticResource HasInterfaceConverter}, ConverterParameter={x:Type caliburnMicro:ICanBeClicked}}" Value="True">
+            <DataTrigger Binding="{Binding Path=.,Converter={StaticResource HasInterfaceConverter}, ConverterParameter={x:Type dapploCM:ICanBeClicked}}" Value="True">
                 <Setter Property="cal:Message.Attach" Value="Click($originalDataContext)" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Style}" Value="{x:Static cmMenu:MenuItemStyles.Separator}">
@@ -43,8 +43,7 @@
                 <Setter Property="IsEnabled" Value="False" />
                 <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}"
-                                     Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
+            <DataTrigger Binding="{Binding Converter={StaticResource AuthenticationTargetPropertyConverter}}" Value="{x:Static security:AuthenticationTargetProperties.Visibility}">
                 <Setter Property="security:AuthenticationVisibility.Permissions" Value="{Binding Permissions}" />
                 <Setter Property="security:AuthenticationVisibility.WhenPermissions" Value="{Binding WhenPermission}" />
                 <Setter Property="security:AuthenticationVisibility.WhenPermissionsMissing" Value="{Binding WhenPermissionMissing}" />

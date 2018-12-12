@@ -22,8 +22,9 @@
 #region using
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
-using Dapplo.CaliburnMicro.Metro.Configuration;
 using MahApps.Metro;
 
 #endregion
@@ -42,8 +43,8 @@ namespace Dapplo.CaliburnMicro.Metro
             "Controls", "Fonts", "Controls.AnimatedSingleRowTabControl"
         };
 
-        private ThemeAccents? _themeAccent;
-        private Themes? _theme;
+        private string _theme;
+        private string _themeColor;
 
         /// <summary>
         /// Default constructor taking care of initialization
@@ -51,10 +52,8 @@ namespace Dapplo.CaliburnMicro.Metro
         public MetroThemeManager(ResourceManager resourceManager)
         {
             _resourceManager = resourceManager;
-            foreach (var style in Styles)
-            {
-                AddMahappsStyle(style);
-            }
+            int order = 0;
+            _resourceManager.AddResourceDictionaries(Styles.Select(style => (CreateMahappStyleUri(style), -100 + order++) ));
         }
 
         /// <summary>
@@ -65,10 +64,11 @@ namespace Dapplo.CaliburnMicro.Metro
         ///     Style name, this is actually what is added behind
         ///     pack://application:,,,/MahApps.Metro;component/Styles/ (and .xaml is added)
         /// </param>
-        public void AddMahappsStyle(string style)
+        /// <param name="order">int order for the ResourceManager</param>
+        public void AddMahappsStyle(string style, int order = 0)
         {
             var packUri = CreateMahappStyleUri(style);
-            _resourceManager.AddResourceDictionary(packUri);
+            _resourceManager.AddResourceDictionary(packUri, order);
         }
 
         /// <summary>
@@ -85,45 +85,74 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <summary>
         ///     Change the current theme
         /// </summary>
-        /// <param name="theme">Themes</param>
-        /// <param name="themeAccent">ThemeAccents</param>
-        public void ChangeTheme(Themes? theme, ThemeAccents? themeAccent)
+        /// <param name="theme">string</param>
+        /// <param name="themeColor">string</param>
+        public void ChangeTheme(string theme, string themeColor)
         {
-            if (_themeAccent.HasValue && _theme.HasValue)
+            if (string.IsNullOrEmpty(theme))
             {
-                // Remove current
-                RemoveMahappsStyle($"Themes/{_theme.Value}.{_themeAccent.Value}");
+                theme = theme ?? _theme;
             }
+            if (string.IsNullOrEmpty(themeColor))
+            {
+                themeColor = themeColor ?? _themeColor;
+            }
+            Theme newTheme = ThemeManager.GetTheme($"{theme}.{themeColor}");
+            ChangeTheme(newTheme);
+        }
 
-            if (theme.HasValue)
+        /// <summary>
+        ///     Change the current theme
+        /// </summary>
+        /// <param name="themeName">string</param>
+        public void ChangeTheme(string themeName)
+        {
+            Theme newTheme;
+            if (string.IsNullOrEmpty(themeName))
             {
-                _theme = theme;
+                newTheme = ThemeManager.Themes.First();
             }
-            if(themeAccent.HasValue)
+            else
             {
-                _themeAccent = themeAccent;
+                newTheme = ThemeManager.GetTheme(themeName);
             }
+            ChangeTheme(newTheme);
+        }
 
-            if (!_themeAccent.HasValue || !_theme.HasValue)
+        /// <summary>
+        ///     Change the current theme
+        /// </summary>
+        /// <param name="theme">Theme</param>
+        public void ChangeTheme(Theme theme)
+        {
+            _theme = theme.BaseColorScheme;
+            _themeColor = theme.ColorScheme;
+            foreach (var sourceUri in _resourceManager.Resources.ToList().Select(resource => resource.Source).Where(source => source.AbsoluteUri.Contains("theme")))
             {
-                return;
+                _resourceManager.DeleteResourceDictionary(sourceUri);
             }
-
-            // Apply the new Theme information
-            var themeName = $"{_theme.Value}.{_themeAccent.Value}";
-            var themeString = $"Themes/{themeName}";
-            AddMahappsStyle(themeString);
-            ThemeManager.ChangeTheme(Application.Current, themeName);
+            _resourceManager.AddResourceDictionary(theme.Resources.Source, 0, false);
+            ThemeManager.ChangeTheme(Application.Current, theme);
         }
 
         /// <summary>
         ///     Create a MapApps Uri for the supplied style
         /// </summary>
         /// <param name="style">e.g. Fonts or Controls</param>
-        /// <returns></returns>
+        /// <returns>Uri</returns>
         public static Uri CreateMahappStyleUri(string style)
         {
             return new Uri($@"pack://application:,,,/MahApps.Metro;component/Styles/{style}.xaml", UriKind.RelativeOrAbsolute);
         }
+
+        /// <summary>
+        /// The available themes
+        /// </summary>
+        public static IEnumerable<string> AvailableThemes => ThemeManager.Themes.Select(theme => theme.BaseColorScheme).Distinct();
+
+        /// <summary>
+        /// The available theme colors
+        /// </summary>
+        public static IEnumerable<string> AvailableThemeColors => ThemeManager.Themes.Select(theme => theme.ColorScheme).Distinct();
     }
 }

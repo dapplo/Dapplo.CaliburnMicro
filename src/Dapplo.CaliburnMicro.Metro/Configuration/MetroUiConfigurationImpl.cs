@@ -23,7 +23,7 @@ namespace Dapplo.CaliburnMicro.Metro.Configuration
 {
     public class MetroUiConfigurationImpl : IMetroUiConfiguration
     {
-        public Themes Theme { get; set; } = Themes.Light;
-        public ThemeAccents ThemeAccent { get; set; } = ThemeAccents.Blue;
+        public string Theme { get; set; }
+        public string ThemeColor { get; set; }
     }
 }

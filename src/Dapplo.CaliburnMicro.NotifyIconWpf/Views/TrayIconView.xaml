@@ -14,9 +14,9 @@
                         ToolTipText="{Binding DisplayName}"
                         Visibility="Collapsed">
     <notifyIconWpf:TrayIcon.ContextMenu>
-        <ContextMenu ItemsSource="{Binding TrayMenuItems}">
+        <ContextMenu ItemsSource="{Binding TrayMenuItems}" Name="TrayContextMenu">
             <ContextMenu.Resources>
-                <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource TrayContextMenu}"/>
+                <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource TrayContextMenu}" />
                 <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource TrayMenuItem}"/>
             </ContextMenu.Resources>
         </ContextMenu>
