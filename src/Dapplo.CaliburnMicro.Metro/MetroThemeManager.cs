@@ -91,11 +91,11 @@ namespace Dapplo.CaliburnMicro.Metro
         {
             if (string.IsNullOrEmpty(theme))
             {
-                theme = theme ?? _theme;
+                theme = _theme;
             }
             if (string.IsNullOrEmpty(themeColor))
             {
-                themeColor = themeColor ?? _themeColor;
+                themeColor = _themeColor;
             }
             Theme newTheme = ThemeManager.GetTheme($"{theme}.{themeColor}");
             ChangeTheme(newTheme);
