@@ -15,6 +15,7 @@
     <DisableImplicitFrameworkReferences Condition="'$(TargetFramework)' == 'net471'">true</DisableImplicitFrameworkReferences>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>false</UseWindowsForms>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' != 'Debug' And !$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Demo'))">

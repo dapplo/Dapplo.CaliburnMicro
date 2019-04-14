@@ -4,6 +4,7 @@
 #tool "coveralls.io"
 #addin "Cake.DocFx"
 #addin "Cake.Coveralls"
+#addin "Cake.FileHelpers"
 
 var target = Argument("target", "Build");
 var configuration = Argument("configuration", "release");
@@ -162,6 +163,13 @@ Task("Build")
 		PlatformTarget = PlatformTarget.MSIL
 	});
 });
+
+Task("DNC30Only")
+    .Does(() =>
+{
+    ReplaceRegexInFiles("./**/*.csproj", "<TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>", "<TargetFramework>netcoreapp3.0</TargetFramework><!-- net471;netcoreapp3.0 -->");
+});
+
 
 // Clean all unneeded files, so we build on a clean file system
 Task("Clean")
