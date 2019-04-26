@@ -28,7 +28,7 @@
       <Version>1.2.4</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Input">
-      <Version>0.8.18</Version>
+      <Version>0.8.27</Version>
     </PackageReference>
   </ItemGroup>
 
