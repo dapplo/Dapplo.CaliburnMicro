@@ -80,13 +80,13 @@ namespace Application.Demo.UseCases.Toast
             var message = toastExampleViewModelFactory();
 
             // Prepare to dispose the view model parts automatically if it's finished
-            EventHandler<DeactivationEventArgs> disposeHandler = null;
-            disposeHandler = (sender, args) =>
+            void DeactivateHandler(object sender, DeactivationEventArgs args)
             {
-                message.Value.Deactivated -= disposeHandler;
+                message.Value.Deactivated -= DeactivateHandler;
                 message.Dispose();
-            };
-            message.Value.Deactivated += disposeHandler;
+            }
+
+            message.Value.Deactivated += DeactivateHandler;
 
             // Show the ViewModel as toast 
             eventAggregator.PublishOnCurrentThread(message.Value);
