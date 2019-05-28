@@ -73,7 +73,7 @@
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks">
-      <Version>3.0.0-alpha0140</Version>
+      <Version>3.0.0-alpha0146</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.Build">
       <Version>1.0.21</Version>

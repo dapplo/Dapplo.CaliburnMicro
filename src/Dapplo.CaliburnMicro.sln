@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro", "Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj", "{971D2CE0-140C-40C1-BFF7-34FF74FC0B04}"
 EndProject
@@ -48,6 +48,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.Addon", "Application.Demo.Addon\Application.Demo.Addon.csproj", "{AE77A5C9-3DDC-4839-939E-CD3A7500FDC8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Demo.MetroAddon", "Application.Demo.MetroAddon\Application.Demo.MetroAddon.csproj", "{BF0A40B2-D678-4226-828E-1CB2918E0FD0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapplo.CaliburnMicro.ClickOnce", "Dapplo.CaliburnMicro.ClickOnce\Dapplo.CaliburnMicro.ClickOnce.csproj", "{B594BBC7-5BFC-4872-91CF-5E70A91A59BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +137,10 @@ Global
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF0A40B2-D678-4226-828E-1CB2918E0FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B594BBC7-5BFC-4872-91CF-5E70A91A59BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B594BBC7-5BFC-4872-91CF-5E70A91A59BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B594BBC7-5BFC-4872-91CF-5E70A91A59BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B594BBC7-5BFC-4872-91CF-5E70A91A59BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
