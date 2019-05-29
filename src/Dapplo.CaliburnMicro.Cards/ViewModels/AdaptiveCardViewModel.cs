@@ -33,6 +33,7 @@ using AdaptiveCards.Rendering;
 using AdaptiveCards.Rendering.Wpf;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Toasts.ViewModels;
+using Dapplo.Log;
 
 namespace Dapplo.CaliburnMicro.Cards.ViewModels
 {
@@ -42,8 +43,10 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
     /// </summary>
     public class AdaptiveCardViewModel : ToastBaseViewModel
     {
+        private static readonly LogSource Log = new LogSource();
         private FrameworkElement _card;
         private AdaptiveCard _adaptiveCard;
+        private readonly AdaptiveHostConfig _adaptiveHostConfig;
         private readonly IEventAggregator _eventAggregator;
 
 #if DEBUG
@@ -56,8 +59,8 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             {
                 return;
             }
-            // Some designtime example
-            Card = new AdaptiveCard
+            // Some design-time example
+            Card = new AdaptiveCard("1.1")
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -73,7 +76,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                     new AdaptiveShowCardAction
                     {
                         Title = "Do you like this?",
-                        Card = new AdaptiveCard
+                        Card = new AdaptiveCard("1.1")
                         {
                             Body = new List<AdaptiveElement>
                             {
@@ -92,12 +95,14 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
         /// <summary>
         /// Constructor with AdaptiveCard
         /// </summary>
+        /// <param name="adaptiveHostConfig">AdaptiveHostConfig</param>
         /// <param name="adaptiveCard"></param>
-        /// <param name="eventAggregator">Optional IEventAggregator for when the AdativeCard has a ShowCardAction</param>
-        public AdaptiveCardViewModel(AdaptiveCard adaptiveCard, IEventAggregator eventAggregator = null)
+        /// <param name="eventAggregator">Optional IEventAggregator for when the AdaptiveCard has a ShowCardAction</param>
+        public AdaptiveCardViewModel(AdaptiveHostConfig adaptiveHostConfig, AdaptiveCard adaptiveCard, IEventAggregator eventAggregator = null)
         {
-            Card = adaptiveCard;
+            _adaptiveHostConfig = adaptiveHostConfig;
             _eventAggregator = eventAggregator;
+            Card = adaptiveCard;
         }
 
         /// <summary>
@@ -109,28 +114,13 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
             set
             {
                 _adaptiveCard = value;
-                var hostConfig = new AdaptiveHostConfig
+                var renderer = new AdaptiveCardRenderer(_adaptiveHostConfig);
+                var renderedAdaptiveCard = renderer.RenderCard(_adaptiveCard);
+                foreach (var warning in renderedAdaptiveCard.Warnings)
                 {
-                    FontSizes = {
-                        Small = 15,
-                        Default = 20,
-                        Medium = 25,
-                        Large = 30,
-                        ExtraLarge= 40
-                    },
-                    ImageSizes =
-                    {
-                        Large = 100,
-                        Medium = 70,
-                        Small = 40
-                    }
-                };
-                var renderer = new AdaptiveCardRenderer(hostConfig)
-                {
-                    // Set defined resources here.
-                    Resources = new ResourceDictionary()
-                };
-                RenderedCard = renderer.RenderCard(_adaptiveCard).FrameworkElement;
+                    Log.Warn().WriteLine(warning.Message);
+                }
+                RenderedCard = renderedAdaptiveCard.FrameworkElement;
             }
         }
 
@@ -173,7 +163,7 @@ namespace Dapplo.CaliburnMicro.Cards.ViewModels
                     Process.Start(openUrlAction.Url.AbsoluteUri);
                     return;
                 case AdaptiveShowCardAction showCardAction:
-                    _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(showCardAction.Card, _eventAggregator));
+                    _eventAggregator.BeginPublishOnUIThread(new AdaptiveCardViewModel(_adaptiveHostConfig, showCardAction.Card, _eventAggregator));
                     return;
                 case AdaptiveSubmitAction submitAction:
                     // TODO: submit how / where?

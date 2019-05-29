@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using AdaptiveCards;
+using AdaptiveCards.Rendering;
 using Application.Demo.Languages;
 using Caliburn.Micro;
 using Dapplo.CaliburnMicro.Cards.ViewModels;
@@ -46,7 +47,7 @@ namespace Application.Demo.UseCases.Toast
     {
         private static readonly LogSource Log = new LogSource();
 
-        public AdaptiveCardMenuItem(
+        public AdaptiveCardMenuItem(AdaptiveHostConfig adaptiveHostConfig,
             IEventAggregator eventAggregator,
             IContextMenuTranslations contextMenuTranslations)
         {
@@ -63,7 +64,7 @@ namespace Application.Demo.UseCases.Toast
             {
                 Log.Debug().WriteLine("ActiveCard");
 
-                var card = new AdaptiveCard
+                var card = new AdaptiveCard("1.1")
                 {
                     Body = new List<AdaptiveElement>
                     {
@@ -85,7 +86,7 @@ namespace Application.Demo.UseCases.Toast
                         new AdaptiveShowCardAction
                         {
                             Title = "Do you like this?",
-                            Card = new AdaptiveCard
+                            Card = new AdaptiveCard("1.1")
                             {
                                 Body = new List<AdaptiveElement>
                                 {
@@ -99,7 +100,7 @@ namespace Application.Demo.UseCases.Toast
                     }
                 };
 
-                eventAggregator.PublishOnCurrentThread(new AdaptiveCardViewModel(card, eventAggregator));
+                eventAggregator.PublishOnCurrentThread(new AdaptiveCardViewModel(adaptiveHostConfig, card, eventAggregator));
             };
 
             this.VisibleOnPermissions("Admin");
