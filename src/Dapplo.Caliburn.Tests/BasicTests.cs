@@ -65,7 +65,7 @@ namespace Dapplo.Caliburn.Tests
                 .GroupBy(x => x.Item2.Groups["IETF"].Value)
                 .ToDictionary(group => group.Key, group => group.Select(x => x.Item1)
                     .ToList());
-
+            Assert.NotEmpty(groupedFiles);
             var foundFiles = FileLocations.Scan(languageConfig.SpecifiedDirectories, filePattern).Select(tuple => tuple.Item1).Select(Path.GetFileName).ToList();
             Assert.Contains("language_addon1-de-DE.xml", foundFiles);
             Assert.Contains("language_addon1-en-US.xml", foundFiles);
