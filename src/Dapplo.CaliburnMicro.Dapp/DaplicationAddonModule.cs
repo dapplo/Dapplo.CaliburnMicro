@@ -36,7 +36,6 @@ namespace Dapplo.CaliburnMicro.Dapp
                 .As<IService>()
                 .SingleInstance();
 
-
             // Export the DapploWindowManager if no other IWindowManager is registered
             builder.RegisterType<DapploWindowManager>()
                 .As<IWindowManager>()
