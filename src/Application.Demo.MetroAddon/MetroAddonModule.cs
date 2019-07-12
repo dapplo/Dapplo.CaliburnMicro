@@ -24,11 +24,12 @@ using Application.Demo.MetroAddon.ViewModels;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
-using Application.Demo.MetroAddon.Configurations.Impl;
 using Application.Demo.MetroAddon.Configurations;
+using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using Dapplo.CaliburnMicro.Metro.Configuration;
+using Dapplo.Config.Ini.Extensions;
 
 namespace Application.Demo.MetroAddon
 {
@@ -39,20 +40,29 @@ namespace Application.Demo.MetroAddon
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .RegisterType<CredentialsTranslationsImpl>()
+                .Register(c => LanguageBase<ICredentialsTranslations>.Create())
                 .As<ICredentialsTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .RegisterType<MetroConfigurationImpl>()
+                .Register(c => IniSectionBase<IMetroConfiguration>.Create()
+                    .RegisterAfterLoad(iniSection =>
+                    {
+                        if (!(iniSection is IMetroUiConfiguration metroConfig))
+                        {
+                            return;
+                        }
+
+                        c.Resolve<MetroThemeManager>().ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                    }))
                 .As<IMetroConfiguration>()
                 .As<IIniSection>()
                 .As<IMetroUiConfiguration>()
                 .SingleInstance();
 
             builder
-                .RegisterType<UiTranslationsImpl>()
+                .Register(c => LanguageBase<IUiTranslations>.Create())
                 .As<IUiTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

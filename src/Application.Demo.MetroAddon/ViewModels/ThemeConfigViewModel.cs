@@ -30,7 +30,6 @@ using Dapplo.CaliburnMicro.Configuration;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Intercepting;
-using Dapplo.Utils.Extensions;
 
 #endregion
 
@@ -115,8 +114,14 @@ namespace Application.Demo.MetroAddon.ViewModels
             _disposables = new CompositeDisposable();
 
             AvailableThemes.Clear();
-            MetroThemeManager.AvailableThemes.ForEach(themeBaseColor => AvailableThemes.Add(themeBaseColor));
-            MetroThemeManager.AvailableThemeColors.ForEach(colorScheme => AvailableThemeColors.Add(colorScheme));
+            foreach (var theme in MetroThemeManager.AvailableThemes)
+            {
+                AvailableThemes.Add(theme);
+            }
+            foreach (var themeColor in MetroThemeManager.AvailableThemeColors)
+            {
+                AvailableThemeColors.Add(themeColor);
+            }
 
             // Place this under the Ui parent
             ParentId = "Ui";
