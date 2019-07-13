@@ -71,49 +71,49 @@ namespace Application.Demo
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<ICoreTranslations>.Create())
+                .Register(c => Language<ICoreTranslations>.Create())
                 .As<ICoreTranslations>()
                 .As<IErrorTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => IniSectionBase<IDemoConfiguration>.Create())
+                .Register(c => IniSection<IDemoConfiguration>.Create())
                 .As<IDemoConfiguration>()
                 .As<IIniSection>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IDemoConfigTranslations>.Create())
+                .Register(c => Language<IDemoConfigTranslations>.Create())
                 .As<IDemoConfigTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
             builder
-                .Register(c => LanguageBase<IContextMenuTranslations>.Create())
+                .Register(c => Language<IContextMenuTranslations>.Create())
                 .As<IContextMenuTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IMenuTranslations>.Create())
+                .Register(c => Language<IMenuTranslations>.Create())
                 .As<IMenuTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IToastTranslations>.Create())
+                .Register(c => Language<IToastTranslations>.Create())
                 .As<IToastTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IValidationErrors>.Create())
+                .Register(c => Language<IValidationErrors>.Create())
                 .As<IValidationErrors>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IWizardTranslations>.Create())
+                .Register(c => Language<IWizardTranslations>.Create())
                 .As<IWizardTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

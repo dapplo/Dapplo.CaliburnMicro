@@ -35,7 +35,7 @@ namespace Application.Demo.Addon
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .Register(c => LanguageBase<IAddonTranslations>.Create())
+                .Register(c => Language<IAddonTranslations>.Create())
                 .As<IAddonTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

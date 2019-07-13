@@ -28,7 +28,7 @@
   
   <ItemGroup>
 	<PackageReference Include="Dapplo.Config.Language">
-      <Version>2.0.4-preview</Version>
+      <Version>2.0.6-preview</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.5</Version>

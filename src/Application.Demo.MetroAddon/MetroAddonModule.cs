@@ -29,7 +29,7 @@ using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using Dapplo.CaliburnMicro.Metro.Configuration;
-using Dapplo.Config.Ini.Extensions;
+using Dapplo.Config.Extensions;
 
 namespace Application.Demo.MetroAddon
 {
@@ -40,29 +40,34 @@ namespace Application.Demo.MetroAddon
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .Register(c => LanguageBase<ICredentialsTranslations>.Create())
+                .Register(c => Language<ICredentialsTranslations>.Create())
                 .As<ICredentialsTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .Register(c => IniSectionBase<IMetroConfiguration>.Create()
-                    .RegisterAfterLoad(iniSection =>
-                    {
-                        if (!(iniSection is IMetroUiConfiguration metroConfig))
+                .Register(c =>
+                {
+                    var metroConfiguration = MetroConfigurationImpl.Create(out var target);
+                    var metroThemeManager = c.Resolve<MetroThemeManager>();
+                    target.OnAfterLoad = iniSection =>
                         {
-                            return;
-                        }
+                            if (!(iniSection is IMetroUiConfiguration metroConfig))
+                            {
+                                return;
+                            }
 
-                        c.Resolve<MetroThemeManager>().ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
-                    }))
+                            metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                        };
+                    return metroConfiguration;
+                })
+                .As<IMetroUiConfiguration>()
                 .As<IMetroConfiguration>()
                 .As<IIniSection>()
-                .As<IMetroUiConfiguration>()
                 .SingleInstance();
 
             builder
-                .Register(c => LanguageBase<IUiTranslations>.Create())
+                .Register(c => Language<IUiTranslations>.Create())
                 .As<IUiTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

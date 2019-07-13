@@ -54,7 +54,7 @@ namespace Dapplo.CaliburnMicro
                 .SingleInstance();
 
             builder
-                .Register(c => IniSectionBase<IUiConfiguration>.Create())
+                .Register(c => IniSection<IUiConfiguration>.Create())
                 .As<IUiConfiguration>()
                 .As<IIniSection>()
                 .SingleInstance();

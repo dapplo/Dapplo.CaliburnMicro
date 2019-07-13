@@ -44,7 +44,7 @@ namespace Dapplo.CaliburnMicro.Metro
                .SingleInstance();
             
             builder
-                .Register(c => DictionaryConfigurationBase<IMetroUiConfiguration>.Create())
+                .Register(c => DictionaryConfiguration<IMetroUiConfiguration>.Create())
                 .IfNotRegistered(typeof(IMetroUiConfiguration))
                 .As<IMetroUiConfiguration>()
                 .SingleInstance();
