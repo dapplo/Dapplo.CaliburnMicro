@@ -29,7 +29,6 @@ using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using Dapplo.CaliburnMicro.Metro.Configuration;
-using Dapplo.Config.Extensions;
 
 namespace Application.Demo.MetroAddon
 {
@@ -48,17 +47,20 @@ namespace Application.Demo.MetroAddon
             builder
                 .Register(c =>
                 {
-                    var metroConfiguration = MetroConfigurationImpl.Create(out var target);
-                    var metroThemeManager = c.Resolve<MetroThemeManager>();
-                    target.OnAfterLoad = iniSection =>
-                        {
-                            if (!(iniSection is IMetroUiConfiguration metroConfig))
-                            {
-                                return;
-                            }
+                    var metroConfiguration = IniSection<IMetroConfiguration>.Create();
 
-                            metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
-                        };
+                    // add specific code
+                    var metroThemeManager = c.Resolve<MetroThemeManager>();
+
+                    metroConfiguration.RegisterAfterLoad(iniSection =>
+                    {
+                        if (!(iniSection is IMetroUiConfiguration metroConfig))
+                        {
+                            return;
+                        }
+
+                        metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                    });
                     return metroConfiguration;
                 })
                 .As<IMetroUiConfiguration>()
