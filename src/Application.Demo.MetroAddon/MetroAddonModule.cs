@@ -24,8 +24,8 @@ using Application.Demo.MetroAddon.ViewModels;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
-using Application.Demo.MetroAddon.Configurations.Impl;
 using Application.Demo.MetroAddon.Configurations;
+using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using Dapplo.CaliburnMicro.Metro.Configuration;
@@ -39,20 +39,37 @@ namespace Application.Demo.MetroAddon
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .RegisterType<CredentialsTranslationsImpl>()
+                .Register(c => Language<ICredentialsTranslations>.Create())
                 .As<ICredentialsTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
             builder
-                .RegisterType<MetroConfigurationImpl>()
+                .Register(c =>
+                {
+                    var metroConfiguration = IniSection<IMetroConfiguration>.Create();
+
+                    // add specific code
+                    var metroThemeManager = c.Resolve<MetroThemeManager>();
+
+                    metroConfiguration.RegisterAfterLoad(iniSection =>
+                    {
+                        if (!(iniSection is IMetroUiConfiguration metroConfig))
+                        {
+                            return;
+                        }
+
+                        metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                    });
+                    return metroConfiguration;
+                })
+                .As<IMetroUiConfiguration>()
                 .As<IMetroConfiguration>()
                 .As<IIniSection>()
-                .As<IMetroUiConfiguration>()
                 .SingleInstance();
 
             builder
-                .RegisterType<UiTranslationsImpl>()
+                .Register(c => Language<IUiTranslations>.Create())
                 .As<IUiTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

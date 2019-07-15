@@ -33,9 +33,6 @@
     <PackageReference Include="Dapplo.Addons.Bootstrapper">
       <Version>1.2.17</Version>
     </PackageReference>
-    <PackageReference Include="Dapplo.Utils">
-      <Version>1.1.21</Version>
-    </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.5</Version>
     </PackageReference>

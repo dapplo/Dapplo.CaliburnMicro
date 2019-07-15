@@ -29,7 +29,6 @@ using Application.Demo.Languages;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Wizard;
 using Dapplo.CaliburnMicro.Wizard.ViewModels;
-using Dapplo.Utils.Collections;
 
 #endregion
 
@@ -91,7 +90,7 @@ namespace Application.Demo.UseCases.Wizard.ViewModels
             // automatically update the DisplayName
             WizardTranslations.CreateDisplayNameBinding(this, nameof(IWizardTranslations.Title));
             // Set the WizardScreens as TrulyObservableCollection (needed for the WizardProgressViewModel) and by ordering them
-            WizardScreens = new TrulyObservableCollection<IWizardScreen>(wizardItems.Select(x => x.Value).OrderBy(x => x.Order));
+            WizardScreens = wizardItems.Select(x => x.Value).OrderBy(x => x.Order);
             WizardProgress = new WizardProgressViewModel(this);
         }
 

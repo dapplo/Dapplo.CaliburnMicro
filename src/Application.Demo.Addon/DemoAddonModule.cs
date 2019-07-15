@@ -20,7 +20,6 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using Application.Demo.Addon.Languages;
-using Application.Demo.Addon.Languages.Impl;
 using Autofac;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
@@ -35,7 +34,8 @@ namespace Application.Demo.Addon
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<AddonTranslationsImpl>()
+            builder
+                .Register(c => Language<IAddonTranslations>.Create())
                 .As<IAddonTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

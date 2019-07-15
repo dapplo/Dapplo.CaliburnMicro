@@ -20,9 +20,7 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using Application.Demo.Languages;
-using Application.Demo.Languages.Impl;
 using Application.Demo.Models;
-using Application.Demo.Models.Impl;
 using Application.Demo.Services;
 using Application.Demo.Shared;
 using Application.Demo.UseCases.Configuration.ViewModels;
@@ -72,42 +70,50 @@ namespace Application.Demo
                 .As<LanguageConfig>()
                 .SingleInstance();
 
-            builder.RegisterType<CoreTranslationsImpl>()
+            builder
+                .Register(c => Language<ICoreTranslations>.Create())
                 .As<ICoreTranslations>()
                 .As<IErrorTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
-            builder.RegisterType<DemoConfigurationImpl>()
+            builder
+                .Register(c => IniSection<IDemoConfiguration>.Create())
                 .As<IDemoConfiguration>()
                 .As<IIniSection>()
                 .SingleInstance();
 
-            builder.RegisterType<DemoConfigTranslationsImpl>()
+            builder
+                .Register(c => Language<IDemoConfigTranslations>.Create())
                 .As<IDemoConfigTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
-            builder.RegisterType<ContextMenuTranslationsImpl>()
+            builder
+                .Register(c => Language<IContextMenuTranslations>.Create())
                 .As<IContextMenuTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
-            builder.RegisterType<MenuTranslationsImpl>()
+            builder
+                .Register(c => Language<IMenuTranslations>.Create())
                 .As<IMenuTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
-            builder.RegisterType<ToastTranslationsImpl>()
+            builder
+                .Register(c => Language<IToastTranslations>.Create())
                 .As<IToastTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
 
-            builder.RegisterType<ValidationErrorsImpl>()
+            builder
+                .Register(c => Language<IValidationErrors>.Create())
                 .As<IValidationErrors>()
                 .As<ILanguage>()
                 .SingleInstance();
 
-            builder.RegisterType<WizardTranslationsImpl>()
+            builder
+                .Register(c => Language<IWizardTranslations>.Create())
                 .As<IWizardTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();

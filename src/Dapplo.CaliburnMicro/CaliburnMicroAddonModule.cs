@@ -23,7 +23,6 @@ using Autofac;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Configuration;
-using Dapplo.CaliburnMicro.Configuration.Impl;
 using Dapplo.CaliburnMicro.Configurers;
 using Dapplo.CaliburnMicro.Services;
 using Dapplo.Config.Ini;
@@ -54,7 +53,8 @@ namespace Dapplo.CaliburnMicro
                 .As<IService>()
                 .SingleInstance();
 
-            builder.RegisterType<UiConfigurationImpl>()
+            builder
+                .Register(c => IniSection<IUiConfiguration>.Create())
                 .As<IUiConfiguration>()
                 .As<IIniSection>()
                 .SingleInstance();

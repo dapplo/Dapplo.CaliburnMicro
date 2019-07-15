@@ -31,7 +31,6 @@ using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
-using Dapplo.Utils;
 
 #endregion
 
@@ -105,10 +104,6 @@ namespace Dapplo.CaliburnMicro.Dapp
         protected override async void OnStartup(StartupEventArgs e)
         {
             Log.Debug().WriteLine("Starting application startup");
-
-            // Enable UI access for different Dapplo packages, especially the UiContext.RunOn
-            // This only works here, not before the Application is started and not later
-            UiContext.Initialize();
             
             _bootstrapper.Configure();
 

@@ -23,6 +23,8 @@ using Autofac;
 using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Metro.Configuration;
+using Dapplo.Config;
+using Dapplo.Config.Ini;
 
 namespace Dapplo.CaliburnMicro.Metro
 {
@@ -41,7 +43,8 @@ namespace Dapplo.CaliburnMicro.Metro
                 .AsSelf()
                .SingleInstance();
             
-            builder.RegisterType<MetroUiConfigurationImpl>()
+            builder
+                .Register(c => DictionaryConfiguration<IMetroUiConfiguration>.Create())
                 .IfNotRegistered(typeof(IMetroUiConfiguration))
                 .As<IMetroUiConfiguration>()
                 .SingleInstance();
