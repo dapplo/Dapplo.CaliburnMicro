@@ -34,10 +34,10 @@
       <Version>1.2.17</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro">
-      <Version>2.0.0-alpha0391</Version>
+      <Version>2.0.0-alpha0409</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks">
-      <Version>3.0.0-alpha0186</Version>
+      <Version>3.0.0-alpha0188</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
       <Version>4.1.5</Version>

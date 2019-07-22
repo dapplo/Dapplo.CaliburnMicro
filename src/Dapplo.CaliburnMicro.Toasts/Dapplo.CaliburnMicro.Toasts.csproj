@@ -31,13 +31,13 @@
       <Version>1.2.17</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows">
-      <Version>0.8.34</Version>
+      <Version>0.9.2</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Dpi">
-      <Version>0.8.34</Version>
+      <Version>0.9.2</Version>
     </PackageReference>
     <PackageReference Include="Dapplo.Windows.Shell32">
-      <Version>0.8.34</Version>
+      <Version>0.9.2</Version>
     </PackageReference>
     <PackageReference Include="ToastNotifications">
       <Version>2.5.0</Version>
