@@ -40,7 +40,7 @@
       <Version>3.0.0-alpha0188</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
-      <Version>4.1.5</Version>
+      <Version>4.1.6</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>4.5.2</Version>

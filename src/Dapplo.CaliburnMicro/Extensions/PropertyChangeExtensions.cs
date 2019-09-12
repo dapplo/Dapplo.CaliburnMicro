@@ -34,7 +34,7 @@ using Dapplo.Log;
 namespace Dapplo.CaliburnMicro.Extensions
 {
     /// <summary>
-    ///     Extensions for DependencyObject s
+    ///     Extensions for DependencyObject
     /// </summary>
     public static class PropertyChangeExtensions
     {
@@ -52,9 +52,9 @@ namespace Dapplo.CaliburnMicro.Extensions
         {
             var observable = Observable.Create<PropertyChangedEventArgs>(observer =>
             {
-                PropertyChangedEventHandler handler = (s, e) => observer.OnNext(e);
-                source.PropertyChanged += handler;
-                return Disposable.Create(() => source.PropertyChanged -= handler);
+                void PropertyChangedEventHandler(object s, PropertyChangedEventArgs e) => observer.OnNext(e);
+                source.PropertyChanged += PropertyChangedEventHandler;
+                return Disposable.Create(() => source.PropertyChanged -= PropertyChangedEventHandler);
             });
 
             if (source == null)
@@ -170,9 +170,9 @@ namespace Dapplo.CaliburnMicro.Extensions
         {
             var observable = Observable.Create<PropertyChangingEventArgs>(observer =>
             {
-                PropertyChangingEventHandler handler = (s, e) => observer.OnNext(e);
-                source.PropertyChanging += handler;
-                return Disposable.Create(() => source.PropertyChanging -= handler);
+                void PropertyChangingEventHandler(object s, PropertyChangingEventArgs e) => observer.OnNext(e);
+                source.PropertyChanging += PropertyChangingEventHandler;
+                return Disposable.Create(() => source.PropertyChanging -= PropertyChangingEventHandler);
             });
 
             if (source == null)
