@@ -23,14 +23,23 @@
 
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Dapp;
 using Dapplo.CaliburnMicro.Diagnostics;
 using Dapplo.Log;
-
+using Dapplo.Microsoft.Extensions.Hosting.AppServices;
+using Dapplo.Microsoft.Extensions.Hosting.Plugins;
+using Dapplo.Microsoft.Extensions.Hosting.Wpf;
+using Dapplo.Microsoft.Extensions.Hosting.CaliburnMicro;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 #if DEBUG
 using Dapplo.Log.Loggers;
 #endif
@@ -44,65 +53,88 @@ namespace Application.Demo
     /// </summary>
     public static class Startup
     {
-        /// <summary>
-        ///     Start the application
-        /// </summary>
-        [STAThread]
-        public static void Main()
-        {
+        private const string AppSettingsFilePrefix = "appsettings";
+        private const string HostSettingsFile = "hostsettings.json";
+        private const string Prefix = "PREFIX_";
 
-            var applicationConfig = ApplicationConfigBuilder.
-                Create()
-                //.WithoutAsyncAssemblyLoading()
-                // Make sure the bootstrapper knows where to find it's DLL files
-                .WithScanDirectories(
-                    ScanLocations.GenerateScanDirectories(
-#if NET471
-                    "net471",
-#else
-                    "netcoreapp3.0",
-#endif
-                        "Application.Demo.Addon",
-                        "Application.Demo.MetroAddon",
-                        "Application.Demo.OverlayAddon").ToArray()
-                )
-                .WithApplicationName("Application.Demo")
-                .WithMutex("f32dbad8-9904-473e-86e2-19275c2d06a5")
-                // Enable CaliburnMicro
-                .WithCaliburnMicro()
-                .WithoutCopyOfEmbeddedAssemblies()
-#if NET471
-                .WithoutCopyOfAssembliesToProbingPath()
-#endif
-                //.WithoutStrictChecking()
-                // Load the Application.Demo.* assemblies
-                .WithAssemblyPatterns("Application.Demo.*").BuildApplicationConfig();
-            Start(applicationConfig);
+        public static async Task Main(string[] args)
+        {
+            var executableLocation = Path.GetDirectoryName(typeof(Startup).Assembly.Location);
+
+            var host = new HostBuilder()
+                .ConfigureWpf()
+                .ConfigureLogging()
+                .ConfigureConfiguration(args)
+                .ConfigureSingleInstance(builder =>
+                {
+                    builder.MutexId = "{f32dbad8-9904-473e-86e2-19275c2d06a5}";
+                    builder.WhenNotFirstInstance = (hostingEnvironment, logger) =>
+                    {
+                        // This is called when an instance was already started, this is in the second instance
+                        logger.LogWarning("Application {0} already running.", hostingEnvironment.ApplicationName);
+                    };
+                })
+                .ConfigurePlugins(pluginBuilder =>
+                {
+                    // Specify the location from where the DLL's are "globbed"
+                    pluginBuilder.AddScanDirectories(Path.Combine(executableLocation, @"..\..\..\..\"));
+                    // Add the framework libraries which can be found with the specified globs
+                    pluginBuilder.IncludeFrameworks(@"**\bin\**\Application.Demo.*.dll");
+                    // Add the plugins which can be found with the specified globs
+                    pluginBuilder.IncludePlugins(@"**\bin\**\Dapplo.CaliburnMicro.*.dll");
+                })
+                .ConfigureCaliburnMicro<MainViewModel>()
+                .ConfigureServices(serviceCollection =>
+                {
+                    // Make OtherWindow available for DI to MainWindow
+                    serviceCollection.AddTransient<OtherViewModel>();
+                })
+                .UseWpfLifetime()
+                .Build();
+
+            Console.WriteLine("Run!");
+            await host.RunAsync();
         }
 
-        private static void Start(ApplicationConfig applicationConfig)
+        /// <summary>
+        /// Configure the loggers
+        /// </summary>
+        /// <param name="hostBuilder">IHostBuilder</param>
+        /// <returns>IHostBuilder</returns>
+        private static IHostBuilder ConfigureLogging(this IHostBuilder hostBuilder)
         {
-            // Make sure the log entries are demystified
-            //LogSettings.ExceptionToStacktrace = exception => exception.ToStringDemystified();
-#if DEBUG
-            // Initialize a debug logger for Dapplo packages
-            LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
-#endif
-
-            // Use this to setup the culture of your UI
-            var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
-
-            var application = new Dapplication(applicationConfig)
+            return hostBuilder.ConfigureLogging((hostContext, configLogging) =>
             {
-                ShutdownMode = ShutdownMode.OnExplicitShutdown
-            };
-            // Handle exceptions
-            application.DisplayErrorView();
+                configLogging.AddConsole();
+                configLogging.AddDebug();
+            });
+        }
 
-            // Run!!!
-            application.Run();
+        /// <summary>
+        /// Configure the configuration
+        /// </summary>
+        /// <param name="hostBuilder"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private static IHostBuilder ConfigureConfiguration(this IHostBuilder hostBuilder, string[] args)
+        {
+            return hostBuilder.ConfigureHostConfiguration(configHost =>
+            {
+                configHost.SetBasePath(Directory.GetCurrentDirectory());
+                configHost.AddJsonFile(HostSettingsFile, optional: true);
+                configHost.AddEnvironmentVariables(prefix: Prefix);
+                configHost.AddCommandLine(args);
+            })
+                .ConfigureAppConfiguration((hostContext, configApp) =>
+                {
+                    configApp.AddJsonFile(AppSettingsFilePrefix + ".json", optional: true);
+                    if (!string.IsNullOrEmpty(hostContext.HostingEnvironment.EnvironmentName))
+                    {
+                        configApp.AddJsonFile(AppSettingsFilePrefix + $".{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+                    }
+                    configApp.AddEnvironmentVariables(prefix: Prefix);
+                    configApp.AddCommandLine(args);
+                });
         }
     }
 }
