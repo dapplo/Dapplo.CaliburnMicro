@@ -19,13 +19,9 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Diagnostics.Contracts;
 using System.Windows;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Behaviors
 {
@@ -102,8 +98,6 @@ namespace Dapplo.CaliburnMicro.Behaviors
         /// <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
         protected abstract void Update(THost uiElement, DependencyPropertyChangedEventArgs? dependencyPropertyChangedEventArgs);
 
-        #region IBehavior
-
         /// <inheritdoc />
         public bool IsApplicable()
         {
@@ -144,7 +138,5 @@ namespace Dapplo.CaliburnMicro.Behaviors
                 Update(host, dependencyPropertyChangedEventArgs);
             }
         }
-
-        #endregion
     }
 }

@@ -29,6 +29,7 @@ using Dapplo.CaliburnMicro.Metro;
 using Dapplo.Config.Ini;
 using Dapplo.Config.Language;
 using Dapplo.CaliburnMicro.Metro.Configuration;
+using Caliburn.Micro;
 
 namespace Application.Demo.MetroAddon
 {
@@ -58,8 +59,11 @@ namespace Application.Demo.MetroAddon
                         {
                             return;
                         }
-
-                        metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                        // following must be done on the UI thread
+                        Execute.OnUIThread(() =>
+                        {
+                            metroThemeManager.ChangeTheme(metroConfig.Theme, metroConfig.ThemeColor);
+                        });
                     });
                     return metroConfiguration;
                 })

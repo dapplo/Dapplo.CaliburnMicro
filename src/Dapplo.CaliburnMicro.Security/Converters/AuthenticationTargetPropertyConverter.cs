@@ -19,14 +19,10 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Globalization;
 using System.Windows.Data;
 using Dapplo.CaliburnMicro.Security.Behaviors;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Security.Converters
 {

@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,8 +29,6 @@ using Dapplo.Addons;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Dapp
 {
@@ -159,8 +155,6 @@ namespace Dapplo.CaliburnMicro.Dapp
             _bootstrapper.Dispose();
         }
 
-        #region Error handling
-
         /// <summary>
         ///     This is called when exceptions occure inside a dispatched call
         /// </summary>
@@ -271,7 +265,5 @@ namespace Dapplo.CaliburnMicro.Dapp
                 Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invokation");
             }
         }
-
-        #endregion
     }
 }

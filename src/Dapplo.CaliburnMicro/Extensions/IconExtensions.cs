@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -34,8 +32,6 @@ using Dapplo.Windows.User32;
 using Dapplo.Windows.User32.Enums;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Extensions
 {

@@ -42,8 +42,6 @@ namespace Dapplo.CaliburnMicro.Controls
             SelectedItem = e.NewValue;
         }
 
-        #region SelectedItem
-
         /// <summary>
         /// Gets or Sets the SelectedItem possible Value of the TreeViewItem object.
         /// </summary>
@@ -70,7 +68,6 @@ namespace Dapplo.CaliburnMicro.Controls
                 tvi.IsSelected = true;
             }
         }
-        #endregion SelectedItem   
 
         /// <summary>
         /// Helper method to find the TreeViewItem belonging to the item which is selected

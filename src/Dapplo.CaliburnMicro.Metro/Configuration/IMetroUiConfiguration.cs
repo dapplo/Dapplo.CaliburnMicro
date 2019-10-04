@@ -20,7 +20,6 @@
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
 using System.ComponentModel;
-using Dapplo.Config.Ini;
 
 namespace Dapplo.CaliburnMicro.Metro.Configuration
 {

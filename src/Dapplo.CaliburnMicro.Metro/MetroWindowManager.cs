@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,8 +26,6 @@ using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Dapplo.CaliburnMicro.Configuration;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Metro
 {

@@ -19,12 +19,8 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using Dapplo.Addons.Bootstrapper;
 using Dapplo.CaliburnMicro.Dapp;
@@ -34,8 +30,6 @@ using Dapplo.Log;
 #if DEBUG
 using Dapplo.Log.Loggers;
 #endif
-
-#endregion
 
 namespace Application.Demo
 {
@@ -88,11 +82,6 @@ namespace Application.Demo
             // Initialize a debug logger for Dapplo packages
             LogSettings.RegisterDefaultLogger<DebugLogger>(LogLevels.Verbose);
 #endif
-
-            // Use this to setup the culture of your UI
-            var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
             var application = new Dapplication(applicationConfig)
             {

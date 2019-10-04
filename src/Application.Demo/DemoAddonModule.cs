@@ -52,8 +52,6 @@ namespace Application.Demo
         /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
-            #region Configuration and Language
-
             // Specify the directories for the translations manually
             builder.Register(context => LanguageConfigBuilder.Create()
                     .WithSpecificDirectories(ScanLocations.GenerateScanDirectories(
@@ -117,7 +115,6 @@ namespace Application.Demo
                 .As<IWizardTranslations>()
                 .As<ILanguage>()
                 .SingleInstance();
-            #endregion
 
             builder.RegisterType<DemoTrayIconViewModel>()
                 .As<ITrayIconViewModel>()

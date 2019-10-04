@@ -24,7 +24,6 @@ using Caliburn.Micro;
 using Dapplo.Addons;
 using Dapplo.CaliburnMicro.Metro.Configuration;
 using Dapplo.Config;
-using Dapplo.Config.Ini;
 
 namespace Dapplo.CaliburnMicro.Metro
 {

@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using Application.Demo.Languages;
 using Application.Demo.UseCases.Wizard.ViewModels;
 using Caliburn.Micro;
@@ -28,8 +26,6 @@ using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
 using MahApps.Metro.IconPacks;
-
-#endregion
 
 namespace Application.Demo.UseCases.ContextMenu
 {

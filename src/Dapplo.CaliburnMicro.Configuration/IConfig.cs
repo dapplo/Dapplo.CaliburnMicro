@@ -19,15 +19,11 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Dapplo.CaliburnMicro.Menu;
 using Dapplo.Config.Interfaces;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Configuration
 {

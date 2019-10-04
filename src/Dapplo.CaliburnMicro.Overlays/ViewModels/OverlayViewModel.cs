@@ -37,8 +37,6 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
         private double _top;
 
 
-        #region IOverlay
-
         /// <inheritdoc />
         public virtual bool IsHittestable
         {
@@ -73,10 +71,6 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
             }
         }
 
-        #endregion
-
-
-        #region IAmDisplayable
 
         /// <inheritdoc />
         public virtual bool IsEnabled
@@ -99,7 +93,5 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
                 NotifyOfPropertyChange(nameof(IsVisible));
             }
         }
-
-        #endregion
     }
 }

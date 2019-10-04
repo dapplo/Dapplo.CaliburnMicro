@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Windows;
 using Application.Demo.Languages;
@@ -32,8 +30,6 @@ using Dapplo.CaliburnMicro.Menu;
 using Dapplo.CaliburnMicro.Security;
 using Dapplo.Log;
 using MahApps.Metro.IconPacks;
-
-#endregion
 
 namespace Application.Demo.UseCases.Toast
 {

@@ -51,8 +51,6 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
             base.OnActivate();
         }
 
-        #region Location
-
         /// <summary>
         ///     Returns if the Left of the displays
         /// </summary>
@@ -107,10 +105,6 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
             }
         }
 
-        #endregion
-
-
-        #region IAmDisplayable
 
         /// <summary>
         ///     Returns if the OverlayViewModel can be selected
@@ -137,7 +131,5 @@ namespace Dapplo.CaliburnMicro.Overlays.ViewModels
                 NotifyOfPropertyChange(nameof(IsVisible));
             }
         }
-
-        #endregion
     }
 }

@@ -19,8 +19,6 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Windows;
@@ -29,8 +27,6 @@ using System.Windows.Media;
 using Dapplo.CaliburnMicro.Extensions;
 using Dapplo.Log;
 using Size = System.Windows.Size;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Behaviors
 {

@@ -19,16 +19,12 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using Caliburn.Micro;
 using Hardcodet.Wpf.TaskbarNotification;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.NotifyIconWpf
 {

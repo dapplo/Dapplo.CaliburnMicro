@@ -19,13 +19,9 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Caliburn.Micro;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Menu
 {
@@ -60,8 +56,6 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        #region IHaveID
-
         /// <summary>
         ///     The Id of this ITreeScreen, is also used to order children of a parent.
         ///     By default the name of the type is used
@@ -71,10 +65,6 @@ namespace Dapplo.CaliburnMicro.Menu
             get => _id;
             set => _id = value;
         }
-
-        #endregion
-
-        #region IAmDisplayable
 
         /// <summary>
         ///     Returns if the ITreeScreen can be selected
@@ -102,10 +92,6 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        #endregion
-
-        #region ITreeNode
-
         /// <summary>
         ///     Used to showing this ITreeScreen inside a tree
         /// </summary>
@@ -120,7 +106,5 @@ namespace Dapplo.CaliburnMicro.Menu
         ///     The parent under which the ITreeScreen is shown, null is root
         /// </summary>
         public virtual string ParentId { get; set; }
-
-        #endregion
     }
 }

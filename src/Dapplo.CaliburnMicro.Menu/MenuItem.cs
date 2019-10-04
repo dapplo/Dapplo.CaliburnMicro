@@ -19,14 +19,10 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Caliburn.Micro;
-
-#endregion
 
 namespace Dapplo.CaliburnMicro.Menu
 {
@@ -74,8 +70,6 @@ namespace Dapplo.CaliburnMicro.Menu
         /// <inheritdoc />
         public string HotKeyHint { get; set; }
 
-        #region IHaveIcon
-
         /// <summary>
         ///     Returns the icon of the IMenuItem
         /// </summary>
@@ -88,10 +82,6 @@ namespace Dapplo.CaliburnMicro.Menu
                 NotifyOfPropertyChange(nameof(Icon));
             }
         }
-
-        #endregion
-
-        #region IHaveDisplayName
 
         /// <summary>
         ///     Returns the DisplayName of the IMenuItem
@@ -106,19 +96,11 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        #endregion
-
-        #region IHaveId
-
         /// <summary>
         ///     The Id of this IMenuItem, is also used to order children of a parent
         ///     Default the Id is the name of the Type
         /// </summary>
         public string Id { get; set; }
-
-        #endregion
-
-        #region IAmDisplayable
 
         /// <summary>
         ///     Returns if the IMenuItem is enabled
@@ -146,10 +128,6 @@ namespace Dapplo.CaliburnMicro.Menu
             }
         }
 
-        #endregion
-
-        #region ITreeNode
-
         /// <summary>
         ///     Used to showing this inside a tree
         /// </summary>
@@ -164,7 +142,5 @@ namespace Dapplo.CaliburnMicro.Menu
         ///     The parent under which the IMenuItem is shown, null is root
         /// </summary>
         public virtual string ParentId { get; set; }
-
-        #endregion
     }
 }

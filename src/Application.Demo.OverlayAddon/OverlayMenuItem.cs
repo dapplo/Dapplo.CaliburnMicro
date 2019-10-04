@@ -19,15 +19,11 @@
 //  You should have a copy of the GNU Lesser General Public License
 //  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
 
-#region using
-
 using Dapplo.CaliburnMicro.Menu;
 using Application.Demo.OverlayAddon.ViewModels;
 using Caliburn.Micro;
 using System.Windows;
 using Dapplo.CaliburnMicro.Security;
-
-#endregion
 
 namespace Application.Demo.OverlayAddon
 {
