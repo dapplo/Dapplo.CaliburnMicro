@@ -6,6 +6,10 @@
     <AssemblyName>Dapplo.CaliburnMicro.Tests</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +50,10 @@
       <Version>2.4.1</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" Version="2.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
