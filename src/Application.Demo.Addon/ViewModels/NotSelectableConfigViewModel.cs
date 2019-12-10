@@ -26,6 +26,9 @@ using Application.Demo.Shared;
 
 namespace Application.Demo.Addon.ViewModels
 {
+    /// <summary>
+    /// A ViewModel for the configuration which cannot be selected
+    /// </summary>
     public sealed class NotSelectableConfigViewModel : SimpleConfigScreen
     {
         public IAddonTranslations AddonTranslations { get; }

@@ -28,6 +28,9 @@ using Application.Demo.Shared;
 
 namespace Application.Demo.Addon.ViewModels
 {
+    /// <summary>
+    /// The ViewModel for the add-on settings
+    /// </summary>
     public sealed class AddonSettingsViewModel : SimpleConfigScreen
     {
         public AddonSettingsViewModel()

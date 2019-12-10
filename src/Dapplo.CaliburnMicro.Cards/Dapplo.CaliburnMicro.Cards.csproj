@@ -41,10 +41,10 @@
 
   <ItemGroup>
     <PackageReference Include="AdaptiveCards">
-      <Version>1.2.3</Version>
+      <Version>1.2.4</Version>
     </PackageReference>
 	<PackageReference Include="AdaptiveCards.Rendering.Wpf">
-      <Version>1.2.3</Version>
+      <Version>1.2.4</Version>
     </PackageReference>
     <PackageReference Include="Caliburn.Micro">
       <Version>3.2.0</Version>
@@ -60,7 +60,7 @@
       <Version>1.0.13</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="ToastNotifications">
       <Version>2.5.0</Version>

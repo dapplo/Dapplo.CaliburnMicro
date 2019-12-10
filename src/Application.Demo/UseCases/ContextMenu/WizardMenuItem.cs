@@ -30,7 +30,7 @@ using MahApps.Metro.IconPacks;
 namespace Application.Demo.UseCases.ContextMenu
 {
     /// <summary>
-    ///     This will add an extry for the wizard to the context menu
+    ///     This will add an entry for the wizard to the context menu
     /// </summary>
     [Menu("contextmenu")]
     public sealed class WizardMenuItem : AuthenticatedMenuItem<IMenuItem, bool>

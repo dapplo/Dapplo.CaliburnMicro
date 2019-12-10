@@ -84,7 +84,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         public new static Dapplication Current { get; private set; }
 
         /// <summary>
-        ///     This function is called when the application is alreay running
+        ///     This function is called when the application is already running
         ///     Facts:
         ///     1: it will be run on the UI thread and
         ///     2: Caliburn.Micro is actually fully configured
@@ -94,7 +94,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         public Func<int> OnAlreadyRunning { get; set; }
 
         /// <summary>
-        ///     Make sure we startup everything after WPF instanciated
+        ///     Make sure we startup everything after WPF instantiated
         /// </summary>
         /// <param name="e">StartupEventArgs</param>
         protected override async void OnStartup(StartupEventArgs e)
@@ -137,7 +137,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         /// </summary>
         private async Task StopBootstrapperAsync()
         {
-            // TODO: What to disable here? Ist unregistering the exception handlers here smart?
+            // TODO: What to disable here? Ist un-registering the exception handlers here smart?
             // Unhook unhandled exceptions in the Dispatcher
             DispatcherUnhandledException -= HandleDispatcherException;
 
@@ -156,7 +156,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         }
 
         /// <summary>
-        ///     This is called when exceptions occure inside a dispatched call
+        ///     This is called when exceptions occur inside a dispatched call
         /// </summary>
         public Action<Exception> OnUnhandledDispatcherException { get; set; }
 
@@ -183,12 +183,12 @@ namespace Dapplo.CaliburnMicro.Dapp
             }
             catch (Exception callerException)
             {
-                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
+                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invocation");
             }
         }
 
         /// <summary>
-        ///     This is called when exceptions occure inside the AppDomain (everywhere)
+        ///     This is called when exceptions occur inside the AppDomain (everywhere)
         ///     Exception is the reason, the boolean specifies if your application will be terminated.
         /// </summary>
         public Action<Exception, bool> OnUnhandledAppDomainException { get; set; }
@@ -220,7 +220,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             }
             catch (Exception callerException)
             {
-                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invokation");
+                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledDispatcherException invocation");
             }
         }
 
@@ -230,7 +230,7 @@ namespace Dapplo.CaliburnMicro.Dapp
         public bool ObserveUnhandledTaskException { get; set; } = true;
 
         /// <summary>
-        ///     This is called when exceptions occure inside Tasks (everywhere)
+        ///     This is called when exceptions occur inside Tasks (everywhere)
         /// </summary>
         public Action<Exception> OnUnhandledTaskException { get; set; }
 
@@ -262,7 +262,7 @@ namespace Dapplo.CaliburnMicro.Dapp
             }
             catch (Exception callerException)
             {
-                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invokation");
+                Log.Error().WriteLine(callerException, "An exception was thrown in the OnUnhandledTaskException invocation");
             }
         }
     }

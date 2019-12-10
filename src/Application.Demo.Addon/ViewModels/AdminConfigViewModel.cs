@@ -28,6 +28,9 @@ using Application.Demo.Shared;
 
 namespace Application.Demo.Addon.ViewModels
 {
+    /// <summary>
+    /// The ViewModel for the admin config
+    /// </summary>
     public sealed class AdminConfigViewModel : AuthenticatedConfigNode<Visibility>
     {
         public IAddonTranslations AddonTranslations { get; }
