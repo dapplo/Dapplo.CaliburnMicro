@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro is a Caliburn bootstrapper (and more) to quickly start with a WPF MVVM Application</Description>
-    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Wizard</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Wizard</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Wizard</PackageId>
@@ -30,7 +30,7 @@
       <Version>1.3.26</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
-      <Version>4.3.1</Version>
+      <Version>4.3.2</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>

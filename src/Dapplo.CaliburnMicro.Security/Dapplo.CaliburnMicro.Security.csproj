@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Security brings security to Dapplo.CaliburnMicro</Description>
-    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Security</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Security</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Security</PackageId>
@@ -34,7 +34,7 @@
       <Version>1.3.3</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
-      <Version>4.3.1</Version>
+      <Version>4.3.2</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>

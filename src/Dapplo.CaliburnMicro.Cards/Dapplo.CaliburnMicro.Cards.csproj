@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Cards brings toast via AdaptiveCard definitions</Description>
-    <TargetFrameworks>net471;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
     <AssemblyTitle>Dapplo.CaliburnMicro.Cards</AssemblyTitle>
     <AssemblyName>Dapplo.CaliburnMicro.Cards</AssemblyName>
     <PackageId>Dapplo.CaliburnMicro.Cards</PackageId>
