@@ -58,7 +58,7 @@ namespace Application.Demo
 #if NET471
                     "net471",
 #else
-                    "netcoreapp3.0",
+                    "netcoreapp3.1",
 #endif
                         "Application.Demo.Addon",
                         "Application.Demo.MetroAddon",
