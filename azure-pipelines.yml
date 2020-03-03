@@ -130,6 +130,6 @@ stages:
             displayName: 'NuGet push'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/drop/a/*.nupkg;!$(Pipeline.Workspace)/drop/a/*.symbols.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/drop/*.nupkg;!$(Pipeline.Workspace)/drop/*.symbols.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'Dapplo NuGet push'
