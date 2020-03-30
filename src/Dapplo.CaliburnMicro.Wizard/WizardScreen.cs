@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -39,7 +39,7 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public virtual int Order
         {
-            get { return _order; }
+            get => _order;
             protected set
             {
                 _order = value;
@@ -52,7 +52,7 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public TWizard ParentWizard
         {
-            get { return _parent; }
+            get => _parent;
             set
             {
                 _parent = value;
@@ -66,8 +66,8 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         IWizard IWizardScreen.ParentWizard
         {
-            get { return ParentWizard; }
-            set { ParentWizard = value as TWizard; }
+            get => ParentWizard;
+            set => ParentWizard = value as TWizard;
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public virtual bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             protected set
             {
                 _isEnabled = value;
@@ -104,7 +104,7 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public virtual bool IsVisible
         {
-            get { return _isVisible; }
+            get => _isVisible;
             protected set
             {
                 _isVisible = value;
@@ -117,7 +117,7 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public virtual bool IsComplete
         {
-            get { return _isComplete; }
+            get => _isComplete;
             protected set
             {
                 _isComplete = value;

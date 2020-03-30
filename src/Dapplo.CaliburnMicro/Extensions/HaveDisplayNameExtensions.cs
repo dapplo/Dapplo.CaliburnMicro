@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -66,7 +66,7 @@ namespace Dapplo.CaliburnMicro.Extensions
         {
             var source = eventPattern.Sender;
             var propertyName = eventPattern.EventArgs.PropertyName;
-            var value = source.GetType().GetProperty(propertyName).GetValue(source) as string;
+            var value = source.GetType().GetProperty(propertyName)?.GetValue(source) as string;
             haveDisplayName.DisplayName = value;
         }
 

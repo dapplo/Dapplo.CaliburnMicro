@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -38,11 +38,9 @@ namespace Dapplo.CaliburnMicro.Cards
                     var resourceProvider = context.Resolve<IResourceProvider>();
                     var resources = resourceProvider.GetCachedManifestResourceNames(ThisAssembly);
 
-                    using (var stream = resourceProvider.LocateResourceAsStream(ThisAssembly, @"HostConfigs\Windows10Toast.json"))
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        return AdaptiveHostConfig.FromJson(streamReader.ReadToEnd());
-                    }
+                    using var stream = resourceProvider.LocateResourceAsStream(ThisAssembly, @"HostConfigs\Windows10Toast.json");
+                    using var streamReader = new StreamReader(stream);
+                    return AdaptiveHostConfig.FromJson(streamReader.ReadToEnd());
                 })
                 .IfNotRegistered(typeof(AdaptiveHostConfig))
                 .As<AdaptiveHostConfig>()

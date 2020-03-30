@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -138,8 +138,8 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         IEnumerable<IWizardScreen> IWizard.WizardScreens
         {
-            get { return WizardScreens; }
-            set { WizardScreens = value as IEnumerable<TWizardScreen>; }
+            get => WizardScreens;
+            set => WizardScreens = value as IEnumerable<TWizardScreen>;
         }
 
         /// <summary>
@@ -147,8 +147,8 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         public virtual TWizardScreen CurrentWizardScreen
         {
-            get { return ActiveItem; }
-            set { ActivateItem(value); }
+            get => ActiveItem;
+            set => ActivateItem(value);
         }
 
         /// <summary>
@@ -156,8 +156,8 @@ namespace Dapplo.CaliburnMicro.Wizard
         /// </summary>
         IWizardScreen IWizard.CurrentWizardScreen
         {
-            get { return CurrentWizardScreen; }
-            set { CurrentWizardScreen = value as TWizardScreen; }
+            get => CurrentWizardScreen;
+            set => CurrentWizardScreen = value as TWizardScreen;
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -103,7 +103,7 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
         /// </summary>
         public Brush DisabledColorBrush
         {
-            get { return _disabledColorBrush; }
+            get => _disabledColorBrush;
             set
             {
                 NotifyOfPropertyChange(nameof(DisabledColorBrush));
@@ -116,7 +116,7 @@ namespace Dapplo.CaliburnMicro.Wizard.ViewModels
         /// </summary>
         public Brush ProgressColorBrush
         {
-            get { return _progressColorBrush; }
+            get => _progressColorBrush;
             set
             {
                 NotifyOfPropertyChange(nameof(ProgressColorBrush));

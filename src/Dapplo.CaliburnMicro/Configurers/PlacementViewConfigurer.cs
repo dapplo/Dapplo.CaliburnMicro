@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -110,7 +110,7 @@ namespace Dapplo.CaliburnMicro.Configurers
                 if (hasPlacement)
                 {
                     // Make sure the placement is set
-                    WindowsExtensions.ApplyPlacement(view, placement);
+                    view.ApplyPlacement(placement);
                 }
                 view.LocationChanged -= eventHandlers[0];
                 view.LocationChanged += eventHandlers[1];

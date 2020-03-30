@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Configuration
         private TWhen _whenPermission;
         private TWhen _whenPermissionMissing;
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication"/>
         public AuthenticationTargetProperties AuthenticationTargetProperty
         {
             get => _authenticationTargetProperty;
@@ -47,7 +47,7 @@ namespace Dapplo.CaliburnMicro.Configuration
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication"/>
         public PermissionOperations PermissionOperation
         {
             get => _permissionOperation;
@@ -58,8 +58,7 @@ namespace Dapplo.CaliburnMicro.Configuration
             }
         }
 
-
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication"/>
         public IEnumerable<string> Permissions
         {
             get => _permissions;
@@ -70,7 +69,7 @@ namespace Dapplo.CaliburnMicro.Configuration
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public TWhen WhenPermission
         {
             get => _whenPermission;
@@ -81,7 +80,7 @@ namespace Dapplo.CaliburnMicro.Configuration
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="INeedAuthentication" />
         public TWhen WhenPermissionMissing
         {
             get => _whenPermissionMissing;

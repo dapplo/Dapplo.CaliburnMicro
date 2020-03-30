@@ -1,5 +1,5 @@
 ﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2019 Dapplo
+//  Copyright (C) 2016-2020 Dapplo
 // 
 //  For more information see: http://dapplo.net/
 //  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
@@ -37,7 +37,11 @@ namespace Dapplo.CaliburnMicro.Dapp.Services
         private readonly IWindowManager _windowManager;
         private readonly IEnumerable<Lazy<IShell>> _shells;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// IOC constructor
+        /// </summary>
+        /// <param name="windowManager">IWindowManager</param>
+        /// <param name="shells">IEnumerable with all IShell items, but lazy</param>
         public ShellStartup(
             IWindowManager windowManager,
             IEnumerable<Lazy<IShell>> shells)
