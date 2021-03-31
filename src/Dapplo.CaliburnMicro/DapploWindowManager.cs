@@ -1,23 +1,5 @@
-﻿//  Dapplo - building blocks for desktop applications
-//  Copyright (C) 2016-2020 Dapplo
-// 
-//  For more information see: http://dapplo.net/
-//  Dapplo repositories are hosted on GitHub: https://github.com/dapplo
-// 
-//  This file is part of Dapplo.CaliburnMicro
-// 
-//  Dapplo.CaliburnMicro is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-// 
-//  Dapplo.CaliburnMicro is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Lesser General Public License for more details.
-// 
-//  You should have a copy of the GNU Lesser General Public License
-//  along with Dapplo.CaliburnMicro. If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+﻿// Copyright (c) Dapplo and contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.Windows;
@@ -74,10 +56,7 @@ namespace Dapplo.CaliburnMicro
         public override bool? ShowDialog(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
+            settings ??= (rootModel as IHaveSettings)?.Settings;
             return base.ShowDialog(rootModel, context, settings);
         }
 
@@ -85,10 +64,7 @@ namespace Dapplo.CaliburnMicro
         public override void ShowWindow(object rootModel, object context = null, IDictionary<string, object> settings = null)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
+            settings ??= (rootModel as IHaveSettings)?.Settings;
             base.ShowWindow(rootModel, context, settings);
         }
 
@@ -96,10 +72,7 @@ namespace Dapplo.CaliburnMicro
         public override Page CreatePage(object rootModel, object context, IDictionary<string, object> settings)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
+            settings ??= (rootModel as IHaveSettings)?.Settings;
             return base.CreatePage(rootModel, context, settings);
         }
 
@@ -107,10 +80,7 @@ namespace Dapplo.CaliburnMicro
         protected override Popup CreatePopup(object rootModel, IDictionary<string, object> settings)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
+            settings ??= (rootModel as IHaveSettings)?.Settings;
             return base.CreatePopup(rootModel, settings);
         }
 
@@ -118,10 +88,7 @@ namespace Dapplo.CaliburnMicro
         protected override Window CreateWindow(object rootModel, bool isDialog, object context, IDictionary<string, object> settings)
         {
             // Maybe the ViewModel supplies settings
-            if (settings == null)
-            {
-                settings = (rootModel as IHaveSettings)?.Settings;
-            }
+            settings ??= (rootModel as IHaveSettings)?.Settings;
             return base.CreateWindow(rootModel, isDialog, context, settings);
         }
 
