@@ -2,14 +2,11 @@
 
   <PropertyGroup>
     <Description>Dapplo.CaliburnMicro.Metro adds a IWindowManager for MahApps MetroWindow support to Dapplo.CaliburnMicro</Description>
-    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
-    <AssemblyTitle>Dapplo.CaliburnMicro.Metro</AssemblyTitle>
-    <AssemblyName>Dapplo.CaliburnMicro.Metro</AssemblyName>
-    <PackageId>Dapplo.CaliburnMicro.Metro</PackageId>
+    <TargetFrameworks>net471;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <PackageTags>Dapplo Caliburn.Micro MahApps</PackageTags>
   </PropertyGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
@@ -26,20 +23,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
-      <Version>3.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="Dapplo.Addons">
-      <Version>1.3.3</Version>
-    </PackageReference>
-    <PackageReference Include="MahApps.Metro">
-      <Version>2.0.0-alpha0409</Version>
-    </PackageReference>
+    <PackageReference Include="Caliburn.Micro" Version="3.2.0" />
+    <PackageReference Include="Dapplo.Addons" Version="1.3.11" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj">
-      <Name>Dapplo.CaliburnMicro</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro\Dapplo.CaliburnMicro.csproj" />
   </ItemGroup>
 </Project>

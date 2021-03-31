@@ -48,7 +48,7 @@ namespace Application.Demo.UseCases.ContextMenu
             Id = "G_ConfigJump";
             Icon = new PackIconMaterial
             {
-                Kind = PackIconMaterialKind.Settings,
+                Kind = PackIconMaterialKind.Cog,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,

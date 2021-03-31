@@ -11,7 +11,7 @@
                      mc:Ignorable="d" d:DataContext="{d:DesignInstance designTime:DefaultConfig,IsDesignTimeCreatable=False}"
              Width="500" Height="400">
     <behaviors:FrameworkElementIcon.Value>
-        <iconPacks:PackIconMaterial Kind="Settings" Margin="10" Visibility="Visible" />
+        <iconPacks:PackIconMaterial Kind="Cog" Margin="10" Visibility="Visible" />
     </behaviors:FrameworkElementIcon.Value>
     <Grid>
         <Grid.RowDefinitions>

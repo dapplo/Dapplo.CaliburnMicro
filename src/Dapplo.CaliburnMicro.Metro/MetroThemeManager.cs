@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using MahApps.Metro;
+using ControlzEx.Theming;
 
 namespace Dapplo.CaliburnMicro.Metro
 {
@@ -36,7 +36,7 @@ namespace Dapplo.CaliburnMicro.Metro
 
         private static readonly string[] Styles =
         {
-            "Controls", "Fonts", "Controls.AnimatedSingleRowTabControl"
+            "Controls", "Fonts", "Controls.TabControl"
         };
 
         private string _theme;
@@ -93,8 +93,8 @@ namespace Dapplo.CaliburnMicro.Metro
             {
                 themeColor = _themeColor;
             }
-            var currentTheme = ThemeManager.DetectTheme(Application.Current);
-            Theme newTheme = ThemeManager.GetTheme($"{theme}.{themeColor}");
+            ThemeManager.Current.DetectTheme(Application.Current);
+            Theme newTheme = ThemeManager.Current.GetTheme($"{theme}.{themeColor}");
             ChangeTheme(newTheme);
         }
 
@@ -104,7 +104,7 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <param name="themeName">string</param>
         public void ChangeTheme(string themeName)
         {
-            var newTheme = string.IsNullOrEmpty(themeName) ? ThemeManager.Themes.First() : ThemeManager.GetTheme(themeName);
+            var newTheme = string.IsNullOrEmpty(themeName) ? ThemeManager.Current.Themes.First() : ThemeManager.Current.GetTheme(themeName);
             ChangeTheme(newTheme);
         }
 
@@ -121,7 +121,7 @@ namespace Dapplo.CaliburnMicro.Metro
                 _resourceManager.DeleteResourceDictionary(sourceUri);
             }
             _resourceManager.AddResourceDictionary(theme.Resources.Source, 0, false);
-            ThemeManager.ChangeTheme(Application.Current, theme);
+            ThemeManager.Current.ChangeTheme(Application.Current, theme);
         }
 
         /// <summary>
@@ -137,11 +137,11 @@ namespace Dapplo.CaliburnMicro.Metro
         /// <summary>
         /// The available themes
         /// </summary>
-        public static IEnumerable<string> AvailableThemes => ThemeManager.Themes.Select(theme => theme.BaseColorScheme).Distinct();
+        public static IEnumerable<string> AvailableThemes => ThemeManager.Current.Themes.Select(theme => theme.BaseColorScheme).Distinct();
 
         /// <summary>
         /// The available theme colors
         /// </summary>
-        public static IEnumerable<string> AvailableThemeColors => ThemeManager.Themes.Select(theme => theme.ColorScheme).Distinct();
+        public static IEnumerable<string> AvailableThemeColors => ThemeManager.Current.Themes.Select(theme => theme.ColorScheme).Distinct();
     }
 }

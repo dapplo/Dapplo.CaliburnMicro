@@ -34,11 +34,11 @@ namespace Dapplo.CaliburnMicro
     /// </summary>
     public class ResourceManager
     {
-        private static readonly LogSource Log = new LogSource();
-        private readonly ReaderWriterLockSlim _applicationResourcesReaderWriterLockSlim = new ReaderWriterLockSlim();
-        private readonly ReaderWriterLockSlim _resourcesReaderWriterLockSlim = new ReaderWriterLockSlim();
+        private static readonly LogSource Log = new();
+        private readonly ReaderWriterLockSlim _applicationResourcesReaderWriterLockSlim = new();
+        private readonly ReaderWriterLockSlim _resourcesReaderWriterLockSlim = new();
         private readonly IResourceProvider _resourceProvider;
-        private List<(Uri Source, int Order)> _resources = new List<(Uri Source, int Order)>();
+        private List<(Uri Source, int Order)> _resources = new();
 
         /// <summary>
         /// Supplies the list of Resources
@@ -94,6 +94,10 @@ namespace Dapplo.CaliburnMicro
         /// <param name="applyResources">bool true if the resources need to be applied</param>
         public void AddResourceDictionary(Uri source, int order = 0, bool applyResources = true)
         {
+            if (source == null)
+            {
+                return;
+            }
             if (source.Scheme == "pack" && !_resourceProvider.EmbeddedResourceExists(source))
             {
                 Log.Warn().WriteLine("Resource {0} might not be available.", source);

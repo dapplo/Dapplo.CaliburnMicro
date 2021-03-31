@@ -35,7 +35,7 @@ namespace Application.Demo.UseCases.ContextMenu
     [Menu("contextmenu")]
     public sealed class ConfigMenuItem : ClickableMenuItem
     {
-        private static readonly LogSource Log = new LogSource();
+        private static readonly LogSource Log = new();
 
         private readonly ConfigViewModel _demoConfigViewModel;
         private readonly IWindowManager _windowManager;
@@ -65,7 +65,7 @@ namespace Application.Demo.UseCases.ContextMenu
         {
             Icon = new PackIconMaterial
             {
-                Kind = PackIconMaterialKind.Settings,
+                Kind = PackIconMaterialKind.Cog,
                 Spin = true,
                 SpinDuration = 3
             };

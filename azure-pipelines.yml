@@ -30,10 +30,10 @@ stages:
     - task: NuGetToolInstaller@1
 
     - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk 3.1.2'
+      displayName: 'Use .NET Core sdk 5.0.4'
       inputs:
         packageType: sdk
-        version: 3.1.201
+        version: 5.0.201
 
     - task: DotNetCoreCLI@2
       displayName: Test
@@ -120,11 +120,7 @@ stages:
             inputs:
               artifact: 'drop'
 
-          - task: NuGetToolInstaller@0
-            displayName: 'Use NuGet 5.4.0'
-            inputs:
-              versionSpec: 5.4.0
-              checkLatest: true
+          - task: NuGetToolInstaller@1
 
           - task: NuGetCommand@2
             displayName: 'NuGet push'

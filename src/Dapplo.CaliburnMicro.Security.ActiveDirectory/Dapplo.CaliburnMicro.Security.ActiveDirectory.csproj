@@ -2,14 +2,11 @@
 
   <PropertyGroup>
     <Description>This adds Active Directory group permissions to Dapplo.CaliburnMicro based applications</Description>
-    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
-    <AssemblyTitle>Dapplo.CaliburnMicro.Security.ActiveDirectory</AssemblyTitle>
-    <AssemblyName>Dapplo.CaliburnMicro.Security.ActiveDirectory</AssemblyName>
-    <PackageId>Dapplo.CaliburnMicro.Security.ActiveDirectory</PackageId>
+    <TargetFrameworks>net471;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <PackageTags>Dapplo Caliburn.Micro MVVM Security Active Directory</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net471' ">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -24,17 +21,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Dapplo.ActiveDirectory">
-      <Version>0.3.6</Version>
-    </PackageReference>
-    <PackageReference Include="Dapplo.Addons">
-      <Version>1.3.3</Version>
-    </PackageReference>
+    <PackageReference Include="Dapplo.ActiveDirectory" Version="0.3.11" />
+    <PackageReference Include="Dapplo.Addons" Version="1.3.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj">
-      <Name>Dapplo.CaliburnMicro.Security</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Dapplo.CaliburnMicro.Security\Dapplo.CaliburnMicro.Security.csproj" />
   </ItemGroup>
 </Project>
