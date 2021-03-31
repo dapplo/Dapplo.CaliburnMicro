@@ -30,6 +30,12 @@ stages:
     - task: NuGetToolInstaller@1
 
     - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk 3.1.5'
+      inputs:
+        packageType: sdk
+        version: 3.1.301
+
+    - task: UseDotNet@2
       displayName: 'Use .NET Core sdk 5.0.4'
       inputs:
         packageType: sdk
