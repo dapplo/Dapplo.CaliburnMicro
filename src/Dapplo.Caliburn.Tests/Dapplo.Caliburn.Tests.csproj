@@ -27,7 +27,7 @@
     <PackageReference Include="Microsoft.Bcl.Build" Version="1.0.21" />
     <PackageReference Include="Microsoft.MarkedNet" Version="1.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
     <PackageReference Include="Caliburn.Micro" Version="3.2.0" />
     <PackageReference Include="Dapplo.Config.Language" Version="2.3.0" />
     <PackageReference Include="Dapplo.Log" Version="1.4.1" />
