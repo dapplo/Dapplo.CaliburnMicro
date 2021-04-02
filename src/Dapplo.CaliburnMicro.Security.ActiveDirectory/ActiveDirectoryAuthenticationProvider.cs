@@ -27,6 +27,15 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
         }
 
         /// <summary>
+        /// Test if the current user, is a local user
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsCurrentUserLocalUser()
+        {
+            return Environment.MachineName == Environment.UserDomainName;
+        }
+
+        /// <summary>
         /// The current user
         /// </summary>
         public IUser CurrentUser { get; private set; }
@@ -36,6 +45,12 @@ namespace Dapplo.CaliburnMicro.Security.ActiveDirectory
         /// </summary>
         public void Load()
         {
+            // If the user is not in a domain, he doesn't have any rights
+            if (IsCurrentUserLocalUser())
+            {
+                _permissions = new List<string>();
+                return;
+            }
             // Read the current user from the AD
             CurrentUser = Query.ForUser(Environment.UserName).Execute<IUser>().FirstOrDefault();
             // From the groups, get the CN, place the result into the permissions
