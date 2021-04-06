@@ -21,7 +21,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Dapplo.ActiveDirectory" Version="0.3.12" />
+    <PackageReference Include="Dapplo.ActiveDirectory" Version="0.3.13" />
     <PackageReference Include="Dapplo.Addons" Version="1.3.12" />
   </ItemGroup>
 
