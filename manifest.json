@@ -1,0 +1,2424 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/1/s/doc",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.AttachedBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.AttachedBehavior.html",
+          "hash": "8pPEuhNfK6v9I3apLMoMtmbucBRex8PTLVSd/RWRBdE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.Behavior-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.Behavior-1.html",
+          "hash": "7OwxfGqZ3RjU3XdMyBbiUdNs/line3Su6mX0AlQz/eo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.html",
+          "hash": "aDg0oE1hTFmkmv1bM7nAGR5ckveJl0KBc44o7+weBfE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.EnumVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.EnumVisibility.html",
+          "hash": "LRWv1tr7iCtTKJCD7lxd8HXYn79lMv0w3QeNlRi+NY8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.html",
+          "hash": "PKlrnLmM6FndjxGnQieMAxbHwti5SO4IfS0cTQ+KjOo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.IBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.IBehavior.html",
+          "hash": "5TsVBvr1UkWewzczVcAzUZqdaGRoTDJrROCBeGzLMjc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.NullVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.NullVisibility.html",
+          "hash": "Z/UHr1eq+aNLbE1URfEmRFB0FuHXRNN5PdNa2xh/s2c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.ValueChecker-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.ValueChecker-1.html",
+          "hash": "MR+Gm7peHOKBW5gDY0kUx7GLF7+jbTGpgCtGbhWdjfM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Behaviors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Behaviors.html",
+          "hash": "PROFbcEXeX/C5SRroen4cReaZTk1U1yeIEKfx+Xc0/E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.CaliburnLogger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.CaliburnLogger.html",
+          "hash": "s52CCt0GEyxjmURDrNrcV+LlxMNTR5kXq8I/LkulA5w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.CaliburnMicroAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.CaliburnMicroAddonModule.html",
+          "hash": "wx+wLqknU2MVBJqSeQtcaaqXeTcmK6gKv8vX1m4mn00="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.CaliburnServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.CaliburnServices.html",
+          "hash": "Ir1z13PrttBHD+eaiIKw8qk6YXL5XgPjYmhAK1QSL5A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.CardsAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.CardsAddonModule.html",
+          "hash": "pCvA/jAr0oBEg6bm7x0acC72flJpqNuRbdZqWgsXSsM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.Entities.HttpActionRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.Entities.HttpActionRequest.html",
+          "hash": "T1TZ9OjrBmcxUsZjvisKSqlss/Or5FxL/LtM68+9xDk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.Entities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.Entities.html",
+          "hash": "TBL0Nq4O9sNizzojtYYKhKVjwe2f+cx7asS/7fxS2ZE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.IAdaptiveCardViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.IAdaptiveCardViewModel.html",
+          "hash": "29fZUjFjFU9GLWY4JlKXCfQPHNOxrIaFtc4bXwU46rM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.ViewModels.AdaptiveCardViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.ViewModels.AdaptiveCardViewModel.html",
+          "hash": "6krKj4ZNgLNKLiZLHYMu79yLlwGWDXbeulJIuf3CISs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.ViewModels.html",
+          "hash": "qqRS7kDcnWtJAOOmF7SrCww3W8EzyFWjBJys9uZC1QI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.Views.AdaptiveCardView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.Views.AdaptiveCardView.html",
+          "hash": "c/CFfT1pdxJO54AwHTKCKsy6rtxC56zq2TkR3pZxWuQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.Views.html",
+          "hash": "pUf62zky46KpWWSlIQGKbYfXbNx3YLsIp9nssD4QENE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Cards.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Cards.html",
+          "hash": "Gga8LfzNvcw8QAayGn0WU7WkLSHCQM/BCdwTggI+sQs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.ClickOnceAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.ClickOnceAddonModule.html",
+          "hash": "rPqHVzw7eDojbFzEYG/CI9uiFYozbXRJqNsgKZHWU7c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.ClickOnceService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.ClickOnceService.html",
+          "hash": "P3WeoTCjOM3rktziwt1YNBYBCbriMGBP1BUaQh0x6vo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.Configuration.IClickOnceConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.Configuration.IClickOnceConfiguration.html",
+          "hash": "IDrH6KVv8PePb/sD4oX97FRx2zChNaejAxq4iyWM1G0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.Configuration.html",
+          "hash": "sWAPJAsKqBe5RVWLSkggY60R+Nnd6fT96pvVkuT96Yk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IApplyClickOnceUpdates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IApplyClickOnceUpdates.html",
+          "hash": "RNh9eWPdNdDwFy1+GC02afWa9qKqB4oy8vOWa5tDCHI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IClickOnceService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IClickOnceService.html",
+          "hash": "tIhu8vpCr/CnNyMJY3BybbEcTipIUAcZSAsjbIA5iog="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IHandleClickOnceRestarts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IHandleClickOnceRestarts.html",
+          "hash": "2bYgKlniNQjyABqcOW7IL9+LvOG9vS/ipsvp228PFzE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IHandleClickOnceUpdates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.IHandleClickOnceUpdates.html",
+          "hash": "W1AYXwczprryh8XLWwaK9pMfAaD6Wu8q8oa9QtS8zBE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ClickOnce.html",
+          "hash": "09ypn55Y3Sz47RGbD2yGr0GyOH5yrLBq/bO0r6Y9zHw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.AuthenticatedConfigNode-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.AuthenticatedConfigNode-1.html",
+          "hash": "obrYucbWB68JXxCWGGB4biHeHig9tDGtQ+tBpX7hcIU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.AuthenticatedConfigScreen-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.AuthenticatedConfigScreen-1.html",
+          "hash": "pPK5Ut83vTpP394efvoPe7mad6e1RwuQ20okmYxCusc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.Config-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.Config-1.html",
+          "hash": "9q3n3UnGU/rn+HPsG87fGF6RfgDDXK2UzCeY8IcagC8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.ConfigNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.ConfigNode.html",
+          "hash": "gfjEAnb6wu1O4lEF0mfGKigD7+dafvrFX5bZu8zyMCI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.ConfigScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.ConfigScreen.html",
+          "hash": "HeW4BnV+9u4fONAtYplHAT1tOgxMhXBCAWTw+Ju7Fx0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.Controls.ConfigurationTreeView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.Controls.ConfigurationTreeView.html",
+          "hash": "xUoY+kIMSD4URqGbCWegtoIud7ePxU8kZ8Q9GMp4hpQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.Controls.html",
+          "hash": "CRPd0D0l82SbDI2ly8acIFKNCqRJoGxARmoEUpm8EFE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.DesignTime.DefaultConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.DesignTime.DefaultConfig.html",
+          "hash": "IuUA9YwsGTPK9axKwuAVuaCP3MIaDuFusIQWex6eDeE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.DesignTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.DesignTime.html",
+          "hash": "swf19amgqvTTuXYSe/W92MWEswAt9fG6B4CI4ewUH8s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfig-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfig-1.html",
+          "hash": "M95RdMJS+A8C+thgwk5cIUUn0EVpVnY+yAEEnnEwNLg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfig.html",
+          "hash": "cbIRg2GnTferz7vdVd4DYBIUvbgAjj9abHLQTb4qi3E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfigScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.IConfigScreen.html",
+          "hash": "PNUlFmllYjBrlDMSiRYrvteRc2AK2Avq1RwV8yxewlM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.IUiConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.IUiConfiguration.html",
+          "hash": "upuO9SwVP042zhWjHCQ7iFLcHBY2y7elIDxkq1ga8Yo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.SimpleConfigScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.SimpleConfigScreen.html",
+          "hash": "D9rfGftor38AeIOVEfqOpADD42iZBNujqG4+sOHrx6I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configuration.html",
+          "hash": "h/yLwtGXXfZlAhFCwgs4YrnXnplstQ9hTUkupNAP8Sg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configurers.CultureViewConfigurer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configurers.CultureViewConfigurer.html",
+          "hash": "RF2+DrFlApj1GdFmFT7mUDxBmt2+g/sHoY/iP07VWWc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configurers.DpiAwareViewConfigurer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configurers.DpiAwareViewConfigurer.html",
+          "hash": "rnzuige4bZZ+eSh0/Lg/RD+PnNFiiUc7sUTYSCTUJKg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configurers.IconViewConfigurer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configurers.IconViewConfigurer.html",
+          "hash": "tgQyJagZ1/PKfKYtFLdQxr3dDNT5g0KnkezRNv6WkGw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer.html",
+          "hash": "0/fJsIpuDjz/nomOHHFFZho44+vYYWN2Wvly0c/bksA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Configurers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Configurers.html",
+          "hash": "Mqt/IXdYMlY0BwMaWKmIedFIz5TJ0rEYkF2h8h+yuwc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Controls.BindableTreeView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Controls.BindableTreeView.html",
+          "hash": "fq7YWdVpLIK518J8skFvvzDqzrJUe7oBYmHbBI2ZHi8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Controls.html",
+          "hash": "SE5vYuvjuWtira/GQlw/kzRQBXtdvd34IYeGkTu8f5E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Converters.HasInterfaceConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Converters.HasInterfaceConverter.html",
+          "hash": "OHeKQzXHufvmguKHTXtx9qygQ1xfBzplzBQb3yuBh0k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Converters.InvertBooleanConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Converters.InvertBooleanConverter.html",
+          "hash": "fkz5o/ThWvd02pqmDnF2aPyAf/TofP9sybUPl/JvluY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Converters.html",
+          "hash": "BQ2bMSLIyMO7F21ie+riPDkx23PaFgyFZUJNn4hOpZ0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.ApplicationConfigBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.ApplicationConfigBuilderExtensions.html",
+          "hash": "H5B3yyWb26Q0MjpNvssq8CbRtG2NoOVYnmMUcnN58E0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.html",
+          "hash": "7b5GHrLk5RPQT/XIiU5XdVhv3JxmqDtnLK4yLUryb7Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.DaplicationAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.DaplicationAddonModule.html",
+          "hash": "QiGFINJpDsLbdc9JN9NuM6qg7WUwQRxEWfXpBUvCbcI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.Dapplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.Dapplication.html",
+          "hash": "T4T47NZbFgshmBDNM6Uc4HM/Lohbc4QEvRSobuEJcPU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.Services.ShellStartup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.Services.ShellStartup.html",
+          "hash": "qvucjf2zXWbR1rqUiGMc7XQAXX4v88Y9IECtfzv+6UA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.Services.html",
+          "hash": "hIhG53TgxoiFmtvP6LqFn7NSM19FHAwP0mvPN4iEah4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Dapp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Dapp.html",
+          "hash": "q9Jx+pzofZkOJ6z0PXHYD3aFB/miV1m36uQNG4FagI4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.DapploWindowManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.DapploWindowManager.html",
+          "hash": "0C/nc8Z+NBxlVeRKI0miL8owH8Io6LkGYedjyvPT8NU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.DapplicationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.DapplicationExtensions.html",
+          "hash": "Pl5drytAh8eu6UfdpoluWGigT/CjAnl8FCVYsZxdAOg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.DiagnosticsAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.DiagnosticsAddonModule.html",
+          "hash": "1w+DamAZuU+Wp+cWe25/hFHuzBH7UzUBiUyrmdVGHUQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Translations.IErrorTranslations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Translations.IErrorTranslations.html",
+          "hash": "odehf/1lLAg0Ac8eIU8dxfKnrFb0Tj/57eEUrOTSTz8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Translations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Translations.html",
+          "hash": "trIVrOA5XbY4GD7RbnAAZpzjzYhb4XnuX3lWwueaCiQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.ViewModels.ErrorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.ViewModels.ErrorViewModel.html",
+          "hash": "TQ/nrCfGxVFQwZihm9nVw+dUu5CinJv6TvUT+xwlHvk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.ViewModels.html",
+          "hash": "FEA9QUS3y9XLnT/qFZ5wAiQA54WJ0sziKE7ClMCT1EY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Views.ErrorView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Views.ErrorView.html",
+          "hash": "SrMvofIJxoKRNLcDpn0Tepw9RIJzOsJyd43wE2KoB/4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.Views.html",
+          "hash": "jeSDuq1u5Qmn7V7KItj7Q+mFYVw9fFIH0Td3UXcY63M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Diagnostics.html",
+          "hash": "6jh/7BOmEhoOY0iK6SInT7/RMkYGg9pMlLjawGvLddk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.html",
+          "hash": "KJdce5oCwshjKekW4cXE+s53dvcZyfkFlTDRpplTJz8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.GenericObjectFactoryExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.GenericObjectFactoryExtension.html",
+          "hash": "Y3UnHNK8UtRuQ0hR8vEA66sm28Fvr+a4S4FqMTDZ5q4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions.html",
+          "hash": "Nc4Odxe/sTpWoxELeriB0eSClof/32H1QnM3NAdiXmQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.html",
+          "hash": "VoofNt/AGbjt+ii9FylST1zS01VISyz9j5Da78twa5A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.IconExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.IconExtensions.html",
+          "hash": "QphYugecKbC9AIkbvWLzl9J/X02OXFA+2OokwJpYDWE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.html",
+          "hash": "Ug+xzlaN6GKiXlg/lHc+oU7ykipKIZIiWKmo9b1WyD8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.TaskExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.TaskExtensions.html",
+          "hash": "5w4nHlDJTzRCDu1dMvpTmkWsLDemHpSJniqibej2aAA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Extensions.html",
+          "hash": "L+KgwpXxnLectMNSRhBzuxzai9ZuieaWtxv7ipoIdzg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IAmDisplayable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IAmDisplayable.html",
+          "hash": "JrZy2Rc3DuaraTBj0UlYdy9uiJER0VDtWCmvHWlN8fU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ICanBeClicked-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ICanBeClicked-1.html",
+          "hash": "9/iVrTx/6KSX8dR7DKbILi5BIgiQVF0fXrLlpQBeMmw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ICanBeClicked.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ICanBeClicked.html",
+          "hash": "nriXIZ5SfFpV8gD1OELVljDbHoyVTdChDs+y7Ma75NE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IConfigureDialogViews.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IConfigureDialogViews.html",
+          "hash": "Ajw4/xHeMSao7+00DAm7kiNc6+zv12kGGumLLkT8B4E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IConfigureWindowViews.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IConfigureWindowViews.html",
+          "hash": "NZ3zcwG8VXaqbip89G8pT9CixbS1dHGmtYQKDeskL9M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IHaveIcon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IHaveIcon.html",
+          "hash": "O46coz9FRzGmTpGy/Yu5CnNy6KEMrJkHqt1rfYy/gnU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IHaveId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IHaveId.html",
+          "hash": "cWAQxStloCHD+e6YSxUzOBjrBA9PxH/s7At3Sid+y2U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IHaveSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IHaveSettings.html",
+          "hash": "u1zK2VBbgJhCUG6IoZqsjPN0ZbsKxGl9IBjQMUbDpy8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IMaintainPosition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IMaintainPosition.html",
+          "hash": "eRUOHOyHb2T//sZnJ45oDdc++RISTt6v6AKYcgrZHbs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IScaleWithDpiChanges.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IScaleWithDpiChanges.html",
+          "hash": "R8ZaCZWmp1CtT7t6d0xfNhB1csQvxGPQd/mVI5gvGNU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IShell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IShell.html",
+          "hash": "tv2TVAbe+/OqRpOyWIH/aS9SzlDiz1+wRI4n/XXBeKU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.IVersionProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.IVersionProvider.html",
+          "hash": "8Qhxctfk8H6Bnll6JjIebG6EXfZUxdLVuTc6WZw7i5o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.AuthenticatedMenuItem-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.AuthenticatedMenuItem-2.html",
+          "hash": "VSbPDVuTGZo/X1obQjm0PuMS5xk+XaaPWlgHnm2FT7E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.AuthenticatedTreeScreen-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.AuthenticatedTreeScreen-2.html",
+          "hash": "EciZmi5DXZ5ja2VF+jYEfQjZAWILvvGNMqFnSy9Udvg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.ClickableMenuItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.ClickableMenuItem-1.html",
+          "hash": "8UZQRv5038RTsua2VPYNh2W4Mp732ThAiAfAnnSvAIM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.ClickableMenuItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.ClickableMenuItem.html",
+          "hash": "lmvBiM7GSnHPHCsN9W6nRxqz/dhWtaPNIEqipsTlwt0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.IMenuItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.IMenuItem.html",
+          "hash": "/ahwud6NfvU+5+H18wC84ZN9jSHYW88V7fQbM8R3k5Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeNode-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeNode-1.html",
+          "hash": "m0zFmrADFiXM1iRrJWZxZMTLC6sO7mEfkmteN2fB0p8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeScreen.html",
+          "hash": "JgSGWDtMzL72qVMVmlrmH/EC885+UfSzINfGt/hRnZ0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeScreenNode-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.ITreeScreenNode-1.html",
+          "hash": "Qo4fclrELIbqnxY5UUSs6BefeSYWTontIHU8G7+lpIk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuAttribute.html",
+          "hash": "c5lpC7n10pmhqG8JceA4MIfwpX0wiHcVxzrznTQYVkk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuItem.html",
+          "hash": "jnz+ZIBo+2OHXNKZZFrfnIBOc4XVXyXSQM485HpAu6s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuItemStyles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.MenuItemStyles.html",
+          "hash": "MJfM1Wb6x9j4Qnxu2ZiqkpePdI1V7BExSpNmkX9IG/Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.TreeNodeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.TreeNodeExtensions.html",
+          "hash": "nvYSdvOpZ8wFoTYYj1WKTJG2SOEH8/dQuWSxyv1kHns="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.TreeScreen-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.TreeScreen-1.html",
+          "hash": "VMN2E0WcbY+is/hrYKO2d3GbKuBYbenPnwZxY/d/dso="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Menu.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Menu.html",
+          "hash": "RWk57YqI7mOaRvKvlK+Yi/RZYJLTbHKcoImF/EcB7Ck="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.Configuration.IMetroUiConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.Configuration.IMetroUiConfiguration.html",
+          "hash": "Z9JAY72NOzRe5vL3km1rvLfW6CPkzrPUmk/JY7Eeq9c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.Configuration.html",
+          "hash": "rhjPbiy/mPhRPf0iMQ0rrPBVjmem0izCPoEvqBsfnzU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroAddonModule.html",
+          "hash": "97qO1q1+auGhB10FM61CQPwpfSZ24RdJ/ram7CamQOs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroThemeManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroThemeManager.html",
+          "hash": "O9zxpugSMZ5zbBIww2x4gdKkXjdWdZJI4WkEyGtPpMg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroWindowManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.MetroWindowManager.html",
+          "hash": "3oLkckLwnRYjh1Zm69oB6DXlEmNs2ChKwlOaY3m2xkw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Metro.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Metro.html",
+          "hash": "UviesABVcs4RIC2k5Oo5REa1JcuT4mAKej4stynHpEQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIcon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIcon.html",
+          "hash": "GuWmaXyB6KxKLgo//59iq5v1giNo7kwwOL+CP7ey0xw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIconManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIconManager.html",
+          "hash": "QWj/+zezdyjdtrkxGIOad7ICjuXV9LFcwuDQWpxmPFw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIconViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ITrayIconViewModel.html",
+          "hash": "4N5ax7n9Jval2JMNKRsZHS9Tnbd0CtLEc5b9a+bX7dY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIcon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIcon.html",
+          "hash": "zOHA4aHGMpNSuDlNj9FR1bvPfsmZO1Uq6IIgbKLLHvE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIconAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIconAddonModule.html",
+          "hash": "ihyME24NUDx1wDMkvKsXk2bZrYhprt1CxCJrQv1Q1JI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIconManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.TrayIconManager.html",
+          "hash": "e5Pz3AwZhp6S8mmg/V34nMeK3NcnDwpcssKo7T0BvQM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels.TrayIconViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels.TrayIconViewModel.html",
+          "hash": "aPclZi23r37XNZIFPQjTox+cwgs212XrYllLFifol3g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.ViewModels.html",
+          "hash": "KRBqa3jFV/KLUPPsrvPKyJiM6ULiKDgd/LZVc8XFP48="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.Views.TrayIconView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.Views.TrayIconView.html",
+          "hash": "AGTcXD2eASHSH/4V/svj5U1vBBzmM0zWcATpASb8nuU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.Views.html",
+          "hash": "hzeO/+IOs4GZQKhDtP7jIEdMwm3FuqLIFoBB2vtRvh4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.NotifyIconWpf.html",
+          "hash": "iKx5Po/0yePTyuCS5vqv1f1rr+NImNcdJLSdxHh4RWU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.IOverlay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.IOverlay.html",
+          "hash": "gZWC88wm3bjF6+fKiq7RjjlVLwy6Zk8HhdE8rpOCAq8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.OverlayAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.OverlayAttribute.html",
+          "hash": "qaV2ONLuEhPO2YEh5Ezfbxn3vLR/Yq7xWADmIMd6bNQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.OverlayContainerViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.OverlayContainerViewModel.html",
+          "hash": "9/t3ROwb7M2ks6ob3VW+eJaXLBugH+cjc5jDHKKSNk0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.OverlayViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.OverlayViewModel.html",
+          "hash": "b6GmiSQxTFUChtJ/YUnPjjjy4ViyRQiF8dNtIVYwSuw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.ViewModels.html",
+          "hash": "oCzlDiQaxvcGAbO6kPg7ZuXK/sIIJjYo8+dKqCPdw/8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.Views.OverlayContainerView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.Views.OverlayContainerView.html",
+          "hash": "LJyWkwJe2Ba6ZrMB1gRcgm8eTXbFOJqyACgRyREXeI8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.Views.html",
+          "hash": "IbTVECpasnpeXLmdftg0NoMK4JX8JSXhLjzo2HAUuRU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Overlays.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Overlays.html",
+          "hash": "t/KgiLNB3eo0bQ2qGaE/Wzzozhm1THwEENZAfaJDs8c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.ResourceManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.ResourceManager.html",
+          "hash": "u/a3w2wlNYIu3D6fJFY/gnbQlVXDq55nLo+rx8f5TUw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.ActiveDirectoryAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.ActiveDirectoryAddonModule.html",
+          "hash": "4Tv0aOk9S1hwyX/ZyXO0dHdwX2ShPoU1HcjKFXgCIM0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.ActiveDirectoryAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.ActiveDirectoryAuthenticationProvider.html",
+          "hash": "RZeWFqQEJXvOs2A7yXy3NLfjVIXEPv5esZ/ypjDVbWU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities.UserImpl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities.UserImpl.html",
+          "hash": "PNmVNtZBoGp9C9q16CyzHlY/2G4Thr2ch5NuDp9YAy8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.Entities.html",
+          "hash": "j4dcKuSu56vJL14o+IX7EwCFloWI+MXlpN5pxrMlFFs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.IUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.IUser.html",
+          "hash": "+6DfZrFPAEZW0ib9nzoUKtB8yLxz/7jmejtyGLOQ2Mg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.UserExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.UserExtensions.html",
+          "hash": "6/Cqzw30pVzlfo4g94skU+CMmmTJEdsHRy0+1+ByKmA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.ActiveDirectory.html",
+          "hash": "QAWaKcwU1SyxhTQir86aqoA5ySqwqXBOkPO4cUFtll8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationEnabled.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationEnabled.html",
+          "hash": "X0GPIPcsB6lzdIkBP3MOLhvxHkft4U8245SdOTq71qs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationTargetProperties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationTargetProperties.html",
+          "hash": "+LH+lBXAFlzv0tzAbcQERJocRmZukI+3pNnUTtKsB2E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.AuthenticationVisibility.html",
+          "hash": "AMrMAvFy5U2+1fSAe+q3YQ/rGVWcUhUzYvGPN97b2Sk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Behaviors.html",
+          "hash": "pRwhzUY/jhryoz0g+DEkQv+iWqS5L3WwsN5UKoqZDes="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Converters.AuthenticationTargetPropertyConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Converters.AuthenticationTargetPropertyConverter.html",
+          "hash": "f2yy7ZBc3rg66H5VyqmwuHpKifdHhYyrS9Z/yUFkftY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.Converters.html",
+          "hash": "Dpptm877j7HGiZaztWD+veexog7y37NcqDSLjXPK2Jg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.BoolAuthentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.BoolAuthentication.html",
+          "hash": "YBWxMFi37DEfOt9LxkOUMd78fPraHNMyMP7q9nX5gbE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.VisibilityAuthentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.VisibilityAuthentication.html",
+          "hash": "dkJF1co4lnFACoJ2k0YsDRuWPe96goaby0UMQgwN9R0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.DesignTime.html",
+          "hash": "NvoyLeOQt0ATGACD08kVxFnVP64w642v6vtztnujDHI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.IAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.IAuthenticationProvider.html",
+          "hash": "8RsVHAcfnkgsjMN78TfMnfP79kakw+rFZ6DD0+RfxsA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.IChangeableNeedAuthentication-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.IChangeableNeedAuthentication-1.html",
+          "hash": "3J2BuVzyMNx3HSs0yj9/N7Yp26y1TOG5lx0RkMSKdd8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.IChangeableNeedAuthentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.IChangeableNeedAuthentication.html",
+          "hash": "k5QAJVt2ognwSlMV0T7d6bYcd7IgGRWna4bcZiO3t/I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.INeedAuthentication-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.INeedAuthentication-1.html",
+          "hash": "O3VBlHalYvLOaP+Pgo9kzagvw39RxsB5MCVxQcRxJ5s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.INeedAuthentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.INeedAuthentication.html",
+          "hash": "rYT8bKZmsr15HlusiLYrkMocZK08qKpu1NTI23b3g40="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.NeedAuthenticationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.NeedAuthenticationExtensions.html",
+          "hash": "O9xzUP9wo/HeiBSVAC028WgfJF4NdMqDOuDXBAw14wE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.PermissionOperations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.PermissionOperations.html",
+          "hash": "UrMBXUL9vU7UeWKBShkN9pjD/LEDZQEoFLswiKVGmLI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.SimpleAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.SimpleAuthenticationProvider.html",
+          "hash": "KRB7ajdiJGxCFd/b7i+mIVdQ3ajQBmGI8jhedz3yFII="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Security.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Security.html",
+          "hash": "3gwOwII5JSjoq4inite9/RZt5rLSwdFfZFB44AuIet0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Services.ConfigurationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Services.ConfigurationService.html",
+          "hash": "5qkY4qDBg3IUay5VpEnhgH9dLUz6XEG5ABJ1/SazQdk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Services.html",
+          "hash": "e6SVTVRI3ZPeUjTQtDSf302u3O0d7mNyCJ2dzl0ymCE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.AllowAllKeyInputEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.AllowAllKeyInputEventHandler.html",
+          "hash": "7p4i2h+NUTZf1Jd/V9HXkd3zmTTIk0psdH1d/6XOBwA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.IToast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.IToast.html",
+          "hash": "PMu5LTLNxPwNL2DO2LE5g16rVMM4OtgCNzRBi1JWebY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.SystemTrayPositionProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.SystemTrayPositionProvider.html",
+          "hash": "LT4/tXYmmpasgewyXWW7omFmVfyrZ9YYELdy+4CQ2cc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastAddonModule.html",
+          "hash": "9UOaC/t6CVjXf+5geaQTSQEOoxXSp3yB/mtDKte4suA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastConductor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastConductor.html",
+          "hash": "V06Kp7pfUzcN2yFmx6V7+59LeXfmbvV9JSrxZd+31bM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.ToastView.html",
+          "hash": "lnvW2ZY9v81xJpgNpF8aSqAoNTOOgebaIPZW35ZAt70="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.ViewModels.ToastBaseViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.ViewModels.ToastBaseViewModel.html",
+          "hash": "k+K6eEIjlJq7DQdy4oTTEcY7WhTkQJbOqbpN9pwgKNA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.ViewModels.html",
+          "hash": "NGBL4Bb50rpk0CFXU//GzIYg7XRSgQSWU2oY7cmDszA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Toasts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Toasts.html",
+          "hash": "N8/fvI2jUWCRmR/RuAwMoqccv3wvKxkaoTXmj8CRXCI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.IConfigTranslations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.IConfigTranslations.html",
+          "hash": "XgYIKvwswtbzgd8enorTmHODbamh5HG20npJL98c2to="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.ICoreTranslations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.ICoreTranslations.html",
+          "hash": "845A3exVY6P2bd91A/bz5PB5wJj1+lMrkujCZw9rsSY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.LanguageChangedExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.LanguageChangedExtensions.html",
+          "hash": "8f1SKdHbSzDrb6n9GOTgHTgcqOwAqFvOdXdXoAVGCOg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.LanguageService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.LanguageService.html",
+          "hash": "QvCKuUGD798sbihjargh4dh61zblSvnAj0j3ywreULI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.TranslationsAddonModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.TranslationsAddonModule.html",
+          "hash": "v57IyxQ0ljbhEGKQgIYJxqFHUdHNVYc/TH9E2SKlAfI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Translations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Translations.html",
+          "hash": "Bq64ERElLsJPmK7dhQW4+U0vej2+PG0JXIkisAOjoXU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.IsLastItemConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.IsLastItemConverter.html",
+          "hash": "LrGnBw1z6iCknPVCRBcLfsGuEfNXl6xr2BSGc1vPvJA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.IsProgressedConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.IsProgressedConverter.html",
+          "hash": "kxFMkid+9rAmnMhbjP/BJ5czlvWqyBYAFMF31VqlV3c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Converters.html",
+          "hash": "JFEH0TvU+W1rng8NWe5g4osWonqd+8ZPcQJpNA3ugkM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizard-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizard-1.html",
+          "hash": "kxWkJf0AY/eFLjuuaK4kTak4o1L78AXNGOT/ynFk9NM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizard.html",
+          "hash": "6bleK+3CSUPELnXROTrZtoX1F9MLZbzF/wsrVjwJy0M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizardScreen-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizardScreen-1.html",
+          "hash": "IfzeljYVOmUOJFUO6Bi1rAFrEbEmI5EjMQr4npRxDHg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizardScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.IWizardScreen.html",
+          "hash": "vxpVoZ5sNC8glybmYiQJ9dIlLnVAvEB+gxauXhYYfqk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.ViewModels.WizardProgressViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.ViewModels.WizardProgressViewModel.html",
+          "hash": "kvhQp/N4rf7r1vJcZ28QOLtHX2A/xQKixtrfmMXHphA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.ViewModels.html",
+          "hash": "g2GbYZMWHMkKCZFcKlKVQPEWQzFK0+Cg7j08yTstABc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Views.WizardProgressView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Views.WizardProgressView.html",
+          "hash": "qNXpJp29RzezH59kFNeuuCeFZNImq2FF11voLDee0As="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Views.html",
+          "hash": "JO2RU15voksZGUY8Tqt5DkQtg4VjvARXOPH0FXvyoWI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.Wizard-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.Wizard-1.html",
+          "hash": "Ekp/rLxVXm9frGowcaCErhydSXEpC7BG5MUMorfk4kU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.WizardScreen-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.WizardScreen-1.html",
+          "hash": "ebLc3U8PbdqcIenI0hNNCecQEQnf/fmHcQ4JCyc6Emw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.Wizard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.Wizard.html",
+          "hash": "dHfcO1oSSZsn25IKg6G2a8rF+6aMm7bJi963NJQaUpk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Dapplo.CaliburnMicro.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Dapplo.CaliburnMicro.html",
+          "hash": "upIicJdEjQf1b+SwnRaE1uOBTfl0HjShST0u7EYiaHQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "m2Zb5Z5sJgY7T1DRcWa/7gMvlAuZUuQ0tUGrbw/1o/0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/cards.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/cards.html",
+          "hash": "86MHnRnn4hxJ9ts6EUgPe/0wCcLdzY+UgY7c+vg2B9A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "hngsnEPid3JIrQl4QhsIjq+0sPoGCOmgaBXsyR60DtE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/toasts.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toasts.html",
+          "hash": "TokcxRrDd96+cypbdeJ27d9XhXEciMXwUXDjqI4dPFM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/d.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/d.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "2Dbkag2E3jKFANa+bbV6tdwqJ1cajHOWDPVg4+9zUlI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 5,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 189,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
